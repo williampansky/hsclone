@@ -18,9 +18,13 @@ const matchSlice = createSlice({
       state.isLoading = false;
     },
     addCardToYourBoard(state, { payload }) {
-      state.yourBoard.push({
-        ...payload
-      });
+      const { item, i } = payload;
+      const newBoard = [
+        ...state.yourBoard.slice(0, i + 1),
+        item,
+        ...state.yourBoard.slice(i + 1)
+      ];
+      state.yourBoard = newBoard;
     }
   }
 });

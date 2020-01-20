@@ -23,9 +23,9 @@ const Footer = ({ mousePositionX, mousePositionY }) => {
   return (
     <Component data-layout="Footer" ref={ref}>
       <Hand data-layout="Hand">
-        <TestCard name="Minion 1" type="CARD" background="red" id={1} />
-        <TestCard name="Minion 2" type="CARD" background="green" id={1} />
-        <TestCard name="Spell" type="SPELL" background="lightblue" id={2} />
+        <TestCard name="Minion 1" type="CARD" background="red" id="Minion1" />
+        <TestCard name="Minion 2" type="CARD" background="green" id="Minion2" />
+        <TestCard name="Spell" type="SPELL" background="lightblue" id="Spell" />
       </Hand>
     </Component>
   );

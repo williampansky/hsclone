@@ -3,11 +3,11 @@ import { useDrag } from 'react-dnd';
 
 const TestCard = ({ name, id, type, background }) => {
   const [{ isDragging }, drag] = useDrag({
-    item: { name, type: type, background: background },
+    item: { name, type: type, id, background: background },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        console.log(`You dropped ${item.name} into ${dropResult.name}!`);
+        console.log(`You dropped ${item.name}!`);
       }
     },
     collect: monitor => ({

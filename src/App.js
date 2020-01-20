@@ -2,7 +2,7 @@ import React from 'react';
 
 // libs
 import { DndProvider } from 'react-dnd';
-import Backend from 'react-dnd-html5-backend';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 // renderers
 import WindowSizer from 'features/layout/WindowSizer';
@@ -29,7 +29,7 @@ export default function App() {
     <React.Fragment>
       <WindowSizer>
         <Header mousePositionX={mouseX} mousePositionY={mouseY} />
-        <DndProvider backend={Backend}>
+        <DndProvider backend={HTML5Backend}>
           <Board onMouseMove={event => handleMouseMove(event)}>
             <TheirBoard />
             <YourBoard />

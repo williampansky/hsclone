@@ -17,10 +17,10 @@ const TheirBoard = ({ children }) => {
 
   return boardHeight && boardWidth ? (
     <Component
+      boardHeight={boardHeight}
+      boardWidth={boardWidth}
       data-feature="TheirBoard"
-      height={boardHeight}
       ref={drop}
-      width={boardWidth}
     >
       {children}
     </Component>
@@ -30,10 +30,10 @@ const TheirBoard = ({ children }) => {
 const Component = styled.div`
   box-sizing: border-box;
   background: #333;
-  height: ${props => (props.height ? `calc(${props.height}px / 2)` : `0px`)};
+  height: ${p => (p.boardHeight ? `calc(${p.boardHeight}px / 2)` : `0px`)};
   margin: auto auto 0;
   overflow: hidden;
-  width: ${props => (props.width ? `${props.width}px` : `0px`)};
+  width: ${p => (p.boardWidth ? `${p.boardWidth}px` : `0px`)};
 `;
 
 TheirBoard.propTypes = {
