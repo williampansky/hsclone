@@ -1,10 +1,8 @@
-import { setFooterHeight } from 'features/layout/layout.slice';
-import { useDispatch } from 'react-redux';
 import React, { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setFooterHeight } from 'features/layout/layout.slice';
 import styled from 'styled-components';
 import useDimensions from 'react-use-dimensions';
-import Bin from 'features/UI/Bin.container';
-import TestBox from 'TestBox';
 
 const Footer = ({ mousePositionX, mousePositionY }) => {
   const dispatch = useDispatch();
@@ -21,16 +19,7 @@ const Footer = ({ mousePositionX, mousePositionY }) => {
     height && handleDispatch(height);
   }, [handleDispatch, height]);
 
-  return (
-    <Component ref={ref}>
-      <Bin id="test1">
-        <TestBox
-          mousePositionX={mousePositionX}
-          mousePositionY={mousePositionY}
-        />
-      </Bin>
-    </Component>
-  );
+  return <Component ref={ref}></Component>;
 };
 
 const Component = styled.div`
