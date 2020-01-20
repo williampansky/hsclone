@@ -1,12 +1,12 @@
 import React from 'react';
 
 // renderers
-import WindowSizer from 'renderers/WindowSizer';
+import WindowSizer from 'features/layout/WindowSizer';
 
 // ui layout
 import Footer from 'features/layout/Footer.container';
 import Header from 'features/layout/Header.container';
-import Stage from 'features/layout/Stage.container';
+import Board from 'features/layout/Board.container';
 import Scene from 'features/layout/Scene.container';
 
 export default function App() {
@@ -24,9 +24,9 @@ export default function App() {
     <React.Fragment>
       <WindowSizer>
         <Header mousePositionX={mouseX} mousePositionY={mouseY} />
-        <Stage onMouseMove={event => handleMouseMove(event)}>
+        <Board onMouseMove={event => handleMouseMove(event)}>
           <Scene mousePositionX={mouseX} mousePositionY={mouseY} />
-        </Stage>
+        </Board>
         <Footer mousePositionX={mouseX} mousePositionY={mouseY} />
       </WindowSizer>
     </React.Fragment>

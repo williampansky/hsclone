@@ -3,11 +3,11 @@ import { loadingStart, loadingFailed } from 'utils/redux.loading';
 
 let initialState = {
   error: null,
-  isLoading: true,
+  isLoading: false,
+  boardHeight: 0,
+  boardWidth: 0,
   footerHeight: 0,
-  headerHeight: 0,
-  stageHeight: 0,
-  stageWidth: 0
+  headerHeight: 0
 };
 
 const layoutSlice = createSlice({
@@ -19,17 +19,20 @@ const layoutSlice = createSlice({
     initLayoutSuccess: state => {
       state.isLoading = false;
     },
+    getFooterHeight(state) {
+      return state.footerHeight;
+    },
+    setBoardHeight(state, { payload }) {
+      state.boardHeight = Number(payload);
+    },
+    setBoardWidth(state, { payload }) {
+      state.boardWidth = Number(payload);
+    },
     setFooterHeight(state, { payload }) {
       state.footerHeight = Number(payload);
     },
     setHeaderHeight(state, { payload }) {
       state.headerHeight = Number(payload);
-    },
-    setStageHeight(state, { payload }) {
-      state.stageHeight = Number(payload);
-    },
-    setStageWidth(state, { payload }) {
-      state.stageWidth = Number(payload);
     }
   }
 });
@@ -40,17 +43,22 @@ export const {
   initLayoutFailure,
   initLayoutStart,
   initLayoutSuccess,
+  getFooterHeight,
   setFooterHeight,
   setHeaderHeight,
-  setStageHeight,
-  setStageWidth
+  setBoardHeight,
+  setBoardWidth
 } = actions;
+
+// const fetchMapDroneImagesFromNeighborhoods = data => {
+//   return data;
+// }
 
 // export const initLayout = () => async dispatch => {
 //   try {
 //     dispatch(initLayoutStart());
-//     const locations = await fetchLocationsFromApi();
-//     dispatch(initLayoutSuccess(locations));
+//     const footerHeight = await getFooterHeight();
+//     dispatch(initLayoutSuccess(footerHeight));
 //   } catch (err) {
 //     dispatch(initLayoutFailure(err));
 

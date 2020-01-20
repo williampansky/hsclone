@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-const Stage = ({ children, onMouseMove }) => {
-  const { stageHeight, stageWidth } = useSelector(s => s.layout);
+const Board = ({ children, onMouseMove }) => {
+  const { boardHeight, boardWidth } = useSelector(s => s.layout);
 
-  return stageHeight && stageWidth ? (
+  return boardHeight && boardWidth ? (
     <Component
-      data-feature="Stage"
-      height={stageHeight}
+      data-feature="Board"
+      height={boardHeight}
       onMouseMove={onMouseMove}
-      width={stageWidth}
+      width={boardWidth}
     >
       {children}
     </Component>
@@ -26,9 +26,9 @@ const Component = styled.div`
   width: ${props => (props.width ? `${props.width}px` : `0px`)};
 `;
 
-Stage.propTypes = {
+Board.propTypes = {
   children: PropTypes.node.isRequired,
   onMouseMove: PropTypes.func.isRequired
 };
 
-export default Stage;
+export default Board;
