@@ -7,17 +7,18 @@ import { addCardToYourBoard } from 'features/match/match.slice';
 import BoardDropArea from 'features/boards/BoardDropArea.component';
 
 const Test = ({ card }) => {
+  const { background, id, name } = card;
   return (
     <div
-      id={card.id}
+      id={id}
       style={{
         cursor: 'default',
         height: 100,
         width: 65,
-        background: card.background
+        background: background
       }}
     >
-      {card.name}
+      {name}
     </div>
   );
 };
@@ -34,7 +35,7 @@ const YourBoard = () => {
         i: index
       };
 
-      dispatch(addCardToYourBoard(dispatchObj));
+      return dispatch(addCardToYourBoard(dispatchObj));
     },
     [dispatch]
   );
@@ -67,6 +68,7 @@ const Component = styled.div`
   height: ${p => (p.boardHeight ? `calc(${p.boardHeight}px / 3)` : `0px`)};
   justify-content: center;
   margin: auto;
+  position: relative;
   width: ${p => (p.boardWidth ? `calc(${p.boardWidth}px - 20%)` : `0px`)};
 
   /* & > div + div {
