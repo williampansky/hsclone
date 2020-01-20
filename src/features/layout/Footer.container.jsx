@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setFooterHeight } from 'features/layout/layout.slice';
 import styled from 'styled-components';
 import useDimensions from 'react-use-dimensions';
+import TestCard from 'TestCard';
 
 const Footer = ({ mousePositionX, mousePositionY }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,15 @@ const Footer = ({ mousePositionX, mousePositionY }) => {
     height && handleDispatch(height);
   }, [handleDispatch, height]);
 
-  return <Component ref={ref}></Component>;
+  return (
+    <Component data-layout="Footer" ref={ref}>
+      <Hand data-layout="Hand">
+        <TestCard name="Minion 1" type="CARD" background="red" id={1} />
+        <TestCard name="Minion 2" type="CARD" background="green" id={1} />
+        <TestCard name="Spell" type="SPELL" background="lightblue" id={2} />
+      </Hand>
+    </Component>
+  );
 };
 
 const Component = styled.div`
@@ -29,6 +38,17 @@ const Component = styled.div`
   position: relative;
   width: 100vw;
   z-index: 200;
+`;
+
+const Hand = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+
+  & > div + div {
+    margin-left: 10px;
+  }
 `;
 
 export default Footer;

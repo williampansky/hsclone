@@ -1,5 +1,9 @@
 import React from 'react';
 
+// libs
+import { DndProvider } from 'react-dnd';
+import Backend from 'react-dnd-html5-backend';
+
 // renderers
 import WindowSizer from 'features/layout/WindowSizer';
 
@@ -7,7 +11,8 @@ import WindowSizer from 'features/layout/WindowSizer';
 import Footer from 'features/layout/Footer.container';
 import Header from 'features/layout/Header.container';
 import Board from 'features/layout/Board.container';
-import Scene from 'features/layout/Scene.container';
+import YourBoard from 'features/layout/YourBoard.container';
+import TheirBoard from 'features/layout/TheirBoard.container';
 
 export default function App() {
   const [mouseX, setMouseX] = React.useState(0);
@@ -24,10 +29,13 @@ export default function App() {
     <React.Fragment>
       <WindowSizer>
         <Header mousePositionX={mouseX} mousePositionY={mouseY} />
-        <Board onMouseMove={event => handleMouseMove(event)}>
-          <Scene mousePositionX={mouseX} mousePositionY={mouseY} />
-        </Board>
-        <Footer mousePositionX={mouseX} mousePositionY={mouseY} />
+        <DndProvider backend={Backend}>
+          <Board onMouseMove={event => handleMouseMove(event)}>
+            <TheirBoard />
+            <YourBoard />
+          </Board>
+          <Footer />
+        </DndProvider>
       </WindowSizer>
     </React.Fragment>
   );
