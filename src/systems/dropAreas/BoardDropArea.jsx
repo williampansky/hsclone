@@ -15,7 +15,8 @@ const BoardDropArea = ({ children, dropSpell }) => {
       object: monitor.getItem()
     }),
     drop: object => {
-      if (object && object.type === 'MINION') return;
+      const { type } = object;
+      if (type === 'MINION') return;
       return dropSpell(object);
     }
   });

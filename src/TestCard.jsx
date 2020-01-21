@@ -26,6 +26,7 @@ const Component = styled.div`
   height: 100px;
   width: 65px;
   transition: transform 100ms ease;
+  user-select: none;
 
   &[draggable='true']:hover {
     transform: translateY(-10px) scale(1.05);

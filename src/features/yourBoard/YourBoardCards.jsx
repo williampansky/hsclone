@@ -68,10 +68,10 @@ const YourBoard = () => {
 
         {yourBoard.map((card, i) => {
           return (
-            <React.Fragment key={i}>
-              <Test card={card} key={`c${card.id}`} />
+            <React.Fragment key={`React.Fragment_${i}`}>
+              <Test card={card} key={card.id} />
               <AdjacentDropArea
-                key={`da${i}`}
+                key={`dropArea_${i}`}
                 afterIndex={i}
                 dropItem={dropCard}
               />
