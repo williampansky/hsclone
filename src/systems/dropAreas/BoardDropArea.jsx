@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Component as SingleDropArea } from 'systems/dropAreas/SingleDropArea';
 import { Component as AdjacentDropArea } from 'systems/dropAreas/AdjacentDropArea';
 
-const BoardDropArea = ({ children }) => {
+const BoardDropArea = ({ children, dropSpell }) => {
   const [{ canDrop, isOver, object }, ref] = useDrop({
     accept: ['MINION', 'SPELL'],
     canDrop: object => object,
@@ -13,7 +13,11 @@ const BoardDropArea = ({ children }) => {
       canDrop: monitor.canDrop(),
       isOver: monitor.isOver({ shallow: false }),
       object: monitor.getItem()
-    })
+    }),
+    drop: object => {
+      if (object && object.type === 'MINION') return;
+      return dropSpell(object);
+    }
   });
 
   return (
@@ -30,7 +34,8 @@ const BoardDropArea = ({ children }) => {
 };
 
 BoardDropArea.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  dropSpell: PropTypes.func
 };
 
 const Component = styled.div`

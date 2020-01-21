@@ -6,9 +6,10 @@ const getInitialState = key => {
     case 'debug':
       // prettier-ignore
       return [
-        { background: 'white', id: 'MINION_test1_0', name: 'test1', type: 'MINION' },
-        { background: 'red', id: 'MINION_test2_1', name: 'test2', type: 'MINION' },
-        { background: 'green', id: 'MINION_test3_2', name: 'test3', type: 'MINION' },
+        { background: 'white', id: 'MINION_min1_0', name: 'min1', type: 'MINION' },
+        { background: 'red', id: 'MINION_min2_1', name: 'min2', type: 'MINION' },
+        { background: 'lightblue', id: 'SPELL_spell0_2', name: 'spell0', type: 'SPELL' },
+        { background: 'green', id: 'MINION_min3_3', name: 'min3', type: 'MINION' },
       ];
 
     default:
@@ -30,6 +31,10 @@ const yourHand = createSlice({
       let newArray = state.slice();
       newArray.splice(i, 0, item);
       return newArray;
+    },
+    playSpellFromYourHand(state, { payload }) {
+      const { item } = payload;
+      console.log(item);
     },
     removeCardFromYourHand(state, { payload }) {
       const { id } = payload;
@@ -58,6 +63,7 @@ export const {
   initYourHandStart,
   initYourHandSuccess,
   addCardToYourHand,
+  playSpellFromYourHand,
   removeCardFromYourHand
 } = actions;
 

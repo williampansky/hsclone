@@ -7,9 +7,6 @@ const TestCard = ({ name, id, type, background }) => {
     item: { name, type: type, id, background: background },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
-      if (item && dropResult) {
-        console.log(`You dropped ${item.name}!`);
-      }
     },
     collect: monitor => ({
       isDragging: monitor.isDragging()

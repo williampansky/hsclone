@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { addCardToYourBoard } from 'features/yourBoard/yourBoard.slice';
-import { removeCardFromYourHand } from 'features/yourHand/yourHand.slice';
+import {
+  playSpellFromYourHand,
+  removeCardFromYourHand
+} from 'features/yourHand/yourHand.slice';
 // import BoardDropArea from 'features/boards/BoardDropArea.component';
 import BoardDropArea from 'systems/dropAreas/BoardDropArea';
 import SingleDropArea from 'systems/dropAreas/SingleDropArea';
@@ -34,13 +37,16 @@ const YourBoard = () => {
 
   const dropCard = React.useCallback(
     (object, index) => {
+      const { type } = object;
       const dispatchObj = {
         item: object,
         i: index
       };
 
       dispatch(removeCardFromYourHand(object));
-      return dispatch(addCardToYourBoard(dispatchObj));
+      return type === 'SPELL'
+        ? dispatch(playSpellFromYourHand(dispatchObj))
+        : dispatch(addCardToYourBoard(dispatchObj));
     },
     [dispatch]
   );
@@ -53,7 +59,7 @@ const YourBoard = () => {
       boardWidth={boardWidth}
       data-file="YourBoardCards"
     >
-      <BoardDropArea>
+      <BoardDropArea dropSpell={dropCard}>
         {yourBoardLength === 0 ? (
           <SingleDropArea dropItem={dropCard} />
         ) : (
