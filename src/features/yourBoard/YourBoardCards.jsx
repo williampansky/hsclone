@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { addCardToYourBoard } from 'features/match/match.slice';
-import BoardDropArea from 'features/boards/BoardDropArea.component';
+// import BoardDropArea from 'features/boards/BoardDropArea.component';
+import BoardDropArea from 'systems/dropAreas/BoardDropArea';
+import SingleDropArea from 'systems/dropAreas/SingleDropArea';
+import AdjacentDropArea from 'systems/dropAreas/AdjacentDropArea';
 
 const Test = ({ card }) => {
   const { background, id, name } = card;
@@ -48,18 +51,18 @@ const YourBoard = () => {
       boardWidth={boardWidth}
       data-file="YourBoardCards"
     >
-      <BoardDropArea isWrapper={true}>
+      <BoardDropArea>
         {yourBoardLength === 0 ? (
-          <BoardDropArea dropItem={dropCard} isAlone={true} />
+          <SingleDropArea dropItem={dropCard} />
         ) : (
-          <BoardDropArea dropItem={dropCard} />
+          <AdjacentDropArea dropItem={dropCard} />
         )}
 
         {yourBoard.map((card, i) => {
           return (
             <React.Fragment key={i}>
               <Test card={card} key={`c${card.id}`} />
-              <BoardDropArea
+              <AdjacentDropArea
                 key={`da${i}`}
                 afterIndex={i}
                 dropItem={dropCard}

@@ -11,7 +11,7 @@ import WindowSizer from 'features/layout/WindowSizer';
 import Footer from 'features/layout/Footer.container';
 import Header from 'features/layout/Header.container';
 import Board from 'features/layout/Board.container';
-import YourBoard from 'features/layout/YourBoard.container';
+import YourBoard from 'features/yourBoard/YourBoard';
 import TheirBoard from 'features/layout/TheirBoard.container';
 
 export default function App() {
