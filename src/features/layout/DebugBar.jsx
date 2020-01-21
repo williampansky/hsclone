@@ -10,8 +10,9 @@ import useDimensions from 'react-use-dimensions';
 import { setDebugBarHeight } from 'features/layout/layout.slice';
 
 // children
-import HoveredTargetFile from 'components/DebugBar/HoveredTargetFile';
-import MousePosition from 'components/DebugBar/MousePosition';
+// import HoveredTargetFile from 'components/DebugBar/HoveredTargetFile';
+// import MousePosition from 'components/DebugBar/MousePosition';
+import AddCardToYourHand from 'components/DebugBar/AddCardToYourHand';
 
 const DebugBar = ({ mousePositionX, mousePositionY, target }) => {
   const dispatch = useDispatch();
@@ -30,8 +31,9 @@ const DebugBar = ({ mousePositionX, mousePositionY, target }) => {
 
   return (
     <Component data-file="DebugBar" ref={ref}>
-      <MousePosition x={mousePositionX} y={mousePositionY} />
-      <HoveredTargetFile target={target} />
+      {/* <MousePosition x={mousePositionX} y={mousePositionY} />
+      <HoveredTargetFile target={target} /> */}
+      <AddCardToYourHand />
     </Component>
   );
 };
@@ -54,7 +56,7 @@ const Component = styled.div`
   padding: ${PADDING}px;
   position: relative;
   width: 100vw;
-  z-index: 200;
+  z-index: 9000;
 
   & > div + div {
     margin-left: ${PADDING * 2}px;

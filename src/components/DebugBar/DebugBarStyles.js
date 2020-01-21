@@ -9,6 +9,7 @@ export const Component = styled.div`
   font-size: 0.625em;
   justify-content: flex-start;
   line-height: 1;
+  position: relative;
 `;
 
 export const Label = styled.div`

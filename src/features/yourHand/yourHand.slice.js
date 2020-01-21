@@ -44,7 +44,7 @@ export const {
   initYourHandFailure,
   initYourHandStart,
   initYourHandSuccess,
-  addCardToYourBoard
+  addCardToYourHand
 } = actions;
 
 // const fetchMapDroneImagesFromNeighborhoods = data => {

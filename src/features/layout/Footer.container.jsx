@@ -36,6 +36,7 @@ const Footer = () => {
 const Component = styled.div`
   background: gray;
   box-sizing: border-box;
+  min-height: 50px;
   position: relative;
   width: 100vw;
   z-index: 200;

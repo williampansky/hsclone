@@ -8,16 +8,19 @@ import WindowSizeListener from 'react-window-size-listener';
 const WindowSizer = ({ children }) => {
   let { innerHeight } = window;
   const dispatch = useDispatch();
-  const { footerHeight, headerHeight } = useSelector(s => s.layout);
+  const { debugBarHeight, footerHeight, headerHeight } = useSelector(
+    s => s.layout
+  );
 
   /**
    * Dispatches `setBoardHeight()` with one of two arguments:
-   *  1. Returns `height - (footerHeight + headerHeight)`
+   *  1. Returns `height - (debugBarHeight + footerHeight + headerHeight)`
    *  2. Returns `height`
    *
    * @param {Number} height window.innerHeight
    * @requires React.useCallback()
    * @requires redux>dispatch()
+   * @requires redux>layout>debugBarHeight
    * @requires redux>layout>footerHeight
    * @requires redux>layout>headerHeight
    * @requires redux>stage>setBoardHeight()
@@ -25,9 +28,13 @@ const WindowSizer = ({ children }) => {
    */
   const handleAppHeight = useCallback(
     height => {
-      if (exists(footerHeight) && exists(headerHeight)) {
+      if (
+        exists(debugBarHeight) &&
+        exists(footerHeight) &&
+        exists(headerHeight)
+      ) {
         /* 1 */
-        const uiCombinedHeight = footerHeight + headerHeight;
+        const uiCombinedHeight = debugBarHeight + footerHeight + headerHeight;
         const newAppHeight = height - uiCombinedHeight;
         return dispatch(setBoardHeight(newAppHeight));
       } else {
@@ -35,7 +42,7 @@ const WindowSizer = ({ children }) => {
         return dispatch(setBoardHeight(height));
       }
     },
-    [dispatch, footerHeight, headerHeight]
+    [dispatch, debugBarHeight, footerHeight, headerHeight]
   );
 
   useEffect(() => {
