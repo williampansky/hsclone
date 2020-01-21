@@ -28,7 +28,7 @@ const Component = styled.div`
 
 Board.propTypes = {
   children: PropTypes.node.isRequired,
-  onMouseMove: PropTypes.func.isRequired
+  onMouseMove: PropTypes.func
 };
 
 export default Board;

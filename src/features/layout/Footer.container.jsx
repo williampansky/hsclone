@@ -27,7 +27,7 @@ const Footer = () => {
   }, [handleDispatch, height]);
 
   return (
-    <Component data-layout="Footer" ref={ref}>
+    <Component data-file="Footer" ref={ref}>
       <YourHand />
     </Component>
   );

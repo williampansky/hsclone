@@ -20,7 +20,11 @@ const Header = ({ mousePositionX, mousePositionY }) => {
     height && handleDispatch(height);
   }, [handleDispatch, height]);
 
-  return <Component ref={ref}>Header</Component>;
+  return (
+    <Component data-file="Header" ref={ref}>
+      Header
+    </Component>
+  );
 };
 
 const Component = styled.div`

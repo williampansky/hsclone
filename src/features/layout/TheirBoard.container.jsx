@@ -19,7 +19,7 @@ const TheirBoard = ({ children }) => {
     <Component
       boardHeight={boardHeight}
       boardWidth={boardWidth}
-      data-feature="TheirBoard"
+      data-file="TheirBoard"
       ref={drop}
     >
       {children}

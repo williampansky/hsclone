@@ -18,21 +18,36 @@ import TheirBoard from 'features/layout/TheirBoard.container';
 export default function App() {
   const [mouseX, setMouseX] = React.useState(0);
   const [mouseY, setMouseY] = React.useState(0);
+  const [domElement, setDomElement] = React.useState(null);
 
   const handleMouseMove = event => {
-    const { nativeEvent } = event;
-    const { offsetX, offsetY } = nativeEvent;
-    setMouseX(offsetX);
-    setMouseY(offsetY);
+    const {
+      nativeEvent: {
+        offsetX,
+        offsetY,
+        toElement: {
+          dataset: { file }
+        }
+      }
+    } = event;
+
+    offsetX && setMouseX(offsetX);
+    offsetY && setMouseY(offsetY);
+    file && setDomElement(file);
   };
 
   return (
     <React.Fragment>
       <WindowSizer>
-        <DebugBar mousePositionX={mouseX} mousePositionY={mouseY} />
+        <DebugBar
+          mousePositionX={mouseX}
+          mousePositionY={mouseY}
+          target={domElement}
+        />
         <Header />
         <DndProvider backend={HTML5Backend}>
-          <Board onMouseMove={event => handleMouseMove(event)}>
+          {/* <Board onMouseMove={event => handleMouseMove(event)}> */}
+          <Board>
             <TheirBoard />
             <YourBoard />
           </Board>
