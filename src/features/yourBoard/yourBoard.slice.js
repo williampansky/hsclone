@@ -1,27 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadingStart, loadingFailed } from 'utils/redux.loading';
 
-let initialState = {
-  error: null,
-  isLoading: false,
-  yourBoard: []
-};
+let initialState = [];
 
-const matchSlice = createSlice({
-  name: 'match',
+const yourBoard = createSlice({
+  name: 'yourBoard',
   initialState,
   reducers: {
-    initMatchFailure: loadingFailed,
-    initMatchStart: loadingStart,
-    initMatchSuccess: state => {
+    initYourBoardFailure: loadingFailed,
+    initYourBoardStart: loadingStart,
+    initYourBoardSuccess: state => {
       state.isLoading = false;
+    },
+    addCardToYourBoard(state, { payload }) {
+      const { item, i } = payload;
+      const newBoard = [...state.slice(0, i + 1), item, ...state.slice(i + 1)];
+      return newBoard;
     }
   }
 });
 
-const { actions, reducer } = matchSlice;
+const { actions, reducer } = yourBoard;
 
-export const { initMatchFailure, initMatchStart, initMatchSuccess } = actions;
+export const {
+  initYourBoardFailure,
+  initYourBoardStart,
+  initYourBoardSuccess,
+  addCardToYourBoard
+} = actions;
 
 // const fetchMapDroneImagesFromNeighborhoods = data => {
 //   return data;

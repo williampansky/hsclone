@@ -12,13 +12,17 @@ const YourHand = () => {
   };
 
   return (
-    <Component data-layout="YourHand" numberOfCardsInHand={length}>
+    <Component
+      data-layout="YourHand"
+      data-length={length}
+      numberOfCardsInHand={length}
+    >
       {yourCards.map((card, index) => {
-        const { background, name, type } = card;
+        const { background, id, name, type } = card;
         return (
           <TestCard
             background={background ? background : 'white'}
-            id={constructIdString(name, type, index)}
+            id={id}
             key={index}
             name={name}
             type={type}
@@ -34,6 +38,11 @@ const Component = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
+
+  & > div {
+    position: relative;
+    top: -20px;
+  }
 
   & > div + div {
     margin-left: 10px;

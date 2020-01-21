@@ -1,11 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadingStart, loadingFailed } from 'utils/redux.loading';
 
-let initialState = [];
+const getInitialState = key => {
+  switch (key) {
+    case 'debug':
+      // prettier-ignore
+      return [
+        { background: 'white', id: 'MINION_test1_0', name: 'test1', type: 'MINION' },
+        { background: 'red', id: 'MINION_test2_1', name: 'test2', type: 'MINION' },
+        { background: 'green', id: 'MINION_test3_2', name: 'test3', type: 'MINION' },
+      ];
+
+    default:
+      return [];
+  }
+};
 
 const yourHand = createSlice({
   name: 'yourHand',
-  initialState,
+  initialState: getInitialState('debug'),
   reducers: {
     initYourHandFailure: loadingFailed,
     initYourHandStart: loadingStart,
@@ -19,8 +32,8 @@ const yourHand = createSlice({
       return newArray;
     },
     removeCardFromYourHand(state, { payload }) {
-      const { i } = payload;
-      return state.filter((item, index) => index !== i);
+      const { id } = payload;
+      return state.filter(item => item.id !== id);
     },
     updateCardInYourHand(state, { payload }) {
       const { item, i } = payload;
@@ -44,7 +57,8 @@ export const {
   initYourHandFailure,
   initYourHandStart,
   initYourHandSuccess,
-  addCardToYourHand
+  addCardToYourHand,
+  removeCardFromYourHand
 } = actions;
 
 // const fetchMapDroneImagesFromNeighborhoods = data => {

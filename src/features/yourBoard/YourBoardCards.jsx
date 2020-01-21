@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { addCardToYourBoard } from 'features/match/match.slice';
+import { addCardToYourBoard } from 'features/yourBoard/yourBoard.slice';
+import { removeCardFromYourHand } from 'features/yourHand/yourHand.slice';
 // import BoardDropArea from 'features/boards/BoardDropArea.component';
 import BoardDropArea from 'systems/dropAreas/BoardDropArea';
 import SingleDropArea from 'systems/dropAreas/SingleDropArea';
@@ -29,7 +30,7 @@ const Test = ({ card }) => {
 const YourBoard = () => {
   const dispatch = useDispatch();
   const { boardHeight, boardWidth } = useSelector(s => s.layout);
-  const { yourBoard } = useSelector(s => s.match);
+  const yourBoard = useSelector(s => s.yourBoard);
 
   const dropCard = React.useCallback(
     (object, index) => {
@@ -38,6 +39,7 @@ const YourBoard = () => {
         i: index
       };
 
+      dispatch(removeCardFromYourHand(object));
       return dispatch(addCardToYourBoard(dispatchObj));
     },
     [dispatch]

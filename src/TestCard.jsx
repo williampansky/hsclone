@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useDrag } from 'react-dnd';
 
 const TestCard = ({ name, id, type, background }) => {
@@ -16,19 +17,23 @@ const TestCard = ({ name, id, type, background }) => {
   });
 
   return (
-    <div
-      id={id}
-      ref={drag}
-      style={{
-        cursor: 'pointer',
-        height: 100,
-        width: 65,
-        background: background
-      }}
-    >
+    <Component id={id} ref={drag} bgColor={background}>
       {name}
-    </div>
+    </Component>
   );
 };
+
+const Component = styled.div`
+  background: ${p => p.bgColor};
+  cursor: pointer;
+  height: 100px;
+  width: 65px;
+  transition: transform 100ms ease;
+
+  &[draggable='true']:hover {
+    transform: translateY(-10px) scale(1.05);
+    transition: transform 200ms ease;
+  }
+`;
 
 export default TestCard;
