@@ -40,21 +40,34 @@ const YourBoard = () => {
     [dispatch]
   );
 
+  const yourBoardLength = yourBoard && yourBoard.length;
+
   return (
     <Component
       boardHeight={boardHeight}
       boardWidth={boardWidth}
       data-file="YourBoardCards"
     >
-      <BoardDropArea dropItem={dropCard} />
-      {yourBoard.map((card, i) => {
-        return (
-          <React.Fragment key={i}>
-            <Test card={card} key={`c${card.id}`} />
-            <BoardDropArea key={`a${i}`} afterIndex={i} dropItem={dropCard} />
-          </React.Fragment>
-        );
-      })}
+      <BoardDropArea isWrapper={true}>
+        {yourBoardLength === 0 ? (
+          <BoardDropArea dropItem={dropCard} isAlone={true} />
+        ) : (
+          <BoardDropArea dropItem={dropCard} />
+        )}
+
+        {yourBoard.map((card, i) => {
+          return (
+            <React.Fragment key={i}>
+              <Test card={card} key={`c${card.id}`} />
+              <BoardDropArea
+                key={`da${i}`}
+                afterIndex={i}
+                dropItem={dropCard}
+              />
+            </React.Fragment>
+          );
+        })}
+      </BoardDropArea>
     </Component>
   );
 };
@@ -70,10 +83,6 @@ const Component = styled.div`
   margin: auto;
   position: relative;
   width: ${p => (p.boardWidth ? `calc(${p.boardWidth}px - 20%)` : `0px`)};
-
-  /* & > div + div {
-    margin-left: 10px;
-  } */
 `;
 
 export default YourBoard;
