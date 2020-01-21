@@ -6,6 +6,7 @@ let initialState = {
   isLoading: false,
   boardHeight: 0,
   boardWidth: 0,
+  debugBarHeight: 0,
   footerHeight: 0,
   headerHeight: 0
 };
@@ -28,6 +29,9 @@ const layoutSlice = createSlice({
     setBoardWidth(state, { payload }) {
       state.boardWidth = Number(payload);
     },
+    setDebugBarHeight(state, { payload }) {
+      state.debugBarHeight = Number(payload);
+    },
     setFooterHeight(state, { payload }) {
       state.footerHeight = Number(payload);
     },
@@ -44,10 +48,11 @@ export const {
   initLayoutStart,
   initLayoutSuccess,
   getFooterHeight,
-  setFooterHeight,
-  setHeaderHeight,
   setBoardHeight,
-  setBoardWidth
+  setBoardWidth,
+  setDebugBarHeight,
+  setFooterHeight,
+  setHeaderHeight
 } = actions;
 
 // const fetchMapDroneImagesFromNeighborhoods = data => {
