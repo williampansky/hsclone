@@ -31,10 +31,10 @@ function AddCardToYourHand() {
           item: {
             name,
             type: type.toUpperCase(),
-            id: `${cardType}_${cardName}`,
+            id: `${type.toUpperCase()}_${name}_${yourHand.length}`,
             background: background
           },
-          i: yourHand.length + 1
+          i: yourHand.length
         };
       }
 
