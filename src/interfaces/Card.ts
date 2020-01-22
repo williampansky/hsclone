@@ -1,9 +1,9 @@
-import CardClass from 'enums/CardClass';
-import CardSet from 'enums/CardSet';
-import CardType from 'enums/CardType';
-import PlayReq from 'enums/PlayReq';
-import Race from 'enums/Race';
-import Rarity from 'enums/Rarity';
+import { CardClass } from 'enums/CardClass';
+import { CardPlayReq } from 'enums/CardPlayReq';
+import { CardRace } from 'enums/CardRace';
+import { CardRarity } from 'enums/CardRarity';
+import { CardSet } from 'enums/CardSet';
+import { CardType } from 'enums/CardType';
 
 /**
  * Data model JavaScript object for card properties.
@@ -54,12 +54,14 @@ export interface Card {
    * Array of card `id` strings which represent the card’s “entourage.”
    * Often used for cards which can create new cards randomly from a pool.
    */
-  entourage: Entourage;
+  entourage?: {
+    [index: number]: string;
+  };
 
   /**
    * Unrelated to actual rules or gameplay; included merely for fun.
    */
-  flavor: string;
+  flavor?: string;
 
   /**
    * Health point value of the card. Always shown for minions.
@@ -74,12 +76,12 @@ export interface Card {
   /**
    * Path for owning the card on your account; eg. reward, craft, etc.
    */
-  howToEarn: string;
+  howToEarn?: string;
 
   /**
    * Path for owning the golden version of the card on your account.
    */
-  howToEarnGolden: string;
+  howToEarnGolden?: string;
 
   /**
    * Unique identifier string of the card.
@@ -89,13 +91,18 @@ export interface Card {
   /**
    * Object of key:string pairs for the image filepaths.
    */
-  images: Images;
+  images: {
+    backgroundImage: string;
+    foregroundImage: string;
+  };
 
   /**
    * Array of mechanic variable enums strings
    * pertaining to the card's special abilities.
    */
-  mechanics: Mechanics;
+  mechanics?: {
+    [index: number]: string;
+  };
 
   /**
    * Name of the card.
@@ -106,17 +113,17 @@ export interface Card {
    * Determine various requirements which have to be met
    * for the card to be played and what it can target.
    */
-  playRequirements: PlayReq;
+  playRequirements?: CardPlayReq;
 
   /**
    * Usually only available on minions.
    */
-  race: Race;
+  race?: CardRace;
 
   /**
    * Determines the difficulty of acquiring the card.
    */
-  rarity: Rarity;
+  rarity: CardRarity;
 
   /**
    * Which release the card belongs to. Also determines the card’s
@@ -127,7 +134,11 @@ export interface Card {
   /**
    * Object of key:string pairs for the sound filepaths.
    */
-  sounds: Sounds;
+  sounds: {
+    attackSound: string;
+    deathSound: string;
+    dropSound: string;
+  };
 
   /**
    * Card's added spell damage to the player's spells.
@@ -137,7 +148,7 @@ export interface Card {
   /**
    * Text when targeting something with the card.
    */
-  targetingArrowText: string;
+  targetingArrowText?: string;
 
   /**
    * Text displayed on the card.
@@ -148,23 +159,4 @@ export interface Card {
    * Type this card categorizes to; Buff, Hero, HeroPower, Minion, etc.
    */
   type: CardType;
-}
-
-interface Entourage {
-  [index: number]: string;
-}
-
-interface Images {
-  backgroundImage: string;
-  foregroundImage: string;
-}
-
-interface Mechanics {
-  [index: number]: string;
-}
-
-interface Sounds {
-  attackSound: string;
-  deathSound: string;
-  dropSound: string;
 }

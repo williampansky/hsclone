@@ -1,6 +1,9 @@
-enum CardSet {
+export enum CardSet {
   Core,
   Free
 }
 
-export default CardSet;
+export const CardSetLabel = new Map<number, string>([
+  [CardSet.Core, 'Core'],
+  [CardSet.Free, 'Free']
+]);

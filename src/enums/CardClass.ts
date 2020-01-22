@@ -1,5 +1,7 @@
-enum CardClass {
+export enum CardClass {
   Neutral
 }
 
-export default CardClass;
+export const CardClassLabel = new Map<number, string>([
+  [CardClass.Neutral, 'Neutral']
+]);
