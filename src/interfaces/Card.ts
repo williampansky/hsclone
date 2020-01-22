@@ -14,11 +14,11 @@ import Rarity from 'enums/Rarity';
  *
  * @see [forkedInfo]{@link https://hearthstonejson.com/docs/cards.html}
  */
-interface Card {
+export interface Card {
   /**
    * Attribution of the `images.foregroundImage` asset.
    */
-  artist: string;
+  artist?: string;
 
   /**
    * Integer attack value. Always shown on minions and weapons.
@@ -168,5 +168,3 @@ interface Sounds {
   deathSound: string;
   dropSound: string;
 }
-
-export default Card;
