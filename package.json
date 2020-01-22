@@ -41,6 +41,7 @@
     "@types/react-redux": "^7.1.6",
     "@types/react-svg": "^5.0.0",
     "@types/styled-components": "^4.4.2",
+    "@typescript-eslint/eslint-plugin": "^2.17.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-config-react-app": "^5.1.0",
     "eslint-plugin-import": "^2.19.1",
