@@ -9,10 +9,10 @@ const getInitialState = key => {
         { background: 'white', id: 'MINION_min1', name: 'min1', type: 'MINION' },
         { background: 'red', id: 'MINION_min2', name: 'min2', type: 'MINION' },
         { background: 'lightblue', id: 'SPELL_spell0', name: 'spell0', type: 'SPELL' },
-        { background: 'lightgreen', id: 'SPELL_spell1', name: 'spell1', type: 'SPELL' },
         { background: 'green', id: 'MINION_min3', name: 'min3', type: 'MINION' },
         { background: 'teal', id: 'MINION_min4', name: 'min4', type: 'MINION' },
         { background: 'darkblue', id: 'MINION_min5', name: 'min5', type: 'MINION' },
+        { background: 'lightgreen', id: 'SPELL_spell1', name: 'spell1', type: 'SPELL' },
         { background: '#999', id: 'MINION_min6', name: 'min6', type: 'MINION' },
       ];
 

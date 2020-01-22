@@ -1,14 +1,23 @@
 export default {
   id: Number,
   name: String,
-  attributes: {
-    attackPower: Number,
-    healthPoints: Number
-  },
+  category: String,
   description: String,
   images: {
-    background: String,
-    foreground: String
+    backgroundImage: String,
+    foregroundImage: String
+  },
+  isGolden: Boolean,
+  numerics: {
+    attackPower: Number,
+    costToPlay: Number,
+    healthPoints: Number
+  },
+  rarity: String,
+  sounds: {
+    attackSound: String,
+    deathSound: String,
+    dropSound: String
   },
   type: String
 };
