@@ -1,10 +1,10 @@
 import { setHeaderHeight } from 'features/layout/layout.slice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import useDimensions from 'react-use-dimensions';
 
-const Header = ({ mousePositionX, mousePositionY }) => {
+const Header = () => {
   const dispatch = useDispatch();
 
   const [ref, { height }] = useDimensions({ liveMeasure: false });

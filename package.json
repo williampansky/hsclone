@@ -21,7 +21,8 @@
     "react-svg": "^11.0.6",
     "react-use-dimensions": "^1.2.1",
     "react-window-size-listener": "^1.5.4",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.0.0",
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,6 +31,15 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "@types/jest": "^24.9.0",
+    "@types/mathjs": "^6.0.4",
+    "@types/matter-js": "^0.10.8",
+    "@types/node": "^13.1.8",
+    "@types/react": "^16.9.18",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-redux": "^7.1.6",
+    "@types/react-svg": "^5.0.0",
+    "@types/styled-components": "^4.4.2",
     "eslint-config-prettier": "^6.9.0",
     "eslint-config-react-app": "^5.1.0",
     "eslint-plugin-import": "^2.19.1",

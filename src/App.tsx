@@ -9,7 +9,7 @@ import WindowSizer from 'features/layout/WindowSizer';
 
 // ui layout
 import Footer from 'features/layout/Footer.container';
-import Header from 'features/layout/Header.container';
+import Header from 'features/layout/Header';
 import DebugBar from 'features/layout/DebugBar';
 import Board from 'features/layout/Board.container';
 import YourBoard from 'features/yourBoard/YourBoard';
