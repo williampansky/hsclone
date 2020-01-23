@@ -2,19 +2,68 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDrag } from 'react-dnd';
 import { CardType, CardTypeLabel } from 'enums/CardType';
+import { Card as CardInterface } from 'interfaces/Card';
 
-interface CardDragLayer {
-  name: string;
-  card: object;
+interface CardDragLayer extends CardInterface {
   children: Node;
-  id: string;
-  type: string;
-  // any other props that come into the component
 }
 
-const CardDragLayer = ({ name, id, type, card, children }: CardDragLayer) => {
+const CardDragLayer = ({
+  artist,
+  attack,
+  cardClass,
+  collectible,
+  cost,
+  elite,
+  entourage,
+  flavor,
+  health,
+  hideStats,
+  howToEarn,
+  howToEarnGolden,
+  id,
+  images,
+  mechanics,
+  name,
+  playRequirements,
+  race,
+  rarity,
+  set,
+  sounds,
+  spellDamage,
+  targetingArrowText,
+  text,
+  type,
+  children
+}: CardDragLayer) => {
   const [{ isDragging }, drag] = useDrag({
-    item: { name, type, id },
+    item: {
+      artist,
+      attack,
+      cardClass,
+      collectible,
+      cost,
+      elite,
+      entourage,
+      flavor,
+      health,
+      hideStats,
+      howToEarn,
+      howToEarnGolden,
+      id,
+      images,
+      mechanics,
+      name,
+      playRequirements,
+      race,
+      rarity,
+      set,
+      sounds,
+      spellDamage,
+      targetingArrowText,
+      text,
+      type
+    },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
     },

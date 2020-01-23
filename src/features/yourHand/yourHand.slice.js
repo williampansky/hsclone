@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadingStart, loadingFailed } from 'utils/redux.loading';
-import debugHand from 'features/yourHand/debugHand.json';
+import debugHand from 'debugData/debugHand.json';
 
 const getInitialState = key => {
   switch (key) {

@@ -16,3 +16,8 @@ export const loadingFailed = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload.toString();
 };
+
+export const loadingSuccess = state => {
+  state.error = null;
+  state.isLoading = false;
+};

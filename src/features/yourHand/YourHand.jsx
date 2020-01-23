@@ -14,7 +14,7 @@ const YourHand = () => {
       data-length={length}
       numberOfCardsInHand={length}
     >
-      {yourCards.map((card, index) => {
+      {yourCards.map(card => {
         const {
           artist,
           attack,
@@ -44,7 +44,34 @@ const YourHand = () => {
         } = card;
 
         return (
-          <CardDragLayer key={id} id={id} name={name} type={type}>
+          <CardDragLayer
+            key={id}
+            artist={artist}
+            attack={attack}
+            cardClass={cardClass}
+            collectible={collectible}
+            cost={cost}
+            elite={elite}
+            entourage={entourage}
+            flavor={flavor}
+            health={health}
+            hideStats={hideStats}
+            howToEarn={howToEarn}
+            howToEarnGolden={howToEarnGolden}
+            id={id}
+            images={images}
+            mechanics={mechanics}
+            name={name}
+            playRequirements={playRequirements}
+            race={race}
+            rarity={rarity}
+            set={set}
+            sounds={sounds}
+            spellDamage={spellDamage}
+            targetingArrowText={targetingArrowText}
+            text={text}
+            type={type}
+          >
             <Card
               artist={artist}
               attack={attack}
