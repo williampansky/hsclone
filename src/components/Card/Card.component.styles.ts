@@ -109,8 +109,8 @@ export const CardTypeWrapper = styled.div`
 
 export const CardCostWrapper = styled.div`
   position: absolute;
-  background: blue;
-  color: white;
+  background: #15abe4;
+  color: #042c3c;
   line-height: 1;
   font-size: 0.875em;
   display: flex;
@@ -128,8 +128,8 @@ export const CardCostWrapper = styled.div`
 
 export const CardAttackWrapper = styled.div`
   position: absolute;
-  background: purple;
-  color: white;
+  background: #f59b2b;
+  color: #6f3205;
   line-height: 1;
   font-size: 0.875em;
   display: flex;
@@ -147,8 +147,8 @@ export const CardAttackWrapper = styled.div`
 
 export const CardHealthWrapper = styled.div`
   position: absolute;
-  background: red;
-  color: white;
+  background: #840802;
+  color: #ff9792;
   line-height: 1;
   font-size: 0.875em;
   display: flex;
