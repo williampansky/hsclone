@@ -102,6 +102,10 @@ const Component = styled.div`
   margin: auto auto 0;
   overflow: hidden;
   width: ${p => (p.boardWidth ? `${p.boardWidth}px` : `0px`)};
+
+  & > article + article {
+    margin-left: 20px;
+  }
 `;
 
 TheirBoard.propTypes = {

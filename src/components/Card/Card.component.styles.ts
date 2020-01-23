@@ -21,7 +21,7 @@ export const ImageWrapper = styled.div`
   border-top-right-radius: 1.5px;
   position: relative;
   box-sizing: border-box;
-  height: 55%;
+  height: 50%;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -71,7 +71,7 @@ export const CardTextWrapper = styled.div`
   flex-flow: column nowrap;
   font-size: 1em;
   font-weight: normal;
-  height: 20%;
+  height: 25%;
   justify-content: center;
   line-height: calc(1.45 / var(--card-height));
   margin: 0;
@@ -91,7 +91,7 @@ export const CardTypeWrapper = styled.div`
   border-radius: 1.5px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  bottom: 10px;
+  bottom: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   box-sizing: border-box;
   display: flex;
@@ -105,4 +105,61 @@ export const CardTypeWrapper = styled.div`
   position: relative;
   text-align: center;
   width: 100%;
+`;
+
+export const CardCostWrapper = styled.div`
+  position: absolute;
+  background: blue;
+  color: white;
+  line-height: 1;
+  font-size: 0.875em;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  height: calc(var(--card-height) / 10);
+  width: calc(var(--card-height) / 10);
+  border-radius: 50%;
+  top: -8.675px;
+  left: -8.675px;
+  font-weight: 600;
+`;
+
+export const CardAttackWrapper = styled.div`
+  position: absolute;
+  background: purple;
+  color: white;
+  line-height: 1;
+  font-size: 0.875em;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  height: calc(var(--card-height) / 10);
+  width: calc(var(--card-height) / 10);
+  border-radius: 50%;
+  bottom: -4.165px;
+  left: -4.165px;
+  font-weight: 600;
+`;
+
+export const CardHealthWrapper = styled.div`
+  position: absolute;
+  background: red;
+  color: white;
+  line-height: 1;
+  font-size: 0.875em;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  height: calc(var(--card-height) / 10);
+  width: calc(var(--card-height) / 10);
+  border-radius: 50%;
+  bottom: -4.165px;
+  right: -4.165px;
+  font-weight: 600;
 `;

@@ -3,7 +3,10 @@ import {
   CardTextWrapper,
   CardTypeWrapper,
   Component,
-  ImageWrapper
+  ImageWrapper,
+  CardCostWrapper,
+  CardAttackWrapper,
+  CardHealthWrapper
 } from 'components/Card/Card.component.styles';
 import { CardClass, CardClassLabel } from 'enums/CardClass';
 import { CardRace, CardRaceLabel } from 'enums/CardRace';
@@ -68,6 +71,8 @@ const Card = ({
 
   return (
     <Component>
+      <CardCostWrapper>{cost}</CardCostWrapper>
+
       <ImageWrapper>
         <img alt={name} role="presentation" src={foregroundImage} />
       </ImageWrapper>
@@ -81,6 +86,10 @@ const Card = ({
       </CardTextWrapper>
 
       {type && <CardTypeWrapper>{type}</CardTypeWrapper>}
+
+      <CardAttackWrapper>{attack}</CardAttackWrapper>
+
+      <CardHealthWrapper>{health}</CardHealthWrapper>
 
       {/* <div>attack: {attack}</div>
       <div>cost: {cost}</div>
