@@ -14,7 +14,7 @@ const YourHand = () => {
       data-length={length}
       numberOfCardsInHand={length}
     >
-      {yourCards.map(card => {
+      {yourCards.map((card, index) => {
         const {
           artist,
           attack,
@@ -45,7 +45,8 @@ const YourHand = () => {
 
         return (
           <CardDragLayer
-            key={id}
+            key={index}
+            index={index}
             artist={artist}
             attack={attack}
             cardClass={cardClass}
@@ -118,7 +119,7 @@ const Component = styled.div`
   }
 
   & > div + div {
-    margin-left: 10px;
+    margin-left: calc(calc(var(--card-height) / 1.4) / -3.5);
   }
 `;
 

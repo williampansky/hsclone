@@ -25,7 +25,7 @@ export const ImageWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
   object-fit: cover;
 
@@ -92,7 +92,7 @@ export const CardTypeWrapper = styled.div`
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   bottom: 15px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.014);
   box-sizing: border-box;
   display: flex;
   flex-flow: column nowrap;
@@ -109,7 +109,21 @@ export const CardTypeWrapper = styled.div`
 
 export const CardCostWrapper = styled.div`
   position: absolute;
-  background: #15abe4;
+  /* background: #15abe4; */
+  /* background: linear-gradient(
+    -135deg,
+    hsla(197, 100%, 80%, 1),
+    hsla(197, 90%, 45%, 1)
+  ); */
+  background-image: radial-gradient(
+    circle,
+    hsla(197, 100%, 80%, 1),
+    hsla(197, 90%, 65%, 1)
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
   color: #042c3c;
   line-height: 1;
   font-size: 0.875em;
