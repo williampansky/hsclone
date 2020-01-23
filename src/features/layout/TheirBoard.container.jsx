@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Card from 'components/Card/Card.component';
+import debugCards from 'debugData/debugCards.json';
 
 const TheirBoard = ({ children }) => {
   const { boardHeight, boardWidth } = useSelector(s => s.layout);
@@ -24,15 +25,67 @@ const TheirBoard = ({ children }) => {
       ref={drop}
     >
       {children}
-      <Card
-        attack={4}
-        name="Francesca Leopold"
-        text="<strong>Battlecry:</strong> Give a friendly minion <strong>Taunt</strong>."
-        images={{
-          foregroundImage:
-            'https://cdnb.artstation.com/p/assets/images/images/009/730/145/large/othon-nikolaidis-humancleric.jpg?1520561421'
-        }}
-      />
+
+      {debugCards.slice(0, 1).map(card => {
+        const {
+          artist,
+          attack,
+          cardClass,
+          collectible,
+          cost,
+          elite,
+          entourage,
+          flavor,
+          health,
+          hideStats,
+          howToEarn,
+          howToEarnGolden,
+          id,
+          images,
+          mechanics,
+          name,
+          playRequirements,
+          race,
+          rarity,
+          set,
+          sounds,
+          spellDamage,
+          targetingArrowText,
+          text,
+          type
+        } = card;
+
+        return (
+          <Card
+            key={id}
+            artist={artist}
+            attack={attack}
+            cardClass={cardClass}
+            collectible={collectible}
+            cost={cost}
+            elite={elite}
+            entourage={entourage}
+            flavor={flavor}
+            health={health}
+            hideStats={hideStats}
+            howToEarn={howToEarn}
+            howToEarnGolden={howToEarnGolden}
+            id={id}
+            images={images}
+            mechanics={mechanics}
+            name={name}
+            playRequirements={playRequirements}
+            race={race}
+            rarity={rarity}
+            set={set}
+            sounds={sounds}
+            spellDamage={spellDamage}
+            targetingArrowText={targetingArrowText}
+            text={text}
+            type={type}
+          />
+        );
+      })}
     </Component>
   ) : null;
 };

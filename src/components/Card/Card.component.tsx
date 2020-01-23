@@ -6,8 +6,9 @@ import {
   ImageWrapper
 } from 'components/Card/Card.component.styles';
 import { CardClass, CardClassLabel } from 'enums/CardClass';
-import { CardRarity } from 'enums/CardRarity';
-import { CardSet } from 'enums/CardSet';
+import { CardRace, CardRaceLabel } from 'enums/CardRace';
+import { CardRarity, CardRarityLabel } from 'enums/CardRarity';
+import { CardSet, CardSetLabel } from 'enums/CardSet';
 import { Card as CardInterface } from 'interfaces/Card';
 import React from 'react';
 import createMarkup from 'utils/createMarkup';
@@ -56,9 +57,12 @@ const Card = ({
     { name: 'flavor', content: flavor },
     { name: 'mechanics', content: JSON.stringify(mechanics) },
     { name: 'playRequirements', content: JSON.stringify(playRequirements) },
+    { name: 'rarity', content: CardRarityLabel.get(rarity) },
+    { name: 'set', content: CardSetLabel.get(set) },
     { name: 'sounds.attackSound', content: attackSound },
     { name: 'sounds.deathSound', content: deathSound },
     { name: 'sounds.dropSound', content: dropSound },
+    { name: 'spellDamage', content: spellDamage },
     { name: 'targetingText', content: targetingArrowText }
   ];
 
@@ -86,9 +90,11 @@ const Card = ({
       <div>set: {CardSetLabel.get(set)}</div>
       <div>spellDamage: {spellDamage}</div> */}
 
-      {metaAttributes.map((attr, idx) => {
+      {metaAttributes.map((attr, index) => {
         const { name, content } = attr;
-        return content && <meta key={idx} name={name} content={content} />;
+        return content ? (
+          <meta key={index} name={name} content={content.toString()} />
+        ) : null;
       })}
     </Component>
   );
@@ -115,7 +121,7 @@ const defaultProps = {
   mechanics: undefined,
   name: 'CARD NAME',
   playRequirements: undefined,
-  race: undefined,
+  race: CardRace.None,
   rarity: CardRarity.Free,
   set: CardSet.Free,
   sounds: {

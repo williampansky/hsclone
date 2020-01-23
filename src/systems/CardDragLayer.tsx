@@ -73,7 +73,7 @@ const CardDragLayer = ({
   });
 
   return (
-    <Component id={id} ref={drag}>
+    <Component id={id} ref={drag} isDragging={isDragging}>
       {children}
     </Component>
   );
@@ -89,16 +89,22 @@ const defaultProps = {
 
 CardDragLayer.defaultProps = defaultProps;
 
-const Component = styled.div`
+interface ComponentStyles {
+  isDragging: boolean;
+}
+
+const Component = styled.div<ComponentStyles>`
   box-sizing: border-box;
   position: relative;
   cursor: pointer;
-  transition: transform 100ms ease;
+  transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
   user-select: none;
+  padding: 0 0 20px;
+  display: ${p => (p.isDragging ? 'none' : 'block')};
 
   &[draggable='true']:hover {
-    transform: translateY(-10px) scale(1.05);
-    transition: transform 200ms ease;
+    transform: translateY(-65%);
+    /* transition: transform 0.3s cubic-bezier(.25,.8,.25,1); */
   }
 `;
 
