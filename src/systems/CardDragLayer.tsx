@@ -97,14 +97,14 @@ const Component = styled.div<ComponentStyles>`
   box-sizing: border-box;
   position: relative;
   cursor: pointer;
-  transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-property: transform;
   user-select: none;
   padding: 0 0 20px;
-  display: ${p => (p.isDragging ? 'none' : 'block')};
+  opacity: ${p => (p.isDragging ? '0' : '1')};
 
   &[draggable='true']:hover {
     transform: translateY(-65%);
-    /* transition: transform 0.3s cubic-bezier(.25,.8,.25,1); */
   }
 `;
 

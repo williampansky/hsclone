@@ -26,7 +26,7 @@ const TheirBoard = ({ children }) => {
     >
       {children}
 
-      {debugCards.slice(0, 1).map(card => {
+      {debugCards.slice(0, 2).map(card => {
         const {
           artist,
           attack,

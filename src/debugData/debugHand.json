@@ -17,11 +17,36 @@
       "BATTLECRY"
     ],
     "name": "Francesca Leopold",
+    "race": 0,
     "rarity": 0,
     "set": 0,
     "spellDamage": 0,
     "targetingArrowText": "Give a minion <strong>Taunt</strong>.",
     "text": "<strong>Battlecry:</strong> Give a friendly minion <strong>Taunt</strong>.",
     "type": "MINION"
+  },
+  {
+    "attack": 2,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 3,
+    "elite": false,
+    "health": 0,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_002",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://cdnb.artstation.com/p/assets/images/images/002/002/109/large/jaan-van-eeden-fireball-artstation.jpg?1455792737"
+    },
+    "mechanics": [],
+    "name": "Meteor",
+    "race": 0,
+    "rarity": 2,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": null,
+    "text": "Conjure a meteor that damages all minions.",
+    "type": "SPELL"
   }
 ]
