@@ -1,16 +1,17 @@
 import {
-  CardName,
+  CardNameWrapper,
+  CardTextWrapper,
+  CardTypeWrapper,
   Component,
-  Header,
   ImageWrapper
-} from 'components/Card/CardComponentStyles';
+} from 'components/Card/Card.component.styles';
 import { CardClass, CardClassLabel } from 'enums/CardClass';
-import { CardRarity, CardRarityLabel } from 'enums/CardRarity';
-import { CardSet, CardSetLabel } from 'enums/CardSet';
-import { CardType, CardTypeLabel } from 'enums/CardType';
-import { CardRace, CardRaceLabel } from 'enums/CardRace';
+import { CardRarity } from 'enums/CardRarity';
+import { CardSet } from 'enums/CardSet';
 import { Card as CardInterface } from 'interfaces/Card';
 import React from 'react';
+import createMarkup from 'utils/createMarkup';
+import { fontSizeBasedOnCharacterLength } from 'utils/text';
 
 const Card = ({
   artist,
@@ -50,7 +51,6 @@ const Card = ({
     { name: 'hideStats', content: hideStats.toString() },
     { name: 'howToEarn', content: howToEarn },
     { name: 'howToEarnGolden', content: howToEarnGolden },
-    { name: '', content: '' },
     { name: 'images.backgroundImage', content: backgroundImage },
     { name: 'images.foregroundImage', content: foregroundImage },
     { name: 'flavor', content: flavor },
@@ -65,22 +65,26 @@ const Card = ({
   return (
     <Component>
       <ImageWrapper>
-        <div>Image</div>
+        <img alt={name} role="presentation" src={foregroundImage} />
       </ImageWrapper>
 
-      <Header>
-        <CardName>{name}</CardName>
-      </Header>
+      <CardNameWrapper fontSize={fontSizeBasedOnCharacterLength(name)}>
+        <span>{name}</span>
+      </CardNameWrapper>
 
-      <div>attack: {attack}</div>
+      <CardTextWrapper>
+        <p dangerouslySetInnerHTML={createMarkup(text)} />
+      </CardTextWrapper>
+
+      {type && <CardTypeWrapper>{type}</CardTypeWrapper>}
+
+      {/* <div>attack: {attack}</div>
       <div>cost: {cost}</div>
       <div>health: {health}</div>
       {race && <div>race: {race}</div>}
       <div>rarity: {CardRarityLabel.get(rarity)}</div>
       <div>set: {CardSetLabel.get(set)}</div>
-      <div>spellDamage: {spellDamage}</div>
-      <div>text: {text}</div>
-      <div>type: {CardTypeLabel.get(type)}</div>
+      <div>spellDamage: {spellDamage}</div> */}
 
       {metaAttributes.map((attr, idx) => {
         const { name, content } = attr;
@@ -121,8 +125,8 @@ const defaultProps = {
   },
   spellDamage: 0,
   targetingArrowText: undefined,
-  text: undefined,
-  type: CardType.Minion
+  text: 'CARD TEXT',
+  type: undefined
 };
 
 Card.defaultProps = defaultProps;

@@ -158,5 +158,5 @@ export interface Card {
   /**
    * Type this card categorizes to; Buff, Hero, HeroPower, Minion, etc.
    */
-  type: CardType;
+  type: string;
 }

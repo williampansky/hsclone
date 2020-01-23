@@ -1,9 +1,9 @@
 export enum CardSet {
-  Core,
-  Free
+  Free,
+  Core
 }
 
 export const CardSetLabel = new Map<number, string>([
-  [CardSet.Core, 'Core'],
-  [CardSet.Free, 'Free']
+  [CardSet.Free, 'Free'],
+  [CardSet.Core, 'Core']
 ]);

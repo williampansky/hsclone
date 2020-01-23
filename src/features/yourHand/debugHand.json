@@ -1,0 +1,27 @@
+[
+  {
+    "attack": 1,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 2,
+    "elite": false,
+    "health": 4,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_001",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://cdnb.artstation.com/p/assets/images/images/009/730/145/large/othon-nikolaidis-humancleric.jpg?1520561421"
+    },
+    "mechanics": [
+      "BATTLECRY"
+    ],
+    "name": "Francesca Leopold",
+    "rarity": 0,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": "Give a minion <strong>Taunt</strong>.",
+    "text": "<strong>Battlecry:</strong> Give a friendly minion <strong>Taunt</strong>.",
+    "type": "MINION"
+  }
+]

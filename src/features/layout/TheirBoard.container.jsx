@@ -24,7 +24,15 @@ const TheirBoard = ({ children }) => {
       ref={drop}
     >
       {children}
-      <Card attack={4} />
+      <Card
+        attack={4}
+        name="Francesca Leopold"
+        text="<strong>Battlecry:</strong> Give a friendly minion <strong>Taunt</strong>."
+        images={{
+          foregroundImage:
+            'https://cdnb.artstation.com/p/assets/images/images/009/730/145/large/othon-nikolaidis-humancleric.jpg?1520561421'
+        }}
+      />
     </Component>
   ) : null;
 };
