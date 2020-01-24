@@ -14,6 +14,7 @@ import SingleDropArea from 'systems/dropAreas/SingleDropArea';
 import AdjacentDropArea from 'systems/dropAreas/AdjacentDropArea';
 import Card from 'components/Card/Card.component';
 import CardTargetingLayer from 'features/targeting/CardTargetingLayer';
+import Minion from 'components/Minion/Minion.component';
 
 const YourBoard = () => {
   const dispatch = useDispatch();
@@ -110,7 +111,7 @@ const YourBoard = () => {
                 text={text}
                 type={type}
               >
-                <Card
+                <Minion
                   artist={artist}
                   attack={attack}
                   cardClass={cardClass}

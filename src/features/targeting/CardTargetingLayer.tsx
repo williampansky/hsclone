@@ -108,7 +108,7 @@ const CardTargetingLayer = ({
           x0={x && height ? x + height * 0.345 : 0}
           x1={targetX + height * 0.345}
           y0={top ? top : 0}
-          y1={targetY + 275}
+          y1={targetY + 200}
         />
       ) : null}
     </Component>

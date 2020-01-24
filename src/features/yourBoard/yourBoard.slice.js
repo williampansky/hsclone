@@ -14,7 +14,7 @@ const getInitialState = key => {
 
 const yourBoard = createSlice({
   name: 'yourBoard',
-  initialState: getInitialState('debug'),
+  initialState: getInitialState(),
   reducers: {
     initYourBoardFailure: loadingFailed,
     initYourBoardStart: loadingStart,

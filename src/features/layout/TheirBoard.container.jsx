@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Card from 'components/Card/Card.component';
+import Minion from 'components/Minion/Minion.component';
 import debugCards from 'debugData/debugCards.json';
 import useDimensions from 'react-use-dimensions';
 import {
@@ -11,8 +12,9 @@ import {
   resetHoveredTarget
 } from 'features/targeting/targeting.slice';
 
-const Test = ({ children }) => {
+const CanTargetTest = ({ children }) => {
   const dispatch = useDispatch();
+  const { enabled } = useSelector(s => s.targeting);
   const [cardRef, redRefProps] = useDimensions({
     liveMeasure: true
   });
@@ -28,7 +30,7 @@ const Test = ({ children }) => {
     return dispatch(resetHoveredTarget());
   }, [dispatch]);
 
-  return (
+  return enabled ? (
     <div
       ref={cardRef}
       className="mechanics--can_target"
@@ -37,6 +39,8 @@ const Test = ({ children }) => {
     >
       {children}
     </div>
+  ) : (
+    <div ref={cardRef}>{children}</div>
   );
 };
 
@@ -91,8 +95,8 @@ const TheirBoard = ({ children }) => {
         } = card;
 
         return (
-          <Test key={id}>
-            <Card
+          <CanTargetTest key={id}>
+            <Minion
               artist={artist}
               attack={attack}
               cardClass={cardClass}
@@ -119,7 +123,7 @@ const TheirBoard = ({ children }) => {
               text={text}
               type={type}
             />
-          </Test>
+          </CanTargetTest>
         );
       })}
     </Component>

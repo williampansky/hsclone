@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
-  enabled: true,
+  enabled: false,
   target: {
     width: 0,
     height: 0,
@@ -26,16 +26,17 @@ const targetingSlice = createSlice({
     },
     targetHovered(state, { payload }) {
       const { width, height, top, left, x, y, right, bottom } = payload;
-      state.target = {
-        width,
-        height,
-        top,
-        left,
-        x,
-        y,
-        right,
-        bottom
-      };
+      if (state.enabled)
+        state.target = {
+          width,
+          height,
+          top,
+          left,
+          x,
+          y,
+          right,
+          bottom
+        };
     },
     resetHoveredTarget(state) {
       const { target } = initialState;
