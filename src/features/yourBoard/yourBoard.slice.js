@@ -1,11 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadingStart, loadingFailed } from 'utils/redux.loading';
+import debugYourBoard from 'debugData/debugYourBoard.json';
 
-let initialState = [];
+const getInitialState = key => {
+  switch (key) {
+    case 'debug':
+      return debugYourBoard;
+
+    default:
+      return [];
+  }
+};
 
 const yourBoard = createSlice({
   name: 'yourBoard',
-  initialState,
+  initialState: getInitialState('debug'),
   reducers: {
     initYourBoardFailure: loadingFailed,
     initYourBoardStart: loadingStart,

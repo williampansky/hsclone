@@ -8,7 +8,7 @@ const Board = ({ children, onMouseMove }) => {
 
   return boardHeight && boardWidth ? (
     <Component
-      data-feature="Board"
+      data-file="Board"
       height={boardHeight}
       onMouseMove={onMouseMove}
       width={boardWidth}

@@ -1,13 +1,48 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Card from 'components/Card/Card.component';
 import debugCards from 'debugData/debugCards.json';
+import useDimensions from 'react-use-dimensions';
+import {
+  targetHovered,
+  resetHoveredTarget
+} from 'features/targeting/targeting.slice';
+
+const Test = ({ children }) => {
+  const dispatch = useDispatch();
+  const [cardRef, redRefProps] = useDimensions({
+    liveMeasure: true
+  });
+
+  const handleMouseEnter = React.useCallback(
+    redRefProps => {
+      return dispatch(targetHovered(redRefProps));
+    },
+    [dispatch]
+  );
+
+  const handleMouseLeave = React.useCallback(() => {
+    return dispatch(resetHoveredTarget());
+  }, [dispatch]);
+
+  return (
+    <div
+      ref={cardRef}
+      className="mechanics--can_target"
+      onMouseEnter={() => handleMouseEnter(redRefProps)}
+      onMouseLeave={() => handleMouseLeave()}
+    >
+      {children}
+    </div>
+  );
+};
 
 const TheirBoard = ({ children }) => {
   const { boardHeight, boardWidth } = useSelector(s => s.layout);
+
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: 'SPELL',
     drop: () => ({ name: 'TheirBoard' }),
@@ -56,34 +91,35 @@ const TheirBoard = ({ children }) => {
         } = card;
 
         return (
-          <Card
-            key={id}
-            artist={artist}
-            attack={attack}
-            cardClass={cardClass}
-            collectible={collectible}
-            cost={cost}
-            elite={elite}
-            entourage={entourage}
-            flavor={flavor}
-            health={health}
-            hideStats={hideStats}
-            howToEarn={howToEarn}
-            howToEarnGolden={howToEarnGolden}
-            id={id}
-            images={images}
-            mechanics={mechanics}
-            name={name}
-            playRequirements={playRequirements}
-            race={race}
-            rarity={rarity}
-            set={set}
-            sounds={sounds}
-            spellDamage={spellDamage}
-            targetingArrowText={targetingArrowText}
-            text={text}
-            type={type}
-          />
+          <Test key={id}>
+            <Card
+              artist={artist}
+              attack={attack}
+              cardClass={cardClass}
+              collectible={collectible}
+              cost={cost}
+              elite={elite}
+              entourage={entourage}
+              flavor={flavor}
+              health={health}
+              hideStats={hideStats}
+              howToEarn={howToEarn}
+              howToEarnGolden={howToEarnGolden}
+              id={id}
+              images={images}
+              mechanics={mechanics}
+              name={name}
+              playRequirements={playRequirements}
+              race={race}
+              rarity={rarity}
+              set={set}
+              sounds={sounds}
+              spellDamage={spellDamage}
+              targetingArrowText={targetingArrowText}
+              text={text}
+              type={type}
+            />
+          </Test>
         );
       })}
     </Component>
@@ -103,7 +139,7 @@ const Component = styled.div`
   overflow: hidden;
   width: ${p => (p.boardWidth ? `${p.boardWidth}px` : `0px`)};
 
-  & > article + article {
+  & > div + div {
     margin-left: 20px;
   }
 `;
