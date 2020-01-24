@@ -13,6 +13,8 @@ import BoardDropArea from 'systems/dropAreas/BoardDropArea';
 import SingleDropArea from 'systems/dropAreas/SingleDropArea';
 import AdjacentDropArea from 'systems/dropAreas/AdjacentDropArea';
 import Card from 'components/Card/Card.component';
+import CardTargetingLayer from 'features/targeting/CardTargetingLayer';
+import Minion from 'components/Minion/Minion.component';
 
 const YourBoard = () => {
   const dispatch = useDispatch();
@@ -81,7 +83,7 @@ const YourBoard = () => {
 
           return (
             <React.Fragment key={`React.Fragment_${i}`}>
-              <Card
+              <CardTargetingLayer
                 key={`card_${id}`}
                 artist={artist}
                 attack={attack}
@@ -108,7 +110,35 @@ const YourBoard = () => {
                 targetingArrowText={targetingArrowText}
                 text={text}
                 type={type}
-              />
+              >
+                <Minion
+                  artist={artist}
+                  attack={attack}
+                  cardClass={cardClass}
+                  collectible={collectible}
+                  cost={cost}
+                  elite={elite}
+                  entourage={entourage}
+                  flavor={flavor}
+                  health={health}
+                  hideStats={hideStats}
+                  howToEarn={howToEarn}
+                  howToEarnGolden={howToEarnGolden}
+                  id={id}
+                  images={images}
+                  mechanics={mechanics}
+                  name={name}
+                  playRequirements={playRequirements}
+                  race={race}
+                  rarity={rarity}
+                  set={set}
+                  sounds={sounds}
+                  spellDamage={spellDamage}
+                  targetingArrowText={targetingArrowText}
+                  text={text}
+                  type={type}
+                />
+              </CardTargetingLayer>
 
               <AdjacentDropArea
                 key={`dropArea_${i}`}
@@ -134,6 +164,25 @@ const Component = styled.div`
   margin: auto;
   position: relative;
   width: ${p => (p.boardWidth ? `calc(${p.boardWidth}px - 20%)` : `0px`)};
+
+  & > div > article {
+    animation-name: uk-fade-scale-18;
+    animation-duration: 200ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+  }
+
+  @keyframes uk-fade-scale-18 {
+    0% {
+      opacity: 0;
+      transform: scale(1.8);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 `;
 
 export default YourBoard;

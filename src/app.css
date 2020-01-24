@@ -1,6 +1,12 @@
 :root {
+  /* card vars */
   --card-background-color: #ededed;
   --card-height: 250px;
+
+  /* minion vars */
+  --minion-height: 150px;
+  --minion-border-radius: 25%;
+  --minion-stat-offset: -4.165px;
 }
 
 body {
