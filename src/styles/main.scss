@@ -1,4 +1,6 @@
 .mechanics--has_charge {
+  z-index: 100;
+
   &:before {
     content: '';
     animation: glowing 2500ms infinite;
@@ -30,7 +32,7 @@
 .mechanics--target_arrow {
   box-sizing: border-box;
   border-top: 5px solid green !important;
-  transition: 75ms ease-in;
-  transition-property: height, width, transform;
-  will-change: height, width, transform;
+  // transition: 75ms ease-in;
+  // transition-property: height, width, transform;
+  // will-change: height, width, transform;
 }

@@ -64,6 +64,7 @@ const CardTargetingLayer = ({
       };
     };
   }
+
   const targetingState = (state: RootState) => state.targeting;
   const { target } = useSelector(targetingState);
 
@@ -73,12 +74,10 @@ const CardTargetingLayer = ({
   }, []);
 
   React.useEffect(() => {
-    // target && cB(target);
-    target && setTargetX(target.x);
-    target && setTargetY(target.y);
+    target && cB(target);
   }, [target]);
 
-  const [cardRef, { x, y, height, width }] = useDimensions({
+  const [cardRef, { x, y, height, top }] = useDimensions({
     liveMeasure: false
   });
 
@@ -108,8 +107,8 @@ const CardTargetingLayer = ({
           className="mechanics--target_arrow"
           x0={x && height ? x + height * 0.345 : 0}
           x1={targetX + height * 0.345}
-          y0={y ? y : 0}
-          y1={targetY + 250}
+          y0={top ? top : 0}
+          y1={targetY + 275}
         />
       ) : null}
     </Component>
