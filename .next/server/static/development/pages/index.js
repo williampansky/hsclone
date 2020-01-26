@@ -2094,7 +2094,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ~/store */ "./src/store.js");
 /* harmony import */ var components_Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! components/Header */ "./src/components/Header.js");
 var _jsxFileName = "/Users/william.pansky/www/hsclone/src/components/MyLayout.js";
 
@@ -2102,32 +2102,31 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: '1px solid #DDD'
-};
-/* harmony default export */ __webpack_exports__["default"] = (props => __jsx(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
-  store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 12
-  },
-  __self: undefined
-}, __jsx("div", {
-  style: layoutStyle,
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 13
-  },
-  __self: undefined
-}, __jsx(components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
-  __source: {
-    fileName: _jsxFileName,
-    lineNumber: 14
-  },
-  __self: undefined
-}), props.children)));
+/* harmony default export */ __webpack_exports__["default"] = (props => {
+  const {
+    children
+  } = props;
+  return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
+    store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 8
+    },
+    __self: undefined
+  }, __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9
+    },
+    __self: undefined
+  }, __jsx(components_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 10
+    },
+    __self: undefined
+  }), children));
+});
 
 /***/ }),
 
@@ -2281,7 +2280,9 @@ __webpack_require__.r(__webpack_exports__);
 const store = Object(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__["configureStore"])({
   reducer: reducers__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
+
 if (false) {}
+
 /* harmony default export */ __webpack_exports__["default"] = (store);
 
 /***/ }),

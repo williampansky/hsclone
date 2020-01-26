@@ -1,0 +1,31 @@
+{
+  "name": "hsclone",
+  "builds": [
+    {
+      "src": "*.html",
+      "use": "@now/static"
+    },
+    {
+      "src": "*.py",
+      "use": "@now/python"
+    },
+    {
+      "src": "*.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
+      },
+      "src": "/src/.*",
+      "dest": "/index.js"
+    }
+  ],
+  "env": {
+    "VERSION": "@version"
+  }
+}
