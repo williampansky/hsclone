@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "target": "es6",
-    "baseUrl": "./src/",
+    "target": "es2017",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "features/*": ["./features/src/*"],
+      "reducers/*": ["./reducers/src/*"],
+      "components/*": ["./components/src/*"]
     }
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
