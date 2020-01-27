@@ -15,6 +15,7 @@
   "dependencies": {
     "@react-hook/mouse-position": "^3.0.2",
     "@reduxjs/toolkit": "^1.2.3",
+    "@zeit/next-css": "^1.0.1",
     "connect-mongodb-session": "^2.3.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
@@ -40,6 +41,8 @@
     "react-use-hover": "^1.0.0",
     "react-window-size-listener": "^1.5.4",
     "socket.io": "^2.3.0",
+    "styled-components": "^5.0.0",
+    "styled-jsx-plugin-sass": "^1.0.0",
     "swr": "^0.1.16"
   },
   "devDependencies": {

@@ -1,9 +1,19 @@
-import Layout from 'components/MyLayout';
+import Board from 'components/game/Board';
+import Game from 'components/game/Game';
+import TheirBoard from 'components/game/TheirBoard';
+import TheirHand from 'components/game/TheirHand';
+import YourBoard from 'components/game/YourBoard';
+import YourHand from 'components/game/YourHand';
 
-export default function Game() {
+export default () => {
   return (
-    <Layout>
-      <p>This is the about page</p>
-    </Layout>
+    <Game>
+      <TheirHand />
+      <Board>
+        <TheirBoard />
+        <YourBoard />
+      </Board>
+      <YourHand />
+    </Game>
   );
-}
+};

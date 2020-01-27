@@ -5,11 +5,9 @@ import Header from 'components/Header';
 export default props => {
   const { children } = props;
   return (
-    <Provider store={store}>
-      <div>
-        <Header />
-        {children}
-      </div>
-    </Provider>
+    <div>
+      <Header />
+      {children}
+    </div>
   );
 };

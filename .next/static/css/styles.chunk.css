@@ -1,0 +1,45 @@
+:root {
+  /* layout vars */
+  --board-theirHand-background-color: gray;
+  --board-theirHand-height: 65px;
+  --board-theirHand-zIndex: 200;
+  --board-yourHand-background-color: gray;
+  --board-yourHand-height: 65px;
+  --board-yourHand-zIndex: 200;
+  --board-players-hands-height: calc(
+    var(--board-theirHand-height) + var(--board-yourHand-height)
+  );
+
+  /* card vars */
+  --card-background-color: #ededed;
+  --card-height: 250px;
+
+  /* minion vars */
+  --minion-height: 150px;
+  --minion-border-radius: 25%;
+  --minion-stat-offset: -4.165px;
+}
+
+html,
+body {
+  background: black;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#game {
+  background: black;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+
+/*# sourceMappingURL=styles.chunk.css.map*/

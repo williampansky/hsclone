@@ -1,7 +1,8 @@
 const path = require('path');
+const withCSS = require('@zeit/next-css');
 
 // prettier-ignore
-module.exports = {
+module.exports = withCSS({
   webpack: config => {
     config.resolve.alias['~'] = path.resolve(__dirname, 'src/');
     config.resolve.alias['components'] = path.resolve(__dirname, 'src/components');
@@ -15,4 +16,4 @@ module.exports = {
 
     return config;
   }
-};
+});
