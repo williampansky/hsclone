@@ -1,8 +1,8 @@
-import MyLayout from 'components/MyLayout';
+import Layout from 'components/site/layout/Layout';
 
 export default function Index() {
   return (
-    <MyLayout>
+    <Layout>
       <style jsx>{`
         main {
           width: 90%;
@@ -22,6 +22,6 @@ export default function Index() {
           font-size: 20px;
         }
       `}</style>
-    </MyLayout>
+    </Layout>
   );
 }

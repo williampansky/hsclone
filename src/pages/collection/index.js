@@ -1,4 +1,4 @@
-import Layout from 'components/MyLayout';
+import Layout from 'components/site/layout/Layout';
 
 export default function Collection() {
   return (

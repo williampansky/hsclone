@@ -23,11 +23,11 @@
       "static/runtime/polyfills.js",
       "static/runtime/polyfills.js.map"
     ],
-    "/game": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/index": [
+    "/play": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

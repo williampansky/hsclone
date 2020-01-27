@@ -6,10 +6,6 @@
       "use": "@now/static"
     },
     {
-      "src": "*.py",
-      "use": "@now/python"
-    },
-    {
       "src": "*.js",
       "use": "@now/node"
     }

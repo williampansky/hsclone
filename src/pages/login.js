@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import fetch from 'isomorphic-unfetch';
-import Layout from 'components/MyLayout';
+import Layout from 'components/site/layout/Layout';
 import { login } from 'utils/auth';
 
 class Login extends Component {
