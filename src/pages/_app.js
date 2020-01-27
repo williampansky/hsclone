@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import store from '~/store';
 import '~/app.css';
 
+import getUserId from '~/lib/user/get-gid';
+
 class MyApp extends App {
   constructor(props) {
     super(props);
@@ -20,6 +22,10 @@ class MyApp extends App {
   //
   //   return { ...appProps }
   // }
+
+  componentDidMount() {
+    getUserId().then(gid => console.log(gid));
+  }
 
   render() {
     const { Component, pageProps } = this.props;
