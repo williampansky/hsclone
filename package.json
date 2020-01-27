@@ -15,10 +15,13 @@
   "dependencies": {
     "@react-hook/mouse-position": "^3.0.2",
     "@reduxjs/toolkit": "^1.2.3",
+    "connect-mongodb-session": "^2.3.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "isomorphic-unfetch": "^3.0.0",
     "mathjs": "^6.5.0",
     "matter-js": "^0.14.2",
+    "mongoose": "^5.8.9",
     "next": "^9.2.1",
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",
