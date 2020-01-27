@@ -1,27 +1,49 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+const { createServer } = require('http');
+const httpProxy = require('http-proxy');
+const { parse } = require('url');
+const next = require('next');
 
-app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
-});
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-io.on('connection', function(socket) {
-  console.log('a user connected');
+const proxy = httpProxy.createProxyServer();
+const target = 'http://localhost:3001';
 
-  socket.on('chat message', function(msg) {
-    console.log('message: ' + msg);
+app.prepare().then(() => {
+  createServer((req, res) => {
+    const parsedUrl = parse(req.url, true);
+    const { pathname, query } = parsedUrl;
+
+    switch (pathname) {
+      case '/':
+        app.render(req, res, '/', query);
+        break;
+
+      case '/login':
+        app.render(req, res, '/login', query);
+        break;
+
+      case '/api/login.js':
+        proxy.web(req, res, { target }, error => {
+          console.log('Error!', error);
+        });
+        break;
+
+      case '/profile':
+        app.render(req, res, '/profile', query);
+        break;
+
+      case '/api/profile.js':
+        proxy.web(req, res, { target }, error => console.log('Error!', error));
+        break;
+
+      default:
+        handle(req, res, parsedUrl);
+        break;
+    }
+  }).listen(3000, err => {
+    if (err) throw err;
+    console.log('> Ready on http://localhost:3000');
   });
-
-  socket.on('chat message', function(msg) {
-    io.emit('chat message', msg);
-  });
-
-  socket.on('disconnect', function() {
-    console.log('user disconnected');
-  });
-});
-
-http.listen(3000, function() {
-  console.log('listening on *:3000');
 });
