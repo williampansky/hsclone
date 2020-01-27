@@ -5,7 +5,7 @@ import { add, subtract } from 'mathjs';
 let initialState = 0;
 
 const goldSlice = createSlice({
-  name: 'price',
+  name: 'gold',
   initialState,
   reducers: {
     setGoldValue(state, { payload }) {

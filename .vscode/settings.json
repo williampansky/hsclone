@@ -20,6 +20,7 @@
   },
   "prettier.ignorePath": ".prettierignore",
   "search.exclude": {
+    "**/.next": true,
     "**/node_modules": true,
     "**/package-lock.json": true,
     "**/yarn.lock": true
@@ -40,6 +41,7 @@
   "cSpell.words": [
     "Battlecry",
     "craftable",
+    "hsclone",
     "hsla"
   ]
 }

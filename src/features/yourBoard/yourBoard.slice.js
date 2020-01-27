@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadingStart, loadingFailed } from 'utils/redux.loading';
-import debugYourBoard from 'debugData/debugYourBoard.json';
+// import debugYourBoard from 'debugData/debugYourBoard.json';
 
 const getInitialState = key => {
   switch (key) {
     case 'debug':
-      return debugYourBoard;
+      return;
+    // return debugYourBoard;
 
     default:
       return [];
