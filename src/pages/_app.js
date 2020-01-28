@@ -23,9 +23,9 @@ class MyApp extends App {
   //   return { ...appProps }
   // }
 
-  componentDidMount() {
-    getUserId().then(gid => console.log(gid));
-  }
+  // componentDidMount() {
+  //   getUserId().then(gid => console.log(gid));
+  // }
 
   render() {
     const { Component, pageProps } = this.props;

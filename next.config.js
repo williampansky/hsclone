@@ -7,6 +7,7 @@ module.exports = withCSS({
     config.resolve.alias['~'] = path.resolve(__dirname, 'src/');
     config.resolve.alias['components'] = path.resolve(__dirname, 'src/components');
     config.resolve.alias['config'] = path.resolve(__dirname, 'src/config');
+    config.resolve.alias['data'] = path.resolve(__dirname, 'src/data');
     config.resolve.alias['features'] = path.resolve(__dirname, 'src/features');
     config.resolve.alias['hooks'] = path.resolve(__dirname, 'src/hooks');
     config.resolve.alias['lib'] = path.resolve(__dirname, 'src/lib');

@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadingStart, loadingFailed } from 'utils/redux.loading';
-// import debugHand from 'debugData/debugHand.json';
+import debugData from '~/data/debug/hand.json';
 
 const getInitialState = key => {
   switch (key) {
     case 'debug':
-      return;
-    // return debugHand;
+      return debugData;
 
     default:
       return [];
@@ -15,7 +14,7 @@ const getInitialState = key => {
 
 const yourHand = createSlice({
   name: 'yourHand',
-  initialState: getInitialState(),
+  initialState: getInitialState('debug'),
   reducers: {
     initYourHandFailure: loadingFailed,
     initYourHandStart: loadingStart,
