@@ -1,31 +1,43 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadingStart, loadingFailed } from 'utils/redux.loading';
 import debugData from '~/data/debug/hand.json';
+import server from '~/server';
 
 const getInitialState = key => {
   switch (key) {
     case 'debug':
-      return debugData;
+      return {
+        error: null,
+        isLoading: false,
+        cardsInHand: debugData,
+        selectedCard: null
+      };
 
     default:
-      return [];
+      return {
+        error: null,
+        isLoading: false,
+        cardsInHand: [],
+        selectedCard: null
+      };
   }
 };
 
 const yourHand = createSlice({
   name: 'yourHand',
-  initialState: getInitialState('debug'),
+  initialState: getInitialState(),
   reducers: {
-    initYourHandFailure: loadingFailed,
-    initYourHandStart: loadingStart,
-    initYourHandSuccess: state => {
-      state.isLoading = false;
+    addCardsToYourHand(state, { payload }) {
+      state.cardsInHand = payload;
     },
     addCardToYourHand(state, { payload }) {
       const { item, i } = payload;
       let newArray = state.slice();
       newArray.splice(i, 0, item);
-      return newArray;
+      state.cardsInHand = newArray;
+    },
+    deselectCard(state, { payload }) {
+      state.selectedCard = null;
     },
     playSpellFromYourHand(state, { payload }) {
       const { item } = payload;
@@ -33,11 +45,14 @@ const yourHand = createSlice({
     },
     removeCardFromYourHand(state, { payload }) {
       const { id } = payload;
-      return state.filter(item => item.id !== id);
+      state.cardsInHand = state.filter(item => item.id !== id);
+    },
+    selectCard(state, { payload }) {
+      state.selectedCard = payload;
     },
     updateCardInYourHand(state, { payload }) {
       const { item, i } = payload;
-      return state.map((entry, index) => {
+      state.cardsInHand = state.map((entry, index) => {
         // This isn't the entry we care about - keep it as-is
         if (index !== i) return entry;
 
@@ -57,28 +72,32 @@ export const {
   initYourHandFailure,
   initYourHandStart,
   initYourHandSuccess,
+  addCardsToYourHand,
   addCardToYourHand,
   playSpellFromYourHand,
-  removeCardFromYourHand
+  removeCardFromYourHand,
+  selectCard,
+  deselectCard
 } = actions;
 
-// const fetchMapDroneImagesFromNeighborhoods = data => {
-//   return data;
-// }
+export const initYourHand = () => dispatch => {
+  function getStartingCards() {
+    return new Promise((response, reject) => {
+      const socket = server();
 
-// export const initLayout = () => async dispatch => {
-//   try {
-//     dispatch(initLayoutStart());
-//     const footerHeight = await getFooterHeight();
-//     dispatch(initLayoutSuccess(footerHeight));
-//   } catch (err) {
-//     dispatch(initLayoutFailure(err));
+      // ask server for the gid of the current user
+      socket.emit('get-starting-cards', null, result => {
+        const { code, data } = result;
+        if (code === 200) {
+          response(data);
+        } else {
+          console.error('initYourHand error');
+        }
+      });
+    });
+  }
 
-//     // recursive failure init
-//     setTimeout(() => {
-//       dispatch(initLayout());
-//     }, 2000);
-//   }
-// };
+  getStartingCards().then(data => dispatch(addCardsToYourHand(data)));
+};
 
 export default reducer;

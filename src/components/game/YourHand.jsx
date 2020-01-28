@@ -1,15 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import server from '~/server';
 
+import {
+  addCardsToYourHand,
+  initYourHand
+} from 'features/yourHand/yourHand.slice';
 import Card from 'components/game/card/Card';
-import CardInteractionLayer from '~/systems/CardInteractionLayer';
+import CardInteractionLayer from '~/systems/card-interaction/CardInteractionLayer';
 
 export default function YourHand() {
-  const yourCards = useSelector(s => s.yourHand);
+  const dispatch = useDispatch();
+  const { cardsInHand } = useSelector(s => s.yourHand);
+
+  React.useEffect(() => {
+    dispatch(initYourHand());
+  }, []);
 
   return (
     <div data-file="YourHand">
-      {yourCards.map((card, index) => {
+      {cardsInHand.map((card, index) => {
         const {
           artist,
           attack,
@@ -39,7 +49,12 @@ export default function YourHand() {
         } = card;
 
         return (
-          <CardInteractionLayer key={index} index={index}>
+          <CardInteractionLayer
+            data={card}
+            key={index}
+            index={index}
+            interactions="is-playable"
+          >
             <Card
               artist={artist}
               attack={attack}
