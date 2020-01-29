@@ -1,0 +1,11 @@
+html,
+body,
+#game {
+  background: black;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+@import 'abstracts/root';
+@import 'components/board-play-area';

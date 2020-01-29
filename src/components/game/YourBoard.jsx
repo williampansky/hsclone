@@ -1,10 +1,12 @@
 import React from 'react';
+import YourBoardPlayerArea from './YourBoardPlayArea';
 // import YourBoardCards from 'features/yourBoard/YourBoardCards';
 
 export default function YourBoard() {
   return (
     <div data-file="YourBoard">
       {/* <YourBoardCards /> */}
+      <YourBoardPlayerArea />
 
       <style jsx>{`
         div {

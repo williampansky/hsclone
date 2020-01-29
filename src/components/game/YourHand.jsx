@@ -14,8 +14,8 @@ export default function YourHand() {
   const { cardsInHand } = useSelector(s => s.yourHand);
 
   React.useEffect(() => {
-    dispatch(initYourHand());
-  }, []);
+    cardsInHand.length === 0 && dispatch(initYourHand());
+  }, [cardsInHand]);
 
   return (
     <div data-file="YourHand">

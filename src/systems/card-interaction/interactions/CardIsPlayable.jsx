@@ -19,7 +19,10 @@ export default function CardIsPlayable({ children, data, index }) {
   }, [dataID, selectedID]);
 
   return (
-    <div onClick={event => handleClick(event, data, isSelected)}>
+    <div
+      data-is-selected={isSelected}
+      onClick={event => handleClick(event, data, isSelected)}
+    >
       {children}
       <style jsx>{`
         div {
@@ -29,25 +32,19 @@ export default function CardIsPlayable({ children, data, index }) {
             ? 0
             : 'calc(calc(var(--card-height) / 0.95) / -3.5)'};
           padding: 0;
-          position: ${isSelected ? 'absolute' : 'relative'};
-          right: ${isSelected ? '5%' : 0};
-          top: ${isSelected ? 'calc(-0.85 * var(--card-height))' : 0};
-          transform: ${isSelected
-            ? 'translateY(0) rotate(0) scale(1)'
-            : `translateY(calc(${calcOffset(index)} * 1px)) 
-               rotate(calc(${calcRotate(index)} * 1deg))
-               scale(0.675);
-          `};
+          position: relative;
+          right: 0;
+          top: 0;
+          transform: ${`translateY(calc(${calcOffset(index)} * 1px))
+            rotate(calc(${calcRotate(index)} * 1deg)) scale(0.675)`};
           transition: 800ms cubic-bezier(0.19, 1, 0.22, 1);
           transition-property: transform;
           user-select: none;
-          z-index: ${isSelected ? 100 : 1};
+          z-index: 1; // make sure to NOT animate z-index
 
           &:before {
             content: '';
-            box-shadow: ${isSelected
-              ? '0 10px 20px hsla(0, 0%, 0%, 0.4)'
-              : '-5px 5px 5px hsla(0, 0%, 0%, 0.15)'};
+            box-shadow: -5px 5px 5px hsla(0, 0%, 0%, 0.15);
             left: 0;
             height: var(--card-height);
             position: absolute;
@@ -70,15 +67,11 @@ export default function CardIsPlayable({ children, data, index }) {
           }
 
           &:hover {
-            padding-bottom: ${isSelected ? 0 : '250px'};
-            transform: ${isSelected
-              ? 'inherit'
-              : `translateY(calc(-0.0015 * var(--card-height)))
-              rotate(0deg) scale(1)`};
+            padding-bottom: 250px;
+            transform: translateY(calc(-0.0015 * var(--card-height)))
+              rotate(0deg) scale(1);
             transition: 100ms cubic-bezier(0.25, 0.8, 0.25, 1);
-            transition-property: ${isSelected
-              ? 'all'
-              : 'box-shadow, padding, transform'};
+            transition-property: box-shadow, padding, transform;
             z-index: 100;
 
             &:before {
@@ -86,10 +79,29 @@ export default function CardIsPlayable({ children, data, index }) {
             }
 
             &:after {
-              animation: ${isSelected
-                ? 'none'
-                : 'fade 250ms ease-out forwards'};
+              animation: fade 250ms ease-out forwards;
             }
+          }
+        }
+
+        div[data-is-selected='true'] {
+          position: absolute;
+          right: 5%;
+          top: calc(-0.85 * var(--card-height));
+          transform: translateY(0) rotate(0) scale(1);
+          z-index: 100;
+
+          &:before {
+            box-shadow: 0 10px 20px hsla(0, 0%, 0%, 0.4);
+          }
+
+          &:after {
+            content: none;
+          }
+
+          &:hover {
+            padding-bottom: 0;
+            transform: inherit;
           }
         }
 

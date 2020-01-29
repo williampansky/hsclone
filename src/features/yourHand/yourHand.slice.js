@@ -45,7 +45,7 @@ const yourHand = createSlice({
     },
     removeCardFromYourHand(state, { payload }) {
       const { id } = payload;
-      state.cardsInHand = state.filter(item => item.id !== id);
+      state.cardsInHand = state.cardsInHand.filter(item => item.id !== id);
     },
     selectCard(state, { payload }) {
       state.selectedCard = payload;

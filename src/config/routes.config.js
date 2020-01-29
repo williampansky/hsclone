@@ -34,5 +34,11 @@ export default [
     name: 'Sign Up',
     protectedRoute: false,
     order: 4
+  },
+  {
+    href: '/play',
+    name: 'Play',
+    protectedRoute: false,
+    order: 5
   }
 ];
