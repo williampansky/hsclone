@@ -1,0 +1,80 @@
+[
+  {
+    "attack": 1,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 2,
+    "elite": false,
+    "health": 4,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_001",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://cdnb.artstation.com/p/assets/images/images/009/730/145/large/othon-nikolaidis-humancleric.jpg?1520561421"
+    },
+    "mechanics": [
+      "BATTLECRY"
+    ],
+    "name": "Francesca Leopold",
+    "race": 0,
+    "rarity": 0,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": "Give a minion <strong>Taunt</strong>.",
+    "text": "<strong>Battlecry:</strong> Give a friendly minion <strong>Taunt</strong>.",
+    "type": "MINION"
+  },
+  {
+    "attack": 4,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 6,
+    "elite": false,
+    "health": 2,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_003",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://dspncdn.com/a1/media/692x/2b/e8/a2/2be8a206a6c2415b6ed6631ea4eb4e50.jpg"
+    },
+    "mechanics": [
+      "CHARGE"
+    ],
+    "name": "Battle Golem",
+    "race": 0,
+    "rarity": 0,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": null,
+    "text": "<strong>Charge</strong>.",
+    "type": "MINION"
+  },
+  {
+    "attack": 2,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 4,
+    "elite": false,
+    "health": 5,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_004",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://i.redd.it/6idvnf7c2ky11.jpg"
+    },
+    "mechanics": [
+      "TAUNT"
+    ],
+    "name": "Shielder",
+    "race": 0,
+    "rarity": 0,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": null,
+    "text": "<strong>Taunt</strong>.",
+    "type": "MINION"
+  }
+]

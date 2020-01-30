@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useHover from 'react-use-hover';
 import css from '~/styles/game/game.scss';
 import Card from 'components/game/card/Card';
+import { removeMinion as removeYourMinion } from '~/features/boards/yourBoard.slice';
+import { removeMinion as removeTheirMinion } from '~/features/boards/theirBoard.slice';
 
-export default function Minion({ data }) {
+export default function Minion({ data, p, slot }) {
   const {
     artist,
     attack,
@@ -36,6 +38,7 @@ export default function Minion({ data }) {
   const { backgroundImage, foregroundImage } = images;
   // const { attackSound, deathSound, dropSound } = sounds;
 
+  const dispatch = useDispatch();
   const [{ AP }, setAP] = useState({ AP: attack });
   const [{ HP }, setHP] = useState({ HP: health });
   const [isHovering, hoverProps] = useHover({
@@ -43,7 +46,16 @@ export default function Minion({ data }) {
     mouseLeaveDelayMS: 0
   });
 
-  return (
+  // const killMinion = useCallback(() => {
+  //   if (p === 'Yours') dispatch(removeYourMinion(`slot${slot}`));
+  //   if (p === 'Theirs') dispatch(removeTheirMinion(`slot${slot}`));
+  // }, []);
+
+  // useEffect(() => {
+  //   HP === 0 && killMinion();
+  // }, [HP]);
+
+  return HP !== 0 ? (
     <div className={[css.Minion].join(' ')} {...hoverProps}>
       <div className={css.ImageWrapper}>
         <img alt={name} role="presentation" src={foregroundImage} />
@@ -83,7 +95,7 @@ export default function Minion({ data }) {
         </article>
       ) : null}
     </div>
-  );
+  ) : null;
 }
 
 Minion.defaultProps = {
