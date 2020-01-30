@@ -16,7 +16,8 @@ export default function MinionCanAttack({ children, data, slot }) {
   return (
     <div
       className={[
-        css.minion_can_attack,
+        css['minion--interaction_layer'],
+        css['minion--can_attack'],
         isSelected ? css['minion--is_attacking'] : ''
       ].join(' ')}
       data-is-selected={isSelected}

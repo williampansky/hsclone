@@ -1,11 +1,74 @@
 .minion--interaction_layer {
-  border: 1px solid transparent;
+  border-top-left-radius: var(--minion-border-radius);
+  border-top-right-radius: var(--minion-border-radius);
+  position: relative;
+
+  &:before,
+  &:after {
+    border-radius: var(--minion-border-radius);
+    content: '';
+    opacity: 0;
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+    transition-property: box-shadow, opacity;
+  }
 }
 
 .minion--can_attack {
-  border-color: green;
+  z-index: 100;
+
+  &:before {
+    box-shadow: 0px 0px 15px 5px rgba(0, 196, 105, 0.25);
+    height: 100%;
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
 }
 
 .minion--is_attacking {
-  border-color: yellow;
+  &:before {
+    opacity: 0;
+  }
+
+  &:after {
+    animation: isAttackingGlow 2500ms infinite;
+    height: 100%;
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+}
+
+@keyframes canAttackGlow {
+  0% {
+    box-shadow: 0 0 -20px #00c469;
+  }
+  50% {
+    box-shadow: 0 0 8px #0ee681;
+  }
+  100% {
+    box-shadow: 0 0 -20px #00c469;
+  }
+}
+
+@keyframes isAttackingGlow {
+  0% {
+    box-shadow: 0 0 -10px #c4a300;
+  }
+  40% {
+    box-shadow: 0 0 20px #c4a300;
+  }
+  60% {
+    box-shadow: 0 0 20px #c4a300;
+  }
+  100% {
+    box-shadow: 0 0 -10px #c4a300;
+  }
 }
