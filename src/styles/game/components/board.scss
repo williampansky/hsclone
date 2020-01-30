@@ -2,7 +2,7 @@
   box-sizing: border-box;
   background: black;
   height: calc(100vh - var(--board-players-hands-height));
-  overflow: auto;
+  overflow: hidden;
   width: 100vw;
 }
 
