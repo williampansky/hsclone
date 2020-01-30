@@ -3,6 +3,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import goldSlice from 'features/gold/gold.slice';
 // import cardsSlice from 'features/cards/cards.slice';
 // import matchSlice from 'features/match/match.slice';
+import playerEnergySlice from 'features/playerEnergy/playerEnergy.slice';
 import yourHandSlice from 'features/yourHand/yourHand.slice';
 import yourBoardSlice from 'features/yourBoard/yourBoard.slice';
 // import targetingSlice from 'features/targeting/targeting.slice';
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   gold: goldSlice,
   // cards: cardsSlice,
   // match: matchSlice,
+  playerEnergy: playerEnergySlice,
   yourHand: yourHandSlice,
   yourBoard: yourBoardSlice
   // targeting: targetingSlice

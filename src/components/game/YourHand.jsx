@@ -8,6 +8,7 @@ import {
 } from 'features/yourHand/yourHand.slice';
 import Card from 'components/game/card/Card';
 import CardInteractionLayer from '~/systems/CardInteractionLayer';
+import PlayerEnergyValue from './PlayerEnergy';
 
 export default function YourHand() {
   const dispatch = useDispatch();
@@ -85,6 +86,8 @@ export default function YourHand() {
           </CardInteractionLayer>
         );
       })}
+
+      <PlayerEnergyValue />
 
       <style jsx>{`
         div {
