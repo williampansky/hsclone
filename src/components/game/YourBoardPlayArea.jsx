@@ -1,5 +1,5 @@
 import React from 'react';
-import css from '~/pages/game/styles/game.scss';
+import css from '~/styles/game/game.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import playCard from 'lib/game/play-card';
 import { addCardToYourBoard } from '~/features/yourBoard/yourBoard.slice';
@@ -7,19 +7,29 @@ import {
   removeCardFromYourHand,
   deselectCard
 } from '~/features/yourHand/yourHand.slice';
+import MinionInteractionLayer from '~/systems/MinionInteractionLayer';
+import YourBoardMinions from '~/components/game/YourBoardMinions';
+import BoardSlot from '~/components/game/BoardSlot';
+import Minion from '~/components/game/minion/Minion';
 
 export default function YourBoardPlayerArea({ children }) {
   const dispatch = useDispatch();
-  const yourBoard = useSelector(s => s.yourBoard);
   const { selectedCard } = useSelector(s => s.yourHand);
 
-  function handleClick(event, slot, obj = selectedCard) {
+  const { slot1, slot2, slot3, slot4, slot5, slot6, slot7 } = useSelector(
+    s => s.yourBoard
+  );
+
+  async function handleClick(event, slot, obj = selectedCard) {
     event.preventDefault();
+
+    if (!selectedCard) return;
+
     return playCard(obj, slot).then(resp => {
       const { data, slot } = resp;
       const addObj = {
-        item: data,
-        i: slot
+        card: data,
+        slot: `slot${slot}`
       };
 
       dispatch(addCardToYourBoard(addObj));
@@ -30,39 +40,18 @@ export default function YourBoardPlayerArea({ children }) {
 
   return (
     <div
-      className={[
-        css.boardPlayArea,
-        selectedCard && css.isActive,
-        yourBoard.length !== 0 && css.hasMinions
-      ].join(' ')}
+      className={[css.BoardPlayArea, selectedCard && css.BoardIsActive].join(
+        ' '
+      )}
       data-file="YourBoardPlayArea"
     >
-      <div className={css.slot} onClick={event => handleClick(event)} />
-      {yourBoard.map((card, index) => {
-        const { name, attack, health } = card;
-        return (
-          <React.Fragment key={`React.Fragment_${index}`}>
-            <div
-              className={css.slot}
-              data-idx={index}
-              key={index + name}
-              onClick={event => handleClick(event, index)}
-            >
-              <div>{name}</div>
-              <div>
-                <span>ap: {attack}</span>
-                <span> | </span>
-                <span>hp: {health}</span>
-              </div>
-            </div>
-            <div
-              className={css.slot}
-              key={index + 'slot'}
-              onClick={event => handleClick(event, index)}
-            />
-          </React.Fragment>
-        );
-      })}
+      <BoardSlot minion={slot1} slot="1" onClick={e => handleClick(e, 1)} />
+      <BoardSlot minion={slot2} slot="2" onClick={e => handleClick(e, 2)} />
+      <BoardSlot minion={slot3} slot="3" onClick={e => handleClick(e, 3)} />
+      <BoardSlot minion={slot4} slot="4" onClick={e => handleClick(e, 4)} />
+      <BoardSlot minion={slot5} slot="5" onClick={e => handleClick(e, 5)} />
+      <BoardSlot minion={slot6} slot="6" onClick={e => handleClick(e, 6)} />
+      <BoardSlot minion={slot7} slot="7" onClick={e => handleClick(e, 7)} />
     </div>
   );
 }

@@ -86,6 +86,7 @@ export default function Card({
 
       <style jsx>{`
         div {
+          color: black;
           border-radius: 3px;
           background: var(--card-background-color);
           width: calc(var(--card-height) / 1.4);

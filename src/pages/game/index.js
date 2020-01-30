@@ -4,7 +4,7 @@ import TheirBoard from 'components/game/TheirBoard';
 import TheirHand from 'components/game/TheirHand';
 import YourBoard from 'components/game/YourBoard';
 import YourHand from 'components/game/YourHand';
-import './styles/game.scss';
+import '~/styles/game/game.scss';
 
 export default () => {
   return (

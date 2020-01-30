@@ -9,7 +9,15 @@ const getInitialState = key => {
     // return debugYourBoard;
 
     default:
-      return [];
+      return {
+        slot1: null,
+        slot2: null,
+        slot3: null,
+        slot4: null,
+        slot5: null,
+        slot6: null,
+        slot7: null
+      };
   }
 };
 
@@ -22,10 +30,14 @@ const yourBoard = createSlice({
     initYourBoardSuccess: state => {
       state.isLoading = false;
     },
+    // addCardToYourBoard(state, { payload }) {
+    //   const { item, i } = payload;
+    //   const newBoard = [...state.slice(0, i + 1), item, ...state.slice(i + 1)];
+    //   return newBoard;
+    // }
     addCardToYourBoard(state, { payload }) {
-      const { item, i } = payload;
-      const newBoard = [...state.slice(0, i + 1), item, ...state.slice(i + 1)];
-      return newBoard;
+      const { card, slot } = payload;
+      state[slot] = card;
     }
   }
 });

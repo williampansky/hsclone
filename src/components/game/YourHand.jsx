@@ -7,7 +7,7 @@ import {
   initYourHand
 } from 'features/yourHand/yourHand.slice';
 import Card from 'components/game/card/Card';
-import CardInteractionLayer from '~/systems/card-interaction/CardInteractionLayer';
+import CardInteractionLayer from '~/systems/CardInteractionLayer';
 
 export default function YourHand() {
   const dispatch = useDispatch();

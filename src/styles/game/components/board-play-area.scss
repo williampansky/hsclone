@@ -1,6 +1,6 @@
-.boardPlayArea {
+.BoardPlayArea {
   align-items: center;
-  background: rgba(255, 255, 255, 0.25);
+  background: transparent;
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
@@ -8,7 +8,7 @@
   justify-content: space-around;
   margin: 5% auto auto;
   position: relative;
-  width: calc(100% / 1.15);
+  width: calc(100% / 1.05);
 }
 
 .boardPlayArea .slot {
@@ -60,6 +60,18 @@
     }
   }
 }
+
+// .boardPlayArea.hasMinions {
+//   .slot[data-idx].canAttack {
+//     border: 1px solid yellow;
+//     cursor: pointer;
+//     pointer-events: auto;
+
+//     &:hover {
+//       border-color: red;
+//     }
+//   }
+// }
 
 // prettier-ignore
 .boardPlayArea {

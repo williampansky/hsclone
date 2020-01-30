@@ -27,6 +27,7 @@ module.exports = withCSS(
       config.resolve.alias['pages'] = path.resolve(__dirname, 'src/pages');
       config.resolve.alias['reducers'] = path.resolve(__dirname, 'src/reducers');
       config.resolve.alias['styles'] = path.resolve(__dirname, 'src/styles');
+      config.resolve.alias['styles'] = path.resolve(__dirname, 'src/styles');
       config.resolve.alias['systems'] = path.resolve(__dirname, 'src/systems');
       config.resolve.alias['utils'] = path.resolve(__dirname, 'src/utils');
 

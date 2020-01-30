@@ -1,19 +1,11 @@
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import css from '~/styles/game/components/board.scss';
 
 const Board = ({ children }) => {
   return (
-    <div data-file="Board">
+    <div data-file="Board" className={css.Board}>
       {children}
-      <style jsx>{`
-        div {
-          box-sizing: border-box;
-          background: black;
-          height: calc(100vh - var(--board-players-hands-height));
-          overflow: auto;
-          width: 100vw;
-        }
-      `}</style>
     </div>
   );
 };
