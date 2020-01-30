@@ -1,11 +1,7 @@
 import PropTypes from 'prop-types';
-import CardAttack from './CardAttack';
-import CardCost from './CardCost';
-import CardHealth from './CardHealth';
-import CardImage from './CardImage';
-import CardName from './CardName';
-import CardText from './CardText';
-import CardType from './CardType';
+import css from '~/styles/game/game.scss';
+import { fontSizeBasedOnCharacterLength } from 'utils/text';
+import createMarkup from 'utils/createMarkup';
 
 export default function Card({
   artist,
@@ -67,15 +63,27 @@ export default function Card({
     { name: 'type', content: type }
   ];
 
+  const cardImage = {
+    backgroundImage: `url(${foregroundImage})`
+  };
+
+  const fontSize = {
+    fontSize: `${fontSizeBasedOnCharacterLength(name)}em`
+  };
+
   return (
-    <div>
-      <CardCost cost={cost} />
-      <CardImage name={name} src={foregroundImage} />
-      <CardName name={name} />
-      <CardText text={text} />
-      <CardType type={type} />
-      <CardAttack value={attack} />
-      <CardHealth value={health} />
+    <div className={css['card']}>
+      <div className={css['card-cost']}>{cost}</div>
+      <div className={css['card-image']} style={cardImage} />
+      <div className={css['card-name']} style={fontSize}>
+        {name}
+      </div>
+      <div className={css['card-text']}>
+        <p dangerouslySetInnerHTML={createMarkup(text)} />
+      </div>
+      <div className={css['card-type']}>{type}</div>
+      <div className={css['card-attack']}>{attack}</div>
+      <div className={css['card-health']}>{health}</div>
 
       {metaAttributes.map((attr, index) => {
         const { name, content } = attr;
@@ -83,20 +91,6 @@ export default function Card({
           <meta key={index} name={name} content={content.toString()} />
         ) : null;
       })}
-
-      <style jsx>{`
-        div {
-          color: black;
-          border-radius: 3px;
-          background: var(--card-background-color);
-          width: calc(var(--card-height) / 1.4);
-          height: var(--card-height);
-          position: relative;
-          box-sizing: border-box;
-          font-size: calc(var(--card-height) / 20);
-          user-select: none;
-        }
-      `}</style>
     </div>
   );
 }
