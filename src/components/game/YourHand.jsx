@@ -8,18 +8,24 @@ import {
 } from 'features/yourHand/yourHand.slice';
 import Card from 'components/game/card/Card';
 import CardInteractionLayer from '~/systems/CardInteractionLayer';
-import PlayerEnergyValue from './PlayerEnergy';
+import YourEnergy from './YourEnergy';
 
 export default function YourHand() {
+  const DEBUG_IS_PLAYABLE = false;
+
   const dispatch = useDispatch();
   const { cardsInHand } = useSelector(s => s.yourHand);
+  const yourEnergy = useSelector(s => s.yourEnergy);
 
   React.useEffect(() => {
     cardsInHand.length === 0 && dispatch(initYourHand());
   }, [cardsInHand]);
 
   return (
-    <div data-file="YourHand">
+    <div
+      data-file="YourHand"
+      data-number-of-cards={cardsInHand && cardsInHand.length}
+    >
       {cardsInHand.map((card, index) => {
         const {
           artist,
@@ -49,12 +55,16 @@ export default function YourHand() {
           type
         } = card;
 
+        const isPlayable = DEBUG_IS_PLAYABLE
+          ? DEBUG_IS_PLAYABLE
+          : cost <= yourEnergy;
+
         return (
           <CardInteractionLayer
             data={card}
             key={index}
             index={index}
-            interactions="is-playable"
+            interactions={isPlayable && 'is-playable'}
           >
             <Card
               artist={artist}
@@ -87,7 +97,7 @@ export default function YourHand() {
         );
       })}
 
-      <PlayerEnergyValue />
+      <YourEnergy />
 
       <style jsx>{`
         div {

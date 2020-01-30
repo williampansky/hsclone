@@ -1,7 +1,7 @@
 export default function CardImage({ name, src }) {
   return (
-    <div>
-      <img alt={name} role="presentation" src={src} />
+    <div style={{ backgroundImage: `url(${src})` }}>
+      {/* <img alt={name} role="presentation" src={src} /> */}
       <style jsx>{`
         div {
           align-items: center;
@@ -16,6 +16,9 @@ export default function CardImage({ name, src }) {
           overflow: hidden;
           position: relative;
           user-select: none;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: top center;
 
           & > img {
             height: auto;

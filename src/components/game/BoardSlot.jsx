@@ -19,7 +19,11 @@ export default function BoardSlot({ minion, onClick, slot }) {
       data-slot={slot}
       onClick={onClick}
     >
-      {minion && <Minion data={minion} />}
+      {minion && (
+        <MinionInteractionLayer data={minion} slot={slot}>
+          <Minion data={minion} />
+        </MinionInteractionLayer>
+      )}
     </div>
   );
 }

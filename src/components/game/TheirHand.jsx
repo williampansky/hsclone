@@ -2,6 +2,7 @@ import React from 'react';
 
 // import Card from 'components/Card/Card.component';
 // import CardDragLayer from 'systems/CardDragLayer';
+import TheirEnergy from './TheirEnergy';
 
 export default function TheirHand() {
   // const yourCards = useSelector(s => s.yourHand);
@@ -12,6 +13,8 @@ export default function TheirHand() {
       {theirCards.map((card, index) => {
         return <div></div>;
       })}
+
+      <TheirEnergy />
 
       <style jsx>{`
         div {

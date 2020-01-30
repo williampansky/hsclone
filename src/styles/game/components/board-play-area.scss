@@ -6,9 +6,16 @@
   flex-flow: row nowrap;
   height: calc(100% / 2.25);
   justify-content: space-around;
-  margin: 5% auto auto;
   position: relative;
   width: calc(100% / 1.05);
+}
+
+.TheirBoardPlayArea {
+  margin: auto auto 5%;
+}
+
+.YourBoardPlayArea {
+  margin: 5% auto auto;
 }
 
 .boardPlayArea .slot {

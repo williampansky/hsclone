@@ -1,7 +1,7 @@
 import css from '~/styles/game/game.scss';
 import { useSelector } from 'react-redux';
 
-export default function PlayerEnergyValue() {
+export default function YourEnergy() {
   const yourEnergy = useSelector(s => s.yourEnergy);
   const yourEnergyTotal = useSelector(s => s.yourEnergyTotal);
 

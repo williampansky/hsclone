@@ -1,14 +1,12 @@
 import MinionCanAttack from './interactions/MinionCanAttack';
 
-export default function CardInteractionLayer({
-  children,
-  data,
-  index,
-  interactions
-}) {
-  switch (interactions) {
-    case 'can-attack':
-      return <MinionCanAttack children={children} data={data} index={index} />;
+export default function MinionInteractionLayer({ children, data, slot }) {
+  const { mechanics } = data;
+  console.log(mechanics);
+
+  switch (mechanics) {
+    case ['BATTLECRY']:
+      return <MinionCanAttack children={children} data={data} slot={slot} />;
 
     default:
       return <>{children}</>;

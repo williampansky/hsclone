@@ -1,14 +1,12 @@
-import PropTypes from 'prop-types';
 import css from '~/styles/game/components/board.scss';
+import TheirAvatar from './TheirAvatar';
+import TheirBoardPlayerArea from '~/components/game/TheirBoardPlayArea';
 
-export default function TheirBoard({ children }) {
+export default function TheirBoard() {
   return (
     <div data-file="TheirBoard" className={css.TheirBoard}>
-      {children}
+      <TheirAvatar src="https://i.ytimg.com/vi/k-dqTDIURfg/hqdefault.jpg" />
+      <TheirBoardPlayerArea />
     </div>
   );
 }
-
-TheirBoard.propTypes = {
-  children: PropTypes.node
-};

@@ -1,25 +1,25 @@
-// prettier-ignore
-@function offset($index, $offsetRange: 80, $total: 10) {
-  // Math.abs((index - (total - 1) / 2) / (total - 2) * range);
-  $set1: calc(#{$index} - calc(#{$total} - 1) / 2);
-  $set2: calc(calc(#{$total} - 2) * #{$offsetRange});
-  
-  @return calc(calc(#{$set1} / #{$set2}) * 1px);
-}
+// // prettier-ignore
+// @function offset($index, $offsetRange: 80, $total: 10) {
+//   // Math.abs((index - (total - 1) / 2) / (total - 2) * range);
+//   $set1: calc(#{$index} - calc(#{$total} - 1) / 2);
+//   $set2: calc(calc(#{$total} - 2) * #{$offsetRange});
 
-// prettier-ignore
-@function rotation($index, $rotationRange: 50, $total: 10) {
-  // (index - (total - 1) / 2) / (total - 2) * rotationRange;
-  $set1: calc(#{$index} - calc(#{$total} - 1) / 2);
-  $set2: calc(calc(#{$total} - 2) * #{$rotationRange});
-  
-  @return calc(calc(#{$set1} / #{$set2}) * 1deg);
-}
+//   @return calc(calc(#{$set1} / #{$set2}) * 1px);
+// }
+
+// // prettier-ignore
+// @function rotation($index, $rotationRange: 50, $total: 10) {
+//   // (index - (total - 1) / 2) / (total - 2) * rotationRange;
+//   $set1: calc(#{$index} - calc(#{$total} - 1) / 2);
+//   $set2: calc(calc(#{$total} - 2) * #{$rotationRange});
+
+//   @return calc(calc(#{$set1} / #{$set2}) * 1deg);
+// }
 
 .CardInYourHand {
   box-sizing: border-box;
-  cursor: pointer;
-  margin-left: calc(calc(var(--card-height) / 0.95) / -3.5);
+  cursor: not-allowed;
+  // margin-left: calc(calc(var(--card-height) / 0.95) / -2.765);
   padding: 0;
   position: relative;
   right: 0;
@@ -31,10 +31,6 @@
 
   * {
     pointer-events: none;
-  }
-
-  &[data-index='0'] {
-    margin-left: 0;
   }
 
   &:before {
@@ -80,11 +76,15 @@
   }
 }
 
-div[data-is-selected='true'] {
+.CardInYourHand[data-is-playable='true'] {
+  cursor: pointer;
+}
+
+.CardInYourHand[data-is-selected='true'] {
   position: absolute;
   right: 5%;
   top: calc(-0.85 * var(--card-height));
-  transform: translateY(0) rotate(0) scale(1);
+  transform: translateY(0) rotate(0) scale(1) !important;
   z-index: 100;
 
   &:before {
@@ -111,4 +111,13 @@ div[data-is-selected='true'] {
     opacity: 0;
     transform: scale(1.15);
   }
+}
+
+// prettier-ignore
+[data-file='YourHand'] {
+  &[data-number-of-cards='4'] .CardInYourHand { margin-left: calc(calc(var(--card-height) / 0.95) / -3.625); }
+  &[data-number-of-cards='5'] .CardInYourHand { margin-left: calc(calc(var(--card-height) / 0.95) / -3.15); }
+  &[data-number-of-cards='6'] .CardInYourHand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.765); }
+  &[data-number-of-cards='7'] .CardInYourHand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.425); }
+  .CardInYourHand[data-index='0'] { margin-left: 0; }
 }

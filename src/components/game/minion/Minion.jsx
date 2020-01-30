@@ -38,28 +38,13 @@ export default function Minion({ data }) {
 
   const [{ AP }, setAP] = useState({ AP: attack });
   const [{ HP }, setHP] = useState({ HP: health });
-  const [{ isSelected }, setIsSelected] = useState({ isSelected: false });
   const [isHovering, hoverProps] = useHover({
     mouseEnterDelayMS: 900,
     mouseLeaveDelayMS: 0
   });
 
-  function handleClick(event) {
-    event.preventDefault();
-    return !isSelected
-      ? setIsSelected({ isSelected: true })
-      : setIsSelected({ isSelected: false });
-  }
-
   return (
-    <div
-      className={[css.Minion, isSelected ? css.minion_is_attacking : ''].join(
-        ' '
-      )}
-      data-is-selected={isSelected}
-      onClick={event => handleClick(event)}
-      {...hoverProps}
-    >
+    <div className={[css.Minion].join(' ')} {...hoverProps}>
       <div className={css.ImageWrapper}>
         <img alt={name} role="presentation" src={foregroundImage} />
       </div>
