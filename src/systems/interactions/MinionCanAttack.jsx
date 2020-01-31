@@ -13,7 +13,10 @@ import css from '~/styles/game/interactions/minion-interactions.scss';
 
 export default function MinionCanAttack({ children, data, slot }) {
   const dispatch = useDispatch();
+  const minionCanAttack = useSelector(s => s.minionCanAttack);
   const minionIsAttacking = useSelector(s => s.minionIsAttacking);
+  const minionID = data && data.id;
+  const minionAttackingID = minionCanAttack && minionCanAttack.id;
 
   function dispatchSelections(obj) {
     dispatch(canAttack());
@@ -36,8 +39,13 @@ export default function MinionCanAttack({ children, data, slot }) {
     <div
       className={[
         css['minion--interaction_layer'],
-        css['minion--can_attack'],
-        minionIsAttacking ? css['minion--is_attacking'] : ''
+        !minionIsAttacking && css['minion--can_attack'],
+        minionIsAttacking && minionID === minionAttackingID
+          ? css['minion--is_attacking']
+          : '',
+        minionIsAttacking && minionID !== minionAttackingID
+          ? css['minion--is_not_attacking']
+          : ''
       ].join(' ')}
       onClick={event => handleClick(event, slot, data)}
     >

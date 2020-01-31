@@ -6,6 +6,10 @@ const withSass = require('@zeit/next-sass');
 module.exports = withCSS(
   withSass({
     cssModules: true,
+    cssLoaderOptions: {
+      esModule: true,
+      sourceMap: true
+    },
     webpack: (config, options) => {
       config.module.rules.push({
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadingStart, loadingFailed } from 'utils/redux.loading';
+import { add, subtract } from 'mathjs';
 import debugHand from 'data/debug/board.json';
 
 const getInitialState = key => {
@@ -37,16 +38,26 @@ const yourBoardSlice = createSlice({
     //   const newBoard = [...state.slice(0, i + 1), item, ...state.slice(i + 1)];
     //   return newBoard;
     // }
-    addMinion(state, { payload }) {
+    addYourMinion(state, { payload }) {
       const { card, slot } = payload;
       state[slot] = card;
     },
-    removeMinion(state, { payload }) {
+    removeYourMinion(state, { payload }) {
       state[payload] = null;
+    },
+    setYourMinionHealth(state, { payload }) {
+      const { attack, card, slot } = payload;
+      const val = subtract(Number(state[slot].health), Number(attack));
+      const newCard = {
+        ...card,
+        health: val
+      };
+
+      state[slot] = newCard;
     }
   }
 });
 
 const { actions, reducer } = yourBoardSlice;
-export const { addMinion, removeMinion } = actions;
+export const { addYourMinion, removeYourMinion, setYourMinionHealth } = actions;
 export default reducer;

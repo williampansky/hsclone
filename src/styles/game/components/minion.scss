@@ -21,6 +21,25 @@
     display: none;
   }
 
+  .InfoTrigger {
+    cursor: help;
+    color: white;
+    // background: rgb(73, 109, 121);
+    height: 2em;
+    width: 2em;
+    font-size: 0.5em;
+    line-height: 1;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    border-radius: 50%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    z-index: 400;
+  }
+
   & > article {
     animation-duration: 200ms;
     animation-fill-mode: both;

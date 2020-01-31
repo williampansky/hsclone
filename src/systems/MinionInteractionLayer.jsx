@@ -13,23 +13,46 @@ export default function MinionInteractionLayer({
   const minionIsAttacking = useSelector(s => s.minionIsAttacking);
   const [{ mechanics }, setMechanics] = useState({ mechanics: null });
   const minionMechanics = data && data.mechanics;
+  const minionAttack = data && data.attack;
   // console.log(mechanics);
 
   const CAN_BE_ATTACKED =
     turn === 'YOUR_TURN' && board === 'Theirs' && minionIsAttacking;
+
+  const CAN_ATTACK =
+    turn === 'YOUR_TURN' && board === 'Yours' && minionAttack !== 0;
 
   useEffect(() => {
     minionMechanics && setMechanics({ mechanics: minionMechanics.toString() });
   }, []);
 
   if (CAN_BE_ATTACKED)
-    return <MinionCanBeAttacked children={children} data={data} slot={slot} />;
+    return (
+      <React.Fragment>
+        <MinionCanBeAttacked data={data} slot={slot} />
+      </React.Fragment>
+    );
 
-  switch (mechanics) {
-    case board === 'Yours' && 'CHARGE':
-      return <MinionCanAttack children={children} data={data} slot={slot} />;
+  if (CAN_ATTACK)
+    return (
+      <React.Fragment>
+        <MinionCanAttack children={children} data={data} slot={slot} />
+      </React.Fragment>
+    );
 
-    default:
-      return <>{children}</>;
+  if (mechanics) {
+    switch (mechanics) {
+      case board === 'Yours' && 'CHARGE':
+        return (
+          <React.Fragment>
+            <MinionCanAttack children={children} data={data} slot={slot} />
+          </React.Fragment>
+        );
+
+      default:
+        return <React.Fragment>{children}</React.Fragment>;
+    }
   }
+
+  return <React.Fragment>{children}</React.Fragment>;
 }

@@ -20,9 +20,10 @@ export default function BoardSlot({ minion, p, onClick, slot }) {
       onClick={onClick}
     >
       {minion && (
-        <MinionInteractionLayer board={p} data={minion} slot={slot}>
+        <React.Fragment>
+          <MinionInteractionLayer board={p} data={minion} slot={slot} />
           <Minion data={minion} p={p} slot={slot} />
-        </MinionInteractionLayer>
+        </React.Fragment>
       )}
     </div>
   );

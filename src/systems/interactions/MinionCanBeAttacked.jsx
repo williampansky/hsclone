@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  removeMinion,
-  setMinionHealth
+  removeTheirMinion,
+  setTheirMinionHealth
 } from '~/features/boards/theirBoard.slice';
+import {
+  removeYourMinion,
+  setYourMinionHealth
+} from '~/features/boards/yourBoard.slice';
 import {
   minionSelected,
   minionDeselected
@@ -16,20 +20,40 @@ import css from '~/styles/game/interactions/minion-interactions.scss';
 
 export default function MinionCanBeAttacked({ children, data, slot }) {
   const dispatch = useDispatch();
-  const { attack } = useSelector(s => s.minionCanAttack);
-  const { health } = data;
+  const yourMinion = useSelector(s => s.minionCanAttack);
+  const yourBoard = useSelector(s => s.yourBoard);
+
+  const yourMinionsAttack = yourMinion && yourMinion.attack;
+  const yourMinionsHealth = yourMinion && yourMinion.health;
+
+  const theirMinionsAttack = data && data.attack;
+  const theirMinionsHealth = data && data.health;
 
   function handleClick(event, slot) {
     event.preventDefault();
+
     dispatch(canNotAttack());
     dispatch(minionDeselected());
-    if (attack >= health) dispatch(removeMinion(`slot${slot}`));
+
+    if (theirMinionsAttack >= yourMinionsHealth)
+      dispatch(removeYourMinion(`slot${slot}`));
     else
       dispatch(
-        setMinionHealth({
-          attack,
+        setYourMinionHealth({
+          attack: theirMinionsAttack,
+          card: yourMinion,
+          slot: Object.keys(yourBoard).filter(k => yourBoard[k] === yourMinion)
+        })
+      );
+
+    if (yourMinionsAttack >= theirMinionsHealth)
+      dispatch(removeTheirMinion(`slot${slot}`));
+    else
+      dispatch(
+        setTheirMinionHealth({
+          attack: yourMinionsAttack,
           card: data,
-          slot
+          slot: `slot${slot}`
         })
       );
   }

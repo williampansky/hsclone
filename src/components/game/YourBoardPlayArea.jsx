@@ -2,7 +2,7 @@ import React from 'react';
 import css from '~/styles/game/game.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import playCard from 'lib/game/play-card';
-import { addMinion } from '~/features/boards/yourBoard.slice';
+import { addYourMinion } from '~/features/boards/yourBoard.slice';
 import {
   removeCardFromYourHand,
   deselectCard
@@ -34,7 +34,7 @@ export default function YourBoardPlayerArea({ children }) {
         slot: `slot${slot}`
       };
 
-      dispatch(addMinion(addObj));
+      dispatch(addYourMinion(addObj));
       dispatch(deselectCard());
       dispatch(removeCardFromYourHand(obj));
       dispatch(subtracted(cost));

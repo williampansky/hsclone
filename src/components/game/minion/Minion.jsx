@@ -39,8 +39,8 @@ export default function Minion({ data, p, slot }) {
   // const { attackSound, deathSound, dropSound } = sounds;
 
   const dispatch = useDispatch();
-  const [{ AP }, setAP] = useState({ AP: attack });
-  const [{ HP }, setHP] = useState({ HP: health });
+  // const [{ AP }, setAP] = useState({ AP: attack });
+  // const [{ HP }, setHP] = useState({ HP: health });
   const [isHovering, hoverProps] = useHover({
     mouseEnterDelayMS: 900,
     mouseLeaveDelayMS: 0
@@ -55,13 +55,16 @@ export default function Minion({ data, p, slot }) {
   //   HP === 0 && killMinion();
   // }, [HP]);
 
-  return HP !== 0 ? (
-    <div className={[css.Minion].join(' ')} {...hoverProps}>
+  return health !== 0 ? (
+    <div className={[css.Minion].join(' ')}>
+      <div className={css.InfoTrigger} {...hoverProps}>
+        ?
+      </div>
       <div className={css.ImageWrapper}>
         <img alt={name} role="presentation" src={foregroundImage} />
       </div>
-      <div className={css.AttackWrapper}>{AP}</div>
-      <div className={css.HealthWrapper}>{HP}</div>
+      <div className={css.AttackWrapper}>{attack}</div>
+      <div className={css.HealthWrapper}>{health}</div>
 
       {isHovering ? (
         <article>

@@ -33,14 +33,14 @@ const theirBoardSlice = createSlice({
   name: 'theirBoard',
   initialState: getInitialState('debug'),
   reducers: {
-    addMinion(state, { payload }) {
+    addTheirMinion(state, { payload }) {
       const { card, slot } = payload;
       state[slot] = card;
     },
-    removeMinion(state, { payload }) {
+    removeTheirMinion(state, { payload }) {
       state[payload] = null;
     },
-    setMinionHealth(state, { payload }) {
+    setTheirMinionHealth(state, { payload }) {
       const { attack, card, slot } = payload;
       const val = subtract(Number(state[slot].health), Number(attack));
       const newCard = {
@@ -54,5 +54,9 @@ const theirBoardSlice = createSlice({
 });
 
 const { actions, reducer } = theirBoardSlice;
-export const { addMinion, removeMinion, setMinionHealth } = actions;
+export const {
+  addTheirMinion,
+  removeTheirMinion,
+  setTheirMinionHealth
+} = actions;
 export default reducer;
