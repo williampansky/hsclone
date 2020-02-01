@@ -1,13 +1,5 @@
-html,
-body,
-#game {
-  background: black;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-}
-
 @import 'abstracts/root';
+@import 'abstracts/html';
 
 @import 'components/cards';
 @import 'components/board';
@@ -19,3 +11,4 @@ body,
 
 @import 'interactions/card-interactions';
 @import 'interactions/minion-interactions';
+@import 'interactions/their-interactions';

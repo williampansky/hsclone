@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import store from '~/store';
 import '~/app.css';
 
-import getUserId from '~/lib/user/get-gid';
-
 class MyApp extends App {
   constructor(props) {
     super(props);

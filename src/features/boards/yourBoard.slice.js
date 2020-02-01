@@ -31,7 +31,7 @@ const getInitialState = key => {
 
 const yourBoardSlice = createSlice({
   name: 'yourBoard',
-  initialState: getInitialState('debug'),
+  initialState: getInitialState(),
   reducers: {
     // addMinion(state, { payload }) {
     //   const { item, i } = payload;

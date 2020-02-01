@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import playGame from 'lib/game/play-game';
+import css from '~/styles/game/game.scss';
 
 export default function Game({ children }) {
   useEffect(() => {
     // playGame().then(resp => console.log(resp));
   }, []);
 
-  return <div id="game">{children}</div>;
+  return <div className={css.Game}>{children}</div>;
 }
 
 Game.propTypes = {

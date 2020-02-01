@@ -31,7 +31,7 @@ const getInitialState = key => {
 
 const theirBoardSlice = createSlice({
   name: 'theirBoard',
-  initialState: getInitialState('debug'),
+  initialState: getInitialState(),
   reducers: {
     addTheirMinion(state, { payload }) {
       const { card, slot } = payload;

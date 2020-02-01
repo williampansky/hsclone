@@ -9,11 +9,17 @@ export default function YourAvatar({ health, src }) {
     >
       <div className={[css['player-health']].join(' ')}>{health}</div>
       <div className={css.AvatarImageWrapper}>
-        <div
-          className={css.AvatarImage}
-          style={{ backgroundImage: `url(${src})` }}
-        />
+        {src && (
+          <div
+            className={css.AvatarImage}
+            style={{ backgroundImage: `url(${src})` }}
+          />
+        )}
       </div>
     </div>
   );
 }
+
+YourAvatar.defaultProps = {
+  backgroundColor: 'white'
+};

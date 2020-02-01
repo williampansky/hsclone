@@ -3,6 +3,10 @@ import { combineReducers } from '@reduxjs/toolkit';
 // import goldSlice from 'features/gold/gold.slice';
 // import cardsSlice from 'features/cards/cards.slice';
 // import matchSlice from 'features/match/match.slice';
+
+import themSlice from 'features/players/them.slice';
+import youSlice from 'features/players/you.slice';
+
 import theirBoardSlice from 'features/boards/theirBoard.slice';
 import theirEnergySlice from '~/features/energy/theirEnergy.slice';
 import theirEnergyTotalSlice from '~/features/energy/theirEnergyTotal.slice';
@@ -20,9 +24,9 @@ import minionCanAttackSlice from 'features/targeting/minionCanAttack.slice';
 import minionIsAttackingSlice from 'features/targeting/minionIsAttacking.slice';
 
 const rootReducer = combineReducers({
-  // gold: goldSlice,
-  // cards: cardsSlice,
-  // match: matchSlice,
+  // players
+  them: themSlice,
+  you: youSlice,
 
   // their stats
   theirEnergy: theirEnergySlice,
