@@ -7,24 +7,57 @@ import YourHand from 'components/game/YourHand';
 import '~/styles/game/game.scss';
 import server from '~/server';
 import { useSelector, useDispatch } from 'react-redux';
-import { initTheirPlayer } from '~/features/players/them.slice';
+
+import {
+  setYourHero,
+  setYourUsername,
+  setYourId,
+  setYourConnection
+} from '~/features/players/you.slice';
+import {
+  setTheirHero,
+  setTheirUsername,
+  setTheirId,
+  setTheirConnection
+} from '~/features/players/them.slice';
 
 export default function Page() {
   const socket = server();
   const dispatch = useDispatch();
   const { username, hero, id, connected } = useSelector(s => s.you);
+  const themObj = useSelector(s => s.them);
 
-  dispatch(initTheirPlayer());
+  const theirUsername = themObj && themObj.username;
+  const theirHero = themObj && themObj.hero;
+  const theirId = themObj && themObj.id;
+  const theyAreConnected = themObj && themObj.connected;
 
   // React.useEffect(() => {
-  //   const abortController = new AbortController();
+  socket.on('start game', payload => {
+    const { username, hero } = payload;
+    const userId = payload && payload.id;
+    console.log(`${username} joined`);
 
-  //   return function cleanup() {
-  //     abortController.abort();
-  //   };
+    if (id !== userId) {
+      dispatch(setTheirHero(hero));
+      dispatch(setTheirUsername(username));
+      dispatch(setTheirId(userId));
+      dispatch(setTheirConnection(true));
+    }
+  });
+
+  socket.on('reconnect', () => {
+    console.log('You have been reconnected');
+    if (username && hero)
+      socket.emit('add user', {
+        username,
+        hero,
+        id
+      });
+  });
   // }, [socket]);
 
-  return connected ? (
+  return connected && theyAreConnected ? (
     <Game>
       <TheirHand />
       <Board>

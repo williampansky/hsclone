@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "next",
+    "dev1": "next -p 3001",
+    "dev2": "next -p 3002",
     "build": "next build",
     "start": "next start -p $PORT",
     "server": "node ./src/server.js"

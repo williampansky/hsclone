@@ -35,16 +35,3 @@ export const {
   setTheirUsername
 } = actions;
 export default reducer;
-
-export const initTheirPlayer = () => dispatch => {
-  const socket = server();
-
-  socket.on('user joined', payload => {
-    const { username, hero } = payload;
-    console.log(`${username} joined`);
-
-    dispatch(setTheirHero(hero));
-    dispatch(setTheirUsername(username));
-    dispatch(setTheirConnection(true));
-  });
-};

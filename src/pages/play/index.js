@@ -1,22 +1,37 @@
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import { initYourPlayer } from '~/features/players/you.slice';
 import css from '~/styles/site/site.scss';
+import server from '~/server';
+
+import {
+  setYourHero,
+  setYourUsername,
+  setYourId,
+  setYourConnection
+} from '~/features/players/you.slice';
+import {
+  setTheirHero,
+  setTheirUsername,
+  setTheirId,
+  setTheirConnection
+} from '~/features/players/them.slice';
 
 export default function Page() {
+  const socket = server();
   const dispatch = useDispatch();
   const router = useRouter();
   const inputRef = React.useRef();
   const [{ error }, setError] = React.useState({ error: false });
   const [{ hero }, selectHero] = React.useState({ hero: null });
+  const [{ waiting }, setIsWaiting] = React.useState({ waiting: false });
 
-  // React.useEffect(() => {
-  //   router.prefetch('/game');
-  // }, []);
-
-  function handleDispatch(username, heroname) {
-    // dispatch(setYourHero(heroname));
-    // dispatch(setYourUsername(username));
+  function emit(userName, selectedHero) {
+    socket.emit('player waiting');
+    socket.emit('add user', {
+      username: userName,
+      hero: selectedHero,
+      id: socket.id
+    });
   }
 
   function handleForm(event) {
@@ -27,12 +42,27 @@ export default function Page() {
 
     if (val && hero) {
       setError({ error: false });
-      dispatch(initYourPlayer(val, hero));
-      router.push('/game');
+      emit(val, hero);
+      setIsWaiting({ waiting: true });
+
+      dispatch(setYourHero(hero));
+      dispatch(setYourUsername(val));
+      dispatch(setYourId(socket.id));
+
+      router.prefetch('/game');
     } else {
       setError({ error: true });
     }
   }
+
+  socket.on('start game', () => {
+    dispatch(setYourConnection(true));
+    router.push('/game');
+  });
+
+  // React.useEffect(() => {
+  //   router.prefetch('/game');
+  // }, []);
 
   return (
     <main className={css.Site}>
@@ -73,18 +103,21 @@ export default function Page() {
         {error && <span className="error">Must select a hero</span>}
 
         <p>
-          <button type="submit">Submit</button>
+          {!waiting && <button type="submit">Submit</button>}
+          {waiting && <span>Waiting for opponent...</span>}
         </p>
       </form>
 
       <style jsx>{`
         .form {
+          color: white;
+          background: black;
           display: flex;
           flex-flow: column nowrap;
           align-items: center;
           justify-content: center;
           width: 100vw;
-          height: 75vh;
+          height: 100vh;
         }
 
         .hero-selection {

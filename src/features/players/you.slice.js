@@ -35,27 +35,3 @@ export const {
   setYourUsername
 } = actions;
 export default reducer;
-
-export const initYourPlayer = (username, hero) => dispatch => {
-  const socket = server();
-
-  socket.emit('add user', {
-    username,
-    hero
-  });
-
-  socket.on('login', () => {
-    dispatch(setYourHero(hero));
-    dispatch(setYourUsername(username));
-    dispatch(setYourConnection(true));
-  });
-
-  socket.on('reconnect', () => {
-    console.log('You have been reconnected');
-    if (username && hero)
-      socket.emit('add user', {
-        username,
-        hero
-      });
-  });
-};
