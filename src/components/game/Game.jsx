@@ -4,6 +4,7 @@ import TheirBoard from 'components/boards/TheirBoard';
 import TheirHand from 'components/TheirHand';
 import YourBoard from 'components/boards/YourBoard';
 import YourHand from 'components/YourHand';
+import EndTurnButton from 'components/end-turn/EndTurn';
 import css from './game-component.module.scss';
 
 export default function GameWrapper(props) {
@@ -31,6 +32,7 @@ export default function GameWrapper(props) {
       <TheirHand {...props} />
       <Board {...props}>
         <TheirBoard {...props} />
+        <EndTurnButton {...props} />
         <YourBoard {...props} />
       </Board>
       <YourHand {...props} />
