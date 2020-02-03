@@ -1,4 +1,12 @@
-import { drawCard, playMinionCard, playSpellCard } from './moves/card-moves';
+import {
+  drawCard,
+  playMinionCard,
+  playSpellCard,
+  incrementDeck,
+  deincrementDeck,
+  incrementHand,
+  deincrementHand
+} from './moves/card-moves';
 import {
   incrementCurrentEnergy,
   incrementTotalEnergy,
@@ -153,7 +161,11 @@ export const HSclone = {
         G.players[0].deck = ctx.random.Shuffle(deck3);
         G.players[1].deck = ctx.random.Shuffle(deck3);
       },
-      endIf: (G) => (G.players[0].deck.length === 30),
+      // End phase when both player's decks are full (30 cards)
+      endIf: (G, ctx) => (
+        G.players[ctx.playOrder[0]].deck.length === 30 &&
+        G.players[ctx.playOrder[1]].deck.length === 30
+      ),
       start: true,
       next: 'initHands'
   
@@ -165,19 +177,25 @@ export const HSclone = {
 
     initHands: {
       onBegin: (G, ctx) => {
-        console.log(ctx.playOrder)
+        const FIRST_PLAYER = ctx.playOrder[0];
+        const SECOND_PLAYER = ctx.playOrder[1];
+
         // Draw three cards from the first player's deck into their hand.
         for (let i = 0; i < 3; i++) {
-          G.players[ctx.playOrder[0]].hand.push(
-            G.players[ctx.playOrder[0]].deck.splice(0, 1)[0]
+          deincrementDeck(G, ctx, FIRST_PLAYER); // set counts[player].deck
+          incrementHand(G, ctx, FIRST_PLAYER); // set counts[player].hand
+          G.players[FIRST_PLAYER].hand.push(
+            G.players[FIRST_PLAYER].deck.splice(0, 1)[0]
           );
         }
 
         // Draw four cards from the first player's deck into their hand;
         // they get four cards since they are not the starting player.
         for (let i = 0; i < 4; i++) {
-          G.players[ctx.playOrder[1]].hand.push(
-            G.players[ctx.playOrder[1]].deck.splice(0, 1)[0]
+          deincrementDeck(G, ctx, SECOND_PLAYER); // set counts[player].deck
+          incrementHand(G, ctx, SECOND_PLAYER); // set counts[player].hand
+          G.players[SECOND_PLAYER].hand.push(
+            G.players[SECOND_PLAYER].deck.splice(0, 1)[0]
           );
         }
       },
