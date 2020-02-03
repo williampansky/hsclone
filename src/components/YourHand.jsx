@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import Card from './cards/Card';
 import CardInteractionLayer from '../systems/CardInteractionLayer';
 import PlayerEnergy from './player-energy/PlayerEnergy';
+import uid from 'utils/uid';
 
 export default function YourHand(props) {
   const {
+    allCards,
     G,
     ctx,
     ctx: { currentPlayer },
@@ -15,10 +17,38 @@ export default function YourHand(props) {
   const yourNumber = Number(playerID) === 0 ? 0 : 1;
 
   // state
+  // const [{ cards }, setCards] = useState({ cards: [] });
   const [{ cards }, setCards] = useState({ cards: [] });
 
+  const setCardsCallback = useCallback((incomingCards = []) => {
+    // const newCardsForHand = incomingCards.map(cardId => {
+    //   return {
+    //     [uid()]: allCards[cardId]
+    //   };
+    // });
+
+    // return cards === null
+    //   ? setCards({
+    //       cards: newCardsForHand
+    //     })
+    //   : setCards({
+    //       cards: {
+    //         cards,
+    //         ...newCardsForHand
+    //       }
+    //     });
+
+    const newCardsForHand = incomingCards.map(cardId => {
+      return allCards[cardId];
+    });
+
+    return setCards({
+      cards: [...cards, newCardsForHand].flat()
+    });
+  }, []);
+
   useEffect(() => {
-    players[yourNumber] && setCards({ cards: players[yourNumber].cards });
+    players[yourNumber] && setCardsCallback(players[yourNumber].hand);
   }, [G]);
 
   const energyObject = energy[yourNumber];
@@ -39,12 +69,13 @@ export default function YourHand(props) {
               elite,
               entourage,
               flavor,
+              goldenImageSrc,
               health,
               hideStats,
               howToEarn,
               howToEarnGolden,
               id,
-              images,
+              imageSrc,
               mechanics,
               name,
               playRequirements,
@@ -74,12 +105,13 @@ export default function YourHand(props) {
                   elite={elite}
                   entourage={entourage}
                   flavor={flavor}
+                  goldenImageSrc={goldenImageSrc}
                   health={health}
                   hideStats={hideStats}
                   howToEarn={howToEarn}
                   howToEarnGolden={howToEarnGolden}
                   id={id}
-                  images={images}
+                  imageSrc={imageSrc}
                   mechanics={mechanics}
                   name={name}
                   playRequirements={playRequirements}

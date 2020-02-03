@@ -36,11 +36,11 @@ export const HSclone = {
     players: {
       0: {
         deck: [],
-        cards: []
+        hand: []
       },
       1: {
         deck: [],
-        cards: []
+        hand: []
       }
     },
     boards: {
@@ -127,6 +127,12 @@ export const HSclone = {
       // Then, sets the `current` value to the total; which allows
       // the `currentPlayer` to spend said energy on card play functions.
       G.energy[ctx.currentPlayer].current = G.energy[ctx.currentPlayer].total;
+
+      // Next, draw one card from the player's deck and move it
+      // into their hand; e.g: Array(b).push(Array(a).splice(0, 1)[0])
+      // G.players[ctx.currentPlayer].hand.push(
+      //   G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
+      // );
     },
   },
 
@@ -149,11 +155,35 @@ export const HSclone = {
       },
       endIf: (G) => (G.players[0].deck.length === 30),
       start: true,
+      next: 'initHands'
   
       /**
        * @todo add ability to get new starting hand cards
        */
       // moves: {}
+    },
+
+    initHands: {
+      onBegin: (G, ctx) => {
+        console.log(ctx.playOrder)
+        // Draw three cards from the first player's deck into their hand.
+        for (let i = 0; i < 3; i++) {
+          G.players[ctx.playOrder[0]].hand.push(
+            G.players[ctx.playOrder[0]].deck.splice(0, 1)[0]
+          );
+        }
+
+        // Draw four cards from the first player's deck into their hand;
+        // they get four cards since they are not the starting player.
+        for (let i = 0; i < 4; i++) {
+          G.players[ctx.playOrder[1]].hand.push(
+            G.players[ctx.playOrder[1]].deck.splice(0, 1)[0]
+          );
+        }
+      },
+      endIf: (G, ctx) => (G.players[ctx.playOrderPos].hand.length === 2),
     }
   }
 };
+
+//

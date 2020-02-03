@@ -7,7 +7,7 @@ import YourHand from 'components/YourHand';
 import EndTurnButton from 'components/end-turn/EndTurn';
 import css from './game-component.module.scss';
 
-export default function GameWrapper(props) {
+export default function GameWrapper(props, { allCards }) {
   const {
     G,
     ctx,
@@ -35,7 +35,7 @@ export default function GameWrapper(props) {
         <EndTurnButton {...props} />
         <YourBoard {...props} />
       </Board>
-      <YourHand {...props} />
+      <YourHand allCards={allCards} {...props} />
     </div>
   ) : null;
 }

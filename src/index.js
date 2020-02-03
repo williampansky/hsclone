@@ -7,6 +7,7 @@ import GameWrapper from './components/game/Game';
 import './index.css';
 import testDeck1 from './data/debug/deck1.json';
 import testDeck2 from './data/debug/deck2.json';
+import testCardsDB from './data/debug/cards.json';
 import * as serviceWorker from './serviceWorker';
 
 const REDUX_DEVTOOLS =
@@ -23,7 +24,8 @@ const HScloneClient = Client({
 class App extends React.Component {
   state = {
     playerID: null,
-    deck: []
+    deck: [],
+    allCards: testCardsDB
   };
 
   componentDidMount() {
@@ -53,7 +55,11 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <HScloneClient playerID={this.state.playerID} deck={this.state.deck} />
+        <HScloneClient
+          playerID={this.state.playerID}
+          // deck={this.state.deck}
+          allCards={this.state.allCards}
+        />
       </React.Fragment>
     );
   }

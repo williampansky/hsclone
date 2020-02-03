@@ -13,12 +13,13 @@ export default function Card({
   elite,
   entourage,
   flavor,
+  goldenImageSrc,
   health,
   hideStats,
   howToEarn,
   howToEarnGolden,
   id,
-  images,
+  imageSrc,
   mechanics,
   name,
   playRequirements,
@@ -31,7 +32,6 @@ export default function Card({
   text,
   type
 }) {
-  const { backgroundImage, foregroundImage } = images;
   const { attackSound, deathSound, dropSound } = sounds;
   const metaAttributes = [
     { name: 'artist', content: artist },
@@ -47,8 +47,8 @@ export default function Card({
     { name: 'howToEarn', content: howToEarn },
     { name: 'howToEarnGolden', content: howToEarnGolden },
     { name: 'id', content: id },
-    { name: 'images.backgroundImage', content: backgroundImage },
-    { name: 'images.foregroundImage', content: foregroundImage },
+    { name: 'images.normal', content: imageSrc },
+    { name: 'images.golden', content: goldenImageSrc },
     { name: 'mechanics', content: JSON.stringify(mechanics) },
     { name: 'name', content: name },
     { name: 'playRequirements', content: JSON.stringify(playRequirements) },
@@ -65,7 +65,7 @@ export default function Card({
   ];
 
   const cardImage = {
-    backgroundImage: `url(${foregroundImage})`
+    backgroundImage: `url(${imageSrc})`
   };
 
   const fontSize = {
@@ -140,15 +140,13 @@ Card.defaultProps = {
   elite: false,
   entourage: [],
   flavor: null,
+  goldenImageSrc: null,
   health: 1,
   hideStats: false,
   howToEarn: null,
   howToEarnGolden: null,
   id: null,
-  images: {
-    backgroundImage: null,
-    foregroundImage: null
-  },
+  imageSrc: null,
   mechanics: [],
   name: 'CARD NAME',
   playRequirements: [],
@@ -162,6 +160,6 @@ Card.defaultProps = {
   },
   spellDamage: 0,
   targetingArrowText: null,
-  text: 'CARD TEXT',
+  text: '',
   type: null
 };
