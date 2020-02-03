@@ -1,15 +1,16 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deselectCard, selectCard } from '~/features/yourHand/yourHand.slice';
+import { deselectCard, selectCard } from '../features/yourHand/yourHand.slice';
 import {
   minionSelected,
   minionDeselected
-} from '~/features/targeting/minionCanAttack.slice';
+} from '../features/targeting/minionCanAttack.slice';
 import {
   canAttack,
   canNotAttack
-} from '~/features/targeting/minionIsAttacking.slice';
-import css from '~/styles/game/interactions/minion-interactions.scss';
+} from '../features/targeting/minionIsAttacking.slice';
+import css from '../styles/interactions/minion-interactions.scss';
 
 export default function MinionCanAttack({ children, data, slot }) {
   const dispatch = useDispatch();

@@ -1,14 +1,5 @@
-// packages
-import io from 'socket.io-client';
-import serverConfig from 'config/server.config';
-
-const { host } = serverConfig;
-const connections = {};
-
-export default () => {
-  if (Boolean(connections[host]) === false) {
-    connections[host] = io(host);
-  }
-
-  return connections[host];
-};
+// src/server.js
+const Server = require('boardgame.io/server').Server;
+const HSclone = require('./lib/game').HSclone;
+const server = Server({ games: [HSclone] });
+server.run(8000);

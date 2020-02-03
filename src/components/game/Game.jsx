@@ -1,15 +1,39 @@
-import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-import css from '~/styles/game/game.scss';
+import React from 'react';
+import Board from 'components/boards/Board';
+import TheirBoard from 'components/boards/TheirBoard';
+import TheirHand from 'components/TheirHand';
+import YourBoard from 'components/boards/YourBoard';
+import YourHand from 'components/YourHand';
+import css from './game-component.module.scss';
 
-export default function Game({ children }) {
-  useEffect(() => {
-    // playGame().then(resp => console.log(resp));
-  }, []);
+export default function GameWrapper(props) {
+  const {
+    G,
+    ctx,
+    moves,
+    events,
+    reset,
+    undo,
+    redo,
+    step,
+    log,
+    gameID,
+    playerID,
+    gameMetadata,
+    isActive,
+    isMultiplayer,
+    isConnected,
+    credentials
+  } = props;
 
-  return <div className={css.Game}>{children}</div>;
+  return props ? (
+    <div data-file="Game" className={css['game-component']}>
+      <TheirHand {...props} />
+      <Board {...props}>
+        <TheirBoard {...props} />
+        <YourBoard {...props} />
+      </Board>
+      <YourHand {...props} />
+    </div>
+  ) : null;
 }
-
-Game.propTypes = {
-  children: PropTypes.node
-};

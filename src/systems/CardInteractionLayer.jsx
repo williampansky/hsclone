@@ -1,13 +1,23 @@
+import React from 'react';
 import CardIsPlayable from './interactions/CardIsPlayable';
-import css from '~/styles/game/game.scss';
+import css from 'styles/interactions/card-interactions.module.scss';
 
 export default function CardInteractionLayer({
   children,
   data,
   index,
-  interactions
+  interactions,
+  theirHand
 }) {
-  const style = {
+  const theirHandStyle = {
+    transform: `
+      translateY(calc(${calcOffset(index)} * -1px)) 
+      rotate(calc(${calcRotate(index)} * -1deg)) 
+      scale(0.675)
+    `
+  };
+
+  const yourHandStyle = {
     transform: `
       translateY(calc(${calcOffset(index)} * 1px)) 
       rotate(calc(${calcRotate(index)} * 1deg)) 
@@ -15,15 +25,26 @@ export default function CardInteractionLayer({
     `
   };
 
+  if (theirHand)
+    return (
+      <div
+        className={css['card-in-their-hand']}
+        data-index={index}
+        style={theirHandStyle}
+      >
+        {children}
+      </div>
+    );
+
   switch (interactions) {
     case 'is-playable':
       // prettier-ignore
-      return <CardIsPlayable children={children} data={data} index={index} style={style} />;
+      return <CardIsPlayable children={children} data={data} index={index} style={yourHandStyle} />;
 
     default:
       // prettier-ignore
       return (
-        <div className={[css.CardInYourHand].join(' ')} data-index={index} style={style}>
+        <div className={css['card-in-your-hand']} data-index={index} style={yourHandStyle}>
           {children}
         </div>
       );

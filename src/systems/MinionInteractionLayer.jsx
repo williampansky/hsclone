@@ -1,3 +1,4 @@
+import React from 'react';
 import MinionCanAttack from './interactions/MinionCanAttack';
 import MinionCanBeAttacked from './interactions/MinionCanBeAttacked';
 import { useState, useEffect } from 'react';

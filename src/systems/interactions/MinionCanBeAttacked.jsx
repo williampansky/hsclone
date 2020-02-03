@@ -1,22 +1,23 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   removeTheirMinion,
   setTheirMinionHealth
-} from '~/features/boards/theirBoard.slice';
+} from '../features/boards/theirBoard.slice';
 import {
   removeYourMinion,
   setYourMinionHealth
-} from '~/features/boards/yourBoard.slice';
+} from '../features/boards/yourBoard.slice';
 import {
   minionSelected,
   minionDeselected
-} from '~/features/targeting/minionCanAttack.slice';
+} from '../features/targeting/minionCanAttack.slice';
 import {
   canAttack,
   canNotAttack
-} from '~/features/targeting/minionIsAttacking.slice';
-import css from '~/styles/game/interactions/minion-interactions.scss';
+} from '../features/targeting/minionIsAttacking.slice';
+import css from '../styles/interactions/minion-interactions.scss';
 
 export default function MinionCanBeAttacked({ children, data, slot }) {
   const dispatch = useDispatch();
