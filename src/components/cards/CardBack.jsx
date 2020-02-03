@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import css from '../../styles/game.scss';
+import css from './cards.module.scss';
 import { fontSizeBasedOnCharacterLength } from '../../utils/text';
 import createMarkup from '../../utils/createMarkup';
 

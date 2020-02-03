@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PlayerEnergy from './player-energy/PlayerEnergy';
 import CardBack from './cards/CardBack';
 import CardInteractionLayer from '../systems/CardInteractionLayer';
 
 export default function TheirHand(props) {
-  const { G } = props;
-  const { energy, numberOfCardsInTheirHand } = G;
-  const energyObject = energy && energy.player2;
+  const {
+    G,
+    G: { energy, counts },
+    ctx,
+    ctx: { currentPlayer },
+    playerID
+  } = props;
+  const theirNumber = Number(playerID) === 0 ? 1 : 0;
+  const cardsInTheirHand = counts[theirNumber].hand;
+  const energyObject = energy[theirNumber];
 
   return (
-    <Component
-      data-file="TheirHand"
-      data-number-of-cards={numberOfCardsInTheirHand}
-    >
-      {Array(numberOfCardsInTheirHand).map((card, index) => {
+    <Component data-file="TheirHand" data-number-of-cards={cardsInTheirHand}>
+      {Array.from(Array(cardsInTheirHand)).map((_, index) => {
         return (
           <CardInteractionLayer key={index} index={index} theirHand>
             <CardBack />

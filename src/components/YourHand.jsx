@@ -12,20 +12,16 @@ export default function YourHand(props) {
     playerID
   } = props;
   const { energy, players } = G;
-  const playerNumber = Number(currentPlayer);
+  const yourNumber = Number(playerID) === 0 ? 0 : 1;
 
   // state
   const [{ cards }, setCards] = useState({ cards: [] });
 
   useEffect(() => {
-    setCards({ cards: players[playerID].cards });
+    players[yourNumber] && setCards({ cards: players[yourNumber].cards });
   }, [G]);
 
-  const energyObject = energy && energy.player1;
-
-  // console.log(cards);
-
-  // const cards = [];
+  const energyObject = energy[yourNumber];
 
   return (
     <Component

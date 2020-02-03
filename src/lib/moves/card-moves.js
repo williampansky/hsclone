@@ -1,28 +1,46 @@
 import { add, subtract } from 'mathjs';
 
-export const getCardFromDeck = (G, ctx, card) => {
-  const { players, numberOfCardsInTheirHand } = G;
+export const incrementDeck = (G, ctx, player) => {
+  return G.counts[player].deck++;
+};
+
+export const deincrementDeck = (G, ctx, player) => {
+  return G.counts[player].deck--;
+};
+
+export const incrementHand = (G, ctx, player) => {
+  return G.counts[player].hand++;
+};
+
+export const deincrementHand = (G, ctx, player) => {
+  return G.counts[player].hand--;
+};
+
+export const drawCard = (G, ctx, card) => {
+  const { players } = G;
   const { currentPlayer } = ctx;
-  const playerNumber = Number(currentPlayer);
 
-  if (playerNumber !== players[playerNumber])
-    add(Number(numberOfCardsInTheirHand), 1);
+  Number(currentPlayer) === 0
+    ? deincrementDeck(G, ctx, 0)
+    : deincrementDeck(G, ctx, 1);
 
-  players[playerNumber].cards.push(card);
+  Number(currentPlayer) === 0
+    ? incrementHand(G, ctx, 0)
+    : incrementHand(G, ctx, 1);
+
+  players[currentPlayer].cards.push(card);
 };
 
 export const playMinionCard = (G, ctx, slotNumber, card) => {
   const { boards } = G;
   const { currentPlayer } = ctx;
-  const playerNumber = Number(currentPlayer) + 1;
 
-  boards[`player${playerNumber}`][`slot${slotNumber}`] = card;
+  boards[currentPlayer][`slot${slotNumber}`] = card;
 };
 
 export const playSpellCard = (G, ctx, card, target) => {
   const { boards } = G;
   const { currentPlayer } = ctx;
-  const playerNumber = Number(currentPlayer) + 1;
 
-  boards[`player${playerNumber}`][`slot${target}`] = card;
+  boards[currentPlayer][`slot${target}`] = card;
 };

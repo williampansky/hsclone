@@ -1,8 +1,4 @@
-import {
-  getCardFromDeck,
-  playMinionCard,
-  playSpellCard
-} from './moves/card-moves';
+import { drawCard, playMinionCard, playSpellCard } from './moves/card-moves';
 
 let StripSecrets = (G, playerID) => ({
   ...G,
@@ -17,6 +13,16 @@ let StripSecrets = (G, playerID) => ({
 export const HSclone = {
   name: 'HSclone',
   setup: () => ({
+    counts: {
+      0: {
+        deck: 30,
+        hand: 0
+      },
+      1: {
+        deck: 30,
+        hand: 0
+      }
+    },
     players: {
       0: {
         deck: [],
@@ -28,7 +34,7 @@ export const HSclone = {
       }
     },
     boards: {
-      player1: {
+      0: {
         slot1: null,
         slot2: null,
         slot3: null,
@@ -37,7 +43,7 @@ export const HSclone = {
         slot6: null,
         slot7: null
       },
-      player2: {
+      1: {
         slot1: null,
         slot2: null,
         slot3: null,
@@ -48,40 +54,35 @@ export const HSclone = {
       }
     },
     energy: {
-      player1: {
+      0: {
         current: 0,
         total: 10
       },
-      player2: {
+      1: {
         current: 0,
         total: 10
       }
-    },
-    numberOfCardsInTheirHand: 0,
-    numberOfCardsInTheirDeck: 30
+    }
   }),
 
   // prettier-ignore
   moves: {
     moveThatUsesSecret: {
-      /**
-       * @param {Number} slotNumber
-       * @param {Object} card
-       */
-      playCard: (G, ctx, slotNumber, card) => {
-        const { boards } = G;
-        const { currentPlayer } = ctx;
-        const playerNumber = Number(currentPlayer) + 1;
-
-        boards[`player${playerNumber}`][`slot${slotNumber}`] = card;
-      },
+      
+      playMinionCard: (G, ctx, slotNumber, card) => playMinionCard(G, ctx, slotNumber, card),
+      playSpellCard: (G, ctx, card, target = null) => playSpellCard(G, ctx, card, target),
 
       client: false
     },
 
-    getCardFromDeck: (G, ctx, card) => getCardFromDeck(G, ctx, card),
-    playMinionCard: (G, ctx, slotNumber, card) => playMinionCard(G, ctx, slotNumber, card),
-    playSpellCard: (G, ctx, card, target = null) => playSpellCard(G, ctx, card, target),
+    drawCard: {
+      move: (G, ctx, card) => drawCard(G, ctx, card),
+      client: false
+    },
+
+    // drawCard: (G, ctx, card) => drawCard(G, ctx, card),
+    // playMinionCard: (G, ctx, slotNumber, card) => playMinionCard(G, ctx, slotNumber, card),
+    // playSpellCard: (G, ctx, card, target = null) => playSpellCard(G, ctx, card, target),
 
     endTurn: (G, ctx) => {}
   },
