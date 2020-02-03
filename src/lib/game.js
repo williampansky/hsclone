@@ -6,6 +6,10 @@ import {
   setTotalEnergy
 } from './moves/energy-moves';
 
+const deck1 = require('../data/debug/deck1.json');
+const deck2 = require('../data/debug/deck2.json');
+const deck3 = require('../data/debug/deck3.json');
+
 let stripSecrets = (G, playerID) => ({
   ...G,
   players: {
@@ -92,6 +96,10 @@ export const HSclone = {
     return stripSecrets(G, playerID);
   },
 
+  /**
+   * @name turn
+   * @memberof HSclone
+   */
   // prettier-ignore
   turn: {
     order: {
@@ -109,19 +117,43 @@ export const HSclone = {
       // This is called at the beginning of the game / phase.
       playOrder: (G, ctx) => ctx.random.Shuffle(ctx.playOrder),
     },
+
     onBegin: (G, ctx) => {
-      /**
-       * Increments the `total` energy of the `currentPlayer`
-       * by one; but not more than ten.
-       */
+      // Increments the `total` energy of the `currentPlayer`
+      // by one; but not more than ten.
       if (G.energy[ctx.currentPlayer].total !== 10)
         G.energy[ctx.currentPlayer].total++;
       
-      /**
-       * Then, sets the `current` value to the total; which allows
-       * the `currentPlayer` to spend said energy on card play functions.
-       */
+      // Then, sets the `current` value to the total; which allows
+      // the `currentPlayer` to spend said energy on card play functions.
       G.energy[ctx.currentPlayer].current = G.energy[ctx.currentPlayer].total;
     },
+  },
+
+  /**
+   * Most games beyond very simple ones tend to have different behaviors at
+   * various phases. A game might have a phase at the beginning where players
+   * are drafting cards before entering a playing phase, for example.
+   *
+   * @name phases
+   * @memberof HSclone
+   */
+  // prettier-ignore
+  phases: {
+    initDecks: {
+      // Start the match by initiating each player's deck from the
+      // component (client-side) state into the G state.
+      onBegin: (G, ctx, playerID) => {
+        G.players[0].deck = ctx.random.Shuffle(deck3);
+        G.players[1].deck = ctx.random.Shuffle(deck3);
+      },
+      endIf: (G) => (G.players[0].deck.length === 30),
+      start: true,
+  
+      /**
+       * @todo add ability to get new starting hand cards
+       */
+      // moves: {}
+    }
   }
 };
