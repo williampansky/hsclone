@@ -214,8 +214,8 @@ export const HSclone = {
 
       // End phase when both player's have their starting hands
       endIf: (G, ctx) => (
-        G.players[ctx.playOrder[0]].hand.length === 2 &&
-        G.players[ctx.playOrder[1]].hand.length === 3
+        G.players[ctx.playOrder[0]].hand.length === 3 &&
+        G.players[ctx.playOrder[1]].hand.length === 4
       ),
       /**
        * @todo add ability to get new starting hand cards
