@@ -153,6 +153,12 @@ export const HSclone = {
       //   G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
       // );
     },
+
+    onEnd: (G, ctx) => {
+      // Reset the hovering states
+      G.hovering[0] = null;
+      G.hovering[1] = null;
+    }
   },
 
   /**
@@ -179,11 +185,6 @@ export const HSclone = {
       ),
       start: true,
       next: 'initHands'
-  
-      /**
-       * @todo add ability to get new starting hand cards
-       */
-      // moves: {}
     },
 
     initHands: {
@@ -210,7 +211,16 @@ export const HSclone = {
           );
         }
       },
-      endIf: (G, ctx) => (G.players[ctx.playOrderPos].hand.length === 2),
+
+      // End phase when both player's have their starting hands
+      endIf: (G, ctx) => (
+        G.players[ctx.playOrder[0]].hand.length === 2 &&
+        G.players[ctx.playOrder[1]].hand.length === 3
+      ),
+      /**
+       * @todo add ability to get new starting hand cards
+       */
+      // moves: {}
     }
   }
 };

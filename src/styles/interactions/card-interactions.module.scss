@@ -1,24 +1,4 @@
-// // prettier-ignore
-// @function offset($index, $offsetRange: 80, $total: 10) {
-//   // Math.abs((index - (total - 1) / 2) / (total - 2) * range);
-//   $set1: calc(#{$index} - calc(#{$total} - 1) / 2);
-//   $set2: calc(calc(#{$total} - 2) * #{$offsetRange});
-
-//   @return calc(calc(#{$set1} / #{$set2}) * 1px);
-// }
-
-// // prettier-ignore
-// @function rotation($index, $rotationRange: 50, $total: 10) {
-//   // (index - (total - 1) / 2) / (total - 2) * rotationRange;
-//   $set1: calc(#{$index} - calc(#{$total} - 1) / 2);
-//   $set2: calc(calc(#{$total} - 2) * #{$rotationRange});
-
-//   @return calc(calc(#{$set1} / #{$set2}) * 1deg);
-// }
-
 .card-in-their-hand {
-  border: 2px solid transparent;
-  border-radius: 3px;
   box-sizing: border-box;
   cursor: default;
   padding: 0;
@@ -26,7 +6,7 @@
   right: 0;
   top: 0;
   transition: 800ms cubic-bezier(0.19, 1, 0.22, 1);
-  transition-property: border, transform;
+  transition-property: transform;
   user-select: none;
   z-index: 1; // make sure to NOT animate z-index
 
@@ -50,8 +30,31 @@
     content: none;
   }
 
-  &.card-they-are-hovering {
-    border-color: yellow;
+  &.card-they-are-hovering:after {
+    animation: isAttackingGlow 2500ms infinite;
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+  }
+
+  @keyframes isAttackingGlow {
+    0% {
+      box-shadow: 0 0 -10px #c4a300;
+    }
+    40% {
+      box-shadow: 0 0 20px #c4a300;
+    }
+    60% {
+      box-shadow: 0 0 20px #c4a300;
+    }
+    100% {
+      box-shadow: 0 0 -10px #c4a300;
+    }
   }
 }
 

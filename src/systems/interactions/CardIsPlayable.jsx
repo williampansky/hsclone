@@ -1,7 +1,7 @@
 import React from 'react';
 import css from 'styles/interactions/card-interactions.module.scss';
 
-export default function CardIsPlayable({ children, data, index, style }) {
+export default function CardIsPlayable({ children, data, index, style, ref }) {
   const [isSelected, setIsSelected] = React.useState(false);
   // const dataID = data && data.id;
   // const selectedID = selectedCard && selectedCard.id;
@@ -27,6 +27,7 @@ export default function CardIsPlayable({ children, data, index, style }) {
       // data-index={index}
       // onClick={event => handleClick(event, data, isSelected)}
       // style={style}
+      ref={ref}
     >
       {children}
     </div>

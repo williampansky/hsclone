@@ -440,5 +440,16 @@
     "text": "Give your weapon <b>Lifesteal</b>.",
     "type": "SPELL",
     "imageSrc": "https://gamepedia.cursecdn.com/hearthstone_gamepedia/thumb/5/5a/Leeching_Poison_full.jpg/500px-Leeching_Poison_full.jpg?version=154fc65190d760569e5dcb524799f0f2"
+  },
+  "KAR_091": {
+    "cost": 5,
+    "name": "IronForge Portal",
+    "flavor": "Come to beautiful Ironforge! Where irons are forged and the forges are iron!",
+    "id": "KAR_091",
+    "rarity": "COMMON",
+    "set": "KARA",
+    "text": "Gain 4 Armor. Summon a random 4-Cost minion.",
+    "type": "SPELL",
+    "imageSrc": "https://i.pinimg.com/474x/49/11/6d/49116d0a23f2db01c8d5395b9a9af026.jpg"
   }
 }
