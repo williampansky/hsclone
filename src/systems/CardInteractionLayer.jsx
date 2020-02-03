@@ -1,14 +1,31 @@
 import React from 'react';
 import CardIsPlayable from './interactions/CardIsPlayable';
 import css from 'styles/interactions/card-interactions.module.scss';
+import useHover from 'hooks/useHover';
 
-export default function CardInteractionLayer({
-  children,
-  data,
-  index,
-  interactions,
-  theirHand
-}) {
+export default function CardInteractionLayer(
+  props
+  // { children, data, index, interactions, theirHand }
+) {
+  const {
+    G,
+    ctx,
+    moves,
+    children,
+    data,
+    index,
+    interactions,
+    theirHand,
+    theyAreHovering
+  } = props;
+  console.log(props);
+
+  const [hoverRef, isHovered] = useHover();
+
+  React.useEffect(() => {
+    isHovered && moves.hover(index);
+  }, [isHovered]);
+
   const theirHandStyle = {
     transform: `
       translateY(calc(${calcOffset(index)} * -1px)) 
@@ -28,7 +45,10 @@ export default function CardInteractionLayer({
   if (theirHand)
     return (
       <div
-        className={css['card-in-their-hand']}
+        className={[
+          css['card-in-their-hand'],
+          theyAreHovering === index && css['card-they-are-hovering']
+        ].join(' ')}
         data-index={index}
         style={theirHandStyle}
       >
@@ -39,12 +59,12 @@ export default function CardInteractionLayer({
   switch (interactions) {
     case 'is-playable':
       // prettier-ignore
-      return <CardIsPlayable children={children} data={data} index={index} style={yourHandStyle} />;
+      return <CardIsPlayable children={children} data={data} index={index} ref={hoverRef} style={yourHandStyle} />;
 
     default:
       // prettier-ignore
       return (
-        <div className={css['card-in-your-hand']} data-index={index} style={yourHandStyle}>
+        <div className={css['card-in-your-hand']} data-index={index} ref={hoverRef} style={yourHandStyle}>
           {children}
         </div>
       );

@@ -80,6 +80,10 @@ export const HSclone = {
         current: 0,
         total: 0
       }
+    },
+    hovering: {
+      0: null,
+      1: null
     }
   }),
 
@@ -93,6 +97,13 @@ export const HSclone = {
     // client-side moves
     // setCurrentEnergy: (G, ctx, player, amount) => setCurrentEnergy(G, ctx, player, amount),
     // setTotalEnergy: (G, ctx, player, amount) => setTotalEnergy(G, ctx, player, amount),
+
+    // hover-specific moves; indicating the opponent player's hover state
+    hover: (G, ctx, index) => {
+      Number(ctx.currentPlayer) === 0
+        ? G.hovering[0] = index
+        : G.hovering[1] = index;
+    }
   },
 
   /**

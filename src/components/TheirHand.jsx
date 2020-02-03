@@ -7,12 +7,13 @@ import CardInteractionLayer from '../systems/CardInteractionLayer';
 export default function TheirHand(props) {
   const {
     G,
-    G: { energy, counts },
+    G: { energy, counts, hovering },
     ctx,
     ctx: { currentPlayer },
     playerID
   } = props;
   const theirNumber = Number(playerID) === 0 ? 1 : 0;
+  const theirHover = hovering[theirNumber];
   const cardsInTheirHand = counts[theirNumber].hand;
   const energyObject = energy[theirNumber];
 
@@ -20,7 +21,12 @@ export default function TheirHand(props) {
     <Component data-file="TheirHand" data-number-of-cards={cardsInTheirHand}>
       {Array.from(Array(cardsInTheirHand)).map((_, index) => {
         return (
-          <CardInteractionLayer key={index} index={index} theirHand>
+          <CardInteractionLayer
+            key={index}
+            index={index}
+            theirHand
+            theyAreHovering={theirHover}
+          >
             <CardBack />
           </CardInteractionLayer>
         );

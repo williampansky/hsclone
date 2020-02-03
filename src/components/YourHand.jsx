@@ -11,13 +11,14 @@ export default function YourHand(props) {
     G,
     ctx,
     ctx: { currentPlayer },
-    playerID
+    playerID,
+    moves: { hover }
   } = props;
   const { energy, players } = G;
   const yourNumber = Number(playerID) === 0 ? 0 : 1;
 
   // state
-  // const [{ cards }, setCards] = useState({ cards: [] });
+  // const [hoverRef, isHovered] = useHover();
   const [{ cards }, setCards] = useState({ cards: [] });
 
   const setCardsCallback = useCallback((incomingCards = []) => {
@@ -94,6 +95,7 @@ export default function YourHand(props) {
                 data={card}
                 key={index}
                 index={index}
+                {...props}
                 // interactions={isPlayable && 'is-playable'}
               >
                 <Card
