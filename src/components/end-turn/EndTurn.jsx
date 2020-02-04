@@ -15,8 +15,8 @@ export default function EndTurnButton(props) {
 
   function handleClick(event) {
     event.preventDefault();
-    moves.hoverOverCardInHand(G, ctx, null);
-    moves.selectPlayableCard(G, ctx, null);
+    moves.hoverOverCardInHand(null);
+    moves.selectPlayableCard(null);
     return endTurn();
   }
 

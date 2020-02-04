@@ -160,19 +160,6 @@ export const HSclone = {
     },
 
     onEnd: (G, ctx) => {
-      // Reset the hovering states
-      try {
-        hoverOverCardInHand(G, ctx, null);
-      } catch (error) {
-        console.error('G.hovering', error);
-      }
-
-      // Reset the selected states
-      // try {
-      //   selectPlayableCard(G, ctx, null);
-      // } catch (error) {
-      //   console.error('G.selected', error);
-      // }
     }
   },
 
@@ -240,5 +227,3 @@ export const HSclone = {
     }
   }
 };
-
-//
