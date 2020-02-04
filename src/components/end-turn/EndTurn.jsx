@@ -3,8 +3,11 @@ import css from './end-turn.module.scss';
 
 export default function EndTurnButton(props) {
   const {
+    G,
+    ctx,
     ctx: { currentPlayer },
     events: { endTurn },
+    moves,
     playerID
   } = props;
 
@@ -12,6 +15,8 @@ export default function EndTurnButton(props) {
 
   function handleClick(event) {
     event.preventDefault();
+    moves.hoverOverCardInHand(G, ctx, null);
+    moves.selectPlayableCard(G, ctx, null);
     return endTurn();
   }
 

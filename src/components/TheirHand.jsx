@@ -7,16 +7,61 @@ import css from 'styles/interactions/card-interactions.module.scss';
 export default function TheirHand(props) {
   const {
     G,
-    G: { energy, counts, hovering },
+    G: { energy, counts, hoveringCard, selectedCard },
     ctx,
     ctx: { currentPlayer },
     playerID,
     moves
   } = props;
   const theirNumber = Number(playerID) === 0 ? 1 : 0;
-  const theirHoverState = hovering[theirNumber];
+  const theirHoverState = hoveringCard[theirNumber];
+  const theirSelectedState = selectedCard[theirNumber];
   const cardsInTheirHand = counts[theirNumber].hand;
   const energyObject = energy[theirNumber];
+
+  function transformHovering(idx) {
+    return `translateY(calc(${calcOffset(idx)} * 1px)) 
+    rotate(calc(${calcRotate(idx)} * -0.25deg)) 
+    scale(0.675)`;
+  }
+
+  function handleTransforms(idx) {
+    let key;
+
+    if (theirSelectedState === idx) key = 'selected';
+    else if (theirHoverState === idx) key = 'hover';
+
+    switch (key) {
+      case 'selected':
+        return false;
+
+      case 'hover':
+        return transformHovering(idx);
+
+      default:
+        return `translateY(calc(${calcOffset(idx)} * -1px)) 
+        rotate(calc(${calcRotate(idx)} * -1deg)) 
+        scale(0.675)`;
+    }
+  }
+
+  function handleClasses(idx) {
+    let key;
+
+    if (theirSelectedState === idx) key = 'selected';
+    else if (theirHoverState === idx) key = 'hover';
+
+    switch (key) {
+      case 'selected':
+        return css['card-they-have-selected'];
+
+      case 'hover':
+        return css['card-they-are-hovering'];
+
+      default:
+        return false;
+    }
+  }
 
   return (
     <Component data-file="TheirHand" data-number-of-cards={cardsInTheirHand}>
@@ -24,23 +69,11 @@ export default function TheirHand(props) {
         return (
           <div
             key={index}
-            className={[
-              css['card-in-their-hand'],
-              theirHoverState === index ? css['card-they-are-hovering'] : ''
-            ].join(' ')}
+            className={[css['card-in-their-hand'], handleClasses(index)].join(
+              ' '
+            )}
             data-index={index}
-            style={{
-              transform:
-                theirHoverState === index
-                  ? `
-                  translateY(calc(${calcOffset(index)} * 1px)) 
-                  rotate(calc(${calcRotate(index)} * -0.25deg)) 
-                  scale(0.675)`
-                  : `
-                  translateY(calc(${calcOffset(index)} * -1px)) 
-                  rotate(calc(${calcRotate(index)} * -1deg)) 
-                  scale(0.675)`
-            }}
+            style={{ transform: handleTransforms(index) }}
           >
             <CardBack />
           </div>

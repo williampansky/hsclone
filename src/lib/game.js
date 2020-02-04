@@ -1,4 +1,8 @@
 import {
+  hoverOverCardInHand,
+  selectPlayableCard
+} from './moves/aesthetic-moves';
+import {
   drawCard,
   playMinionCard,
   playSpellCard,
@@ -81,7 +85,11 @@ export const HSclone = {
         total: 0
       }
     },
-    hovering: {
+    hoveringCard: {
+      0: null,
+      1: null
+    },
+    selectedCard: {
       0: null,
       1: null
     }
@@ -99,11 +107,8 @@ export const HSclone = {
     // setTotalEnergy: (G, ctx, player, amount) => setTotalEnergy(G, ctx, player, amount),
 
     // hover-specific moves; indicating the opponent player's hover state
-    hover: (G, ctx, index) => {
-      Number(ctx.currentPlayer) === 0
-        ? G.hovering[0] = index
-        : G.hovering[1] = index;
-    }
+    hoverOverCardInHand: (G, ctx, index) => hoverOverCardInHand(G, ctx, index),
+    selectPlayableCard: (G, ctx, index) => selectPlayableCard(G, ctx, index)
   },
 
   /**
@@ -156,8 +161,18 @@ export const HSclone = {
 
     onEnd: (G, ctx) => {
       // Reset the hovering states
-      G.hovering[0] = null;
-      G.hovering[1] = null;
+      try {
+        hoverOverCardInHand(G, ctx, null);
+      } catch (error) {
+        console.error('G.hovering', error);
+      }
+
+      // Reset the selected states
+      // try {
+      //   selectPlayableCard(G, ctx, null);
+      // } catch (error) {
+      //   console.error('G.selected', error);
+      // }
     }
   },
 
@@ -217,6 +232,7 @@ export const HSclone = {
         G.players[ctx.playOrder[0]].hand.length === 3 &&
         G.players[ctx.playOrder[1]].hand.length === 4
       ),
+      
       /**
        * @todo add ability to get new starting hand cards
        */

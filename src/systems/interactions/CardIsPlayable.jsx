@@ -1,8 +1,8 @@
 import React from 'react';
 import css from 'styles/interactions/card-interactions.module.scss';
 
-export default function CardIsPlayable({ children, data, index, style, ref }) {
-  const [isSelected, setIsSelected] = React.useState(false);
+export default function CardIsPlayable({ onClick }) {
+  // const [isSelected, setIsSelected] = React.useState(false);
   // const dataID = data && data.id;
   // const selectedID = selectedCard && selectedCard.id;
 
@@ -21,15 +21,9 @@ export default function CardIsPlayable({ children, data, index, style, ref }) {
 
   return (
     <div
-      className={css['card-in-your-hand']}
+      className={css['card-is-playable']}
       data-is-playable={true}
-      // data-is-selected={isSelected}
-      // data-index={index}
-      // onClick={event => handleClick(event, data, isSelected)}
-      // style={style}
-      ref={ref}
-    >
-      {children}
-    </div>
+      onClick={onClick}
+    />
   );
 }

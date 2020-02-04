@@ -15,7 +15,8 @@ export default function CardInteractionLayer({
   interactions,
   theirHand,
   theirHoverState,
-  energy
+  energy,
+  selectedCard
 }) {
   // const {
   //   G: { energy },
@@ -34,15 +35,18 @@ export default function CardInteractionLayer({
   const [hoverRef, isHovered] = useHover();
   const { currentPlayer, playOrderPos } = ctx;
   const yourNumber = Number(playerID) === 0 ? 0 : 1;
-  // const yourEnergy = energy[yourNumber];
-  // const yourCurrentEnergy = yourEnergy && yourEnergy.current;
-  // const yourTotalEnergy = yourEnergy && yourEnergy.total;
+
+  const yourEnergy = energy[yourNumber];
+  const yourCurrentEnergy = yourEnergy && yourEnergy.current;
+  const yourTotalEnergy = yourEnergy && yourEnergy.total;
+
+  const yourSelectedCardIndex = selectedCard[yourNumber];
 
   React.useEffect(() => {
-    Number(currentPlayer) === Number(playOrderPos) &&
+    Number(currentPlayer) === Number(playerID) &&
       isHovered &&
-      moves.hover(index);
-  }, [currentPlayer, playOrderPos, isHovered]);
+      moves.hoverOverCardInHand(index);
+  }, [currentPlayer, isHovered]);
 
   const {
     artist,
@@ -73,8 +77,8 @@ export default function CardInteractionLayer({
     type
   } = card;
 
-  // const IS_PLAYABLE = cost <= yourCurrentEnergy;
-  const IS_PLAYABLE = false;
+  const IS_YOUR_TURN = Number(currentPlayer) === Number(playerID);
+  const IS_PLAYABLE = cost <= yourCurrentEnergy;
 
   const yourHandStyle = {
     transform: `
@@ -84,15 +88,25 @@ export default function CardInteractionLayer({
     `
   };
 
+  function selectPlayableCard(event, index) {
+    event.preventDefault();
+    return yourSelectedCardIndex !== index
+      ? moves.selectPlayableCard(index)
+      : moves.selectPlayableCard(null);
+  }
+
   // prettier-ignore
   return (
     <div
       className={css['card-in-your-hand']}
       data-file="CardInteractionLayer"
+      data-is-selected={yourSelectedCardIndex === index}
       ref={hoverRef}
       style={yourHandStyle}
     >
-      {IS_PLAYABLE && <CardIsPlayable data={card} index={index} />}
+      {IS_YOUR_TURN ? 
+        IS_PLAYABLE && <CardIsPlayable onClick={event => selectPlayableCard(event, index)} />
+      : null}
       <Card
         artist={artist}
         attack={attack}
