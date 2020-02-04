@@ -31,11 +31,24 @@ export const drawCard = (G, ctx, card) => {
   players[currentPlayer].cards.push(card);
 };
 
-export const playMinionCard = (G, ctx, slotNumber, card) => {
-  const { boards } = G;
+export const playMinionCard = (G, ctx, slotNumber, cardId, cardIndex) => {
+  const { boards, players, playedCards } = G;
   const { currentPlayer } = ctx;
 
-  boards[currentPlayer][`slot${slotNumber}`] = card;
+  // place card in selected slotNumber on your board
+  boards[currentPlayer][`slot${slotNumber}`] = cardId;
+
+  // move to your playerCards array
+  playedCards[currentPlayer].push(
+    players[currentPlayer].hand.find(c => c === cardId)
+  );
+
+  // and then remove card from your hand
+  const newHand = players[currentPlayer].hand.filter(c => c !== cardId);
+  players[currentPlayer].hand = newHand;
+
+  // then deincrement your hand count
+  deincrementHand(G, ctx, currentPlayer);
 };
 
 export const playSpellCard = (G, ctx, card, target) => {

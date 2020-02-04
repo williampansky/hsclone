@@ -1400,7 +1400,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@^16.7.20":
   version "16.9.19"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.19.tgz#c842aa83ea490007d29938146ff2e4d9e4360c40"
   integrity sha512-LJV97//H+zqKWMms0kvxaKYJDG05U2TtQB3chRLF8MPNs+MQh/H1aGlyDUxjaHvu08EAGerdX2z4LTBc7ns77A==
@@ -9212,6 +9212,13 @@ react-scripts@3.3.1:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.1.2"
+
+react-use-hover@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-use-hover/-/react-use-hover-1.0.0.tgz#fdcba44434effd4f4821423b8a5c795111a3d144"
+  integrity sha512-E9xRLelDmEZdq7G7hnGns4jKirU8uGFQCJfh/Ah3Xb5oboaf8a1g96b9zLgzCw+0DuccP57LjeoWH9iYtYNM9Q==
+  dependencies:
+    "@types/react" "^16.7.20"
 
 react@^16.12.0:
   version "16.12.0"

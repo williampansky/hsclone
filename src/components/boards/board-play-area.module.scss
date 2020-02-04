@@ -1,0 +1,104 @@
+.board-play-area {
+  align-items: center;
+  background: transparent;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row nowrap;
+  height: calc(100% / 2.25);
+  justify-content: center;
+  position: relative;
+  width: calc(100% / 1.05);
+}
+
+.their-board-play-area {
+  margin: auto auto 5%;
+}
+
+.your-board-play-area {
+  margin: 5% auto auto;
+}
+
+// .board-play-area .board-slot {
+//   color: white;
+//   border: 1px dashed rgba(255, 255, 255, 0.25);
+//   align-items: center;
+//   box-sizing: border-box;
+//   display: flex;
+//   flex-flow: column nowrap;
+//   height: 90%;
+//   justify-content: center;
+//   padding: 0 1.25%;
+//   margin: 0 1.25%;
+//   width: 100%;
+//   opacity: 0;
+//   pointer-events: none;
+//   user-select: none;
+// }
+
+// .board-play-area.board-is-active .board-slot {
+//   cursor: pointer;
+//   opacity: 1;
+//   pointer-events: auto;
+
+//   &:hover {
+//     border-color: rgba(255, 255, 255, 0.625);
+//   }
+// }
+
+// .board-play-area.has-minions .board-slot {
+//   border-color: transparent;
+//   cursor: default;
+//   opacity: 1;
+//   pointer-events: none;
+
+//   &:hover {
+//     border-color: transparent;
+//   }
+// }
+
+// .board-play-area.has-minions.board-is-active {
+//   .board-slot:not([data-idx]) {
+//     border-color: rgba(255, 255, 255, 0.25);
+//     cursor: pointer;
+//     pointer-events: auto;
+
+//     &:hover {
+//       border-color: rgba(255, 255, 255, 0.625);
+//     }
+//   }
+// }
+
+// .board-play-area.hasMinions {
+//   .slot[data-idx].canAttack {
+//     border: 1px solid yellow;
+//     cursor: pointer;
+//     pointer-events: auto;
+
+//     &:hover {
+//       border-color: red;
+//     }
+//   }
+// }
+
+// prettier-ignore
+// .board-play-area {
+//   .board-slot1 { grid-area: board-slot-one; }
+//   .board-slot2 { grid-area: board-slot-two; }
+//   .board-slot3 { grid-area: board-slot-three; }
+//   .board-slot4 { grid-area: board-slot-four; }
+//   .board-slot5 { grid-area: board-slot-five; }
+//   .board-slot6 { grid-area: board-slot-six; }
+//   .board-slot7 { grid-area: board-slot-seven; }
+// }
+
+// @keyframes scaleDown {
+//   0% {
+//     opacity: 0;
+//     transform: scale(1.8);
+//   }
+
+//   100% {
+//     opacity: 1;
+//     transform: scale(1);
+//   }
+// }

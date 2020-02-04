@@ -1,10 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect, useCallback } from 'react';
 import useHover from 'react-use-hover';
-import css from '../styles/game.scss';
-import Card from 'components/game/card/Card';
-import { removeMinion as removeYourMinion } from '../features/boards/yourBoard.slice';
-import { removeMinion as removeTheirMinion } from '../features/boards/theirBoard.slice';
+import css from './minion.module.scss';
+import Card from 'components/cards/Card';
 
 export default function Minion({ data, p, slot }) {
   const {
@@ -16,12 +13,13 @@ export default function Minion({ data, p, slot }) {
     elite,
     entourage,
     flavor,
+    goldenImageSrc,
     health,
     hideStats,
     howToEarn,
     howToEarnGolden,
     id,
-    images,
+    imageSrc,
     mechanics,
     name,
     playRequirements,
@@ -35,36 +33,21 @@ export default function Minion({ data, p, slot }) {
     type
   } = data;
 
-  const { backgroundImage, foregroundImage } = images;
-  // const { attackSound, deathSound, dropSound } = sounds;
-
-  const dispatch = useDispatch();
-  // const [{ AP }, setAP] = useState({ AP: attack });
-  // const [{ HP }, setHP] = useState({ HP: health });
   const [isHovering, hoverProps] = useHover({
     mouseEnterDelayMS: 900,
     mouseLeaveDelayMS: 0
   });
 
-  // const killMinion = useCallback(() => {
-  //   if (p === 'Yours') dispatch(removeYourMinion(`slot${slot}`));
-  //   if (p === 'Theirs') dispatch(removeTheirMinion(`slot${slot}`));
-  // }, []);
-
-  // useEffect(() => {
-  //   HP === 0 && killMinion();
-  // }, [HP]);
-
   return health !== 0 ? (
-    <div className={[css.Minion].join(' ')}>
-      <div className={css.InfoTrigger} {...hoverProps}>
+    <div className={[css['minion']].join(' ')}>
+      <div className={css['info-trigger']} {...hoverProps}>
         ?
       </div>
-      <div className={css.ImageWrapper}>
-        <img alt={name} role="presentation" src={foregroundImage} />
+      <div className={css['image-wrapper']}>
+        <img alt={name} role="presentation" src={imageSrc} />
       </div>
-      <div className={css.AttackWrapper}>{attack}</div>
-      <div className={css.HealthWrapper}>{health}</div>
+      <div className={css['attack-wrapper']}>{attack}</div>
+      <div className={css['health-wrapper']}>{health}</div>
 
       {isHovering ? (
         <article>
@@ -77,12 +60,13 @@ export default function Minion({ data, p, slot }) {
             elite={elite}
             entourage={entourage}
             flavor={flavor}
+            goldenImageSrc={goldenImageSrc}
             health={health}
             hideStats={hideStats}
             howToEarn={howToEarn}
             howToEarnGolden={howToEarnGolden}
             id={id}
-            images={images}
+            imageSrc={imageSrc}
             mechanics={mechanics}
             name={name}
             playRequirements={playRequirements}
@@ -111,15 +95,13 @@ Minion.defaultProps = {
     elite: false,
     entourage: [],
     flavor: null,
+    goldenImageSrc: null,
     health: 1,
     hideStats: false,
     howToEarn: null,
     howToEarnGolden: null,
     id: null,
-    images: {
-      backgroundImage: null,
-      foregroundImage: null
-    },
+    imageSrc: null,
     mechanics: [],
     name: 'CARD NAME',
     playRequirements: [],
@@ -133,7 +115,7 @@ Minion.defaultProps = {
     },
     spellDamage: 0,
     targetingArrowText: null,
-    text: 'CARD TEXT',
+    text: '',
     type: null
   }
 };

@@ -16,7 +16,7 @@ export default function CardInteractionLayer({
   theirHand,
   theirHoverState,
   energy,
-  selectedCard
+  selectedCardIndexObject
 }) {
   // const {
   //   G: { energy },
@@ -40,11 +40,13 @@ export default function CardInteractionLayer({
   const yourCurrentEnergy = yourEnergy && yourEnergy.current;
   const yourTotalEnergy = yourEnergy && yourEnergy.total;
 
-  const yourSelectedCardIndex = selectedCard[yourNumber];
+  const yourSelectedCardIndex = selectedCardIndexObject[yourNumber];
+  const cardIsSelected = selectedCardIndexObject[yourNumber] !== null;
 
   React.useEffect(() => {
     Number(currentPlayer) === Number(playerID) &&
       isHovered &&
+      !cardIsSelected &&
       moves.hoverOverCardInHand(index);
   }, [currentPlayer, isHovered]);
 
@@ -90,6 +92,7 @@ export default function CardInteractionLayer({
 
   function selectPlayableCard(event, index) {
     event.preventDefault();
+    moves.hoverOverCardInHand(null);
     return yourSelectedCardIndex !== index
       ? moves.selectPlayableCard(index)
       : moves.selectPlayableCard(null);

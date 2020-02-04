@@ -7,15 +7,15 @@ import css from 'styles/interactions/card-interactions.module.scss';
 export default function TheirHand(props) {
   const {
     G,
-    G: { energy, counts, hoveringCard, selectedCard },
+    G: { energy, counts, hoveringCardIndexObject, selectedCardIndexObject },
     ctx,
     ctx: { currentPlayer },
     playerID,
     moves
   } = props;
   const theirNumber = Number(playerID) === 0 ? 1 : 0;
-  const theirHoverState = hoveringCard[theirNumber];
-  const theirSelectedState = selectedCard[theirNumber];
+  const theirHoverState = hoveringCardIndexObject[theirNumber];
+  const theirSelectedState = selectedCardIndexObject[theirNumber];
   const cardsInTheirHand = counts[theirNumber].hand;
   const energyObject = energy[theirNumber];
 

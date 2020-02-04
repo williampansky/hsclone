@@ -13,7 +13,7 @@ export default function YourHand(props) {
     playerID,
     moves
   } = props;
-  const { energy, players, selectedCard } = G;
+  const { energy, players, selectedCardIndexObject } = G;
   const yourNumber = Number(playerID) === 0 ? 0 : 1;
 
   // state
@@ -70,7 +70,7 @@ export default function YourHand(props) {
                 playerID={playerID}
                 moves={moves}
                 energy={energy}
-                selectedCard={selectedCard}
+                selectedCardIndexObject={selectedCardIndexObject}
               />
             );
           })

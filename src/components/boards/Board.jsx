@@ -4,7 +4,7 @@ import css from './board.module.scss';
 
 const Board = ({ children }) => {
   return (
-    <div data-file="Board" className={css['board']}>
+    <div data-file="boards/Board" className={css['board']}>
       {children}
     </div>
   );

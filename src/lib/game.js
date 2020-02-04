@@ -85,11 +85,15 @@ export const HSclone = {
         total: 0
       }
     },
-    hoveringCard: {
+    playedCards: {
+      0: [],
+      1: []
+    },
+    hoveringCardIndexObject: {
       0: null,
       1: null
     },
-    selectedCard: {
+    selectedCardIndexObject: {
       0: null,
       1: null
     }
@@ -99,12 +103,18 @@ export const HSclone = {
   moves: {
     // server-side moves (e.g. `client: false`)
     drawCard: { client: false, move: (G, ctx, card) => drawCard(G, ctx, card) },
-    playMinionCard: { client: false, move: (G, ctx, slotNumber, card) => playMinionCard(G, ctx, slotNumber, card) },
+    playMinionCard: { client: false, move: (G, ctx, slotNumber, cardId, cardIndex) => playMinionCard(G, ctx, slotNumber, cardId, cardIndex) },
     playSpellCard: { client: false, move: (G, ctx, card, target = null) => playSpellCard(G, ctx, card, target) },
 
     // client-side moves
     // setCurrentEnergy: (G, ctx, player, amount) => setCurrentEnergy(G, ctx, player, amount),
     // setTotalEnergy: (G, ctx, player, amount) => setTotalEnergy(G, ctx, player, amount),
+
+    // deck and hand count manipulations
+    deincrementDeck: (G, ctx, player) => deincrementDeck(G, ctx, player),
+    deincrementHand: (G, ctx, player) => deincrementHand(G, ctx, player),
+    incrementDeck: (G, ctx, player) => incrementDeck(G, ctx, player),
+    incrementHand: (G, ctx, player) => incrementHand(G, ctx, player),
 
     // hover-specific moves; indicating the opponent player's hover state
     hoverOverCardInHand: (G, ctx, index) => hoverOverCardInHand(G, ctx, index),
@@ -227,3 +237,4 @@ export const HSclone = {
     }
   }
 };
+//
