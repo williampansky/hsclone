@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import css from 'styles/interactions/minion-interactions.scss';
+import css from 'styles/interactions/minion-interactions.module.scss';
 
 export default function MinionCanAttack({ children, data, slot }) {
   const minionID = data && data.id;

@@ -30,7 +30,8 @@ export default function Card({
   spellDamage,
   targetingArrowText,
   text,
-  type
+  type,
+  isGolden
 }) {
   const { attackSound, deathSound, dropSound } = sounds;
   const metaAttributes = [
@@ -64,8 +65,11 @@ export default function Card({
     { name: 'type', content: type }
   ];
 
+  const IS_MINION = type === 'MINION' ? true : false;
+  const IS_WEAPON = type === 'WEAPON' ? true : false;
+
   const cardImage = {
-    backgroundImage: `url(${imageSrc})`
+    backgroundImage: isGolden ? `url(${goldenImageSrc})` : `url(${imageSrc})`
   };
 
   const fontSize = {
@@ -83,8 +87,9 @@ export default function Card({
         <p dangerouslySetInnerHTML={createMarkup(text)} />
       </div>
       <div className={css['card-type']}>{type}</div>
-      <div className={css['card-attack']}>{attack}</div>
-      <div className={css['card-health']}>{health}</div>
+      {IS_MINION && <div className={css['card-attack']}>{attack}</div>}
+      {IS_MINION && <div className={css['card-health']}>{health}</div>}
+      {IS_WEAPON && <div className={css['card-durability']}>{health}</div>}
 
       {metaAttributes.map((attr, index) => {
         const { name, content } = attr;
@@ -132,6 +137,7 @@ export default function Card({
 // };
 
 Card.defaultProps = {
+  // card object props
   artist: 'Unknown',
   attack: 0,
   cardClass: 'Neutral',
@@ -161,5 +167,8 @@ Card.defaultProps = {
   spellDamage: 0,
   targetingArrowText: null,
   text: '',
-  type: null
+  type: null,
+
+  // incoming transformative props
+  isGolden: false
 };

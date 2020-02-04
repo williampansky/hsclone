@@ -1,5 +1,5 @@
 import React from 'react';
-import css from 'styles/interactions/minion-interactions.scss';
+import css from 'styles/interactions/minion-interactions.module.scss';
 
 export default function MinionCanBeAttacked({ children, data, slot }) {
   // const yourMinionsAttack = yourMinion && yourMinion.attack;

@@ -26,6 +26,10 @@
     transition-property: box-shadow, opacity;
     z-index: -1;
   }
+
+  &[data-render='false'] {
+    opacity: 0;
+  }
 }
 
 .minion--can_attack {

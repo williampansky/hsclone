@@ -137,6 +137,7 @@ export default function CardInteractionLayer({
         targetingArrowText={targetingArrowText}
         text={text}
         type={type}
+        isGolden={id === 'THE_ORB'}
       />
     </div>
   );

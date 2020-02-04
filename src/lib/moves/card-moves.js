@@ -1,4 +1,5 @@
 import { add, subtract } from 'mathjs';
+import { playSpellByCardId } from './spell-moves';
 
 export const incrementDeck = (G, ctx, player) => {
   return G.counts[player].deck++;
@@ -51,9 +52,22 @@ export const playMinionCard = (G, ctx, slotNumber, cardId, cardIndex) => {
   deincrementHand(G, ctx, currentPlayer);
 };
 
-export const playSpellCard = (G, ctx, card, target) => {
-  const { boards } = G;
+export const playSpellCard = (G, ctx, cardId, target) => {
+  const { players, playedCards } = G;
   const { currentPlayer } = ctx;
 
-  boards[currentPlayer][`slot${target}`] = card;
+  // play spell based on the card's id
+  playSpellByCardId(G, ctx, cardId);
+
+  // move to your playerCards array
+  playedCards[currentPlayer].push(
+    players[currentPlayer].hand.find(c => c === cardId)
+  );
+
+  // and then remove card from your hand
+  const newHand = players[currentPlayer].hand.filter(c => c !== cardId);
+  players[currentPlayer].hand = newHand;
+
+  // then deincrement your hand count
+  deincrementHand(G, ctx, currentPlayer);
 };

@@ -1,4 +1,16 @@
 {
+  "THE_ORB": {
+    "cardClass": "NEUTRAL",
+    "collectible": false,
+    "cost": 0,
+    "goldenImageSrc": "https://i.pinimg.com/originals/cd/c4/c4/cdc4c4dabc4efa820907649bf90936c4.gif",
+    "id": "THE_ORB",
+    "imageSrc": "https://i.pinimg.com/originals/e8/24/22/e82422f05c6c7dc5d0a23cdf459311f3.jpg",
+    "name": "The Orb",
+    "set": "CORE",
+    "text": "Gain 1 Energy Point for this turn only.",
+    "type": "SPELL"
+  },
   "FR_001": {
     "attack": 1,
     "cardClass": 0,

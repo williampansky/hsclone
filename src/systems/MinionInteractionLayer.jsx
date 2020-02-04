@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import MinionCanAttack from './interactions/MinionCanAttack';
 import MinionCanBeAttacked from './interactions/MinionCanBeAttacked';
+import css from 'styles/interactions/minion-interactions.module.scss';
+import useHover from 'hooks/useHover';
 
 export default function MinionInteractionLayer({
   board,
   children,
   data,
-  slot
+  slot,
+  render
 }) {
+  const [hoverRef, isHovered] = useHover();
   // const minionMechanics = data && data.mechanics;
   // const minionAttack = data && data.attack;
   // // console.log(mechanics);
@@ -50,5 +54,12 @@ export default function MinionInteractionLayer({
   //   }
   // }
 
-  return <React.Fragment>{children}</React.Fragment>;
+  return (
+    <div
+      className={css['minion--interaction-layer']}
+      data-file="systems/MinionInteractionLayer"
+      data-render={render}
+      ref={hoverRef}
+    />
+  );
 }

@@ -186,6 +186,7 @@ export const HSclone = {
     initDecks: {
       // Start the match by initiating each player's deck from the
       // component (client-side) state into the G state.
+      // @TODO fix later on for deck selection/lobby/etc
       onBegin: (G, ctx, playerID) => {
         G.players[0].deck = ctx.random.Shuffle(deck3);
         G.players[1].deck = ctx.random.Shuffle(deck3);
@@ -208,8 +209,8 @@ export const HSclone = {
         for (let i = 0; i < 3; i++) {
           deincrementDeck(G, ctx, FIRST_PLAYER); // set counts[player].deck
           incrementHand(G, ctx, FIRST_PLAYER); // set counts[player].hand
-          G.players[FIRST_PLAYER].hand.push(
-            G.players[FIRST_PLAYER].deck.splice(0, 1)[0]
+          G.players[FIRST_PLAYER].hand.push( // pushes to hand
+            G.players[FIRST_PLAYER].deck.splice(0, 1)[0] // splices from deck
           );
         }
 
@@ -218,16 +219,21 @@ export const HSclone = {
         for (let i = 0; i < 4; i++) {
           deincrementDeck(G, ctx, SECOND_PLAYER); // set counts[player].deck
           incrementHand(G, ctx, SECOND_PLAYER); // set counts[player].hand
-          G.players[SECOND_PLAYER].hand.push(
-            G.players[SECOND_PLAYER].deck.splice(0, 1)[0]
+          G.players[SECOND_PLAYER].hand.push( // pushes to hand
+            G.players[SECOND_PLAYER].deck.splice(0, 1)[0] // splices from deck
           );
         }
+
+        // Give the second player the Energy card (The Orb), which when
+        // played gives that player an additional energy point for the turn.
+        incrementHand(G, ctx, SECOND_PLAYER);
+        G.players[SECOND_PLAYER].hand.push('THE_ORB');
       },
 
       // End phase when both player's have their starting hands
       endIf: (G, ctx) => (
         G.players[ctx.playOrder[0]].hand.length === 3 &&
-        G.players[ctx.playOrder[1]].hand.length === 4
+        G.players[ctx.playOrder[1]].hand.length === 5
       ),
       
       /**
@@ -237,4 +243,3 @@ export const HSclone = {
     }
   }
 };
-//

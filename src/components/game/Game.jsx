@@ -33,7 +33,7 @@ export default function GameWrapper(props, { allCards }) {
       <Board {...props}>
         <TheirBoard {...props} />
         <EndTurnButton {...props} />
-        <YourBoard {...props} />
+        <YourBoard allCards={allCards} {...props} />
       </Board>
       <YourHand allCards={allCards} {...props} />
     </div>
