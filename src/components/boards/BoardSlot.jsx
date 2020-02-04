@@ -12,17 +12,13 @@ export default function BoardSlot({ minion, p, onClick, slot, render }) {
       data-render={render}
       onClick={onClick}
     >
-      {minion && (
-        <React.Fragment>
-          <MinionInteractionLayer
-            board={p}
-            data={minion}
-            slot={slot}
-            render={render}
-          />
-          <Minion data={minion} p={p} slot={slot} />
-        </React.Fragment>
-      )}
+      <MinionInteractionLayer
+        board={p}
+        data={minion}
+        slot={slot}
+        render={render}
+      />
+      {minion && <Minion data={minion} p={p} slot={slot} />}
     </div>
   );
 }

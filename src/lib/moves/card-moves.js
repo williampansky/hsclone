@@ -32,9 +32,15 @@ export const drawCard = (G, ctx, card) => {
   players[currentPlayer].cards.push(card);
 };
 
-export const playMinionCard = (G, ctx, slotNumber, cardId, cardIndex) => {
-  const { boards, players, playedCards } = G;
+export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
+  const { boards, energy, players, playedCards } = G;
   const { currentPlayer } = ctx;
+
+  // subtract the card's cost from player's current energy count
+  energy[ctx.currentPlayer].current = subtract(
+    energy[ctx.currentPlayer].current,
+    cardCost
+  );
 
   // place card in selected slotNumber on your board
   boards[currentPlayer][`slot${slotNumber}`] = cardId;
@@ -52,9 +58,15 @@ export const playMinionCard = (G, ctx, slotNumber, cardId, cardIndex) => {
   deincrementHand(G, ctx, currentPlayer);
 };
 
-export const playSpellCard = (G, ctx, cardId, target) => {
-  const { players, playedCards } = G;
+export const playSpellCard = (G, ctx, cardId, cardCost) => {
+  const { energy, players, playedCards } = G;
   const { currentPlayer } = ctx;
+
+  // subtract the card's cost from player's current energy count
+  energy[ctx.currentPlayer].current = subtract(
+    energy[ctx.currentPlayer].current,
+    cardCost
+  );
 
   // play spell based on the card's id
   playSpellByCardId(G, ctx, cardId);

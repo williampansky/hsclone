@@ -18,6 +18,8 @@ export default function YourBoardPlayerArea(props) {
   const cardIsSelected = selectedCardIndexObject[playerID] !== null;
   const selectedCardIndex = selectedCardIndexObject[playerID];
   const selectedCardId = yourHand[selectedCardIndex];
+  const selectedCardCost =
+    allCards[selectedCardId] && allCards[selectedCardId].cost;
   const selectedCardType =
     allCards[selectedCardId] && allCards[selectedCardId].type;
 
@@ -25,19 +27,19 @@ export default function YourBoardPlayerArea(props) {
   const RENDER_SLOT_1 = slot2 !== null;
   const RENDER_SLOT_2 = slot3 !== null;
   const RENDER_SLOT_3 = slot4 !== null;
-  const RENDER_SLOT_4 = slot4 === null && selectedCardType !== 'SPELL';
+  const RENDER_SLOT_4 = selectedCardType !== 'SPELL';
   const RENDER_SLOT_5 = slot4 !== null;
   const RENDER_SLOT_6 = slot5 !== null;
   const RENDER_SLOT_7 = slot6 !== null;
 
-  function handleMinionMoves(slotNumber, cardId, cardIndex) {
-    moves.playMinionCard(slotNumber, cardId, cardIndex);
+  function handleMinionMoves(slotNumber, cardId, cardCost) {
+    moves.playMinionCard(slotNumber, cardId, cardCost);
     moves.hoverOverCardInHand(null);
     moves.selectPlayableCard(null);
   }
 
-  function handleSpellMoves(cardId, cardIndex) {
-    moves.playSpellCard(cardId, cardIndex);
+  function handleSpellMoves(cardId, cardCost) {
+    moves.playSpellCard(cardId, cardCost);
     moves.hoverOverCardInHand(null);
     moves.selectPlayableCard(null);
   }
@@ -46,12 +48,12 @@ export default function YourBoardPlayerArea(props) {
     event,
     slotNumber,
     cardId = selectedCardId,
-    cardIndex = selectedCardIndex
+    cardCost = selectedCardCost
   ) {
     event.preventDefault();
     if (!cardIsSelected) return;
-    if (slotNumber === 0) return handleSpellMoves(cardId, cardIndex);
-    return handleMinionMoves(slotNumber, cardId, cardIndex);
+    if (slotNumber === 0) return handleSpellMoves(cardId, cardCost);
+    return handleMinionMoves(slotNumber, cardId, cardCost);
   }
 
   function handleClasses(idx) {
