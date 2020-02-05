@@ -14,7 +14,6 @@ export const initTurnTimer = (G, ctx, events, playerID) => {
       }
     }, 1000);
   }
-  //
   // Number(ctx.currentPlayer) === 0 ? countdownTick(G, 0) : countdownTick(G, 1);
 };
 

@@ -81,7 +81,7 @@ export default function YourHand(props) {
 
       <PlayerEnergy energy={energyObject} />
 
-      <Timer {...props} />
+      {/* <Timer {...props} /> */}
     </Component>
   );
 }

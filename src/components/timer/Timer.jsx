@@ -8,7 +8,7 @@ export default function Timer(props) {
     G,
     ctx,
     moves,
-    events: { endTurn },
+    events,
     // reset,
     // undo,
     // redo,
@@ -23,7 +23,7 @@ export default function Timer(props) {
     // credentials
   } = props;
 
-  const [{ turnTimer }, setTurnTimer] = React.useState({ turnTimer: 5000 });
+  const [{ turnTimer }, setTurnTimer] = useState({ turnTimer: 5000 });
 
   // useEffect(() => {
   //   if (isActive) {
@@ -36,11 +36,12 @@ export default function Timer(props) {
   //       return () => {
   //         console.log('clearInterval');
   //         clearInterval(interval);
-  //         return endTurn();
+  //         events.endTurn();
+  //         setTurnTimer({ turnTimer: 5000 });
   //       };
   //     }
   //   }
-  // }, [isActive]);
+  // }, [isActive, turnTimer]);
 
   // const [seconds, setSeconds] = useState(0);
 
