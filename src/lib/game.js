@@ -1,14 +1,13 @@
-import { TurnOrder } from 'boardgame.io/core';
 import { stripSecrets } from './stripSecrets';
-import { deincrementDeck, incrementHand } from './moves/card-moves';
 import state from './state';
 import moves from './moves';
+import turns from './turns';
+import initDecksPhase from './phases/initDecks';
 import initHandsPhase from './phases/initHands';
 import playPhase from './phases/play';
-const deck3 = require('../data/debug/deck3.json');
 
 /**
- *
+ * @see https://boardgame.io/documentation/#/
  */
 export const HSclone = {
   name: 'HSclone',
@@ -19,6 +18,7 @@ export const HSclone = {
    * This method uses the `stripSecrets` function to hide
    * the opponent player's hand and deck data from your client.
    * @requires stripSecrets
+   * @see https://boardgame.io/documentation/#/secret-state
    */
   playerView: (G, ctx, playerID) => {
     return stripSecrets(G, playerID);
@@ -27,25 +27,9 @@ export const HSclone = {
   /**
    * @name turn
    * @memberof HSclone
+   * @see https://boardgame.io/documentation/#/turn-order
    */
-  // prettier-ignore
-  turn: {
-    order: TurnOrder.CUSTOM_FROM('turnOrder'),
-    onBegin: (G, ctx, events, playerID) => {
-      // Reset timer to 75 seconds
-      // G.counts[ctx.currentPlayer].timer = 75000;
-
-      // Increments the `total` energy of the `currentPlayer`
-      // by one; but not more than ten.
-      if (G.energy[ctx.currentPlayer].total !== 10)
-        G.energy[ctx.currentPlayer].total++;
-      
-      // Then, sets the `current` value to the total; which allows
-      // the `currentPlayer` to spend said energy on card play functions.
-      G.energy[ctx.currentPlayer].current = G.energy[ctx.currentPlayer].total;
-    },
-    endIf: (G, ctx) => G.counts[ctx.currentPlayer].timer === 0,
-  },
+  turn: turns,
 
   /**
    * Most games beyond very simple ones tend to have different behaviors at
@@ -54,28 +38,10 @@ export const HSclone = {
    *
    * @name phases
    * @memberof HSclone
+   * @see https://boardgame.io/documentation/#/phases
    */
-  // prettier-ignore
   phases: {
-    initDecks: {
-      // Start the match by initiating each player's deck from the
-      // component (client-side) state into the G state.
-      // @TODO fix later on for deck selection/lobby/etc
-      onBegin: (G, ctx, playerID) => {
-        G.players[0].deck = ctx.random.Shuffle(deck3);
-        G.players[1].deck = ctx.random.Shuffle(deck3);
-      },
-
-      // End phase when both player's decks are full (30 cards)
-      endIf: (G, ctx) => (
-        G.players[ctx.playOrder[0]].deck.length === 30 &&
-        G.players[ctx.playOrder[1]].deck.length === 30
-      ),
-      
-      start: true,
-      next: 'initHands'
-    },
-
+    initDecks: initDecksPhase,
     initHands: initHandsPhase,
     play: playPhase
   }
