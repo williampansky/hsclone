@@ -2,8 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import css from 'styles/interactions/minion-interactions.module.scss';
 
-export default function MinionCanAttack({ children, data, slot }) {
-  const minionID = data && data.id;
+export default function MinionCanAttack(props) {
+  const { children, data, slot } = props;
+  // const minionID = data && data.id;
   // const minionAttackingID = minionCanAttack && minionCanAttack.id;
 
   function dispatchSelections(obj) {

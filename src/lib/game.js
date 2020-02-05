@@ -1,134 +1,19 @@
 import { TurnOrder } from 'boardgame.io/core';
-import {
-  hoverOverCardInHand,
-  selectPlayableCard
-} from './moves/aesthetic-moves';
-import {
-  drawCard,
-  playMinionCard,
-  playSpellCard,
-  incrementDeck,
-  deincrementDeck,
-  incrementHand,
-  deincrementHand
-} from './moves/card-moves';
-import {
-  incrementCurrentEnergy,
-  incrementTotalEnergy,
-  setCurrentEnergy,
-  setTotalEnergy
-} from './moves/energy-moves';
-import { countdownTick, initTurnTimer } from './moves/game-moves';
-
-const deck1 = require('../data/debug/deck1.json');
-const deck2 = require('../data/debug/deck2.json');
+import { stripSecrets } from './stripSecrets';
+import { deincrementDeck, incrementHand } from './moves/card-moves';
+import state from './state';
+import moves from './moves';
+import initHandsPhase from './phases/initHands';
+import playPhase from './phases/play';
 const deck3 = require('../data/debug/deck3.json');
-
-let stripSecrets = (G, playerID) => ({
-  ...G,
-  players: {
-    [playerID]: G.players[playerID]
-  }
-});
 
 /**
  *
  */
 export const HSclone = {
   name: 'HSclone',
-  setup: () => ({
-    counts: {
-      0: {
-        deck: 30,
-        hand: 0,
-        timer: 75000
-      },
-      1: {
-        deck: 30,
-        hand: 0,
-        timer: 75000
-      }
-    },
-    players: {
-      0: {
-        deck: [],
-        hand: []
-      },
-      1: {
-        deck: [],
-        hand: []
-      }
-    },
-    boards: {
-      0: {
-        slot1: null,
-        slot2: null,
-        slot3: null,
-        slot4: null,
-        slot5: null,
-        slot6: null,
-        slot7: null
-      },
-      1: {
-        slot1: null,
-        slot2: null,
-        slot3: null,
-        slot4: null,
-        slot5: null,
-        slot6: null,
-        slot7: null
-      }
-    },
-    energy: {
-      0: {
-        current: 0,
-        total: 0
-      },
-      1: {
-        current: 0,
-        total: 0
-      }
-    },
-    playedCards: {
-      0: [],
-      1: []
-    },
-    hoveringCardIndexObject: {
-      0: null,
-      1: null
-    },
-    selectedCardIndexObject: {
-      0: null,
-      1: null
-    },
-    turnOrder: ['0', '1'].sort(() => {
-      return Math.random() - 0.5;
-    })
-  }),
-
-  // prettier-ignore
-  moves: {
-    // server-side moves (e.g. `client: false`)
-    countdownTick: { client: false, move: (G, ctx) => countdownTick(G, ctx) },
-    // initCountdownTimer: { client: false, move: (G, ctx, moves) => initCountdownTimer(G, ctx, moves) },
-    drawCard: { client: false, move: (G, ctx, card) => drawCard(G, ctx, card) },
-    playMinionCard: { client: false, move: (G, ctx, slotNumber, cardId, cardIndex) => playMinionCard(G, ctx, slotNumber, cardId, cardIndex) },
-    playSpellCard: { client: false, move: (G, ctx, card, target = null) => playSpellCard(G, ctx, card, target) },
-
-    // client-side moves
-    // setCurrentEnergy: (G, ctx, player, amount) => setCurrentEnergy(G, ctx, player, amount),
-    // setTotalEnergy: (G, ctx, player, amount) => setTotalEnergy(G, ctx, player, amount),
-
-    // deck and hand count manipulations
-    deincrementDeck: (G, ctx, player) => deincrementDeck(G, ctx, player),
-    deincrementHand: (G, ctx, player) => deincrementHand(G, ctx, player),
-    incrementDeck: (G, ctx, player) => incrementDeck(G, ctx, player),
-    incrementHand: (G, ctx, player) => incrementHand(G, ctx, player),
-
-    // hover-specific moves; indicating the opponent player's hover state
-    hoverOverCardInHand: (G, ctx, index) => hoverOverCardInHand(G, ctx, index),
-    selectPlayableCard: (G, ctx, index) => selectPlayableCard(G, ctx, index)
-  },
+  setup: () => state,
+  moves: moves,
 
   /**
    * This method uses the `stripSecrets` function to hide
@@ -191,79 +76,7 @@ export const HSclone = {
       next: 'initHands'
     },
 
-    initHands: {
-      onBegin: (G, ctx) => {
-        const FIRST_PLAYER = G.turnOrder[0];
-        const SECOND_PLAYER = G.turnOrder[1];
-
-        // Draw three cards from the first player's deck into their hand.
-        for (let i = 0; i < 3; i++) {
-          deincrementDeck(G, ctx, FIRST_PLAYER); // set counts[player].deck
-          incrementHand(G, ctx, FIRST_PLAYER); // set counts[player].hand
-          G.players[FIRST_PLAYER].hand.push( // pushes to hand
-            G.players[FIRST_PLAYER].deck.splice(0, 1)[0] // splices from deck
-          );
-        }
-
-        // Draw four cards from the first player's deck into their hand;
-        // they get four cards since they are not the starting player.
-        for (let i = 0; i < 4; i++) {
-          deincrementDeck(G, ctx, SECOND_PLAYER); // set counts[player].deck
-          incrementHand(G, ctx, SECOND_PLAYER); // set counts[player].hand
-          G.players[SECOND_PLAYER].hand.push( // pushes to hand
-            G.players[SECOND_PLAYER].deck.splice(0, 1)[0] // splices from deck
-          );
-        }
-
-        // Give the second player the Energy card (The Orb), which when
-        // played gives that player an additional energy point for the turn.
-        incrementHand(G, ctx, SECOND_PLAYER);
-        G.players[SECOND_PLAYER].hand.push('THE_ORB');
-      },
-
-      // End phase when both player's have their starting hands
-      endIf: (G, ctx) => (
-        G.players[G.turnOrder[0]].hand.length === 3 &&
-        G.players[G.turnOrder[1]].hand.length === 5
-      ),
-      
-      /**
-       * @todo add ability to get new starting hand cards
-       */
-      // moves: {},
-
-      next: 'play'
-    },
-
-    play: {
-      turn: {
-        order: TurnOrder.CUSTOM_FROM('turnOrder'),
-        onBegin: (G, ctx, events, playerID) => {
-          // Increments the `total` energy of the `currentPlayer`
-          // by one; but not more than ten.
-          if (G.energy[ctx.currentPlayer].total !== 10)
-            G.energy[ctx.currentPlayer].total++;
-          
-          // Then, sets the `current` value to the total; which allows
-          // the `currentPlayer` to spend said energy on card play functions.
-          G.energy[ctx.currentPlayer].current = G.energy[ctx.currentPlayer].total;
-
-          // draw a card every turn; you can hold a max of ten cards at a time.
-          if (G.players[ctx.currentPlayer].hand.length <= 9) {
-            deincrementDeck(G, ctx, ctx.currentPlayer); // set counts[player].deck
-            incrementHand(G, ctx, ctx.currentPlayer); // set counts[player].hand
-  
-            G.players[ctx.currentPlayer].hand.push(
-              G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
-            );
-          } else {
-            // if you are holding ten cards, your next card will be discarded
-            G.playedCards[ctx.currentPlayer].push(
-              G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
-            );
-          }
-        }
-      }
-    }
+    initHands: initHandsPhase,
+    play: playPhase
   }
 };

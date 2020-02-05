@@ -41,7 +41,7 @@ export default function Minion({ data, p, slot }) {
   return health !== 0 ? (
     <div className={[css['minion']].join(' ')}>
       <div className={css['info-trigger']} {...hoverProps}>
-        ?
+        {/* ? */}
       </div>
       <div className={css['image-wrapper']}>
         <img alt={name} role="presentation" src={imageSrc} />

@@ -4,20 +4,41 @@ import MinionCanBeAttacked from './interactions/MinionCanBeAttacked';
 import css from 'styles/interactions/minion-interactions.module.scss';
 import useHover from 'hooks/useHover';
 
-export default function MinionInteractionLayer({
-  board,
-  children,
-  data,
-  slot,
-  render
-}) {
+export default function MinionInteractionLayer(props) {
+  const { G, ctx, isActive, board, children, minionData, slot, render } = props;
   const [hoverRef, isHovered] = useHover();
-  // const minionMechanics = data && data.mechanics;
+  const {
+    artist,
+    attack,
+    cardClass,
+    collectible,
+    cost,
+    elite,
+    entourage,
+    flavor,
+    goldenImageSrc,
+    health,
+    hideStats,
+    howToEarn,
+    howToEarnGolden,
+    id,
+    imageSrc,
+    mechanics,
+    name,
+    playRequirements,
+    race,
+    rarity,
+    set,
+    sounds,
+    spellDamage,
+    targetingArrowText,
+    text,
+    type
+  } = minionData;
   // const minionAttack = data && data.attack;
   // // console.log(mechanics);
 
-  // const CAN_BE_ATTACKED =
-  //   turn === 'YOUR_TURN' && board === 'Theirs' && minionIsAttacking;
+  // const CAN_BE_ATTACKED = isActive && board === 'Theirs' && minionIsAttacking;
 
   // const CAN_ATTACK =
   //   turn === 'YOUR_TURN' && board === 'Yours' && minionAttack !== 0;

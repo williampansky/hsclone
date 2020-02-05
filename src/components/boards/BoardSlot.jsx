@@ -3,7 +3,9 @@ import css from './board-slot.module.scss';
 import MinionInteractionLayer from 'systems/MinionInteractionLayer';
 import Minion from 'components/minion/Minion';
 
-export default function BoardSlot({ minion, p, onClick, slot, render }) {
+export default function BoardSlot(props) {
+  const { board, minion, onClick, slot, render } = props;
+
   return (
     <div
       className={[css['board-slot'], minion && css['has-minion']].join(' ')}
@@ -12,13 +14,16 @@ export default function BoardSlot({ minion, p, onClick, slot, render }) {
       data-render={render}
       onClick={onClick}
     >
-      <MinionInteractionLayer
-        board={p}
-        data={minion}
-        slot={slot}
-        render={render}
-      />
-      {minion && <Minion data={minion} p={p} slot={slot} />}
+      {minion && (
+        <MinionInteractionLayer
+          board={board}
+          minionData={minion}
+          slot={slot}
+          render={render}
+          {...props}
+        />
+      )}
+      {minion && <Minion data={minion} slot={slot} />}
     </div>
   );
 }

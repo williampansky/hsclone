@@ -17,25 +17,14 @@ export const deincrementHand = (G, ctx, player) => {
   return G.counts[player].hand--;
 };
 
-export const drawCard = (G, ctx, numberOfCards = 1) => {
-  console.log('drawCard');
-  console.log(ctx.currentPlayer);
-
-  Number(ctx.currentPlayer) === 0
-    ? deincrementDeck(G, ctx, 0)
-    : deincrementDeck(G, ctx, 1);
-
-  Number(ctx.currentPlayer) === 0
-    ? incrementHand(G, ctx, 0)
-    : incrementHand(G, ctx, 1);
-
-  // players[currentPlayer].cards.push(card);
-
+export const drawCard = (G, ctx, player, numberOfCards = 1) => {
   // prettier-ignore
   for (let i = 0; i < numberOfCards; i++) {
-    // Number(ctx.currentPlayer) === 0
-    //   ? G.players[0].hand.push(G.players[0].deck.splice(0, 1)[0])
-    //   : G.players[1].hand.push(G.players[1].deck.splice(0, 1)[0]);
+    deincrementDeck(G, ctx, player); // set counts[player].deck
+    incrementHand(G, ctx, player); // set counts[player].hand
+    G.players[player].hand.push( // pushes to hand
+      G.players[player].deck.splice(0, 1)[0] // splices from deck
+    );
   }
 };
 

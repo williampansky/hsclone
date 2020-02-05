@@ -31,7 +31,7 @@ export default function GameWrapper(props, { allCards }) {
     <div data-file="Game" className={css['game-component']}>
       <TheirHand {...props} />
       <Board {...props}>
-        <TheirBoard {...props} />
+        <TheirBoard allCards={allCards} {...props} />
         <EndTurnButton {...props} />
         <YourBoard allCards={allCards} {...props} />
       </Board>
