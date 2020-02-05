@@ -18,6 +18,7 @@ import {
   setCurrentEnergy,
   setTotalEnergy
 } from './moves/energy-moves';
+import { countdownTick, initCountdownTimer } from './moves/game-moves';
 
 const deck1 = require('../data/debug/deck1.json');
 const deck2 = require('../data/debug/deck2.json');
@@ -39,11 +40,13 @@ export const HSclone = {
     counts: {
       0: {
         deck: 30,
-        hand: 0
+        hand: 0,
+        timer: 75000
       },
       1: {
         deck: 30,
-        hand: 0
+        hand: 0,
+        timer: 75000
       }
     },
     players: {
@@ -101,26 +104,13 @@ export const HSclone = {
     turnOrder: ['0', '1'].sort(() => {
       return Math.random() - 0.5;
     })
-
-    //
-    // turnOrder: [...Array(2)]
-    //   .map(() => {
-
-    //   })
-    //   .join()
-    //   .split(',')
-    //
-    // turnOrder: [...Array(2)]
-    //   .map(() => {
-    //     return Math.round(Math.random() * 1);
-    //   })
-    //   .join()
-    //   .split(',')
   }),
 
   // prettier-ignore
   moves: {
     // server-side moves (e.g. `client: false`)
+    countdownTick: { client: false, move: (G, ctx) => countdownTick(G, ctx) },
+    // initCountdownTimer: { client: false, move: (G, ctx, moves) => initCountdownTimer(G, ctx, moves) },
     drawCard: { client: false, move: (G, ctx, card) => drawCard(G, ctx, card) },
     playMinionCard: { client: false, move: (G, ctx, slotNumber, cardId, cardIndex) => playMinionCard(G, ctx, slotNumber, cardId, cardIndex) },
     playSpellCard: { client: false, move: (G, ctx, card, target = null) => playSpellCard(G, ctx, card, target) },
@@ -156,8 +146,10 @@ export const HSclone = {
   // prettier-ignore
   turn: {
     order: TurnOrder.CUSTOM_FROM('turnOrder'),
+    onBegin: (G, ctx) => {
+      // Reset timer to 75 seconds
+      G.counts[ctx.currentPlayer].timer = 75000;
 
-    onBegin: (G, ctx, playerID) => {
       // Increments the `total` energy of the `currentPlayer`
       // by one; but not more than ten.
       if (G.energy[ctx.currentPlayer].total !== 10)
@@ -166,36 +158,8 @@ export const HSclone = {
       // Then, sets the `current` value to the total; which allows
       // the `currentPlayer` to spend said energy on card play functions.
       G.energy[ctx.currentPlayer].current = G.energy[ctx.currentPlayer].total;
-
-      // Next, draw one card from the player's deck & move it into their hand.
-      // console.log(ctx.currentPlayer);
-      // console.log(G.players[ctx.currentPlayer].hand);
-      // const newDeck = G.players[ctx.currentPlayer].deck;
-      // console.log(newDeck);
-      
-      // for (let i = 0; i < 1; i++) {
-        // G.players[ctx.currentPlayer].hand.push(
-        //   // G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
-        //   'TEST'
-        // );
-      // }
-      // const oldHand = G.players[ctx.currentPlayer].hand;
-      // const newHand = [
-      //   ...oldHand,
-      //   'TEST'
-      // ];
-
-      // console.log(newHand)
-      // G.players[ctx.currentPlayer].hand = [...newHand];
-      // drawCard(G, ctx);
-      // G.players[ctx.currentPlayer].hand.push(
-      //   G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
-      // );
-      // if (ctx.currentPlayer === G.turnOrder[0]) drawCard(G, ctx);
-      // else if (ctx.currentPlayer === G.turnOrder[1]) drawCard(G, ctx);
     },
-
-    onEnd: (G, ctx) => {}
+    endIf: (G, ctx) => G.counts[ctx.currentPlayer].timer === 0,
   },
 
   /**
@@ -274,7 +238,7 @@ export const HSclone = {
     play: {
       turn: {
         order: TurnOrder.CUSTOM_FROM('turnOrder'),
-        onBegin: (G, ctx, playerID) => {
+        onBegin: (G, ctx) => {
           // Increments the `total` energy of the `currentPlayer`
           // by one; but not more than ten.
           if (G.energy[ctx.currentPlayer].total !== 10)

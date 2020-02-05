@@ -12,19 +12,19 @@ export default function GameWrapper(props, { allCards }) {
     G,
     ctx,
     moves,
-    events,
-    reset,
-    undo,
-    redo,
-    step,
-    log,
-    gameID,
-    playerID,
-    gameMetadata,
-    isActive,
-    isMultiplayer,
-    isConnected,
-    credentials
+    events: { endTurn },
+    // reset,
+    // undo,
+    // redo,
+    // step,
+    // log,
+    // gameID,
+    playerID
+    // gameMetadata,
+    // isActive,
+    // isMultiplayer,
+    // isConnected,
+    // credentials
   } = props;
 
   return props ? (
