@@ -89,7 +89,8 @@ export default function Card({
       <div className={css['card-type']}>{type}</div>
       {IS_MINION && <div className={css['card-attack']}>{attack}</div>}
       {IS_MINION && <div className={css['card-health']}>{health}</div>}
-      {IS_WEAPON && <div className={css['card-durability']}>{health}</div>}
+      {/* {IS_WEAPON && <div className={css['card-weapon-attack']}>{attack}</div>}
+      {IS_WEAPON && <div className={css['card-weapon-dura']}>{health}</div>} */}
 
       {metaAttributes.map((attr, index) => {
         const { name, content } = attr;

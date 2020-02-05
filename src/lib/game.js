@@ -1,3 +1,4 @@
+import { TurnOrder } from 'boardgame.io/core';
 import {
   hoverOverCardInHand,
   selectPlayableCard
@@ -96,7 +97,25 @@ export const HSclone = {
     selectedCardIndexObject: {
       0: null,
       1: null
-    }
+    },
+    turnOrder: ['0', '1'].sort(() => {
+      return Math.random() - 0.5;
+    })
+
+    //
+    // turnOrder: [...Array(2)]
+    //   .map(() => {
+
+    //   })
+    //   .join()
+    //   .split(',')
+    //
+    // turnOrder: [...Array(2)]
+    //   .map(() => {
+    //     return Math.round(Math.random() * 1);
+    //   })
+    //   .join()
+    //   .split(',')
   }),
 
   // prettier-ignore
@@ -136,23 +155,9 @@ export const HSclone = {
    */
   // prettier-ignore
   turn: {
-    order: {
-      // Get the initial value of playOrderPos.
-      // This is called at the beginning of the phase.
-      first: (G, ctx) => 0,
-  
-      // Get the next value of playOrderPos.
-      // This is called at the end of each turn.
-      // The phase ends if this returns undefined.
-      next: (G, ctx) => (ctx.playOrderPos + 1) % ctx.numPlayers,
-  
-      // OPTIONAL:
-      // Override the initial value of playOrder.
-      // This is called at the beginning of the game / phase.
-      playOrder: (G, ctx) => ctx.random.Shuffle(ctx.playOrder),
-    },
+    order: TurnOrder.CUSTOM_FROM('turnOrder'),
 
-    onBegin: (G, ctx) => {
+    onBegin: (G, ctx, playerID) => {
       // Increments the `total` energy of the `currentPlayer`
       // by one; but not more than ten.
       if (G.energy[ctx.currentPlayer].total !== 10)
@@ -162,15 +167,35 @@ export const HSclone = {
       // the `currentPlayer` to spend said energy on card play functions.
       G.energy[ctx.currentPlayer].current = G.energy[ctx.currentPlayer].total;
 
-      // Next, draw one card from the player's deck and move it
-      // into their hand; e.g: Array(b).push(Array(a).splice(0, 1)[0])
+      // Next, draw one card from the player's deck & move it into their hand.
+      // console.log(ctx.currentPlayer);
+      // console.log(G.players[ctx.currentPlayer].hand);
+      // const newDeck = G.players[ctx.currentPlayer].deck;
+      // console.log(newDeck);
+      
+      // for (let i = 0; i < 1; i++) {
+        // G.players[ctx.currentPlayer].hand.push(
+        //   // G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
+        //   'TEST'
+        // );
+      // }
+      // const oldHand = G.players[ctx.currentPlayer].hand;
+      // const newHand = [
+      //   ...oldHand,
+      //   'TEST'
+      // ];
+
+      // console.log(newHand)
+      // G.players[ctx.currentPlayer].hand = [...newHand];
+      // drawCard(G, ctx);
       // G.players[ctx.currentPlayer].hand.push(
       //   G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
       // );
+      // if (ctx.currentPlayer === G.turnOrder[0]) drawCard(G, ctx);
+      // else if (ctx.currentPlayer === G.turnOrder[1]) drawCard(G, ctx);
     },
 
-    onEnd: (G, ctx) => {
-    }
+    onEnd: (G, ctx) => {}
   },
 
   /**
@@ -191,19 +216,21 @@ export const HSclone = {
         G.players[0].deck = ctx.random.Shuffle(deck3);
         G.players[1].deck = ctx.random.Shuffle(deck3);
       },
+
       // End phase when both player's decks are full (30 cards)
       endIf: (G, ctx) => (
         G.players[ctx.playOrder[0]].deck.length === 30 &&
         G.players[ctx.playOrder[1]].deck.length === 30
       ),
+      
       start: true,
       next: 'initHands'
     },
 
     initHands: {
       onBegin: (G, ctx) => {
-        const FIRST_PLAYER = ctx.playOrder[0];
-        const SECOND_PLAYER = ctx.playOrder[1];
+        const FIRST_PLAYER = G.turnOrder[0];
+        const SECOND_PLAYER = G.turnOrder[1];
 
         // Draw three cards from the first player's deck into their hand.
         for (let i = 0; i < 3; i++) {
@@ -232,14 +259,39 @@ export const HSclone = {
 
       // End phase when both player's have their starting hands
       endIf: (G, ctx) => (
-        G.players[ctx.playOrder[0]].hand.length === 3 &&
-        G.players[ctx.playOrder[1]].hand.length === 5
+        G.players[G.turnOrder[0]].hand.length === 3 &&
+        G.players[G.turnOrder[1]].hand.length === 5
       ),
       
       /**
        * @todo add ability to get new starting hand cards
        */
-      // moves: {}
+      // moves: {},
+
+      next: 'play'
+    },
+
+    play: {
+      turn: {
+        order: TurnOrder.CUSTOM_FROM('turnOrder'),
+        onBegin: (G, ctx, playerID) => {
+          // Increments the `total` energy of the `currentPlayer`
+          // by one; but not more than ten.
+          if (G.energy[ctx.currentPlayer].total !== 10)
+          G.energy[ctx.currentPlayer].total++;
+          
+          // Then, sets the `current` value to the total; which allows
+          // the `currentPlayer` to spend said energy on card play functions.
+          G.energy[ctx.currentPlayer].current = G.energy[ctx.currentPlayer].total;
+
+          deincrementDeck(G, ctx, ctx.currentPlayer); // set counts[player].deck
+          incrementHand(G, ctx, ctx.currentPlayer); // set counts[player].hand
+
+          G.players[ctx.currentPlayer].hand.push(
+            G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
+          );
+        }
+      }
     }
   }
 };

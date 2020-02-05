@@ -190,6 +190,9 @@
   &[data-number-of-cards='5'] .card-in-their-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -3.155); }
   &[data-number-of-cards='6'] .card-in-their-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.765); }
   &[data-number-of-cards='7'] .card-in-their-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.425); }
+  &[data-number-of-cards='8'] .card-in-their-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.425); }
+  &[data-number-of-cards='9'] .card-in-their-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.125); }
+  &[data-number-of-cards='10'] .card-in-their-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.125); }
   .card-in-their-hand[data-index='0'] { margin-left: 0; }
 }
 
@@ -202,6 +205,9 @@
   &[data-number-of-cards='5'] .card-in-your-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -3.155); }
   &[data-number-of-cards='6'] .card-in-your-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.765); }
   &[data-number-of-cards='7'] .card-in-your-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.425); }
+  &[data-number-of-cards='8'] .card-in-your-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.425); }
+  &[data-number-of-cards='9'] .card-in-your-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.125); }
+  &[data-number-of-cards='10'] .card-in-your-hand { margin-left: calc(calc(var(--card-height) / 0.95) / -2.125); }
   .card-in-your-hand[data-index='0'] { margin-left: 0; }
 }
 
