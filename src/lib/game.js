@@ -18,7 +18,7 @@ import {
   setCurrentEnergy,
   setTotalEnergy
 } from './moves/energy-moves';
-import { countdownTick, initCountdownTimer } from './moves/game-moves';
+import { countdownTick, initTurnTimer } from './moves/game-moves';
 
 const deck1 = require('../data/debug/deck1.json');
 const deck2 = require('../data/debug/deck2.json');
@@ -146,9 +146,9 @@ export const HSclone = {
   // prettier-ignore
   turn: {
     order: TurnOrder.CUSTOM_FROM('turnOrder'),
-    onBegin: (G, ctx) => {
+    onBegin: (G, ctx, events, playerID) => {
       // Reset timer to 75 seconds
-      G.counts[ctx.currentPlayer].timer = 75000;
+      // G.counts[ctx.currentPlayer].timer = 75000;
 
       // Increments the `total` energy of the `currentPlayer`
       // by one; but not more than ten.
@@ -238,22 +238,30 @@ export const HSclone = {
     play: {
       turn: {
         order: TurnOrder.CUSTOM_FROM('turnOrder'),
-        onBegin: (G, ctx) => {
+        onBegin: (G, ctx, events, playerID) => {
           // Increments the `total` energy of the `currentPlayer`
           // by one; but not more than ten.
           if (G.energy[ctx.currentPlayer].total !== 10)
-          G.energy[ctx.currentPlayer].total++;
+            G.energy[ctx.currentPlayer].total++;
           
           // Then, sets the `current` value to the total; which allows
           // the `currentPlayer` to spend said energy on card play functions.
           G.energy[ctx.currentPlayer].current = G.energy[ctx.currentPlayer].total;
 
-          deincrementDeck(G, ctx, ctx.currentPlayer); // set counts[player].deck
-          incrementHand(G, ctx, ctx.currentPlayer); // set counts[player].hand
-
-          G.players[ctx.currentPlayer].hand.push(
-            G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
-          );
+          // draw a card every turn; you can hold a max of ten cards at a time.
+          if (G.players[ctx.currentPlayer].hand.length <= 9) {
+            deincrementDeck(G, ctx, ctx.currentPlayer); // set counts[player].deck
+            incrementHand(G, ctx, ctx.currentPlayer); // set counts[player].hand
+  
+            G.players[ctx.currentPlayer].hand.push(
+              G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
+            );
+          } else {
+            // if you are holding ten cards, your next card will be discarded
+            G.playedCards[ctx.currentPlayer].push(
+              G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
+            );
+          }
         }
       }
     }

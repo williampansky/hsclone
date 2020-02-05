@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import CardInteractionLayer from '../systems/CardInteractionLayer';
 import PlayerEnergy from './player-energy/PlayerEnergy';
+import Timer from 'components/timer/Timer';
 import uid from 'utils/uid';
 
 export default function YourHand(props) {
@@ -11,7 +12,8 @@ export default function YourHand(props) {
     ctx,
     ctx: { currentPlayer },
     playerID,
-    moves
+    moves,
+    isActive
   } = props;
   const { counts, energy, players, selectedCardIndexObject } = G;
   const yourNumber = Number(playerID) === 0 ? 0 : 1;
@@ -79,7 +81,7 @@ export default function YourHand(props) {
 
       <PlayerEnergy energy={energyObject} />
 
-      <Timer timer={yourTimer} />
+      <Timer {...props} />
     </Component>
   );
 }
@@ -96,48 +98,3 @@ const Component = styled.div`
   width: 100vw;
   z-index: var(--board-yourHand-zIndex);
 `;
-
-const Timer = styled.div`
-  position: fixed;
-  top: auto;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  pointer-events: none;
-  user-select: none;
-  background: yellow;
-  width: ${props => percentage(props.timer, 750)}%;
-  height: 2px;
-  transition: 100ms width ease-out;
-  z-index: 500;
-`;
-
-function percentageDivider(source) {
-  const timerSource = source;
-  const timerString = timerSource.toString();
-  const split = timerString.split('');
-  const remove = split.slice(0, 3);
-  const newTimerString = remove.join().replace(/(,)/g, '');
-  const newTimer = Number(newTimerString);
-  return newTimer;
-}
-
-function percentage(num, divider) {
-  // e.g. 75000 becomes 750
-  // const timerSource = num;
-  // const timerString = timerSource.toString();
-  // const split = timerString.split('');
-  // const remove = split.slice(0, 3);
-  // const newTimerString = remove.join().replace(/(,)/g, '');
-  // const newTimer = Number(newTimerString);
-  // const divider = Number(
-  //   num
-  //     .toString()
-  //     .split('')
-  //     .slice(0, 3)
-  //     .join()
-  //     .replace(/(,)/g, '')
-  // );
-
-  return num / divider;
-}
