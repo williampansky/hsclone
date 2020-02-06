@@ -1,5 +1,6 @@
 import { add, subtract } from 'mathjs';
 import { playSpellByCardId } from './spell-moves';
+import { generateMinion } from '../utils/generate-minion';
 
 export const incrementDeck = (G, ctx, player) => {
   return G.counts[player].deck++;
@@ -39,7 +40,9 @@ export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
   );
 
   // place card in selected slotNumber on your board
-  boards[currentPlayer][`slot${slotNumber}`] = cardId;
+  boards[currentPlayer][`slot${slotNumber}`].minionData = generateMinion(
+    cardId
+  );
 
   // move to your playerCards array
   playedCards[currentPlayer].push(

@@ -24,13 +24,13 @@ export default function YourBoardPlayerArea(props) {
     allCards[selectedCardId] && allCards[selectedCardId].type;
 
   const RENDER_GLOBAL_SPELL_SLOT = selectedCardType === 'SPELL';
-  const RENDER_SLOT_1 = slot2 !== null;
-  const RENDER_SLOT_2 = slot3 !== null;
-  const RENDER_SLOT_3 = slot4 !== null;
+  const RENDER_SLOT_1 = slot2.minionData !== null;
+  const RENDER_SLOT_2 = slot3.minionData !== null;
+  const RENDER_SLOT_3 = slot4.minionData !== null;
   const RENDER_SLOT_4 = selectedCardType !== 'SPELL';
-  const RENDER_SLOT_5 = slot4 !== null;
-  const RENDER_SLOT_6 = slot5 !== null;
-  const RENDER_SLOT_7 = slot6 !== null;
+  const RENDER_SLOT_5 = slot4.minionData !== null;
+  const RENDER_SLOT_6 = slot5.minionData !== null;
+  const RENDER_SLOT_7 = slot6.minionData !== null;
 
   function handleMinionMoves(slotNumber, cardId, cardCost) {
     moves.playMinionCard(slotNumber, cardId, cardCost);
@@ -86,7 +86,7 @@ export default function YourBoardPlayerArea(props) {
       />
       <BoardSlot
         board="Yours"
-        minion={allCards[slot1]}
+        minion={slot1}
         render={RENDER_SLOT_1}
         slot={1}
         onClick={e => handleClick(e, 1)}
@@ -94,7 +94,7 @@ export default function YourBoardPlayerArea(props) {
       />
       <BoardSlot
         board="Yours"
-        minion={allCards[slot2]}
+        minion={slot2}
         render={RENDER_SLOT_2}
         slot={2}
         onClick={e => handleClick(e, 2)}
@@ -102,7 +102,7 @@ export default function YourBoardPlayerArea(props) {
       />
       <BoardSlot
         board="Yours"
-        minion={allCards[slot3]}
+        minion={slot3}
         render={RENDER_SLOT_3}
         slot={3}
         onClick={e => handleClick(e, 3)}
@@ -110,7 +110,7 @@ export default function YourBoardPlayerArea(props) {
       />
       <BoardSlot
         board="Yours"
-        minion={allCards[slot4]}
+        minion={slot4}
         render={RENDER_SLOT_4}
         slot={4}
         onClick={e => handleClick(e, 4)}
@@ -118,7 +118,7 @@ export default function YourBoardPlayerArea(props) {
       />
       <BoardSlot
         board="Yours"
-        minion={allCards[slot5]}
+        minion={slot5}
         render={RENDER_SLOT_5}
         slot={5}
         onClick={e => handleClick(e, 5)}
@@ -126,7 +126,7 @@ export default function YourBoardPlayerArea(props) {
       />
       <BoardSlot
         board="Yours"
-        minion={allCards[slot6]}
+        minion={slot6}
         render={RENDER_SLOT_6}
         slot={6}
         onClick={e => handleClick(e, 6)}
@@ -134,7 +134,7 @@ export default function YourBoardPlayerArea(props) {
       />
       <BoardSlot
         board="Yours"
-        minion={allCards[slot7]}
+        minion={slot7}
         render={RENDER_SLOT_7}
         slot={7}
         onClick={e => handleClick(e, 7)}

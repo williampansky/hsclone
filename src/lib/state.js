@@ -21,24 +21,25 @@ export default {
       hand: []
     }
   },
+  // prettier-ignore
   boards: {
     0: {
-      slot1: null,
-      slot2: null,
-      slot3: null,
-      slot4: null,
-      slot5: null,
-      slot6: null,
-      slot7: null
+      slot1: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot2: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot3: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot4: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot5: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot6: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot7: { canAttack: false, canBeAttacked: false, minionData: null },
     },
     1: {
-      slot1: null,
-      slot2: null,
-      slot3: null,
-      slot4: null,
-      slot5: null,
-      slot6: null,
-      slot7: null
+      slot1: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot2: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot3: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot4: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot5: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot6: { canAttack: false, canBeAttacked: false, minionData: null },
+      slot7: { canAttack: false, canBeAttacked: false, minionData: null }
     }
   },
   energy: {

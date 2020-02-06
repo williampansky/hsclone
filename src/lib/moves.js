@@ -11,6 +11,7 @@ import {
   incrementHand,
   deincrementHand
 } from './moves/card-moves';
+import { attackMinion } from './moves/minion-moves';
 
 /**
  * Note that moves marked `client: false` are executed on the server.
@@ -34,6 +35,13 @@ export default {
     client: false,
     move: (G, ctx, card, target = null) => {
       return playSpellCard(G, ctx, card, target);
+    }
+  },
+
+  attackMinion: {
+    client: false,
+    move: (G, ctx, slotNumber) => {
+      return attackMinion(G, ctx, slotNumber);
     }
   },
 

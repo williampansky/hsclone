@@ -1,4 +1,4 @@
-import { stripSecrets } from './stripSecrets';
+import { stripSecrets } from './strip-secrets';
 import state from './state';
 import moves from './moves';
 import turns from './turns';

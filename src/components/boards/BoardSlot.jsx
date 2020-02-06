@@ -5,6 +5,7 @@ import Minion from 'components/minion/Minion';
 
 export default function BoardSlot(props) {
   const { board, minion, onClick, slot, render } = props;
+  const { minionData } = minion;
 
   return (
     <div
@@ -14,16 +15,16 @@ export default function BoardSlot(props) {
       data-render={render}
       onClick={onClick}
     >
-      {minion && (
+      {minionData && (
         <MinionInteractionLayer
           board={board}
-          minionData={minion}
+          minionData={minionData}
           slot={slot}
           render={render}
           {...props}
         />
       )}
-      {minion && <Minion data={minion} slot={slot} />}
+      {minionData && <Minion data={minionData} slot={slot} />}
     </div>
   );
 }
