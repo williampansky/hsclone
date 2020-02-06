@@ -36,7 +36,7 @@
   cursor: pointer;
 
   &:before {
-    box-shadow: 0px 0px 15px 5px rgba(0, 196, 105, 0.25);
+    box-shadow: 0px 0px 15px 5px rgba(0, 196, 105, 0.465);
   }
 }
 
@@ -82,16 +82,16 @@
 
 @keyframes isAttackingGlow {
   0% {
-    box-shadow: 0 0 -10px #c4a300;
+    box-shadow: 0 0 -10px #e9c305;
   }
   40% {
-    box-shadow: 0 0 20px #c4a300;
+    box-shadow: 0 0 20px #e9c305;
   }
   60% {
-    box-shadow: 0 0 20px #c4a300;
+    box-shadow: 0 0 20px #e9c305;
   }
   100% {
-    box-shadow: 0 0 -10px #c4a300;
+    box-shadow: 0 0 -10px #e9c305;
   }
 }
 

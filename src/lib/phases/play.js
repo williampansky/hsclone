@@ -1,7 +1,17 @@
 import { TurnOrder } from 'boardgame.io/core';
 import { deincrementDeck, incrementHand } from '../moves/card-moves';
+import {
+  disableMinionCanAttack,
+  enableMinionCanAttack,
+  disableMinionCanBeAttacked,
+  enableMinionCanBeAttacked
+} from '../moves/minion-moves';
 
 const onBegin = (G, ctx) => {
+  const players = G.turnOrder;
+  const currentPlayer = ctx.currentPlayer;
+  const previousPlayer = players.find(p => p !== currentPlayer);
+
   // Increments the `total` energy of the `currentPlayer`
   // by one; but not more than ten.
   if (G.energy[ctx.currentPlayer].total !== 10)
@@ -24,6 +34,28 @@ const onBegin = (G, ctx) => {
     G.playedCards[ctx.currentPlayer].push(
       G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
     );
+  }
+
+  // enable/disable their board minions
+  for (let i = 0; i < G.boards[previousPlayer].length; i++) {
+    // enable canBeAttacked on their board minions
+    if (G.boards[previousPlayer][`slot${i}`].canBeAttacked === false)
+      enableMinionCanBeAttacked(G, previousPlayer, [`slot${i}`]);
+
+    // disable canAttack on their board minions
+    if (G.boards[previousPlayer][`slot${i}`].canAttack === true)
+      disableMinionCanAttack(G, previousPlayer, [`slot${i}`]);
+  }
+
+  // enable/disable your board minions
+  for (let i = 0; i < G.boards[ctx.currentPlayer].length; i++) {
+    // disable canBeAttacked on your board minions
+    if (G.boards[ctx.currentPlayer][`slot${i}`].canBeAttacked === true)
+      disableMinionCanBeAttacked(G, ctx.currentPlayer, [`slot${i}`]);
+
+    // enable canAttack on your board minions
+    if (G.boards[ctx.currentPlayer][`slot${i}`].canAttack === false)
+      enableMinionCanAttack(G, ctx.currentPlayer, [`slot${i}`]);
   }
 };
 

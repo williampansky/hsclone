@@ -64,6 +64,10 @@ export default {
     0: null,
     1: null
   },
+  selectedMinionIndexObject: {
+    0: null,
+    1: null
+  },
   turnOrder: ['0', '1'].sort(() => {
     return Math.random() - 0.5;
   })

@@ -37,8 +37,6 @@ export default function MinionCanAttack(props) {
         //   : ''
       ].join(' ')}
       onClick={event => handleClick(event, slot, data)}
-    >
-      {children}
-    </div>
+    />
   );
 }

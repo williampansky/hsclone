@@ -5,11 +5,15 @@ import Minion from 'components/minion/Minion';
 
 export default function BoardSlot(props) {
   const { board, minion, onClick, slot, render } = props;
-  const { minionData } = minion;
+  const { canAttack, canBeAttacked, minionData } = minion;
 
   return (
     <div
-      className={[css['board-slot'], minion && css['has-minion']].join(' ')}
+      className={[
+        css['board-slot'],
+        !minionData && css['is-empty'],
+        minionData && css['has-minion']
+      ].join(' ')}
       data-file="boards/BoardSlot"
       data-slot={slot}
       data-render={render}

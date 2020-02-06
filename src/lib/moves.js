@@ -11,7 +11,14 @@ import {
   incrementHand,
   deincrementHand
 } from './moves/card-moves';
-import { attackMinion } from './moves/minion-moves';
+import {
+  enableMinionCanAttack,
+  disableMinionCanAttack,
+  enableMinionCanBeAttacked,
+  disableMinionCanBeAttacked,
+  selectMinionForAttack,
+  attackMinion
+} from './moves/minion-moves';
 
 /**
  * Note that moves marked `client: false` are executed on the server.
@@ -35,6 +42,41 @@ export default {
     client: false,
     move: (G, ctx, card, target = null) => {
       return playSpellCard(G, ctx, card, target);
+    }
+  },
+
+  enableMinionCanAttack: {
+    client: false,
+    move: (G, player, slotNumber) => {
+      return enableMinionCanAttack(G, player, slotNumber);
+    }
+  },
+
+  disableMinionCanAttack: {
+    client: false,
+    move: (G, player, slotNumber) => {
+      return disableMinionCanAttack(G, player, slotNumber);
+    }
+  },
+
+  enableMinionCanBeAttacked: {
+    client: false,
+    move: (G, player, slotNumber) => {
+      return enableMinionCanBeAttacked(G, player, slotNumber);
+    }
+  },
+
+  disableMinionCanBeAttacked: {
+    client: false,
+    move: (G, player, slotNumber) => {
+      return disableMinionCanBeAttacked(G, player, slotNumber);
+    }
+  },
+
+  selectMinionForAttack: {
+    client: false,
+    move: (G, ctx, slotNumber) => {
+      return selectMinionForAttack(G, ctx, slotNumber);
     }
   },
 
