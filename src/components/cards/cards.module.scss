@@ -1,6 +1,6 @@
 .card {
   background: var(--card-background-color);
-  border-radius: 3px;
+  border-radius: var(--card-border-radius);
   box-sizing: border-box;
   color: black;
   font-size: calc(var(--card-height) / 20);
@@ -43,8 +43,8 @@
   background-position: top center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-top-left-radius: 1.5px;
-  border-top-right-radius: 1.5px;
+  border-top-left-radius: var(--card-border-radius);
+  border-top-right-radius: var(--card-border-radius);
   box-sizing: border-box;
   display: flex;
   flex-flow: column nowrap;
@@ -59,7 +59,7 @@
 .card .card-name {
   align-items: center;
   background: #d0deb3;
-  border-radius: 1.5px;
+  border-radius: calc(var(--card-border-radius) / 2);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   bottom: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -105,7 +105,7 @@
 .card .card-type {
   align-items: center;
   background: lightgray;
-  border-radius: 1.5px;
+  border-radius: calc(var(--card-border-radius) / 2);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   bottom: 15px;

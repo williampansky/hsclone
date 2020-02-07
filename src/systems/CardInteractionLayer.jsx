@@ -1,5 +1,6 @@
 import React from 'react';
 import CardIsPlayable from './interactions/CardIsPlayable';
+import CardIsSelected from './interactions/CardIsSelected';
 import css from 'styles/interactions/card-interactions.module.scss';
 import useHover from 'hooks/useHover';
 import Card from 'components/cards/Card';
@@ -81,6 +82,7 @@ export default function CardInteractionLayer({
 
   const IS_YOUR_TURN = Number(currentPlayer) === Number(playerID);
   const IS_PLAYABLE = cost <= yourCurrentEnergy;
+  const IS_SELECTED = yourSelectedCardIndex === index;
 
   const yourHandStyle = {
     transform: `
@@ -93,9 +95,13 @@ export default function CardInteractionLayer({
   function selectPlayableCard(event, index) {
     event.preventDefault();
     moves.hoverOverCardInHand(null);
-    return yourSelectedCardIndex !== index
-      ? moves.selectPlayableCard(index)
-      : moves.selectPlayableCard(null);
+    return moves.selectPlayableCard(index);
+  }
+
+  function deselectSelectedCard(event) {
+    event.preventDefault();
+    moves.hoverOverCardInHand(null);
+    return moves.selectPlayableCard(null);
   }
 
   // prettier-ignore
@@ -103,13 +109,17 @@ export default function CardInteractionLayer({
     <div
       className={css['card-in-your-hand']}
       data-file="CardInteractionLayer"
-      data-is-selected={yourSelectedCardIndex === index}
+      data-is-playable={IS_PLAYABLE}
+      data-is-selected={IS_SELECTED}
       ref={hoverRef}
       style={yourHandStyle}
     >
-      {IS_YOUR_TURN ? 
-        IS_PLAYABLE && <CardIsPlayable onClick={event => selectPlayableCard(event, index)} />
-      : null}
+      {IS_YOUR_TURN ? (
+        <React.Fragment>
+          {IS_SELECTED && <CardIsSelected onClick={event => deselectSelectedCard(event)} />}
+          {IS_PLAYABLE && !IS_SELECTED && <CardIsPlayable onClick={event => selectPlayableCard(event, index)} />}
+        </React.Fragment>
+      ) : null}
       <Card
         artist={artist}
         attack={attack}

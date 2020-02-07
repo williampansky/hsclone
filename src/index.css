@@ -12,6 +12,7 @@
 
   /* card vars */
   --card-background-color: #ededed;
+  --card-border-radius: 3px;
   --card-height: 250px;
 
   /* minion vars */

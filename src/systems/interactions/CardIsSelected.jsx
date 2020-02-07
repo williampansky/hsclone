@@ -1,11 +1,11 @@
 import React from 'react';
 import css from 'styles/interactions/card-interactions.module.scss';
 
-export default function CardIsPlayable({ onClick }) {
+export default function CardIsSelected({ onClick }) {
   return (
     <div
-      className={css['card--is_playable']}
-      data-is-playable={true}
+      className={css['card--is_selected']}
+      data-is-selected={true}
       onClick={onClick}
     />
   );
