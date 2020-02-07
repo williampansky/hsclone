@@ -4,12 +4,13 @@ import {
 } from './moves/aesthetic-moves';
 import {
   drawCard,
+  drawCards,
   playMinionCard,
   playSpellCard,
-  incrementDeck,
-  deincrementDeck,
-  incrementHand,
-  deincrementHand
+  incrementDeckCount,
+  deincrementDeckCount,
+  incrementHandCount,
+  deincrementHandCount
 } from './moves/card-moves';
 import {
   enableMinionCanAttack,
@@ -26,8 +27,15 @@ import {
 export default {
   drawCard: {
     client: false,
-    move: (G, ctx, player, numberOfCards) => {
-      return drawCard(G, ctx, player, numberOfCards);
+    move: (G, player) => {
+      return drawCard(G, player);
+    }
+  },
+
+  drawCards: {
+    client: false,
+    move: (G, player, numberOfCards) => {
+      return drawCards(G, player, numberOfCards);
     }
   },
 
@@ -92,10 +100,10 @@ export default {
   // setTotalEnergy: (G, ctx, player, amount) => setTotalEnergy(G, ctx, player, amount),
 
   // deck & hand count manipulations
-  deincrementDeck: (G, ctx, player) => deincrementDeck(G, ctx, player),
-  deincrementHand: (G, ctx, player) => deincrementHand(G, ctx, player),
-  incrementDeck: (G, ctx, player) => incrementDeck(G, ctx, player),
-  incrementHand: (G, ctx, player) => incrementHand(G, ctx, player),
+  deincrementDeckCount: (G, player) => deincrementDeckCount(G, player),
+  deincrementHandCount: (G, player) => deincrementHandCount(G, player),
+  incrementDeckCount: (G, player) => incrementDeckCount(G, player),
+  incrementHandCount: (G, player) => incrementHandCount(G, player),
 
   // interaction moves; indicating the opponent player's hover/selection
   hoverOverCardInHand: (G, ctx, index) => hoverOverCardInHand(G, ctx, index),

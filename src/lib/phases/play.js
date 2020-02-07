@@ -1,5 +1,5 @@
 import { TurnOrder } from 'boardgame.io/core';
-import { deincrementDeck, incrementHand } from '../moves/card-moves';
+import { deincrementDeckCount, incrementHandCount } from '../moves/card-moves';
 import {
   incrementTotalEnergy,
   matchCurrentWithTotalEnergy
@@ -20,40 +20,30 @@ const onBegin = (G, ctx) => {
   matchCurrentWithTotalEnergy(G, CURRENT_PLAYER);
 
   // draw a card every turn; you can hold a max of ten cards at a time.
-  if (G.players[ctx.currentPlayer].hand.length <= 9) {
-    deincrementDeck(G, ctx, ctx.currentPlayer); // set counts[player].deck
-    incrementHand(G, ctx, ctx.currentPlayer); // set counts[player].hand
+  if (G.players[CURRENT_PLAYER].hand.length <= 9) {
+    deincrementDeckCount(G, CURRENT_PLAYER); // set counts[player].deck
+    incrementHandCount(G, CURRENT_PLAYER); // set counts[player].hand
 
-    G.players[ctx.currentPlayer].hand.push(
-      G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
+    G.players[CURRENT_PLAYER].hand.push(
+      G.players[CURRENT_PLAYER].deck.splice(0, 1)[0]
     );
   } else {
     // if you are holding ten cards, your next card will be discarded
-    G.playedCards[ctx.currentPlayer].push(
-      G.players[ctx.currentPlayer].deck.splice(0, 1)[0]
+    G.playedCards[CURRENT_PLAYER].push(
+      G.players[CURRENT_PLAYER].deck.splice(0, 1)[0]
     );
   }
 
-  // enable/disable their board minions
+  // enable canBeAttacked & disable canAttack on THEIR board slots
   for (let i = 0; i < G.boards[PREVIOUS_PLAYER].length; i++) {
-    // enable canBeAttacked on their board minions
-    if (G.boards[PREVIOUS_PLAYER][`slot${i}`].canBeAttacked === false)
-      enableMinionCanBeAttacked(G, PREVIOUS_PLAYER, [`slot${i}`]);
-
-    // disable canAttack on their board minions
-    if (G.boards[PREVIOUS_PLAYER][`slot${i}`].canAttack === true)
-      disableMinionCanAttack(G, PREVIOUS_PLAYER, [`slot${i}`]);
+    enableMinionCanBeAttacked(G, PREVIOUS_PLAYER, i);
+    disableMinionCanAttack(G, PREVIOUS_PLAYER, i);
   }
 
-  // enable/disable your board minions
-  for (let i = 0; i < G.boards[ctx.currentPlayer].length; i++) {
-    // disable canBeAttacked on your board minions
-    if (G.boards[ctx.currentPlayer][`slot${i}`].canBeAttacked === true)
-      disableMinionCanBeAttacked(G, ctx.currentPlayer, [`slot${i}`]);
-
-    // enable canAttack on your board minions
-    if (G.boards[ctx.currentPlayer][`slot${i}`].canAttack === false)
-      enableMinionCanAttack(G, ctx.currentPlayer, [`slot${i}`]);
+  // disable canBeAttacked & enable canAttack on YOUR board slots
+  for (let i = 0; i < G.boards[CURRENT_PLAYER].length; i++) {
+    disableMinionCanBeAttacked(G, CURRENT_PLAYER, i);
+    enableMinionCanAttack(G, CURRENT_PLAYER, i);
   }
 };
 
