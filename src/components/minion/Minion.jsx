@@ -38,7 +38,7 @@ export default function Minion({ data, p, slot }) {
     mouseLeaveDelayMS: 0
   });
 
-  return health !== 0 ? (
+  return health >= 0 ? (
     <div className={[css['minion']].join(' ')}>
       <div className={css['info-trigger']} {...hoverProps}>
         {/* ? */}

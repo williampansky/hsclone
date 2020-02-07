@@ -17,6 +17,7 @@ export default function EndTurnButton(props) {
     event.preventDefault();
     moves.hoverOverCardInHand(null);
     moves.selectPlayableCard(null);
+    moves.selectMinionForAttack(null);
     return endTurn();
   }
 

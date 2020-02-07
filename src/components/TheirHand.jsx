@@ -7,7 +7,13 @@ import css from 'styles/interactions/card-interactions.module.scss';
 export default function TheirHand(props) {
   const {
     G,
-    G: { energy, counts, hoveringCardIndexObject, selectedCardIndexObject },
+    G: {
+      energy,
+      counts,
+      hoveringCardIndexObject,
+      selectedCardIndexObject,
+      selectedMinionIndexObject
+    },
     ctx,
     ctx: { currentPlayer },
     playerID,
@@ -16,6 +22,7 @@ export default function TheirHand(props) {
   const theirNumber = Number(playerID) === 0 ? 1 : 0;
   const theirHoverState = hoveringCardIndexObject[theirNumber];
   const theirSelectedState = selectedCardIndexObject[theirNumber];
+  const theirSelectedMinionState = selectedMinionIndexObject[theirNumber];
   const cardsInTheirHand = counts[theirNumber].hand;
   const energyObject = energy[theirNumber];
 
@@ -28,7 +35,8 @@ export default function TheirHand(props) {
   function handleTransforms(idx) {
     let key;
 
-    if (theirSelectedState === idx) key = 'selected';
+    if (theirSelectedMinionState) key = '';
+    else if (theirSelectedState === idx) key = 'selected';
     else if (theirHoverState === idx) key = 'hover';
 
     switch (key) {
@@ -48,7 +56,8 @@ export default function TheirHand(props) {
   function handleClasses(idx) {
     let key;
 
-    if (theirSelectedState === idx) key = 'selected';
+    if (theirSelectedMinionState) key = '';
+    else if (theirSelectedState === idx) key = 'selected';
     else if (theirHoverState === idx) key = 'hover';
 
     switch (key) {

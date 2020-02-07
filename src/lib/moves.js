@@ -3,22 +3,22 @@ import {
   selectPlayableCard
 } from './moves/aesthetic-moves';
 import {
+  deincrementDeckCount,
+  deincrementHandCount,
   drawCard,
   drawCards,
-  playMinionCard,
-  playSpellCard,
   incrementDeckCount,
-  deincrementDeckCount,
   incrementHandCount,
-  deincrementHandCount
+  playMinionCard,
+  playSpellCard
 } from './moves/card-moves';
 import {
-  enableMinionCanAttack,
+  attackMinion,
   disableMinionCanAttack,
-  enableMinionCanBeAttacked,
   disableMinionCanBeAttacked,
-  selectMinionForAttack,
-  attackMinion
+  enableMinionCanAttack,
+  enableMinionCanBeAttacked,
+  selectMinionForAttack
 } from './moves/minion-moves';
 
 /**
@@ -106,6 +106,13 @@ export default {
   incrementHandCount: (G, player) => incrementHandCount(G, player),
 
   // interaction moves; indicating the opponent player's hover/selection
-  hoverOverCardInHand: (G, ctx, index) => hoverOverCardInHand(G, ctx, index),
-  selectPlayableCard: (G, ctx, index) => selectPlayableCard(G, ctx, index)
+  hoverOverCardInHand: (G, ctx, index) => {
+    return hoverOverCardInHand(G, ctx, index);
+  },
+  selectPlayableCard: (G, ctx, index) => {
+    return selectPlayableCard(G, ctx, index);
+  },
+  selectMinionForAttack: (G, ctx, index) => {
+    return selectMinionForAttack(G, ctx, index);
+  }
 };

@@ -51,11 +51,14 @@ export default function MinionInteractionLayer(props) {
   const previousPlayer = players.find(p => p !== currentPlayer);
 
   const CAN_BE_ATTACKED =
+    isActive &&
+    board === 'Theirs' &&
     G.boards[previousPlayer][`slot${slot}`].canBeAttacked === true &&
     G.selectedMinionIndexObject[ctx.currentPlayer] !== null;
 
   const CAN_ATTACK =
     isActive &&
+    board === 'Yours' &&
     G.boards[currentPlayer][`slot${slot}`].canAttack === true &&
     attack !== 0;
 
@@ -83,10 +86,17 @@ export default function MinionInteractionLayer(props) {
   // }
 
   function handleClick(event) {
+    moves.hoverOverCardInHand(null);
+    moves.selectPlayableCard(null);
+
     if (CAN_ATTACK) {
-      return G.selectedMinionIndexObject[ctx.currentPlayer] === slot
+      return G.selectedMinionIndexObject[currentPlayer] === slot
         ? moves.selectMinionForAttack(null)
         : moves.selectMinionForAttack(slot);
+    }
+
+    if (CAN_BE_ATTACKED) {
+      return moves.attackMinion(slot);
     }
   }
 

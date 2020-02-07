@@ -1,4 +1,8 @@
 import { TurnOrder } from 'boardgame.io/core';
+import {
+  hoverOverCardInHand,
+  selectPlayableCard
+} from '../moves/aesthetic-moves';
 import { drawSingleCardAtStartOfCurrentPlayersTurn } from '../moves/card-moves';
 import {
   incrementTotalEnergy,
@@ -31,6 +35,18 @@ const onBegin = (G, ctx) => {
     disableMinionCanBeAttacked(G, CURRENT_PLAYER, i + 1);
     enableMinionCanAttack(G, CURRENT_PLAYER, i + 1);
   }
+
+  // reset both player's interaction hover states
+  G.hoveringCardIndexObject[0] = null;
+  G.hoveringCardIndexObject[1] = null;
+
+  // reset both player's selected card states
+  G.selectedCardIndexObject[0] = null;
+  G.selectedCardIndexObject[1] = null;
+
+  // reset both player's selected minion states
+  G.selectedMinionIndexObject[0] = null;
+  G.selectedMinionIndexObject[1] = null;
 };
 
 export default {
