@@ -1,5 +1,5 @@
 const esmImport = require('esm')(module);
-const { disableMinionCanAttack } = esmImport('../lib/moves/minion-moves');
+const { disableMinionCanAttack } = esmImport('../../lib/moves/minion-moves');
 
 test(`disable player 0's slot4 canAttack`, () => {
   const G = {

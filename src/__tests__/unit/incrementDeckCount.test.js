@@ -1,5 +1,5 @@
 const esmImport = require('esm')(module);
-const { incrementDeckCount } = esmImport('../lib/moves/card-moves');
+const { incrementDeckCount } = esmImport('../../lib/moves/card-moves');
 
 test(`increment player 0's deck count`, () => {
   const G = {

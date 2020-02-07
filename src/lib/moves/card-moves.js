@@ -18,38 +18,35 @@ export const deincrementHandCount = (G, player) => {
   return G.counts[player].hand--;
 };
 
-export const drawCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
-  if (G.players[CURRENT_PLAYER].hand.length <= 9) {
-    deincrementDeckCount(G, CURRENT_PLAYER); // set counts[player].deck
-    incrementHandCount(G, CURRENT_PLAYER); // set counts[player].hand
-
-    G.players[CURRENT_PLAYER].hand.push(
-      G.players[CURRENT_PLAYER].deck.splice(0, 1)[0]
-    );
-  } else {
-    // if you are holding ten cards, your next card will be discarded
-    G.playedCards[CURRENT_PLAYER].push(
-      G.players[CURRENT_PLAYER].deck.splice(0, 1)[0]
-    );
-  }
+/**
+ * Discard a single card from your deck into your `playedCards`; also runs
+ * `deincrementDeckCount()` and `incrementHandCount()` functions.
+ * @param {*} G
+ * @param {*} player
+ * @requires card-moves::deincrementDeckCount()
+ */
+// prettier-ignore
+export const discardCard = (G, player) => {
+  deincrementDeckCount(G, player); // ............. set counts[player].deck
+  G.playedCards[player].push( // .................. pushes to playedCards
+    G.players[player].deck.splice(0, 1)[0] // ..... splices from deck
+  );
 };
 
-export const discardCard = (G, player, numberOfCards = 1) => {
-  // prettier-ignore
-  for (let i = 0; i < numberOfCards; i++) {
-    deincrementDeckCount(G, player); // set counts[player].deck
-    incrementHandCount(G, player); // set counts[player].hand
-    G.playedCards[player].hand.push( // pushes to playedCards
-      G.players[player].deck.splice(0, 1)[0] // splices from deck
-    );
-  }
+/**
+ * Runs `discardCard()` multiple times based on the `numberOfCards` param.
+ * @param {Number} numberOfCards Number of cards to discard
+ * @requires card-moves::discardCard()
+ */
+export const discardCards = (G, player, numberOfCards = 1) => {
+  for (let i = 0; i < numberOfCards; i++) discardCard(G, player);
 };
 
 /**
  * Draw a single card from your deck into your hand; also runs
  * `deincrementDeckCount()` and `incrementHandCount()` functions.
- * @param {*} G
- * @param {*} player
+ * @requires card-moves::deincrementDeckCount()
+ * @requires card-moves::incrementHandCount()
  */
 // prettier-ignore
 export const drawCard = (G, player) => {
@@ -61,18 +58,27 @@ export const drawCard = (G, player) => {
 };
 
 /**
- * Runs `drawCard()` multiple times based
- * on the provided `numberOfCards` param.
- * @param {*} G
- * @param {*} player
- * @param {*} numberOfCards
+ * Runs `drawCard()` multiple times based on the `numberOfCards` param.
+ * @param {Number} numberOfCards Number of cards to draw
  * @requires card-moves::drawCard()
  */
 export const drawCards = (G, player, numberOfCards = 1) => {
-  // prettier-ignore
-  for (let i = 0; i < numberOfCards; i++) {
-    drawCard(G, player);
-  }
+  for (let i = 0; i < numberOfCards; i++) drawCard(G, player);
+};
+
+/**
+ * Draws or discards a single card at the start of the current player's turn.
+ * @param {Object} ctx currentPlayer
+ * @requires card-moves::drawCard()
+ * @requires card-moves::discardCard()
+ */
+export const drawCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
+  const { currentPlayer } = ctx;
+  const currentPlayerHandLength = G.players[currentPlayer].hand.length;
+  const currentPlayerHasLessThan10Cards = currentPlayerHandLength <= 9;
+
+  if (currentPlayerHasLessThan10Cards) drawCard(G, currentPlayer);
+  else discardCard(G, currentPlayer);
 };
 
 export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {

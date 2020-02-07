@@ -1,5 +1,5 @@
 const esmImport = require('esm')(module);
-const { setCurrentEnergy } = esmImport('../lib/moves/energy-moves');
+const { setCurrentEnergy } = esmImport('../../lib/moves/energy-moves');
 
 test(`set player 0's current energy to provided amount`, () => {
   const G = { energy: { 0: { current: 0 } } };

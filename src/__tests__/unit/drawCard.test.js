@@ -1,5 +1,5 @@
 const esmImport = require('esm')(module);
-const { drawCard } = esmImport('../lib/moves/card-moves');
+const { drawCard } = esmImport('../../lib/moves/card-moves');
 
 test(`draw a single card from your deck to your hand`, () => {
   const G = {

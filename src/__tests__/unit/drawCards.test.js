@@ -1,5 +1,5 @@
 const esmImport = require('esm')(module);
-const { drawCards } = esmImport('../lib/moves/card-moves');
+const { drawCards } = esmImport('../../lib/moves/card-moves');
 
 test(`draw cards equal to the provided value`, () => {
   const G = {

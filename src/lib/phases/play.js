@@ -18,21 +18,7 @@ const onBegin = (G, ctx) => {
 
   incrementTotalEnergy(G, CURRENT_PLAYER);
   matchCurrentWithTotalEnergy(G, CURRENT_PLAYER);
-
-  // draw a card every turn; you can hold a max of ten cards at a time.
-  if (G.players[CURRENT_PLAYER].hand.length <= 9) {
-    deincrementDeckCount(G, CURRENT_PLAYER); // set counts[player].deck
-    incrementHandCount(G, CURRENT_PLAYER); // set counts[player].hand
-
-    G.players[CURRENT_PLAYER].hand.push(
-      G.players[CURRENT_PLAYER].deck.splice(0, 1)[0]
-    );
-  } else {
-    // if you are holding ten cards, your next card will be discarded
-    G.playedCards[CURRENT_PLAYER].push(
-      G.players[CURRENT_PLAYER].deck.splice(0, 1)[0]
-    );
-  }
+  drawCardAtStartOfCurrentPlayersTurn(G, ctx);
 
   // enable canBeAttacked & disable canAttack on THEIR board slots
   for (let i = 0; i < G.boards[PREVIOUS_PLAYER].length; i++) {

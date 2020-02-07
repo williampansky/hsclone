@@ -1,5 +1,5 @@
 const esmImport = require('esm')(module);
-const { incrementTotalEnergy } = esmImport('../lib/moves/energy-moves');
+const { incrementTotalEnergy } = esmImport('../../lib/moves/energy-moves');
 
 test(`increments player 0's total energy`, () => {
   const G = { energy: { 0: { total: 0 } } };
