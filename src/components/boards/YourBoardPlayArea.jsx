@@ -12,7 +12,7 @@ export default function YourBoardPlayerArea(props) {
     moves,
     playerID
   } = props;
-  const yourHand = players[playerID].hand;
+  const yourHand = players[playerID] && players[playerID].hand;
   const yourBoard = boards[playerID];
   const { slot1, slot2, slot3, slot4, slot5, slot6, slot7 } = yourBoard;
   const cardIsSelected = selectedCardIndexObject[playerID] !== null;

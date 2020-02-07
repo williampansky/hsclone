@@ -1,24 +1,58 @@
-import { add, subtract } from 'mathjs';
+import { add } from 'mathjs';
 
-export const incrementCurrentEnergy = (G, ctx, playerID) => {
-  if (Number(ctx.currentPlayer) === Number(playerID))
-    G.energy[ctx.currentPlayer].current =
-      G.energy[ctx.currentPlayer].current + 1;
-  return ctx.events.endPhase();
-};
-
-export const incrementTotalEnergy = (G, ctx, playerID) => {
-  if (Number(ctx.currentPlayer) !== Number(playerID))
-    G.energy[ctx.currentPlayer].total = G.energy[ctx.currentPlayer].total + 1;
-  return ctx.events.endPhase();
-};
-
-export const setCurrentEnergy = (G, ctx, player, amount) => {
+/**
+ * Increments the `total` energy of the `ctx.currentPlayer` by one;
+ * unless the total is already at ten.
+ *
+ * @param {Object} G Game state object.
+ * @param {Number|String} player Player to increment.
+ * @requires mathjs::add()
+ */
+export const incrementTotalEnergy = (G, player) => {
   const { energy } = G;
-  energy[player].current = amount;
+  const { total } = energy[player];
+
+  if (total === 10) return;
+
+  const newTotal = add(Number(total), 1);
+  return (G.energy[player].total = newTotal);
 };
 
-export const setTotalEnergy = (G, ctx, player, amount) => {
+/**
+ * Sets the `current` value to the `total`; which allows the
+ * `ctx.currentPlayer` to spend energy on card play moves.
+ *
+ * @param {Object} G Game state object.
+ * @param {Number|String} player Player to match.
+ */
+export const matchCurrentWithTotalEnergy = (G, player) => {
   const { energy } = G;
-  energy[player].total = amount;
+  const { total } = energy[player];
+  return (G.energy[player].current = total);
+};
+
+/**
+ * Sets the `current` energy value of the
+ * `player` param to the specified `amount`.
+ *
+ * @param {Object} G Game state object.
+ * @param {Number|String} player Player to set.
+ * @param {Number} amount Value to set.
+ */
+export const setCurrentEnergy = (G, player, amount) => {
+  const { energy } = G;
+  return (energy[player].current = amount);
+};
+
+/**
+ * Sets the `total` energy value of the
+ * `player` param to the specified `amount`.
+ *
+ * @param {Object} G Game state object.
+ * @param {Number|String} player Player to set.
+ * @param {Number} amount Value to set.
+ */
+export const setTotalEnergy = (G, player, amount) => {
+  const { energy } = G;
+  return (energy[player].total = amount);
 };

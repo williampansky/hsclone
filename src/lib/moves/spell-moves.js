@@ -1,6 +1,4 @@
-const castTheOrb = (G, ctx) => {
-  return G.energy[ctx.currentPlayer].current++;
-};
+import { castTheOrb } from '../spells/cast-the-orb';
 
 export const playSpellByCardId = (G, ctx, cardId) => {
   // prettier-ignore

@@ -1,6 +1,10 @@
 import { TurnOrder } from 'boardgame.io/core';
 import { deincrementDeck, incrementHand } from '../moves/card-moves';
 import {
+  incrementTotalEnergy,
+  matchCurrentWithTotalEnergy
+} from '../moves/energy-moves';
+import {
   disableMinionCanAttack,
   enableMinionCanAttack,
   disableMinionCanBeAttacked,
@@ -8,18 +12,12 @@ import {
 } from '../moves/minion-moves';
 
 const onBegin = (G, ctx) => {
-  const players = G.turnOrder;
-  const currentPlayer = ctx.currentPlayer;
-  const previousPlayer = players.find(p => p !== currentPlayer);
+  const PLAY_ORDER = G.turnOrder;
+  const CURRENT_PLAYER = ctx.currentPlayer;
+  const PREVIOUS_PLAYER = PLAY_ORDER.find(player => player !== CURRENT_PLAYER);
 
-  // Increments the `total` energy of the `currentPlayer`
-  // by one; but not more than ten.
-  if (G.energy[ctx.currentPlayer].total !== 10)
-    G.energy[ctx.currentPlayer].total++;
-
-  // Then, sets the `current` value to the total; which allows
-  // the `currentPlayer` to spend said energy on card play functions.
-  G.energy[ctx.currentPlayer].current = G.energy[ctx.currentPlayer].total;
+  incrementTotalEnergy(G, CURRENT_PLAYER);
+  matchCurrentWithTotalEnergy(G, CURRENT_PLAYER);
 
   // draw a card every turn; you can hold a max of ten cards at a time.
   if (G.players[ctx.currentPlayer].hand.length <= 9) {
@@ -37,14 +35,14 @@ const onBegin = (G, ctx) => {
   }
 
   // enable/disable their board minions
-  for (let i = 0; i < G.boards[previousPlayer].length; i++) {
+  for (let i = 0; i < G.boards[PREVIOUS_PLAYER].length; i++) {
     // enable canBeAttacked on their board minions
-    if (G.boards[previousPlayer][`slot${i}`].canBeAttacked === false)
-      enableMinionCanBeAttacked(G, previousPlayer, [`slot${i}`]);
+    if (G.boards[PREVIOUS_PLAYER][`slot${i}`].canBeAttacked === false)
+      enableMinionCanBeAttacked(G, PREVIOUS_PLAYER, [`slot${i}`]);
 
     // disable canAttack on their board minions
-    if (G.boards[previousPlayer][`slot${i}`].canAttack === true)
-      disableMinionCanAttack(G, previousPlayer, [`slot${i}`]);
+    if (G.boards[PREVIOUS_PLAYER][`slot${i}`].canAttack === true)
+      disableMinionCanAttack(G, PREVIOUS_PLAYER, [`slot${i}`]);
   }
 
   // enable/disable your board minions
