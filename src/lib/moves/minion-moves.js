@@ -1,20 +1,20 @@
 export const disableMinionCanAttack = (G, player, slotNumber) => {
-  if (G.boards[player][`slot${slotNumber}`].canAttack === false) return;
+  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
   return (G.boards[player][`slot${slotNumber}`].canAttack = false);
 };
 
 export const enableMinionCanAttack = (G, player, slotNumber) => {
-  if (G.boards[player][`slot${slotNumber}`].canAttack === true) return;
+  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
   return (G.boards[player][`slot${slotNumber}`].canAttack = true);
 };
 
 export const disableMinionCanBeAttacked = (G, player, slotNumber) => {
-  if (G.boards[player][`slot${slotNumber}`].canBeAttacked === false) return;
+  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
   return (G.boards[player][`slot${slotNumber}`].canBeAttacked = false);
 };
 
 export const enableMinionCanBeAttacked = (G, player, slotNumber) => {
-  if (G.boards[player][`slot${slotNumber}`].canBeAttacked === true) return;
+  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
   return (G.boards[player][`slot${slotNumber}`].canBeAttacked = true);
 };
 

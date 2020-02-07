@@ -1,5 +1,5 @@
 import { TurnOrder } from 'boardgame.io/core';
-import { deincrementDeckCount, incrementHandCount } from '../moves/card-moves';
+import { drawSingleCardAtStartOfCurrentPlayersTurn } from '../moves/card-moves';
 import {
   incrementTotalEnergy,
   matchCurrentWithTotalEnergy
@@ -21,15 +21,15 @@ const onBegin = (G, ctx) => {
   drawSingleCardAtStartOfCurrentPlayersTurn(G, ctx);
 
   // enable canBeAttacked & disable canAttack on THEIR board slots
-  for (let i = 0; i < G.boards[PREVIOUS_PLAYER].length; i++) {
-    enableMinionCanBeAttacked(G, PREVIOUS_PLAYER, i);
-    disableMinionCanAttack(G, PREVIOUS_PLAYER, i);
+  for (let i = 0; i < Object.keys(G.boards[PREVIOUS_PLAYER]).length; i++) {
+    enableMinionCanBeAttacked(G, PREVIOUS_PLAYER, i + 1);
+    disableMinionCanAttack(G, PREVIOUS_PLAYER, i + 1);
   }
 
   // disable canBeAttacked & enable canAttack on YOUR board slots
-  for (let i = 0; i < G.boards[CURRENT_PLAYER].length; i++) {
-    disableMinionCanBeAttacked(G, CURRENT_PLAYER, i);
-    enableMinionCanAttack(G, CURRENT_PLAYER, i);
+  for (let i = 0; i < Object.keys(G.boards[CURRENT_PLAYER]).length; i++) {
+    disableMinionCanBeAttacked(G, CURRENT_PLAYER, i + 1);
+    enableMinionCanAttack(G, CURRENT_PLAYER, i + 1);
   }
 };
 
