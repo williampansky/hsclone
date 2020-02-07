@@ -1,58 +1,104 @@
+import React, { useState, useEffect } from 'react';
 import MinionCanAttack from './interactions/MinionCanAttack';
 import MinionCanBeAttacked from './interactions/MinionCanBeAttacked';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import css from 'styles/interactions/minion-interactions.module.scss';
+import useHover from 'hooks/useHover';
 
-export default function MinionInteractionLayer({
-  board,
-  children,
-  data,
-  slot
-}) {
-  const turn = useSelector(s => s.turn);
-  const minionIsAttacking = useSelector(s => s.minionIsAttacking);
-  const [{ mechanics }, setMechanics] = useState({ mechanics: null });
-  const minionMechanics = data && data.mechanics;
-  const minionAttack = data && data.attack;
-  // console.log(mechanics);
+export default function MinionInteractionLayer(props) {
+  const {
+    G,
+    ctx,
+    isActive,
+    moves,
+    board,
+    children,
+    minionData,
+    slot,
+    render
+  } = props;
+  const [hoverRef, isHovered] = useHover();
+  const {
+    artist,
+    attack,
+    cardClass,
+    collectible,
+    cost,
+    elite,
+    entourage,
+    flavor,
+    goldenImageSrc,
+    health,
+    hideStats,
+    howToEarn,
+    howToEarnGolden,
+    id,
+    imageSrc,
+    mechanics,
+    name,
+    playRequirements,
+    race,
+    rarity,
+    set,
+    sounds,
+    spellDamage,
+    targetingArrowText,
+    text,
+    type
+  } = minionData;
+
+  const players = G.turnOrder;
+  const currentPlayer = ctx.currentPlayer;
+  const previousPlayer = players.find(p => p !== currentPlayer);
 
   const CAN_BE_ATTACKED =
-    turn === 'YOUR_TURN' && board === 'Theirs' && minionIsAttacking;
+    board === 'Theirs' &&
+    G.boards[previousPlayer][`slot${slot}`] !== null &&
+    G.selectedMinionIndexObject[ctx.currentPlayer] !== null;
 
-  const CAN_ATTACK =
-    turn === 'YOUR_TURN' && board === 'Yours' && minionAttack !== 0;
+  const CAN_ATTACK = isActive && board === 'Yours' && attack !== 0;
+  const IS_ATTACKING =
+    CAN_ATTACK && G.selectedMinionIndexObject[ctx.currentPlayer] === slot;
 
-  useEffect(() => {
-    minionMechanics && setMechanics({ mechanics: minionMechanics.toString() });
-  }, []);
+  // useEffect(() => {
+  //   minionMechanics && setMechanics({ mechanics: minionMechanics.toString() });
+  // }, []);
 
-  if (CAN_BE_ATTACKED)
-    return (
-      <React.Fragment>
-        <MinionCanBeAttacked data={data} slot={slot} />
-      </React.Fragment>
-    );
+  // if (CAN_ATTACK) return <MinionCanAttack data={minionData} slot={slot} />;
 
-  if (CAN_ATTACK)
-    return (
-      <React.Fragment>
-        <MinionCanAttack children={children} data={data} slot={slot} />
-      </React.Fragment>
-    );
+  // if (mechanics) {
+  //   switch (mechanics) {
+  //     case board === 'Yours' && 'CHARGE':
+  //       return (
+  //         <React.Fragment>
+  //           <MinionCanAttack children={children} data={data} slot={slot} />
+  //         </React.Fragment>
+  //       );
 
-  if (mechanics) {
-    switch (mechanics) {
-      case board === 'Yours' && 'CHARGE':
-        return (
-          <React.Fragment>
-            <MinionCanAttack children={children} data={data} slot={slot} />
-          </React.Fragment>
-        );
+  //     default:
+  //       return <React.Fragment>{children}</React.Fragment>;
+  //   }
+  // }
 
-      default:
-        return <React.Fragment>{children}</React.Fragment>;
+  function handleClick(event) {
+    if (CAN_ATTACK) {
+      return G.selectedMinionIndexObject[ctx.currentPlayer] === slot
+        ? moves.selectMinionForAttack(null)
+        : moves.selectMinionForAttack(slot);
     }
   }
 
-  return <React.Fragment>{children}</React.Fragment>;
+  return (
+    <div
+      className={[
+        css['minion--interaction_layer'],
+        CAN_ATTACK ? css['minion--can_attack'] : '',
+        IS_ATTACKING ? css['minion--is_attacking'] : '',
+        CAN_BE_ATTACKED ? css['minion--can_be_attacked'] : ''
+      ].join(' ')}
+      data-file="systems/MinionInteractionLayer"
+      data-render={render}
+      ref={hoverRef}
+      onClick={event => handleClick(event)}
+    />
+  );
 }

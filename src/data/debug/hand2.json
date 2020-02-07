@@ -1,0 +1,78 @@
+[
+  {
+    "attack": 2,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 3,
+    "elite": false,
+    "health": 0,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_002",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://cdnb.artstation.com/p/assets/images/images/002/002/109/large/jaan-van-eeden-fireball-artstation.jpg?1455792737"
+    },
+    "mechanics": [],
+    "name": "Meteor",
+    "race": 0,
+    "rarity": 2,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": null,
+    "text": "Conjure a meteor that damages all minions.",
+    "type": "SPELL"
+  },
+  {
+    "attack": 4,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 6,
+    "elite": false,
+    "health": 2,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_003",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://dspncdn.com/a1/media/692x/2b/e8/a2/2be8a206a6c2415b6ed6631ea4eb4e50.jpg"
+    },
+    "mechanics": [
+      "CHARGE"
+    ],
+    "name": "Battle Golem",
+    "race": 0,
+    "rarity": 0,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": null,
+    "text": "<strong>Charge</strong>.",
+    "type": "MINION"
+  },
+  {
+    "attack": 2,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 4,
+    "elite": false,
+    "health": 5,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_004",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://i.redd.it/6idvnf7c2ky11.jpg"
+    },
+    "mechanics": [
+      "TAUNT"
+    ],
+    "name": "Shielder",
+    "race": 0,
+    "rarity": 0,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": null,
+    "text": "<strong>Taunt</strong>.",
+    "type": "MINION"
+  }
+]

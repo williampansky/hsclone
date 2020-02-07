@@ -1,0 +1,557 @@
+[
+  {
+    "attack": 1,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 2,
+    "elite": false,
+    "health": 4,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_001",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://cdnb.artstation.com/p/assets/images/images/009/730/145/large/othon-nikolaidis-humancleric.jpg?1520561421"
+    },
+    "mechanics": [
+      "BATTLECRY"
+    ],
+    "name": "Francesca Leopold",
+    "race": 0,
+    "rarity": 0,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": "Give a minion <strong>Taunt</strong>.",
+    "text": "<strong>Battlecry:</strong> Give a friendly minion <strong>Taunt</strong>.",
+    "type": "MINION"
+  },
+  {
+    "attack": 2,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 3,
+    "elite": false,
+    "health": 0,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_002",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://cdnb.artstation.com/p/assets/images/images/002/002/109/large/jaan-van-eeden-fireball-artstation.jpg?1455792737"
+    },
+    "mechanics": [],
+    "name": "Meteor",
+    "race": 0,
+    "rarity": 2,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": null,
+    "text": "Conjure a meteor that damages all minions.",
+    "type": "SPELL"
+  },
+  {
+    "attack": 1,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 2,
+    "elite": false,
+    "health": 4,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_001",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://cdnb.artstation.com/p/assets/images/images/009/730/145/large/othon-nikolaidis-humancleric.jpg?1520561421"
+    },
+    "mechanics": [
+      "BATTLECRY"
+    ],
+    "name": "Francesca Leopold",
+    "race": 0,
+    "rarity": 0,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": "Give a minion <strong>Taunt</strong>.",
+    "text": "<strong>Battlecry:</strong> Give a friendly minion <strong>Taunt</strong>.",
+    "type": "MINION"
+  },
+  {
+    "attack": 4,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 6,
+    "elite": false,
+    "health": 2,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_003",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://dspncdn.com/a1/media/692x/2b/e8/a2/2be8a206a6c2415b6ed6631ea4eb4e50.jpg"
+    },
+    "mechanics": [
+      "CHARGE"
+    ],
+    "name": "Battle Golem",
+    "race": 0,
+    "rarity": 0,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": null,
+    "text": "<strong>Charge</strong>.",
+    "type": "MINION"
+  },
+  {
+    "attack": 2,
+    "cardClass": 0,
+    "collectible": true,
+    "cost": 4,
+    "elite": false,
+    "health": 5,
+    "howToEarn": "Create an account.",
+    "howToEarnGolden": "Craftable",
+    "id": "FR_004",
+    "images": {
+      "backgroundImage": "",
+      "foregroundImage": "https://i.redd.it/6idvnf7c2ky11.jpg"
+    },
+    "mechanics": [
+      "TAUNT"
+    ],
+    "name": "Shielder",
+    "race": 0,
+    "rarity": 0,
+    "set": 0,
+    "spellDamage": 0,
+    "targetingArrowText": null,
+    "text": "<strong>Taunt</strong>.",
+    "type": "MINION"
+  },
+  {
+    "artist": "Malcolm Davis",
+    "attack": 1,
+    "cardClass": "NEUTRAL",
+    "collectible": true,
+    "cost": 0,
+    "dbfId": 179,
+    "flavor": "If you hit an Eredar Lord with enough Wisps, it will explode.   But why?",
+    "health": 1,
+    "id": "CS2_231",
+    "name": "Wisp",
+    "rarity": "COMMON",
+    "set": "EXPERT1",
+    "type": "MINION"
+  },
+  {
+    "artist": "John Polidora",
+    "attack": 7,
+    "cardClass": "NEUTRAL",
+    "collectible": true,
+    "cost": 5,
+    "dbfId": 1122,
+    "faction": "HORDE",
+    "flavor": "No Job is too big.  No fee is too big.",
+    "health": 6,
+    "id": "CS2_227",
+    "mechanics": [
+      "AURA"
+    ],
+    "name": "Venture Co. Mercenary",
+    "rarity": "COMMON",
+    "set": "EXPERT1",
+    "text": "Your minions cost (3) more.",
+    "type": "MINION"
+  },
+  {
+    "artist": "Dave Allsop",
+    "attack": 8,
+    "cardClass": "DRUID",
+    "collectible": true,
+    "cost": 8,
+    "dbfId": 205,
+    "flavor": "I <i>dare</i> you to attack Darnassus.",
+    "health": 8,
+    "howToEarn": "Unlocked at Level 10.",
+    "howToEarnGolden": "Unlocked at Level 49.",
+    "id": "CS2_232",
+    "mechanics": [
+      "TAUNT"
+    ],
+    "name": "Ironbark Protector",
+    "rarity": "FREE",
+    "set": "CORE",
+    "text": "<b>Taunt</b>",
+    "type": "MINION"
+  },
+  {
+    "artist": "Bernie Kang",
+    "attack": 3,
+    "cardClass": "HUNTER",
+    "collectible": true,
+    "cost": 5,
+    "dbfId": 1241,
+    "flavor": "If you feed him, he loses his whole <i>identity</i>.",
+    "health": 2,
+    "howToEarn": "Unlocked at Level 4.",
+    "howToEarnGolden": "Unlocked at Level 47.",
+    "id": "CS2_237",
+    "mechanics": [
+      "TRIGGER_VISUAL"
+    ],
+    "name": "Starving Buzzard",
+    "race": "BEAST",
+    "rarity": "FREE",
+    "set": "CORE",
+    "text": "Whenever you summon a Beast, draw a card.",
+    "type": "MINION"
+  },
+  {
+    "attack": 0,
+    "cardClass": "MAGE",
+    "cost": 0,
+    "dbfId": 968,
+    "health": 2,
+    "id": "CS2_mirror",
+    "mechanics": [
+      "TAUNT"
+    ],
+    "name": "Mirror Image",
+    "rarity": "COMMON",
+    "set": "CORE",
+    "text": "<b>Taunt</b>",
+    "type": "MINION"
+  },
+  {
+    "attack": 1,
+    "cardClass": "NEUTRAL",
+    "cost": 1,
+    "dbfId": 796,
+    "health": 1,
+    "id": "CS2_tk1",
+    "name": "Sheep",
+    "race": "BEAST",
+    "rarity": "COMMON",
+    "set": "CORE",
+    "type": "MINION"
+  },
+  {
+    "artist": "Nate Bowden",
+    "cardClass": "WARRIOR",
+    "collectible": true,
+    "cost": 5,
+    "dbfId": 39747,
+    "flavor": "Come to beautiful Ironforge! Where irons are forged and the forges are iron!",
+    "howToEarn": "Unlocked in the Spire, in One Night in Karazhan.",
+    "howToEarnGolden": "Crafting unlocked in the Spire, in One Night in Karazhan.",
+    "id": "KAR_091",
+    "name": "Ironforge Portal",
+    "rarity": "COMMON",
+    "set": "KARA",
+    "text": "Gain 4 Armor.\nSummon a random\n4-Cost minion.",
+    "type": "SPELL"
+  },
+  {
+    "artist": "Evgeniy Zaqumyenny",
+    "cardClass": "DRUID",
+    "collectible": true,
+    "cost": 6,
+    "dbfId": 39714,
+    "flavor": "Ain't no party like a Moonglade party ‘cause a Moonglade party got bears.",
+    "howToEarn": "Unlocked in the Spire, in One Night in Karazhan.",
+    "howToEarnGolden": "Crafting unlocked in the Spire, in One Night in Karazhan.",
+    "id": "KAR_075",
+    "name": "Moonglade Portal",
+    "playRequirements": {
+      "REQ_TARGET_TO_PLAY": 0
+    },
+    "rarity": "RARE",
+    "set": "KARA",
+    "text": "Restore #6 Health. Summon a random\n6-Cost minion.",
+    "type": "SPELL"
+  },
+  {
+    "artist": "Luke Mancini",
+    "attack": 2,
+    "cardClass": "PALADIN",
+    "collectible": true,
+    "cost": 3,
+    "dbfId": 39477,
+    "flavor": "Originally joined to be Arcanagos’ Templar, but has to admit that ordering pizza has become waaaay easier.",
+    "health": 3,
+    "howToEarn": "Unlocked in the Menagerie, in One Night in Karazhan.",
+    "howToEarnGolden": "Crafting unlocked in the Menagerie, in One Night in Karazhan.",
+    "id": "KAR_010",
+    "mechanics": [
+      "BATTLECRY"
+    ],
+    "name": "Nightbane Templar",
+    "rarity": "COMMON",
+    "set": "KARA",
+    "text": "<b>Battlecry:</b> If you're holding a Dragon, summon two 1/1 Whelps.",
+    "type": "MINION"
+  },
+  {
+    "attack": 1,
+    "cardClass": "NEUTRAL",
+    "cost": 1,
+    "dbfId": 42872,
+    "health": 1,
+    "id": "ICCA07_004",
+    "mechanics": [
+      "TRIGGER_VISUAL"
+    ],
+    "name": "Growing Ooze",
+    "set": "ICECROWN",
+    "text": "At the start of your turn, gain +1/+1.",
+    "type": "MINION"
+  },
+  {
+    "attack": 3,
+    "cardClass": "NEUTRAL",
+    "cost": 3,
+    "dbfId": 45361,
+    "health": 3,
+    "id": "ICCA01_009",
+    "mechanics": [
+      "TRIGGER_VISUAL"
+    ],
+    "name": "Needy Hunter",
+    "set": "ICECROWN",
+    "text": "Whenever this minion attacks, add a Coin to your hand.",
+    "type": "MINION"
+  },
+  {
+    "attack": 2,
+    "cardClass": "NEUTRAL",
+    "cost": 2,
+    "dbfId": 45360,
+    "health": 3,
+    "id": "ICCA01_008",
+    "name": "Terrible Tank",
+    "set": "ICECROWN",
+    "type": "MINION"
+  },
+  {
+    "cardClass": "PALADIN",
+    "dbfId": 45367,
+    "entourage": [
+      "ICC_314t2",
+      "ICC_314t3",
+      "ICC_314t4",
+      "ICC_314t1",
+      "ICC_314t6",
+      "ICC_314t5",
+      "ICC_314t7",
+      "ICC_314t8"
+    ],
+    "health": 30,
+    "id": "ICCA01_013",
+    "name": "Tirion Fordring",
+    "set": "ICECROWN",
+    "type": "HERO"
+  },
+  {
+    "artist": "J. Axer",
+    "attack": 2,
+    "cardClass": "NEUTRAL",
+    "cost": 2,
+    "dbfId": 45305,
+    "health": 2,
+    "id": "ICC_900t",
+    "name": "Ghoul",
+    "set": "ICECROWN",
+    "type": "MINION"
+  },
+  {
+    "artist": "Zoltan Boros",
+    "attack": 3,
+    "cardClass": "DRUID",
+    "collectible": true,
+    "cost": 9,
+    "dbfId": 43439,
+    "elite": true,
+    "flavor": "The viziers of Azjol-Nerub released Hadronox as a last-ditch effort to hold back the Lich King. They did so by VERY carefully scooping him up in a LARGE newspaper and releasing him.",
+    "health": 7,
+    "id": "ICC_835",
+    "mechanics": [
+      "DEATHRATTLE"
+    ],
+    "name": "Hadronox",
+    "race": "BEAST",
+    "rarity": "LEGENDARY",
+    "referencedTags": [
+      "TAUNT"
+    ],
+    "set": "ICECROWN",
+    "text": "<b>Deathrattle:</b> Summon your <b>Taunt</b> minions that\ndied this game.",
+    "type": "MINION"
+  },
+  {
+    "attack": 0,
+    "cardClass": "MAGE",
+    "cost": 0,
+    "dbfId": 968,
+    "health": 2,
+    "id": "CS2_mirror",
+    "mechanics": [
+      "TAUNT"
+    ],
+    "name": "Mirror Image",
+    "rarity": "COMMON",
+    "set": "CORE",
+    "text": "<b>Taunt</b>",
+    "type": "MINION"
+  },
+  {
+    "attack": 2,
+    "cardClass": "NEUTRAL",
+    "cost": 2,
+    "dbfId": 45360,
+    "health": 3,
+    "id": "ICCA01_008",
+    "name": "Terrible Tank",
+    "set": "ICECROWN",
+    "type": "MINION"
+  },
+  {
+    "artist": "Dave Allsop",
+    "attack": 8,
+    "cardClass": "DRUID",
+    "collectible": true,
+    "cost": 8,
+    "dbfId": 205,
+    "flavor": "I <i>dare</i> you to attack Darnassus.",
+    "health": 8,
+    "howToEarn": "Unlocked at Level 10.",
+    "howToEarnGolden": "Unlocked at Level 49.",
+    "id": "CS2_232",
+    "mechanics": [
+      "TAUNT"
+    ],
+    "name": "Ironbark Protector",
+    "rarity": "FREE",
+    "set": "CORE",
+    "text": "<b>Taunt</b>",
+    "type": "MINION"
+  },
+  {
+    "artist": "Malcolm Davis",
+    "attack": 1,
+    "cardClass": "NEUTRAL",
+    "collectible": true,
+    "cost": 0,
+    "dbfId": 179,
+    "flavor": "If you hit an Eredar Lord with enough Wisps, it will explode.   But why?",
+    "health": 1,
+    "id": "CS2_231",
+    "name": "Wisp",
+    "rarity": "COMMON",
+    "set": "EXPERT1",
+    "type": "MINION"
+  },
+  {
+    "artist": "Nate Bowden",
+    "cardClass": "WARRIOR",
+    "collectible": true,
+    "cost": 5,
+    "dbfId": 39747,
+    "flavor": "Come to beautiful Ironforge! Where irons are forged and the forges are iron!",
+    "howToEarn": "Unlocked in the Spire, in One Night in Karazhan.",
+    "howToEarnGolden": "Crafting unlocked in the Spire, in One Night in Karazhan.",
+    "id": "KAR_091",
+    "name": "Ironforge Portal",
+    "rarity": "COMMON",
+    "set": "KARA",
+    "text": "Gain 4 Armor.\nSummon a random\n4-Cost minion.",
+    "type": "SPELL"
+  },
+  {
+    "attack": 1,
+    "cardClass": "HUNTER",
+    "collectionText": "<b>Poisonous</b>, <b>Rush</b>",
+    "cost": 5,
+    "dbfId": 50143,
+    "health": 3,
+    "id": "ICC_828t6",
+    "mechanics": [
+      "POISONOUS",
+      "RUSH"
+    ],
+    "name": "Vilebrood Skitterer",
+    "race": "BEAST",
+    "rarity": "COMMON",
+    "set": "GILNEAS",
+    "text": "<b>Poisonous</b>\n<b>Rush</b>",
+    "type": "MINION"
+  },
+  {
+    "cardClass": "ROGUE",
+    "dbfId": 47533,
+    "id": "ICC_809e",
+    "name": "Test Subject",
+    "rarity": "COMMON",
+    "referencedTags": [
+      "POISONOUS"
+    ],
+    "set": "ICECROWN",
+    "text": "<b>Poisonous</b>",
+    "type": "ENCHANTMENT"
+  },
+  {
+    "artist": "Daren Bader",
+    "attack": 2,
+    "cardClass": "NEUTRAL",
+    "collectible": true,
+    "cost": 4,
+    "dbfId": 42395,
+    "flavor": "Desperately needs some alone time.",
+    "health": 3,
+    "id": "ICC_466",
+    "mechanics": [
+      "BATTLECRY",
+      "TAUNT"
+    ],
+    "name": "Saronite Chain Gang",
+    "rarity": "RARE",
+    "set": "ICECROWN",
+    "text": "<b>Taunt</b>\n<b>Battlecry:</b> Summon a copy of this minion.",
+    "type": "MINION"
+  },
+  {
+    "artist": "James Ryman",
+    "attack": 5,
+    "cardClass": "DEATHKNIGHT",
+    "cost": 7,
+    "dbfId": 43012,
+    "durability": 3,
+    "elite": true,
+    "id": "ICC_314t1",
+    "mechanics": [
+      "DEATHRATTLE"
+    ],
+    "name": "Frostmourne",
+    "set": "ICECROWN",
+    "text": "<b>Deathrattle:</b> Summon every minion killed by this weapon.",
+    "type": "WEAPON"
+  },
+  {
+    "artist": "Ben Thompson",
+    "cardClass": "ROGUE",
+    "collectible": true,
+    "cost": 2,
+    "dbfId": 42665,
+    "flavor": "No actual leeches were harmed in the creation of this card.",
+    "id": "ICC_221",
+    "name": "Leeching Poison",
+    "playRequirements": {
+      "REQ_WEAPON_EQUIPPED": 0
+    },
+    "rarity": "COMMON",
+    "referencedTags": [
+      "LIFESTEAL"
+    ],
+    "set": "ICECROWN",
+    "text": "Give your weapon <b>Lifesteal</b>.",
+    "type": "SPELL"
+  }
+]

@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Nodemon",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "port": 8000,
+            "restart": true,
+            "runtimeExecutable": "nodemon",
+            "program": "${workspaceFolder}/src/server.js",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "runtimeArgs": [
+                "--inspect=8000",
+                "-r",
+                "esm"
+            ],
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ]
+}
