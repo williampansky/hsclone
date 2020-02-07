@@ -72,7 +72,7 @@ export const drawCards = (G, player, numberOfCards = 1) => {
  * @requires card-moves::drawCard()
  * @requires card-moves::discardCard()
  */
-export const drawCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
+export const drawSingleCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
   const { currentPlayer } = ctx;
   const currentPlayerHandLength = G.players[currentPlayer].hand.length;
   const currentPlayerHasLessThan10Cards = currentPlayerHandLength <= 9;

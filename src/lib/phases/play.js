@@ -18,7 +18,7 @@ const onBegin = (G, ctx) => {
 
   incrementTotalEnergy(G, CURRENT_PLAYER);
   matchCurrentWithTotalEnergy(G, CURRENT_PLAYER);
-  drawCardAtStartOfCurrentPlayersTurn(G, ctx);
+  drawSingleCardAtStartOfCurrentPlayersTurn(G, ctx);
 
   // enable canBeAttacked & disable canAttack on THEIR board slots
   for (let i = 0; i < G.boards[PREVIOUS_PLAYER].length; i++) {
