@@ -25,7 +25,6 @@ export const selectMinionForAttack = (G, ctx, slotNumber) => {
     ? (G.selectedMinionIndexObject[0] = slotNumber)
     : (G.selectedMinionIndexObject[1] = slotNumber);
 };
-//
 
 // prettier-ignore
 export const attackMinion = (G, ctx, slotNumber) => {

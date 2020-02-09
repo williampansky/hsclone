@@ -20,7 +20,6 @@ export default function TheirAvatar(props) {
 
   function handleClick() {
     if (!CAN_BE_ATTACKED) return;
-    console.log('PREVIOUS_PLAYER', PREVIOUS_PLAYER);
     moves.attackPlayer(PREVIOUS_PLAYER, atkMinionsAtk);
   }
 

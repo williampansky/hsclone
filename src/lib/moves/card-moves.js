@@ -1,6 +1,7 @@
 import { subtract } from 'mathjs';
 import { playSpellByCardId } from './spell-moves';
 import { generateMinion } from '../utils/generate-minion';
+import { enableMinionCanAttack } from './minion-moves';
 
 export const incrementDeckCount = (G, player) => {
   return G.counts[player].deck++;
@@ -84,6 +85,8 @@ export const drawSingleCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
 export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
   const { boards, energy, players, playedCards } = G;
   const { currentPlayer } = ctx;
+  const minionObject = generateMinion(cardId);
+  const { mechanics } = minionObject;
 
   // subtract the card's cost from player's current energy count
   energy[ctx.currentPlayer].current = subtract(
@@ -92,9 +95,7 @@ export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
   );
 
   // place card in selected slotNumber on your board
-  boards[currentPlayer][`slot${slotNumber}`].minionData = generateMinion(
-    cardId
-  );
+  boards[currentPlayer][`slot${slotNumber}`].minionData = minionObject;
 
   // move to your playerCards array
   playedCards[currentPlayer].push(
@@ -107,6 +108,10 @@ export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
 
   // then deincrement your hand count
   deincrementHandCount(G, currentPlayer);
+
+  // if minion has charge
+  if (mechanics.find(m => m === 'CHARGE'))
+    enableMinionCanAttack(G, ctx.currentPlayer, slotNumber);
 };
 
 export const playSpellCard = (G, ctx, cardId, cardCost) => {

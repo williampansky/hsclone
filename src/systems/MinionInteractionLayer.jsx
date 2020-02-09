@@ -62,6 +62,8 @@ export default function MinionInteractionLayer(props) {
     G.boards[currentPlayer][`slot${slot}`].canAttack === true &&
     attack !== 0;
 
+  const HAS_CHARGE = mechanics.find(m => m === 'CHARGE');
+
   const IS_ATTACKING =
     CAN_ATTACK && G.selectedMinionIndexObject[ctx.currentPlayer] === slot;
 
