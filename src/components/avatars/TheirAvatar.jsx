@@ -13,7 +13,9 @@ export default function TheirAvatar(props) {
   const atkMinionsAtk = atkMinionObj && atkMinionObj.minionData.attack;
 
   const CAN_BE_ATTACKED =
-    isActive && G.selectedMinionIndexObject[CURRENT_PLAYER] !== null;
+    isActive &&
+    (G.selectedMinionIndexObject[CURRENT_PLAYER] !== null ||
+      G.selectedCardIndexObject[CURRENT_PLAYER] !== null);
 
   function handleClick() {
     if (!CAN_BE_ATTACKED) return;
