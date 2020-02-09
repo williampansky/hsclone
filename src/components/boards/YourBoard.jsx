@@ -5,15 +5,14 @@ import YourAvatar from '../avatars/YourAvatar';
 import avatars from '../../config/avatars.config';
 
 export default function YourBoard(props) {
-  const { health } = props;
-  // const yourHealth = useSelector(s => s.yourHealth);
-  // const { username, hero, id } = useSelector(s => s.you);
-  // const avatar = hero && avatars[hero.toLowerCase()];
+  const { G, ctx, playerID } = props;
+  const { health, playerClass } = G;
+  const PLAYER_CLASS = playerClass[playerID];
 
   return (
     <div data-file="YourBoard" className={css['your-board']}>
       <YourBoardPlayerArea {...props} />
-      <YourAvatar health={health} src={avatars.warrior} {...props} />
+      <YourAvatar health={health} src={avatars[PLAYER_CLASS]} {...props} />
     </div>
   );
 }

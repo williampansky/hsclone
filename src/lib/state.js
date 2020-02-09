@@ -11,13 +11,13 @@ export default {
       timer: 75000
     }
   },
-  class: {
-    0: null,
-    1: null
-  },
   health: {
     0: 30,
     1: 30
+  },
+  playerClass: {
+    0: 'SOCERER',
+    1: 'GUARDIAN'
   },
   players: {
     0: {

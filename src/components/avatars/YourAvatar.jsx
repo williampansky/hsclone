@@ -2,10 +2,9 @@ import React from 'react';
 import css from './avatar.module.scss';
 
 export default function YourAvatar(props) {
-  const { G, ctx, isActive, src } = props;
+  const { G, ctx, isActive, playerID, src } = props;
   const { health } = G;
-  const currentPlayer = ctx.currentPlayer;
-  const YOUR_HEALTH = health[currentPlayer];
+  const YOUR_HEALTH = health[playerID];
 
   const CAN_BE_ATTACKED = !isActive;
 

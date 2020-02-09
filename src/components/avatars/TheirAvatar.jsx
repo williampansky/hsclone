@@ -2,25 +2,22 @@ import React from 'react';
 import css from './avatar.module.scss';
 
 export default function TheirAvatar(props) {
-  const { G, ctx, moves, allCards, isActive, src } = props;
-  const PLAY_ORDER = G.turnOrder;
+  const { G, ctx, moves, playerID, isActive, src } = props;
   const CURRENT_PLAYER = ctx.currentPlayer;
-  const PREVIOUS_PLAYER = PLAY_ORDER.find(player => player !== CURRENT_PLAYER);
+  const THEIR_NUMBER = Number(playerID) === 0 ? 1 : 0;
 
-  const THEIR_HEALTH = G.health[PREVIOUS_PLAYER];
+  const THEIR_HEALTH = G.health[THEIR_NUMBER];
 
   const atkMinionIdx = G.selectedMinionIndexObject[CURRENT_PLAYER];
   const atkMinionObj = G.boards[CURRENT_PLAYER][`slot${atkMinionIdx}`];
   const atkMinionsAtk = atkMinionObj && atkMinionObj.minionData.attack;
-
-  // console.log(atkMinionIdx, atkMinionObj, atkMinionsAtk);
 
   const CAN_BE_ATTACKED =
     isActive && G.selectedMinionIndexObject[CURRENT_PLAYER] !== null;
 
   function handleClick() {
     if (!CAN_BE_ATTACKED) return;
-    moves.attackPlayer(PREVIOUS_PLAYER, atkMinionsAtk);
+    moves.attackPlayer(THEIR_NUMBER, atkMinionsAtk);
   }
 
   return (

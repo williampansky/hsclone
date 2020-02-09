@@ -1,18 +1,18 @@
 import React from 'react';
-import avatars from '../../config/avatars.config';
 import css from './board.module.scss';
 import TheirAvatar from '../avatars/TheirAvatar';
 import TheirBoardPlayerArea from './TheirBoardPlayArea';
+import avatars from '../../config/avatars.config';
 
 export default function TheirBoard(props) {
-  const { health } = props;
-  // const theirHealth = useSelector(s => s.theirHealth);
-  // const { username, hero, id } = useSelector(s => s.them);
-  // const avatar = hero && avatars[hero.toLowerCase()];
+  const { G, ctx, playerID } = props;
+  const { health, playerClass } = G;
+  const THEIR_NUMBER = Number(playerID) === 0 ? 1 : 0;
+  const PLAYER_CLASS = playerClass[THEIR_NUMBER];
 
   return (
     <div data-file="TheirBoard" className={css['their-board']}>
-      <TheirAvatar health={health} src={avatars.mage} {...props} />
+      <TheirAvatar health={health} src={avatars[PLAYER_CLASS]} {...props} />
       <TheirBoardPlayerArea {...props} />
     </div>
   );

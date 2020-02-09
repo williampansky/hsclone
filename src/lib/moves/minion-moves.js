@@ -76,6 +76,9 @@ export const attackPlayer = (G, ctx, player, attack) => {
   // disable MINION_ATTACKING's ability to attack
   disableMinionCanAttack(G, currentPlayer, selectedMinion);
 
+  // reset currentPlayer's selectedMinionIndexObject value
+  selectMinionForAttack(G, ctx, null);
+
   // subtract attack from player's health value
   const newHealth = subtract(G.health[player], attack);
   G.health[player] = newHealth;
