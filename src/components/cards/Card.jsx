@@ -20,6 +20,7 @@ export default function Card({
   howToEarnGolden,
   id,
   imageSrc,
+  inspiration,
   mechanics,
   name,
   playRequirements,
@@ -76,12 +77,18 @@ export default function Card({
     fontSize: `${fontSizeBasedOnCharacterLength(name)}em`
   };
 
+  function cardName(name = name, ins = inspiration) {
+    if (name) return name;
+    else if (ins) return ins;
+    else return 'Unknown';
+  }
+
   return (
     <div className={css['card']}>
       <div className={css['card-cost']}>{cost}</div>
       <div className={css['card-image']} style={cardImage} />
       <div className={css['card-name']} style={fontSize}>
-        {name}
+        {cardName(name, inspiration)}
       </div>
       <div className={css['card-text']}>
         <p dangerouslySetInnerHTML={createMarkup(text)} />
@@ -89,8 +96,8 @@ export default function Card({
       <div className={css['card-type']}>{type}</div>
       {IS_MINION && <div className={css['card-attack']}>{attack}</div>}
       {IS_MINION && <div className={css['card-health']}>{health}</div>}
-      {/* {IS_WEAPON && <div className={css['card-weapon-attack']}>{attack}</div>}
-      {IS_WEAPON && <div className={css['card-weapon-dura']}>{health}</div>} */}
+      {IS_WEAPON && <div className={css['card-weapon-attack']}>{attack}</div>}
+      {IS_WEAPON && <div className={css['card-weapon-health']}>{health}</div>}
 
       {metaAttributes.map((attr, index) => {
         const { name, content } = attr;
@@ -154,6 +161,7 @@ Card.defaultProps = {
   howToEarnGolden: null,
   id: null,
   imageSrc: null,
+  inspiration: null,
   mechanics: [],
   name: 'CARD NAME',
   playRequirements: [],

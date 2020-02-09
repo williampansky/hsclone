@@ -67,6 +67,7 @@ export default function CardInteractionLayer({
     howToEarnGolden,
     id,
     imageSrc,
+    inspiration,
     mechanics,
     name,
     playRequirements,
@@ -136,6 +137,7 @@ export default function CardInteractionLayer({
         howToEarnGolden={howToEarnGolden}
         id={id}
         imageSrc={imageSrc}
+        inspiration={inspiration}
         mechanics={mechanics}
         name={name}
         playRequirements={playRequirements}
@@ -147,7 +149,6 @@ export default function CardInteractionLayer({
         targetingArrowText={targetingArrowText}
         text={text}
         type={type}
-        isGolden={id === 'THE_ORB'}
       />
     </div>
   );

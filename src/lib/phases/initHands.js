@@ -15,7 +15,7 @@ export default {
     // Give the second player the Energy card (The Orb), which when
     // played gives that player an additional energy point for the turn.
     incrementHandCount(G, SECOND_PLAYER);
-    G.players[SECOND_PLAYER].hand.push('THE_ORB');
+    G.players[SECOND_PLAYER].hand.push('GAME_001');
   },
 
   // End phase when both player's have their starting hands
