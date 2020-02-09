@@ -68,3 +68,16 @@ export const attackMinion = (G, ctx, slotNumber) => {
   if (G.boards[otherPlayer][`slot${slotNumber}`].minionData.health <= 0)
     G.boards[otherPlayer][`slot${slotNumber}`].minionData = null;
 };
+
+export const attackPlayer = (G, ctx, player, attack) => {
+  const { selectedMinionIndexObject } = G;
+  const { currentPlayer } = ctx;
+  const selectedMinion = selectedMinionIndexObject[currentPlayer];
+
+  // disable MINION_ATTACKING's ability to attack
+  disableMinionCanAttack(G, currentPlayer, selectedMinion);
+
+  // subtract attack from player's health value
+  const newHealth = subtract(G.health[player], attack);
+  G.health[player] = newHealth;
+};

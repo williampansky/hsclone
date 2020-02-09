@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import CardInteractionLayer from '../systems/CardInteractionLayer';
-import PlayerEnergy from './player-energy/PlayerEnergy';
+import CardInteractionLayer from '../../systems/CardInteractionLayer';
+import PlayerEnergy from '../player-energy/PlayerEnergy';
 import Timer from 'components/timer/Timer';
 import uid from 'utils/uid';
 

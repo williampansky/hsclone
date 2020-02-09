@@ -14,6 +14,7 @@ import {
 } from './moves/card-moves';
 import {
   attackMinion,
+  attackPlayer,
   disableMinionCanAttack,
   disableMinionCanBeAttacked,
   enableMinionCanAttack,
@@ -92,6 +93,13 @@ export default {
     client: false,
     move: (G, ctx, slotNumber) => {
       return attackMinion(G, ctx, slotNumber);
+    }
+  },
+
+  attackPlayer: {
+    client: false,
+    move: (G, ctx, player, attack) => {
+      return attackPlayer(G, ctx, player, attack);
     }
   },
 

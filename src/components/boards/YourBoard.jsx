@@ -1,7 +1,7 @@
 import React from 'react';
 import YourBoardPlayerArea from './YourBoardPlayArea';
 import css from './board.module.scss';
-import YourAvatar from '../YourAvatar';
+import YourAvatar from '../avatars/YourAvatar';
 import avatars from '../../config/avatars.config';
 
 export default function YourBoard(props) {
@@ -13,7 +13,7 @@ export default function YourBoard(props) {
   return (
     <div data-file="YourBoard" className={css['your-board']}>
       <YourBoardPlayerArea {...props} />
-      <YourAvatar health={health} />
+      <YourAvatar health={health} src={avatars.warrior} {...props} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import PlayerEnergy from './player-energy/PlayerEnergy';
-import CardBack from './cards/CardBack';
+import PlayerEnergy from '../player-energy/PlayerEnergy';
+import CardBack from '../cards/CardBack';
 import css from 'styles/interactions/card-interactions.module.scss';
 
 export default function TheirHand(props) {

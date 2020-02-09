@@ -1,9 +1,9 @@
 import React from 'react';
 import Board from 'components/boards/Board';
 import TheirBoard from 'components/boards/TheirBoard';
-import TheirHand from 'components/TheirHand';
+import TheirHand from 'components/hands/TheirHand';
 import YourBoard from 'components/boards/YourBoard';
-import YourHand from 'components/YourHand';
+import YourHand from 'components/hands/YourHand';
 import EndTurnButton from 'components/end-turn/EndTurn';
 import css from './game-component.module.scss';
 
