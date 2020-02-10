@@ -72,7 +72,15 @@ export default {
     0: null,
     1: null
   },
+  selectedCardObject: {
+    0: null,
+    1: null
+  },
   selectedMinionIndex: {
+    0: null,
+    1: null
+  },
+  selectedMinionObject: {
     0: null,
     1: null
   },

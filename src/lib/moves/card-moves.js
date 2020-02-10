@@ -1,8 +1,8 @@
 import { subtract } from 'mathjs';
-import { playSpellByCardId } from './spell-moves';
-import { generateMinion } from '../utils/generate-minion';
-import { enableMinionCanAttack } from './minion-moves';
 import { getCardByID } from '../utils/get-card-by-id';
+import { generateMinion } from '../utils/generate-minion';
+import { playSpellByCardId } from './spell-moves';
+import { enableMinionCanAttack } from './minion-moves';
 
 export const incrementDeckCount = (G, player) => {
   return G.counts[player].deck++;
@@ -58,10 +58,12 @@ export const discardCards = (G, player, numberOfCards = 1) => {
  */
 // prettier-ignore
 export const drawCard = (G, player) => {
-  deincrementDeckCount(G, player); // ............. set counts[player].deck
-  incrementHandCount(G, player); // ............... set counts[player].hand
-  G.players[player].hand.push( // ................. pushes to hand
-    G.players[player].deck.splice(0, 1)[0] // ..... splices from deck
+  deincrementDeckCount(G, player); // ............... set counts[player].deck
+  incrementHandCount(G, player); // ................. set counts[player].hand
+  G.players[player].hand.push( // ................... pushes to hand
+    getCardByID( // ................................. generates card object
+      G.players[player].deck.splice(0, 1)[0] // ..... splices from deck
+    ) 
   );
 };
 

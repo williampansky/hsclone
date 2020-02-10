@@ -42,11 +42,15 @@ const onBegin = (G, ctx) => {
 
   // reset both player's selected card states
   G.selectedCardIndex[0] = null;
+  G.selectedCardObject[0] = null;
   G.selectedCardIndex[1] = null;
+  G.selectedCardObject[1] = null;
 
   // reset both player's selected minion states
   G.selectedMinionIndex[0] = null;
+  G.selectedMinionObject[0] = null;
   G.selectedMinionIndex[1] = null;
+  G.selectedMinionObject[1] = null;
 };
 
 export default {

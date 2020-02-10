@@ -2,7 +2,10 @@ import { subtract } from 'mathjs';
 import { castTheOrb } from '../spells/cast-the-orb';
 import { castAssassinSpells } from '../spells/assassin-spells';
 import { castAugurSpells } from '../spells/augur-spells';
-import { selectPlayableCard } from '../moves/aesthetic-moves';
+import {
+  selectPlayableCardIndex,
+  selectPlayableCardObject
+} from '../moves/aesthetic-moves';
 import { getCardByID } from '../utils/get-card-by-id';
 
 export const playSpellByCardId = (G, ctx, cardId, player) => {
@@ -34,5 +37,6 @@ export const attackPlayerWithSpell = (G, ctx, player) => {
   const { selectedCardIndex } = G;
   const { currentPlayer } = ctx;
   playSpellByCardId(G, ctx, selectedCardIndex[currentPlayer], player);
-  selectPlayableCard(G, ctx, null);
+  selectPlayableCardIndex(G, ctx, null);
+  selectPlayableCardObject(G, ctx, null);
 };

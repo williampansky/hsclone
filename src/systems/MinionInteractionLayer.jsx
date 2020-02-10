@@ -69,13 +69,13 @@ export default function MinionInteractionLayer(props) {
     CAN_ATTACK && G.selectedMinionIndex[ctx.currentPlayer] === slot;
 
   function handleClick(event) {
-    moves.hoverOverCardInHand(null);
-    moves.selectPlayableCard(null);
+    moves.hoverOverCardInHand(null, null);
+    moves.selectPlayableCard(null, null);
 
     if (CAN_ATTACK) {
       return G.selectedMinionIndex[currentPlayer] === slot
-        ? moves.selectMinionForAttack(null)
-        : moves.selectMinionForAttack(slot);
+        ? moves.selectMinionForAttack(null, null)
+        : moves.selectMinionForAttack(minionData, slot);
     }
 
     if (CAN_BE_ATTACKED) {

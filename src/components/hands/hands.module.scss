@@ -1,0 +1,21 @@
+.hand {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
+}
+
+.hands--their_hand {
+  background: var(--board-theirHand-background-color);
+  height: var(--board-theirHand-height);
+  z-index: var(--board-theirHand-zIndex);
+}
+
+.hands--your_hand {
+  background: var(--board-yourHand-background-color);
+  height: var(--board-yourHand-height);
+  z-index: var(--board-yourHand-zIndex);
+}

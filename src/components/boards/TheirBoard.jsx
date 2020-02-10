@@ -4,16 +4,63 @@ import TheirAvatar from '../avatars/TheirAvatar';
 import TheirBoardPlayerArea from './TheirBoardPlayArea';
 import avatars from '../../config/avatars.config';
 
-export default function TheirBoard(props) {
-  const { G, ctx, playerID } = props;
-  const { health, playerClass } = G;
-  const THEIR_NUMBER = Number(playerID) === 0 ? 1 : 0;
-  const PLAYER_CLASS = playerClass[THEIR_NUMBER];
-
+export default function TheirBoard({
+  G,
+  ctx,
+  moves,
+  events,
+  reset,
+  undo,
+  redo,
+  step,
+  log,
+  gameID,
+  theirID,
+  gameMetadata,
+  isActive,
+  isMultiplayer,
+  isConnected,
+  credentials
+}) {
   return (
-    <div data-file="TheirBoard" className={css['their-board']}>
-      <TheirAvatar health={health} src={avatars[PLAYER_CLASS]} {...props} />
-      <TheirBoardPlayerArea {...props} />
+    <div className={css['their-board']} data-file="TheirBoard">
+      <TheirAvatar
+        src={avatars[G.playerClass[theirID]]}
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        events={events}
+        reset={reset}
+        undo={undo}
+        redo={redo}
+        step={step}
+        log={log}
+        gameID={gameID}
+        theirID={theirID}
+        gameMetadata={gameMetadata}
+        isActive={isActive}
+        isMultiplayer={isMultiplayer}
+        isConnected={isConnected}
+        credentials={credentials}
+      />
+      <TheirBoardPlayerArea
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        events={events}
+        reset={reset}
+        undo={undo}
+        redo={redo}
+        step={step}
+        log={log}
+        gameID={gameID}
+        theirID={theirID}
+        gameMetadata={gameMetadata}
+        isActive={isActive}
+        isMultiplayer={isMultiplayer}
+        isConnected={isConnected}
+        credentials={credentials}
+      />
     </div>
   );
 }

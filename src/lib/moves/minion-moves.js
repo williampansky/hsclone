@@ -20,10 +20,21 @@ export const enableMinionCanBeAttacked = (G, player, slotNumber) => {
   return (G.boards[player][`slot${slotNumber}`].canBeAttacked = true);
 };
 
-export const selectMinionForAttack = (G, ctx, slotNumber) => {
+export const selectMinionForAttack = (G, ctx, index, card) => {
+  selectAttackingMinionIndex(G, ctx, index);
+  selectAttackingMinionObject(G, ctx, card);
+};
+
+export const selectAttackingMinionIndex = (G, ctx, slotNumber) => {
   Number(ctx.currentPlayer) === 0
     ? (G.selectedMinionIndex[0] = slotNumber)
     : (G.selectedMinionIndex[1] = slotNumber);
+};
+
+export const selectAttackingMinionObject = (G, ctx, minion) => {
+  Number(ctx.currentPlayer) === 0
+    ? (G.selectedMinionObject[0] = minion)
+    : (G.selectedMinionObject[1] = minion);
 };
 
 // prettier-ignore
@@ -59,7 +70,7 @@ export const attackMinion = (G, ctx, slotNumber) => {
   disableMinionCanAttack(G, currentPlayer, selectedMinion);
 
   // reset currentPlayer's selectedMinionIndex value
-  selectMinionForAttack(G, ctx, null);
+  selectMinionForAttack(G, ctx, null, null);
 
   // kill any minions with health <= 0
   if (G.boards[currentPlayer][`slot${selectedMinion}`].minionData.health <= 0)
@@ -79,7 +90,7 @@ export const attackPlayer = (G, ctx, player, attack) => {
   disableMinionCanAttack(G, currentPlayer, selectedMinion);
 
   // reset currentPlayer's selectedMinionIndex value
-  selectMinionForAttack(G, ctx, null);
+  selectMinionForAttack(G, ctx, null, null);
 
   // subtract attack from player's health value
   const newHealth = subtract(G.health[player], attack);

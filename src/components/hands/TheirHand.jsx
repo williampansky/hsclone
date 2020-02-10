@@ -1,31 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import PlayerEnergy from '../player-energy/PlayerEnergy';
 import CardBack from '../cards/CardBack';
 import css from 'styles/interactions/card-interactions.module.scss';
+import styles from './hands.module.scss';
 
-export default function TheirHand(props) {
-  const {
-    G,
-    G: {
-      energy,
-      counts,
-      hoveringCardIndex,
-      selectedCardIndex,
-      selectedMinionIndex
-    },
-    ctx,
-    ctx: { currentPlayer },
-    playerID,
-    moves
-  } = props;
-  const theirNumber = Number(playerID) === 0 ? 1 : 0;
-  const theirHoverState = hoveringCardIndex[theirNumber];
-  const theirSelectedState = selectedCardIndex[theirNumber];
-  const theirSelectedMinionState = selectedMinionIndex[theirNumber];
-  const cardsInTheirHand = counts[theirNumber].hand;
-  const energyObject = energy[theirNumber];
-
+export default function TheirHand({
+  G,
+  ctx,
+  moves,
+  events,
+  reset,
+  undo,
+  redo,
+  step,
+  log,
+  gameID,
+  playerID,
+  gameMetadata,
+  isActive,
+  isMultiplayer,
+  isConnected,
+  credentials,
+  yourID,
+  theirID
+}) {
   function transformHovering(idx) {
     return `translateY(calc(${calcOffset(idx)} * 1px)) 
     rotate(calc(${calcRotate(idx)} * -0.25deg)) 
@@ -35,9 +33,9 @@ export default function TheirHand(props) {
   function handleTransforms(idx) {
     let key;
 
-    if (theirSelectedMinionState) key = '';
-    else if (theirSelectedState === idx) key = 'selected';
-    else if (theirHoverState === idx) key = 'hover';
+    if (G.selectedMinionIndex[theirID]) key = '';
+    else if (G.selectedCardIndex[theirID] === idx) key = 'selected';
+    else if (G.hoveringCardIndex[theirID] === idx) key = 'hover';
 
     switch (key) {
       case 'selected':
@@ -56,9 +54,9 @@ export default function TheirHand(props) {
   function handleClasses(idx) {
     let key;
 
-    if (theirSelectedMinionState) key = '';
-    else if (theirSelectedState === idx) key = 'selected';
-    else if (theirHoverState === idx) key = 'hover';
+    if (G.selectedMinionIndex[theirID]) key = '';
+    else if (G.selectedCardIndex[theirID] === idx) key = 'selected';
+    else if (G.hoveringCardIndex[theirID] === idx) key = 'hover';
 
     switch (key) {
       case 'selected':
@@ -73,8 +71,12 @@ export default function TheirHand(props) {
   }
 
   return (
-    <Component data-file="TheirHand" data-number-of-cards={cardsInTheirHand}>
-      {Array.from(Array(cardsInTheirHand)).map((_, index) => {
+    <div
+      className={[styles['hand'], styles['hands--their_hand']].join(' ')}
+      data-file="TheirHand"
+      data-number-of-cards={G.counts[theirID].hand}
+    >
+      {Array.from(Array(G.counts[theirID].hand)).map((_, index) => {
         return (
           <div
             key={index}
@@ -89,23 +91,10 @@ export default function TheirHand(props) {
         );
       })}
 
-      <PlayerEnergy energy={energyObject} />
-    </Component>
+      <PlayerEnergy energy={G.energy[theirID]} />
+    </div>
   );
 }
-
-const Component = styled.div`
-  align-items: center;
-  background: var(--board-theirHand-background-color);
-  box-sizing: border-box;
-  display: flex;
-  flex-flow: row nowrap;
-  height: var(--board-theirHand-height);
-  justify-content: center;
-  position: relative;
-  width: 100vw;
-  z-index: var(--board-theirHand-zIndex);
-`;
 
 // prettier-ignore
 // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);

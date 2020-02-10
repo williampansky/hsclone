@@ -4,51 +4,59 @@ import slotCSS from './board-slot.module.scss';
 import BoardSlot from './BoardSlot';
 import SpellSlot from './SpellSlot';
 
-export default function YourBoardPlayerArea(props) {
-  const {
-    allCards,
-    G: { players, boards, selectedCardIndex },
-    ctx,
-    moves,
+export default function YourBoardPlayerArea({
+  G,
+  ctx,
+  moves,
+  events,
+  reset,
+  undo,
+  redo,
+  step,
+  log,
+  gameID,
+  playerID,
+  gameMetadata,
+  isActive,
+  isMultiplayer,
+  isConnected,
+  credentials
+}) {
+  const { slot1, slot2, slot3, slot4, slot5, slot6, slot7 } = G.boards[
     playerID
-  } = props;
-  const yourHand = players[playerID] && players[playerID].hand;
-  const yourBoard = boards[playerID];
-  const { slot1, slot2, slot3, slot4, slot5, slot6, slot7 } = yourBoard;
-  const cardIsSelected = selectedCardIndex[playerID] !== null;
-  const selectedCardIdx = selectedCardIndex[playerID];
-  const selectedCardId = yourHand[selectedCardIdx];
-  const selectedCardCost =
-    allCards[selectedCardId] && allCards[selectedCardId].cost;
-  const selectedCardType =
-    allCards[selectedCardId] && allCards[selectedCardId].type;
+  ];
 
-  const RENDER_GLOBAL_SPELL_SLOT = selectedCardType === 'SPELL';
+  const cardIsSelected = G.selectedCardIndex[playerID] !== null;
+  const cardCost = cardIsSelected && G.selectedCardIndex[playerID].cost;
+  const cardId = cardIsSelected && G.selectedCardIndex[playerID].id;
+  const cardType = cardIsSelected && G.selectedCardIndex[playerID].type;
+
+  const RENDER_GLOBAL_SPELL_SLOT = cardType === 'SPELL';
   const RENDER_SLOT_1 = slot2.minionData !== null;
   const RENDER_SLOT_2 = slot3.minionData !== null;
   const RENDER_SLOT_3 = slot4.minionData !== null;
-  const RENDER_SLOT_4 = selectedCardType !== 'SPELL';
+  const RENDER_SLOT_4 = cardType !== 'SPELL';
   const RENDER_SLOT_5 = slot4.minionData !== null;
   const RENDER_SLOT_6 = slot5.minionData !== null;
   const RENDER_SLOT_7 = slot6.minionData !== null;
 
   function handleMinionMoves(slotNumber, cardId, cardCost) {
     moves.playMinionCard(slotNumber, cardId, cardCost);
-    moves.hoverOverCardInHand(null);
-    moves.selectPlayableCard(null);
+    moves.hoverOverCardInHand(null, null);
+    moves.selectPlayableCard(null, null);
   }
 
   function handleSpellMoves(cardId, cardCost) {
     moves.playSpellCard(cardId, cardCost);
-    moves.hoverOverCardInHand(null);
-    moves.selectPlayableCard(null);
+    moves.hoverOverCardInHand(null, null);
+    moves.selectPlayableCard(null, null);
   }
 
   function handleClick(
     event,
     slotNumber,
-    cardId = selectedCardId,
-    cardCost = selectedCardCost
+    cardId = cardId,
+    cardCost = cardCost
   ) {
     event.preventDefault();
     if (!cardIsSelected) return;
@@ -79,7 +87,7 @@ export default function YourBoardPlayerArea(props) {
       ].join(' ')}
       data-file="boards/YourBoardPlayArea"
     >
-      <SpellSlot
+      {/* <SpellSlot
         render={RENDER_GLOBAL_SPELL_SLOT}
         slot={0}
         onClick={e => handleClick(e, 0)}
@@ -139,7 +147,7 @@ export default function YourBoardPlayerArea(props) {
         slot={7}
         onClick={e => handleClick(e, 7)}
         {...props}
-      />
+      /> */}
     </div>
   );
 }
