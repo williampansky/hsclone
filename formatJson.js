@@ -1,5 +1,6 @@
 const fs = require('fs');
-const incomingDataArray = require('./csvjson.json');
+const incomingCore = require('./csv-core.json');
+const incomingEntourage = require('./csv-entourage.json');
 
 function parseCardClass(string) {
   if (!string) return;
@@ -13,7 +14,8 @@ function parseImageSrc(string) {
   return newString;
 }
 
-const mapped = incomingDataArray.map(item => {
+// CORE
+const mappedCore = incomingCore.map(item => {
   const {
     artist,
     cardClass,
@@ -39,11 +41,11 @@ const mapped = incomingDataArray.map(item => {
   };
 });
 
-const newObj = JSON.stringify(Object.assign({}, ...mapped));
-fs.writeFileSync('./src/data/debug/cards.json', newObj);
-// fs.writeFileSync('./src/data/debug/cards.json', newObj.replace(/}$/g, ''));
+const coreCards = JSON.stringify(Object.assign({}, ...mappedCore));
+fs.writeFileSync('./src/data/debug/cards.json', coreCards);
 
-const idArray = incomingDataArray.map(item => {
+// IDs
+const idArray = incomingCore.map(item => {
   const { id } = item;
   if (!id) return;
   return id;
@@ -51,3 +53,33 @@ const idArray = incomingDataArray.map(item => {
 const filterNull = idArray.filter(item => item);
 const newArr = JSON.stringify(filterNull);
 fs.writeFileSync('./src/data/debug/cardIdArray.json', newArr);
+
+// ENTOURAGE
+const mappedEntourage = incomingEntourage.map(item => {
+  const {
+    artist,
+    cardClass,
+    collectible,
+    elite,
+    id,
+    imageSrc,
+    mechanics
+  } = item;
+
+  if (!id) return;
+
+  return {
+    [id]: {
+      ...item,
+      artist: artist ? artist : null,
+      cardClass: parseCardClass(cardClass),
+      collectible: collectible === 'checked' ? true : false,
+      elite: elite === 'checked' ? true : false,
+      imageSrc: parseImageSrc(imageSrc),
+      mechanics: mechanics.split(',')
+    }
+  };
+});
+
+const entourage = JSON.stringify(Object.assign({}, ...mappedEntourage));
+fs.writeFileSync('./src/data/debug/entourage.json', entourage);

@@ -3,6 +3,7 @@ import MinionCanAttack from './interactions/MinionCanAttack';
 import MinionCanBeAttacked from './interactions/MinionCanBeAttacked';
 import css from 'styles/interactions/minion-interactions.module.scss';
 import useHover from 'hooks/useHover';
+import MECHANICS from '../enums/mechanics.enums';
 
 export default function MinionInteractionLayer({
   board,
@@ -73,8 +74,9 @@ export default function MinionInteractionLayer({
     G.boards[currentPlayer][`slot${index}`].canAttack === true &&
     attack !== 0;
 
-  const HAS_STAMPEDE = mechanics.find(m => m === 'STAMPEDE');
-  const HAS_GUARD = mechanics.find(m => m === 'GUARD');
+  const HAS_GUARD = mechanics.find(m => m === MECHANICS[4]);
+  const HAS_STAMPEDE = mechanics.find(m => m === MECHANICS[5]);
+  const HAS_WARCRY = mechanics.find(m => m === MECHANICS[6]);
 
   const IS_ATTACKING =
     CAN_ATTACK && G.selectedMinionIndex[ctx.currentPlayer] === index;
@@ -102,7 +104,8 @@ export default function MinionInteractionLayer({
         IS_ATTACKING ? css['minion--is_attacking'] : '',
         CAN_BE_ATTACKED ? css['minion--can_be_attacked'] : '',
         HAS_STAMPEDE ? css['minion--has_stampede'] : '',
-        HAS_GUARD ? css['minion--has_guard'] : ''
+        HAS_GUARD ? css['minion--has_guard'] : '',
+        HAS_WARCRY ? css['minion--has_warcry'] : ''
       ].join(' ')}
       data-file="systems/MinionInteractionLayer"
       data-render={render}

@@ -1,4 +1,5 @@
 import { subtract } from 'mathjs';
+import { initCoreWarcry } from '../warcrys/core.warcrys';
 
 export const disableMinionCanAttack = (G, player, slotNumber) => {
   if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
@@ -45,6 +46,10 @@ export const selectAttackingMinionObject = (G, ctx, minion) => {
   Number(ctx.currentPlayer) === 0
     ? (G.selectedMinionObject[0] = minion)
     : (G.selectedMinionObject[1] = minion);
+};
+
+export const initMinionWarcry = (G, ctx, slotNumber, cardId) => {
+  return initCoreWarcry(G, ctx, slotNumber, cardId);
 };
 
 // prettier-ignore

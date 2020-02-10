@@ -40,13 +40,13 @@ export default function TheirAvatar({
     isActive &&
     (G.selectedMinionIndex[CURRENT_PLAYER] !== null ||
       G.selectedCardIndex[CURRENT_PLAYER] !== null) &&
-    THEIR_BOARD['slot1'].hasGuard !== false &&
-    THEIR_BOARD['slot2'].hasGuard !== false &&
-    THEIR_BOARD['slot3'].hasGuard !== false &&
-    THEIR_BOARD['slot4'].hasGuard !== false &&
-    THEIR_BOARD['slot5'].hasGuard !== false &&
-    THEIR_BOARD['slot6'].hasGuard !== false &&
-    THEIR_BOARD['slot7'].hasGuard !== false;
+    THEIR_BOARD['slot1'].hasGuard === false &&
+    THEIR_BOARD['slot2'].hasGuard === false &&
+    THEIR_BOARD['slot3'].hasGuard === false &&
+    THEIR_BOARD['slot4'].hasGuard === false &&
+    THEIR_BOARD['slot5'].hasGuard === false &&
+    THEIR_BOARD['slot6'].hasGuard === false &&
+    THEIR_BOARD['slot7'].hasGuard === false;
 
   const CARD_IS_MINION =
     G.selectedCardIndex[CURRENT_PLAYER] !== null &&
