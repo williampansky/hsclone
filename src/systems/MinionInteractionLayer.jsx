@@ -54,7 +54,7 @@ export default function MinionInteractionLayer(props) {
     isActive &&
     board === 'Theirs' &&
     G.boards[previousPlayer][`slot${slot}`].canBeAttacked === true &&
-    G.selectedMinionIndexObject[ctx.currentPlayer] !== null;
+    G.selectedMinionIndex[ctx.currentPlayer] !== null;
 
   const CAN_ATTACK =
     isActive &&
@@ -62,37 +62,18 @@ export default function MinionInteractionLayer(props) {
     G.boards[currentPlayer][`slot${slot}`].canAttack === true &&
     attack !== 0;
 
-  const HAS_CHARGE = mechanics.find(m => m === 'CHARGE');
+  const HAS_STAMPEDE = mechanics.find(m => m === 'STAMPEDE');
+  const HAS_GUARD = mechanics.find(m => m === 'GUARD');
 
   const IS_ATTACKING =
-    CAN_ATTACK && G.selectedMinionIndexObject[ctx.currentPlayer] === slot;
-
-  // useEffect(() => {
-  //   minionMechanics && setMechanics({ mechanics: minionMechanics.toString() });
-  // }, []);
-
-  // if (CAN_ATTACK) return <MinionCanAttack data={minionData} slot={slot} />;
-
-  // if (mechanics) {
-  //   switch (mechanics) {
-  //     case board === 'Yours' && 'CHARGE':
-  //       return (
-  //         <React.Fragment>
-  //           <MinionCanAttack children={children} data={data} slot={slot} />
-  //         </React.Fragment>
-  //       );
-
-  //     default:
-  //       return <React.Fragment>{children}</React.Fragment>;
-  //   }
-  // }
+    CAN_ATTACK && G.selectedMinionIndex[ctx.currentPlayer] === slot;
 
   function handleClick(event) {
     moves.hoverOverCardInHand(null);
     moves.selectPlayableCard(null);
 
     if (CAN_ATTACK) {
-      return G.selectedMinionIndexObject[currentPlayer] === slot
+      return G.selectedMinionIndex[currentPlayer] === slot
         ? moves.selectMinionForAttack(null)
         : moves.selectMinionForAttack(slot);
     }
@@ -108,7 +89,9 @@ export default function MinionInteractionLayer(props) {
         css['minion--interaction_layer'],
         CAN_ATTACK ? css['minion--can_attack'] : '',
         IS_ATTACKING ? css['minion--is_attacking'] : '',
-        CAN_BE_ATTACKED ? css['minion--can_be_attacked'] : ''
+        CAN_BE_ATTACKED ? css['minion--can_be_attacked'] : '',
+        HAS_STAMPEDE ? css['minion--has_stampede'] : '',
+        HAS_GUARD ? css['minion--has_guard'] : ''
       ].join(' ')}
       data-file="systems/MinionInteractionLayer"
       data-render={render}

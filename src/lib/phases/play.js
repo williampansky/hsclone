@@ -37,16 +37,16 @@ const onBegin = (G, ctx) => {
   }
 
   // reset both player's interaction hover states
-  G.hoveringCardIndexObject[0] = null;
-  G.hoveringCardIndexObject[1] = null;
+  G.hoveringCardIndex[0] = null;
+  G.hoveringCardIndex[1] = null;
 
   // reset both player's selected card states
-  G.selectedCardIndexObject[0] = null;
-  G.selectedCardIndexObject[1] = null;
+  G.selectedCardIndex[0] = null;
+  G.selectedCardIndex[1] = null;
 
   // reset both player's selected minion states
-  G.selectedMinionIndexObject[0] = null;
-  G.selectedMinionIndexObject[1] = null;
+  G.selectedMinionIndex[0] = null;
+  G.selectedMinionIndex[1] = null;
 };
 
 export default {

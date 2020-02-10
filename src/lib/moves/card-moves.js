@@ -117,7 +117,7 @@ export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
   deincrementHandCount(G, currentPlayer);
 
   // if minion has charge
-  if (mechanics.find(m => m === 'CHARGE'))
+  if (mechanics.find(m => m === 'STAMPEDE'))
     enableMinionCanAttack(G, ctx.currentPlayer, slotNumber);
 };
 

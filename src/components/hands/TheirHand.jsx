@@ -10,9 +10,9 @@ export default function TheirHand(props) {
     G: {
       energy,
       counts,
-      hoveringCardIndexObject,
-      selectedCardIndexObject,
-      selectedMinionIndexObject
+      hoveringCardIndex,
+      selectedCardIndex,
+      selectedMinionIndex
     },
     ctx,
     ctx: { currentPlayer },
@@ -20,9 +20,9 @@ export default function TheirHand(props) {
     moves
   } = props;
   const theirNumber = Number(playerID) === 0 ? 1 : 0;
-  const theirHoverState = hoveringCardIndexObject[theirNumber];
-  const theirSelectedState = selectedCardIndexObject[theirNumber];
-  const theirSelectedMinionState = selectedMinionIndexObject[theirNumber];
+  const theirHoverState = hoveringCardIndex[theirNumber];
+  const theirSelectedState = selectedCardIndex[theirNumber];
+  const theirSelectedMinionState = selectedMinionIndex[theirNumber];
   const cardsInTheirHand = counts[theirNumber].hand;
   const energyObject = energy[theirNumber];
 

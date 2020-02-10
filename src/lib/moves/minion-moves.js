@@ -22,16 +22,16 @@ export const enableMinionCanBeAttacked = (G, player, slotNumber) => {
 
 export const selectMinionForAttack = (G, ctx, slotNumber) => {
   Number(ctx.currentPlayer) === 0
-    ? (G.selectedMinionIndexObject[0] = slotNumber)
-    : (G.selectedMinionIndexObject[1] = slotNumber);
+    ? (G.selectedMinionIndex[0] = slotNumber)
+    : (G.selectedMinionIndex[1] = slotNumber);
 };
 
 // prettier-ignore
 export const attackMinion = (G, ctx, slotNumber) => {
-  const { selectedMinionIndexObject, turnOrder } = G;
+  const { selectedMinionIndex, turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
-  const selectedMinion = selectedMinionIndexObject[currentPlayer];
+  const selectedMinion = selectedMinionIndex[currentPlayer];
   const MINION_ATTACKING = G.boards[currentPlayer][`slot${selectedMinion}`];
   const MINION_BEING_ATTACKED = G.boards[otherPlayer][`slot${slotNumber}`];
 
@@ -58,7 +58,7 @@ export const attackMinion = (G, ctx, slotNumber) => {
   // disable MINION_ATTACKING's ability to attack
   disableMinionCanAttack(G, currentPlayer, selectedMinion);
 
-  // reset currentPlayer's selectedMinionIndexObject value
+  // reset currentPlayer's selectedMinionIndex value
   selectMinionForAttack(G, ctx, null);
 
   // kill any minions with health <= 0
@@ -69,16 +69,16 @@ export const attackMinion = (G, ctx, slotNumber) => {
 };
 
 export const attackPlayer = (G, ctx, player, attack) => {
-  const { selectedMinionIndexObject } = G;
+  const { selectedMinionIndex } = G;
   const { currentPlayer } = ctx;
 
-  const selectedMinion = selectedMinionIndexObject[currentPlayer];
+  const selectedMinion = selectedMinionIndex[currentPlayer];
   if (!selectedMinion) return;
 
   // disable MINION_ATTACKING's ability to attack
   disableMinionCanAttack(G, currentPlayer, selectedMinion);
 
-  // reset currentPlayer's selectedMinionIndexObject value
+  // reset currentPlayer's selectedMinionIndex value
   selectMinionForAttack(G, ctx, null);
 
   // subtract attack from player's health value

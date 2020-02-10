@@ -15,7 +15,7 @@ export default function YourHand(props) {
     moves,
     isActive
   } = props;
-  const { counts, energy, players, selectedCardIndexObject } = G;
+  const { counts, energy, players, selectedCardIndex } = G;
   const yourNumber = Number(playerID) === 0 ? 0 : 1;
   const yourTimer = counts[yourNumber].timer;
 
@@ -55,7 +55,7 @@ export default function YourHand(props) {
                 playerID={playerID}
                 moves={moves}
                 energy={energy}
-                selectedCardIndexObject={selectedCardIndexObject}
+                selectedCardIndex={selectedCardIndex}
               />
             );
           })

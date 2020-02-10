@@ -17,7 +17,7 @@ export default function CardInteractionLayer({
   theirHand,
   theirHoverState,
   energy,
-  selectedCardIndexObject
+  selectedCardIndex
 }) {
   // const {
   //   G: { energy },
@@ -41,8 +41,8 @@ export default function CardInteractionLayer({
   const yourCurrentEnergy = yourEnergy && yourEnergy.current;
   const yourTotalEnergy = yourEnergy && yourEnergy.total;
 
-  const yourSelectedCardIndex = selectedCardIndexObject[yourNumber];
-  const cardIsSelected = selectedCardIndexObject[yourNumber] !== null;
+  const yourSelectedCardIndex = selectedCardIndex[yourNumber];
+  const cardIsSelected = selectedCardIndex[yourNumber] !== null;
 
   React.useEffect(() => {
     Number(currentPlayer) === Number(playerID) &&

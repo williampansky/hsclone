@@ -6,7 +6,7 @@ import BoardSlot from './BoardSlot';
 export default function TheirBoardPlayerArea(props) {
   const {
     allCards,
-    G: { players, boards, selectedCardIndexObject },
+    G: { players, boards, selectedCardIndex },
     ctx,
     moves,
     playerID

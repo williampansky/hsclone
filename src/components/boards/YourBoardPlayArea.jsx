@@ -7,7 +7,7 @@ import SpellSlot from './SpellSlot';
 export default function YourBoardPlayerArea(props) {
   const {
     allCards,
-    G: { players, boards, selectedCardIndexObject },
+    G: { players, boards, selectedCardIndex },
     ctx,
     moves,
     playerID
@@ -15,9 +15,9 @@ export default function YourBoardPlayerArea(props) {
   const yourHand = players[playerID] && players[playerID].hand;
   const yourBoard = boards[playerID];
   const { slot1, slot2, slot3, slot4, slot5, slot6, slot7 } = yourBoard;
-  const cardIsSelected = selectedCardIndexObject[playerID] !== null;
-  const selectedCardIndex = selectedCardIndexObject[playerID];
-  const selectedCardId = yourHand[selectedCardIndex];
+  const cardIsSelected = selectedCardIndex[playerID] !== null;
+  const selectedCardIdx = selectedCardIndex[playerID];
+  const selectedCardId = yourHand[selectedCardIdx];
   const selectedCardCost =
     allCards[selectedCardId] && allCards[selectedCardId].cost;
   const selectedCardType =
