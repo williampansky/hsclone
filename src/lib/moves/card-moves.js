@@ -2,7 +2,7 @@ import { subtract } from 'mathjs';
 import { getCardByID } from '../utils/get-card-by-id';
 import { generateMinion } from '../utils/generate-minion';
 import { playSpellByCardId } from './spell-moves';
-import { enableMinionCanAttack } from './minion-moves';
+import { enableMinionCanAttack, enableMinionHasGuard } from './minion-moves';
 import MECHANICS from '../../enums/mechanics.enums';
 
 export const incrementDeckCount = (G, player) => {
@@ -109,11 +109,11 @@ export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
 
   // move to your playerCards array
   playedCards[currentPlayer].push(
-    players[currentPlayer].hand.find(c => c === cardId)
+    players[currentPlayer].hand.find(c => c.id === cardId)
   );
 
   // and then remove card from your hand
-  const newHand = players[currentPlayer].hand.filter(c => c !== cardId);
+  const newHand = players[currentPlayer].hand.filter(c => c.id !== cardId);
   players[currentPlayer].hand = newHand;
 
   // then deincrement your hand count
@@ -122,6 +122,10 @@ export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
   // if minion has charge
   if (mechanics.find(m => m === MECHANICS[5]))
     enableMinionCanAttack(G, ctx.currentPlayer, slotNumber);
+
+  // if minion has taunt
+  if (mechanics.find(m => m === MECHANICS[4]))
+    enableMinionHasGuard(G, ctx.currentPlayer, slotNumber);
 };
 
 export const playSpellCard = (G, ctx, cardId, cardCost) => {

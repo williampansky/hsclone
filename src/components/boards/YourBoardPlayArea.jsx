@@ -71,90 +71,172 @@ export default function YourBoardPlayerArea({
       <div
         className={[
           boardCSS['board-play-area'],
-          boardCSS['your-board-play-area']
+          boardCSS['your-board-play-area'],
+          cardIsSelected ? slotCSS['board-is-active'] : ''
         ].join(' ')}
         data-file="boards/YourBoardPlayArea"
       >
-        {/* <BoardSlot
-        board="Yours"
-        credentials={credentials}
-        ctx={ctx}
-        data={slot1}
-        events={events}
-        G={G}
-        gameID={gameID}
-        gameMetadata={gameMetadata}
-        index={1}
-        isActive={isActive}
-        isConnected={isConnected}
-        isMultiplayer={isMultiplayer}
-        log={log}
-        moves={moves}
-        onClick={e => handleClick(e, 1)}
-        playerID={playerID}
-        redo={redo}
-        render={RENDER_SLOT_1}
-        reset={reset}
-        step={step}
-        undo={undo}
-      /> */}
-        {/* 
-      <BoardSlot
-        board="Yours"
-        minion={slot1}
-        render={RENDER_SLOT_1}
-        slot={1}
-        onClick={e => handleClick(e, 1)}
-        {...props}
-      />
-      <BoardSlot
-        board="Yours"
-        minion={slot2}
-        render={RENDER_SLOT_2}
-        slot={2}
-        onClick={e => handleClick(e, 2)}
-        {...props}
-      />
-      <BoardSlot
-        board="Yours"
-        minion={slot3}
-        render={RENDER_SLOT_3}
-        slot={3}
-        onClick={e => handleClick(e, 3)}
-        {...props}
-      />
-      <BoardSlot
-        board="Yours"
-        minion={slot4}
-        render={RENDER_SLOT_4}
-        slot={4}
-        onClick={e => handleClick(e, 4)}
-        {...props}
-      />
-      <BoardSlot
-        board="Yours"
-        minion={slot5}
-        render={RENDER_SLOT_5}
-        slot={5}
-        onClick={e => handleClick(e, 5)}
-        {...props}
-      />
-      <BoardSlot
-        board="Yours"
-        minion={slot6}
-        render={RENDER_SLOT_6}
-        slot={6}
-        onClick={e => handleClick(e, 6)}
-        {...props}
-      />
-      <BoardSlot
-        board="Yours"
-        minion={slot7}
-        render={RENDER_SLOT_7}
-        slot={7}
-        onClick={e => handleClick(e, 7)}
-        {...props}
-      /> */}
+        <BoardSlot
+          board="Yours"
+          credentials={credentials}
+          ctx={ctx}
+          data={slot1}
+          events={events}
+          G={G}
+          gameID={gameID}
+          gameMetadata={gameMetadata}
+          index={1}
+          isActive={isActive}
+          isConnected={isConnected}
+          isMultiplayer={isMultiplayer}
+          log={log}
+          moves={moves}
+          onClick={e => handleClick(e, 1)}
+          playerID={playerID}
+          redo={redo}
+          render={RENDER_SLOT_1}
+          reset={reset}
+          step={step}
+          undo={undo}
+        />
+        <BoardSlot
+          board="Yours"
+          credentials={credentials}
+          ctx={ctx}
+          data={slot2}
+          events={events}
+          G={G}
+          gameID={gameID}
+          gameMetadata={gameMetadata}
+          index={2}
+          isActive={isActive}
+          isConnected={isConnected}
+          isMultiplayer={isMultiplayer}
+          log={log}
+          moves={moves}
+          onClick={e => handleClick(e, 2)}
+          playerID={playerID}
+          redo={redo}
+          render={RENDER_SLOT_2}
+          reset={reset}
+          step={step}
+          undo={undo}
+        />
+        <BoardSlot
+          board="Yours"
+          credentials={credentials}
+          ctx={ctx}
+          data={slot3}
+          events={events}
+          G={G}
+          gameID={gameID}
+          gameMetadata={gameMetadata}
+          index={3}
+          isActive={isActive}
+          isConnected={isConnected}
+          isMultiplayer={isMultiplayer}
+          log={log}
+          moves={moves}
+          onClick={e => handleClick(e, 3)}
+          playerID={playerID}
+          redo={redo}
+          render={RENDER_SLOT_3}
+          reset={reset}
+          step={step}
+          undo={undo}
+        />
+        <BoardSlot
+          board="Yours"
+          credentials={credentials}
+          ctx={ctx}
+          data={slot4}
+          events={events}
+          G={G}
+          gameID={gameID}
+          gameMetadata={gameMetadata}
+          index={4}
+          isActive={isActive}
+          isConnected={isConnected}
+          isMultiplayer={isMultiplayer}
+          log={log}
+          moves={moves}
+          onClick={e => handleClick(e, 4)}
+          playerID={playerID}
+          redo={redo}
+          render={RENDER_SLOT_4}
+          reset={reset}
+          step={step}
+          undo={undo}
+        />
+        <BoardSlot
+          board="Yours"
+          credentials={credentials}
+          ctx={ctx}
+          data={slot5}
+          events={events}
+          G={G}
+          gameID={gameID}
+          gameMetadata={gameMetadata}
+          index={5}
+          isActive={isActive}
+          isConnected={isConnected}
+          isMultiplayer={isMultiplayer}
+          log={log}
+          moves={moves}
+          onClick={e => handleClick(e, 5)}
+          playerID={playerID}
+          redo={redo}
+          render={RENDER_SLOT_5}
+          reset={reset}
+          step={step}
+          undo={undo}
+        />
+        <BoardSlot
+          board="Yours"
+          credentials={credentials}
+          ctx={ctx}
+          data={slot6}
+          events={events}
+          G={G}
+          gameID={gameID}
+          gameMetadata={gameMetadata}
+          index={6}
+          isActive={isActive}
+          isConnected={isConnected}
+          isMultiplayer={isMultiplayer}
+          log={log}
+          moves={moves}
+          onClick={e => handleClick(e, 6)}
+          playerID={playerID}
+          redo={redo}
+          render={RENDER_SLOT_6}
+          reset={reset}
+          step={step}
+          undo={undo}
+        />
+        <BoardSlot
+          board="Yours"
+          credentials={credentials}
+          ctx={ctx}
+          data={slot7}
+          events={events}
+          G={G}
+          gameID={gameID}
+          gameMetadata={gameMetadata}
+          index={7}
+          isActive={isActive}
+          isConnected={isConnected}
+          isMultiplayer={isMultiplayer}
+          log={log}
+          moves={moves}
+          onClick={e => handleClick(e, 7)}
+          playerID={playerID}
+          redo={redo}
+          render={RENDER_SLOT_7}
+          reset={reset}
+          step={step}
+          undo={undo}
+        />
       </div>
     </React.Fragment>
   );

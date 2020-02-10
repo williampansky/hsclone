@@ -20,7 +20,17 @@ export const enableMinionCanBeAttacked = (G, player, slotNumber) => {
   return (G.boards[player][`slot${slotNumber}`].canBeAttacked = true);
 };
 
-export const selectMinionForAttack = (G, ctx, index, card) => {
+export const disableMinionHasGuard = (G, player, slotNumber) => {
+  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
+  return (G.boards[player][`slot${slotNumber}`].hasGuard = false);
+};
+
+export const enableMinionHasGuard = (G, player, slotNumber) => {
+  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
+  return (G.boards[player][`slot${slotNumber}`].hasGuard = true);
+};
+
+export const selectMinionForAttack = (G, ctx, card, index) => {
   selectAttackingMinionIndex(G, ctx, index);
   selectAttackingMinionObject(G, ctx, card);
 };

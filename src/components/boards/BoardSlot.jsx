@@ -40,14 +40,30 @@ export default function BoardSlot({
       data-render={render}
       onClick={onClick}
     >
-      {/* {minionData && (
+      {minionData && (
         <MinionInteractionLayer
           board={board}
           minionData={minionData}
-          slot={index}
+          index={index}
           render={render}
+          G={G}
+          ctx={ctx}
+          moves={moves}
+          events={events}
+          reset={reset}
+          undo={undo}
+          redo={redo}
+          step={step}
+          log={log}
+          gameID={gameID}
+          playerID={playerID}
+          gameMetadata={gameMetadata}
+          isActive={isActive}
+          isMultiplayer={isMultiplayer}
+          isConnected={isConnected}
+          credentials={credentials}
         />
-      )} */}
+      )}
       {minionData && <Minion data={minionData} slot={index} />}
     </div>
   );

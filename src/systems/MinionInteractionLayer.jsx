@@ -4,18 +4,29 @@ import MinionCanBeAttacked from './interactions/MinionCanBeAttacked';
 import css from 'styles/interactions/minion-interactions.module.scss';
 import useHover from 'hooks/useHover';
 
-export default function MinionInteractionLayer(props) {
-  const {
-    G,
-    ctx,
-    isActive,
-    moves,
-    board,
-    children,
-    minionData,
-    slot,
-    render
-  } = props;
+export default function MinionInteractionLayer({
+  board,
+  minionData,
+  index,
+  onClick,
+  render,
+  G,
+  ctx,
+  moves,
+  events,
+  reset,
+  undo,
+  redo,
+  step,
+  log,
+  gameID,
+  playerID,
+  gameMetadata,
+  isActive,
+  isMultiplayer,
+  isConnected,
+  credentials
+}) {
   const [hoverRef, isHovered] = useHover();
   const {
     artist,
@@ -53,33 +64,33 @@ export default function MinionInteractionLayer(props) {
   const CAN_BE_ATTACKED =
     isActive &&
     board === 'Theirs' &&
-    G.boards[previousPlayer][`slot${slot}`].canBeAttacked === true &&
+    G.boards[previousPlayer][`slot${index}`].canBeAttacked === true &&
     G.selectedMinionIndex[ctx.currentPlayer] !== null;
 
   const CAN_ATTACK =
     isActive &&
     board === 'Yours' &&
-    G.boards[currentPlayer][`slot${slot}`].canAttack === true &&
+    G.boards[currentPlayer][`slot${index}`].canAttack === true &&
     attack !== 0;
 
   const HAS_STAMPEDE = mechanics.find(m => m === 'STAMPEDE');
   const HAS_GUARD = mechanics.find(m => m === 'GUARD');
 
   const IS_ATTACKING =
-    CAN_ATTACK && G.selectedMinionIndex[ctx.currentPlayer] === slot;
+    CAN_ATTACK && G.selectedMinionIndex[ctx.currentPlayer] === index;
 
   function handleClick(event) {
     moves.hoverOverCardInHand(null, null);
     moves.selectPlayableCard(null, null);
 
     if (CAN_ATTACK) {
-      return G.selectedMinionIndex[currentPlayer] === slot
+      return G.selectedMinionIndex[currentPlayer] === index
         ? moves.selectMinionForAttack(null, null)
-        : moves.selectMinionForAttack(minionData, slot);
+        : moves.selectMinionForAttack(minionData, index);
     }
 
     if (CAN_BE_ATTACKED) {
-      return moves.attackMinion(slot);
+      return moves.attackMinion(index);
     }
   }
 
