@@ -133,10 +133,10 @@ export default {
   hoverOverCardInHand: (G, ctx, index) => {
     return hoverOverCardInHand(G, ctx, index);
   },
-  selectPlayableCard: (G, ctx, index) => {
-    return selectPlayableCard(G, ctx, index);
+  selectPlayableCard: (G, ctx, card, index) => {
+    return selectPlayableCard(G, ctx, card, index);
   },
-  selectMinionForAttack: (G, ctx, index) => {
-    return selectMinionForAttack(G, ctx, index);
+  selectMinionForAttack: (G, ctx, minion, index) => {
+    return selectMinionForAttack(G, ctx, minion, index);
   }
 };

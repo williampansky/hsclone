@@ -2,13 +2,28 @@ import React from 'react';
 import css from './avatar.module.scss';
 import { getCardByID } from '../../lib/utils/get-card-by-id';
 
-export default function TheirAvatar(props) {
-  const { G, ctx, moves, playerID, isActive, src } = props;
+export default function TheirAvatar({
+  G,
+  ctx,
+  moves,
+  events,
+  reset,
+  undo,
+  redo,
+  step,
+  log,
+  gameID,
+  theirID,
+  gameMetadata,
+  isActive,
+  isMultiplayer,
+  isConnected,
+  credentials,
+  src
+}) {
   const CURRENT_PLAYER = ctx.currentPlayer;
-  const THEIR_NUMBER = Number(playerID) === 0 ? 1 : 0;
-
-  const THEIR_HEALTH = G.health[THEIR_NUMBER];
-  const THEIR_BOARD = G.boards[THEIR_NUMBER];
+  const THEIR_HEALTH = G.health[theirID];
+  const THEIR_BOARD = G.boards[theirID];
 
   const selectedCardIdFromHand =
     G.players[CURRENT_PLAYER] &&
@@ -25,13 +40,13 @@ export default function TheirAvatar(props) {
     isActive &&
     (G.selectedMinionIndex[CURRENT_PLAYER] !== null ||
       G.selectedCardIndex[CURRENT_PLAYER] !== null) &&
-    THEIR_BOARD['slot1'].hasGuard !== true &&
-    THEIR_BOARD['slot2'].hasGuard !== true &&
-    THEIR_BOARD['slot3'].hasGuard !== true &&
-    THEIR_BOARD['slot4'].hasGuard !== true &&
-    THEIR_BOARD['slot5'].hasGuard !== true &&
-    THEIR_BOARD['slot6'].hasGuard !== true &&
-    THEIR_BOARD['slot7'].hasGuard !== true;
+    THEIR_BOARD['slot1'].hasGuard === false &&
+    THEIR_BOARD['slot2'].hasGuard === false &&
+    THEIR_BOARD['slot3'].hasGuard === false &&
+    THEIR_BOARD['slot4'].hasGuard === false &&
+    THEIR_BOARD['slot5'].hasGuard === false &&
+    THEIR_BOARD['slot6'].hasGuard === false &&
+    THEIR_BOARD['slot7'].hasGuard === false;
 
   const CARD_IS_MINION =
     G.selectedCardIndex[CURRENT_PLAYER] !== null &&
@@ -47,7 +62,7 @@ export default function TheirAvatar(props) {
     if (CARD_IS_SPELL)
       return moves.attackPlayerWithSpell(G.selectedCardIndex[CURRENT_PLAYER]);
 
-    return moves.attackPlayer(THEIR_NUMBER, atkMinionsAtk);
+    return moves.attackPlayer(theirID, atkMinionsAtk);
   }
 
   return (

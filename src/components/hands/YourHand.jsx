@@ -4,79 +4,66 @@ import CardInteractionLayer from '../../systems/CardInteractionLayer';
 import PlayerEnergy from '../player-energy/PlayerEnergy';
 import Timer from 'components/timer/Timer';
 import uid from 'utils/uid';
+import styles from './hands.module.scss';
 
-export default function YourHand(props) {
-  const {
-    allCards,
-    G,
-    ctx,
-    ctx: { currentPlayer },
-    playerID,
-    moves,
-    isActive
-  } = props;
-  const { counts, energy, players, selectedCardIndex } = G;
-  const yourNumber = Number(playerID) === 0 ? 0 : 1;
-  const yourTimer = counts[yourNumber].timer;
-
-  // state
-  const [{ cards }, setCards] = useState({ cards: [] });
-
-  const setCardsCallback = useCallback((incomingCards = []) => {
-    const newCardsForHand = incomingCards.map(cardId => {
-      return allCards[cardId];
-    });
-
-    return setCards({
-      cards: [...cards, newCardsForHand].flat()
-    });
-  }, []);
-
-  useEffect(() => {
-    players[yourNumber] && setCardsCallback(players[yourNumber].hand);
-  }, [G]);
-
-  const energyObject = energy[yourNumber];
-
+export default function YourHand({
+  G,
+  ctx,
+  moves,
+  events,
+  reset,
+  undo,
+  redo,
+  step,
+  log,
+  gameID,
+  playerID,
+  gameMetadata,
+  isActive,
+  isMultiplayer,
+  isConnected,
+  credentials,
+  yourID,
+  theirID
+}) {
   return (
-    <Component
+    <div
+      className={[styles['hand'], styles['hands--their_hand']].join(' ')}
       data-file="YourHand"
-      data-number-of-cards={cards && cards.length}
+      data-number-of-cards={G.counts[yourID].hand}
     >
-      {cards && cards.length
-        ? cards.map((card, index) => {
+      {G.players[yourID].hand && G.players[yourID].hand.length
+        ? G.players[yourID].hand.map((card, index) => {
             return (
-              <CardInteractionLayer
-                card={card}
-                key={index}
-                index={index}
-                G={G}
-                ctx={ctx}
-                playerID={playerID}
-                moves={moves}
-                energy={energy}
-                selectedCardIndex={selectedCardIndex}
-              />
+              <React.Fragment key={index}>
+                <CardInteractionLayer
+                  card={card}
+                  index={index}
+                  G={G}
+                  ctx={ctx}
+                  moves={moves}
+                  events={events}
+                  reset={reset}
+                  undo={undo}
+                  redo={redo}
+                  step={step}
+                  log={log}
+                  gameID={gameID}
+                  playerID={playerID}
+                  gameMetadata={gameMetadata}
+                  isActive={isActive}
+                  isMultiplayer={isMultiplayer}
+                  isConnected={isConnected}
+                  credentials={credentials}
+                  yourID={yourID}
+                  theirID={theirID}
+                />
+              </React.Fragment>
             );
           })
         : null}
 
-      <PlayerEnergy energy={energyObject} />
-
-      {/* <Timer {...props} /> */}
-    </Component>
+      <PlayerEnergy energy={G.energy[yourID]} />
+    </div>
   );
 }
-
-const Component = styled.div`
-  align-items: center;
-  background: var(--board-yourHand-background-color);
-  box-sizing: border-box;
-  display: flex;
-  flex-flow: row nowrap;
-  height: var(--board-yourHand-height);
-  justify-content: center;
-  position: relative;
-  width: 100vw;
-  z-index: var(--board-yourHand-zIndex);
-`;

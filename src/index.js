@@ -58,7 +58,7 @@ class App extends React.Component {
         <HScloneClient
           playerID={this.state.playerID}
           // deck={this.state.deck}
-          allCards={this.state.allCards}
+          // allCards={this.state.allCards}
         />
       </React.Fragment>
     );

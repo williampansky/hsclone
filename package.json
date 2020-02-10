@@ -31,6 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "unit": "jest",
+    "format": "node formatJson.js",
     "eject": "react-scripts eject"
   }
 }

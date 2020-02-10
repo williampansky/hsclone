@@ -7,49 +7,35 @@ import Card from 'components/cards/Card';
 import CardBack from 'components/cards/CardBack';
 
 export default function CardInteractionLayer({
-  G,
-  ctx,
-  playerID,
-  moves,
   card,
   index,
-  interactions,
-  theirHand,
-  theirHoverState,
-  energy,
-  selectedCardIndex
+  G,
+  ctx,
+  moves,
+  events,
+  reset,
+  undo,
+  redo,
+  step,
+  log,
+  gameID,
+  playerID,
+  gameMetadata,
+  isActive,
+  isMultiplayer,
+  isConnected,
+  credentials,
+  yourID,
+  theirID
 }) {
-  // const {
-  //   G: { energy },
-  //   ctx,
-  //   playerID,
-  //   moves,
-
-  //   children,
-  //   card,
-  //   index,
-  //   interactions,
-  //   theirHand,
-  //   theirHoverState
-  // } = props;
-
   const [hoverRef, isHovered] = useHover();
-  const { currentPlayer, playOrderPos } = ctx;
-  const yourNumber = Number(playerID) === 0 ? 0 : 1;
-
-  const yourEnergy = energy[yourNumber];
-  const yourCurrentEnergy = yourEnergy && yourEnergy.current;
-  const yourTotalEnergy = yourEnergy && yourEnergy.total;
-
-  const yourSelectedCardIndex = selectedCardIndex[yourNumber];
-  const cardIsSelected = selectedCardIndex[yourNumber] !== null;
 
   React.useEffect(() => {
-    Number(currentPlayer) === Number(playerID) &&
+    isActive &&
       isHovered &&
-      !cardIsSelected &&
-      moves.hoverOverCardInHand(index);
-  }, [currentPlayer, isHovered]);
+      G.selectedCardIndex[ctx.currentPlayer] === null &&
+      moves.hoverOverCardInHand(index, card);
+  }, [ctx.currentPlayer, isHovered]);
 
   const {
     artist,
@@ -81,9 +67,9 @@ export default function CardInteractionLayer({
     type
   } = card;
 
-  const IS_YOUR_TURN = Number(currentPlayer) === Number(playerID);
-  const IS_PLAYABLE = cost <= yourCurrentEnergy;
-  const IS_SELECTED = yourSelectedCardIndex === index;
+  const IS_YOUR_TURN = isActive;
+  const IS_PLAYABLE = cost <= G.energy[playerID].current;
+  const IS_SELECTED = G.selectedCardIndex[playerID] === index;
 
   const yourHandStyle = {
     transform: `
@@ -95,14 +81,14 @@ export default function CardInteractionLayer({
 
   function selectPlayableCard(event, index) {
     event.preventDefault();
-    moves.hoverOverCardInHand(null);
-    return moves.selectPlayableCard(index);
+    moves.hoverOverCardInHand(null, null);
+    return moves.selectPlayableCard(card, index);
   }
 
   function deselectSelectedCard(event) {
     event.preventDefault();
-    moves.hoverOverCardInHand(null);
-    return moves.selectPlayableCard(null);
+    moves.hoverOverCardInHand(null, null);
+    return moves.selectPlayableCard(null, null);
   }
 
   // prettier-ignore
