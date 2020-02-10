@@ -10,12 +10,6 @@ export default function SpellSlot({ index, onClick, render }) {
       data-slot={index}
       data-render={render}
       onClick={onClick}
-    >
-      {/* {minion && (
-        <React.Fragment>
-          <MinionInteractionLayer board={p} data={minion} slot={slot} />
-        </React.Fragment>
-      )} */}
-    </div>
+    />
   );
 }

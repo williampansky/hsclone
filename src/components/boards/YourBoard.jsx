@@ -1,8 +1,9 @@
 import React from 'react';
 import YourBoardPlayerArea from './YourBoardPlayArea';
-import css from './board.module.scss';
 import YourAvatar from '../avatars/YourAvatar';
 import avatars from '../../config/avatars.config';
+import css from './board.module.scss';
+import slotCSS from './board-slot.module.scss';
 
 export default function YourBoard({
   G,
@@ -22,8 +23,23 @@ export default function YourBoard({
   isConnected,
   credentials
 }) {
+  const cardIsSelected =
+    G.selectedCardIndex[playerID] !== null &&
+    G.selectedCardObject[playerID] !== null;
+  const cardType = cardIsSelected && G.selectedCardObject[playerID].type;
+  const spellType = cardIsSelected && G.selectedCardObject[playerID].spellType;
+
   return (
-    <div className={css['your-board']} data-file="YourBoard">
+    <div
+      className={[
+        css['your-board'],
+        cardIsSelected ? slotCSS['board-is-active'] : '',
+        cardType === 'SPELL' && spellType === 'GLOBAL'
+          ? slotCSS['spell-is-global']
+          : ''
+      ].join(' ')}
+      data-file="YourBoard"
+    >
       <YourBoardPlayerArea
         G={G}
         ctx={ctx}

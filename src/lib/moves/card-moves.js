@@ -143,7 +143,7 @@ export const playSpellCard = (G, ctx, cardId, cardCost) => {
   );
 
   // and then remove card from your hand
-  const newHand = players[currentPlayer].hand.filter(c => c !== cardId);
+  const newHand = players[currentPlayer].hand.filter(c => c.id !== cardId);
   players[currentPlayer].hand = newHand;
 
   // then deincrement your hand count

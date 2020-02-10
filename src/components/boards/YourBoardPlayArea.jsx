@@ -26,10 +26,12 @@ export default function YourBoardPlayerArea({
     playerID
   ];
 
-  const cardIsSelected = G.selectedCardIndex[playerID] !== null;
-  const cardCost = cardIsSelected && G.selectedCardIndex[playerID].cost;
-  const cardId = cardIsSelected && G.selectedCardIndex[playerID].id;
-  const cardType = cardIsSelected && G.selectedCardIndex[playerID].type;
+  const cardIsSelected =
+    G.selectedCardIndex[playerID] !== null &&
+    G.selectedCardObject[playerID] !== null;
+  const cardCost = cardIsSelected && G.selectedCardObject[playerID].cost;
+  const cardId = cardIsSelected && G.selectedCardObject[playerID].id;
+  const cardType = cardIsSelected && G.selectedCardObject[playerID].type;
 
   const RENDER_GLOBAL_SPELL_SLOT = cardType === 'SPELL';
   const RENDER_SLOT_1 = slot2.minionData !== null;
@@ -52,47 +54,28 @@ export default function YourBoardPlayerArea({
     moves.selectPlayableCard(null, null);
   }
 
-  function handleClick(
-    event,
-    slotNumber,
-    cardId = cardId,
-    cardCost = cardCost
-  ) {
+  function handleClick(event, slotNumber, id = cardId, cost = cardCost) {
     event.preventDefault();
     if (!cardIsSelected) return;
-    if (slotNumber === 0) return handleSpellMoves(cardId, cardCost);
-    return handleMinionMoves(slotNumber, cardId, cardCost);
-  }
-
-  function handleClasses(idx) {
-    let key;
-
-    if (cardIsSelected) key = 'active';
-
-    switch (key) {
-      case 'active':
-        return slotCSS['board-is-active'];
-
-      default:
-        return false;
-    }
+    if (slotNumber === 0) return handleSpellMoves(id, cost);
+    return handleMinionMoves(slotNumber, id, cost);
   }
 
   return (
-    <div
-      className={[
-        boardCSS['board-play-area'],
-        boardCSS['your-board-play-area'],
-        handleClasses()
-      ].join(' ')}
-      data-file="boards/YourBoardPlayArea"
-    >
+    <React.Fragment>
       <SpellSlot
         index={0}
         onClick={e => handleClick(e, 0)}
         render={RENDER_GLOBAL_SPELL_SLOT}
       />
-      {/* <BoardSlot
+      <div
+        className={[
+          boardCSS['board-play-area'],
+          boardCSS['your-board-play-area']
+        ].join(' ')}
+        data-file="boards/YourBoardPlayArea"
+      >
+        {/* <BoardSlot
         board="Yours"
         credentials={credentials}
         ctx={ctx}
@@ -115,7 +98,7 @@ export default function YourBoardPlayerArea({
         step={step}
         undo={undo}
       /> */}
-      {/* 
+        {/* 
       <BoardSlot
         board="Yours"
         minion={slot1}
@@ -172,6 +155,7 @@ export default function YourBoardPlayerArea({
         onClick={e => handleClick(e, 7)}
         {...props}
       /> */}
-    </div>
+      </div>
+    </React.Fragment>
   );
 }

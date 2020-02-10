@@ -1,11 +1,11 @@
 .end-turn {
   bottom: auto;
   left: auto;
+  margin: 0 1% 0 0;
   position: absolute;
   right: 0;
   top: calc(50% - calc(38px / 2));
-  z-index: 100;
-  margin: 0 1% 0 0;
+  z-index: 500;
 }
 
 .end-turn-button {
