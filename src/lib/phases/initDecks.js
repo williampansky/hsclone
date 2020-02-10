@@ -5,7 +5,8 @@ const cardIdArray = require('../../data/debug/cardIdArray.json');
 function buildRandomDeck(array = cardIdArray) {
   const deck = [];
   for (let i = 0; i < 30; i++) {
-    deck.push(array.splice(0, 1)[0]);
+    if (array.id !== 'GAME_001')
+      deck.push(array[Math.floor(Math.random() * array.length)]);
   }
 
   return deck;

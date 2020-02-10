@@ -53,7 +53,7 @@ export default function TheirBoardPlayerArea(props) {
       ].join(' ')}
       data-file="TheirBoardPlayArea"
     >
-      <BoardSlot
+      {/* <BoardSlot
         minion={slot1}
         board="Theirs"
         render={RENDER_SLOT_1}
@@ -108,7 +108,7 @@ export default function TheirBoardPlayerArea(props) {
         slot={7}
         onClick={e => handleClick(e, 7)}
         {...props}
-      />
+      /> */}
     </div>
   );
 }

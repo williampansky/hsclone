@@ -87,11 +87,35 @@ export default function YourBoardPlayerArea({
       ].join(' ')}
       data-file="boards/YourBoardPlayArea"
     >
-      {/* <SpellSlot
-        render={RENDER_GLOBAL_SPELL_SLOT}
-        slot={0}
+      <SpellSlot
+        index={0}
         onClick={e => handleClick(e, 0)}
+        render={RENDER_GLOBAL_SPELL_SLOT}
       />
+      {/* <BoardSlot
+        board="Yours"
+        credentials={credentials}
+        ctx={ctx}
+        data={slot1}
+        events={events}
+        G={G}
+        gameID={gameID}
+        gameMetadata={gameMetadata}
+        index={1}
+        isActive={isActive}
+        isConnected={isConnected}
+        isMultiplayer={isMultiplayer}
+        log={log}
+        moves={moves}
+        onClick={e => handleClick(e, 1)}
+        playerID={playerID}
+        redo={redo}
+        render={RENDER_SLOT_1}
+        reset={reset}
+        step={step}
+        undo={undo}
+      /> */}
+      {/* 
       <BoardSlot
         board="Yours"
         minion={slot1}

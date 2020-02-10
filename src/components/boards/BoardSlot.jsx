@@ -3,9 +3,30 @@ import css from './board-slot.module.scss';
 import MinionInteractionLayer from 'systems/MinionInteractionLayer';
 import Minion from 'components/minion/Minion';
 
-export default function BoardSlot(props) {
-  const { board, minion, onClick, slot, render } = props;
-  const { canAttack, canBeAttacked, minionData } = minion;
+export default function BoardSlot({
+  board,
+  data,
+  index,
+  onClick,
+  render,
+  G,
+  ctx,
+  moves,
+  events,
+  reset,
+  undo,
+  redo,
+  step,
+  log,
+  gameID,
+  playerID,
+  gameMetadata,
+  isActive,
+  isMultiplayer,
+  isConnected,
+  credentials
+}) {
+  const { canAttack, canBeAttacked, hasGuard, minionData } = data;
 
   return (
     <div
@@ -15,20 +36,19 @@ export default function BoardSlot(props) {
         minionData && css['has-minion']
       ].join(' ')}
       data-file="boards/BoardSlot"
-      data-slot={slot}
+      data-slot={index}
       data-render={render}
       onClick={onClick}
     >
-      {minionData && (
+      {/* {minionData && (
         <MinionInteractionLayer
           board={board}
           minionData={minionData}
-          slot={slot}
+          slot={index}
           render={render}
-          {...props}
         />
-      )}
-      {minionData && <Minion data={minionData} slot={slot} />}
+      )} */}
+      {minionData && <Minion data={minionData} slot={index} />}
     </div>
   );
 }
