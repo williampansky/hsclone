@@ -35,7 +35,7 @@ export default function TheirBoardPlayerArea({
 
   async function handleClick(event, slot, obj) {
     event.preventDefault();
-    console.log(event);
+    // console.log(event);
 
     // if (!selectedCard) return;
 

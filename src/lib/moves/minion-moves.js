@@ -87,11 +87,24 @@ export const attackMinion = (G, ctx, slotNumber) => {
   // reset currentPlayer's selectedMinionIndex value
   selectMinionForAttack(G, ctx, null, null);
 
-  // kill any minions with health <= 0
-  if (G.boards[currentPlayer][`slot${selectedMinion}`].minionData.health <= 0)
-    G.boards[currentPlayer][`slot${selectedMinion}`].minionData = null;
-  if (G.boards[otherPlayer][`slot${slotNumber}`].minionData.health <= 0)
-    G.boards[otherPlayer][`slot${slotNumber}`].minionData = null;
+  // kill ANY minions with health <= 0 and reset states
+  if (G.boards[currentPlayer][`slot${selectedMinion}`].minionData.health <= 0) {
+    G.boards[currentPlayer][`slot${selectedMinion}`] = {
+      canAttack: false,
+      canBeAttacked: false,
+      hasGuard: false,
+      minionData: null
+    };
+  }
+
+  if (G.boards[otherPlayer][`slot${slotNumber}`].minionData.health <= 0) {
+    G.boards[otherPlayer][`slot${slotNumber}`] = {
+      canAttack: false,
+      canBeAttacked: false,
+      hasGuard: false,
+      minionData: null
+    };
+  }
 };
 
 export const attackPlayer = (G, ctx, player, attack) => {
