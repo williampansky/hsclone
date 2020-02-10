@@ -4,7 +4,7 @@ import css from './end-turn.module.scss';
 export default function EndTurnButton({ events, moves, isActive }) {
   function handleClick(event) {
     event.preventDefault();
-    moves.hoverOverCardInHand(null, null);
+    moves.hoverOverCardInHand(null);
     moves.selectPlayableCard(null, null);
     moves.selectMinionForAttack(null, null);
     return events.endTurn();

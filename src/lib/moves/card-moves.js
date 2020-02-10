@@ -96,11 +96,18 @@ export const drawSingleCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
   else discardCard(G, currentPlayer);
 };
 
-export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
+export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
   const { boards, energy, players, playedCards } = G;
   const { currentPlayer } = ctx;
   const minionObject = generateMinion(cardId);
   const { mechanics } = minionObject;
+
+  const CARD_ITEM = {
+    canAttack: false,
+    canBeAttacked: false,
+    hasGuard: false,
+    minionData: minionObject
+  };
 
   // subtract the card's cost from player's current energy count
   energy[ctx.currentPlayer].current = subtract(
@@ -108,8 +115,14 @@ export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
     cardCost
   );
 
-  // place card in selected slotNumber on your board
-  boards[currentPlayer][`slot${slotNumber}`].minionData = minionObject;
+  // place card in selected index on your board
+  const newBoard = [
+    ...G.boards[currentPlayer].slice(0, index + 1),
+    CARD_ITEM,
+    ...G.boards[currentPlayer].slice(index + 1)
+  ];
+
+  G.boards[currentPlayer] = newBoard;
 
   // move to your playerCards array
   playedCards[currentPlayer].push(
@@ -125,15 +138,15 @@ export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
 
   // if minion has guard
   if (mechanics.find(m => m === MECHANICS[4]))
-    enableMinionHasGuard(G, ctx.currentPlayer, slotNumber);
+    enableMinionHasGuard(G, ctx.currentPlayer, index);
 
   // if minion has stampede
   if (mechanics.find(m => m === MECHANICS[5]))
-    enableMinionCanAttack(G, ctx.currentPlayer, slotNumber);
+    enableMinionCanAttack(G, ctx.currentPlayer, index);
 
   // if minion has warcry
   if (mechanics.find(m => m === MECHANICS[6]))
-    initMinionWarcry(G, ctx, slotNumber, cardId);
+    initMinionWarcry(G, ctx, index, cardId);
 };
 
 export const playSpellCard = (G, ctx, cardId, cardCost) => {

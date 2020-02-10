@@ -16,7 +16,7 @@ const REDUX_DEVTOOLS =
 const HScloneClient = Client({
   game: HSclone,
   board: GameWrapper,
-  debug: true,
+  debug: false,
   multiplayer: SocketIO({ server: 'localhost:8000' }),
   enhancer: REDUX_DEVTOOLS
 });

@@ -29,14 +29,14 @@ const onBegin = (G, ctx) => {
 
   // enable canBeAttacked & disable canAttack on THEIR board slots
   for (let i = 0; i < Object.keys(THEIR_BOARD).length; i++) {
-    enableMinionCanBeAttacked(G, PREVIOUS_PLAYER, i + 1);
-    disableMinionCanAttack(G, PREVIOUS_PLAYER, i + 1);
+    enableMinionCanBeAttacked(G, PREVIOUS_PLAYER, i);
+    disableMinionCanAttack(G, PREVIOUS_PLAYER, i);
   }
 
   // disable canBeAttacked & enable canAttack on YOUR board slots
   for (let i = 0; i < Object.keys(YOUR_BOARD).length; i++) {
-    disableMinionCanBeAttacked(G, CURRENT_PLAYER, i + 1);
-    enableMinionCanAttack(G, CURRENT_PLAYER, i + 1);
+    disableMinionCanBeAttacked(G, CURRENT_PLAYER, i);
+    enableMinionCanAttack(G, CURRENT_PLAYER, i);
   }
 
   // reset both player's interaction hover states

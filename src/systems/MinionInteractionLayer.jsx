@@ -64,15 +64,14 @@ export default function MinionInteractionLayer({
 
   let CAN_BE_ATTACKED = false;
   let SIBLING_HAS_GUARD = false;
-  Object.keys(G.boards[previousPlayer]).forEach(slot => {
-    if (G.boards[previousPlayer][slot].hasGuard === true)
-      SIBLING_HAS_GUARD = true;
+  G.boards[previousPlayer].forEach(slot => {
+    if (slot.hasGuard === true) SIBLING_HAS_GUARD = true;
   });
 
   const CAN_ATTACK =
     isActive &&
     board === 'Yours' &&
-    G.boards[currentPlayer][`slot${index}`].canAttack === true &&
+    G.boards[currentPlayer][index].canAttack === true &&
     attack !== 0;
 
   const HAS_GUARD = mechanics.find(m => m === MECHANICS[4]);
@@ -83,7 +82,7 @@ export default function MinionInteractionLayer({
     isActive &&
     board === 'Theirs' &&
     !SIBLING_HAS_GUARD &&
-    G.boards[previousPlayer][`slot${index}`].canBeAttacked === true &&
+    G.boards[previousPlayer][index].canBeAttacked === true &&
     G.selectedMinionIndex[ctx.currentPlayer] !== null
   )
     CAN_BE_ATTACKED = true;
@@ -91,7 +90,7 @@ export default function MinionInteractionLayer({
     isActive &&
     board === 'Theirs' &&
     HAS_GUARD &&
-    G.boards[previousPlayer][`slot${index}`].canBeAttacked === true &&
+    G.boards[previousPlayer][index].canBeAttacked === true &&
     G.selectedMinionIndex[ctx.currentPlayer] !== null
   )
     CAN_BE_ATTACKED = true;

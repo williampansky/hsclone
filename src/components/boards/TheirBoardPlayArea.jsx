@@ -25,13 +25,13 @@ export default function TheirBoardPlayerArea({
   const { slot1, slot2, slot3, slot4, slot5, slot6, slot7 } = G.boards[theirID];
 
   // const RENDER_GLOBAL_SPELL_SLOT = selectedCardType === 'SPELL';
-  const RENDER_SLOT_1 = slot1.minionData !== null;
-  const RENDER_SLOT_2 = slot2.minionData !== null;
-  const RENDER_SLOT_3 = slot3.minionData !== null;
-  const RENDER_SLOT_4 = slot4.minionData !== null;
-  const RENDER_SLOT_5 = slot5.minionData !== null;
-  const RENDER_SLOT_6 = slot6.minionData !== null;
-  const RENDER_SLOT_7 = slot7.minionData !== null;
+  // const RENDER_SLOT_1 = slot1.minionData !== null;
+  // const RENDER_SLOT_2 = slot2.minionData !== null;
+  // const RENDER_SLOT_3 = slot3.minionData !== null;
+  // const RENDER_SLOT_4 = slot4.minionData !== null;
+  // const RENDER_SLOT_5 = slot5.minionData !== null;
+  // const RENDER_SLOT_6 = slot6.minionData !== null;
+  // const RENDER_SLOT_7 = slot7.minionData !== null;
 
   async function handleClick(event, slot, obj) {
     event.preventDefault();
@@ -62,167 +62,34 @@ export default function TheirBoardPlayerArea({
       ].join(' ')}
       data-file="TheirBoardPlayArea"
     >
-      <BoardSlot
-        board="Theirs"
-        credentials={credentials}
-        ctx={ctx}
-        data={slot1}
-        events={events}
-        G={G}
-        gameID={gameID}
-        gameMetadata={gameMetadata}
-        index={1}
-        isActive={isActive}
-        isConnected={isConnected}
-        isMultiplayer={isMultiplayer}
-        log={log}
-        moves={moves}
-        onClick={e => handleClick(e, 1)}
-        playerID={playerID}
-        redo={redo}
-        render={RENDER_SLOT_1}
-        reset={reset}
-        step={step}
-        undo={undo}
-      />
-      <BoardSlot
-        board="Theirs"
-        credentials={credentials}
-        ctx={ctx}
-        data={slot2}
-        events={events}
-        G={G}
-        gameID={gameID}
-        gameMetadata={gameMetadata}
-        index={2}
-        isActive={isActive}
-        isConnected={isConnected}
-        isMultiplayer={isMultiplayer}
-        log={log}
-        moves={moves}
-        onClick={e => handleClick(e, 2)}
-        playerID={playerID}
-        redo={redo}
-        render={RENDER_SLOT_2}
-        reset={reset}
-        step={step}
-        undo={undo}
-      />
-      <BoardSlot
-        board="Theirs"
-        credentials={credentials}
-        ctx={ctx}
-        data={slot3}
-        events={events}
-        G={G}
-        gameID={gameID}
-        gameMetadata={gameMetadata}
-        index={3}
-        isActive={isActive}
-        isConnected={isConnected}
-        isMultiplayer={isMultiplayer}
-        log={log}
-        moves={moves}
-        onClick={e => handleClick(e, 3)}
-        playerID={playerID}
-        redo={redo}
-        render={RENDER_SLOT_3}
-        reset={reset}
-        step={step}
-        undo={undo}
-      />
-      <BoardSlot
-        board="Theirs"
-        credentials={credentials}
-        ctx={ctx}
-        data={slot4}
-        events={events}
-        G={G}
-        gameID={gameID}
-        gameMetadata={gameMetadata}
-        index={4}
-        isActive={isActive}
-        isConnected={isConnected}
-        isMultiplayer={isMultiplayer}
-        log={log}
-        moves={moves}
-        onClick={e => handleClick(e, 4)}
-        playerID={playerID}
-        redo={redo}
-        render={RENDER_SLOT_4}
-        reset={reset}
-        step={step}
-        undo={undo}
-      />
-      <BoardSlot
-        board="Theirs"
-        credentials={credentials}
-        ctx={ctx}
-        data={slot5}
-        events={events}
-        G={G}
-        gameID={gameID}
-        gameMetadata={gameMetadata}
-        index={5}
-        isActive={isActive}
-        isConnected={isConnected}
-        isMultiplayer={isMultiplayer}
-        log={log}
-        moves={moves}
-        onClick={e => handleClick(e, 5)}
-        playerID={playerID}
-        redo={redo}
-        render={RENDER_SLOT_5}
-        reset={reset}
-        step={step}
-        undo={undo}
-      />
-      <BoardSlot
-        board="Theirs"
-        credentials={credentials}
-        ctx={ctx}
-        data={slot6}
-        events={events}
-        G={G}
-        gameID={gameID}
-        gameMetadata={gameMetadata}
-        index={6}
-        isActive={isActive}
-        isConnected={isConnected}
-        isMultiplayer={isMultiplayer}
-        log={log}
-        moves={moves}
-        onClick={e => handleClick(e, 6)}
-        playerID={playerID}
-        redo={redo}
-        render={RENDER_SLOT_6}
-        reset={reset}
-        step={step}
-        undo={undo}
-      />
-      <BoardSlot
-        board="Theirs"
-        credentials={credentials}
-        ctx={ctx}
-        data={slot7}
-        events={events}
-        G={G}
-        gameID={gameID}
-        gameMetadata={gameMetadata}
-        index={7}
-        isActive={isActive}
-        isConnected={isConnected}
-        isMultiplayer={isMultiplayer}
-        log={log}
-        moves={moves}
-        onClick={e => handleClick(e, 7)}
-        playerID={playerID}
-        redo={redo}
-        render={RENDER_SLOT_7}
-        reset={reset}
-        step={step}
-        undo={undo}
-      />
+      {G.boards[theirID].map((card, index) => {
+        return (
+          <BoardSlot
+            key={index}
+            board="Theirs"
+            credentials={credentials}
+            ctx={ctx}
+            data={card}
+            events={events}
+            G={G}
+            gameID={gameID}
+            gameMetadata={gameMetadata}
+            index={index}
+            isActive={isActive}
+            isConnected={isConnected}
+            isMultiplayer={isMultiplayer}
+            log={log}
+            moves={moves}
+            onClick={e => handleClick(e, index)}
+            playerID={playerID}
+            redo={redo}
+            // render={RENDER_SLOT_1}
+            reset={reset}
+            step={step}
+            undo={undo}
+          />
+        );
+      })}
     </div>
   );
 }

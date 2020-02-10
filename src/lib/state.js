@@ -32,24 +32,8 @@ export default {
   //
   // prettier-ignore
   boards: {
-    0: {
-      slot1: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot2: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot3: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot4: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot5: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot6: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot7: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-    },
-    1: {
-      slot1: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot2: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot3: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot4: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot5: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot6: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null },
-      slot7: { canAttack: false, canBeAttacked: false, hasGuard: false, minionData: null }
-    }
+    0: [],
+    1: []
   },
   energy: {
     0: {

@@ -1,34 +1,34 @@
 import { subtract } from 'mathjs';
 import { initCoreWarcry } from '../warcrys/core.warcrys';
 
-export const disableMinionCanAttack = (G, player, slotNumber) => {
-  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
-  return (G.boards[player][`slot${slotNumber}`].canAttack = false);
+export const disableMinionCanAttack = (G, player, index) => {
+  if (!G.boards[player][index]) return;
+  return (G.boards[player][index].canAttack = false);
 };
 
-export const enableMinionCanAttack = (G, player, slotNumber) => {
-  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
-  return (G.boards[player][`slot${slotNumber}`].canAttack = true);
+export const enableMinionCanAttack = (G, player, index) => {
+  if (!G.boards[player][index]) return;
+  return (G.boards[player][index].canAttack = true);
 };
 
-export const disableMinionCanBeAttacked = (G, player, slotNumber) => {
-  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
-  return (G.boards[player][`slot${slotNumber}`].canBeAttacked = false);
+export const disableMinionCanBeAttacked = (G, player, index) => {
+  if (!G.boards[player][index]) return;
+  return (G.boards[player][index].canBeAttacked = false);
 };
 
-export const enableMinionCanBeAttacked = (G, player, slotNumber) => {
-  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
-  return (G.boards[player][`slot${slotNumber}`].canBeAttacked = true);
+export const enableMinionCanBeAttacked = (G, player, index) => {
+  if (!G.boards[player][index]) return;
+  return (G.boards[player][index].canBeAttacked = true);
 };
 
-export const disableMinionHasGuard = (G, player, slotNumber) => {
-  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
-  return (G.boards[player][`slot${slotNumber}`].hasGuard = false);
+export const disableMinionHasGuard = (G, player, index) => {
+  if (!G.boards[player][index]) return;
+  return (G.boards[player][index].hasGuard = false);
 };
 
-export const enableMinionHasGuard = (G, player, slotNumber) => {
-  if (G.boards[player][`slot${slotNumber}`].minionData === null) return;
-  return (G.boards[player][`slot${slotNumber}`].hasGuard = true);
+export const enableMinionHasGuard = (G, player, index) => {
+  if (!G.boards[player][index]) return;
+  return (G.boards[player][index].hasGuard = true);
 };
 
 export const selectMinionForAttack = (G, ctx, card, index) => {
@@ -53,13 +53,13 @@ export const initMinionWarcry = (G, ctx, slotNumber, cardId) => {
 };
 
 // prettier-ignore
-export const attackMinion = (G, ctx, slotNumber) => {
+export const attackMinion = (G, ctx, index) => {
   const { selectedMinionIndex, turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
   const selectedMinion = selectedMinionIndex[currentPlayer];
-  const MINION_ATTACKING = G.boards[currentPlayer][`slot${selectedMinion}`];
-  const MINION_BEING_ATTACKED = G.boards[otherPlayer][`slot${slotNumber}`];
+  const MINION_ATTACKING = G.boards[currentPlayer][index];
+  const MINION_BEING_ATTACKED = G.boards[otherPlayer][index];
 
   // MINION_ATTACKING attack & health
   const attackingAttack = MINION_ATTACKING.minionData.attack;
@@ -76,10 +76,10 @@ export const attackMinion = (G, ctx, slotNumber) => {
   const newBeingAttackedHealth = subtract(beingAttackedHealth, attackingAttack);
   
   // subtract minion being attacked's attack value from the attacking minion's health value.
-  G.boards[currentPlayer][`slot${selectedMinion}`].minionData.health = newAttackedHealth;
+  G.boards[currentPlayer][selectedMinion].minionData.health = newAttackedHealth;
   
   // subtract attacking minion's attack value from the minion being attacked's health value.
-  G.boards[otherPlayer][`slot${slotNumber}`].minionData.health = newBeingAttackedHealth;
+  G.boards[otherPlayer][index].minionData.health = newBeingAttackedHealth;
 
   // disable MINION_ATTACKING's ability to attack
   disableMinionCanAttack(G, currentPlayer, selectedMinion);
@@ -88,22 +88,12 @@ export const attackMinion = (G, ctx, slotNumber) => {
   selectMinionForAttack(G, ctx, null, null);
 
   // kill ANY minions with health <= 0 and reset states
-  if (G.boards[currentPlayer][`slot${selectedMinion}`].minionData.health <= 0) {
-    G.boards[currentPlayer][`slot${selectedMinion}`] = {
-      canAttack: false,
-      canBeAttacked: false,
-      hasGuard: false,
-      minionData: null
-    };
+  if (G.boards[currentPlayer][selectedMinion].minionData.health <= 0) {
+    G.boards[currentPlayer].splice(selectedMinion, 1);
   }
 
-  if (G.boards[otherPlayer][`slot${slotNumber}`].minionData.health <= 0) {
-    G.boards[otherPlayer][`slot${slotNumber}`] = {
-      canAttack: false,
-      canBeAttacked: false,
-      hasGuard: false,
-      minionData: null
-    };
+  if (G.boards[otherPlayer][index].minionData.health <= 0) {
+    G.boards[otherPlayer].splice(index, 1);
   }
 };
 
@@ -112,7 +102,7 @@ export const attackPlayer = (G, ctx, player, attack) => {
   const { currentPlayer } = ctx;
 
   const selectedMinion = selectedMinionIndex[currentPlayer];
-  if (!selectedMinion) return;
+  if (selectedMinion === null) return;
 
   // disable MINION_ATTACKING's ability to attack
   disableMinionCanAttack(G, currentPlayer, selectedMinion);

@@ -2,6 +2,7 @@ import React from 'react';
 import css from './board-slot.module.scss';
 import MinionInteractionLayer from 'systems/MinionInteractionLayer';
 import Minion from 'components/minion/Minion';
+import CardInteractionLayer from 'systems/CardInteractionLayer';
 
 export default function BoardSlot({
   board,
@@ -68,3 +69,12 @@ export default function BoardSlot({
     </div>
   );
 }
+
+BoardSlot.defaultProps = {
+  data: {
+    canAttack: false,
+    canBeAttacked: false,
+    hasGuard: false,
+    minionData: null
+  }
+};
