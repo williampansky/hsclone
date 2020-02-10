@@ -2,6 +2,7 @@ import { subtract } from 'mathjs';
 import { playSpellByCardId } from './spell-moves';
 import { generateMinion } from '../utils/generate-minion';
 import { enableMinionCanAttack } from './minion-moves';
+import { getCardByID } from '../utils/get-card-by-id';
 
 export const incrementDeckCount = (G, player) => {
   return G.counts[player].deck++;
@@ -17,6 +18,12 @@ export const incrementHandCount = (G, player) => {
 
 export const deincrementHandCount = (G, player) => {
   return G.counts[player].hand--;
+};
+
+export const addCardToHand = (G, ctx, player, cardId) => {
+  if (!getCardByID(cardId)) return;
+  incrementHandCount(G, player);
+  G.players[player].hand.push(cardId);
 };
 
 /**

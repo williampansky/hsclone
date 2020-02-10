@@ -3,6 +3,7 @@ import {
   selectPlayableCard
 } from './moves/aesthetic-moves';
 import {
+  addCardToHand,
   deincrementDeckCount,
   deincrementHandCount,
   drawCard,
@@ -21,11 +22,19 @@ import {
   enableMinionCanBeAttacked,
   selectMinionForAttack
 } from './moves/minion-moves';
+import { attackPlayerWithSpell } from './moves/spell-moves';
 
 /**
  * Note that moves marked `client: false` are executed on the server.
  */
 export default {
+  addCardToHand: {
+    client: false,
+    move: (G, ctx, player, cardId) => {
+      return addCardToHand(G, ctx, player, cardId);
+    }
+  },
+
   drawCard: {
     client: false,
     move: (G, player) => {
@@ -100,6 +109,13 @@ export default {
     client: false,
     move: (G, ctx, player, attack) => {
       return attackPlayer(G, ctx, player, attack);
+    }
+  },
+
+  attackPlayerWithSpell: {
+    client: false,
+    move: (G, ctx, player) => {
+      return attackPlayerWithSpell(G, ctx, player);
     }
   },
 

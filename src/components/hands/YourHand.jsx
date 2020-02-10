@@ -20,27 +20,9 @@ export default function YourHand(props) {
   const yourTimer = counts[yourNumber].timer;
 
   // state
-  // const [hoverRef, isHovered] = useHover();
   const [{ cards }, setCards] = useState({ cards: [] });
 
   const setCardsCallback = useCallback((incomingCards = []) => {
-    // const newCardsForHand = incomingCards.map(cardId => {
-    //   return {
-    //     [uid()]: allCards[cardId]
-    //   };
-    // });
-
-    // return cards === null
-    //   ? setCards({
-    //       cards: newCardsForHand
-    //     })
-    //   : setCards({
-    //       cards: {
-    //         cards,
-    //         ...newCardsForHand
-    //       }
-    //     });
-
     const newCardsForHand = incomingCards.map(cardId => {
       return allCards[cardId];
     });

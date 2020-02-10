@@ -17,9 +17,19 @@ export default function TheirAvatar(props) {
     (G.selectedMinionIndexObject[CURRENT_PLAYER] !== null ||
       G.selectedCardIndexObject[CURRENT_PLAYER] !== null);
 
+  const CARD_IS_SPELL =
+    G.selectedCardIndexObject[CURRENT_PLAYER] !== null &&
+    G.selectedMinionIndexObject[CURRENT_PLAYER] === null;
+
   function handleClick() {
     if (!CAN_BE_ATTACKED) return;
-    moves.attackPlayer(THEIR_NUMBER, atkMinionsAtk);
+
+    if (CARD_IS_SPELL)
+      return moves.attackPlayerWithSpell(
+        G.selectedCardIndexObject[CURRENT_PLAYER]
+      );
+
+    return moves.attackPlayer(THEIR_NUMBER, atkMinionsAtk);
   }
 
   return (

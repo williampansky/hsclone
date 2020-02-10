@@ -2,18 +2,22 @@ import { subtract } from 'mathjs';
 import { castTheOrb } from '../spells/cast-the-orb';
 import { castAugurSpells } from '../spells/augur-spells';
 import { selectPlayableCard } from '../moves/aesthetic-moves';
-const cards = require('../../data/debug/cards.json');
+import { getCardByID } from '../utils/get-card-by-id';
 
-export const playSpellByCardId = (G, ctx, cardId) => {
-  const { cardClass } = cards[cardId];
+export const playSpellByCardId = (G, ctx, cardId, player) => {
+  console.log(cardId, player);
+  if (!cardId) return;
+  const cardObj = getCardByID(cardId);
+  const cardClass = cardObj && cardObj.cardClass;
 
   if (cardClass) {
     // prettier-ignore
     switch (cardClass) {
-      case 'AUGUR':       return castAugurSpells(G, ctx, cardId);
-      default:            return castGeneralSpell(G, ctx, cardId);
+      case 'AUGUR':       return castAugurSpells(G, ctx, cardId, player);
+      default:            return castGeneralSpell(G, ctx, cardId, player);
     }
   }
+  //
 
   function castGeneralSpell(G, ctx, cardId) {
     // prettier-ignore
@@ -27,13 +31,6 @@ export const playSpellByCardId = (G, ctx, cardId) => {
 export const attackPlayerWithSpell = (G, ctx, player) => {
   const { selectedCardIndexObject } = G;
   const { currentPlayer } = ctx;
-  const selectedCard = cards[selectedCardIndexObject[currentPlayer]];
-  const selectedCardAttack = selectedCard.attack;
-
-  // reset currentPlayer's selectedCardIndexObject value
+  playSpellByCardId(G, ctx, selectedCardIndexObject[currentPlayer], player);
   selectPlayableCard(G, ctx, null);
-
-  // subtract attack from player's health value
-  const newHealth = subtract(G.health[player], selectedCardAttack);
-  G.health[player] = newHealth;
 };

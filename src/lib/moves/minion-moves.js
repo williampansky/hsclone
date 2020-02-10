@@ -71,7 +71,9 @@ export const attackMinion = (G, ctx, slotNumber) => {
 export const attackPlayer = (G, ctx, player, attack) => {
   const { selectedMinionIndexObject } = G;
   const { currentPlayer } = ctx;
+
   const selectedMinion = selectedMinionIndexObject[currentPlayer];
+  if (!selectedMinion) return;
 
   // disable MINION_ATTACKING's ability to attack
   disableMinionCanAttack(G, currentPlayer, selectedMinion);
