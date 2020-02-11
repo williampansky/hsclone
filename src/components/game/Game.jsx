@@ -78,6 +78,8 @@ export default function GameWrapper(props) {
           moves={moves}
           events={events}
           isActive={isActive}
+          yourID={yourID}
+          theirID={theirID}
         />
         <YourBoard
           G={G}

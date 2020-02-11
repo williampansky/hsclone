@@ -89,11 +89,14 @@ export const drawCards = (G, player, numberOfCards = 1) => {
  */
 export const drawSingleCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
   const { currentPlayer } = ctx;
+  const currentPlayerDeckLength = G.players[currentPlayer].deck.length;
   const currentPlayerHandLength = G.players[currentPlayer].hand.length;
   const currentPlayerHasLessThan10Cards = currentPlayerHandLength <= 9;
 
   if (currentPlayerHasLessThan10Cards) drawCard(G, currentPlayer);
   else discardCard(G, currentPlayer);
+
+  if (currentPlayerDeckLength === 0) G.health[currentPlayer]--;
 };
 
 export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
