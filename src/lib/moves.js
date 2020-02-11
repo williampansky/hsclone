@@ -23,6 +23,7 @@ import {
   selectMinionForAttack
 } from './moves/minion-moves';
 import { attackPlayerWithSpell } from './moves/spell-moves';
+import { castWarycrySpell } from './moves/warcry-moves';
 
 /**
  * Note that moves marked `client: false` are executed on the server.
@@ -116,6 +117,13 @@ export default {
     client: false,
     move: (G, ctx, player) => {
       return attackPlayerWithSpell(G, ctx, player);
+    }
+  },
+
+  castWarycrySpell: {
+    client: false,
+    move: (G, ctx, warcry, targetContext, target) => {
+      return castWarycrySpell(G, ctx, warcry, targetContext, target);
     }
   },
 

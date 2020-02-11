@@ -98,9 +98,19 @@ export default function MinionInteractionLayer({
   const IS_ATTACKING =
     CAN_ATTACK && G.selectedMinionIndex[ctx.currentPlayer] === index;
 
+  const WARCRY_IS_ACTIVE = G.warcryObject[ctx.currentPlayer] !== null;
+
   function handleClick(event) {
     moves.hoverOverCardInHand(null, null);
     moves.selectPlayableCard(null, null);
+
+    if (WARCRY_IS_ACTIVE) {
+      return moves.castWarycrySpell(
+        G.warcryObject[ctx.currentPlayer],
+        'minion',
+        index
+      );
+    }
 
     if (CAN_ATTACK) {
       return G.selectedMinionIndex[currentPlayer] === index
@@ -119,6 +129,7 @@ export default function MinionInteractionLayer({
         css['minion--interaction_layer'],
         CAN_ATTACK ? css['minion--can_attack'] : '',
         CAN_BE_ATTACKED ? css['minion--can_be_attacked'] : '',
+        WARCRY_IS_ACTIVE ? css['minion--can_be_attacked'] : '',
         HAS_GUARD ? css['minion--has_guard'] : '',
         HAS_STAMPEDE ? css['minion--has_stampede'] : '',
         HAS_WARCRY ? css['minion--has_warcry'] : '',

@@ -45,10 +45,13 @@ export default function TheirAvatar({
     G.selectedCardIndex[CURRENT_PLAYER] !== null &&
     selectedCardType === 'SPELL';
 
+  const WARCRY_IS_ACTIVE = G.warcryObject[CURRENT_PLAYER] !== null;
+
   const CAN_BE_ATTACKED =
     isActive &&
     (G.selectedMinionIndex[CURRENT_PLAYER] !== null ||
-      (G.selectedCardIndex[CURRENT_PLAYER] !== null && CARD_IS_SPELL));
+      (G.selectedCardIndex[CURRENT_PLAYER] !== null && CARD_IS_SPELL) ||
+      G.warcryObject[CURRENT_PLAYER]);
   // THEIR_BOARD['slot1'].hasGuard === false &&
   // THEIR_BOARD['slot2'].hasGuard === false &&
   // THEIR_BOARD['slot3'].hasGuard === false &&
@@ -62,6 +65,9 @@ export default function TheirAvatar({
 
     if (CARD_IS_SPELL)
       return moves.attackPlayerWithSpell(G.selectedCardIndex[CURRENT_PLAYER]);
+
+    if (WARCRY_IS_ACTIVE)
+      return moves.castWarycrySpell(G.warcryObject[CURRENT_PLAYER], theirID);
 
     return moves.attackPlayer(theirID, selectedMinionAtk);
   }
