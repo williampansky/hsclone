@@ -279,3 +279,73 @@ test(`WARCRY(CORE_026)`, () => {
     }
   });
 });
+
+// Restore 2 Health to you and all your minions.
+test(`WARCRY(CORE_032)`, () => {
+  const CARD_ID = 'CORE_032';
+  const WARCRY_MINION = getCardByID(CARD_ID);
+  const OTHER_MINION1 = getCardByID('CORE_014'); // max health is 3
+
+  const G = {
+    health: {
+      '0': 25
+    },
+    boards: {
+      '0': [
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack,
+          currentHealth: 2,
+          hasGuard: false,
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack,
+          totalHealth: OTHER_MINION1.health
+        },
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: WARCRY_MINION.attack,
+          currentHealth: WARCRY_MINION.health,
+          hasGuard: false,
+          minionData: WARCRY_MINION,
+          totalAttack: WARCRY_MINION.attack,
+          totalHealth: WARCRY_MINION.health
+        }
+      ]
+    }
+  };
+
+  const ctx = { currentPlayer: '0' };
+  initCoreWarcry(G, ctx, CARD_ID);
+
+  expect(G).toEqual({
+    health: {
+      '0': 27
+    },
+    boards: {
+      '0': [
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack,
+          currentHealth: OTHER_MINION1.health,
+          hasGuard: false,
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack,
+          totalHealth: OTHER_MINION1.health
+        },
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: WARCRY_MINION.attack,
+          currentHealth: WARCRY_MINION.health,
+          hasGuard: false,
+          minionData: WARCRY_MINION,
+          totalAttack: WARCRY_MINION.attack,
+          totalHealth: WARCRY_MINION.health
+        }
+      ]
+    }
+  });
+});

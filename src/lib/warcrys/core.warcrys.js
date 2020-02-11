@@ -1,5 +1,7 @@
 import { getCardByID } from '../utils/get-card-by-id';
 import { drawSingleCardAtStartOfCurrentPlayersTurn } from '../moves/card-moves';
+import { addToPlayerHealth } from '../moves/player-moves';
+import { limitNumberWithinRange } from '../utils/range-limit';
 
 export const initCoreWarcry = (G, ctx, cardId, index) => {
   // prettier-ignore
@@ -11,6 +13,7 @@ export const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_016':  return CORE_016(G, ctx);
     case 'CORE_021':  return CORE_021(G, ctx, index);
     case 'CORE_026':  return CORE_026(G, ctx);
+    case 'CORE_032':  return CORE_032(G, ctx);
     default:          break;
   }
 };
@@ -82,20 +85,26 @@ const CORE_026 = (G, ctx) => {
 /**
  * Restore 2 Health to you and all your minions.
  */
-// const CORE_032 = (G, ctx, cardId) => {
-//   const transformEach = (G, player, index) => {
-//     G.boards[player][index] = {
-//       ...G.boards[player][index],
-//       currentAttack: G.boards[player][index].currentAttack + 1,
-//       currentHealth: G.boards[player][index].currentHealth + 1
-//     };
-//   };
+const CORE_032 = (G, ctx, cardId) => {
+  const HEAL_AMOUNT = 2;
 
-//   // heal minions
-//   for (let i = 0; i < G.boards[ctx.currentPlayer].length; i++) {
-//     if (G.boards[ctx.currentPlayer][i].minionData.id !== cardId)
-//       transformEach(G, ctx.currentPlayer, i);
-//   }
+  // heal player
+  addToPlayerHealth(G, ctx.currentPlayer, HEAL_AMOUNT);
 
-//   // heal player
-// };
+  // heal minions w/loop method
+  for (let i = 0; i < G.boards[ctx.currentPlayer].length; i++) {
+    if (G.boards[ctx.currentPlayer][i].minionData.id !== cardId)
+      transformEach(G, ctx.currentPlayer, i);
+  }
+
+  // minion loop
+  function transformEach(G, player, index) {
+    G.boards[player][index] = {
+      ...G.boards[player][index],
+      currentHealth: limitNumberWithinRange(
+        G.boards[player][index].currentHealth + HEAL_AMOUNT,
+        G.boards[player][index].totalHealth
+      )
+    };
+  }
+};
