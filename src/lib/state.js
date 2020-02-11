@@ -40,7 +40,20 @@ export default {
     }
   },
   boards: {
-    '0': [],
+    '0': [
+      /**
+       * {
+       *  canAttack: false,
+       *  canBeAttacked: false,
+       *  currentAttack: minionObject.attack,
+       *  currentHealth: minionObject.health,
+       *  hasGuard: false,
+       *  minionData: minionObject,
+       *  totalAttack: minionObject.attack,
+       *  totalHealth: minionObject.health
+       * }
+       */
+    ],
     '1': []
   },
   energy: {
