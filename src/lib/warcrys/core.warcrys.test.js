@@ -187,14 +187,22 @@ test(`WARCRY(CORE_021)`, () => {
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack,
+          currentHealth: OTHER_MINION1.health,
           hasGuard: false,
-          minionData: OTHER_MINION1
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack,
+          totalHealth: OTHER_MINION1.health
         },
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: WARCRY_MINION.attack,
+          currentHealth: WARCRY_MINION.health,
           hasGuard: false,
-          minionData: WARCRY_MINION
+          minionData: WARCRY_MINION,
+          totalAttack: WARCRY_MINION.attack,
+          totalHealth: WARCRY_MINION.health
         }
       ]
     }
@@ -211,18 +219,22 @@ test(`WARCRY(CORE_021)`, () => {
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack + 1,
+          currentHealth: OTHER_MINION1.health + 1,
           hasGuard: false,
-          minionData: {
-            ...OTHER_MINION1,
-            attack: OTHER_MINION1.attack + 1,
-            health: OTHER_MINION1.health + 1
-          }
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack + 1,
+          totalHealth: OTHER_MINION1.health + 1
         },
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: WARCRY_MINION.attack,
+          currentHealth: WARCRY_MINION.health,
           hasGuard: false,
-          minionData: WARCRY_MINION
+          minionData: WARCRY_MINION,
+          totalAttack: WARCRY_MINION.attack,
+          totalHealth: WARCRY_MINION.health
         }
       ]
     }

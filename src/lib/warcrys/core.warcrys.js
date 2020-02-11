@@ -68,14 +68,34 @@ const CORE_016 = (G, ctx) => {
 const CORE_021 = (G, ctx, index) => {
   G.boards[ctx.currentPlayer][index] = {
     ...G.boards[ctx.currentPlayer][index],
-    minionData: {
-      ...G.boards[ctx.currentPlayer][index].minionData,
-      attack: G.boards[ctx.currentPlayer][index].minionData.attack + 1,
-      health: G.boards[ctx.currentPlayer][index].minionData.health + 1
-    }
+    currentAttack: G.boards[ctx.currentPlayer][index].currentAttack + 1,
+    currentHealth: G.boards[ctx.currentPlayer][index].currentHealth + 1,
+    totalAttack: G.boards[ctx.currentPlayer][index].totalAttack + 1,
+    totalHealth: G.boards[ctx.currentPlayer][index].totalHealth + 1
   };
 };
 
 const CORE_026 = (G, ctx) => {
   return drawSingleCardAtStartOfCurrentPlayersTurn(G, ctx);
 };
+
+/**
+ * Restore 2 Health to you and all your minions.
+ */
+// const CORE_032 = (G, ctx, cardId) => {
+//   const transformEach = (G, player, index) => {
+//     G.boards[player][index] = {
+//       ...G.boards[player][index],
+//       currentAttack: G.boards[player][index].currentAttack + 1,
+//       currentHealth: G.boards[player][index].currentHealth + 1
+//     };
+//   };
+
+//   // heal minions
+//   for (let i = 0; i < G.boards[ctx.currentPlayer].length; i++) {
+//     if (G.boards[ctx.currentPlayer][i].minionData.id !== cardId)
+//       transformEach(G, ctx.currentPlayer, i);
+//   }
+
+//   // heal player
+// };
