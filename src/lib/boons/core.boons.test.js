@@ -14,14 +14,22 @@ test(`BOON(CORE_041)`, () => {
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack,
+          currentHealth: OTHER_MINION1.health,
           hasGuard: false,
-          minionData: OTHER_MINION1
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack,
+          totalHealth: OTHER_MINION1.health
         },
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: OTHER_MINION2.attack,
+          currentHealth: OTHER_MINION2.health,
           hasGuard: false,
-          minionData: OTHER_MINION2
+          minionData: OTHER_MINION2,
+          totalAttack: OTHER_MINION2.attack,
+          totalHealth: OTHER_MINION2.health
         }
       ]
     }
@@ -39,22 +47,22 @@ test(`BOON(CORE_041)`, () => {
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack + 1,
+          currentHealth: OTHER_MINION1.health + 1,
           hasGuard: false,
-          minionData: {
-            ...OTHER_MINION1,
-            attack: OTHER_MINION1.attack + 1,
-            health: OTHER_MINION1.health + 1
-          }
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack + 1,
+          totalHealth: OTHER_MINION1.health + 1
         },
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: OTHER_MINION2.attack + 1,
+          currentHealth: OTHER_MINION2.health + 1,
           hasGuard: false,
-          minionData: {
-            ...OTHER_MINION2,
-            attack: OTHER_MINION2.attack + 1,
-            health: OTHER_MINION2.health + 1
-          }
+          minionData: OTHER_MINION2,
+          totalAttack: OTHER_MINION2.attack + 1,
+          totalHealth: OTHER_MINION2.health + 1
         }
       ]
     }
