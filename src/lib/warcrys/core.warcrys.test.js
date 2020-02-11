@@ -461,3 +461,22 @@ test(`WARCRY(CORE_035)`, () => {
     turnOrder: TURN_ORDER
   });
 });
+
+test(`WARCRY(CORE_036)`, () => {
+  const CARD_ID = 'CORE_036';
+  const G = { warcryObject: { '1': null } };
+  const ctx = { currentPlayer: '1' };
+  initCoreWarcry(G, ctx, CARD_ID);
+  expect(G).toEqual({
+    warcryObject: {
+      '1': {
+        id: CARD_ID,
+        type: 'SPELL',
+        cost: 0,
+        attack: 2,
+        spellType: 'TARGETED',
+        targetingArrowText: 'Deal 2 damage'
+      }
+    }
+  });
+});

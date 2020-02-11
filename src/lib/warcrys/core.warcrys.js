@@ -19,6 +19,7 @@ export const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_032':  return CORE_032(G, ctx);
     case 'CORE_033':  return CORE_033(G, ctx, cardId);
     case 'CORE_035':  return CORE_035(G, ctx);
+    case 'CORE_036':  return CORE_036(G, ctx);
     default:          break;
   }
 };
@@ -150,4 +151,18 @@ const CORE_035 = (G, ctx) => {
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
   subtractFromPlayerHealth(G, otherPlayer, 3);
+};
+
+/**
+ * Deal 2 damage to anyone.
+ */
+const CORE_036 = (G, ctx) => {
+  G.warcryObject[ctx.currentPlayer] = {
+    id: 'CORE_036',
+    type: 'SPELL',
+    cost: 0,
+    attack: 2,
+    spellType: 'TARGETED',
+    targetingArrowText: 'Deal 2 damage'
+  };
 };
