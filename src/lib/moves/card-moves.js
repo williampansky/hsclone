@@ -2,6 +2,7 @@ import { subtract } from 'mathjs';
 import { getCardByID } from '../utils/get-card-by-id';
 import { generateMinion } from '../utils/generate-minion';
 import { playSpellByCardId } from './spell-moves';
+import { initCoreBuff } from '../buffs/core.buffs';
 import {
   enableMinionCanAttack,
   enableMinionHasGuard,
@@ -125,7 +126,7 @@ export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
     ...G.boards[currentPlayer].slice(index + 1)
   ];
 
-  //
+  // swap new board in
   G.boards[currentPlayer] = newBoard;
 
   // move to your playerCards array
@@ -139,6 +140,10 @@ export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
 
   // then deincrement your hand count
   deincrementHandCount(G, currentPlayer);
+
+  // if minion has buff
+  if (mechanics.find(m => m === MECHANICS[2]))
+    initCoreBuff(G, ctx.currentPlayer, cardId);
 
   // if minion has guard
   if (mechanics.find(m => m === MECHANICS[4]))
