@@ -1,20 +1,34 @@
 const esmImport = require('esm')(module);
 const { castTheOrb } = esmImport('../../lib/spells/cast-the-orb');
 
-// spells > castTheOrb()
+/**
+ * spell-moves::castTheOrb()
+ */
 test(`adds 1 energy to currentPlayer's energy.current value`, () => {
   const G = {
     energy: {
-      0: {
+      '0': {
+        current: 0
+      },
+      '1': {
         current: 0
       }
     }
   };
 
   const ctx = {
-    currentPlayer: 0
+    currentPlayer: '0'
   };
 
-  const result = castTheOrb(G, ctx);
-  expect(result).toBe(1);
+  castTheOrb(G, ctx);
+  expect(G).toEqual({
+    energy: {
+      '0': {
+        current: 1
+      },
+      '1': {
+        current: 0
+      }
+    }
+  });
 });

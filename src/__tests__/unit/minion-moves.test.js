@@ -6,66 +6,154 @@ const {
   enableMinionCanBeAttacked
 } = esmImport('../../lib/moves/minion-moves');
 
-// minion-moves::disableMinionCanAttack()
-test(`disable player 0's slot4 canAttack`, () => {
+/**
+ * minion-moves::disableMinionCanAttack()
+ */
+test(`disable currentPlayer's 4th minion canAttack`, () => {
   const G = {
     boards: {
-      0: {
-        slot4: {
+      '0': [
+        null,
+        null,
+        null,
+        null,
+        {
           canAttack: true
         }
-      }
+      ]
     }
   };
 
-  const result = disableMinionCanAttack(G, 0, 4);
-  expect(result).toBe(false);
-});
-
-// minion-moves::disableMinionCanBeAttacked()
-test(`disable player 0's slot3 canBeAttacked`, () => {
-  const G = {
-    boards: {
-      0: {
-        slot3: {
-          canBeAttacked: true
-        }
-      }
-    }
+  const ctx = {
+    currentPlayer: '0'
   };
 
-  const result = disableMinionCanBeAttacked(G, 0, 3);
-  expect(result).toBe(false);
-});
-
-// minion-moves::enableMinionCanAttack()
-test(`enable player 0's slot2 canAttack`, () => {
-  const G = {
+  disableMinionCanAttack(G, ctx.currentPlayer, 4);
+  expect(G).toEqual({
     boards: {
-      0: {
-        slot2: {
+      '0': [
+        null,
+        null,
+        null,
+        null,
+        {
           canAttack: false
         }
-      }
+      ]
     }
-  };
-
-  const result = enableMinionCanAttack(G, 0, 2);
-  expect(result).toBe(true);
+  });
 });
 
-// minion-moves::enableMinionCanBeAttacked()
-test(`enable player 0's slot5 canBeAttacked`, () => {
+/**
+ * minion-moves::disableMinionCanBeAttacked()
+ */
+test(`disable currentPlayer's 3rd minion canBeAttacked`, () => {
   const G = {
     boards: {
-      0: {
-        slot5: {
-          canBeAttacked: false
+      '0': [
+        null,
+        null,
+        null,
+        {
+          canBeAttacked: true
         }
-      }
+      ]
     }
   };
 
-  const result = enableMinionCanBeAttacked(G, 0, 5);
-  expect(result).toBe(true);
+  const ctx = {
+    currentPlayer: '0'
+  };
+
+  disableMinionCanBeAttacked(G, ctx.currentPlayer, 3);
+  expect(G).toEqual({
+    boards: {
+      '0': [
+        null,
+        null,
+        null,
+        {
+          canBeAttacked: false
+        }
+      ]
+    }
+  });
+});
+
+/**
+ * minion-moves::enableMinionCanAttack()
+ */
+test(`enable currentPlayer's 2nd minion canAttack`, () => {
+  const G = {
+    boards: {
+      '0': {},
+      '1': [
+        null,
+        null,
+        {
+          canAttack: false
+        }
+      ]
+    }
+  };
+
+  const ctx = {
+    currentPlayer: '1'
+  };
+
+  enableMinionCanAttack(G, ctx.currentPlayer, 2);
+  expect(G).toEqual({
+    boards: {
+      '0': {},
+      '1': [
+        null,
+        null,
+        {
+          canAttack: true
+        }
+      ]
+    }
+  });
+});
+
+/**
+ * minion-moves::enableMinionCanBeAttacked()
+ */
+test(`enable currentPlayer's 5th minion canBeAttacked`, () => {
+  const G = {
+    boards: {
+      '0': {},
+      '1': [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          canBeAttacked: false
+        }
+      ]
+    }
+  };
+
+  const ctx = {
+    currentPlayer: '1'
+  };
+
+  enableMinionCanBeAttacked(G, ctx.currentPlayer, 5);
+  expect(G).toEqual({
+    boards: {
+      '0': {},
+      '1': [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          canBeAttacked: true
+        }
+      ]
+    }
+  });
 });
