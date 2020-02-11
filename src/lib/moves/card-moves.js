@@ -2,6 +2,7 @@ import { subtract } from 'mathjs';
 import { getCardByID } from '../utils/get-card-by-id';
 import { generateMinion } from '../utils/generate-minion';
 import { playSpellByCardId } from './spell-moves';
+import { initCoreBoon } from '../boons/core.boons';
 import { initCoreBuff } from '../buffs/core.buffs';
 import {
   enableMinionCanAttack,
@@ -121,13 +122,13 @@ export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
 
   // place card in selected index on your board
   const newBoard = [
-    ...G.boards[currentPlayer].slice(0, index + 1),
+    ...boards[currentPlayer].slice(0, index + 1),
     CARD_ITEM,
-    ...G.boards[currentPlayer].slice(index + 1)
+    ...boards[currentPlayer].slice(index + 1)
   ];
 
   // swap new board in
-  G.boards[currentPlayer] = newBoard;
+  boards[currentPlayer] = newBoard;
 
   // move to your playerCards array
   playedCards[currentPlayer].push(
@@ -141,17 +142,21 @@ export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
   // then deincrement your hand count
   deincrementHandCount(G, currentPlayer);
 
+  // if minion has boon
+  if (mechanics.find(m => m === MECHANICS[1]))
+    initCoreBoon(G, currentPlayer, cardId);
+
   // if minion has buff
   if (mechanics.find(m => m === MECHANICS[2]))
-    initCoreBuff(G, ctx.currentPlayer, cardId);
+    initCoreBuff(G, currentPlayer, cardId);
 
   // if minion has guard
   if (mechanics.find(m => m === MECHANICS[4]))
-    enableMinionHasGuard(G, ctx.currentPlayer, index);
+    enableMinionHasGuard(G, currentPlayer, index);
 
   // if minion has stampede
   if (mechanics.find(m => m === MECHANICS[5]))
-    enableMinionCanAttack(G, ctx.currentPlayer, index);
+    enableMinionCanAttack(G, currentPlayer, index);
 
   // if minion has warcry
   if (mechanics.find(m => m === MECHANICS[6]))
