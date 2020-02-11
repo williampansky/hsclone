@@ -56,8 +56,12 @@ test(`plays a minion card and adds it to the board`, () => {
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: MINION_CARD.attack,
+          currentHealth: MINION_CARD.health,
           hasGuard: false,
-          minionData: MINION_CARD
+          minionData: MINION_CARD,
+          totalAttack: MINION_CARD.attack,
+          totalHealth: MINION_CARD.health
         }
       ]
     },
@@ -98,14 +102,22 @@ test(`plays a minion card with the BOON(CORE_041) mechanic and adds it to the bo
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack,
+          currentHealth: OTHER_MINION1.health,
           hasGuard: false,
-          minionData: OTHER_MINION1
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack,
+          totalHealth: OTHER_MINION1.health
         },
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: OTHER_MINION2.attack,
+          currentHealth: OTHER_MINION2.health,
           hasGuard: false,
-          minionData: OTHER_MINION2
+          minionData: OTHER_MINION2,
+          totalAttack: OTHER_MINION2.attack,
+          totalHealth: OTHER_MINION2.health
         }
       ]
     },
@@ -142,28 +154,32 @@ test(`plays a minion card with the BOON(CORE_041) mechanic and adds it to the bo
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack + 1,
+          currentHealth: OTHER_MINION1.health + 1,
           hasGuard: false,
-          minionData: {
-            ...OTHER_MINION1,
-            attack: OTHER_MINION1.attack + 1,
-            health: OTHER_MINION1.health + 1
-          }
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack + 1,
+          totalHealth: OTHER_MINION1.health + 1
         },
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: OTHER_MINION2.attack + 1,
+          currentHealth: OTHER_MINION2.health + 1,
           hasGuard: false,
-          minionData: {
-            ...OTHER_MINION2,
-            attack: OTHER_MINION2.attack + 1,
-            health: OTHER_MINION2.health + 1
-          }
+          minionData: OTHER_MINION2,
+          totalAttack: OTHER_MINION2.attack + 1,
+          totalHealth: OTHER_MINION2.health + 1
         },
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: MINION_CARD.attack,
+          currentHealth: MINION_CARD.health,
           hasGuard: false,
-          minionData: MINION_CARD
+          minionData: MINION_CARD,
+          totalAttack: MINION_CARD.attack,
+          totalHealth: MINION_CARD.health
         }
       ]
     },
@@ -245,7 +261,11 @@ test(`plays a minion card with the BUFF mechanic and adds it to the board`, () =
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: MINION_CARD.attack,
+          currentHealth: MINION_CARD.health,
           hasGuard: false,
+          totalAttack: MINION_CARD.attack,
+          totalHealth: MINION_CARD.health,
           minionData: MINION_CARD
         }
       ]
@@ -316,7 +336,11 @@ test(`plays a minion card with the GUARD mechanic and adds it to the board`, () 
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: MINION_CARD.attack,
+          currentHealth: MINION_CARD.health,
           hasGuard: true,
+          totalAttack: MINION_CARD.attack,
+          totalHealth: MINION_CARD.health,
           minionData: MINION_CARD
         }
       ]
@@ -387,7 +411,11 @@ test(`plays a minion card with the STAMPEDE mechanic and adds it to the board`, 
         {
           canAttack: true,
           canBeAttacked: false,
+          currentAttack: MINION_CARD.attack,
+          currentHealth: MINION_CARD.health,
           hasGuard: false,
+          totalAttack: MINION_CARD.attack,
+          totalHealth: MINION_CARD.health,
           minionData: MINION_CARD
         }
       ]
@@ -462,7 +490,11 @@ test(`plays a minion card with the WARCRY mechanic and adds it to the board`, ()
         {
           canAttack: false,
           canBeAttacked: false,
+          currentAttack: MINION_CARD.attack,
+          currentHealth: MINION_CARD.health,
           hasGuard: false,
+          totalAttack: MINION_CARD.attack,
+          totalHealth: MINION_CARD.health,
           minionData: MINION_CARD
         }
       ]

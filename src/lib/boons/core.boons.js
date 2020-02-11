@@ -13,11 +13,10 @@ const CORE_041 = (G, player, cardId) => {
   const transformEach = (G, player, index) => {
     G.boards[player][index] = {
       ...G.boards[player][index],
-      minionData: {
-        ...G.boards[player][index].minionData,
-        attack: G.boards[player][index].minionData.attack + 1,
-        health: G.boards[player][index].minionData.health + 1
-      }
+      currentAttack: G.boards[player][index].currentAttack + 1,
+      currentHealth: G.boards[player][index].currentHealth + 1,
+      totalAttack: G.boards[player][index].totalAttack + 1,
+      totalHealth: G.boards[player][index].totalHealth + 1
     };
   };
 

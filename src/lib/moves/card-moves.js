@@ -110,8 +110,12 @@ export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
   const CARD_ITEM = {
     canAttack: false,
     canBeAttacked: false,
+    currentAttack: minionObject && minionObject.attack,
+    currentHealth: minionObject && minionObject.health,
     hasGuard: false,
-    minionData: minionObject
+    minionData: minionObject,
+    totalAttack: minionObject && minionObject.attack,
+    totalHealth: minionObject && minionObject.health
   };
 
   // subtract the card's cost from player's current energy count
