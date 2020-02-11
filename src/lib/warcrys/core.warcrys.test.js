@@ -349,3 +349,88 @@ test(`WARCRY(CORE_032)`, () => {
     }
   });
 });
+
+// Gain +1/+1 for each of your other active minions.
+test(`WARCRY(CORE_033)`, () => {
+  const CARD_ID = 'CORE_033';
+  const MINION = getCardByID(CARD_ID);
+  const OTHER_MINION1 = getCardByID('CORE_016');
+  const OTHER_MINION2 = getCardByID('CORE_036');
+
+  const G = {
+    boards: {
+      '0': [
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack,
+          currentHealth: OTHER_MINION1.health,
+          hasGuard: false,
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack,
+          totalHealth: OTHER_MINION1.health
+        },
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: OTHER_MINION2.attack,
+          currentHealth: OTHER_MINION2.health,
+          hasGuard: false,
+          minionData: OTHER_MINION2,
+          totalAttack: OTHER_MINION2.attack,
+          totalHealth: OTHER_MINION2.health
+        },
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: MINION.attack,
+          currentHealth: MINION.health,
+          hasGuard: false,
+          minionData: MINION,
+          totalAttack: MINION.attack,
+          totalHealth: MINION.health
+        }
+      ]
+    }
+  };
+
+  const ctx = { currentPlayer: '0' };
+  initCoreWarcry(G, ctx, CARD_ID);
+
+  expect(G).toEqual({
+    boards: {
+      '0': [
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack,
+          currentHealth: OTHER_MINION1.health,
+          hasGuard: false,
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack,
+          totalHealth: OTHER_MINION1.health
+        },
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: OTHER_MINION2.attack,
+          currentHealth: OTHER_MINION2.health,
+          hasGuard: false,
+          minionData: OTHER_MINION2,
+          totalAttack: OTHER_MINION2.attack,
+          totalHealth: OTHER_MINION2.health
+        },
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: MINION.attack + 2,
+          currentHealth: MINION.health + 2,
+          hasGuard: false,
+          minionData: MINION,
+          totalAttack: MINION.attack,
+          totalHealth: MINION.health
+        }
+      ]
+    }
+  });
+});

@@ -14,6 +14,7 @@ export const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_021':  return CORE_021(G, ctx, index);
     case 'CORE_026':  return CORE_026(G, ctx);
     case 'CORE_032':  return CORE_032(G, ctx);
+    case 'CORE_033':  return CORE_033(G, ctx, cardId);
     default:          break;
   }
 };
@@ -97,7 +98,7 @@ const CORE_032 = (G, ctx, cardId) => {
       transformEach(G, ctx.currentPlayer, i);
   }
 
-  // minion loop
+  // transformation method
   function transformEach(G, player, index) {
     G.boards[player][index] = {
       ...G.boards[player][index],
@@ -105,6 +106,34 @@ const CORE_032 = (G, ctx, cardId) => {
         G.boards[player][index].currentHealth + HEAL_AMOUNT,
         G.boards[player][index].totalHealth
       )
+    };
+  }
+};
+
+/**
+ * Gain +1/+1 for each of your other active minions.
+ */
+const CORE_033 = (G, ctx, cardId) => {
+  // (length - 1) since we don't count CORE_033 itself
+  const NUMBER_OF_MINIONS = parseInt(G.boards[ctx.currentPlayer].length - 1);
+  const isTargetId = obj => obj.minionData.id === cardId;
+  const targetIndex = G.boards[ctx.currentPlayer].findIndex(isTargetId);
+
+  // add to CORE_033's current values
+  transformTarget(G, ctx.currentPlayer, targetIndex);
+
+  // transformation method
+  function transformTarget(G, player, index) {
+    const AP = parseInt(G.boards[player][index].minionData.attack);
+    const HP = parseInt(G.boards[player][index].minionData.health);
+
+    const newAP = AP + NUMBER_OF_MINIONS;
+    const newHP = HP + NUMBER_OF_MINIONS;
+
+    G.boards[player][index] = {
+      ...G.boards[player][index],
+      currentAttack: newAP,
+      currentHealth: newHP
     };
   }
 };
