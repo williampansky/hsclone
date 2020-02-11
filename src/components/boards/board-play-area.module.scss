@@ -4,8 +4,9 @@
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
-  height: calc(100% / 2.25);
+  // height: calc(100% / 2.25);
   justify-content: center;
+  min-height: 150px;
   position: relative;
   width: calc(100% / 1.05);
 }

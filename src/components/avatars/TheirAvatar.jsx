@@ -47,18 +47,20 @@ export default function TheirAvatar({
 
   const WARCRY_IS_ACTIVE = G.warcryObject[CURRENT_PLAYER] !== null;
 
-  const CAN_BE_ATTACKED =
+  let CAN_BE_ATTACKED = false;
+  let MINION_HAS_GUARD = false;
+  G.boards[theirID].forEach(slot => {
+    if (slot.hasGuard === true) MINION_HAS_GUARD = true;
+  });
+
+  if (
     isActive &&
     (G.selectedMinionIndex[CURRENT_PLAYER] !== null ||
       (G.selectedCardIndex[CURRENT_PLAYER] !== null && CARD_IS_SPELL) ||
-      G.warcryObject[CURRENT_PLAYER]);
-  // THEIR_BOARD['slot1'].hasGuard === false &&
-  // THEIR_BOARD['slot2'].hasGuard === false &&
-  // THEIR_BOARD['slot3'].hasGuard === false &&
-  // THEIR_BOARD['slot4'].hasGuard === false &&
-  // THEIR_BOARD['slot5'].hasGuard === false &&
-  // THEIR_BOARD['slot6'].hasGuard === false &&
-  // THEIR_BOARD['slot7'].hasGuard === false;
+      G.warcryObject[CURRENT_PLAYER]) &&
+    !MINION_HAS_GUARD
+  )
+    CAN_BE_ATTACKED = true;
 
   function handleClick() {
     if (!CAN_BE_ATTACKED || CARD_IS_MINION) return;

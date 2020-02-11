@@ -54,6 +54,10 @@ const onBegin = (G, ctx) => {
   G.selectedMinionIndex[1] = null;
   G.selectedMinionObject[0] = null;
   G.selectedMinionObject[1] = null;
+
+  // reset both player's warcry states
+  G.warcryObject[0] = null;
+  G.warcryObject[1] = null;
 };
 
 export default {
