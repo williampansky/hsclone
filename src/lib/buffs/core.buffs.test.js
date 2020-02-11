@@ -2,8 +2,8 @@ const esmImport = require('esm')(module);
 const { initCoreBuff } = esmImport('./core.buffs');
 // const { getCardByID } = esmImport('../utils/get-card-by-id');
 
-// Give your hero  +1 Spell Damage.
-test(`BOON(CORE_011)`, () => {
+// Give your hero +1 Spell Damage.
+test(`BUFF(CORE_011)`, () => {
   const CARD_ID = 'CORE_011';
 
   const G = {

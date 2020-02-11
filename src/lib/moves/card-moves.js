@@ -160,7 +160,7 @@ export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
 
   // if minion has warcry
   if (mechanics.find(m => m === MECHANICS[6]))
-    initMinionWarcry(G, ctx, index, cardId);
+    initMinionWarcry(G, ctx, cardId, index);
 };
 
 export const playSpellCard = (G, ctx, cardId, cardCost) => {

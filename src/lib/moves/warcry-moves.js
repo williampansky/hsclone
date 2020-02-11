@@ -6,12 +6,12 @@ export const castWarycrySpell = (G, ctx, warcry, targetContext, target) => {
 
   // prettier-ignore
   switch (id) {
-    case 'CORE_001':  return attackWithCORE_001(G, ctx, targetContext, target);
+    case 'CORE_001':  return ATTACK_WITH_CORE_001(G, ctx, targetContext, target);
     default:          return null;
   }
 };
 
-const attackWithCORE_001 = (G, ctx, targetContext, target) => {
+const ATTACK_WITH_CORE_001 = (G, ctx, targetContext, target) => {
   const { turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
@@ -30,5 +30,3 @@ const attackWithCORE_001 = (G, ctx, targetContext, target) => {
     G.boards[otherPlayer].splice(target, 1);
   }
 };
-
-//
