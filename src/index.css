@@ -1,10 +1,10 @@
 :root {
   /* layout vars */
   --board-theirHand-background-color: gray;
-  --board-theirHand-height: 65px;
+  --board-theirHand-height: 45px;
   --board-theirHand-zIndex: 200;
   --board-yourHand-background-color: gray;
-  --board-yourHand-height: 65px;
+  --board-yourHand-height: 45px;
   --board-yourHand-zIndex: 200;
   --board-players-hands-height: calc(
     var(--board-theirHand-height) + var(--board-yourHand-height)

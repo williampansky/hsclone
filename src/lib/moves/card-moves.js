@@ -125,6 +125,7 @@ export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
     ...G.boards[currentPlayer].slice(index + 1)
   ];
 
+  //
   G.boards[currentPlayer] = newBoard;
 
   // move to your playerCards array
