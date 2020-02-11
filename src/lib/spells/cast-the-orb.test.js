@@ -1,8 +1,8 @@
 const esmImport = require('esm')(module);
-const { castTheOrb } = esmImport('../../lib/spells/cast-the-orb');
+const { castTheOrb } = esmImport('./cast-the-orb');
 
 /**
- * spell-moves::castTheOrb()
+ * spells/castTheOrb()
  */
 test(`adds 1 energy to currentPlayer's energy.current value`, () => {
   const G = {
