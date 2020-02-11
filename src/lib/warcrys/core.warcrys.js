@@ -1,7 +1,10 @@
 import { getCardByID } from '../utils/get-card-by-id';
-import { drawSingleCardAtStartOfCurrentPlayersTurn } from '../moves/card-moves';
-import { addToPlayerHealth } from '../moves/player-moves';
 import { limitNumberWithinRange } from '../utils/range-limit';
+import { drawSingleCardAtStartOfCurrentPlayersTurn } from '../moves/card-moves';
+import {
+  addToPlayerHealth,
+  subtractFromPlayerHealth
+} from '../moves/player-moves';
 
 export const initCoreWarcry = (G, ctx, cardId, index) => {
   // prettier-ignore
@@ -15,6 +18,7 @@ export const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_026':  return CORE_026(G, ctx);
     case 'CORE_032':  return CORE_032(G, ctx);
     case 'CORE_033':  return CORE_033(G, ctx, cardId);
+    case 'CORE_035':  return CORE_035(G, ctx);
     default:          break;
   }
 };
@@ -136,4 +140,14 @@ const CORE_033 = (G, ctx, cardId) => {
       currentHealth: newHP
     };
   }
+};
+
+/**
+ * Attack the enemy hero for 3 damage.
+ */
+const CORE_035 = (G, ctx) => {
+  const { turnOrder } = G;
+  const { currentPlayer } = ctx;
+  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+  subtractFromPlayerHealth(G, otherPlayer, 3);
 };

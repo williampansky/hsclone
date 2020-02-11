@@ -434,3 +434,30 @@ test(`WARCRY(CORE_033)`, () => {
     }
   });
 });
+
+// Attack the enemy hero for 3 damage.
+test(`WARCRY(CORE_035)`, () => {
+  const CARD_ID = 'CORE_035';
+  const TURN_ORDER = ['0', '1'].sort(() => {
+    return Math.random() - 0.5;
+  });
+
+  const G = {
+    health: {
+      '0': 30,
+      '1': 30
+    },
+    turnOrder: TURN_ORDER
+  };
+
+  const ctx = { currentPlayer: '1' };
+  initCoreWarcry(G, ctx, CARD_ID);
+
+  expect(G).toEqual({
+    health: {
+      '0': 27,
+      '1': 30
+    },
+    turnOrder: TURN_ORDER
+  });
+});
