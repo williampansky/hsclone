@@ -19,3 +19,12 @@
   height: var(--board-yourHand-height);
   z-index: var(--board-yourHand-zIndex);
 }
+
+.active-warcry {
+  background: white;
+  position: absolute;
+  right: 2.5%;
+  top: -100%;
+  transform: translateY(0) rotate(0) scale(1) !important;
+  z-index: 100;
+}

@@ -19,14 +19,14 @@
   margin: auto auto 0;
   width: 100%;
 
-  & > div + div {
-    margin-left: 20px;
-  }
+  // & > div + div {
+  //   margin-left: 20px;
+  // }
 }
 
 .your-board {
   align-items: center;
-  background: #111;
+  background: #383838;
   box-shadow: inset 0 0 10px transparent;
   box-sizing: border-box;
   display: flex;

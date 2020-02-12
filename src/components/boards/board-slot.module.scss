@@ -1,6 +1,6 @@
 .board-slot {
   align-items: center;
-  border: 1px dashed rgba(255, 255, 255, 0.25);
+  // border: 1px dashed rgba(255, 255, 255, 0.25);
   box-sizing: border-box;
   color: white;
   display: flex;
@@ -52,7 +52,7 @@
   pointer-events: auto;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.625);
+    // border-color: rgba(255, 255, 255, 0.625);
   }
 }
 

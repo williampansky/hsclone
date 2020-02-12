@@ -1,5 +1,8 @@
 /**
- * Strips away the opposing player's hand and deck data from the client.
+ * Strips away the following nested fields
+ * from the opposing player's client:
+ *  - players
+ *  - selectedCardObject
  *
  * @param {Object} G game state object.
  * @param {Number} playerID player's unique playOrder ID.
@@ -9,5 +12,8 @@ export const stripSecrets = (G, playerID) => ({
   ...G,
   players: {
     [playerID]: G.players[playerID]
+  },
+  selectedCardObject: {
+    [playerID]: G.selectedCardObject[playerID]
   }
 });

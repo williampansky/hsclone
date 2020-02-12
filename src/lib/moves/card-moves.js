@@ -1,13 +1,6 @@
 import { subtract } from 'mathjs';
 import { getCardByID } from '../utils/get-card-by-id';
-import { generateMinion } from '../utils/generate-minion';
 import { playSpellByCardId } from './spell-moves';
-import {
-  enableMinionCanAttack,
-  enableMinionHasGuard,
-  initMinionWarcry
-} from './minion-moves';
-import MECHANICS from '../../enums/mechanics.enums';
 
 export const incrementDeckCount = (G, player) => {
   return G.counts[player].deck++;
@@ -89,51 +82,22 @@ export const drawCards = (G, player, numberOfCards = 1) => {
  */
 export const drawSingleCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
   const { currentPlayer } = ctx;
+  const currentPlayerDeckLength = G.players[currentPlayer].deck.length;
   const currentPlayerHandLength = G.players[currentPlayer].hand.length;
   const currentPlayerHasLessThan10Cards = currentPlayerHandLength <= 9;
 
   if (currentPlayerHasLessThan10Cards) drawCard(G, currentPlayer);
   else discardCard(G, currentPlayer);
+
+  if (currentPlayerDeckLength === 0) G.health[currentPlayer]--;
 };
 
-export const playMinionCard = (G, ctx, slotNumber, cardId, cardCost) => {
-  const { boards, energy, players, playedCards } = G;
-  const { currentPlayer } = ctx;
-  const minionObject = generateMinion(cardId);
-  const { mechanics } = minionObject;
-
-  // subtract the card's cost from player's current energy count
-  energy[ctx.currentPlayer].current = subtract(
-    energy[ctx.currentPlayer].current,
-    cardCost
-  );
-
-  // place card in selected slotNumber on your board
-  boards[currentPlayer][`slot${slotNumber}`].minionData = minionObject;
-
-  // move to your playerCards array
-  playedCards[currentPlayer].push(
-    players[currentPlayer].hand.find(c => c.id === cardId)
-  );
-
-  // and then remove card from your hand
-  const newHand = players[currentPlayer].hand.filter(c => c.id !== cardId);
-  players[currentPlayer].hand = newHand;
-
-  // then deincrement your hand count
-  deincrementHandCount(G, currentPlayer);
-
-  // if minion has guard
-  if (mechanics.find(m => m === MECHANICS[4]))
-    enableMinionHasGuard(G, ctx.currentPlayer, slotNumber);
-
-  // if minion has stampede
-  if (mechanics.find(m => m === MECHANICS[5]))
-    enableMinionCanAttack(G, ctx.currentPlayer, slotNumber);
-
-  // if minion has warcry
-  if (mechanics.find(m => m === MECHANICS[6]))
-    initMinionWarcry(G, ctx, slotNumber, cardId);
+/**
+ * Selects the card from the current player's hand.
+ */
+export const selectCard = (G, ctx, index, card) => {
+  G.selectedCardIndex[ctx.currentPlayer] = index;
+  G.selectedCardObject[ctx.currentPlayer] = card;
 };
 
 export const playSpellCard = (G, ctx, cardId, cardCost) => {

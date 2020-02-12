@@ -11,36 +11,56 @@ const {
   incrementHandCount
 } = esmImport('../../lib/moves/card-moves');
 
-// card-moves::deincrementDeckCount()
+/**
+ * card-moves::deincrementDeckCount()
+ */
 test(`deincrement player 0's deck count`, () => {
   const G = {
     counts: {
-      0: {
+      '0': {
         deck: 1
       }
     }
   };
 
-  deincrementDeckCount(G, 0);
-  expect(G.counts[0].deck).toBe(0);
+  deincrementDeckCount(G, '0');
+
+  expect(G).toEqual({
+    counts: {
+      '0': {
+        deck: 0
+      }
+    }
+  });
 });
 
-// card-moves::deincrementHandCount()
+/**
+ * card-moves::deincrementHandCount()
+ */
 test(`deincrement player 0's hand count`, () => {
   const G = {
     counts: {
-      0: {
+      '0': {
         hand: 1
       }
     }
   };
 
-  deincrementHandCount(G, 0);
-  expect(G.counts[0].hand).toBe(0);
+  deincrementHandCount(G, '0');
+
+  expect(G).toEqual({
+    counts: {
+      '0': {
+        hand: 0
+      }
+    }
+  });
 });
 
-// card-moves::discardCard()
-test(`discard a single card from your deck to your playedCards`, () => {
+/**
+ * card-moves::discardCard()
+ */
+test(`discard a single card from your deck to your playedCards array`, () => {
   const G = {
     counts: {
       0: {
@@ -49,7 +69,7 @@ test(`discard a single card from your deck to your playedCards`, () => {
     },
     players: {
       0: {
-        deck: [1]
+        deck: ['CARD']
       }
     },
     playedCards: {
@@ -58,12 +78,27 @@ test(`discard a single card from your deck to your playedCards`, () => {
   };
 
   discardCard(G, 0);
-  expect(G.counts[0].deck).toBe(29);
-  expect(G.players[0].deck).toHaveLength(0);
-  expect(G.playedCards[0]).toHaveLength(1);
+
+  expect(G).toEqual({
+    counts: {
+      0: {
+        deck: 29
+      }
+    },
+    players: {
+      0: {
+        deck: []
+      }
+    },
+    playedCards: {
+      0: ['CARD']
+    }
+  });
 });
 
-// card-moves::disacrdCards()
+/**
+ * card-moves::discardCards()
+ */
 test(`discard cards equal to the provided value`, () => {
   const G = {
     counts: {
@@ -87,7 +122,9 @@ test(`discard cards equal to the provided value`, () => {
   expect(G.playedCards[0]).toHaveLength(3);
 });
 
-// card-moves::drawCard()
+/**
+ * card-moves::drawCard()
+ */
 test(`draw a single card from your deck to your hand`, () => {
   const G = {
     counts: {
@@ -110,7 +147,9 @@ test(`draw a single card from your deck to your hand`, () => {
   expect(G.players[0].hand).toHaveLength(1);
 });
 
-// card-moves::drawCards()
+/**
+ * card-moves::drawCards()
+ */
 test(`draw cards equal to the provided value`, () => {
   const G = {
     counts: {
@@ -133,7 +172,9 @@ test(`draw cards equal to the provided value`, () => {
   expect(G.players[0].hand).toHaveLength(3);
 });
 
-// card-moves::drawSingleCardAtStartOfCurrentPlayersTurn() - draw
+/**
+ * card-moves::drawSingleCardAtStartOfCurrentPlayersTurn() - draw
+ */
 test(`Draw 1 card at the start of the current player's turn when their hand is not full`, () => {
   const G = {
     counts: {
@@ -160,7 +201,9 @@ test(`Draw 1 card at the start of the current player's turn when their hand is n
   expect(G.players[1].hand).toHaveLength(6);
 });
 
-// card-moves::drawSingleCardAtStartOfCurrentPlayersTurn() - burn
+/**
+ * card-moves::drawSingleCardAtStartOfCurrentPlayersTurn() - burn
+ */
 test(`Discard 1 card at the start of the current player's turn when their hand is full`, () => {
   const G = {
     counts: {
@@ -191,7 +234,9 @@ test(`Discard 1 card at the start of the current player's turn when their hand i
   expect(G.playedCards[1]).toHaveLength(1);
 });
 
-// card-moves::incrementDeckCount()
+/**
+ * card-moves::incrementDeckCount()
+ */
 test(`increment player 0's deck count`, () => {
   const G = {
     counts: {
@@ -205,7 +250,9 @@ test(`increment player 0's deck count`, () => {
   expect(G.counts[0].deck).toBe(1);
 });
 
-// card-moves::incrementDeckCount()
+/**
+ * card-moves::incrementDeckCount()
+ */
 test(`increment player 0's hand count`, () => {
   const G = {
     counts: {

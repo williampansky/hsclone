@@ -34,7 +34,7 @@ export default function CardInteractionLayer({
     isActive &&
       isHovered &&
       G.selectedCardIndex[ctx.currentPlayer] === null &&
-      moves.hoverOverCardInHand(index, card);
+      moves.hoverOverCardInHand(index);
   }, [ctx.currentPlayer, isHovered]);
 
   const {

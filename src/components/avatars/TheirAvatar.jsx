@@ -32,21 +32,10 @@ export default function TheirAvatar({
   const selectedCardObj = getCardByID(selectedCardIdFromHand);
   const selectedCardType = selectedCardObj && selectedCardObj.type;
 
-  const atkMinionIdx = G.selectedMinionIndex[CURRENT_PLAYER];
-  const atkMinionObj = G.boards[CURRENT_PLAYER][`slot${atkMinionIdx}`];
-  const atkMinionsAtk = atkMinionObj && atkMinionObj.minionData.attack;
-
-  const CAN_BE_ATTACKED =
-    isActive &&
-    (G.selectedMinionIndex[CURRENT_PLAYER] !== null ||
-      G.selectedCardIndex[CURRENT_PLAYER] !== null) &&
-    THEIR_BOARD['slot1'].hasGuard === false &&
-    THEIR_BOARD['slot2'].hasGuard === false &&
-    THEIR_BOARD['slot3'].hasGuard === false &&
-    THEIR_BOARD['slot4'].hasGuard === false &&
-    THEIR_BOARD['slot5'].hasGuard === false &&
-    THEIR_BOARD['slot6'].hasGuard === false &&
-    THEIR_BOARD['slot7'].hasGuard === false;
+  const selectedMinionObj = G.selectedMinionObject[CURRENT_PLAYER];
+  const selectedMinionAtk = selectedMinionObj && selectedMinionObj.attack;
+  // const selectedMinionIdx = THEIR_BOARD.find()
+  // const atkMinionObj = G.boards[CURRENT_PLAYER][`slot${atkMinionIdx}`];
 
   const CARD_IS_MINION =
     G.selectedCardIndex[CURRENT_PLAYER] !== null &&
@@ -56,13 +45,33 @@ export default function TheirAvatar({
     G.selectedCardIndex[CURRENT_PLAYER] !== null &&
     selectedCardType === 'SPELL';
 
+  const WARCRY_IS_ACTIVE = G.warcryObject[CURRENT_PLAYER] !== null;
+
+  let CAN_BE_ATTACKED = false;
+  let MINION_HAS_GUARD = false;
+  G.boards[theirID].forEach(slot => {
+    if (slot.hasGuard === true) MINION_HAS_GUARD = true;
+  });
+
+  if (
+    isActive &&
+    (G.selectedMinionIndex[CURRENT_PLAYER] !== null ||
+      (G.selectedCardIndex[CURRENT_PLAYER] !== null && CARD_IS_SPELL) ||
+      G.warcryObject[CURRENT_PLAYER]) &&
+    !MINION_HAS_GUARD
+  )
+    CAN_BE_ATTACKED = true;
+
   function handleClick() {
     if (!CAN_BE_ATTACKED || CARD_IS_MINION) return;
 
     if (CARD_IS_SPELL)
       return moves.attackPlayerWithSpell(G.selectedCardIndex[CURRENT_PLAYER]);
 
-    return moves.attackPlayer(theirID, atkMinionsAtk);
+    if (WARCRY_IS_ACTIVE)
+      return moves.castWarycrySpell(G.warcryObject[CURRENT_PLAYER], theirID);
+
+    return moves.attackPlayer(theirID, selectedMinionAtk);
   }
 
   return (
@@ -71,9 +80,7 @@ export default function TheirAvatar({
       className={[
         css['player-avatar'],
         css['their-avatar'],
-        !CARD_IS_MINION &&
-          CAN_BE_ATTACKED &&
-          css['player-avatar--can_be_attacked']
+        CAN_BE_ATTACKED ? css['player-avatar--can_be_attacked'] : ''
       ].join(' ')}
       onClick={() => handleClick()}
     >

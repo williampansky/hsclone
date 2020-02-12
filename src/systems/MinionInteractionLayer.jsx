@@ -64,15 +64,14 @@ export default function MinionInteractionLayer({
 
   let CAN_BE_ATTACKED = false;
   let SIBLING_HAS_GUARD = false;
-  Object.keys(G.boards[previousPlayer]).forEach(slot => {
-    if (G.boards[previousPlayer][slot].hasGuard === true)
-      SIBLING_HAS_GUARD = true;
+  G.boards[previousPlayer].forEach(slot => {
+    if (slot.hasGuard === true) SIBLING_HAS_GUARD = true;
   });
 
   const CAN_ATTACK =
     isActive &&
     board === 'Yours' &&
-    G.boards[currentPlayer][`slot${index}`].canAttack === true &&
+    G.boards[currentPlayer][index].canAttack === true &&
     attack !== 0;
 
   const HAS_GUARD = mechanics.find(m => m === MECHANICS[4]);
@@ -83,7 +82,7 @@ export default function MinionInteractionLayer({
     isActive &&
     board === 'Theirs' &&
     !SIBLING_HAS_GUARD &&
-    G.boards[previousPlayer][`slot${index}`].canBeAttacked === true &&
+    G.boards[previousPlayer][index].canBeAttacked === true &&
     G.selectedMinionIndex[ctx.currentPlayer] !== null
   )
     CAN_BE_ATTACKED = true;
@@ -91,7 +90,7 @@ export default function MinionInteractionLayer({
     isActive &&
     board === 'Theirs' &&
     HAS_GUARD &&
-    G.boards[previousPlayer][`slot${index}`].canBeAttacked === true &&
+    G.boards[previousPlayer][index].canBeAttacked === true &&
     G.selectedMinionIndex[ctx.currentPlayer] !== null
   )
     CAN_BE_ATTACKED = true;
@@ -99,9 +98,19 @@ export default function MinionInteractionLayer({
   const IS_ATTACKING =
     CAN_ATTACK && G.selectedMinionIndex[ctx.currentPlayer] === index;
 
+  const WARCRY_IS_ACTIVE = G.warcryObject[ctx.currentPlayer] !== null;
+
   function handleClick(event) {
     moves.hoverOverCardInHand(null, null);
     moves.selectPlayableCard(null, null);
+
+    if (WARCRY_IS_ACTIVE) {
+      return moves.castWarycrySpell(
+        G.warcryObject[ctx.currentPlayer],
+        'minion',
+        index
+      );
+    }
 
     if (CAN_ATTACK) {
       return G.selectedMinionIndex[currentPlayer] === index
@@ -120,6 +129,7 @@ export default function MinionInteractionLayer({
         css['minion--interaction_layer'],
         CAN_ATTACK ? css['minion--can_attack'] : '',
         CAN_BE_ATTACKED ? css['minion--can_be_attacked'] : '',
+        WARCRY_IS_ACTIVE ? css['minion--can_be_attacked'] : '',
         HAS_GUARD ? css['minion--has_guard'] : '',
         HAS_STAMPEDE ? css['minion--has_stampede'] : '',
         HAS_WARCRY ? css['minion--has_warcry'] : '',

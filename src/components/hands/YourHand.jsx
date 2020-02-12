@@ -63,6 +63,13 @@ export default function YourHand({
           })
         : null}
 
+      {G.warcryObject[yourID] ? (
+        <div className={styles['active-warcry']}>
+          <div>{G.warcryObject[yourID].type}</div>
+          <div>{G.warcryObject[yourID].targetingArrowText}</div>
+        </div>
+      ) : null}
+
       <PlayerEnergy energy={G.energy[yourID]} />
     </div>
   );

@@ -1,10 +1,4 @@
-const CORE = require('../../data/debug/cards.json');
-const ENTOURAGE = require('../../data/debug/entourage.json');
-
-const CARD_DATABASE = {
-  ...CORE,
-  ...ENTOURAGE
-};
+import { CARD_DATABASE } from '../utils/card-databse';
 
 const getCardObjectFromDatabase = (id, database = CARD_DATABASE) => {
   return database[id];
