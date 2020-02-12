@@ -1,21 +1,11 @@
-export const enablePlayerBuff = (G, ctx, buffType, amount) => {};
-
-/**
- * @see https://stackoverflow.com/a/5842770/8296677
- */
-const limitHealthWithinRange = number => {
-  const MIN = 0;
-  const MAX = 30;
-  const parsed = parseInt(number);
-  return Math.min(Math.max(parsed, MIN), MAX);
-};
+import { limitNumberWithinRange } from '../utils/range-limit';
 
 export const addToPlayerHealth = (G, player, amount) => {
-  const newHealth = limitHealthWithinRange(G.health[player] + amount);
+  const newHealth = limitNumberWithinRange(G.health[player] + amount, 30, 0);
   G.health[player] = newHealth;
 };
 
 export const subtractFromPlayerHealth = (G, player, amount) => {
-  const newHealth = limitHealthWithinRange(G.health[player] - amount);
+  const newHealth = limitNumberWithinRange(G.health[player] - amount, 30, 0);
   G.health[player] = newHealth;
 };

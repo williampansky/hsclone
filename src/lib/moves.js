@@ -143,8 +143,5 @@ export default {
   },
   selectPlayableCard: (G, ctx, card, index) => {
     return selectPlayableCard(G, ctx, card, index);
-  },
-  selectMinionForAttack: (G, ctx, minion, index) => {
-    return selectMinionForAttack(G, ctx, minion, index);
   }
 };
