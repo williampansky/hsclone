@@ -101,6 +101,17 @@ export const drawSingleCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
   if (currentPlayerDeckLength === 0) G.health[currentPlayer]--;
 };
 
+/**
+ * Selects the card from the current player's hand.
+ */
+export const selectCard = (G, ctx, index, card) => {
+  G.selectedCardIndex[ctx.currentPlayer] = index;
+  G.selectedCardObject[ctx.currentPlayer] = card;
+};
+
+/**
+ * Plays the selected minion card.
+ */
 export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
   const { boards, energy, players, playedCards } = G;
   const { currentPlayer } = ctx;
