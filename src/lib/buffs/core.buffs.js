@@ -1,4 +1,4 @@
-export const initCoreBuff = (G, player, cardId) => {
+export const initCoreBuff = (G, player, cardId, index) => {
   // prettier-ignore
   switch (cardId) {
     case 'CORE_011':  return CORE_011_015_028_037(G, player);
