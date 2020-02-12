@@ -2,6 +2,7 @@ import {
   hoverOverCardInHand,
   selectPlayableCard
 } from './moves/aesthetic-moves';
+import { playMinionCard } from './cards/playMinionCard';
 import {
   addCardToHand,
   deincrementDeckCount,
@@ -10,7 +11,6 @@ import {
   drawCards,
   incrementDeckCount,
   incrementHandCount,
-  playMinionCard,
   playSpellCard
 } from './moves/card-moves';
 import {

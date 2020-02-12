@@ -1,6 +1,6 @@
 const esmImport = require('esm')(module);
-const { playMinionCard } = esmImport('../../lib/moves/card-moves');
 const { getCardByID } = esmImport('../../lib/utils/get-card-by-id');
+const { playMinionCard } = esmImport('./playMinionCard');
 
 /**
  * card-moves::playMinionCard() - no mechanics, no index splicing
