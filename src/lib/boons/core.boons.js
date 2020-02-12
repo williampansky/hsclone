@@ -1,4 +1,4 @@
-export const initCoreBoon = (G, player, cardId) => {
+export const initCoreBoon = (G, player, cardId, index) => {
   // prettier-ignore
   switch (cardId) {
     case 'CORE_041':  return CORE_041(G, player, cardId);

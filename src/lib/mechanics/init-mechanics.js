@@ -1,4 +1,4 @@
-import { initCoreBoon } from '../boons/core.boons';
+import { initBoons } from './init-boons';
 import { initCoreBuff } from '../buffs/core.buffs';
 import {
   enableMinionCanAttack,
@@ -7,16 +7,18 @@ import {
 } from '../moves/minion-moves';
 import MECHANICS from '../../enums/mechanics.enums';
 
-export const initCardMechanics = (G, ctx, mechanics, cardId, index) => {
+// prettier-ignore
+export const initCardMechanics = (G, ctx, card, index) => {
   const { currentPlayer } = ctx;
+  const { id, mechanics } = card;
 
   // if minion has boon
   if (mechanics.find(m => m === MECHANICS[1]))
-    initCoreBoon(G, currentPlayer, cardId);
+    initBoons(G, ctx, card, index);
 
   // if minion has buff
   if (mechanics.find(m => m === MECHANICS[2]))
-    initCoreBuff(G, currentPlayer, cardId);
+    initCoreBuff(G, currentPlayer, id);
 
   // if minion has guard
   if (mechanics.find(m => m === MECHANICS[4]))
@@ -28,5 +30,5 @@ export const initCardMechanics = (G, ctx, mechanics, cardId, index) => {
 
   // if minion has warcry
   if (mechanics.find(m => m === MECHANICS[6]))
-    initMinionWarcry(G, ctx, cardId, index);
+    initMinionWarcry(G, ctx, id, index);
 };

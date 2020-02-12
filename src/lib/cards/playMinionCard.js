@@ -11,7 +11,6 @@ export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
   const { currentPlayer } = ctx;
 
   const minionObject = generateMinion(cardId);
-  const { mechanics } = minionObject;
 
   const CARD_ITEM = {
     canAttack: false,
@@ -53,5 +52,5 @@ export const playMinionCard = (G, ctx, index, cardId, cardCost) => {
   deincrementHandCount(G, currentPlayer);
 
   // check and init and mechanics
-  initCardMechanics(G, ctx, mechanics, cardId, index);
+  initCardMechanics(G, ctx, minionObject, index);
 };
