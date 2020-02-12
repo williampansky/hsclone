@@ -1,7 +1,7 @@
 import { subtract } from 'mathjs';
 import {
   disableMinionCanAttack,
-  selectMinionForAttack
+  selectAttackingMinion
 } from '../moves/minion-moves';
 
 // prettier-ignore
@@ -37,7 +37,7 @@ export const attackMinion = (G, ctx, index) => {
   disableMinionCanAttack(G, currentPlayer, selectedMinion);
 
   // reset currentPlayer's selectedMinionIndex value
-  selectMinionForAttack(G, ctx, null, null);
+  selectAttackingMinion(G, ctx, null, null);
 
   // kill ANY minions with health <= 0 and reset states
   if (G.boards[currentPlayer][selectedMinion].minionData.health <= 0) {

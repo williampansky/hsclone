@@ -13,7 +13,7 @@ export default function EndTurnButton({
     event.preventDefault();
     moves.hoverOverCardInHand(null);
     moves.selectPlayableCard(null, null);
-    moves.selectMinionForAttack(null, null);
+    moves.selectAttackingMinion(null, null);
     return events.endTurn();
   }
 

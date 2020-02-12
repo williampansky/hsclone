@@ -3,8 +3,10 @@ const {
   disableMinionCanAttack,
   disableMinionCanBeAttacked,
   enableMinionCanAttack,
-  enableMinionCanBeAttacked
-} = esmImport('../../lib/moves/minion-moves');
+  enableMinionCanBeAttacked,
+  selectAttackingMinion
+} = esmImport('../moves/minion-moves');
+const { generateBoardSlotObject } = esmImport('../utils/generate-board-slot');
 
 /**
  * minion-moves::disableMinionCanAttack()
@@ -86,7 +88,7 @@ test(`disable currentPlayer's 3rd minion canBeAttacked`, () => {
 test(`enable currentPlayer's 2nd minion canAttack`, () => {
   const G = {
     boards: {
-      '0': {},
+      '0': [],
       '1': [
         null,
         null,
@@ -104,7 +106,7 @@ test(`enable currentPlayer's 2nd minion canAttack`, () => {
   enableMinionCanAttack(G, ctx.currentPlayer, 2);
   expect(G).toEqual({
     boards: {
-      '0': {},
+      '0': [],
       '1': [
         null,
         null,
@@ -122,7 +124,7 @@ test(`enable currentPlayer's 2nd minion canAttack`, () => {
 test(`enable currentPlayer's 5th minion canBeAttacked`, () => {
   const G = {
     boards: {
-      '0': {},
+      '0': [],
       '1': [
         null,
         null,
@@ -143,7 +145,7 @@ test(`enable currentPlayer's 5th minion canBeAttacked`, () => {
   enableMinionCanBeAttacked(G, ctx.currentPlayer, 5);
   expect(G).toEqual({
     boards: {
-      '0': {},
+      '0': [],
       '1': [
         null,
         null,
@@ -154,6 +156,50 @@ test(`enable currentPlayer's 5th minion canBeAttacked`, () => {
           canBeAttacked: true
         }
       ]
+    }
+  });
+});
+
+/**
+ * minion-moves::selectAttackingMinion()
+ */
+test(`selects a minion capable of making an attack`, () => {
+  const CARD_ID = 'CORE_001';
+  const SLOT_OBJECT = generateBoardSlotObject(CARD_ID);
+
+  const G = {
+    boards: {
+      '0': [SLOT_OBJECT],
+      '1': []
+    },
+    selectedMinionIndex: {
+      '0': null,
+      '1': null
+    },
+    selectedMinionObject: {
+      '0': null,
+      '1': null
+    }
+  };
+
+  const ctx = {
+    currentPlayer: '0'
+  };
+
+  selectAttackingMinion(G, ctx, SLOT_OBJECT, 0);
+
+  expect(G).toEqual({
+    boards: {
+      '0': [SLOT_OBJECT],
+      '1': []
+    },
+    selectedMinionIndex: {
+      '0': 0,
+      '1': null
+    },
+    selectedMinionObject: {
+      '0': SLOT_OBJECT,
+      '1': null
     }
   });
 });

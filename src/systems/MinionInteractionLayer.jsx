@@ -114,8 +114,8 @@ export default function MinionInteractionLayer({
 
     if (CAN_ATTACK) {
       return G.selectedMinionIndex[currentPlayer] === index
-        ? moves.selectMinionForAttack(null, null)
-        : moves.selectMinionForAttack(minionData, index);
+        ? moves.selectAttackingMinion(null, null)
+        : moves.selectAttackingMinion(minionData, index);
     }
 
     if (CAN_BE_ATTACKED) {

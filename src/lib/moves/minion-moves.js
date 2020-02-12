@@ -31,15 +31,15 @@ export const enableMinionHasGuard = (G, player, index) => {
   return (G.boards[player][index].hasGuard = true);
 };
 
-export const selectMinionForAttack = (G, ctx, card, index) => {
+export const selectAttackingMinion = (G, ctx, minion, index) => {
   selectAttackingMinionIndex(G, ctx, index);
-  selectAttackingMinionObject(G, ctx, card);
+  selectAttackingMinionObject(G, ctx, minion);
 };
 
-export const selectAttackingMinionIndex = (G, ctx, slotNumber) => {
+export const selectAttackingMinionIndex = (G, ctx, index) => {
   Number(ctx.currentPlayer) === 0
-    ? (G.selectedMinionIndex[0] = slotNumber)
-    : (G.selectedMinionIndex[1] = slotNumber);
+    ? (G.selectedMinionIndex[0] = index)
+    : (G.selectedMinionIndex[1] = index);
 };
 
 export const selectAttackingMinionObject = (G, ctx, minion) => {
@@ -63,7 +63,7 @@ export const attackPlayer = (G, ctx, player, attack) => {
   disableMinionCanAttack(G, currentPlayer, selectedMinion);
 
   // reset currentPlayer's selectedMinionIndex value
-  selectMinionForAttack(G, ctx, null, null);
+  selectAttackingMinion(G, ctx, null, null);
 
   // subtract attack from player's health value
   const newHealth = subtract(G.health[player], attack);
