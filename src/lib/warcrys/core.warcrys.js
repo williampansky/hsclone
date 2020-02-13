@@ -1,6 +1,6 @@
-import { limitNumberWithinRange } from '../utils/range-limit';
 import { generateBoardSlotObject } from '../utils/generate-board-slot';
 import { generateWarcryObject } from '../utils/generate-warcry-object';
+import { addToMinionHealth } from '../minions/minions.health';
 import { drawSingleCardAtStartOfCurrentPlayersTurn } from '../moves/card-moves';
 import {
   addToPlayerHealth,
@@ -15,9 +15,9 @@ export const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_012':  return CORE_012(G, ctx, cardId);
     case 'CORE_013':  return CORE_013(G, ctx, cardId);
     case 'CORE_016':  return CORE_016(G, ctx, cardId);
-    case 'CORE_020':  return CORE_016(G, ctx, cardId);
+    case 'CORE_020':  return CORE_020(G, ctx, cardId);
     case 'CORE_021':  return CORE_021(G, ctx, cardId, index);
-    case 'CORE_025':  return CORE_026(G, ctx, cardId);
+    case 'CORE_025':  return CORE_025(G, ctx, cardId);
     case 'CORE_026':  return CORE_026(G, ctx, cardId);
     case 'CORE_032':  return CORE_032(G, ctx, cardId);
     case 'CORE_033':  return CORE_033(G, ctx, cardId);
@@ -48,7 +48,7 @@ const CORE_016 = (G, ctx, cardId) => {
   G.warcryObject[ctx.currentPlayer] = generateWarcryObject(cardId);
 };
 
-const CORE_20 = (G, ctx, cardId) => {
+const CORE_020 = (G, ctx, cardId) => {
   if (G.boards[ctx.currentPlayer].length === 7) return; // max minions
   G.boards[ctx.currentPlayer].push(generateBoardSlotObject(`${cardId}a`));
 };
@@ -85,21 +85,9 @@ const CORE_032 = (G, ctx, cardId) => {
   addToPlayerHealth(G, ctx.currentPlayer, HEAL_AMOUNT);
 
   // heal minions w/loop method
-  for (let i = 0; i < G.boards[ctx.currentPlayer].length; i++) {
+  for (let i = 0; i < G.boards[ctx.currentPlayer].length; i++)
     if (G.boards[ctx.currentPlayer][i].minionData.id !== cardId)
-      transformEach(G, ctx.currentPlayer, i);
-  }
-
-  // transformation method
-  function transformEach(G, player, index) {
-    G.boards[player][index] = {
-      ...G.boards[player][index],
-      currentHealth: limitNumberWithinRange(
-        G.boards[player][index].currentHealth + HEAL_AMOUNT,
-        G.boards[player][index].totalHealth
-      )
-    };
-  }
+      addToMinionHealth(G, ctx.currentPlayer, i, HEAL_AMOUNT);
 };
 
 /**
@@ -116,8 +104,8 @@ const CORE_033 = (G, ctx, cardId) => {
 
   // transformation method
   function transformTarget(G, player, index) {
-    const AP = parseInt(G.boards[player][index].minionData.attack);
-    const HP = parseInt(G.boards[player][index].minionData.health);
+    const AP = parseInt(G.boards[player][index].currentAttack);
+    const HP = parseInt(G.boards[player][index].currentHealth);
 
     const newAP = AP + NUMBER_OF_MINIONS;
     const newHP = HP + NUMBER_OF_MINIONS;
