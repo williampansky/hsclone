@@ -12,14 +12,15 @@
     "cost": 1,
     "attack": 1,
     "health": 1,
-    "text": "<strong>Battlecry:</strong> Deal 1 damage.",
+    "text": "<strong>Warcry:</strong>  Deal 1 damage to anyone.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
     "howToEarnGolden": "",
-    "mechanics": "WARCRY,BUFF",
-    "spellType": "",
-    "targetingArrowText": "",
+    "mechanics": "WARCRY",
+    "spellType": "TARGETED",
+    "targetingArrowText": "Deal 1 damage",
+    "warcryObjectNumber": 1,
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -45,6 +46,7 @@
     "mechanics": "GUARD",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -70,6 +72,7 @@
     "mechanics": "BOON",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -95,6 +98,7 @@
     "mechanics": "",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -120,6 +124,7 @@
     "mechanics": "STAMPEDE",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -137,14 +142,15 @@
     "cost": 1,
     "attack": 2,
     "health": 1,
-    "text": "<strong>Warcry:</strong> Restore 2 Health to anyone.",
+    "text": "<strong>Warcry:</strong> Restore 2 Health to yourself or a friendly minion.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
     "howToEarnGolden": "",
     "mechanics": "WARCRY",
-    "spellType": "",
-    "targetingArrowText": "",
+    "spellType": "TARGETED",
+    "targetingArrowText": "Heal 2 HP",
+    "warcryObjectNumber": 2,
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -170,6 +176,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -195,6 +202,7 @@
     "mechanics": "",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -220,6 +228,7 @@
     "mechanics": "STAMPEDE",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -245,6 +254,7 @@
     "mechanics": "GUARD",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -262,7 +272,7 @@
     "cost": 2,
     "attack": 2,
     "health": 2,
-    "text": "<strong>Buff.</strong>\n<br />Spell Damage +1",
+    "text": "<strong>Buff:</strong> Give your hero +1 Spell Damage.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -270,6 +280,7 @@
     "mechanics": "BUFF",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -295,6 +306,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -312,7 +324,7 @@
     "cost": 2,
     "attack": 1,
     "health": 1,
-    "text": "<strong>Warcry:</strong> Draw a card.",
+    "text": "<strong>Warcry:</strong> Draw a card from your deck.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -320,6 +332,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -345,6 +358,7 @@
     "mechanics": "",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -362,7 +376,7 @@
     "cost": 3,
     "attack": 1,
     "health": 4,
-    "text": "<strong>Buff.</strong>\n<br />Spell Damage +1",
+    "text": "<strong>Buff:</strong> Give your hero +1 Spell Damage.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -370,6 +384,7 @@
     "mechanics": "BUFF",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -395,6 +410,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -420,6 +436,7 @@
     "mechanics": "GUARD",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -445,6 +462,7 @@
     "mechanics": "",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -462,7 +480,7 @@
     "cost": 3,
     "attack": 2,
     "health": 2,
-    "text": "Your other minions have +1 Attack.",
+    "text": "<strong>Boon:</strong> Your other minions have +1 Attack.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -470,6 +488,7 @@
     "mechanics": "BOON",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -487,7 +506,7 @@
     "cost": 3,
     "attack": 2,
     "health": 3,
-    "text": "Battlecry: Summon a 1/1 Boar.",
+    "text": "<strong>Warcry: </strong> Summon a 1/1 Boar.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -495,6 +514,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -512,7 +532,7 @@
     "cost": 3,
     "attack": 3,
     "health": 2,
-    "text": "Battlecry: Give a friendly minion +1/+1.",
+    "text": "<strong>Warcry: </strong> Provide +1/+1 to one of your minions.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -520,6 +540,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -545,6 +566,7 @@
     "mechanics": "GUARD",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -570,6 +592,7 @@
     "mechanics": "STAMPEDE",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -595,6 +618,7 @@
     "mechanics": "",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -612,7 +636,7 @@
     "cost": 4,
     "attack": 2,
     "health": 4,
-    "text": "Battlecry: Summon a 2/1 Mechanical Dragonling.",
+    "text": "<strong>Warcry: </strong> Summon a 2/1 Mechanical Dragonling.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -620,6 +644,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -637,7 +662,7 @@
     "cost": 4,
     "attack": 2,
     "health": 4,
-    "text": "Battlecry: Draw a card.",
+    "text": "<strong>Warcry: </strong> Draw a card.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -645,6 +670,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -670,6 +696,7 @@
     "mechanics": "",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -687,7 +714,7 @@
     "cost": 4,
     "attack": 4,
     "health": 4,
-    "text": "Spell Damage +1",
+    "text": "<strong>Buff:</strong> Give your hero +1 Spell Damage.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -695,6 +722,7 @@
     "mechanics": "BUFF",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -720,6 +748,7 @@
     "mechanics": "GUARD",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -745,6 +774,7 @@
     "mechanics": "STAMPEDE",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -770,6 +800,7 @@
     "mechanics": "GUARD",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -787,7 +818,7 @@
     "cost": 5,
     "attack": 4,
     "health": 5,
-    "text": "Battlecry: Restore 2 Health to all friendly characters.",
+    "text": "<strong>Warcry: </strong> Restore 2 Health to you and all your minions.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -795,6 +826,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -812,7 +844,7 @@
     "cost": 5,
     "attack": 4,
     "health": 4,
-    "text": "Battlecry: Gain +1/+1 for each other friendly minion on the battlefield.",
+    "text": "<strong>Warcry: </strong> Gain +1/+1 for each of your other active minions.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -820,6 +852,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -845,6 +878,7 @@
     "mechanics": "",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -862,7 +896,7 @@
     "cost": 5,
     "attack": 4,
     "health": 4,
-    "text": "Battlecry: Deal 3 damage to the enemy hero.",
+    "text": "<strong>Warcry: </strong> Attack the enemy hero for 3 damage.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -870,6 +904,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -887,7 +922,7 @@
     "cost": 5,
     "attack": 4,
     "health": 2,
-    "text": "Battlecry: Deal 2 damage.",
+    "text": "<strong>Warcry:</strong> Deal 2 damage to anyone.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -895,6 +930,7 @@
     "mechanics": "WARCRY",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -912,7 +948,7 @@
     "cost": 6,
     "attack": 4,
     "health": 7,
-    "text": "Spell Damage +1",
+    "text": "<strong>Buff:</strong> Give your hero +1 Spell Damage.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -920,6 +956,7 @@
     "mechanics": "BUFF",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -945,6 +982,7 @@
     "mechanics": "",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -970,6 +1008,7 @@
     "mechanics": "GUARD",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -995,6 +1034,7 @@
     "mechanics": "",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -1012,7 +1052,7 @@
     "cost": 7,
     "attack": 6,
     "health": 6,
-    "text": "Your other minions have +1/+1.",
+    "text": "<strong>Boon:</strong> Gift +1/+1 to all your other minions.",
     "collectible": "checked",
     "elite": "",
     "howToEarn": "",
@@ -1020,6 +1060,7 @@
     "mechanics": "BOON",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -1045,6 +1086,7 @@
     "mechanics": "",
     "spellType": "",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
@@ -1070,6 +1112,7 @@
     "mechanics": "",
     "spellType": "GLOBAL",
     "targetingArrowText": "",
+    "warcryObjectNumber": "",
     "flavor": "",
     "entourage": "",
     "artist": ""
