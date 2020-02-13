@@ -1,6 +1,3 @@
-import { subtract } from 'mathjs';
-import { initCoreWarcry } from '../warcrys/core.warcrys';
-
 /**
  * Disables `canAttack` of the player's board index object.
  * @param {{}} G
