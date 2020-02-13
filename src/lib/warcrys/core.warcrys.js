@@ -15,7 +15,9 @@ export const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_012':  return CORE_012(G, ctx, cardId);
     case 'CORE_013':  return CORE_013(G, ctx, cardId);
     case 'CORE_016':  return CORE_016(G, ctx, cardId);
+    case 'CORE_020':  return CORE_016(G, ctx, cardId);
     case 'CORE_021':  return CORE_021(G, ctx, cardId, index);
+    case 'CORE_025':  return CORE_026(G, ctx, cardId);
     case 'CORE_026':  return CORE_026(G, ctx, cardId);
     case 'CORE_032':  return CORE_032(G, ctx, cardId);
     case 'CORE_033':  return CORE_033(G, ctx, cardId);
@@ -46,6 +48,11 @@ const CORE_016 = (G, ctx, cardId) => {
   G.warcryObject[ctx.currentPlayer] = generateWarcryObject(cardId);
 };
 
+const CORE_20 = (G, ctx, cardId) => {
+  if (G.boards[ctx.currentPlayer].length === 7) return; // max minions
+  G.boards[ctx.currentPlayer].push(generateBoardSlotObject(`${cardId}a`));
+};
+
 /**
  * Provide +1/+1 to one of your minions.
  */
@@ -57,6 +64,11 @@ const CORE_021 = (G, ctx, cardId, index) => {
     totalAttack: G.boards[ctx.currentPlayer][index].totalAttack + 1,
     totalHealth: G.boards[ctx.currentPlayer][index].totalHealth + 1
   };
+};
+
+const CORE_025 = (G, ctx, cardId) => {
+  if (G.boards[ctx.currentPlayer].length === 7) return; // max minions
+  G.boards[ctx.currentPlayer].push(generateBoardSlotObject(`${cardId}a`));
 };
 
 const CORE_026 = (G, ctx) => {
