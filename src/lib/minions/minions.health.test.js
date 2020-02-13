@@ -1,8 +1,11 @@
 const esmImport = require('esm')(module);
 const { generateMinion } = esmImport('../utils/generate-minion');
-const { addToMinionHealth, subtractFromMinionHealth, killMinion } = esmImport(
-  './minions.health'
-);
+const {
+  addToMinionHealth,
+  subtractFromMinionHealth,
+  killMinion,
+  killMinionIfHealthReachesZero
+} = esmImport('./minions.health');
 
 /**
  * addToMinionHealth() - w/o hitting max totalHealth
@@ -183,6 +186,27 @@ test(`adds more than minimum totalHealth from minion's health; limits result to 
 /**
  * killMinion()
  */
+test(`kill a single minion; regardless of health or status`, () => {
+  const CARD_ID = 'CORE_042';
+  const ctx = { currentPlayer: '0' };
+  const G = {
+    boards: {
+      '0': [generateMinion(CARD_ID)]
+    }
+  };
+
+  killMinion(G, ctx.currentPlayer, 0);
+
+  expect(G).toEqual({
+    boards: {
+      '0': []
+    }
+  });
+});
+
+/**
+ * killMinion()
+ */
 test(`kill a single minion with zero or less currentHealth`, () => {
   const CARD_ID = 'CORE_042';
   const MINION_OBJECT = generateMinion(CARD_ID);
@@ -204,7 +228,7 @@ test(`kill a single minion with zero or less currentHealth`, () => {
     }
   };
 
-  killMinion(G, ctx.currentPlayer, 0);
+  killMinionIfHealthReachesZero(G, ctx.currentPlayer, 0);
 
   expect(G).toEqual({
     boards: {

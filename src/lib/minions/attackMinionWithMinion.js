@@ -1,4 +1,3 @@
-import { subtract } from 'mathjs';
 import {
   disableMinionCanAttack,
   selectAttackingMinion
