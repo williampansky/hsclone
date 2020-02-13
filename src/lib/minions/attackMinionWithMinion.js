@@ -3,48 +3,48 @@ import {
   disableMinionCanAttack,
   selectAttackingMinion
 } from '../moves/minion-moves';
+import { subtractFromMinionHealth } from '../minions/minions.health';
 
-// prettier-ignore
 export const attackMinion = (G, ctx, index) => {
-  const { selectedMinionIndex, turnOrder } = G;
+  const { boards, selectedMinionIndex, selectedMinionObject, turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
-  const selectedMinion = selectedMinionIndex[currentPlayer];
-  const MINION_ATTACKING = G.boards[currentPlayer][index];
-  const MINION_BEING_ATTACKED = G.boards[otherPlayer][index];
 
-  // MINION_ATTACKING attack & health
-  const attackingAttack = MINION_ATTACKING.minionData.attack;
-  const attackingHealth = MINION_ATTACKING.minionData.health;
+  const ATTACKING_MINION = selectedMinionObject[currentPlayer];
+  const ATTACKING_MINION_INDEX = selectedMinionIndex[currentPlayer];
+  const MINION_BEING_ATTACKED = boards[otherPlayer][index];
+  const MINION_BEING_ATTACKED_INDEX = boards[otherPlayer][index];
 
-  // MINION_BEING_ATTACKED attack & health
-  const beingAttackedAttack = MINION_BEING_ATTACKED.minionData.attack;
-  const beingAttackedHealth = MINION_BEING_ATTACKED.minionData.health;
+  // Subtract `ATTACKING_MINION.currentAttack`
+  // from MINION_BEING_ATTACKED_INDEX's currentHealth value
+  subtractFromMinionHealth(
+    G,
+    otherPlayer,
+    MINION_BEING_ATTACKED_INDEX,
+    ATTACKING_MINION.currentAttack
+  );
 
-  // new MINION_ATTACKING health value after subtracting `beingAttackedAttack`
-  const newAttackedHealth = subtract(attackingHealth, beingAttackedAttack);
+  // Subtract `MINION_BEING_ATTACKED.currentAttack`
+  // from ATTACKING_MINION_INDEX's currentHealth value
+  subtractFromMinionHealth(
+    G,
+    currentPlayer,
+    ATTACKING_MINION_INDEX,
+    MINION_BEING_ATTACKED.currentAttack
+  );
 
-  // new MINION_BEING_ATTACKED health value after subtracting `attackingAttack`
-  const newBeingAttackedHealth = subtract(beingAttackedHealth, attackingAttack);
-  
-  // subtract minion being attacked's attack value from the attacking minion's health value.
-  G.boards[currentPlayer][selectedMinion].minionData.health = newAttackedHealth;
-  
-  // subtract attacking minion's attack value from the minion being attacked's health value.
-  G.boards[otherPlayer][index].minionData.health = newBeingAttackedHealth;
+  // disable ATTACKING_MINION's ability to attack
+  disableMinionCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
 
-  // disable MINION_ATTACKING's ability to attack
-  disableMinionCanAttack(G, currentPlayer, selectedMinion);
-
-  // reset currentPlayer's selectedMinionIndex value
+  // reset currentPlayer's selectedMinionIndex & selectedMinionObject value
   selectAttackingMinion(G, ctx, null, null);
 
   // kill ANY minions with health <= 0 and reset states
-  if (G.boards[currentPlayer][selectedMinion].minionData.health <= 0) {
-    G.boards[currentPlayer].splice(selectedMinion, 1);
+  if (boards[currentPlayer][ATTACKING_MINION_INDEX].minionData.health <= 0) {
+    boards[currentPlayer].splice(ATTACKING_MINION_INDEX, 1);
   }
 
-  if (G.boards[otherPlayer][index].minionData.health <= 0) {
-    G.boards[otherPlayer].splice(index, 1);
+  if (boards[otherPlayer][index].minionData.health <= 0) {
+    boards[otherPlayer].splice(index, 1);
   }
 };
