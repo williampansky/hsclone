@@ -1,5 +1,5 @@
-import { getCardByID } from '../utils/get-card-by-id';
 import { limitNumberWithinRange } from '../utils/range-limit';
+import { generateBoardSlotObject } from '../utils/generate-board-slot';
 import { drawSingleCardAtStartOfCurrentPlayersTurn } from '../moves/card-moves';
 import {
   addToPlayerHealth,
@@ -48,12 +48,7 @@ const CORE_006 = (G, ctx) => {
 
 const CORE_012 = (G, ctx, cardId) => {
   if (G.boards[ctx.currentPlayer].length === 7) return; // max minions
-  G.boards[ctx.currentPlayer].push({
-    canAttack: false,
-    canBeAttacked: false,
-    hasGuard: false,
-    minionData: getCardByID(`${cardId}a`)
-  });
+  G.boards[ctx.currentPlayer].push(generateBoardSlotObject(`${cardId}a`));
 };
 
 const CORE_013 = (G, ctx) => {

@@ -1,6 +1,7 @@
 const esmImport = require('esm')(module);
 const { initCoreWarcry } = esmImport('./core.warcrys');
 const { getCardByID } = esmImport('../utils/get-card-by-id');
+const { generateBoardSlotObject } = esmImport('../utils/generate-board-slot');
 
 test(`WARCRY(CORE_001)`, () => {
   const CARD_ID = 'CORE_001';
@@ -42,20 +43,8 @@ test(`WARCRY(CORE_006)`, () => {
 
 test(`WARCRY(CORE_012) - board under max capacity`, () => {
   const CARD_ID = 'CORE_012';
-
-  const PARENT_MINION = {
-    canAttack: false,
-    canBeAttacked: false,
-    hasGuard: false,
-    minionData: getCardByID(CARD_ID)
-  };
-
-  const ENTOURAGE_MINION = {
-    canAttack: false,
-    canBeAttacked: false,
-    hasGuard: false,
-    minionData: getCardByID(`${CARD_ID}a`)
-  };
+  const PARENT_MINION = generateBoardSlotObject(CARD_ID);
+  const ENTOURAGE_MINION = generateBoardSlotObject(`${CARD_ID}a`);
 
   const G = {
     boards: {
@@ -76,13 +65,7 @@ test(`WARCRY(CORE_012) - board under max capacity`, () => {
 
 test(`WARCRY(CORE_012) - board at max capacity`, () => {
   const CARD_ID = 'CORE_012';
-
-  const PARENT_MINION = {
-    canAttack: false,
-    canBeAttacked: false,
-    hasGuard: false,
-    minionData: getCardByID(CARD_ID)
-  };
+  const PARENT_MINION = generateBoardSlotObject(CARD_ID);
 
   const G = {
     boards: {
