@@ -14,8 +14,11 @@ export const attackMinionWithMinion = (G, ctx, index) => {
 
   const ATTACKING_MINION = selectedMinionObject[currentPlayer];
   const ATTACKING_MINION_INDEX = selectedMinionIndex[currentPlayer];
+  if (ATTACKING_MINION && !ATTACKING_MINION.canAttack) return;
+
   const MINION_BEING_ATTACKED = boards[otherPlayer][index];
   const MINION_BEING_ATTACKED_INDEX = index;
+  if (MINION_BEING_ATTACKED && !MINION_BEING_ATTACKED.canBeAttacked) return;
 
   // Subtract `ATTACKING_MINION.currentAttack`
   // from MINION_BEING_ATTACKED_INDEX's currentHealth value
