@@ -2,6 +2,7 @@ const esmImport = require('esm')(module);
 const { initCoreWarcry } = esmImport('./core.warcrys');
 const { getCardByID } = esmImport('../utils/get-card-by-id');
 const { generateBoardSlotObject } = esmImport('../utils/generate-board-slot');
+const { generateWarcryObject } = esmImport('../utils/generate-warcry-object');
 
 test(`WARCRY(CORE_001)`, () => {
   const CARD_ID = 'CORE_001';
@@ -10,14 +11,7 @@ test(`WARCRY(CORE_001)`, () => {
   initCoreWarcry(G, ctx, CARD_ID);
   expect(G).toEqual({
     warcryObject: {
-      '0': {
-        id: CARD_ID,
-        type: 'SPELL',
-        cost: 0,
-        attack: 1,
-        spellType: 'TARGETED',
-        targetingArrowText: 'Deal 1 damage'
-      }
+      '0': generateWarcryObject(CARD_ID)
     }
   });
 });
@@ -29,14 +23,7 @@ test(`WARCRY(CORE_006)`, () => {
   initCoreWarcry(G, ctx, CARD_ID);
   expect(G).toEqual({
     warcryObject: {
-      '0': {
-        id: CARD_ID,
-        type: 'SPELL',
-        cost: 0,
-        heal: 1,
-        spellType: 'TARGETED',
-        targetingArrowText: 'Restore 2 Health to anyone.'
-      }
+      '0': generateWarcryObject(CARD_ID)
     }
   });
 });
@@ -146,14 +133,7 @@ test(`WARCRY(CORE_016)`, () => {
   initCoreWarcry(G, ctx, CARD_ID);
   expect(G).toEqual({
     warcryObject: {
-      '0': {
-        id: CARD_ID,
-        type: 'SPELL',
-        cost: 0,
-        attack: 1,
-        spellType: 'TARGETED',
-        targetingArrowText: 'Deal 1 damage'
-      }
+      '0': generateWarcryObject(CARD_ID)
     }
   });
 });
@@ -452,14 +432,7 @@ test(`WARCRY(CORE_036)`, () => {
   initCoreWarcry(G, ctx, CARD_ID);
   expect(G).toEqual({
     warcryObject: {
-      '1': {
-        id: CARD_ID,
-        type: 'SPELL',
-        cost: 0,
-        attack: 2,
-        spellType: 'TARGETED',
-        targetingArrowText: 'Deal 2 damage'
-      }
+      '1': generateWarcryObject(CARD_ID)
     }
   });
 });

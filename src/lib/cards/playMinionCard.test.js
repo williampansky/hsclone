@@ -1,6 +1,7 @@
 const esmImport = require('esm')(module);
 const { getCardByID } = esmImport('../../lib/utils/get-card-by-id');
 const { playMinionCard } = esmImport('./playMinionCard');
+const { generateWarcryObject } = esmImport('../utils/generate-warcry-object');
 
 /**
  * card-moves::playMinionCard() - no mechanics, no index splicing
@@ -509,14 +510,7 @@ test(`plays a minion card with the WARCRY mechanic and adds it to the board`, ()
       '0': [MINION_CARD]
     },
     warcryObject: {
-      '0': {
-        id: 'CORE_001',
-        type: 'SPELL',
-        cost: 0,
-        attack: 1,
-        spellType: 'TARGETED',
-        targetingArrowText: 'Deal 1 damage'
-      },
+      '0': generateWarcryObject(CARD_ID),
       '1': null
     }
   });

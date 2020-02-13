@@ -1,5 +1,6 @@
 import { limitNumberWithinRange } from '../utils/range-limit';
 import { generateBoardSlotObject } from '../utils/generate-board-slot';
+import { generateWarcryObject } from '../utils/generate-warcry-object';
 import { drawSingleCardAtStartOfCurrentPlayersTurn } from '../moves/card-moves';
 import {
   addToPlayerHealth,
@@ -9,41 +10,27 @@ import {
 export const initCoreWarcry = (G, ctx, cardId, index) => {
   // prettier-ignore
   switch (cardId) {
-    case 'CORE_001':  return CORE_001(G, ctx);
-    case 'CORE_006':  return CORE_006(G, ctx);
+    case 'CORE_001':  return CORE_001(G, ctx, cardId);
+    case 'CORE_006':  return CORE_006(G, ctx, cardId);
     case 'CORE_012':  return CORE_012(G, ctx, cardId);
-    case 'CORE_013':  return CORE_013(G, ctx);
-    case 'CORE_016':  return CORE_016(G, ctx);
-    case 'CORE_021':  return CORE_021(G, ctx, index);
-    case 'CORE_026':  return CORE_026(G, ctx);
-    case 'CORE_032':  return CORE_032(G, ctx);
+    case 'CORE_013':  return CORE_013(G, ctx, cardId);
+    case 'CORE_016':  return CORE_016(G, ctx, cardId);
+    case 'CORE_021':  return CORE_021(G, ctx, cardId, index);
+    case 'CORE_026':  return CORE_026(G, ctx, cardId);
+    case 'CORE_032':  return CORE_032(G, ctx, cardId);
     case 'CORE_033':  return CORE_033(G, ctx, cardId);
-    case 'CORE_035':  return CORE_035(G, ctx);
-    case 'CORE_036':  return CORE_036(G, ctx);
+    case 'CORE_035':  return CORE_035(G, ctx, cardId);
+    case 'CORE_036':  return CORE_036(G, ctx, cardId);
     default:          break;
   }
 };
 
-const CORE_001 = (G, ctx) => {
-  G.warcryObject[ctx.currentPlayer] = {
-    id: 'CORE_001',
-    type: 'SPELL',
-    cost: 0,
-    attack: 1,
-    spellType: 'TARGETED',
-    targetingArrowText: 'Deal 1 damage'
-  };
+const CORE_001 = (G, ctx, cardId) => {
+  G.warcryObject[ctx.currentPlayer] = generateWarcryObject(cardId);
 };
 
-const CORE_006 = (G, ctx) => {
-  G.warcryObject[ctx.currentPlayer] = {
-    id: 'CORE_006',
-    type: 'SPELL',
-    cost: 0,
-    heal: 1,
-    spellType: 'TARGETED',
-    targetingArrowText: 'Restore 2 Health to anyone.'
-  };
+const CORE_006 = (G, ctx, cardId) => {
+  G.warcryObject[ctx.currentPlayer] = generateWarcryObject(cardId);
 };
 
 const CORE_012 = (G, ctx, cardId) => {
@@ -55,21 +42,14 @@ const CORE_013 = (G, ctx) => {
   return drawSingleCardAtStartOfCurrentPlayersTurn(G, ctx);
 };
 
-const CORE_016 = (G, ctx) => {
-  G.warcryObject[ctx.currentPlayer] = {
-    id: 'CORE_016',
-    type: 'SPELL',
-    cost: 0,
-    attack: 1,
-    spellType: 'TARGETED',
-    targetingArrowText: 'Deal 1 damage'
-  };
+const CORE_016 = (G, ctx, cardId) => {
+  G.warcryObject[ctx.currentPlayer] = generateWarcryObject(cardId);
 };
 
 /**
  * Provide +1/+1 to one of your minions.
  */
-const CORE_021 = (G, ctx, index) => {
+const CORE_021 = (G, ctx, cardId, index) => {
   G.boards[ctx.currentPlayer][index] = {
     ...G.boards[ctx.currentPlayer][index],
     currentAttack: G.boards[ctx.currentPlayer][index].currentAttack + 1,
@@ -151,13 +131,6 @@ const CORE_035 = (G, ctx) => {
 /**
  * Deal 2 damage to anyone.
  */
-const CORE_036 = (G, ctx) => {
-  G.warcryObject[ctx.currentPlayer] = {
-    id: 'CORE_036',
-    type: 'SPELL',
-    cost: 0,
-    attack: 2,
-    spellType: 'TARGETED',
-    targetingArrowText: 'Deal 2 damage'
-  };
+const CORE_036 = (G, ctx, cardId) => {
+  G.warcryObject[ctx.currentPlayer] = generateWarcryObject(cardId);
 };
