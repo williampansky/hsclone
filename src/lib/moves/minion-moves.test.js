@@ -4,7 +4,9 @@ const {
   disableMinionCanBeAttacked,
   enableMinionCanAttack,
   enableMinionCanBeAttacked,
-  selectAttackingMinion
+  selectAttackingMinion,
+  selectAttackingMinionIndex,
+  selectAttackingMinionObject
 } = esmImport('../moves/minion-moves');
 const { generateBoardSlotObject } = esmImport('../utils/generate-board-slot');
 
@@ -156,6 +158,78 @@ test(`enable currentPlayer's 5th minion canBeAttacked`, () => {
           canBeAttacked: true
         }
       ]
+    }
+  });
+});
+
+/**
+ * minion-moves::selectAttackingMinionIndex()
+ */
+test(`sets attacking minion's index value`, () => {
+  const CARD_ID = 'CORE_001';
+  const SLOT_OBJECT = generateBoardSlotObject(CARD_ID);
+
+  const G = {
+    boards: {
+      '0': [],
+      '1': [SLOT_OBJECT]
+    },
+    selectedMinionIndex: {
+      '0': null,
+      '1': null
+    }
+  };
+
+  const ctx = {
+    currentPlayer: '1'
+  };
+
+  selectAttackingMinionIndex(G, ctx, 0);
+
+  expect(G).toEqual({
+    boards: {
+      '0': [],
+      '1': [SLOT_OBJECT]
+    },
+    selectedMinionIndex: {
+      '0': null,
+      '1': 0
+    }
+  });
+});
+
+/**
+ * minion-moves::selectAttackingMinionObject()
+ */
+test(`sets attacking minion's object value`, () => {
+  const CARD_ID = 'CORE_001';
+  const SLOT_OBJECT = generateBoardSlotObject(CARD_ID);
+
+  const G = {
+    boards: {
+      '0': [SLOT_OBJECT],
+      '1': []
+    },
+    selectedMinionObject: {
+      '0': null,
+      '1': null
+    }
+  };
+
+  const ctx = {
+    currentPlayer: '0'
+  };
+
+  selectAttackingMinionObject(G, ctx, SLOT_OBJECT);
+
+  expect(G).toEqual({
+    boards: {
+      '0': [SLOT_OBJECT],
+      '1': []
+    },
+    selectedMinionObject: {
+      '0': SLOT_OBJECT,
+      '1': null
     }
   });
 });
