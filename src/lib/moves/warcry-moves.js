@@ -1,9 +1,5 @@
-import {
-  subtractFromMinionHealth,
-  killMinionIfHealthReachesZero
-} from '../minions/minions.health';
-import { subtractFromPlayerHealth } from './player-moves';
-import WARCRY_TARGET_CONTEXT from '../../enums/warcry.target-context.enum';
+import { CAST_WARCRY_CORE_001 } from '../warcrys/objects/CAST_WARCRY_CORE_001';
+import { CAST_WARCRY_CORE_006 } from '../warcrys/objects/CAST_WARCRY_CORE_006';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -23,23 +19,7 @@ export const castWarycrySpell = (G, ctx, targetCtx, targetIdx) => {
   // prettier-ignore
   switch (id) {
     case 'CORE_001':  return CAST_WARCRY_CORE_001(G, ctx, targetCtx, targetIdx);
-    default:          return null;
-  }
-};
-
-const CAST_WARCRY_CORE_001 = (G, ctx, targetCtx, targetIdx) => {
-  const { turnOrder } = G;
-  const { currentPlayer } = ctx;
-  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
-
-  switch (targetCtx) {
-    case WARCRY_TARGET_CONTEXT[1]:
-      subtractFromMinionHealth(G, otherPlayer, targetIdx, 1);
-      killMinionIfHealthReachesZero(G, otherPlayer, targetIdx);
-      break;
-
-    default:
-      subtractFromPlayerHealth(G, otherPlayer, 1);
-      break;
+    case 'CORE_006':  return CAST_WARCRY_CORE_006(G, ctx, targetCtx, targetIdx);
+    default:          return;
   }
 };
