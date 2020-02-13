@@ -1,3 +1,10 @@
+/**
+ * Sets the value of `hoveringCardIndex` if `index` is provided;
+ * otherwise sets the value to null.
+ * @param {{}} G
+ * @param {{}} ctx
+ * @param {number} index
+ */
 export const hoverOverCardInHand = (G, ctx, index) => {
   if (!index || index === null) {
     G.hoveringCardIndex[0] = null;
@@ -9,11 +16,27 @@ export const hoverOverCardInHand = (G, ctx, index) => {
   }
 };
 
+/**
+ * Sets the `selectedCardIndex` and `selectedCardObject`
+ * of the current player's card.
+ * @param {{}} G
+ * @param {{}} ctx
+ * @param {number} index
+ * @requires selectPlayableCardIndex()
+ * @requires selectPlayableCardObject()
+ */
 export const selectPlayableCard = (G, ctx, card, index) => {
   selectPlayableCardIndex(G, ctx, index);
   selectPlayableCardObject(G, ctx, card);
 };
 
+/**
+ * Sets the value of `selectPlayableCardIndex` if `index` is provided;
+ * otherwise sets the value to null.
+ * @param {{}} G
+ * @param {{}} ctx
+ * @param {number} index
+ */
 export const selectPlayableCardIndex = (G, ctx, index) => {
   if (!index || index === null) {
     G.selectedCardIndex[0] = null;
@@ -25,6 +48,13 @@ export const selectPlayableCardIndex = (G, ctx, index) => {
   }
 };
 
+/**
+ * Sets the value of `selectPlayableCardObject` if `card` is provided;
+ * otherwise sets the value to null.
+ * @param {{}} G
+ * @param {{}} ctx
+ * @param {{}} card
+ */
 export const selectPlayableCardObject = (G, ctx, card) => {
   if (!card || card === null) {
     G.selectedCardObject[0] = null;
