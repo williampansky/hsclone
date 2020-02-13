@@ -7,6 +7,12 @@ import {
   killMinionIfHealthReachesZero
 } from '../minions/minions.health';
 
+/**
+ * Attacks a minion (index) with the current player's selectedMinionObject.
+ * @param {{}} G
+ * @param {{}} ctx
+ * @param {number} index
+ */
 export const attackMinionWithMinion = (G, ctx, index) => {
   const { boards, selectedMinionIndex, selectedMinionObject, turnOrder } = G;
   const { currentPlayer } = ctx;
