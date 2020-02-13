@@ -1,32 +1,45 @@
-export const castWarycrySpell = (G, ctx, warcry, targetContext, target) => {
-  const { id } = warcry;
+import {
+  subtractFromMinionHealth,
+  killMinionIfHealthReachesZero
+} from '../minions/minions.health';
+import { subtractFromPlayerHealth } from './player-moves';
+import WARCRY_TARGET_CONTEXT from '../../enums/warcry.target-context.enum';
+
+/**
+ * Casts a targeted Warcry spell object.
+ * @param {{}} G
+ * @param {{}} ctx
+ * @param {string} targetCtx Target context; MINION || PLAYER
+ * @param {string|number} targetIdx Target index if targetCtx is MINION
+ */
+export const castWarycrySpell = (G, ctx, targetCtx, targetIdx) => {
+  const { warcryObject } = G;
+  const { currentPlayer } = ctx;
+  const { id } = warcryObject[currentPlayer];
 
   // clear warcryObject
-  G.warcryObject[ctx.currentPlayer] = null;
+  G.warcryObject[currentPlayer] = null;
 
   // prettier-ignore
   switch (id) {
-    case 'CORE_001':  return ATTACK_WITH_CORE_001(G, ctx, targetContext, target);
+    case 'CORE_001':  return CAST_WARCRY_CORE_001(G, ctx, targetCtx, targetIdx);
     default:          return null;
   }
 };
 
-const ATTACK_WITH_CORE_001 = (G, ctx, targetContext, target) => {
+const CAST_WARCRY_CORE_001 = (G, ctx, targetCtx, targetIdx) => {
   const { turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
 
-  if (targetContext === 'player') {
-    G.health[target] = G.health[target] - 1;
-  }
+  switch (targetCtx) {
+    case WARCRY_TARGET_CONTEXT[1]:
+      subtractFromMinionHealth(G, otherPlayer, targetIdx, 1);
+      killMinionIfHealthReachesZero(G, otherPlayer, targetIdx);
+      break;
 
-  if (targetContext === 'minion') {
-    G.boards[otherPlayer][target].minionData.health =
-      G.boards[otherPlayer][target].minionData.health - 1;
-  }
-
-  // kill minion if its health <= 0 and reset states
-  if (G.boards[otherPlayer][target].minionData.health <= 0) {
-    G.boards[otherPlayer].splice(target, 1);
+    default:
+      subtractFromPlayerHealth(G, otherPlayer, 1);
+      break;
   }
 };

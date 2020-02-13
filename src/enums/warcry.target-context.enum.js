@@ -1,0 +1,6 @@
+const WARCRY_TARGET_CONTEXT = {
+  1: 'MINION',
+  2: 'PLAYER'
+};
+
+export default WARCRY_TARGET_CONTEXT;
