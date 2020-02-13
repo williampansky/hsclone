@@ -2,8 +2,10 @@ const esmImport = require('esm')(module);
 const {
   disableMinionCanAttack,
   disableMinionCanBeAttacked,
+  disableMinionHasGuard,
   enableMinionCanAttack,
   enableMinionCanBeAttacked,
+  enableMinionHasGuard,
   selectAttackingMinion,
   selectAttackingMinionIndex,
   selectAttackingMinionObject
@@ -194,6 +196,77 @@ test(`sets attacking minion's index value`, () => {
     selectedMinionIndex: {
       '0': null,
       '1': 0
+    }
+  });
+});
+
+/**
+ * minion-moves::disableMinionHasGuard()
+ */
+test(`disables hasGuard on the index minion`, () => {
+  const CARD_ID = 'CORE_029';
+  const SLOT_OBJECT = generateBoardSlotObject(CARD_ID);
+
+  const G = {
+    boards: {
+      '0': [],
+      '1': [
+        {
+          ...SLOT_OBJECT,
+          hasGuard: true
+        }
+      ]
+    }
+  };
+
+  const ctx = {
+    currentPlayer: '1'
+  };
+
+  disableMinionHasGuard(G, ctx.currentPlayer, 0);
+
+  expect(G).toEqual({
+    boards: {
+      '0': [],
+      '1': [
+        {
+          ...SLOT_OBJECT,
+          hasGuard: false
+        }
+      ]
+    }
+  });
+});
+
+/**
+ * minion-moves::enableMinionHasGuard()
+ */
+test(`enables hasGuard on the index minion`, () => {
+  const CARD_ID = 'CORE_029';
+  const SLOT_OBJECT = generateBoardSlotObject(CARD_ID);
+
+  const G = {
+    boards: {
+      '0': [SLOT_OBJECT],
+      '1': []
+    }
+  };
+
+  const ctx = {
+    currentPlayer: '0'
+  };
+
+  enableMinionHasGuard(G, ctx.currentPlayer, 0);
+
+  expect(G).toEqual({
+    boards: {
+      '0': [
+        {
+          ...SLOT_OBJECT,
+          hasGuard: true
+        }
+      ],
+      '1': []
     }
   });
 });
