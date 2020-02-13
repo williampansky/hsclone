@@ -1,4 +1,3 @@
-// prettier-ignore
 const SPELLTYPE = {
   1: 'GLOBAL',
   2: 'TARGETED'

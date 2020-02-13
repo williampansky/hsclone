@@ -1,4 +1,3 @@
-// prettier-ignore
 const TYPE = {
   1: 'MINION',
   2: 'POTION',

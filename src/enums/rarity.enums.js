@@ -1,4 +1,3 @@
-// prettier-ignore
 const RARITY = {
   0: 'NONE',
   1: 'FREE',

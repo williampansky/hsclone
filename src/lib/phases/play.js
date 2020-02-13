@@ -1,8 +1,4 @@
 import { TurnOrder } from 'boardgame.io/core';
-import {
-  hoverOverCardInHand,
-  selectPlayableCard
-} from '../moves/aesthetic-moves';
 import { drawSingleCardAtStartOfCurrentPlayersTurn } from '../moves/card-moves';
 import {
   incrementTotalEnergy,
@@ -64,5 +60,14 @@ export default {
   turn: {
     order: TurnOrder.CUSTOM_FROM('turnOrder'),
     onBegin: (G, ctx) => onBegin(G, ctx)
-  }
+  },
+
+  // End game if either player's health reaches zero
+  // prettier-ignore
+  endIf: G => (
+    G.health[G.turnOrder[0]] === 0 ||
+    G.health[G.turnOrder[1]] === 0
+  ),
+
+  next: 'endGame'
 };
