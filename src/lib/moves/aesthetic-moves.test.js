@@ -11,6 +11,10 @@ test(`with an index provided, sets the currentPlayer's card hover index`, () => 
     hoveringCardIndex: {
       '0': null,
       '1': null
+    },
+    selectedCardIndex: {
+      '0': null,
+      '1': null
     }
   };
 
@@ -24,6 +28,10 @@ test(`with an index provided, sets the currentPlayer's card hover index`, () => 
     hoveringCardIndex: {
       '0': null,
       '1': 4
+    },
+    selectedCardIndex: {
+      '0': null,
+      '1': null
     }
   });
 });
@@ -36,6 +44,10 @@ test(`without an index & card provided, sets the currentPlayer's card hover to n
     hoveringCardIndex: {
       '0': 2,
       '1': null
+    },
+    selectedCardIndex: {
+      '0': null,
+      '1': null
     }
   };
 
@@ -47,6 +59,10 @@ test(`without an index & card provided, sets the currentPlayer's card hover to n
 
   expect(G).toEqual({
     hoveringCardIndex: {
+      '0': null,
+      '1': null
+    },
+    selectedCardIndex: {
       '0': null,
       '1': null
     }

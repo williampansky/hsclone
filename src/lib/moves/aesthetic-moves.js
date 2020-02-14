@@ -5,7 +5,7 @@
  * @param {{}} ctx
  * @param {number} index
  */
-export const hoverOverCardInHand = (G, ctx, index) => {
+export const hoverOverCardInHand = (G, ctx, index = null) => {
   if (G.selectedCardIndex[ctx.currentPlayer] !== null)
     G.hoveringCardIndex[ctx.currentPlayer] = null;
 
@@ -23,7 +23,7 @@ export const hoverOverCardInHand = (G, ctx, index) => {
  * @requires selectPlayableCardIndex()
  * @requires selectPlayableCardObject()
  */
-export const selectPlayableCard = (G, ctx, card, index) => {
+export const selectPlayableCard = (G, ctx, card = null, index = null) => {
   selectPlayableCardIndex(G, ctx, index);
   selectPlayableCardObject(G, ctx, card);
 };
