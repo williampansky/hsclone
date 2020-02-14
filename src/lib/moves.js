@@ -14,8 +14,6 @@ import {
   playSpellCard
 } from './moves/card-moves';
 import {
-  attackMinion,
-  attackPlayer,
   disableMinionCanAttack,
   disableMinionCanBeAttacked,
   enableMinionCanAttack,
@@ -24,6 +22,7 @@ import {
 } from './moves/minion-moves';
 import { attackPlayerWithSpell } from './moves/spell-moves';
 import { castWarycrySpell } from './moves/warcry-moves';
+import { attackMinionWithMinion } from './minions/attackMinionWithMinion';
 
 /**
  * Note that moves marked `client: false` are executed on the server.
@@ -99,17 +98,10 @@ export default {
     }
   },
 
-  attackMinion: {
+  attackMinionWithMinion: {
     client: false,
-    move: (G, ctx, slotNumber) => {
-      return attackMinion(G, ctx, slotNumber);
-    }
-  },
-
-  attackPlayer: {
-    client: false,
-    move: (G, ctx, player, attack) => {
-      return attackPlayer(G, ctx, player, attack);
+    move: (G, ctx, index) => {
+      return attackMinionWithMinion(G, ctx, index);
     }
   },
 

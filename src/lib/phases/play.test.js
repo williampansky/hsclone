@@ -2,15 +2,9 @@ const esmImport = require('esm')(module);
 const { Client } = esmImport('boardgame.io/client');
 const { HSclone } = esmImport('../game');
 
-test(`should setup both player's decks and move to initHands phase`, () => {
+test(`start the game with both player's health values at 30`, () => {
   // set up a specific board scenario
-  const HScloneScenario = {
-    ...HSclone,
-    phases: {
-      ...HSclone.phases,
-      initHands: {}
-    }
-  };
+  const HScloneScenario = HSclone;
 
   // initialize the client w/ custom scenario
   const client = Client({
@@ -21,7 +15,7 @@ test(`should setup both player's decks and move to initHands phase`, () => {
   const { G, ctx } = client.store.getState();
 
   // the game state should look like this now
-  expect(G.players[ctx.playOrder['0']].deck.length).toEqual(30);
-  expect(G.players[ctx.playOrder['1']].deck.length).toEqual(30);
-  expect(ctx.phase).toEqual('initHands');
+  expect(G.health['0']).toEqual(30);
+  expect(G.health['1']).toEqual(30);
+  expect(ctx.phase).toEqual('play');
 });

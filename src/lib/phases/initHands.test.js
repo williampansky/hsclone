@@ -1,7 +1,6 @@
-// const esmImport = require('esm')(module);
-// const { stripSecrets } = esmImport('./strip-secrets');
-import { Client } from 'boardgame.io/client';
-import { HSclone } from '../game';
+const esmImport = require('esm')(module);
+const { Client } = esmImport('boardgame.io/client');
+const { HSclone } = esmImport('../game');
 
 test(`should setup both player's hands and move into the play phase`, () => {
   // set up a specific board scenario
