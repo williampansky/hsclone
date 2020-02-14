@@ -1,6 +1,9 @@
 import { subtract } from 'mathjs';
 import { getCardByID } from '../utils/get-card-by-id';
 import { playSpellByCardId } from './spell-moves';
+import { moveCardToPlayedCards } from '../cards/moveCardToPlayedCards';
+import { removeCardFromHand } from '../cards/removeCardFromHand';
+import { selectPlayableCard } from '../moves/aesthetic-moves';
 
 export const incrementDeckCount = (G, player) => {
   return G.counts[player].deck++;
@@ -100,8 +103,8 @@ export const selectCard = (G, ctx, index, card) => {
   G.selectedCardObject[ctx.currentPlayer] = card;
 };
 
-export const playSpellCard = (G, ctx, cardId, cardCost) => {
-  const { energy, players, playedCards } = G;
+export const playSpellCard = (G, ctx, cardId, cardCost, target) => {
+  const { energy } = G;
   const { currentPlayer } = ctx;
 
   // subtract the card's cost from player's current energy count
@@ -111,17 +114,9 @@ export const playSpellCard = (G, ctx, cardId, cardCost) => {
   );
 
   // play spell based on the card's id
-  playSpellByCardId(G, ctx, cardId);
-
-  // move to your playerCards array
-  playedCards[currentPlayer].push(
-    players[currentPlayer].hand.find(c => c.id === cardId)
-  );
-
-  // and then remove card from your hand
-  const newHand = players[currentPlayer].hand.filter(c => c.id !== cardId);
-  players[currentPlayer].hand = newHand;
-
-  // then deincrement your hand count
+  playSpellByCardId(G, ctx, cardId, target);
+  selectPlayableCard(G, ctx, null, null);
+  moveCardToPlayedCards(G, currentPlayer, cardId);
+  removeCardFromHand(G, currentPlayer, cardId);
   deincrementHandCount(G, currentPlayer);
 };

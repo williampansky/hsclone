@@ -1,6 +1,11 @@
 import { castTheOrb } from '../spells/cast-the-orb';
 import { selectPlayableCard } from '../moves/aesthetic-moves';
 
+export const playSpellCard = (G, ctx, cardId, player) => {
+  playSpellByCardId(G, ctx, cardId, player);
+  selectPlayableCard(G, ctx, null, null);
+};
+
 export const playSpellByCardId = (G, ctx, cardId, player) => {
   // prettier-ignore
   switch (cardId) {

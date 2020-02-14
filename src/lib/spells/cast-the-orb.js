@@ -12,5 +12,5 @@ export const castTheOrb = (G, ctx) => {
   const { current } = energy[currentPlayer];
 
   const newTotal = add(Number(current), 1);
-  return (G.energy[ctx.currentPlayer].current = newTotal);
+  G.energy[ctx.currentPlayer].current = newTotal;
 };

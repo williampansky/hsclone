@@ -59,8 +59,8 @@ export default {
 
   playSpellCard: {
     client: false,
-    move: (G, ctx, card, target = null) => {
-      return playSpellCard(G, ctx, card, target);
+    move: (G, ctx, card, cost = 0, target = null) => {
+      return playSpellCard(G, ctx, card, cost, target);
     }
   },
 
