@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Client } from 'boardgame.io/react';
 import { SocketIO } from 'boardgame.io/multiplayer';
 import { HSclone } from './lib/game';
-import GameWrapper from './components/game/Game';
+import GameWrapper from './components/game-wrapper/GameWrapper';
 import './index.css';
 import testDeck1 from './data/debug/deck1.json';
 import testDeck2 from './data/debug/deck2.json';

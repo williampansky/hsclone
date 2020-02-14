@@ -1,0 +1,39 @@
+.end-turn {
+  bottom: auto;
+  left: auto;
+  margin: 0 1% 0 0;
+  position: absolute;
+  right: 0;
+  top: calc(50% - var(--board-yourHand-height));
+  z-index: 500;
+}
+
+.end-turn-button {
+  appearance: none;
+  border-radius: 0;
+  border: none;
+  box-sizing: border-box;
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font: inherit;
+  line-height: 38px;
+  margin: 0;
+  min-width: 150px;
+  overflow: visible;
+  padding: 0 15px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition-property: color, background-color, border-color;
+  transition: 0.1s ease-in-out;
+  vertical-align: middle;
+
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: #999;
+    color: #e5e5e5;
+    border-color: #e5e5e5;
+  }
+}

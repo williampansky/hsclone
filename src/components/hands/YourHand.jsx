@@ -1,9 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import styled from 'styled-components';
-import CardInteractionLayer from '../../systems/CardInteractionLayer';
+import React from 'react';
+import PropTypes from 'prop-types';
 import PlayerEnergy from '../player-energy/PlayerEnergy';
-import Timer from 'components/timer/Timer';
-import uid from 'utils/uid';
 import styles from './hands.module.scss';
 
 export default function YourHand({
@@ -23,54 +20,26 @@ export default function YourHand({
   isMultiplayer,
   isConnected,
   credentials,
-  yourID,
-  theirID
+  yourID
 }) {
+  const { counts, energy } = G;
+  const { hand } = counts[yourID];
+
   return (
     <div
       className={[styles['hand'], styles['hands--their_hand']].join(' ')}
       data-file="YourHand"
-      data-number-of-cards={G.counts[yourID].hand}
+      data-number-of-cards={hand}
     >
-      {G.players[yourID].hand && G.players[yourID].hand.length
-        ? G.players[yourID].hand.map((card, index) => {
-            return (
-              <React.Fragment key={index}>
-                <CardInteractionLayer
-                  card={card}
-                  index={index}
-                  G={G}
-                  ctx={ctx}
-                  moves={moves}
-                  events={events}
-                  reset={reset}
-                  undo={undo}
-                  redo={redo}
-                  step={step}
-                  log={log}
-                  gameID={gameID}
-                  playerID={playerID}
-                  gameMetadata={gameMetadata}
-                  isActive={isActive}
-                  isMultiplayer={isMultiplayer}
-                  isConnected={isConnected}
-                  credentials={credentials}
-                  yourID={yourID}
-                  theirID={theirID}
-                />
-              </React.Fragment>
-            );
-          })
-        : null}
-
-      {G.warcryObject[yourID] ? (
-        <div className={styles['active-warcry']}>
-          <div>{G.warcryObject[yourID].type}</div>
-          <div>{G.warcryObject[yourID].targetingArrowText}</div>
-        </div>
-      ) : null}
-
-      <PlayerEnergy energy={G.energy[yourID]} />
+      <PlayerEnergy energy={energy[yourID]} />
     </div>
   );
 }
+
+YourHand.propTypes = {
+  G: PropTypes.shape({
+    counts: PropTypes.object,
+    energy: PropTypes.object
+  }),
+  yourID: PropTypes.string
+};
