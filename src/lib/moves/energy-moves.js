@@ -1,4 +1,5 @@
 import { add } from 'mathjs';
+import { limitNumberWithinRange } from '../utils/range-limit';
 
 /**
  * Increments the `total` energy of the `ctx.currentPlayer` by one;
@@ -55,4 +56,17 @@ export const setCurrentEnergy = (G, player, amount) => {
 export const setTotalEnergy = (G, player, amount) => {
   const { energy } = G;
   return (energy[player].total = amount);
+};
+
+/**
+ * Subtracts amount from player's current energy value.
+ *
+ * @param {{}} G Game state object.
+ * @param {string|number} player
+ * @param {number} amount
+ */
+export const subtractFromCurrentEnergy = (G, player, amount) => {
+  const { current, total } = G.energy[player];
+  const newValue = limitNumberWithinRange(current - amount, total, 0);
+  G.energy[player].current = newValue;
 };

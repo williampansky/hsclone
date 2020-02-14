@@ -3,7 +3,8 @@ const {
   incrementTotalEnergy,
   matchCurrentWithTotalEnergy,
   setCurrentEnergy,
-  setTotalEnergy
+  setTotalEnergy,
+  subtractFromCurrentEnergy
 } = esmImport('../../lib/moves/energy-moves');
 
 /**
@@ -40,4 +41,13 @@ test(`set player 0's total energy to provided amount`, () => {
   const G = { energy: { '0': { total: 0 } } };
   setTotalEnergy(G, '0', 10);
   expect(G).toEqual({ energy: { '0': { total: 10 } } });
+});
+
+/**
+ * energy-moves::subtractFromCurrentEnergy()
+ */
+test(`subtract the provided amount from player's current energy value`, () => {
+  const G = { energy: { '0': { current: 4, total: 4 } } };
+  subtractFromCurrentEnergy(G, '0', 2);
+  expect(G).toEqual({ energy: { '0': { current: 2, total: 4 } } });
 });

@@ -1,10 +1,4 @@
 import { castTheOrb } from '../spells/cast-the-orb';
-import { selectPlayableCard } from '../moves/aesthetic-moves';
-
-export const playSpellCard = (G, ctx, cardId, player) => {
-  playSpellByCardId(G, ctx, cardId, player);
-  selectPlayableCard(G, ctx, null, null);
-};
 
 export const playSpellByCardId = (G, ctx, cardId, player) => {
   // prettier-ignore
@@ -12,11 +6,4 @@ export const playSpellByCardId = (G, ctx, cardId, player) => {
     case 'GAME_001':    return castTheOrb(G, ctx);
     default:            return null;
   }
-};
-
-export const attackPlayerWithSpell = (G, ctx, player) => {
-  const { selectedCardIndex } = G;
-  const { currentPlayer } = ctx;
-  playSpellByCardId(G, ctx, selectedCardIndex[currentPlayer], player);
-  selectPlayableCard(G, ctx, null, null);
 };
