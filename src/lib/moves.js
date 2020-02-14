@@ -23,6 +23,7 @@ import {
 import { attackPlayerWithSpell } from './moves/spell-moves';
 import { castWarycrySpell } from './moves/warcry-moves';
 import { attackMinionWithMinion } from './minions/attackMinionWithMinion';
+import { attackPlayerWithMinion } from './minions/attackPlayerWithMinion';
 
 /**
  * Note that moves marked `client: false` are executed on the server.
@@ -102,6 +103,13 @@ export default {
     client: false,
     move: (G, ctx, index) => {
       return attackMinionWithMinion(G, ctx, index);
+    }
+  },
+
+  attackPlayerWithMinion: {
+    client: false,
+    move: (G, ctx) => {
+      return attackPlayerWithMinion(G, ctx);
     }
   },
 

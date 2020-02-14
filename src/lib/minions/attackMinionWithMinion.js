@@ -29,8 +29,8 @@ export const attackMinionWithMinion = (G, ctx, index) => {
   if (MINION_BEING_ATTACKED && !MINION_BEING_ATTACKED.canBeAttacked) return;
 
   // eject if a MINION_BEING_ATTACKED's sibling has gaurd
-  for (let i = 0; i < G.boards[otherPlayer].length; i++) {
-    if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
+  for (let i = 0; i < boards[otherPlayer].length; i++) {
+    if (boards[otherPlayer][i] && boards[otherPlayer][i].hasGuard) return;
   }
 
   // Subtract `ATTACKING_MINION.currentAttack`
