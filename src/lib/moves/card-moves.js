@@ -1,9 +1,9 @@
-import { subtract } from 'mathjs';
 import { getCardByID } from '../utils/get-card-by-id';
 import { playSpellByCardId } from './spell-moves';
 import { moveCardToPlayedCards } from '../cards/moveCardToPlayedCards';
 import { removeCardFromHand } from '../cards/removeCardFromHand';
 import { selectPlayableCard } from '../moves/aesthetic-moves';
+import { subtractFromCurrentEnergy } from '../moves/energy-moves';
 
 export const incrementDeckCount = (G, player) => {
   return G.counts[player].deck++;
@@ -104,16 +104,9 @@ export const selectCard = (G, ctx, index, card) => {
 };
 
 export const playSpellCard = (G, ctx, cardId, cardCost, target) => {
-  const { energy } = G;
   const { currentPlayer } = ctx;
 
-  // subtract the card's cost from player's current energy count
-  energy[ctx.currentPlayer].current = subtract(
-    energy[ctx.currentPlayer].current,
-    cardCost
-  );
-
-  // play spell based on the card's id
+  subtractFromCurrentEnergy(G, currentPlayer, cardCost);
   playSpellByCardId(G, ctx, cardId, target);
   selectPlayableCard(G, ctx, null, null);
   moveCardToPlayedCards(G, currentPlayer, cardId);

@@ -20,7 +20,6 @@ import {
   enableMinionCanBeAttacked,
   selectAttackingMinion
 } from './moves/minion-moves';
-import { attackPlayerWithSpell } from './moves/spell-moves';
 import { castWarycrySpell } from './moves/warcry-moves';
 import { attackMinionWithMinion } from './minions/attackMinionWithMinion';
 import { attackPlayerWithMinion } from './minions/attackPlayerWithMinion';
@@ -110,13 +109,6 @@ export default {
     client: false,
     move: (G, ctx) => {
       return attackPlayerWithMinion(G, ctx);
-    }
-  },
-
-  attackPlayerWithSpell: {
-    client: false,
-    move: (G, ctx, player) => {
-      return attackPlayerWithSpell(G, ctx, player);
     }
   },
 

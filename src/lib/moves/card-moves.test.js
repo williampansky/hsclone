@@ -8,8 +8,10 @@ const {
   drawCards,
   drawSingleCardAtStartOfCurrentPlayersTurn,
   incrementDeckCount,
-  incrementHandCount
-} = esmImport('../../lib/moves/card-moves');
+  incrementHandCount,
+  playSpellCard
+} = esmImport('./card-moves');
+const { getCardByID } = esmImport('../utils/get-card-by-id');
 
 /**
  * card-moves::deincrementDeckCount()
@@ -264,4 +266,84 @@ test(`increment player 0's hand count`, () => {
 
   incrementHandCount(G, 0);
   expect(G.counts[0].hand).toBe(1);
+});
+
+/**
+ * card-moves::playSpellCard()
+ */
+test(`plays spell card`, () => {
+  const CARD_ID = 'GAME_001';
+  const CARD_OBJ = getCardByID(CARD_ID);
+  const ctx = { currentPlayer: '0' };
+
+  const G = {
+    counts: {
+      0: {
+        hand: 1
+      }
+    },
+    players: {
+      '0': {
+        hand: [CARD_OBJ]
+      }
+    },
+    energy: {
+      '0': {
+        current: 5,
+        total: 8
+      },
+      '1': {
+        current: 7,
+        total: 7
+      }
+    },
+    playedCards: {
+      '0': [],
+      '1': []
+    },
+    selectedCardIndex: {
+      '0': 0,
+      '1': null
+    },
+    selectedCardObject: {
+      '0': CARD_OBJ,
+      '1': null
+    }
+  };
+
+  playSpellCard(G, ctx, CARD_ID, CARD_OBJ.cost);
+  expect(G).toEqual({
+    counts: {
+      0: {
+        hand: 0
+      }
+    },
+    players: {
+      '0': {
+        hand: []
+      }
+    },
+    energy: {
+      '0': {
+        current: 6,
+        total: 8
+      },
+      '1': {
+        current: 7,
+        total: 7
+      }
+    },
+    playedCards: {
+      '0': [CARD_OBJ],
+      '1': []
+    },
+    selectedCardIndex: {
+      '0': null,
+      '1': null
+    },
+    selectedCardObject: {
+      '0': null,
+      '1': null
+    }
+  });
 });

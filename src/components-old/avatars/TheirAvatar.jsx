@@ -65,9 +65,6 @@ export default function TheirAvatar({
   function handleClick() {
     if (!CAN_BE_ATTACKED || CARD_IS_MINION) return;
 
-    if (CARD_IS_SPELL)
-      return moves.attackPlayerWithSpell(G.selectedCardIndex[CURRENT_PLAYER]);
-
     if (WARCRY_IS_ACTIVE)
       return moves.castWarycrySpell(G.warcryObject[CURRENT_PLAYER], theirID);
 
