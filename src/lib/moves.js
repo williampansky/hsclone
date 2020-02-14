@@ -138,10 +138,17 @@ export default {
   incrementHandCount: (G, player) => incrementHandCount(G, player),
 
   // interaction moves; indicating the opponent player's hover/selection
-  hoverOverCardInHand: (G, ctx, index) => {
-    return hoverOverCardInHand(G, ctx, index);
+  hoverOverCardInHand: {
+    client: false,
+    move: (G, ctx, index) => {
+      return hoverOverCardInHand(G, ctx, index);
+    }
   },
-  selectPlayableCard: (G, ctx, card, index) => {
-    return selectPlayableCard(G, ctx, card, index);
+
+  selectPlayableCard: {
+    client: false,
+    move: (G, ctx, card, index) => {
+      return selectPlayableCard(G, ctx, card, index);
+    }
   }
 };

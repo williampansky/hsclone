@@ -1,36 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlayerEnergy from '../player-energy/PlayerEnergy';
-import styles from './hands.module.scss';
 
-export default function YourHand({
-  G,
-  ctx,
-  moves,
-  events,
-  reset,
-  undo,
-  redo,
-  step,
-  log,
-  gameID,
-  playerID,
-  gameMetadata,
-  isActive,
-  isMultiplayer,
-  isConnected,
-  credentials,
-  yourID
-}) {
-  const { counts, energy } = G;
-  const { hand } = counts[yourID];
+// styles
+import css from './hands.module.scss';
+import interactionStyles from '../interactions/card-interactions.module.scss';
+
+// child components
+import PlayerEnergy from '../player-energy/PlayerEnergy';
+import CardInteraction from 'components/interactions/CardInteraction';
+
+export default function YourHand({ G, ctx, moves, isActive, yourID }) {
+  const { counts, energy, players, selectedCardIndex } = G;
+  const yourHand = players[yourID] && players[yourID].hand;
+  const handLength = counts[yourID] && counts[yourID].hand;
+  const cardIsSelected = selectedCardIndex[yourID];
 
   return (
     <div
-      className={[styles['hand'], styles['hands--their_hand']].join(' ')}
+      className={[css['hand'], css['hands--your_hand']].join(' ')}
       data-file="YourHand"
-      data-number-of-cards={hand}
+      data-number-of-cards={handLength}
     >
+      {yourHand.map((card, index) => {
+        return (
+          <React.Fragment key={index}>
+            <CardInteraction
+              G={G}
+              ctx={ctx}
+              moves={moves}
+              isActive={isActive}
+              yourID={yourID}
+              card={card}
+              index={index}
+              numberOfCards={handLength}
+            />
+
+            {cardIsSelected && selectedCardIndex[yourID] === index ? (
+              <div
+                className={[
+                  interactionStyles['card-in-your-hand'],
+                  interactionStyles['card-placeholder']
+                ].join(' ')}
+              />
+            ) : null}
+          </React.Fragment>
+        );
+      })}
       <PlayerEnergy energy={energy[yourID]} />
     </div>
   );
@@ -39,7 +54,11 @@ export default function YourHand({
 YourHand.propTypes = {
   G: PropTypes.shape({
     counts: PropTypes.object,
-    energy: PropTypes.object
+    energy: PropTypes.object,
+    players: PropTypes.object
   }),
+  ctx: PropTypes.object,
+  moves: PropTypes.object,
+  isActive: PropTypes.bool,
   yourID: PropTypes.string
 };

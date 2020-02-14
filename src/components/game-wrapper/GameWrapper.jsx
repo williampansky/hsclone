@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import defaultGameState from '../../lib/state';
 // import defaultGameMoves from '../../lib/moves';
-// import Board from 'components/boards/Board';
+import Board from 'components/boards/Board';
 // import TheirBoard from 'components/boards/TheirBoard';
 import TheirHand from 'components/hands/TheirHand';
 // import YourBoard from 'components/boards/YourBoard';
 import YourHand from 'components/hands/YourHand';
-import EndTurnButton from 'components/end-turn/EndTurn';
+
 import WrapperCSS from './game-wrapper.module.scss';
-import BoardCSS from './board.module.scss';
 
 export default function GameWrapper(props) {
   const {
@@ -37,20 +36,33 @@ export default function GameWrapper(props) {
   return props ? (
     <div data-file="GameWrapper" className={WrapperCSS['game-wrapper']}>
       <TheirHand G={G} theirID={theirID} />
-      <div data-file="Board" className={BoardCSS['board']}>
-        <div data-file="TheirBoard" className={BoardCSS['their-board']}></div>
-        <EndTurnButton
-          G={G}
-          ctx={ctx}
-          moves={moves}
-          events={events}
-          isActive={isActive}
-          yourID={yourID}
-          theirID={theirID}
-        />
-        <div data-file="TheirBoard" className={BoardCSS['your-board']}></div>
-      </div>
-      <YourHand G={G} yourID={yourID} />
+      <Board
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        events={events}
+        reset={reset}
+        undo={undo}
+        redo={redo}
+        step={step}
+        log={log}
+        gameID={gameID}
+        playerID={playerID}
+        gameMetadata={gameMetadata}
+        isActive={isActive}
+        isMultiplayer={isMultiplayer}
+        isConnected={isConnected}
+        credentials={credentials}
+        yourID={yourID}
+        theirID={theirID}
+      />
+      <YourHand
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        isActive={isActive}
+        yourID={yourID}
+      />
     </div>
   ) : null;
 }
