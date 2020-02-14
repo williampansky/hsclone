@@ -31,7 +31,15 @@ export default function Board({
 }) {
   return (
     <div data-file="boards/Board" className={css['board']}>
-      <TheirBoard />
+      <TheirBoard
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        events={events}
+        playerID={playerID}
+        isActive={isActive}
+        theirID={theirID}
+      />
       <EndTurnButton
         G={G}
         ctx={ctx}
@@ -41,7 +49,15 @@ export default function Board({
         yourID={yourID}
         theirID={theirID}
       />
-      <YourBoard />
+      <YourBoard
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        events={events}
+        playerID={playerID}
+        isActive={isActive}
+        yourID={yourID}
+      />
     </div>
   );
 }
