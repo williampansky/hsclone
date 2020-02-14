@@ -17,10 +17,20 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
 
   return (
     <div
-      className={[css['hand'], css['hands--your_hand']].join(' ')}
       data-file="YourHand"
       data-number-of-cards={handLength}
+      className={[css['hand'], css['hands--your_hand']].join(' ')}
     >
+      {selectedCardIndex[yourID] === 0 ? (
+        <div
+          data-index={0}
+          className={[
+            interactionStyles['card-in-your-hand'],
+            interactionStyles['card-placeholder']
+          ].join(' ')}
+        />
+      ) : null}
+
       {yourHand.map((card, index) => {
         return (
           <React.Fragment key={index}>
@@ -37,6 +47,7 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
 
             {cardIsSelected && selectedCardIndex[yourID] === index ? (
               <div
+                data-index={index}
                 className={[
                   interactionStyles['card-in-your-hand'],
                   interactionStyles['card-placeholder']
@@ -55,7 +66,8 @@ YourHand.propTypes = {
   G: PropTypes.shape({
     counts: PropTypes.object,
     energy: PropTypes.object,
-    players: PropTypes.object
+    players: PropTypes.object,
+    selectedCardIndex: PropTypes.object
   }),
   ctx: PropTypes.object,
   moves: PropTypes.object,

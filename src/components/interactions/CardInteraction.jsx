@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import useHover from 'react-use-hover';
+
+// styles
+import css from 'components/interactions/card-interactions.module.scss';
+
+// child components
+import Card from 'components/cards/Card';
 import CardIsPlayable from 'components/interactions/layers/CardIsPlayable';
 import CardIsSelected from 'components/interactions/layers/CardIsSelected';
-import css from 'components/interactions/card-interactions.module.scss';
-// import useHover from 'hooks/useHover';
-import useHover from 'react-use-hover';
-import Card from 'components/cards/Card';
 
 export default function CardInteraction({
   G,
@@ -20,7 +24,6 @@ export default function CardInteraction({
   const { currentPlayer } = ctx;
   const { hoverOverCardInHand, selectPlayableCard } = moves;
 
-  // const [hoverRef, isHovered] = useHover();
   const [isHovering, hoverProps] = useHover({
     mouseEnterDelayMS: 0,
     mouseLeaveDelayMS: 0
@@ -98,11 +101,11 @@ export default function CardInteraction({
   // prettier-ignore
   return (
     <div
-      className={css['card-in-your-hand']}
       data-file="CardInteractionLayer"
       data-index={index}
       data-is-playable={IS_PLAYABLE}
       data-is-selected={IS_SELECTED}
+      className={css['card-in-your-hand']}
       style={yourHandStyle}
       {...hoverProps}
     >
@@ -144,6 +147,17 @@ export default function CardInteraction({
     </div>
   );
 }
+
+CardInteraction.propTypes = {
+  G: PropTypes.object,
+  ctx: PropTypes.object,
+  moves: PropTypes.object,
+  isActive: PropTypes.bool,
+  yourID: PropTypes.string,
+  card: PropTypes.object,
+  index: PropTypes.number,
+  numberOfCards: PropTypes.number
+};
 
 // prettier-ignore
 // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
