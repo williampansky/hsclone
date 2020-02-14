@@ -1,3 +1,8 @@
+import {
+  disablePlayerCanBeAttacked,
+  enablePlayerCanBeAttacked
+} from './player-moves';
+
 /**
  * Disables `canAttack` of the player's board index object.
  * @param {{}} G
@@ -72,32 +77,60 @@ export const enableMinionHasGuard = (G, player, index) => {
  * @param {Number} index
  * @requires selectAttackingMinionIndex()
  * @requires selectAttackingMinionObject()
+ * @requires determineAttackingMinionTargets()
  */
 export const selectAttackingMinion = (G, ctx, minion, index) => {
-  selectAttackingMinionIndex(G, ctx, index);
-  selectAttackingMinionObject(G, ctx, minion);
+  const { turnOrder } = G;
+  const { currentPlayer } = ctx;
+  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+
+  selectAttackingMinionIndex(G, currentPlayer, index);
+  selectAttackingMinionObject(G, currentPlayer, minion);
+
+  if (minion !== null || index !== null)
+    determineAttackingMinionTargets(G, otherPlayer);
 };
 
 /**
  * Sets `selectedMinionIndex` of the current player.
  * @param {{}} G
- * @param {{}} ctx
+ * @param {string|number} player
  * @param {Number} index
  */
-export const selectAttackingMinionIndex = (G, ctx, index) => {
-  Number(ctx.currentPlayer) === 0
-    ? (G.selectedMinionIndex[0] = index)
-    : (G.selectedMinionIndex[1] = index);
+export const selectAttackingMinionIndex = (G, player, index) => {
+  G.selectedMinionIndex[player] = index;
 };
 
 /**
- * Sets `selectAttackingMinionObject` of the current player.
+ * Sets `selectedMinionObject` of the current player.
  * @param {{}} G
- * @param {{}} ctx
+ * @param {string|number} player
  * @param {Number} index
  */
-export const selectAttackingMinionObject = (G, ctx, minion) => {
-  Number(ctx.currentPlayer) === 0
-    ? (G.selectedMinionObject[0] = minion)
-    : (G.selectedMinionObject[1] = minion);
+export const selectAttackingMinionObject = (G, player, minion) => {
+  G.selectedMinionObject[player] = minion;
+};
+
+/**
+ * When a player selects a minion that can attack, we need to determine
+ * its possible targets—both opposing minions and the opposing player.
+ * @param {{}} G
+ * @param {string|number} player
+ */
+export const determineAttackingMinionTargets = (G, player) => {
+  const { boards } = G;
+  const BOARD = boards[player];
+  const MINION_HAS_GUARD = BOARD.find(b => b.hasGuard === true) ? true : false;
+
+  if (MINION_HAS_GUARD) disablePlayerCanBeAttacked(G, player);
+  else if (!MINION_HAS_GUARD) enablePlayerCanBeAttacked(G, player);
+
+  // first, enable all minions to be attackable
+  for (let i = 0; i < G.boards[player].length; i++)
+    enableMinionCanBeAttacked(G, player, i);
+
+  // then loop again and disable ones that don't have guard?
+  for (let i = 0; i < G.boards[player].length; i++)
+    if (!G.boards[player].hasGuard === false)
+      disableMinionCanBeAttacked(G, player, i);
 };

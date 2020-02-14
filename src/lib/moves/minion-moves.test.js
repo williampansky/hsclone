@@ -1,5 +1,6 @@
 const esmImport = require('esm')(module);
 const {
+  determineAttackingMinionTargets,
   disableMinionCanAttack,
   disableMinionCanBeAttacked,
   disableMinionHasGuard,
@@ -186,7 +187,7 @@ test(`sets attacking minion's index value`, () => {
     currentPlayer: '1'
   };
 
-  selectAttackingMinionIndex(G, ctx, 0);
+  selectAttackingMinionIndex(G, ctx.currentPlayer, 0);
 
   expect(G).toEqual({
     boards: {
@@ -293,7 +294,7 @@ test(`sets attacking minion's object value`, () => {
     currentPlayer: '0'
   };
 
-  selectAttackingMinionObject(G, ctx, SLOT_OBJECT);
+  selectAttackingMinionObject(G, ctx.currentPlayer, SLOT_OBJECT);
 
   expect(G).toEqual({
     boards: {
@@ -313,8 +314,13 @@ test(`sets attacking minion's object value`, () => {
 test(`selects a minion capable of making an attack`, () => {
   const CARD_ID = 'CORE_001';
   const SLOT_OBJECT = generateBoardSlotObject(CARD_ID);
+  const TURN_ORDER = ['0', '1'];
 
   const G = {
+    canBeAttacked: {
+      '0': false,
+      '1': false
+    },
     boards: {
       '0': [SLOT_OBJECT],
       '1': []
@@ -326,7 +332,8 @@ test(`selects a minion capable of making an attack`, () => {
     selectedMinionObject: {
       '0': null,
       '1': null
-    }
+    },
+    turnOrder: TURN_ORDER
   };
 
   const ctx = {
@@ -336,6 +343,10 @@ test(`selects a minion capable of making an attack`, () => {
   selectAttackingMinion(G, ctx, SLOT_OBJECT, 0);
 
   expect(G).toEqual({
+    canBeAttacked: {
+      '0': false,
+      '1': true
+    },
     boards: {
       '0': [SLOT_OBJECT],
       '1': []
@@ -346,6 +357,132 @@ test(`selects a minion capable of making an attack`, () => {
     },
     selectedMinionObject: {
       '0': SLOT_OBJECT,
+      '1': null
+    },
+    turnOrder: TURN_ORDER
+  });
+});
+
+/**
+ * minion-moves::determineAttackingMinionTargets()
+ * no minions have guard
+ */
+test(`should allow opposing player and their minions to be attackable`, () => {
+  const ATTACKING_MINION = generateBoardSlotObject('CORE_038');
+  const SOME_MINION = generateBoardSlotObject('CORE_042');
+  const SOME_OTHER_MINION = generateBoardSlotObject('CORE_016');
+
+  const G = {
+    canBeAttacked: {
+      '0': false,
+      '1': false
+    },
+    boards: {
+      '0': [ATTACKING_MINION],
+      '1': [SOME_MINION, SOME_OTHER_MINION]
+    },
+    selectedMinionIndex: {
+      '0': 0,
+      '1': null
+    },
+    selectedMinionObject: {
+      '0': ATTACKING_MINION,
+      '1': null
+    }
+  };
+
+  determineAttackingMinionTargets(G, '1');
+
+  expect(G).toEqual({
+    canBeAttacked: {
+      '0': false,
+      '1': true
+    },
+    boards: {
+      '0': [ATTACKING_MINION],
+      '1': [
+        {
+          ...SOME_MINION,
+          canBeAttacked: true
+        },
+        {
+          ...SOME_OTHER_MINION,
+          canBeAttacked: true
+        }
+      ]
+    },
+    selectedMinionIndex: {
+      '0': 0,
+      '1': null
+    },
+    selectedMinionObject: {
+      '0': ATTACKING_MINION,
+      '1': null
+    }
+  });
+});
+
+/**
+ * minion-moves::determineAttackingMinionTargets()
+ * one of their minions has guard
+ */
+test(`should only allow the opposing player's minion with guard to be attackable`, () => {
+  const ATTACKING_MINION = generateBoardSlotObject('CORE_038');
+  const SOME_MINION = generateBoardSlotObject('CORE_042');
+  const SOME_OTHER_MINION = generateBoardSlotObject('CORE_016');
+  const MINION_WITH_GUARD = generateBoardSlotObject('CORE_017');
+
+  const G = {
+    canBeAttacked: {
+      '0': false,
+      '1': false
+    },
+    boards: {
+      '0': [ATTACKING_MINION],
+      '1': [
+        SOME_MINION,
+        {
+          ...MINION_WITH_GUARD,
+          hasGuard: true
+        },
+        SOME_OTHER_MINION
+      ]
+    },
+    selectedMinionIndex: {
+      '0': 0,
+      '1': null
+    },
+    selectedMinionObject: {
+      '0': ATTACKING_MINION,
+      '1': null
+    }
+  };
+
+  determineAttackingMinionTargets(G, '1');
+
+  expect(G).toEqual({
+    canBeAttacked: {
+      '0': false,
+      '1': false
+    },
+    boards: {
+      '0': [ATTACKING_MINION],
+      '1': [
+        SOME_MINION,
+        {
+          ...MINION_WITH_GUARD,
+          canBeAttacked: true,
+          hasGuard: true
+        },
+        SOME_OTHER_MINION
+      ]
+    },
+    selectedMinionIndex: {
+      '0': 0,
+      '1': null
+    },
+    selectedMinionObject: {
+      '0': ATTACKING_MINION,
       '1': null
     }
   });

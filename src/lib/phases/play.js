@@ -5,35 +5,43 @@ import {
   matchCurrentWithTotalEnergy
 } from '../moves/energy-moves';
 import {
-  disableMinionCanAttack,
+  // disableMinionCanAttack,
   enableMinionCanAttack,
-  disableMinionCanBeAttacked,
-  enableMinionCanBeAttacked
+  disableMinionCanBeAttacked
+  // enableMinionCanBeAttacked
 } from '../moves/minion-moves';
 
 const onBegin = (G, ctx) => {
-  const PLAY_ORDER = G.turnOrder;
+  // const PLAY_ORDER = G.turnOrder;
   const CURRENT_PLAYER = ctx.currentPlayer;
-  const PREVIOUS_PLAYER = PLAY_ORDER.find(player => player !== CURRENT_PLAYER);
+  // const PREVIOUS_PLAYER = PLAY_ORDER.find(player => player !== CURRENT_PLAYER);
 
-  const YOUR_BOARD = G.boards[CURRENT_PLAYER];
-  const THEIR_BOARD = G.boards[PREVIOUS_PLAYER];
+  // const YOUR_BOARD = G.boards[CURRENT_PLAYER];
+  // const THEIR_BOARD = G.boards[PREVIOUS_PLAYER];
 
   incrementTotalEnergy(G, CURRENT_PLAYER);
   matchCurrentWithTotalEnergy(G, CURRENT_PLAYER);
   drawSingleCardAtStartOfCurrentPlayersTurn(G, ctx);
 
-  // enable canBeAttacked & disable canAttack on THEIR board slots
-  for (let i = 0; i < Object.keys(THEIR_BOARD).length; i++) {
-    enableMinionCanBeAttacked(G, PREVIOUS_PLAYER, i);
-    disableMinionCanAttack(G, PREVIOUS_PLAYER, i);
-  }
-
-  // disable canBeAttacked & enable canAttack on YOUR board slots
-  for (let i = 0; i < Object.keys(YOUR_BOARD).length; i++) {
+  for (let i = 0; i < G.boards[CURRENT_PLAYER].length; i++) {
+    // disable canBeAttacked on your board minions
     disableMinionCanBeAttacked(G, CURRENT_PLAYER, i);
+
+    // enable canAttack on your board minions
     enableMinionCanAttack(G, CURRENT_PLAYER, i);
   }
+
+  // // enable canBeAttacked & disable canAttack on THEIR board slots
+  // for (let i = 0; i < Object.keys(THEIR_BOARD).length; i++) {
+  //   enableMinionCanBeAttacked(G, PREVIOUS_PLAYER, i);
+  //   disableMinionCanAttack(G, PREVIOUS_PLAYER, i);
+  // }
+
+  // // disable canBeAttacked & enable canAttack on YOUR board slots
+  // for (let i = 0; i < Object.keys(YOUR_BOARD).length; i++) {
+  //   disableMinionCanBeAttacked(G, CURRENT_PLAYER, i);
+  //   enableMinionCanAttack(G, CURRENT_PLAYER, i);
+  // }
 
   // reset both player's interaction hover states
   G.hoveringCardIndex[0] = null;
