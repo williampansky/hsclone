@@ -39,6 +39,10 @@ export default {
       hand: []
     }
   },
+  canBeAttacked: {
+    '0': false,
+    '1': false
+  },
   boards: {
     '0': [
       /**
