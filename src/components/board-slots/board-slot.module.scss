@@ -81,6 +81,11 @@
   }
 }
 
+.board-slot.has-minion.cannot-drop-minion {
+  cursor: default;
+  pointer-events: none;
+}
+
 .board-is-active.spell-is-global .spell-slot {
   cursor: pointer;
   opacity: 1;

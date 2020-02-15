@@ -12,14 +12,16 @@ export default function MinionInteraction({
   currentAttack,
   currentHealth,
   hasGuard,
-  isAttacking,
-  selectedMinionObject
+  isAttacking
 }) {
   // const {} = G;
-  const { selectAttackingMinion } = moves;
+  const { deselectAttackingMinion, selectAttackingMinion } = moves;
 
   function handleClick() {
-    return selectAttackingMinion(data, index);
+    if (!canAttack) return;
+    return isAttacking
+      ? deselectAttackingMinion()
+      : selectAttackingMinion(data, index);
   }
 
   return (

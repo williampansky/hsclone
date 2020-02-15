@@ -13,6 +13,14 @@ import BoardSlot from 'components/board-slots/BoardSlot';
 export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
   const { boards, selectedCardObject } = G;
   const { playMinionCard } = moves;
+  const SELECTED_CARD_OBJECT = selectedCardObject[yourID];
+  const CARD_IS_SELECTED = SELECTED_CARD_OBJECT !== null;
+
+  function canDropMinion(idx) {
+    return SELECTED_CARD_OBJECT !== null && boards[yourID][idx] === null
+      ? true
+      : false;
+  }
 
   function handleClick(index) {
     if (boards[yourID][index]) return;
@@ -26,7 +34,7 @@ export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
         className={[
           boardCSS['board-play-area'],
           boardCSS['your-board-play-area'],
-          selectedCardObject[yourID] !== null ? slotCSS['board-is-active'] : ''
+          CARD_IS_SELECTED ? slotCSS['board-is-active'] : ''
         ].join(' ')}
         data-file="board-play-areas/YourBoardPlayArea"
       >
@@ -36,6 +44,7 @@ export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
             G={G}
             ctx={ctx}
             moves={moves}
+            canDrop={canDropMinion(0)}
             data={boards[yourID][0]}
             key={`slot_0`}
             index={0}
@@ -49,6 +58,7 @@ export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
                   G={G}
                   ctx={ctx}
                   moves={moves}
+                  canDrop={canDropMinion(index)}
                   data={card}
                   key={`slot_${index}`}
                   index={index}

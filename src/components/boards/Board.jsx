@@ -39,6 +39,7 @@ export default function Board({
         playerID={playerID}
         isActive={isActive}
         theirID={theirID}
+        yourID={yourID}
       />
       <EndTurnButton
         G={G}

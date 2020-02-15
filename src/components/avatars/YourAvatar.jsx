@@ -7,15 +7,15 @@ import css from './avatar.module.scss';
 export default function YourAvatar({ G, moves, yourID, src }) {
   const { health, canBeAttacked } = G;
   const YOUR_HEALTH = health[yourID];
-  const CAN_BE_ATTACKED = canBeAttacked[yourID];
+  // const CAN_BE_ATTACKED = canBeAttacked[yourID];
 
   return (
     <div
-      data-file="YourAvatar"
+      data-file="avatars/YourAvatar"
       className={[
         css['player-avatar'],
-        css['your-avatar'],
-        CAN_BE_ATTACKED ? css['player-avatar--can_be_attacked'] : ''
+        css['your-avatar']
+        // CAN_BE_ATTACKED ? css['player-avatar--can_be_attacked'] : ''
       ].join(' ')}
     >
       <div className={[css['player-health']].join(' ')}>{YOUR_HEALTH}</div>

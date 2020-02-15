@@ -7,6 +7,7 @@ export default function BoardSlot({
   G,
   ctx,
   moves,
+  canDrop,
   data,
   index,
   onClick,
@@ -31,8 +32,9 @@ export default function BoardSlot({
       data-render={render}
       className={[
         css['board-slot'],
-        minionData === null ? css['is-empty'] : '',
-        minionData !== null ? css['has-minion'] : ''
+        data === null ? css['is-empty'] : '',
+        data !== null ? css['has-minion'] : '',
+        data === null && !canDrop ? css['cannot-drop-minion'] : ''
       ].join(' ')}
       onClick={onClick}
     >
