@@ -51,8 +51,8 @@ export default {
 
   playMinionCard: {
     client: false,
-    move: (G, ctx, index) => {
-      return playMinionCard(G, ctx, index);
+    move: (G, ctx, index, cardId) => {
+      return playMinionCard(G, ctx, index, cardId);
     }
   },
 

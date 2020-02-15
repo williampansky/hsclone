@@ -1,31 +1,20 @@
 import React from 'react';
 import css from 'components/board-slots/board-slot.module.scss';
-// import MinionInteractionLayer from 'systems/MinionInteractionLayer';
+import MinionInteraction from 'components/interactions/MinionInteraction';
 import Minion from 'components/minion/Minion';
 
 export default function BoardSlot({
-  board,
+  G,
+  ctx,
+  moves,
   data,
   index,
   onClick,
   render,
-  G,
-  ctx,
-  moves,
-  events,
-  reset,
-  undo,
-  redo,
-  step,
-  log,
-  gameID,
-  playerID,
-  gameMetadata,
-  isActive,
-  isMultiplayer,
-  isConnected,
-  credentials
+  yourID,
+  theirID
 }) {
+  const { selectedMinionIndex } = G;
   const {
     canAttack,
     canBeAttacked,
@@ -47,30 +36,20 @@ export default function BoardSlot({
       ].join(' ')}
       onClick={onClick}
     >
-      {/* {minionData && (
-        <MinionInteractionLayer
-          board={board}
-          minionData={minionData}
+      {minionData && (
+        <MinionInteraction
+          G={G}
           index={index}
           render={render}
-          G={G}
-          ctx={ctx}
-          moves={moves}
-          events={events}
-          reset={reset}
-          undo={undo}
-          redo={redo}
-          step={step}
-          log={log}
-          gameID={gameID}
-          playerID={playerID}
-          gameMetadata={gameMetadata}
-          isActive={isActive}
-          isMultiplayer={isMultiplayer}
-          isConnected={isConnected}
-          credentials={credentials}
+          canAttack={canAttack}
+          canBeAttacked={canBeAttacked}
+          currentAttack={currentAttack}
+          currentHealth={currentHealth}
+          hasGuard={hasGuard}
+          minionData={minionData}
+          isAttacking={selectedMinionIndex[yourID]}
         />
-      )} */}
+      )}
       {minionData && <Minion data={minionData} slot={index} />}
     </div>
   );

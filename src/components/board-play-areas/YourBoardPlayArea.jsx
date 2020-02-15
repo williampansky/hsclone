@@ -15,7 +15,9 @@ export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
   const { playMinionCard } = moves;
 
   function handleClick(index) {
-    return playMinionCard(index);
+    if (boards[yourID][index]) return;
+    const id = selectedCardObject[yourID] && selectedCardObject[yourID].id;
+    return playMinionCard(index, id);
   }
 
   return (
@@ -31,9 +33,9 @@ export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
         {/* <BoardDropArea G={G} ctx={ctx} moves={moves} index={0} /> */}
         {boards[yourID].length === 0 ? (
           <BoardSlot
+            G={G}
             data={boards[yourID][0]}
             key={`slot_0`}
-            board="Yours"
             index={0}
             onClick={() => handleClick(0)}
           />
@@ -42,13 +44,13 @@ export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
             return (
               <React.Fragment key={`fragment_${index}`}>
                 <BoardSlot
+                  G={G}
                   data={card}
                   key={`slot_${index}`}
-                  board="Yours"
                   index={index}
+                  yourID={yourID}
                   onClick={() => handleClick(index)}
                 />
-                {/* <BoardDropArea G={G} ctx={ctx} moves={moves} index={0} /> */}
               </React.Fragment>
             );
           })
