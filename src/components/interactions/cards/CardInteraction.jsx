@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import useHover from 'react-use-hover';
 
 // styles
-import css from 'components/interactions/card-interactions.module.scss';
+import css from 'components/interactions/cards/card-interactions.module.scss';
 
 // child components
 import Card from 'components/cards/Card';
-import CardIsPlayable from 'components/interactions/layers/CardIsPlayable';
-import CardIsSelected from 'components/interactions/layers/CardIsSelected';
+import CardIsPlayable from 'components/interactions/cards/layers/CardIsPlayable';
+import CardIsSelected from 'components/interactions/cards/layers/CardIsSelected';
 
 export default function CardInteraction({
   G,

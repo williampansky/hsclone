@@ -1,5 +1,6 @@
 import React from 'react';
-import css from 'styles/interactions/card-interactions.module.scss';
+import PropTypes from 'prop-types';
+import css from 'components/interactions/cards/card-interactions.module.scss';
 
 export default function CardIsPlayable({ onClick }) {
   return (
@@ -10,3 +11,7 @@ export default function CardIsPlayable({ onClick }) {
     />
   );
 }
+
+CardIsPlayable.propTypes = {
+  onClick: PropTypes.func
+};

@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // styles
-import css from './hands.module.scss';
-import interactionStyles from '../interactions/card-interactions.module.scss';
+import css from 'components/hands/hands.module.scss';
+import interactionStyles from 'components/interactions/cards/card-interactions.module.scss';
 
 // child components
-import PlayerEnergy from '../player-energy/PlayerEnergy';
-import CardInteraction from 'components/interactions/CardInteraction';
+import PlayerEnergy from 'components/player-energy/PlayerEnergy';
+import CardInteraction from 'components/interactions/cards/CardInteraction';
 
 export default function YourHand({ G, ctx, moves, isActive, yourID }) {
   const { counts, energy, players, selectedCardIndex } = G;

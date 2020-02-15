@@ -1,5 +1,6 @@
 import React from 'react';
-import css from 'components/interactions/card-interactions.module.scss';
+import PropTypes from 'prop-types';
+import css from 'components/interactions/cards/card-interactions.module.scss';
 
 export default function CardIsSelected({ onClick }) {
   return (
@@ -12,3 +13,7 @@ export default function CardIsSelected({ onClick }) {
     </div>
   );
 }
+
+CardIsSelected.propTypes = {
+  onClick: PropTypes.func
+};

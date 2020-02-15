@@ -1,6 +1,6 @@
 import React from 'react';
 import css from 'components/board-slots/board-slot.module.scss';
-import MinionInteraction from 'components/interactions/MinionInteraction';
+import MinionInteraction from 'components/interactions/minions/MinionInteraction';
 import Minion from 'components/minion/Minion';
 
 export default function BoardSlot({
