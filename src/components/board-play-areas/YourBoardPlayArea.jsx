@@ -34,6 +34,8 @@ export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
         {boards[yourID].length === 0 ? (
           <BoardSlot
             G={G}
+            ctx={ctx}
+            moves={moves}
             data={boards[yourID][0]}
             key={`slot_0`}
             index={0}
@@ -45,6 +47,8 @@ export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
               <React.Fragment key={`fragment_${index}`}>
                 <BoardSlot
                   G={G}
+                  ctx={ctx}
+                  moves={moves}
                   data={card}
                   key={`slot_${index}`}
                   index={index}

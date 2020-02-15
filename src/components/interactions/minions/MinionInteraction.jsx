@@ -1,26 +1,30 @@
 import React from 'react';
-import css from 'styles/interactions/minion-interactions.module.scss';
-import MECHANICS from 'enums/mechanics.enums';
+import css from 'components/interactions/minions/minion-interactions.module.scss';
 
 export default function MinionInteraction({
   G,
+  moves,
   index,
   render,
+  data,
   canAttack,
   canBeAttacked,
   currentAttack,
   currentHealth,
   hasGuard,
-  minionData,
-  isAttacking
+  isAttacking,
+  selectedMinionObject
 }) {
   // const {} = G;
+  const { selectAttackingMinion } = moves;
 
-  function handleClick() {}
+  function handleClick() {
+    return selectAttackingMinion(data, index);
+  }
 
   return (
     <div
-      data-file="interactions/MinionInteraction"
+      data-file="interactions/minions/MinionInteraction"
       data-render={render}
       className={[
         css['minion--interaction_layer'],

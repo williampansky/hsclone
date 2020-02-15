@@ -39,15 +39,16 @@ export default function BoardSlot({
       {minionData && (
         <MinionInteraction
           G={G}
+          moves={moves}
           index={index}
           render={render}
+          data={data}
           canAttack={canAttack}
           canBeAttacked={canBeAttacked}
           currentAttack={currentAttack}
           currentHealth={currentHealth}
           hasGuard={hasGuard}
-          minionData={minionData}
-          isAttacking={selectedMinionIndex[yourID]}
+          isAttacking={selectedMinionIndex[yourID] === index}
         />
       )}
       {minionData && <Minion data={minionData} slot={index} />}
