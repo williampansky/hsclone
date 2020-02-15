@@ -1,5 +1,6 @@
 const esmImport = require('esm')(module);
 const {
+  deselectAttackingMinion,
   determineAttackingMinionTargets,
   disableMinionCanAttack,
   disableMinionCanBeAttacked,
@@ -305,6 +306,53 @@ test(`sets attacking minion's object value`, () => {
       '0': SLOT_OBJECT,
       '1': null
     }
+  });
+});
+
+/**
+ * minion-moves::selectAttackingMinion()
+ */
+test(`deselects minion if selected index and object match event target`, () => {
+  const CARD_ID = 'CORE_027';
+  const SLOT_OBJECT = generateBoardSlotObject(CARD_ID);
+  const TURN_ORDER = ['0', '1'];
+
+  const G = {
+    boards: {
+      '0': [SLOT_OBJECT],
+      '1': []
+    },
+    selectedMinionIndex: {
+      '0': 0,
+      '1': null
+    },
+    selectedMinionObject: {
+      '0': SLOT_OBJECT,
+      '1': null
+    },
+    turnOrder: TURN_ORDER
+  };
+
+  const ctx = {
+    currentPlayer: '0'
+  };
+
+  deselectAttackingMinion(G, ctx);
+
+  expect(G).toEqual({
+    boards: {
+      '0': [SLOT_OBJECT],
+      '1': []
+    },
+    selectedMinionIndex: {
+      '0': null,
+      '1': null
+    },
+    selectedMinionObject: {
+      '0': null,
+      '1': null
+    },
+    turnOrder: TURN_ORDER
   });
 });
 

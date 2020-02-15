@@ -70,7 +70,7 @@ export const enableMinionHasGuard = (G, player, index) => {
 };
 
 /**
- * Sets `selectedMinionIndex` and `selectedMinionObject` of the current player.
+ * Sets `selectedMinionIndex` & `selectedMinionObject` of the current player.
  * @param {{}} G
  * @param {{}} ctx
  * @param {{}} minion
@@ -89,6 +89,19 @@ export const selectAttackingMinion = (G, ctx, minion, index) => {
 
   if (minion !== null || index !== null)
     determineAttackingMinionTargets(G, otherPlayer);
+};
+
+/**
+ * Resets `selectedMinionIndex` & `selectedMinionObject` of the current player.
+ * @param {{}} G
+ * @param {{}} ctx
+ * @requires selectAttackingMinionIndex()
+ * @requires selectAttackingMinionObject()
+ */
+export const deselectAttackingMinion = (G, ctx) => {
+  const { currentPlayer } = ctx;
+  selectAttackingMinionIndex(G, currentPlayer, null);
+  selectAttackingMinionObject(G, currentPlayer, null);
 };
 
 /**

@@ -18,7 +18,8 @@ import {
   disableMinionCanBeAttacked,
   enableMinionCanAttack,
   enableMinionCanBeAttacked,
-  selectAttackingMinion
+  selectAttackingMinion,
+  deselectAttackingMinion
 } from './moves/minion-moves';
 import { castWarycrySpell } from './moves/warcry-moves';
 import { attackMinionWithMinion } from './minions/attackMinionWithMinion';
@@ -95,6 +96,13 @@ export default {
     client: false,
     move: (G, ctx, minion, index) => {
       return selectAttackingMinion(G, ctx, minion, index);
+    }
+  },
+
+  deselectAttackingMinion: {
+    client: false,
+    move: (G, ctx) => {
+      return deselectAttackingMinion(G, ctx);
     }
   },
 
