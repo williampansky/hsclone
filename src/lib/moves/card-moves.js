@@ -95,14 +95,6 @@ export const drawSingleCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
   if (currentPlayerDeckLength === 0) G.health[currentPlayer]--;
 };
 
-/**
- * Selects the card from the current player's hand.
- */
-export const selectCard = (G, ctx, index, card) => {
-  G.selectedCardIndex[ctx.currentPlayer] = index;
-  G.selectedCardObject[ctx.currentPlayer] = card;
-};
-
 export const playSpellCard = (G, ctx, cardId, cardCost, target) => {
   const { currentPlayer } = ctx;
 

@@ -1,7 +1,7 @@
 .board-slot {
   align-items: center;
-  // border: 1px dashed rgba(255, 255, 255, 0.25);
   box-sizing: border-box;
+  border-radius: var(--minion-border-radius);
   color: white;
   display: flex;
   flex-flow: column nowrap;
@@ -73,7 +73,12 @@
 }
 
 .board-slot.is-empty {
-  height: 100%;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  height: 75%;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.625);
+  }
 }
 
 .board-is-active.spell-is-global .spell-slot {

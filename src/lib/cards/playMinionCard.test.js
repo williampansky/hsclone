@@ -1,14 +1,21 @@
 const esmImport = require('esm')(module);
 const { getCardByID } = esmImport('../../lib/utils/get-card-by-id');
+const { generateBoardSlotObject } = esmImport(
+  '../../lib/utils/generate-board-slot'
+);
 const { playMinionCard } = esmImport('./playMinionCard');
 const { generateWarcryObject } = esmImport('../utils/generate-warcry-object');
 
 /**
- * card-moves::playMinionCard() - no mechanics, no index splicing
+ * card-moves::playMinionCard()
+ * no mechanics, no index splicing
  */
 test(`plays a minion card and adds it to the board`, () => {
   const CARD_ID = 'CORE_024';
   const MINION_CARD = getCardByID(CARD_ID);
+  const SLOT_OBJ = generateBoardSlotObject(CARD_ID);
+  const SOME_CARD = getCardByID('CORE_002');
+  const SOME_OTHER_CARD = getCardByID('CORE_012');
 
   const G = {
     counts: {
@@ -31,7 +38,13 @@ test(`plays a minion card and adds it to the board`, () => {
       }
     },
     playedCards: {
-      '0': ['PLAYED CARD', 'PLAYED CARD']
+      '0': [SOME_CARD, SOME_OTHER_CARD]
+    },
+    selectedCardIndex: {
+      '0': 0
+    },
+    selectedCardObject: {
+      '0': SLOT_OBJ
     }
   };
 
@@ -39,7 +52,7 @@ test(`plays a minion card and adds it to the board`, () => {
     currentPlayer: '0'
   };
 
-  playMinionCard(G, ctx, 0, CARD_ID, 4);
+  playMinionCard(G, ctx, 0, CARD_ID);
 
   expect(G).toEqual({
     counts: {
@@ -53,18 +66,7 @@ test(`plays a minion card and adds it to the board`, () => {
       }
     },
     boards: {
-      '0': [
-        {
-          canAttack: false,
-          canBeAttacked: false,
-          currentAttack: MINION_CARD.attack,
-          currentHealth: MINION_CARD.health,
-          hasGuard: false,
-          minionData: MINION_CARD,
-          totalAttack: MINION_CARD.attack,
-          totalHealth: MINION_CARD.health
-        }
-      ]
+      '0': [SLOT_OBJ]
     },
     energy: {
       '0': {
@@ -73,19 +75,27 @@ test(`plays a minion card and adds it to the board`, () => {
       }
     },
     playedCards: {
-      '0': ['PLAYED CARD', 'PLAYED CARD', MINION_CARD]
+      '0': [SOME_CARD, SOME_OTHER_CARD, MINION_CARD]
+    },
+    selectedCardIndex: {
+      '0': null
+    },
+    selectedCardObject: {
+      '0': null
     }
   });
 });
 
 /**
- * card-moves::playMinionCard() - mechanics[BOON(CORE_041)], no index splicing
+ * card-moves::playMinionCard()
+ * mechanics[BOON(CORE_041)], no index splicing
  */
 test(`plays a minion card with the BOON(CORE_041) mechanic and adds it to the board`, () => {
   const CARD_ID = 'CORE_041';
   const MINION_CARD = getCardByID(CARD_ID);
-  const OTHER_MINION1 = getCardByID('CORE_014');
-  const OTHER_MINION2 = getCardByID('CORE_024');
+  const MINION_CARD_OBJ = generateBoardSlotObject(CARD_ID);
+  const SOME_MINION = generateBoardSlotObject('CORE_014');
+  const SOME_OTHER_MINION = generateBoardSlotObject('CORE_024');
 
   const G = {
     counts: {
@@ -99,28 +109,7 @@ test(`plays a minion card with the BOON(CORE_041) mechanic and adds it to the bo
       }
     },
     boards: {
-      '0': [
-        {
-          canAttack: false,
-          canBeAttacked: false,
-          currentAttack: OTHER_MINION1.attack,
-          currentHealth: OTHER_MINION1.health,
-          hasGuard: false,
-          minionData: OTHER_MINION1,
-          totalAttack: OTHER_MINION1.attack,
-          totalHealth: OTHER_MINION1.health
-        },
-        {
-          canAttack: false,
-          canBeAttacked: false,
-          currentAttack: OTHER_MINION2.attack,
-          currentHealth: OTHER_MINION2.health,
-          hasGuard: false,
-          minionData: OTHER_MINION2,
-          totalAttack: OTHER_MINION2.attack,
-          totalHealth: OTHER_MINION2.health
-        }
-      ]
+      '0': [SOME_MINION, SOME_OTHER_MINION]
     },
     energy: {
       '0': {
@@ -130,6 +119,12 @@ test(`plays a minion card with the BOON(CORE_041) mechanic and adds it to the bo
     },
     playedCards: {
       '0': []
+    },
+    selectedCardIndex: {
+      '0': 0
+    },
+    selectedCardObject: {
+      '0': MINION_CARD_OBJ
     }
   };
 
@@ -137,7 +132,7 @@ test(`plays a minion card with the BOON(CORE_041) mechanic and adds it to the bo
     currentPlayer: '0'
   };
 
-  playMinionCard(G, ctx, 2, CARD_ID, 7);
+  playMinionCard(G, ctx, 2, CARD_ID);
 
   expect(G).toEqual({
     counts: {
@@ -153,35 +148,20 @@ test(`plays a minion card with the BOON(CORE_041) mechanic and adds it to the bo
     boards: {
       '0': [
         {
-          canAttack: false,
-          canBeAttacked: false,
-          currentAttack: OTHER_MINION1.attack + 1,
-          currentHealth: OTHER_MINION1.health + 1,
-          hasGuard: false,
-          minionData: OTHER_MINION1,
-          totalAttack: OTHER_MINION1.attack + 1,
-          totalHealth: OTHER_MINION1.health + 1
+          ...SOME_MINION,
+          currentAttack: SOME_MINION.minionData.attack + 1,
+          currentHealth: SOME_MINION.minionData.health + 1,
+          totalAttack: SOME_MINION.minionData.attack + 1,
+          totalHealth: SOME_MINION.minionData.health + 1
         },
         {
-          canAttack: false,
-          canBeAttacked: false,
-          currentAttack: OTHER_MINION2.attack + 1,
-          currentHealth: OTHER_MINION2.health + 1,
-          hasGuard: false,
-          minionData: OTHER_MINION2,
-          totalAttack: OTHER_MINION2.attack + 1,
-          totalHealth: OTHER_MINION2.health + 1
+          ...SOME_OTHER_MINION,
+          currentAttack: SOME_OTHER_MINION.minionData.attack + 1,
+          currentHealth: SOME_OTHER_MINION.minionData.health + 1,
+          totalAttack: SOME_OTHER_MINION.minionData.attack + 1,
+          totalHealth: SOME_OTHER_MINION.minionData.health + 1
         },
-        {
-          canAttack: false,
-          canBeAttacked: false,
-          currentAttack: MINION_CARD.attack,
-          currentHealth: MINION_CARD.health,
-          hasGuard: false,
-          minionData: MINION_CARD,
-          totalAttack: MINION_CARD.attack,
-          totalHealth: MINION_CARD.health
-        }
+        MINION_CARD_OBJ
       ]
     },
     energy: {
@@ -192,6 +172,12 @@ test(`plays a minion card with the BOON(CORE_041) mechanic and adds it to the bo
     },
     playedCards: {
       '0': [MINION_CARD]
+    },
+    selectedCardIndex: {
+      '0': null
+    },
+    selectedCardObject: {
+      '0': null
     }
   });
 });
@@ -202,6 +188,7 @@ test(`plays a minion card with the BOON(CORE_041) mechanic and adds it to the bo
 test(`plays a minion card with the BUFF mechanic and adds it to the board`, () => {
   const CARD_ID = 'CORE_011';
   const MINION_CARD = getCardByID(CARD_ID);
+  const MINION_CARD_OBJ = generateBoardSlotObject(CARD_ID);
 
   const G = {
     buffs: {
@@ -231,6 +218,12 @@ test(`plays a minion card with the BUFF mechanic and adds it to the board`, () =
     },
     playedCards: {
       '0': []
+    },
+    selectedCardIndex: {
+      '0': 0
+    },
+    selectedCardObject: {
+      '0': MINION_CARD_OBJ
     }
   };
 
@@ -238,7 +231,7 @@ test(`plays a minion card with the BUFF mechanic and adds it to the board`, () =
     currentPlayer: '0'
   };
 
-  playMinionCard(G, ctx, 0, CARD_ID, 2);
+  playMinionCard(G, ctx, 0, CARD_ID);
 
   expect(G).toEqual({
     buffs: {
@@ -258,18 +251,7 @@ test(`plays a minion card with the BUFF mechanic and adds it to the board`, () =
       }
     },
     boards: {
-      '0': [
-        {
-          canAttack: false,
-          canBeAttacked: false,
-          currentAttack: MINION_CARD.attack,
-          currentHealth: MINION_CARD.health,
-          hasGuard: false,
-          totalAttack: MINION_CARD.attack,
-          totalHealth: MINION_CARD.health,
-          minionData: MINION_CARD
-        }
-      ]
+      '0': [MINION_CARD_OBJ]
     },
     energy: {
       '0': {
@@ -279,16 +261,27 @@ test(`plays a minion card with the BUFF mechanic and adds it to the board`, () =
     },
     playedCards: {
       '0': [MINION_CARD]
+    },
+    selectedCardIndex: {
+      '0': null
+    },
+    selectedCardObject: {
+      '0': null
     }
   });
 });
 
 /**
- * card-moves::playMinionCard() - mechanics[GUARD], no index splicing
+ * card-moves::playMinionCard()
+ * mechanics[GUARD], no index splicing
  */
 test(`plays a minion card with the GUARD mechanic and adds it to the board`, () => {
   const CARD_ID = 'CORE_002';
   const MINION_CARD = getCardByID(CARD_ID);
+  const MINION_CARD_OBJ = generateBoardSlotObject(CARD_ID);
+  const SOME_MINION = getCardByID('CORE_014');
+  const SOME_OTHER_MINION = getCardByID('CORE_014');
+  const ANOTHER_OTHER_MINION = getCardByID('CORE_027');
 
   const G = {
     counts: {
@@ -298,11 +291,11 @@ test(`plays a minion card with the GUARD mechanic and adds it to the board`, () 
     },
     players: {
       '0': {
-        hand: ['PLAYED CARD', MINION_CARD]
+        hand: [SOME_MINION, MINION_CARD]
       }
     },
     boards: {
-      '0': []
+      '0': [SOME_OTHER_MINION]
     },
     energy: {
       '0': {
@@ -311,7 +304,13 @@ test(`plays a minion card with the GUARD mechanic and adds it to the board`, () 
       }
     },
     playedCards: {
-      '0': ['PLAYED CARD']
+      '0': [ANOTHER_OTHER_MINION]
+    },
+    selectedCardIndex: {
+      '0': 0
+    },
+    selectedCardObject: {
+      '0': MINION_CARD_OBJ
     }
   };
 
@@ -319,7 +318,7 @@ test(`plays a minion card with the GUARD mechanic and adds it to the board`, () 
     currentPlayer: '0'
   };
 
-  playMinionCard(G, ctx, 0, CARD_ID, 1);
+  playMinionCard(G, ctx, 1, CARD_ID);
 
   expect(G).toEqual({
     counts: {
@@ -329,20 +328,15 @@ test(`plays a minion card with the GUARD mechanic and adds it to the board`, () 
     },
     players: {
       '0': {
-        hand: ['PLAYED CARD']
+        hand: [SOME_MINION]
       }
     },
     boards: {
       '0': [
+        SOME_OTHER_MINION,
         {
-          canAttack: false,
-          canBeAttacked: false,
-          currentAttack: MINION_CARD.attack,
-          currentHealth: MINION_CARD.health,
-          hasGuard: true,
-          totalAttack: MINION_CARD.attack,
-          totalHealth: MINION_CARD.health,
-          minionData: MINION_CARD
+          ...MINION_CARD_OBJ,
+          hasGuard: true
         }
       ]
     },
@@ -353,17 +347,25 @@ test(`plays a minion card with the GUARD mechanic and adds it to the board`, () 
       }
     },
     playedCards: {
-      '0': ['PLAYED CARD', MINION_CARD]
+      '0': [ANOTHER_OTHER_MINION, MINION_CARD]
+    },
+    selectedCardIndex: {
+      '0': null
+    },
+    selectedCardObject: {
+      '0': null
     }
   });
 });
 
 /**
- * card-moves::playMinionCard() - mechanics[STAMPEDE], no index splicing
+ * card-moves::playMinionCard()
+ * mechanics[STAMPEDE], no index splicing
  */
 test(`plays a minion card with the STAMPEDE mechanic and adds it to the board`, () => {
   const CARD_ID = 'CORE_005';
   const MINION_CARD = getCardByID(CARD_ID);
+  const MINION_CARD_OBJ = generateBoardSlotObject(CARD_ID);
 
   const G = {
     counts: {
@@ -387,6 +389,12 @@ test(`plays a minion card with the STAMPEDE mechanic and adds it to the board`, 
     },
     playedCards: {
       '0': ['PLAYED CARD', 'PLAYED CARD', 'PLAYED CARD']
+    },
+    selectedCardIndex: {
+      '0': 0
+    },
+    selectedCardObject: {
+      '0': MINION_CARD_OBJ
     }
   };
 
@@ -394,7 +402,7 @@ test(`plays a minion card with the STAMPEDE mechanic and adds it to the board`, 
     currentPlayer: '0'
   };
 
-  playMinionCard(G, ctx, 0, CARD_ID, 1);
+  playMinionCard(G, ctx, 0, CARD_ID);
 
   expect(G).toEqual({
     counts: {
@@ -410,14 +418,8 @@ test(`plays a minion card with the STAMPEDE mechanic and adds it to the board`, 
     boards: {
       '0': [
         {
-          canAttack: true,
-          canBeAttacked: false,
-          currentAttack: MINION_CARD.attack,
-          currentHealth: MINION_CARD.health,
-          hasGuard: false,
-          totalAttack: MINION_CARD.attack,
-          totalHealth: MINION_CARD.health,
-          minionData: MINION_CARD
+          ...MINION_CARD_OBJ,
+          canAttack: true
         }
       ]
     },
@@ -429,16 +431,27 @@ test(`plays a minion card with the STAMPEDE mechanic and adds it to the board`, 
     },
     playedCards: {
       '0': ['PLAYED CARD', 'PLAYED CARD', 'PLAYED CARD', MINION_CARD]
+    },
+    selectedCardIndex: {
+      '0': null
+    },
+    selectedCardObject: {
+      '0': null
     }
   });
 });
 
 /**
- * card-moves::playMinionCard() - mechanics[WARCRY], no index splicing
+ * card-moves::playMinionCard()
+ * mechanics[WARCRY], no index splicing
  */
 test(`plays a minion card with the WARCRY mechanic and adds it to the board`, () => {
   const CARD_ID = 'CORE_001';
   const MINION_CARD = getCardByID(CARD_ID);
+  const SLOT_OBJ = generateBoardSlotObject(CARD_ID);
+  const WARCRY_OBJ = generateWarcryObject(CARD_ID);
+  const SOME_CARD = getCardByID('CORE_018');
+  const SOME_OTHER_CARD = getCardByID('CORE_024');
 
   const G = {
     counts: {
@@ -448,7 +461,7 @@ test(`plays a minion card with the WARCRY mechanic and adds it to the board`, ()
     },
     players: {
       '0': {
-        hand: ['PLAYED CARD', MINION_CARD, 'PLAYED CARD']
+        hand: [SOME_CARD, MINION_CARD, SOME_OTHER_CARD]
       }
     },
     boards: {
@@ -463,6 +476,14 @@ test(`plays a minion card with the WARCRY mechanic and adds it to the board`, ()
     playedCards: {
       '0': []
     },
+    selectedCardIndex: {
+      '0': 0,
+      '1': null
+    },
+    selectedCardObject: {
+      '0': MINION_CARD,
+      '1': null
+    },
     warcryObject: {
       '0': null,
       '1': null
@@ -473,7 +494,7 @@ test(`plays a minion card with the WARCRY mechanic and adds it to the board`, ()
     currentPlayer: '0'
   };
 
-  playMinionCard(G, ctx, 0, CARD_ID, 1);
+  playMinionCard(G, ctx, 0, CARD_ID);
 
   expect(G).toEqual({
     counts: {
@@ -483,22 +504,11 @@ test(`plays a minion card with the WARCRY mechanic and adds it to the board`, ()
     },
     players: {
       '0': {
-        hand: ['PLAYED CARD', 'PLAYED CARD']
+        hand: [SOME_CARD, SOME_OTHER_CARD]
       }
     },
     boards: {
-      '0': [
-        {
-          canAttack: false,
-          canBeAttacked: false,
-          currentAttack: MINION_CARD.attack,
-          currentHealth: MINION_CARD.health,
-          hasGuard: false,
-          totalAttack: MINION_CARD.attack,
-          totalHealth: MINION_CARD.health,
-          minionData: MINION_CARD
-        }
-      ]
+      '0': [SLOT_OBJ]
     },
     energy: {
       '0': {
@@ -509,8 +519,16 @@ test(`plays a minion card with the WARCRY mechanic and adds it to the board`, ()
     playedCards: {
       '0': [MINION_CARD]
     },
+    selectedCardIndex: {
+      '0': null,
+      '1': null
+    },
+    selectedCardObject: {
+      '0': null,
+      '1': null
+    },
     warcryObject: {
-      '0': generateWarcryObject(CARD_ID),
+      '0': WARCRY_OBJ,
       '1': null
     }
   });
