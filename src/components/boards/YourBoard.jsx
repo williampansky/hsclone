@@ -13,7 +13,7 @@ import SpellSlot from 'components/board-slots/SpellSlot';
 import YourAvatar from 'components/avatars/YourAvatar';
 import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
 
-export default function YourBoard({ G, ctx, moves, yourID }) {
+export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
   const { playerClass, selectedCardObject } = G;
   const { playSpellCard } = moves;
 
@@ -31,7 +31,14 @@ export default function YourBoard({ G, ctx, moves, yourID }) {
       {spellType === SPELLTYPE[1] ? (
         <SpellSlot index={0} onClick={() => castGlobalSpell()} />
       ) : null}
-      <YourBoardPlayArea G={G} ctx={ctx} moves={moves} yourID={yourID} />
+      <YourBoardPlayArea
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        isActive={isActive}
+        board="YourBoard"
+        yourID={yourID}
+      />
       <YourAvatar
         G={G}
         moves={moves}

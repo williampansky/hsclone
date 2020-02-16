@@ -124,6 +124,13 @@
     box-shadow: 0 0 5px #c43800;
   }
 
+  &.minion--has_guard + div:after {
+    animation: none;
+    box-shadow: 0 0 5px #c43800;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+
   &:hover + div:after {
     box-shadow: 0 0 20px #c43800;
   }

@@ -36,12 +36,16 @@
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
-  z-index: 100;
+  z-index: 90;
 
   &:hover {
     box-shadow: 0px 0px 30px 0px rgba(183, 197, 53, 0.85) inset;
     // border-color: rgba(255, 255, 255, 0.625);
   }
+}
+
+.spell-slot ~ .board-is-active * {
+  opacity: 0 !important;
 }
 
 // prettier-ignore
@@ -86,17 +90,17 @@
   pointer-events: none;
 }
 
-.board-is-active.spell-is-global .spell-slot {
-  cursor: pointer;
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 100;
+// .board-is-active.spell-is-global .spell-slot {
+//   cursor: pointer;
+//   opacity: 1;
+//   pointer-events: auto;
+//   z-index: 100;
 
-  &:hover {
-    box-shadow: 0px 0px 30px 0px rgba(183, 197, 53, 0.85) inset;
-    // border-color: rgba(255, 255, 255, 0.625);
-  }
-}
+//   &:hover {
+//     box-shadow: 0px 0px 30px 0px rgba(183, 197, 53, 0.85) inset;
+//     // border-color: rgba(255, 255, 255, 0.625);
+//   }
+// }
 
 .board-is-active .board-slot[data-render='false'],
 .board-is-active .spell-slot[data-render='false'] {

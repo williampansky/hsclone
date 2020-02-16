@@ -6,13 +6,11 @@ export default function TheirBoardPlayerArea({
   G,
   ctx,
   moves,
+  isActive,
+  board,
   theirID,
   yourID
 }) {
-  function handleClick(index) {
-    console.log(index);
-  }
-
   return (
     <div
       data-file="board-play-areas/TheirBoardPlayArea"
@@ -27,12 +25,13 @@ export default function TheirBoardPlayerArea({
             G={G}
             ctx={ctx}
             moves={moves}
+            isActive={isActive}
             data={card}
+            board={board}
             key={`slot_${index}`}
             index={index}
             theirID={theirID}
             yourID={yourID}
-            onClick={() => handleClick(index)}
           />
         );
       })}

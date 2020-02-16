@@ -86,9 +86,7 @@ export const selectAttackingMinion = (G, ctx, minion, index) => {
 
   selectAttackingMinionIndex(G, currentPlayer, index);
   selectAttackingMinionObject(G, currentPlayer, minion);
-
-  if (minion !== null || index !== null)
-    determineAttackingMinionTargets(G, otherPlayer);
+  determineAttackingMinionTargets(G, otherPlayer);
 };
 
 /**
@@ -99,9 +97,15 @@ export const selectAttackingMinion = (G, ctx, minion, index) => {
  * @requires selectAttackingMinionObject()
  */
 export const deselectAttackingMinion = (G, ctx) => {
+  const { turnOrder } = G;
   const { currentPlayer } = ctx;
+  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+
   selectAttackingMinionIndex(G, currentPlayer, null);
   selectAttackingMinionObject(G, currentPlayer, null);
+  disablePlayerCanBeAttacked(G, otherPlayer);
+  for (let i = 0; i < G.boards[otherPlayer].length; i++)
+    disableMinionCanBeAttacked(G, otherPlayer, i);
 };
 
 /**
@@ -139,11 +143,9 @@ export const determineAttackingMinionTargets = (G, player) => {
   else if (!MINION_HAS_GUARD) enablePlayerCanBeAttacked(G, player);
 
   // first, enable all minions to be attackable
-  for (let i = 0; i < G.boards[player].length; i++)
+  for (let i = 0; i < G.boards[player].length; i++) {
     enableMinionCanBeAttacked(G, player, i);
-
-  // then loop again and disable ones that don't have guard?
-  for (let i = 0; i < G.boards[player].length; i++)
     if (!G.boards[player].hasGuard === false)
       disableMinionCanBeAttacked(G, player, i);
+  }
 };

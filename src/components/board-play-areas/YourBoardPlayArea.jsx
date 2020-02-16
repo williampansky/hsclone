@@ -11,7 +11,14 @@ import BoardDropArea from 'components/board-drop-areas/BoardDropArea';
 import BoardSlot from 'components/board-slots/BoardSlot';
 // import SpellSlot from 'components/board-slots/SpellSlot';
 
-export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
+export default function YourBoardPlayerArea({
+  G,
+  ctx,
+  moves,
+  isActive,
+  board,
+  yourID
+}) {
   const { boards, selectedCardObject } = G;
   const { playMinionCard } = moves;
   const SELECTED_CARD_OBJECT = selectedCardObject[yourID];
@@ -52,8 +59,10 @@ export default function YourBoardPlayerArea({ G, ctx, moves, yourID }) {
                 G={G}
                 ctx={ctx}
                 moves={moves}
+                isActive={isActive}
                 data={card}
                 key={`slot_${index}`}
+                board={board}
                 index={index}
                 yourID={yourID}
                 onClick={() => handleClick(index)}

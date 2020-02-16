@@ -27,6 +27,10 @@ test(`attacks player with a minion, calculating the outcome`, () => {
       ],
       '1': []
     },
+    canBeAttacked: {
+      '0': null,
+      '1': null
+    },
     selectedMinionIndex: {
       '0': 0,
       '1': null
@@ -68,6 +72,10 @@ test(`attacks player with a minion, calculating the outcome`, () => {
         }
       ],
       '1': []
+    },
+    canBeAttacked: {
+      '0': null,
+      '1': true
     },
     selectedMinionIndex: {
       '0': null,

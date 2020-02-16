@@ -322,6 +322,10 @@ test(`deselects minion if selected index and object match event target`, () => {
       '0': [SLOT_OBJECT],
       '1': []
     },
+    canBeAttacked: {
+      '0': false,
+      '1': false
+    },
     selectedMinionIndex: {
       '0': 0,
       '1': null
@@ -343,6 +347,10 @@ test(`deselects minion if selected index and object match event target`, () => {
     boards: {
       '0': [SLOT_OBJECT],
       '1': []
+    },
+    canBeAttacked: {
+      '0': false,
+      '1': false
     },
     selectedMinionIndex: {
       '0': null,

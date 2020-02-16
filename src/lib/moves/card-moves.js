@@ -4,6 +4,7 @@ import { moveCardToPlayedCards } from '../cards/moveCardToPlayedCards';
 import { removeCardFromHand } from '../cards/removeCardFromHand';
 import { selectPlayableCard } from '../moves/aesthetic-moves';
 import { subtractFromCurrentEnergy } from '../moves/energy-moves';
+import { subtractFromPlayerHealth } from '../moves/player-moves';
 
 export const incrementDeckCount = (G, player) => {
   return G.counts[player].deck++;
@@ -14,6 +15,7 @@ export const deincrementDeckCount = (G, player) => {
 };
 
 export const incrementHandCount = (G, player) => {
+  if (G.players[player].deck.length === 0) return;
   return G.counts[player].hand++;
 };
 
@@ -61,6 +63,7 @@ export const discardCards = (G, player, numberOfCards = 1) => {
 export const drawCard = (G, player) => {
   deincrementDeckCount(G, player); // ............... set counts[player].deck
   incrementHandCount(G, player); // ................. set counts[player].hand
+  if (G.players[player].deck.length === 0) return; // eject if no deck
   G.players[player].hand.push( // ................... pushes to hand
     getCardByID( // ................................. generates card object
       G.players[player].deck.splice(0, 1)[0] // ..... splices from deck
@@ -92,7 +95,12 @@ export const drawSingleCardAtStartOfCurrentPlayersTurn = (G, ctx) => {
   if (currentPlayerHasLessThan10Cards) drawCard(G, currentPlayer);
   else discardCard(G, currentPlayer);
 
-  if (currentPlayerDeckLength === 0) G.health[currentPlayer]--;
+  if (currentPlayerDeckLength === 0)
+    subtractFromPlayerHealth(
+      G,
+      currentPlayer,
+      Math.abs(G.counts[currentPlayer].deck)
+    );
 };
 
 export const playSpellCard = (G, ctx, cardId, cardCost, target) => {

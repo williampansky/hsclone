@@ -7,8 +7,10 @@ export default function BoardSlot({
   G,
   ctx,
   moves,
+  isActive,
   canDrop,
   data,
+  board,
   index,
   onClick,
   render,
@@ -16,6 +18,7 @@ export default function BoardSlot({
   theirID
 }) {
   const { selectedMinionIndex } = G;
+  const { currentPlayer } = ctx;
   const {
     canAttack,
     canBeAttacked,
@@ -41,7 +44,10 @@ export default function BoardSlot({
       {minionData && (
         <MinionInteraction
           G={G}
+          ctx={ctx}
           moves={moves}
+          isActive={isActive}
+          board={board}
           index={index}
           render={render}
           data={data}

@@ -230,10 +230,81 @@ test(`Discard 1 card at the start of the current player's turn when their hand i
   };
 
   drawSingleCardAtStartOfCurrentPlayersTurn(G, ctx);
+
   expect(G.counts[1].deck).toBe(19);
   expect(G.counts[1].hand).toBe(10);
   expect(G.players[1].hand).toHaveLength(10);
   expect(G.playedCards[1]).toHaveLength(1);
+});
+
+/**
+ * card-moves::drawSingleCardAtStartOfCurrentPlayersTurn() - subtract 1 health
+ */
+test(`should remove health when deck is empty matching the negative deck amount`, () => {
+  const G = {
+    counts: {
+      1: {
+        deck: 0,
+        hand: 4
+      }
+    },
+    players: {
+      1: {
+        deck: [],
+        hand: [1, 2, 3, 4]
+      }
+    },
+    health: {
+      '1': 30
+    }
+  };
+
+  const ctx = {
+    currentPlayer: 1
+  };
+
+  drawSingleCardAtStartOfCurrentPlayersTurn(G, ctx);
+
+  expect(G.counts[1].deck).toBe(-1);
+  expect(G.counts[1].hand).toBe(4);
+  expect(G.players[1].deck).toHaveLength(0);
+  expect(G.players[1].hand).toHaveLength(4);
+  expect(G.health[1]).toBe(29);
+});
+
+/**
+ * card-moves::drawSingleCardAtStartOfCurrentPlayersTurn() - subtract 5 health
+ */
+test(`should remove health when deck is empty matching the negative deck amount`, () => {
+  const G = {
+    counts: {
+      1: {
+        deck: -4,
+        hand: 4
+      }
+    },
+    players: {
+      1: {
+        deck: [],
+        hand: [1, 2, 3, 4]
+      }
+    },
+    health: {
+      '1': 30
+    }
+  };
+
+  const ctx = {
+    currentPlayer: 1
+  };
+
+  drawSingleCardAtStartOfCurrentPlayersTurn(G, ctx);
+
+  expect(G.counts[1].deck).toBe(-5);
+  expect(G.counts[1].hand).toBe(4);
+  expect(G.players[1].deck).toHaveLength(0);
+  expect(G.players[1].hand).toHaveLength(4);
+  expect(G.health[1]).toBe(25);
 });
 
 /**
@@ -260,6 +331,11 @@ test(`increment player 0's hand count`, () => {
     counts: {
       0: {
         hand: 0
+      }
+    },
+    players: {
+      '0': {
+        deck: ['SOME_CARD_ID']
       }
     }
   };

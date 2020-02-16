@@ -38,6 +38,10 @@ test(`attacks a minion with another minion, calculating the outcome`, () => {
         }
       ]
     },
+    canBeAttacked: {
+      '0': null,
+      '1': null
+    },
     selectedMinionIndex: {
       '0': 0,
       '1': null
@@ -87,6 +91,10 @@ test(`attacks a minion with another minion, calculating the outcome`, () => {
         }
       ]
     },
+    canBeAttacked: {
+      '0': null,
+      '1': true
+    },
     selectedMinionIndex: {
       '0': null,
       '1': null
@@ -135,6 +143,10 @@ test(`attacks a minion with another minion, the attacking minion survives`, () =
         }
       ]
     },
+    canBeAttacked: {
+      '0': null,
+      '1': null
+    },
     selectedMinionIndex: {
       '0': 0,
       '1': null
@@ -172,6 +184,10 @@ test(`attacks a minion with another minion, the attacking minion survives`, () =
         }
       ],
       '1': []
+    },
+    canBeAttacked: {
+      '0': null,
+      '1': true
     },
     selectedMinionIndex: {
       '0': null,
@@ -221,6 +237,10 @@ test(`attacks a minion with another minion, the minion being attacked survives`,
         }
       ]
     },
+    canBeAttacked: {
+      '0': null,
+      '1': null
+    },
     selectedMinionIndex: {
       '0': 0,
       '1': null
@@ -258,6 +278,10 @@ test(`attacks a minion with another minion, the minion being attacked survives`,
           totalHealth: MINION_BEING_ATTACKED.health
         }
       ]
+    },
+    canBeAttacked: {
+      '0': null,
+      '1': true
     },
     selectedMinionIndex: {
       '0': null,
