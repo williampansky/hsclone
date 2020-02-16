@@ -5,16 +5,16 @@ import {
   matchCurrentWithTotalEnergy
 } from '../moves/energy-moves';
 import {
-  // disableMinionCanAttack,
+  disableMinionCanAttack,
   enableMinionCanAttack,
   disableMinionCanBeAttacked
   // enableMinionCanBeAttacked
 } from '../moves/minion-moves';
 
 const onBegin = (G, ctx) => {
-  // const PLAY_ORDER = G.turnOrder;
+  const PLAY_ORDER = G.turnOrder;
   const CURRENT_PLAYER = ctx.currentPlayer;
-  // const PREVIOUS_PLAYER = PLAY_ORDER.find(player => player !== CURRENT_PLAYER);
+  const PREVIOUS_PLAYER = PLAY_ORDER.find(player => player !== CURRENT_PLAYER);
 
   // const YOUR_BOARD = G.boards[CURRENT_PLAYER];
   // const THEIR_BOARD = G.boards[PREVIOUS_PLAYER];
@@ -22,6 +22,11 @@ const onBegin = (G, ctx) => {
   incrementTotalEnergy(G, CURRENT_PLAYER);
   matchCurrentWithTotalEnergy(G, CURRENT_PLAYER);
   drawSingleCardAtStartOfCurrentPlayersTurn(G, ctx);
+
+  for (let i = 0; i < G.boards[PREVIOUS_PLAYER].length; i++) {
+    // enable canAttack on your preview board minions
+    disableMinionCanAttack(G, PREVIOUS_PLAYER, i);
+  }
 
   for (let i = 0; i < G.boards[CURRENT_PLAYER].length; i++) {
     // disable canBeAttacked on your board minions

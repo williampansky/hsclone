@@ -9,6 +9,7 @@ import css from './board.module.scss';
 
 // child components
 import TheirAvatar from 'components/avatars/TheirAvatar';
+import TheirBoardPlayerArea from 'components/board-play-areas/TheirBoardPlayArea';
 
 export default function TheirBoard({ G, ctx, moves, theirID, yourID }) {
   const { playerClass } = G;
@@ -19,6 +20,13 @@ export default function TheirBoard({ G, ctx, moves, theirID, yourID }) {
         G={G}
         moves={moves}
         src={avatars[playerClass[theirID]]}
+        theirID={theirID}
+        yourID={yourID}
+      />
+      <TheirBoardPlayerArea
+        G={G}
+        ctx={ctx}
+        moves={moves}
         theirID={theirID}
         yourID={yourID}
       />

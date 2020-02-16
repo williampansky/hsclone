@@ -8,6 +8,7 @@ const { generateBoardSlotObject } = esmImport(
 test(`should select and then deselect an attacking minion`, () => {
   const CARD_ID = 'CORE_027';
   const SLOT_OBJECT = generateBoardSlotObject(CARD_ID);
+  const TURN_ORDER = ['0', '1'];
 
   // set up a specific board scenario
   const HScloneScenario = {
@@ -17,7 +18,8 @@ test(`should select and then deselect an attacking minion`, () => {
       boards: {
         '0': [SLOT_OBJECT],
         '1': []
-      }
+      },
+      turnOrder: TURN_ORDER
     })
   };
 
@@ -43,6 +45,7 @@ test(`should select and then deselect an attacking minion`, () => {
     selectedMinionObject: {
       '0': null,
       '1': null
-    }
+    },
+    turnOrder: TURN_ORDER
   });
 });

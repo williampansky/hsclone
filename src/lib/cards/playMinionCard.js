@@ -16,7 +16,7 @@ export const playMinionCard = (G, ctx, index, cardId = null) => {
   const { boards } = G;
   const { currentPlayer } = ctx;
 
-  if (boards[currentPlayer][index]) return;
+  // if (boards[currentPlayer][index]) return;
 
   const CARD_OBJECT = generateMinion(cardId);
   const BOARD_SLOT_OBJ = generateBoardSlotObject(cardId);
