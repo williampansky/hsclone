@@ -25,6 +25,7 @@ test(`should draw a single card from your deck to your hand`, () => {
 });
 
 test(`should draw multiple cards from your deck to your hand`, () => {
+  const AMOUNT_TO_DRAW = 4;
   const ctx = { currentPlayer: '0' };
   const G = {
     counts: {
@@ -48,7 +49,7 @@ test(`should draw multiple cards from your deck to your hand`, () => {
     }
   };
 
-  drawCard(G, ctx.currentPlayer, 4);
+  drawCard(G, ctx.currentPlayer, AMOUNT_TO_DRAW);
   expect(G.counts[ctx.currentPlayer].deck).toBe(2);
   expect(G.counts[ctx.currentPlayer].hand).toBe(4);
   expect(G.players[ctx.currentPlayer].deck).toHaveLength(2);

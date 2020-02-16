@@ -1,3 +1,4 @@
+import discardCard from 'lib/moves/discard-card';
 import drawCard from 'lib/moves/draw-card';
 
 /**
@@ -8,6 +9,12 @@ export default {
     client: false,
     move: (G, player, amountToDraw) => {
       return drawCard(G, player, amountToDraw);
+    }
+  },
+  discardCard: {
+    client: false,
+    move: (G, player, amountToDiscard) => {
+      return discardCard(G, player, amountToDiscard);
     }
   }
 
