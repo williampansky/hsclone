@@ -14,52 +14,6 @@ const {
 const { getCardByID } = esmImport('../utils/get-card-by-id');
 
 /**
- * card-moves::deincrementDeckCount()
- */
-test(`deincrement player 0's deck count`, () => {
-  const G = {
-    counts: {
-      '0': {
-        deck: 1
-      }
-    }
-  };
-
-  deincrementDeckCount(G, '0');
-
-  expect(G).toEqual({
-    counts: {
-      '0': {
-        deck: 0
-      }
-    }
-  });
-});
-
-/**
- * card-moves::deincrementHandCount()
- */
-test(`deincrement player 0's hand count`, () => {
-  const G = {
-    counts: {
-      '0': {
-        hand: 1
-      }
-    }
-  };
-
-  deincrementHandCount(G, '0');
-
-  expect(G).toEqual({
-    counts: {
-      '0': {
-        hand: 0
-      }
-    }
-  });
-});
-
-/**
  * card-moves::discardCard()
  */
 test(`discard a single card from your deck to your playedCards array`, () => {
@@ -305,43 +259,6 @@ test(`should remove health when deck is empty matching the negative deck amount`
   expect(G.players[1].deck).toHaveLength(0);
   expect(G.players[1].hand).toHaveLength(4);
   expect(G.health[1]).toBe(25);
-});
-
-/**
- * card-moves::incrementDeckCount()
- */
-test(`increment player 0's deck count`, () => {
-  const G = {
-    counts: {
-      0: {
-        deck: 0
-      }
-    }
-  };
-
-  incrementDeckCount(G, 0);
-  expect(G.counts[0].deck).toBe(1);
-});
-
-/**
- * card-moves::incrementDeckCount()
- */
-test(`increment player 0's hand count`, () => {
-  const G = {
-    counts: {
-      0: {
-        hand: 0
-      }
-    },
-    players: {
-      '0': {
-        deck: ['SOME_CARD_ID']
-      }
-    }
-  };
-
-  incrementHandCount(G, 0);
-  expect(G.counts[0].hand).toBe(1);
 });
 
 /**
