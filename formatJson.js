@@ -1,3 +1,4 @@
+import GAME_CONFIG from './src/config/game.config';
 const fs = require('fs');
 const incomingCore = require('./csv-core.json');
 const incomingEntourage = require('./csv-entourage.json');
@@ -23,7 +24,8 @@ const mappedCore = incomingCore.map(item => {
     elite,
     id,
     imageSrc,
-    mechanics
+    mechanics,
+    text
   } = item;
 
   if (!id) return;
@@ -36,7 +38,8 @@ const mappedCore = incomingCore.map(item => {
       collectible: collectible === 'checked' ? true : false,
       elite: elite === 'checked' ? true : false,
       imageSrc: parseImageSrc(imageSrc),
-      mechanics: mechanics.split(',')
+      mechanics: GAME_CONFIG.enableMechanics ? mechanics.split(',') : '',
+      text: GAME_CONFIG.text ? text : ''
     }
   };
 });
@@ -63,7 +66,8 @@ const mappedEntourage = incomingEntourage.map(item => {
     elite,
     id,
     imageSrc,
-    mechanics
+    mechanics,
+    text
   } = item;
 
   if (!id) return;
@@ -76,7 +80,8 @@ const mappedEntourage = incomingEntourage.map(item => {
       collectible: collectible === 'checked' ? true : false,
       elite: elite === 'checked' ? true : false,
       imageSrc: parseImageSrc(imageSrc),
-      mechanics: mechanics.split(',')
+      mechanics: GAME_CONFIG.enableMechanics ? mechanics.split(',') : '',
+      text: GAME_CONFIG.text ? text : ''
     }
   };
 });
