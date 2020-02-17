@@ -2,7 +2,7 @@
  * Sets the value of `selectPlayableCardIndex` if `index` is provided;
  * otherwise sets the value to null.
  * @param {{}} G
- * @param {{}} ctx
+ * @param {string} player
  * @param {number} index
  */
 const selectPlayableCardIndex = (G, player, index) => {
