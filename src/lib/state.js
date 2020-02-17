@@ -6,6 +6,7 @@ import energy from 'lib/state/energy';
 import health from 'lib/state/health';
 import hoveringCardIndex from 'lib/state/hovering-card-index';
 import players from 'lib/state/players';
+import playedCards from 'lib/state/played-cards';
 import selectedCardIndex from 'lib/state/selected-card-index';
 import selectedCardObject from 'lib/state/selected-card-object';
 
@@ -21,10 +22,7 @@ export default {
   players: players.__DATA_MODEL,
   boards: boards.__DATA_MODEL,
   energy: energy.__DATA_MODEL,
-  playedCards: {
-    '0': [],
-    '1': []
-  },
+  playedCards: playedCards.__DATA_MODEL,
   hoveringCardIndex: hoveringCardIndex.__DATA_MODEL,
   selectedCardIndex: selectedCardIndex.__DATA_MODEL,
   selectedCardObject: selectedCardObject.__DATA_MODEL,
