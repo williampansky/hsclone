@@ -10,7 +10,7 @@ import counts from 'lib/state/counts';
  * @requires counts.deincrementDeck()
  * @requires counts.incrementHand()
  */
-const drawCard = (G, player, amountToDraw = 1) => {
+const drawCard = (G, ctx, player, amountToDraw = 1) => {
   return amountToDraw >= 2
     ? drawMultipleCards(G, player, amountToDraw)
     : drawSingleCard(G, player);

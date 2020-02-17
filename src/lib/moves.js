@@ -23,20 +23,20 @@ export default {
   },
   discardCard: {
     client: false,
-    move: (G, player, amountToDiscard) => {
-      return discardCard(G, player, amountToDiscard);
+    move: (G, ctx, player, amountToDiscard) => {
+      return discardCard(G, ctx, player, amountToDiscard);
     }
   },
   drawCard: {
     client: false,
-    move: (G, player, amountToDraw) => {
-      return drawCard(G, player, amountToDraw);
+    move: (G, ctx, player, amountToDraw) => {
+      return drawCard(G, ctx, player, amountToDraw);
     }
   },
   forfeitGame: {
     client: false,
-    move: (G, player) => {
-      return forfeitGame(G, player);
+    move: (G, ctx, player) => {
+      return forfeitGame(G, ctx, player);
     }
   },
   hoverCard: {

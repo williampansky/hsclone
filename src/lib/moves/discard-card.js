@@ -6,7 +6,7 @@ import counts from 'lib/state/counts';
  * @param {string} player
  * @requires counts.deincrementDeck()
  */
-const discardCard = (G, player, amountToDiscard = 1) => {
+const discardCard = (G, ctx, player, amountToDiscard = 1) => {
   return amountToDiscard >= 2
     ? discardMultipleCards(G, player, amountToDiscard)
     : discardSingleCard(G, player);

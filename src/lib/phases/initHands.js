@@ -4,7 +4,7 @@ import GAME_CONFIG from 'config/game.config';
 import getCardByID from 'lib/utils/get-card-by-id';
 
 export default {
-  onBegin: G => {
+  onBegin: (G, ctx) => {
     const FIRST_PLAYER = G.turnOrder[0];
     const SECOND_PLAYER = G.turnOrder[1];
 
@@ -12,11 +12,11 @@ export default {
       // initHandsStage(G);
     } else {
       // Draw three cards from the first player's deck into their hand.
-      drawCard(G, FIRST_PLAYER, 3);
+      drawCard(G, ctx, FIRST_PLAYER, 3);
 
       // Draw four cards from the first player's deck into their hand;
       // they get four cards since they are not the starting player.
-      drawCard(G, SECOND_PLAYER, 4);
+      drawCard(G, ctx, SECOND_PLAYER, 4);
 
       // Give the second player the Energy card (The Orb), which when
       // played gives that player an additional energy point for the turn.

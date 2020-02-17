@@ -6,6 +6,6 @@ test(`should forfeit the game`, () => {
     health: { '0': 30, '1': 30 }
   };
 
-  forfeitGame(G, ctx.currentPlayer);
+  forfeitGame(G, ctx, ctx.currentPlayer);
   expect(G.health[ctx.currentPlayer]).toBe(0);
 });

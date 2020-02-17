@@ -8,7 +8,7 @@ test(`discard a single card from your deck to your playedCards array`, () => {
     playedCards: { '0': [] }
   };
 
-  discardCard(G, ctx.currentPlayer);
+  discardCard(G, ctx, ctx.currentPlayer);
   expect(G.counts[ctx.currentPlayer].deck).toBe(29);
   expect(G.players[ctx.currentPlayer].deck).toHaveLength(0);
   expect(G.playedCards[ctx.currentPlayer]).toHaveLength(1);
@@ -33,7 +33,7 @@ test(`discard cards equal to the provided value`, () => {
     }
   };
 
-  discardCard(G, ctx.currentPlayer, AMOUNT_TO_DISCARD);
+  discardCard(G, ctx, ctx.currentPlayer, AMOUNT_TO_DISCARD);
   expect(G.counts[ctx.currentPlayer].deck).toBe(27);
   expect(G.players[ctx.currentPlayer].deck).toHaveLength(0);
   expect(G.playedCards[0]).toHaveLength(3);

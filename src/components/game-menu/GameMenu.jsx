@@ -10,8 +10,11 @@ export default function GameMenu({
   showMenu,
   toggleMenuFn
 }) {
+  const { forfeitGame } = moves;
+
   function handleForfeitGame(event) {
-    moves.forfeitGame(yourID);
+    event.target.blur();
+    return forfeitGame(yourID);
   }
 
   return (
@@ -21,7 +24,7 @@ export default function GameMenu({
       <button
         className="forfeit-game-button"
         disabled={!isActive}
-        onClick={e => handleForfeitGame(e)}
+        onClick={event => handleForfeitGame(event)}
       >
         Forfeit game
       </button>

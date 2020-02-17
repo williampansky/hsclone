@@ -17,7 +17,7 @@ test(`should draw a single card from your deck to your hand`, () => {
     }
   };
 
-  drawCard(G, ctx.currentPlayer);
+  drawCard(G, ctx, ctx.currentPlayer);
   expect(G.counts[ctx.currentPlayer].deck).toBe(2);
   expect(G.counts[ctx.currentPlayer].hand).toBe(1);
   expect(G.players[ctx.currentPlayer].deck).toHaveLength(2);
@@ -49,7 +49,7 @@ test(`should draw multiple cards from your deck to your hand`, () => {
     }
   };
 
-  drawCard(G, ctx.currentPlayer, AMOUNT_TO_DRAW);
+  drawCard(G, ctx, ctx.currentPlayer, AMOUNT_TO_DRAW);
   expect(G.counts[ctx.currentPlayer].deck).toBe(2);
   expect(G.counts[ctx.currentPlayer].hand).toBe(4);
   expect(G.players[ctx.currentPlayer].deck).toHaveLength(2);
@@ -73,7 +73,7 @@ test(`should eject if player's deck is empty`, () => {
     }
   };
 
-  drawCard(G, ctx.currentPlayer);
+  drawCard(G, ctx, ctx.currentPlayer);
   expect(G.counts[ctx.currentPlayer].deck).toBe(-1);
   expect(G.counts[ctx.currentPlayer].hand).toBe(0);
   expect(G.players[ctx.currentPlayer].deck).toHaveLength(0);
