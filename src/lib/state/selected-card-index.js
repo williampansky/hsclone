@@ -1,5 +1,5 @@
 const selectedCardIndex = {
-  _DATA_MODEL: {
+  __DATA_MODEL: {
     '0': null,
     '1': null
   },

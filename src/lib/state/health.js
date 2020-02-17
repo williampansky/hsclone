@@ -1,7 +1,7 @@
 import limitNumberWithinRange from 'lib/utils/range-limit';
 
 const health = {
-  _DATA_MODEL: {
+  __DATA_MODEL: {
     '0': 30,
     '1': 30
   },
