@@ -1,9 +1,11 @@
-import { CARD_DATABASE } from '../utils/card-databse';
+import CARD_DATABASE from 'lib/utils/card-databse';
 
 const getCardObjectFromDatabase = (id, database = CARD_DATABASE) => {
   return database[id];
 };
 
-export const getCardByID = cardId => {
+const getCardByID = cardId => {
   return getCardObjectFromDatabase(cardId);
 };
+
+export default getCardByID;

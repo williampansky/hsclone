@@ -8,7 +8,7 @@
  * @param {Number} playerID player's unique playOrder ID.
  * @see https://boardgame.io/documentation/#/secret-state
  */
-export const stripSecrets = (G, playerID) => ({
+const stripSecrets = (G, playerID) => ({
   ...G,
   players: {
     [playerID]: G.players[playerID]
@@ -17,3 +17,5 @@ export const stripSecrets = (G, playerID) => ({
     [playerID]: G.selectedCardObject[playerID]
   }
 });
+
+export default stripSecrets;

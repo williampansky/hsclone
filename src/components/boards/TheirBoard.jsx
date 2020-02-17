@@ -1,66 +1,52 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+// configs
+import avatars from 'config/avatars.config';
+
+// styles
 import css from './board.module.scss';
-import TheirAvatar from '../avatars/TheirAvatar';
-import TheirBoardPlayerArea from './TheirBoardPlayArea';
-import avatars from '../../config/avatars.config';
+
+// child components
+import TheirAvatar from 'components/avatars/TheirAvatar';
+import TheirBoardPlayerArea from 'components/board-play-areas/TheirBoardPlayArea';
 
 export default function TheirBoard({
   G,
   ctx,
   moves,
-  events,
-  reset,
-  undo,
-  redo,
-  step,
-  log,
-  gameID,
-  theirID,
-  gameMetadata,
   isActive,
-  isMultiplayer,
-  isConnected,
-  credentials
+  theirID,
+  yourID
 }) {
+  const { playerClass } = G;
+
   return (
-    <div className={css['their-board']} data-file="TheirBoard">
+    <div data-file="boards/TheirBoard" className={css['their-board']}>
       <TheirAvatar
-        src={avatars[G.playerClass[theirID]]}
         G={G}
-        ctx={ctx}
         moves={moves}
-        events={events}
-        reset={reset}
-        undo={undo}
-        redo={redo}
-        step={step}
-        log={log}
-        gameID={gameID}
-        theirID={theirID}
-        gameMetadata={gameMetadata}
         isActive={isActive}
-        isMultiplayer={isMultiplayer}
-        isConnected={isConnected}
-        credentials={credentials}
+        src={avatars[playerClass[theirID]]}
+        theirID={theirID}
+        yourID={yourID}
       />
       <TheirBoardPlayerArea
         G={G}
         ctx={ctx}
         moves={moves}
-        events={events}
-        reset={reset}
-        undo={undo}
-        redo={redo}
-        step={step}
-        log={log}
-        gameID={gameID}
-        theirID={theirID}
-        gameMetadata={gameMetadata}
         isActive={isActive}
-        isMultiplayer={isMultiplayer}
-        isConnected={isConnected}
-        credentials={credentials}
+        board="TheirBoard"
+        theirID={theirID}
+        yourID={yourID}
       />
     </div>
   );
 }
+
+TheirBoard.propTypes = {
+  G: PropTypes.object,
+  ctx: PropTypes.object,
+  moves: PropTypes.object,
+  theirID: PropTypes.string
+};

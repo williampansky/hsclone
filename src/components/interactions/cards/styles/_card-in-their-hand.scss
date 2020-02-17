@@ -1,0 +1,68 @@
+.card-in-their-hand {
+  border-radius: var(--card-border-radius);
+  box-sizing: border-box;
+  cursor: default;
+  padding: 0;
+  position: relative;
+  right: 0;
+  top: 0;
+  transition: 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition-property: top, transform;
+  user-select: none;
+  z-index: 1; // make sure to NOT animate z-index
+
+  * {
+    pointer-events: none;
+  }
+
+  &:before {
+    content: '';
+    box-shadow: -5px 5px 5px hsla(0, 0%, 0%, 0.15);
+    left: 0;
+    height: var(--card-height);
+    position: absolute;
+    top: 0;
+    transition: box-shadow 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 100%;
+    pointer-events: none;
+  }
+
+  &:after {
+    content: none;
+  }
+}
+
+.card-they-are-hovering:after {
+  animation: isAttackingGlow 2500ms infinite;
+  bottom: 0;
+  content: '';
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.card-they-have-selected {
+  animation: selectedRotation 10000ms infinite;
+  animation-timing-function: ease-in-out;
+  top: calc(var(--card-height) / 2);
+  z-index: 100;
+
+  &:before {
+    box-shadow: 0 10px 20px hsla(0, 0%, 0%, 0.4);
+  }
+
+  &:after {
+    animation: isAttackingGlow 2500ms infinite;
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+  }
+}

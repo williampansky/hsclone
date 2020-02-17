@@ -17,8 +17,8 @@
             "internalConsoleOptions": "neverOpen",
             "runtimeArgs": [
                 "--inspect=8000",
-                "-r",
-                "esm"
+                "--exec",
+                "babel-node"
             ],
             "skipFiles": [
                 "<node_internals>/**"

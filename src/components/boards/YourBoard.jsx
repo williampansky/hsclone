@@ -1,82 +1,56 @@
 import React from 'react';
-import YourBoardPlayerArea from './YourBoardPlayArea';
-import YourAvatar from '../avatars/YourAvatar';
-import avatars from '../../config/avatars.config';
-import css from './board.module.scss';
-import slotCSS from './board-slot.module.scss';
+import PropTypes from 'prop-types';
 
-export default function YourBoard({
-  G,
-  ctx,
-  moves,
-  events,
-  reset,
-  undo,
-  redo,
-  step,
-  log,
-  gameID,
-  playerID,
-  gameMetadata,
-  isActive,
-  isMultiplayer,
-  isConnected,
-  credentials
-}) {
-  const cardIsSelected =
-    G.selectedCardIndex[playerID] !== null &&
-    G.selectedCardObject[playerID] !== null;
-  const cardType = cardIsSelected && G.selectedCardObject[playerID].type;
-  const spellType = cardIsSelected && G.selectedCardObject[playerID].spellType;
+// configs
+import avatars from 'config/avatars.config';
+import SPELLTYPE from 'enums/spellType.enums';
+
+// styles
+import css from './board.module.scss';
+
+// child components
+import SpellSlot from 'components/board-slots/SpellSlot';
+import YourAvatar from 'components/avatars/YourAvatar';
+import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
+
+export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
+  const { playerClass, selectedCardObject } = G;
+  const { playCard } = moves;
+
+  const selectedCard = selectedCardObject[yourID];
+  const cardId = selectedCard && selectedCard.id;
+  const spellType = selectedCard && selectedCard.spellType;
+
+  function castGlobalSpell(index = 0, id = cardId) {
+    return playCard(index, id);
+  }
 
   return (
-    <div
-      className={[
-        css['your-board'],
-        cardIsSelected ? slotCSS['board-is-active'] : '',
-        cardType === 'SPELL' && spellType === 'GLOBAL'
-          ? slotCSS['spell-is-global']
-          : ''
-      ].join(' ')}
-      data-file="YourBoard"
-    >
-      <YourBoardPlayerArea
+    <div data-file="boards/YourBoard" className={css['your-board']}>
+      {spellType === SPELLTYPE[1] ? (
+        <SpellSlot index={0} onClick={() => castGlobalSpell()} />
+      ) : null}
+      <YourBoardPlayArea
         G={G}
         ctx={ctx}
         moves={moves}
-        events={events}
-        reset={reset}
-        undo={undo}
-        redo={redo}
-        step={step}
-        log={log}
-        gameID={gameID}
-        playerID={playerID}
-        gameMetadata={gameMetadata}
         isActive={isActive}
-        isMultiplayer={isMultiplayer}
-        isConnected={isConnected}
-        credentials={credentials}
+        board="YourBoard"
+        yourID={yourID}
       />
       <YourAvatar
-        src={avatars[G.playerClass[playerID]]}
         G={G}
-        ctx={ctx}
         moves={moves}
-        events={events}
-        reset={reset}
-        undo={undo}
-        redo={redo}
-        step={step}
-        log={log}
-        gameID={gameID}
-        playerID={playerID}
-        gameMetadata={gameMetadata}
-        isActive={isActive}
-        isMultiplayer={isMultiplayer}
-        isConnected={isConnected}
-        credentials={credentials}
+        yourID={yourID}
+        src={avatars[playerClass[yourID]]}
       />
     </div>
   );
 }
+
+YourBoard.propTypes = {
+  G: PropTypes.object,
+  ctx: PropTypes.object,
+  moves: PropTypes.object,
+  yourID: PropTypes.string
+};

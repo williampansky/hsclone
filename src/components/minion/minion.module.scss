@@ -13,6 +13,10 @@
   user-select: none;
   z-index: 1;
 
+  @media (max-height: 768px) {
+    transform: scale(0.75);
+  }
+
   * {
     user-select: none;
   }

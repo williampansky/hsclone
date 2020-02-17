@@ -13,9 +13,13 @@
     "styled-components": "^5.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-config-react-app": "^5.1.0",
@@ -25,14 +29,14 @@
     "node-sass": "^4.13.1"
   },
   "scripts": {
-    "server": "node -r esm src/server.js",
+    "server": "node src/server.js",
     "start": "react-scripts start",
     "start1": "PORT=3001 react-scripts start",
     "start2": "PORT=3002 react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "unit": "jest",
-    "format": "node formatJson.js",
+    "format": "node -r esm formatJson.js",
     "eject": "react-scripts eject"
   }
 }

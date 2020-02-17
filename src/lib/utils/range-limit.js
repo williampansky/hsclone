@@ -6,9 +6,11 @@
  * @param {Number} min Min amount
  * @see https://stackoverflow.com/a/5842770/8296677
  */
-export const limitNumberWithinRange = (number, max, min) => {
+const limitNumberWithinRange = (number, max, min) => {
   const MIN = min || 0;
   const MAX = max || 0;
   const parsed = parseInt(number);
   return Math.min(Math.max(parsed, MIN), MAX);
 };
+
+export default limitNumberWithinRange;

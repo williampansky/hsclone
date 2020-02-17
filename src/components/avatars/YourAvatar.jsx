@@ -1,17 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+// styles
 import css from './avatar.module.scss';
 
-export default function YourAvatar(props) {
-  const { G, ctx, isActive, playerID, src } = props;
-  const { health } = G;
-  const YOUR_HEALTH = health[playerID];
-
-  const CAN_BE_ATTACKED = !isActive;
+export default function YourAvatar({ G, moves, yourID, src }) {
+  const { health, canBeAttacked } = G;
+  const YOUR_HEALTH = health[yourID];
+  // const CAN_BE_ATTACKED = canBeAttacked[yourID];
 
   return (
     <div
-      data-file="YourAvatar"
-      className={[css['player-avatar'], css['your-avatar']].join(' ')}
+      data-file="avatars/YourAvatar"
+      className={[
+        css['player-avatar'],
+        css['your-avatar']
+        // CAN_BE_ATTACKED ? css['player-avatar--can_be_attacked'] : ''
+      ].join(' ')}
     >
       <div className={[css['player-health']].join(' ')}>{YOUR_HEALTH}</div>
       <div className={css['avatar-image-wrapper']}>
@@ -25,6 +30,13 @@ export default function YourAvatar(props) {
     </div>
   );
 }
+
+YourAvatar.propTypes = {
+  G: PropTypes.object,
+  moves: PropTypes.object,
+  yourID: PropTypes.string,
+  src: PropTypes.string
+};
 
 YourAvatar.defaultProps = {
   backgroundColor: 'white'

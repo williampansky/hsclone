@@ -1,76 +1,76 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import styled from 'styled-components';
-import CardInteractionLayer from '../../systems/CardInteractionLayer';
-import PlayerEnergy from '../player-energy/PlayerEnergy';
-import Timer from 'components/timer/Timer';
-import uid from 'utils/uid';
-import styles from './hands.module.scss';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function YourHand({
-  G,
-  ctx,
-  moves,
-  events,
-  reset,
-  undo,
-  redo,
-  step,
-  log,
-  gameID,
-  playerID,
-  gameMetadata,
-  isActive,
-  isMultiplayer,
-  isConnected,
-  credentials,
-  yourID,
-  theirID
-}) {
+// styles
+import css from 'components/hands/hands.module.scss';
+import interactionStyles from 'components/interactions/cards/card-interactions.module.scss';
+
+// child components
+import PlayerEnergy from 'components/player-energy/PlayerEnergy';
+import CardInteraction from 'components/interactions/cards/CardInteraction';
+
+export default function YourHand({ G, ctx, moves, isActive, yourID }) {
+  const { counts, energy, players, selectedCardIndex } = G;
+  const yourHand = players[yourID] && players[yourID].hand;
+  const handLength = counts[yourID] && counts[yourID].hand;
+  const cardIsSelected = selectedCardIndex[yourID];
+
   return (
     <div
-      className={[styles['hand'], styles['hands--their_hand']].join(' ')}
       data-file="YourHand"
-      data-number-of-cards={G.counts[yourID].hand}
+      data-number-of-cards={handLength}
+      className={[css['hand'], css['hands--your_hand']].join(' ')}
     >
-      {G.players[yourID].hand && G.players[yourID].hand.length
-        ? G.players[yourID].hand.map((card, index) => {
-            return (
-              <React.Fragment key={index}>
-                <CardInteractionLayer
-                  card={card}
-                  index={index}
-                  G={G}
-                  ctx={ctx}
-                  moves={moves}
-                  events={events}
-                  reset={reset}
-                  undo={undo}
-                  redo={redo}
-                  step={step}
-                  log={log}
-                  gameID={gameID}
-                  playerID={playerID}
-                  gameMetadata={gameMetadata}
-                  isActive={isActive}
-                  isMultiplayer={isMultiplayer}
-                  isConnected={isConnected}
-                  credentials={credentials}
-                  yourID={yourID}
-                  theirID={theirID}
-                />
-              </React.Fragment>
-            );
-          })
-        : null}
-
-      {G.warcryObject[yourID] ? (
-        <div className={styles['active-warcry']}>
-          <div>{G.warcryObject[yourID].type}</div>
-          <div>{G.warcryObject[yourID].targetingArrowText}</div>
-        </div>
+      {selectedCardIndex[yourID] === 0 ? (
+        <div
+          data-index={0}
+          className={[
+            interactionStyles['card-in-your-hand'],
+            interactionStyles['card-placeholder']
+          ].join(' ')}
+        />
       ) : null}
 
-      <PlayerEnergy energy={G.energy[yourID]} />
+      {yourHand.map((card, index) => {
+        return (
+          <React.Fragment key={index}>
+            <CardInteraction
+              G={G}
+              ctx={ctx}
+              moves={moves}
+              isActive={isActive}
+              yourID={yourID}
+              card={card}
+              index={index}
+              numberOfCards={handLength}
+            />
+
+            {cardIsSelected && selectedCardIndex[yourID] === index ? (
+              <div
+                data-index={index}
+                className={[
+                  interactionStyles['card-in-your-hand'],
+                  interactionStyles['card-placeholder']
+                ].join(' ')}
+              />
+            ) : null}
+          </React.Fragment>
+        );
+      })}
+      <PlayerEnergy energy={energy[yourID]} />
     </div>
   );
 }
+
+YourHand.propTypes = {
+  G: PropTypes.shape({
+    counts: PropTypes.object,
+    energy: PropTypes.object,
+    players: PropTypes.object,
+    selectedCardIndex: PropTypes.object
+  }),
+  ctx: PropTypes.object,
+  moves: PropTypes.object,
+  isActive: PropTypes.bool,
+  yourID: PropTypes.string
+};

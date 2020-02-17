@@ -15,13 +15,9 @@
   display: flex;
   flex-flow: column nowrap;
   height: calc(100% / 2);
-  justify-content: center;
+  justify-content: flex-start;
   margin: auto auto 0;
   width: 100%;
-
-  // & > div + div {
-  //   margin-left: 20px;
-  // }
 }
 
 .your-board {
@@ -32,7 +28,7 @@
   display: flex;
   flex-flow: column nowrap;
   height: calc(100% / 2);
-  justify-content: center;
+  justify-content: flex-end;
   margin: auto auto 0;
   width: 100%;
 }
