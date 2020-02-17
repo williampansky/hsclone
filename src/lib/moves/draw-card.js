@@ -1,6 +1,5 @@
 import getCardByID from 'lib/utils/get-card-by-id';
 import counts from 'lib/state/counts';
-const { deincrementDeck, incrementHand } = counts;
 
 /**
  * Draw a card from player's deck to their hand.
@@ -8,8 +7,8 @@ const { deincrementDeck, incrementHand } = counts;
  * @param {{}} G
  * @param {string} player
  * @param {number} amountToDraw number of cards to draw
- * @requires counts::deincrementDeck
- * @requires counts::incrementHand
+ * @requires counts.deincrementDeck()
+ * @requires counts.incrementHand()
  */
 const drawCard = (G, player, amountToDraw = 1) => {
   return amountToDraw >= 2
@@ -19,8 +18,8 @@ const drawCard = (G, player, amountToDraw = 1) => {
 
 // prettier-ignore
 export const drawSingleCard = (G, player) => {
-  deincrementDeck(G, player); // ............... set counts[player].deck
-  incrementHand(G, player); // ................. set counts[player].hand
+  counts.deincrementDeck(G, player); // ............. set counts[player].deck
+  counts.incrementHand(G, player); // ............... set counts[player].hand
 
   if (G.players[player].deck.length === 0) return; // eject if deck is empty
   

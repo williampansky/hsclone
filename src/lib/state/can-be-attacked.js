@@ -3,8 +3,8 @@ const canBeAttacked = {
     '0': false,
     '1': false
   },
-  enable: (G, player, amount) => enablePlayerCanBeAttacked(G, player, amount),
-  disable: (G, player, amount) => disablePlayerCanBeAttacked(G, player, amount)
+  enable: (G, player) => enablePlayerCanBeAttacked(G, player),
+  disable: (G, player) => disablePlayerCanBeAttacked(G, player)
 };
 
 /**

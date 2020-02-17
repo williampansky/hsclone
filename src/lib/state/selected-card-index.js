@@ -3,8 +3,12 @@ const selectedCardIndex = {
     '0': null,
     '1': null
   },
-  set: (G, player, index) => selectPlayableCardIndex(G, player, index),
-  reset: (G, player) => deselectPlayableCardIndex(G, player)
+  set: (G, player, index) => {
+    return selectPlayableCardIndex(G, player, index);
+  },
+  reset: (G, player) => {
+    return deselectPlayableCardIndex(G, player);
+  }
 };
 
 /**

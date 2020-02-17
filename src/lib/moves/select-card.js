@@ -1,5 +1,5 @@
-import selectPlayableCardIndex from 'lib/state/selected-card-index';
-import selectPlayableCardObject from 'lib/state/selected-card-object';
+import selectedCardIndex from 'lib/state/selected-card-index';
+import selectedCardObject from 'lib/state/selected-card-object';
 
 /**
  * Sets the `selectedCardIndex` and `selectedCardObject`
@@ -9,12 +9,13 @@ import selectPlayableCardObject from 'lib/state/selected-card-object';
  * @param {{}} ctx
  * @param {{}} cardObject
  * @param {number} index
- * @requires selectPlayableCardIndex()
- * @requires selectPlayableCardObject()
+ * @requires selectedCardObject
+ * @requires selectedCardObject
  */
 const selectCard = (G, ctx, cardObject = null, index = null) => {
-  selectPlayableCardIndex(G, ctx, index);
-  selectPlayableCardObject(G, ctx, cardObject);
+  const { currentPlayer } = ctx;
+  selectedCardIndex.set(G, currentPlayer, index);
+  selectedCardObject.set(G, currentPlayer, cardObject);
 };
 
 export default selectCard;

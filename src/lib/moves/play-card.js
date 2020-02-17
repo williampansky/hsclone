@@ -1,10 +1,16 @@
-// import selectCard from 'lib/moves/select-card';
+// state
 import boards from 'lib/state/boards';
-import copyCardToPlayedCards from 'lib/utils/copy-card-to-played-cards';
 import counts from 'lib/state/counts';
+import energy from 'lib/state/energy';
+
+// moves
+import selectCard from 'lib/moves/select-card';
+
+// utils
+import copyCardToPlayedCards from 'lib/utils/copy-card-to-played-cards';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import createMinionObject from 'lib/creators/create-minion-object';
-import energy from 'lib/state/energy';
+import playSpellByCardId from 'lib/spells/play-spell-card-by-id';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
 import TYPE from 'enums/type.enums';
 
@@ -31,7 +37,7 @@ const playCard = (G, ctx, index, cardId = null) => {
       return playMinionCard(G, ctx, index, cardId, CARD_OBJECT, BOARD_SLOT_OBJ);
 
     case TYPE[3]:
-      return playSpellCard(G, ctx, index, cardId);
+      return playSpellCard(G, ctx, index, cardId, CARD_OBJECT.cost);
 
     default:
       return;
@@ -65,13 +71,23 @@ export const playMinionCard = (G, ctx, index, cardId, cardObj, boardObj) => {
   G.selectedCardObject[currentPlayer] = null;
 };
 
-export const playSpellCard = (G, ctx, cardId, cardCost, target) => {
+export const playSpellCard = (G, ctx, index, cardId, cardCost, target) => {
+  switch (index) {
+    case 0:
+      return playGlobalSpellCard(G, ctx, cardId, cardCost);
+
+    default:
+      break;
+  }
+};
+
+export const playGlobalSpellCard = (G, ctx, cardId, cardCost) => {
   const { currentPlayer } = ctx;
 
   energy.subtract(G, currentPlayer, cardCost);
-  // playSpellByCardId(G, ctx, cardId, target);
-  // selectPlayableCard(G, ctx, null, null);
-  // moveCardToPlayedCards(G, currentPlayer, cardId);
+  playSpellByCardId(G, ctx, cardId);
+  selectCard(G, ctx);
+  copyCardToPlayedCards(G, currentPlayer, cardId);
   removeCardFromHand(G, currentPlayer, cardId);
   counts.deincrementHand(G, currentPlayer);
 };

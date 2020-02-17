@@ -1,11 +1,10 @@
 import counts from 'lib/state/counts';
-const { deincrementDeck } = counts;
 
 /**
  * Discard a single card from your deck into your `playedCards` array.
  * @param {{}} G
  * @param {string} player
- * @requires counts::deincrementDeck()
+ * @requires counts.deincrementDeck()
  */
 const discardCard = (G, player, amountToDiscard = 1) => {
   return amountToDiscard >= 2
@@ -15,7 +14,7 @@ const discardCard = (G, player, amountToDiscard = 1) => {
 
 // prettier-ignore
 export const discardSingleCard = (G, player) => {
-  deincrementDeck(G, player); // ............. set counts[player].deck
+  counts.deincrementDeck(G, player); // ........... set counts[player].deck
   G.playedCards[player].push( // .................. pushes to playedCards
     G.players[player].deck.splice(0, 1)[0] // ..... splices from deck
   );

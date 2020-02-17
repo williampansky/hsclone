@@ -1,7 +1,16 @@
+import canBeAttacked from 'lib/state/can-be-attacked';
+import limitNumberWithinRange from 'lib/utils/range-limit';
+
 const boards = {
   __DATA_MODEL: {
     '0': [],
     '1': []
+  },
+  addToMinionHealth: (G, player, index, amount) => {
+    return addToMinionHealth(G, player, index, amount);
+  },
+  determineTargets: (G, player) => {
+    return determineAttackingMinionTargets(G, player);
   },
   disableCanAttack: (G, player, index) => {
     return disableMinionCanAttack(G, player, index);
@@ -15,8 +24,54 @@ const boards = {
   enableCanBeAttacked: (G, player, index) => {
     return enableMinionCanBeAttacked(G, player, index);
   },
+  killMinion: (G, player, index) => {
+    return killMinion(G, player, index);
+  },
+  killMinionIfHealthReachesZero: (G, player, index) => {
+    return killMinionIfHealthReachesZero(G, player, index);
+  },
   placeCardOnBoard: (G, player, boardSlotObject, index) => {
     return placeCardOnBoard(G, player, boardSlotObject, index);
+  },
+  subtractFromMinionHealth: (G, player, index, amount) => {
+    return subtractFromMinionHealth(G, player, index, amount);
+  }
+};
+
+/**
+ * Add health to a minion.
+ * @param {{}} G
+ * @param {string} player
+ * @param {number} index
+ * @param {number} amount
+ */
+export const addToMinionHealth = (G, player, index, amount) => {
+  const totalHealth = G.boards[player][index].totalHealth;
+  const calculation = G.boards[player][index].currentHealth + amount;
+  const newHealth = limitNumberWithinRange(calculation, totalHealth);
+
+  G.boards[player][index].currentHealth = newHealth;
+};
+
+/**
+ * When a player selects a minion that can attack, we need to determine
+ * its possible targets—both opposing minions and the opposing player.
+ * @param {{}} G
+ * @param {string} player
+ */
+export const determineAttackingMinionTargets = (G, player) => {
+  const { boards } = G;
+  const BOARD = boards[player];
+  const MINION_HAS_GUARD = BOARD.find(b => b.hasGuard === true) ? true : false;
+
+  if (MINION_HAS_GUARD) canBeAttacked.disable(G, player);
+  else if (!MINION_HAS_GUARD) canBeAttacked.enable(G, player);
+
+  // first, enable all minions to be attackable
+  for (let i = 0; i < G.boards[player].length; i++) {
+    enableMinionCanBeAttacked(G, player, i);
+    if (!G.boards[player].hasGuard === false)
+      disableMinionCanBeAttacked(G, player, i);
   }
 };
 
@@ -65,6 +120,27 @@ export const enableMinionCanBeAttacked = (G, player, index) => {
 };
 
 /**
+ * Kill a single active minion.
+ * @param {{}} G
+ * @param {string} player
+ * @param {number} index
+ */
+export const killMinion = (G, player, index) => {
+  G.boards[player].splice(index, 1);
+};
+
+/**
+ * Kill a single active minion if its currentHealth reaches zero.
+ * @param {{}} G
+ * @param {string} player
+ * @param {number} index
+ */
+export const killMinionIfHealthReachesZero = (G, player, index) => {
+  if (G.boards[player][index].currentHealth <= 0)
+    G.boards[player].splice(index, 1);
+};
+
+/**
  * Places a slot object in the specific `index` of a player's board.
  *
  * @param {{}} G
@@ -81,6 +157,21 @@ export const placeCardOnBoard = (G, player, boardSlotObject, index = 0) => {
 
   // swap new board in
   G.boards[player] = newBoard;
+};
+
+/**
+ * Subtract health from a minion.
+ * @param {{}} G
+ * @param {string} player
+ * @param {number} index
+ * @param {number} amount
+ */
+export const subtractFromMinionHealth = (G, player, index, amount) => {
+  const totalHealth = G.boards[player][index].totalHealth;
+  const calculation = G.boards[player][index].currentHealth - amount;
+  const newHealth = limitNumberWithinRange(calculation, totalHealth);
+
+  G.boards[player][index].currentHealth = newHealth;
 };
 
 export default boards;
