@@ -1,4 +1,5 @@
 import boards from 'lib/state/boards';
+import buffs from 'lib/state/buffs';
 import canBeAttacked from 'lib/state/can-be-attacked';
 import counts from 'lib/state/counts';
 import energy from 'lib/state/energy';
@@ -8,16 +9,7 @@ import selectedCardIndex from 'lib/state/selected-card-index';
 import selectedCardObject from 'lib/state/selected-card-object';
 
 export default {
-  buffs: {
-    '0': {
-      attack: 0,
-      spellDamage: 0
-    },
-    '1': {
-      attack: 0,
-      spellDamage: 0
-    }
-  },
+  buffs: buffs.__DATA_MODEL,
   canBeAttacked: canBeAttacked.__DATA_MODEL,
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,

@@ -1,5 +1,5 @@
 const canBeAttacked = {
-  _DATA_MODEL: {
+  __DATA_MODEL: {
     '0': false,
     '1': false
   },
