@@ -5,10 +5,13 @@ import counts from 'lib/state/counts';
 import energy from 'lib/state/energy';
 import health from 'lib/state/health';
 import hoveringCardIndex from 'lib/state/hovering-card-index';
-import players from 'lib/state/players';
 import playedCards from 'lib/state/played-cards';
+import players from 'lib/state/players';
 import selectedCardIndex from 'lib/state/selected-card-index';
 import selectedCardObject from 'lib/state/selected-card-object';
+import selectedMinionIndex from 'lib/state/selected-minion-index';
+import selectedMinionObject from 'lib/state/selected-minion-object';
+import warcryObject from 'lib/state/warcry-object';
 
 export default {
   buffs: buffs.__DATA_MODEL,
@@ -26,18 +29,9 @@ export default {
   hoveringCardIndex: hoveringCardIndex.__DATA_MODEL,
   selectedCardIndex: selectedCardIndex.__DATA_MODEL,
   selectedCardObject: selectedCardObject.__DATA_MODEL,
-  selectedMinionIndex: {
-    '0': null,
-    '1': null
-  },
-  selectedMinionObject: {
-    '0': null,
-    '1': null
-  },
-  warcryObject: {
-    '0': null,
-    '1': null
-  },
+  selectedMinionIndex: selectedMinionIndex.__DATA_MODEL,
+  selectedMinionObject: selectedMinionObject.__DATA_MODEL,
+  warcryObject: warcryObject.__DATA_MODEL,
   turnOrder: ['0', '1'].sort(() => {
     return Math.random() - 0.5;
   })
