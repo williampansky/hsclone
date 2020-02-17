@@ -1,3 +1,4 @@
+import boards from 'lib/state/boards';
 import canBeAttacked from 'lib/state/can-be-attacked';
 import counts from 'lib/state/counts';
 import energy from 'lib/state/energy';
@@ -34,23 +35,7 @@ export default {
       hand: []
     }
   },
-  boards: {
-    '0': [
-      /**
-       * {
-       *  canAttack: false,
-       *  canBeAttacked: false,
-       *  currentAttack: minionObject.attack,
-       *  currentHealth: minionObject.health,
-       *  hasGuard: false,
-       *  minionData: minionObject,
-       *  totalAttack: minionObject.attack,
-       *  totalHealth: minionObject.health
-       * }
-       */
-    ],
-    '1': []
-  },
+  boards: boards.__DATA_MODEL,
   energy: energy.__DATA_MODEL,
   playedCards: {
     '0': [],
