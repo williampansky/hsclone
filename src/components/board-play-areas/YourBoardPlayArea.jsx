@@ -20,18 +20,18 @@ export default function YourBoardPlayerArea({
   yourID
 }) {
   const { boards, selectedCardObject } = G;
-  const { playMinionCard } = moves;
+  const { playCard } = moves;
   const SELECTED_CARD_OBJECT = selectedCardObject[yourID];
   const CARD_IS_SELECTED = SELECTED_CARD_OBJECT !== null;
   const CARD_ID = SELECTED_CARD_OBJECT && SELECTED_CARD_OBJECT.id;
 
   function handleClick(index, id = CARD_ID) {
     if (boards[yourID][index]) return;
-    return playMinionCard(index, id);
+    return playCard(index, id);
   }
 
   function dropMinion(index, id = CARD_ID) {
-    return playMinionCard(index, id);
+    return playCard(index, id);
   }
 
   return (

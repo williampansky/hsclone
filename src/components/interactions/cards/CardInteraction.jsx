@@ -22,7 +22,7 @@ export default function CardInteraction({
 }) {
   const { selectedCardIndex } = G;
   const { currentPlayer } = ctx;
-  const { hoverOverCardInHand, selectPlayableCard } = moves;
+  const { hoverCard, selectCard } = moves;
 
   const [isHovering, hoverProps] = useHover({
     mouseEnterDelayMS: 0,
@@ -33,11 +33,9 @@ export default function CardInteraction({
 
   const dispatchHover = React.useCallback(
     (hovering, nullIdx) => {
-      hovering && nullIdx
-        ? hoverOverCardInHand(index)
-        : hoverOverCardInHand(null);
+      hovering && nullIdx ? hoverCard(index) : hoverCard(null);
     },
-    [hoverOverCardInHand, index]
+    [hoverCard, index]
   );
 
   React.useEffect(() => {
@@ -86,15 +84,15 @@ export default function CardInteraction({
     `
   };
 
-  function selectCard(index) {
-    hoverOverCardInHand(null);
-    return selectPlayableCard(card, index);
+  function selectPlayableCard(index) {
+    hoverCard(null);
+    return selectCard(card, index);
   }
 
-  function deselectCard() {
-    selectPlayableCard(null, null);
+  function deselectPlayableCard() {
+    selectCard(null, null);
     setTimeout(() => {
-      hoverOverCardInHand(null);
+      hoverCard(null);
     }, 0);
   }
 
@@ -111,8 +109,8 @@ export default function CardInteraction({
     >
       {IS_YOUR_TURN ? (
         <React.Fragment>
-          {IS_SELECTED && <CardIsSelected onClick={() => deselectCard()} />}
-          {IS_PLAYABLE && !IS_SELECTED && <CardIsPlayable onClick={() => selectCard(index)} />}
+          {IS_SELECTED && <CardIsSelected onClick={() => deselectPlayableCard()} />}
+          {IS_PLAYABLE && !IS_SELECTED && <CardIsPlayable onClick={() => selectPlayableCard(index)} />}
         </React.Fragment>
       ) : null}
       <Card

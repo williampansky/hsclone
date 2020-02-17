@@ -12,14 +12,14 @@ export default function EndTurnButton({
 }) {
   function handleClick(event) {
     event.preventDefault();
-    moves.hoverOverCardInHand(null);
-    moves.selectPlayableCard(null, null);
-    moves.selectAttackingMinion(null, null);
+    moves.hoverCard(null);
+    moves.selectCard(null, null);
+    // moves.selectAttackingMinion(null, null);
     return events.endTurn();
   }
 
   return (
-    <div className={css['end-turn']} data-file="end-turn/EndTurn">
+    <div data-file="EndTurn" className={css['end-turn']}>
       <div
         style={{
           color: 'white',

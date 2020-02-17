@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import css from 'components/hands/hands.module.scss';
 import interactionStyles from 'components/interactions/cards/card-interactions.module.scss';
 import PlayerEnergy from 'components/player-energy/PlayerEnergy';
-import CardBack from '../../components-old/cards/CardBack';
+import CardBack from 'components/cards/CardBack';
 
 export default function TheirHand({ G, theirID }) {
   const {

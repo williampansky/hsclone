@@ -15,15 +15,14 @@ import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
 
 export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
   const { playerClass, selectedCardObject } = G;
-  const { playSpellCard } = moves;
+  const { playCard } = moves;
 
   const selectedCard = selectedCardObject[yourID];
   const cardId = selectedCard && selectedCard.id;
-  const cardCost = selectedCard && selectedCard.cost;
   const spellType = selectedCard && selectedCard.spellType;
 
-  function castGlobalSpell(id = cardId, cost = cardCost) {
-    return playSpellCard(id, cost);
+  function castGlobalSpell(index = 0, id = cardId) {
+    return playCard(index, id);
   }
 
   return (

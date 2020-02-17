@@ -3,7 +3,13 @@ import useHover from 'react-use-hover';
 import css from './minion.module.scss';
 import Card from 'components/cards/Card';
 
-export default function Minion({ data, p, slot }) {
+export default function Minion({
+  currentAttack,
+  currentHealth,
+  data,
+  p,
+  slot
+}) {
   const {
     artist,
     attack,
@@ -44,8 +50,8 @@ export default function Minion({ data, p, slot }) {
       <div className={css['image-wrapper']}>
         <img alt={name} role="presentation" src={imageSrc} />
       </div>
-      <div className={css['attack-wrapper']}>{attack}</div>
-      <div className={css['health-wrapper']}>{health}</div>
+      <div className={css['attack-wrapper']}>{currentAttack}</div>
+      <div className={css['health-wrapper']}>{currentHealth}</div>
 
       {/* {isHovering ? (
         <article>

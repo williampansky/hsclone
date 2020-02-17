@@ -6,7 +6,7 @@ import css from './avatar.module.scss';
 
 export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
   const { health, canBeAttacked, selectedMinionIndex, warcryObject } = G;
-  const { attackPlayerWithMinion } = moves;
+  const { attackPlayer } = moves;
 
   const THEIR_HEALTH = health[theirID];
   const CAN_BE_ATTACKED = canBeAttacked[theirID];
@@ -14,7 +14,7 @@ export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
   // const ATTACKING_WITH_WARCRY = warcryObject[yourID];
 
   function handleClick() {
-    if (ATTACKING_MINION_INDEX) return attackPlayerWithMinion();
+    if (ATTACKING_MINION_INDEX) return attackPlayer();
   }
 
   return (

@@ -59,7 +59,14 @@ export default function BoardSlot({
           isAttacking={selectedMinionIndex[yourID] === index}
         />
       )}
-      {minionData && <Minion data={minionData} slot={index} />}
+      {minionData && (
+        <Minion
+          currentAttack={currentAttack}
+          currentHealth={currentHealth}
+          data={minionData}
+          slot={index}
+        />
+      )}
     </div>
   );
 }

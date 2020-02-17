@@ -19,11 +19,7 @@ export default function MinionInteraction({
 }) {
   const { selectedMinionIndex } = G;
   const { currentPlayer } = ctx;
-  const {
-    attackMinionWithMinion,
-    deselectAttackingMinion,
-    selectAttackingMinion
-  } = moves;
+  const { attackMinion, selectMinion } = moves;
 
   const HAS_GUARD = hasGuard;
   const IS_ATTACKING = board === 'YourBoard' && isAttacking;
@@ -34,11 +30,16 @@ export default function MinionInteraction({
     selectedMinionIndex[currentPlayer] !== null;
 
   function handleClick() {
-    if (IS_ATTACKING && board === 'YourBoard') deselectAttackingMinion();
-    else if (board === 'YourBoard') selectAttackingMinion(data, index);
-    // if (!CAN_ATTACK) return;
+    if (board === 'YourBoard') {
+      if (!CAN_ATTACK) return;
+      if (IS_ATTACKING) return selectMinion();
+      else return selectMinion(data, index);
+    }
 
-    // if (CAN_BE_ATTACKED) return attackMinionWithMinion(index);
+    if (board === 'TheirBoard') {
+      if (!CAN_BE_ATTACKED) return;
+      if (CAN_BE_ATTACKED) return attackMinion(index);
+    }
   }
 
   return (
