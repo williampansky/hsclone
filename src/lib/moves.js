@@ -2,14 +2,12 @@ import attackMinion from 'lib/moves/attack-minion';
 import attackPlayer from 'lib/moves/attack-player';
 import discardCard from 'lib/moves/discard-card';
 import drawCard from 'lib/moves/draw-card';
+import forfeitGame from 'lib/moves/forfeit-game';
 import hoverCard from 'lib/moves/hover-card';
 import playCard from 'lib/moves/play-card';
 import selectCard from 'lib/moves/select-card';
 import selectMinion from 'lib/moves/select-minion';
 
-/**
- * Note that moves marked `client: false` are executed on the server.
- */
 export default {
   attackMinion: {
     client: false,
@@ -33,6 +31,12 @@ export default {
     client: false,
     move: (G, player, amountToDraw) => {
       return drawCard(G, player, amountToDraw);
+    }
+  },
+  forfeitGame: {
+    client: false,
+    move: (G, playerID) => {
+      return forfeitGame(G, playerID);
     }
   },
   hoverCard: {

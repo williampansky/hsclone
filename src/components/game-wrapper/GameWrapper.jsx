@@ -8,10 +8,12 @@ import TheirHand from 'components/hands/TheirHand';
 // import YourBoard from 'components/boards/YourBoard';
 import YourHand from 'components/hands/YourHand';
 import GameOver from 'components/game-over/GameOver';
+import GameMenu from 'components/game-menu/GameMenu';
 
 import WrapperCSS from './game-wrapper.module.scss';
 
 export default function GameWrapper(props) {
+  const [{ showMenu }, setShowMenu] = React.useState({ showMenu: false });
   const {
     G,
     ctx,
@@ -36,9 +38,25 @@ export default function GameWrapper(props) {
   const yourID = playerID === '0' ? '0' : '1';
   const theirID = playerID === '0' ? '1' : '0';
 
+  function toggleMenu() {
+    return !showMenu
+      ? setShowMenu({ showMenu: true })
+      : setShowMenu({ showMenu: false });
+  }
+
   return props ? (
     <React.Fragment>
       {gameover && <GameOver winner={winner} />}
+
+      {showMenu && (
+        <GameMenu
+          G={G}
+          moves={moves}
+          playerID={playerID}
+          showMenu={showMenu}
+          toggleMenuFn={() => toggleMenu()}
+        />
+      )}
 
       <div
         data-file="GameWrapper"
@@ -47,7 +65,7 @@ export default function GameWrapper(props) {
           gameover ? WrapperCSS['game-over'] : ''
         ].join(' ')}
       >
-        <TheirHand G={G} theirID={theirID} />
+        <TheirHand G={G} theirID={theirID} toggleMenuFn={() => toggleMenu()} />
         <Board
           G={G}
           ctx={ctx}

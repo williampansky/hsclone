@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 // styles
 import css from 'components/hands/hands.module.scss';
 import interactionStyles from 'components/interactions/cards/card-interactions.module.scss';
-import PlayerEnergy from 'components/player-energy/PlayerEnergy';
-import CardBack from 'components/cards/CardBack';
 
-export default function TheirHand({ G, theirID }) {
+// child components
+import CardBack from 'components/cards/CardBack';
+import GameMenuTrigger from 'components/game-menu/GameMenuTrigger';
+import PlayerEnergy from 'components/player-energy/PlayerEnergy';
+
+export default function TheirHand({ G, theirID, toggleMenuFn }) {
   const {
     counts,
     energy,
@@ -71,6 +74,8 @@ export default function TheirHand({ G, theirID }) {
       data-file="TheirHand"
       data-number-of-cards={handLength}
     >
+      <GameMenuTrigger toggleMenuFn={toggleMenuFn} />
+
       {Array.from(Array(handLength)).map((_, index) => {
         return (
           <div
