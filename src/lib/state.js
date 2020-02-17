@@ -1,3 +1,8 @@
+import counts from 'lib/state/counts';
+import canBeAttacked from 'lib/state/can-be-attacked';
+import energy from 'lib/state/energy';
+import health from 'lib/state/health';
+
 export default {
   buffs: {
     '0': {
@@ -9,22 +14,9 @@ export default {
       spellDamage: 0
     }
   },
-  counts: {
-    '0': {
-      deck: 30,
-      hand: 0,
-      timer: 75000
-    },
-    '1': {
-      deck: 30,
-      hand: 0,
-      timer: 75000
-    }
-  },
-  health: {
-    '0': 30,
-    '1': 30
-  },
+  canBeAttacked: canBeAttacked.__DATA_MODEL,
+  counts: counts._DATA_MODEL,
+  health: health._DATA_MODEL,
   playerClass: {
     '0': 'SOCERER',
     '1': 'GUARDIAN'
@@ -38,10 +30,6 @@ export default {
       deck: [],
       hand: []
     }
-  },
-  canBeAttacked: {
-    '0': false,
-    '1': false
   },
   boards: {
     '0': [
@@ -60,16 +48,7 @@ export default {
     ],
     '1': []
   },
-  energy: {
-    '0': {
-      current: 0,
-      total: 0
-    },
-    '1': {
-      current: 0,
-      total: 0
-    }
-  },
+  energy: energy.__DATA_MODEL,
   playedCards: {
     '0': [],
     '1': []

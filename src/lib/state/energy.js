@@ -1,6 +1,24 @@
 import { add, subtract } from 'mathjs';
 import limitNumberWithinRange from 'lib/utils/range-limit';
 
+const energy = {
+  __DATA_MODEL: {
+    '0': {
+      current: 0,
+      total: 0
+    },
+    '1': {
+      current: 0,
+      total: 0
+    }
+  },
+  incrementTotal: (G, player) => incrementTotalEnergy(G, player),
+  matchTotal: (G, player) => matchCurrentWithTotalEnergy(G, player),
+  setCurrent: (G, player, amount) => setCurrentEnergy(G, player, amount),
+  setTotal: (G, player, amount) => setTotalEnergy(G, player, amount),
+  subtract: (G, player, amount) => subtractFromCurrentEnergy(G, player, amount)
+};
+
 /**
  * Increments the `total` energy of the `ctx.currentPlayer` by one;
  * unless the total is already at ten.
@@ -9,7 +27,7 @@ import limitNumberWithinRange from 'lib/utils/range-limit';
  * @param {string} player Player to increment.
  * @requires mathjs::add()
  */
-const incrementTotalEnergy = (G, player) => {
+export const incrementTotalEnergy = (G, player) => {
   const { energy } = G;
   const { total } = energy[player];
 
@@ -26,7 +44,7 @@ const incrementTotalEnergy = (G, player) => {
  * @param {{}} G Game state object.
  * @param {string} player Player to match.
  */
-const matchCurrentWithTotalEnergy = (G, player) => {
+export const matchCurrentWithTotalEnergy = (G, player) => {
   const { energy } = G;
   const { total } = energy[player];
   G.energy[player].current = total;
@@ -40,7 +58,7 @@ const matchCurrentWithTotalEnergy = (G, player) => {
  * @param {string} player Player to set.
  * @param {number} amount Value to set.
  */
-const setCurrentEnergy = (G, player, amount) => {
+export const setCurrentEnergy = (G, player, amount) => {
   G.energy[player].current = amount;
 };
 
@@ -52,7 +70,7 @@ const setCurrentEnergy = (G, player, amount) => {
  * @param {string} player Player to set.
  * @param {number} amount Value to set.
  */
-const setTotalEnergy = (G, player, amount) => {
+export const setTotalEnergy = (G, player, amount) => {
   G.energy[player].total = amount;
 };
 
@@ -64,22 +82,13 @@ const setTotalEnergy = (G, player, amount) => {
  * @param {number} amount
  * @requires mathjs::subtract()
  */
-const subtractFromCurrentEnergy = (G, player, amount) => {
+export const subtractFromCurrentEnergy = (G, player, amount) => {
   const { current, total } = G.energy[player];
 
   const calculation = subtract(Number(current), Number(amount));
   const newValue = limitNumberWithinRange(calculation, total, 0);
 
   G.energy[player].current = newValue;
-};
-
-// prettier-ignore
-const energy = {
-  incrementTotalEnergy: (G, player) => incrementTotalEnergy(G, player),
-  matchCurrentWithTotalEnergy: (G, player) => matchCurrentWithTotalEnergy(G, player),
-  setCurrentEnergy: (G, player, amount) => setCurrentEnergy(G, player, amount),
-  setTotalEnergy: (G, player, amount) => setTotalEnergy(G, player, amount),
-  subtractFromCurrentEnergy: (G, player, amount) => subtractFromCurrentEnergy(G, player, amount)
 };
 
 export default energy;

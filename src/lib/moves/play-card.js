@@ -5,10 +5,8 @@ import createMinionObject from 'lib/creators/create-minion-object';
 import energy from 'lib/state/energy';
 import placeCardOnBoard from 'lib/boards/place-card-on-board';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
-import selectCard from 'lib/moves/select-card';
+// import selectCard from 'lib/moves/select-card';
 import TYPE from 'enums/type.enums';
-const { deincrementHandCount } = counts;
-const { subtractFromCurrentEnergy } = energy;
 
 /**
  * Plays the provided card.
@@ -45,7 +43,7 @@ export const playMinionCard = (G, ctx, index, cardId, cardObj, boardObj) => {
   const { cost } = cardObj;
 
   // subtract the card's cost from player's current energy count
-  subtractFromCurrentEnergy(G, currentPlayer, cost);
+  energy.subtract(G, currentPlayer, cost);
 
   // place card in selected index on your board
   placeCardOnBoard(G, currentPlayer, boardObj, index);
@@ -57,7 +55,7 @@ export const playMinionCard = (G, ctx, index, cardId, cardObj, boardObj) => {
   removeCardFromHand(G, currentPlayer, cardId);
 
   // then deincrement your hand count
-  deincrementHandCount(G, currentPlayer);
+  counts.deincrementHand(G, currentPlayer);
 
   // check and init and mechanics
   // initCardMechanics(G, ctx, cardObj, index);
@@ -70,12 +68,12 @@ export const playMinionCard = (G, ctx, index, cardId, cardObj, boardObj) => {
 export const playSpellCard = (G, ctx, cardId, cardCost, target) => {
   const { currentPlayer } = ctx;
 
-  subtractFromCurrentEnergy(G, currentPlayer, cardCost);
+  energy.subtract(G, currentPlayer, cardCost);
   // playSpellByCardId(G, ctx, cardId, target);
   // selectPlayableCard(G, ctx, null, null);
   // moveCardToPlayedCards(G, currentPlayer, cardId);
   removeCardFromHand(G, currentPlayer, cardId);
-  deincrementHandCount(G, currentPlayer);
+  deincrementHand(G, currentPlayer);
 };
 
 export default playCard;

@@ -1,25 +1,37 @@
-const deincrementDeckCount = (G, player) => {
+const counts = {
+  __DATA_MODEL: {
+    '0': {
+      deck: 30,
+      hand: 0,
+      timer: 75000
+    },
+    '1': {
+      deck: 30,
+      hand: 0,
+      timer: 75000
+    }
+  },
+  deincrementDeck: (G, player) => deincrementDeckCount(G, player),
+  deincrementHand: (G, player) => deincrementHandCount(G, player),
+  incrementDeck: (G, player) => incrementDeckCount(G, player),
+  incrementHand: (G, player) => incrementHandCount(G, player)
+};
+
+export const deincrementDeckCount = (G, player) => {
   return G.counts[player].deck--;
 };
 
-const deincrementHandCount = (G, player) => {
+export const deincrementHandCount = (G, player) => {
   return G.counts[player].hand--;
 };
 
-const incrementDeckCount = (G, player) => {
+export const incrementDeckCount = (G, player) => {
   return G.counts[player].deck++;
 };
 
-const incrementHandCount = (G, player) => {
+export const incrementHandCount = (G, player) => {
   if (G.players[player].deck.length === 0) return;
   return G.counts[player].hand++;
-};
-
-const counts = {
-  deincrementDeckCount: (G, player) => deincrementDeckCount(G, player),
-  deincrementHandCount: (G, player) => deincrementHandCount(G, player),
-  incrementDeckCount: (G, player) => incrementDeckCount(G, player),
-  incrementHandCount: (G, player) => incrementHandCount(G, player)
 };
 
 export default counts;
