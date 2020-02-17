@@ -23,12 +23,16 @@ export default function EndTurnButton({
       <div
         style={{
           color: 'white',
+          fontSize: '0.875em',
           padding: '4px 0',
           textAlign: 'center'
         }}
       >
-        {G.counts[theirID].deck}
+        <span>Hand: {G.counts[theirID].hand}</span>
+        <span>{` | `}</span>
+        <span>Deck: {G.counts[theirID].deck}</span>
       </div>
+
       <button
         className={css['end-turn-button']}
         disabled={!isActive}
@@ -36,14 +40,18 @@ export default function EndTurnButton({
       >
         {isActive ? 'End Turn' : 'Their Turn'}
       </button>
+
       <div
         style={{
           color: 'white',
+          fontSize: '0.875em',
           padding: '4px 0',
           textAlign: 'center'
         }}
       >
-        {G.counts[yourID].deck}
+        <span>Hand: {G.counts[yourID].hand}</span>
+        <span>{` | `}</span>
+        <span>Deck: {G.counts[yourID].deck}</span>
       </div>
     </div>
   );
