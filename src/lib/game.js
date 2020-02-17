@@ -1,10 +1,10 @@
-import { stripSecrets } from './strip-secrets';
-import state from './state';
-import moves from './moves';
-import turns from './turns';
-import initDecksPhase from './phases/initDecks';
-import initHandsPhase from './phases/initHands';
-import playPhase from './phases/play';
+import initDecksPhase from 'lib/phases/initDecks';
+import initHandsPhase from 'lib/phases/initHands';
+import moves from 'lib/moves';
+import playPhase from 'lib/phases/play';
+import state from 'lib/state';
+import stripSecrets from 'lib/strip-secrets';
+import turns from 'lib/turns';
 
 /**
  * @see https://boardgame.io/documentation/#/
@@ -44,5 +44,12 @@ export const HSclone = {
     initDecks: initDecksPhase,
     initHands: initHandsPhase,
     play: playPhase
-  }
+  },
+
+  // End game if either player's health reaches zero
+  // prettier-ignore
+  endIf: G => (
+    G.health[G.turnOrder[0]] === 0 ||
+    G.health[G.turnOrder[1]] === 0
+  )
 };
