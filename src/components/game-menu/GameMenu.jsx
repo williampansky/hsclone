@@ -2,15 +2,9 @@ import React from 'react';
 import GameMenuTrigger from 'components/game-menu/GameMenuTrigger';
 import 'components/game-menu/game-menu.scss';
 
-export default function GameMenu({
-  G,
-  moves,
-  playerID,
-  showMenu,
-  toggleMenuFn
-}) {
+export default function GameMenu({ G, moves, yourID, showMenu, toggleMenuFn }) {
   function handleForfeitGame(event) {
-    return moves.forfeitGame(playerID);
+    moves.forfeitGame(yourID);
   }
 
   return (

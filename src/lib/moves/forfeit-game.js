@@ -1,10 +1,13 @@
+import health from 'lib/state/health';
+
 /**
- * Forfeits the game by setting playerID's health to zero.
+ * Forfeits the game by setting player's health to zero.
  * @param {{}} G
- * @param {string} playerID
+ * @param {string} player
+ * @requires health.subtract()
  */
-const forfeitGame = (G, playerID) => {
-  G.health[playerID] = 0;
+const forfeitGame = (G, player) => {
+  health.subtract(G, player, 1000);
 };
 
 export default forfeitGame;

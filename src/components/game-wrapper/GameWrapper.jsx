@@ -52,7 +52,7 @@ export default function GameWrapper(props) {
         <GameMenu
           G={G}
           moves={moves}
-          playerID={playerID}
+          yourID={yourID}
           showMenu={showMenu}
           toggleMenuFn={() => toggleMenu()}
         />

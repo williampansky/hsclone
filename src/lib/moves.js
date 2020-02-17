@@ -35,8 +35,8 @@ export default {
   },
   forfeitGame: {
     client: false,
-    move: (G, playerID) => {
-      return forfeitGame(G, playerID);
+    move: (G, player) => {
+      return forfeitGame(G, player);
     }
   },
   hoverCard: {
