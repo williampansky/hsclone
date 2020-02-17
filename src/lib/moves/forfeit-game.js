@@ -7,6 +7,7 @@ import health from 'lib/state/health';
  * @requires health.subtract()
  */
 const forfeitGame = (G, player) => {
+  console.log(G, player);
   health.subtract(G, player, 1000);
 };
 

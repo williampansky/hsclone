@@ -44,6 +44,25 @@ export default function GameWrapper(props) {
       : setShowMenu({ showMenu: false });
   }
 
+  const escFunction = React.useCallback(
+    event => {
+      if (event.keyCode === 27) {
+        !showMenu
+          ? setShowMenu({ showMenu: true })
+          : setShowMenu({ showMenu: false });
+      }
+    },
+    [showMenu]
+  );
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', escFunction, false);
+
+    return () => {
+      document.removeEventListener('keydown', escFunction, false);
+    };
+  }, [escFunction]);
+
   return props ? (
     <React.Fragment>
       {gameover && <GameOver winner={winner} />}
@@ -52,6 +71,7 @@ export default function GameWrapper(props) {
         <GameMenu
           G={G}
           moves={moves}
+          isActive={isActive}
           yourID={yourID}
           showMenu={showMenu}
           toggleMenuFn={() => toggleMenu()}
