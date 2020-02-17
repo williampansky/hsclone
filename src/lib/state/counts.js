@@ -18,20 +18,20 @@ const counts = {
 };
 
 export const deincrementDeckCount = (G, player) => {
-  return G.counts[player].deck--;
+  G.counts[player].deck--;
 };
 
 export const deincrementHandCount = (G, player) => {
-  return G.counts[player].hand--;
+  G.counts[player].hand--;
 };
 
 export const incrementDeckCount = (G, player) => {
-  return G.counts[player].deck++;
+  G.counts[player].deck++;
 };
 
 export const incrementHandCount = (G, player) => {
   if (G.players[player].deck.length === 0) return;
-  return G.counts[player].hand++;
+  G.counts[player].hand++;
 };
 
 export default counts;

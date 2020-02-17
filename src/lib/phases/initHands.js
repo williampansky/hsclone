@@ -1,5 +1,6 @@
-import { getCardByID } from '../utils/get-card-by-id';
-import { incrementHandCount, drawCards } from '../moves/card-moves';
+import counts from 'lib/state/counts';
+import drawCard from 'lib/moves/draw-card';
+import getCardByID from 'lib/utils/get-card-by-id';
 
 export default {
   onBegin: G => {
@@ -7,15 +8,15 @@ export default {
     const SECOND_PLAYER = G.turnOrder[1];
 
     // Draw three cards from the first player's deck into their hand.
-    drawCards(G, FIRST_PLAYER, 3);
+    drawCard(G, FIRST_PLAYER, 3);
 
     // Draw four cards from the first player's deck into their hand;
     // they get four cards since they are not the starting player.
-    drawCards(G, SECOND_PLAYER, 4);
+    drawCard(G, SECOND_PLAYER, 4);
 
     // Give the second player the Energy card (The Orb), which when
     // played gives that player an additional energy point for the turn.
-    incrementHandCount(G, SECOND_PLAYER);
+    counts.incrementHand(G, SECOND_PLAYER);
     G.players[SECOND_PLAYER].hand.push(getCardByID('GAME_001'));
   },
 

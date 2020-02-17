@@ -18,8 +18,8 @@ export default {
     }
   },
   canBeAttacked: canBeAttacked.__DATA_MODEL,
-  counts: counts._DATA_MODEL,
-  health: health._DATA_MODEL,
+  counts: counts.__DATA_MODEL,
+  health: health.__DATA_MODEL,
   playerClass: {
     '0': 'SOCERER',
     '1': 'GUARDIAN'
