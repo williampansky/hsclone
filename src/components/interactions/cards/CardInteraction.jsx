@@ -21,7 +21,7 @@ export default function CardInteraction({
   numberOfCards
 }) {
   const { selectedCardIndex } = G;
-  const { currentPlayer } = ctx;
+  const { currentPlayer, phase } = ctx;
   const { hoverCard, selectCard } = moves;
 
   const [isHovering, hoverProps] = useHover({
@@ -39,8 +39,8 @@ export default function CardInteraction({
   );
 
   React.useEffect(() => {
-    isActive && dispatchHover(isHovering, nullCardIndex);
-  }, [isActive, isHovering, nullCardIndex, dispatchHover]);
+    phase === 'play' && isActive && dispatchHover(isHovering, nullCardIndex);
+  }, [isActive, phase, isHovering, nullCardIndex, dispatchHover]);
 
   const {
     artist,

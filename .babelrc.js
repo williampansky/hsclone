@@ -15,7 +15,13 @@ module.exports = {
       {
         root: ['./src'],
         alias: {
-          lib: './src/lib'
+          components: './src/components',
+          config: './src/config',
+          data: './src/data',
+          enums: './src/enums',
+          lib: './src/lib',
+          styles: './src/styles',
+          utils: './src/utils'
         }
       }
     ]

@@ -7,6 +7,9 @@ const GAME_CONFIG = {
     enableSet: true,
     enableSpellType: true,
     enableText: false
+  },
+  matchConfig: {
+    enableInitHandsStage: true
   }
 };
 
