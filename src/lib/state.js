@@ -5,6 +5,7 @@ import counts from 'lib/state/counts';
 import energy from 'lib/state/energy';
 import health from 'lib/state/health';
 import hoveringCardIndex from 'lib/state/hovering-card-index';
+import players from 'lib/state/players';
 import selectedCardIndex from 'lib/state/selected-card-index';
 import selectedCardObject from 'lib/state/selected-card-object';
 
@@ -17,16 +18,7 @@ export default {
     '0': 'SOCERER',
     '1': 'GUARDIAN'
   },
-  players: {
-    '0': {
-      deck: [],
-      hand: []
-    },
-    '1': {
-      deck: [],
-      hand: []
-    }
-  },
+  players: players.__DATA_MODEL,
   boards: boards.__DATA_MODEL,
   energy: energy.__DATA_MODEL,
   playedCards: {
