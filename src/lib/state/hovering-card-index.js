@@ -1,11 +1,20 @@
+const hoveringCardIndex = {
+  _DATA_MODEL: {
+    '0': null,
+    '1': null
+  },
+  set: (G, ctx, index) => setHoveringCardIndex(G, ctx, index)
+};
+
 /**
  * Sets the value of `hoveringCardIndex` if `index` is provided;
  * otherwise sets the value to null.
+ *
  * @param {{}} G
  * @param {{}} ctx
  * @param {number} index
  */
-const setHoveringCardIndex = (G, ctx, index = null) => {
+export const setHoveringCardIndex = (G, ctx, index = null) => {
   const { selectedCardIndex } = G;
   const { currentPlayer } = ctx;
 
@@ -15,4 +24,4 @@ const setHoveringCardIndex = (G, ctx, index = null) => {
   G.hoveringCardIndex[currentPlayer] = index;
 };
 
-export default setHoveringCardIndex;
+export default hoveringCardIndex;

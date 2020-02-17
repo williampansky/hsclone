@@ -73,7 +73,7 @@ export const playSpellCard = (G, ctx, cardId, cardCost, target) => {
   // selectPlayableCard(G, ctx, null, null);
   // moveCardToPlayedCards(G, currentPlayer, cardId);
   removeCardFromHand(G, currentPlayer, cardId);
-  deincrementHand(G, currentPlayer);
+  counts.deincrementHand(G, currentPlayer);
 };
 
 export default playCard;

@@ -1,4 +1,5 @@
-import setHoveringCardIndex from 'lib/state/hovering-card-index';
+import hoveringCardIndex from 'lib/state/hovering-card-index';
+const { set } = hoveringCardIndex;
 
 /**
  * Sets the `hoveringCardIndex` value.
@@ -7,7 +8,7 @@ import setHoveringCardIndex from 'lib/state/hovering-card-index';
  * @param {number} index
  */
 const hoverCard = (G, ctx, index) => {
-  return setHoveringCardIndex(G, ctx, index);
+  return set(G, ctx, index);
 };
 
 export default hoverCard;

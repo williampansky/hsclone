@@ -1,3 +1,12 @@
+const selectedCardObject = {
+  _DATA_MODEL: {
+    '0': null,
+    '1': null
+  },
+  set: (G, player, object) => selectPlayableCardObject(G, player, object),
+  reset: (G, player) => deselectPlayableCardObject(G, player)
+};
+
 /**
  * Sets the value of `selectPlayableCardObject` if `card` is provided;
  * otherwise sets the value to null.
@@ -5,8 +14,12 @@
  * @param {{}} ctx
  * @param {{}} object
  */
-const selectPlayableCardObject = (G, player, object) => {
+export const selectPlayableCardObject = (G, player, object) => {
   G.selectedCardObject[player] = object;
 };
 
-export default selectPlayableCardObject;
+export const deselectPlayableCardObject = (G, player, object) => {
+  G.selectedCardObject[player] = null;
+};
+
+export default selectedCardObject;

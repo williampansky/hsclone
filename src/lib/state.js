@@ -1,7 +1,10 @@
-import counts from 'lib/state/counts';
 import canBeAttacked from 'lib/state/can-be-attacked';
+import counts from 'lib/state/counts';
 import energy from 'lib/state/energy';
 import health from 'lib/state/health';
+import hoveringCardIndex from 'lib/state/hovering-card-index';
+import selectedCardIndex from 'lib/state/selected-card-index';
+import selectedCardObject from 'lib/state/selected-card-object';
 
 export default {
   buffs: {
@@ -53,18 +56,9 @@ export default {
     '0': [],
     '1': []
   },
-  hoveringCardIndex: {
-    '0': null,
-    '1': null
-  },
-  selectedCardIndex: {
-    '0': null,
-    '1': null
-  },
-  selectedCardObject: {
-    '0': null,
-    '1': null
-  },
+  hoveringCardIndex: hoveringCardIndex.__DATA_MODEL,
+  selectedCardIndex: selectedCardIndex.__DATA_MODEL,
+  selectedCardObject: selectedCardObject.__DATA_MODEL,
   selectedMinionIndex: {
     '0': null,
     '1': null
