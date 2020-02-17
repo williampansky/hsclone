@@ -73,7 +73,7 @@ export default function CardInteraction({
   } = card;
 
   const IS_YOUR_TURN = isActive;
-  const IS_PLAYABLE = cost <= G.energy[yourID].current;
+  const IS_PLAYABLE = isActive && cost <= G.energy[yourID].current;
   const IS_SELECTED = G.selectedCardIndex[yourID] === index;
 
   const yourHandStyle = {
