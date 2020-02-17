@@ -1,7 +1,8 @@
 /**
  * Places a `minion` in the specific `index` of a player's board.
+ *
  * @param {{}} G
- * @param {string|number} player
+ * @param {string} player
  * @param {{}} boardSlotObject
  * @param {number} index defaults to zero
  */
