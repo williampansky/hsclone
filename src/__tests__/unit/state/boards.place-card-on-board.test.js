@@ -1,5 +1,6 @@
-import placeCardOnBoard from 'lib/boards/place-card-on-board';
+import boards from 'lib/state/boards';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
+const { placeCardOnBoard } = boards;
 
 test(`should place a minion on the board`, () => {
   const CARD_ID = 'CORE_024';

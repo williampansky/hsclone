@@ -1,11 +1,11 @@
+// import selectCard from 'lib/moves/select-card';
+import boards from 'lib/state/boards';
 import copyCardToPlayedCards from 'lib/utils/copy-card-to-played-cards';
 import counts from 'lib/state/counts';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import createMinionObject from 'lib/creators/create-minion-object';
 import energy from 'lib/state/energy';
-import placeCardOnBoard from 'lib/boards/place-card-on-board';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
-// import selectCard from 'lib/moves/select-card';
 import TYPE from 'enums/type.enums';
 
 /**
@@ -46,7 +46,7 @@ export const playMinionCard = (G, ctx, index, cardId, cardObj, boardObj) => {
   energy.subtract(G, currentPlayer, cost);
 
   // place card in selected index on your board
-  placeCardOnBoard(G, currentPlayer, boardObj, index);
+  boards.placeCardOnBoard(G, currentPlayer, boardObj, index);
 
   // move to your playerCards array
   copyCardToPlayedCards(G, currentPlayer, cardId);
