@@ -5,6 +5,7 @@ import { SocketIO } from 'boardgame.io/multiplayer';
 import { HSclone } from './lib/game';
 import GameWrapper from './components/game-wrapper/GameWrapper';
 import './index.css';
+import './styles/game.scss';
 import * as serviceWorker from './serviceWorker';
 
 const REDUX_DEVTOOLS =
@@ -51,11 +52,7 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <HScloneClient
-          playerID={this.state.playerID}
-          // deck={this.state.deck}
-          // allCards={this.state.allCards}
-        />
+        <HScloneClient playerID={this.state.playerID} />
       </React.Fragment>
     );
   }

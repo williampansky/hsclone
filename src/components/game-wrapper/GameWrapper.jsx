@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import defaultGameState from '../../lib/state';
-// import defaultGameMoves from '../../lib/moves';
-import Board from 'components/boards/Board';
-// import TheirBoard from 'components/boards/TheirBoard';
-import TheirHand from 'components/hands/TheirHand';
-// import YourBoard from 'components/boards/YourBoard';
-import YourHand from 'components/hands/YourHand';
-import GameOver from 'components/game-over/GameOver';
-import GameMenu from 'components/game-menu/GameMenu';
 
-import WrapperCSS from './game-wrapper.module.scss';
+// child components
+import Board from 'components/boards/Board';
+import GameMenu from 'components/game-menu/GameMenu';
+import GameOver from 'components/game-over/GameOver';
+import TheirHand from 'components/hands/TheirHand';
+import YourHand from 'components/hands/YourHand';
 
 export default function GameWrapper(props) {
-  const [{ showMenu }, setShowMenu] = React.useState({ showMenu: false });
+  // global state manipulations
+  const [{ showMenu }, setShowMenu] = useState({ showMenu: false });
+
+  // props destructuring
   const {
     G,
     ctx,
@@ -35,6 +34,7 @@ export default function GameWrapper(props) {
   const { winner } = G;
   const { gameover } = ctx;
 
+  // id declarations
   const yourID = playerID === '0' ? '0' : '1';
   const theirID = playerID === '0' ? '1' : '0';
 
@@ -44,7 +44,7 @@ export default function GameWrapper(props) {
       : setShowMenu({ showMenu: false });
   }
 
-  const escFunction = React.useCallback(
+  const escFunction = useCallback(
     event => {
       if (event.keyCode === 27) {
         !showMenu
@@ -55,7 +55,7 @@ export default function GameWrapper(props) {
     [showMenu]
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.addEventListener('keydown', escFunction, false);
 
     return () => {
@@ -80,10 +80,7 @@ export default function GameWrapper(props) {
 
       <div
         data-file="GameWrapper"
-        className={[
-          WrapperCSS['game-wrapper'],
-          gameover ? WrapperCSS['game-over'] : ''
-        ].join(' ')}
+        className={['game-wrapper', gameover ? 'game-over' : ''].join(' ')}
       >
         <TheirHand G={G} theirID={theirID} toggleMenuFn={() => toggleMenu()} />
         <Board

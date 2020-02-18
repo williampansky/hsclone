@@ -1,40 +1,18 @@
-:root {
-  /* layout vars */
-  --board-theirHand-background-color: gray;
-  --board-theirHand-height: 45px;
-  --board-theirHand-zIndex: 200;
-  --board-yourHand-background-color: gray;
-  --board-yourHand-height: 45px;
-  --board-yourHand-zIndex: 200;
-  --board-players-hands-height: calc(
-    var(--board-theirHand-height) + var(--board-yourHand-height)
-  );
-
-  /* card vars */
-  --card-background-color: #ededed;
-  --card-border-radius: 3px;
-  --card-height: 250px;
-
-  /* minion vars */
-  --minion-height: 150px;
-  --minion-border-radius: 25%;
-  --minion-stat-offset: -4.165px;
+.debug-panel {
+  z-index: 9000 !important;
+  display: none !important;
 }
 
-html,
-body {
-  background: black;
+.debug-panel .pane {
+  background: #111 !important;
+  width: 380px !important;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.debug-panel .label,
+.debug-panel .move {
+  color: #eee !important;
 }
 
-.bgio-client {
-  overflow: hidden;
+.debug-panel .json {
+  color: #ccc !important;
 }

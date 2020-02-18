@@ -2,3 +2,6 @@ build
 dist
 now.json
 .vscode
+
+# styles
+mixins

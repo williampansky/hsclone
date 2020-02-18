@@ -67,6 +67,7 @@
   right: 4%;
   top: calc(-1 * var(--card-height));
   transform: translateY(0) rotate(0) scale(1) !important;
+  // transform: translate(-200%, -75%) rotate(0) scale(1) !important;
   z-index: 100;
 
   &:before {

@@ -109,6 +109,10 @@ TheirHand.propTypes = {
 // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
 function calcOffset(index, total = 10, offsetRange = 80) {
   // index = index + 1;
+  if (total <= 4) {
+    if (index === 0) return Math.abs((index + 1) * offsetRange);
+  }
+
   return Math.abs((index - (total - 1) / 2) / (total - 2) * offsetRange);
 }
 

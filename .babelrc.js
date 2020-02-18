@@ -20,6 +20,7 @@ module.exports = {
           data: './src/data',
           enums: './src/enums',
           lib: './src/lib',
+          moves: './src/lib/moves',
           styles: './src/styles',
           utils: './src/utils'
         }
