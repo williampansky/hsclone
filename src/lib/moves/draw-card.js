@@ -1,5 +1,5 @@
-import getCardByID from 'utils/get-card-by-id';
-import counts from 'state/counts';
+import getCardByID from 'lib/utils/get-card-by-id';
+import counts from 'lib/state/counts';
 
 /**
  * Draw a card from player's deck to their hand.

@@ -1,4 +1,4 @@
-import health from 'state/health';
+import health from 'lib/state/health';
 
 /**
  * Forfeits the game by setting player's health to zero.

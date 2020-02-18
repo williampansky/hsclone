@@ -1,10 +1,10 @@
-import initDecksPhase from 'phases/initDecks';
-import initHandsPhase from 'phases/initHands';
-import moves from 'moves';
-import playPhase from 'phases/play';
-import state from 'state';
-import stripSecrets from 'strip-secrets';
-import turns from 'turns';
+import initDecksPhase from 'lib/phases/initDecks';
+import initHandsPhase from 'lib/phases/initHands';
+import moves from 'lib/moves';
+import playPhase from 'lib/phases/play';
+import state from 'lib/state';
+import stripSecrets from 'lib/strip-secrets';
+import turns from 'lib/turns';
 
 /**
  * @see https://boardgame.io/documentation/#/

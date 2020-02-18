@@ -1,8 +1,8 @@
 import { TurnOrder } from 'boardgame.io/core';
-import boards from 'state/boards';
-import energy from 'state/energy';
-import drawCardAtStartOfTurn from 'utils/draw-turn-start-card';
-import winner from 'state/winner';
+import boards from 'lib/state/boards';
+import energy from 'lib/state/energy';
+import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
+import winner from 'lib/state/winner';
 
 const onBegin = (G, ctx) => {
   const PLAY_ORDER = G.turnOrder;

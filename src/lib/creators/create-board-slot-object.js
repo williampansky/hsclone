@@ -1,4 +1,4 @@
-import createMinionObject from 'creators/create-minion-object';
+import createMinionObject from 'lib/creators/create-minion-object';
 
 const createBoardSlotObject = cardId => {
   const minionObject = createMinionObject(cardId);

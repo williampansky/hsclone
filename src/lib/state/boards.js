@@ -1,5 +1,5 @@
-import canBeAttacked from 'state/can-be-attacked';
-import limitNumberWithinRange from 'utils/range-limit';
+import canBeAttacked from 'lib/state/can-be-attacked';
+import limitNumberWithinRange from 'lib/utils/range-limit';
 
 const boards = {
   __DATA_MODEL: {

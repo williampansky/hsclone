@@ -1,4 +1,4 @@
-import getCardByID from 'utils/get-card-by-id';
+import getCardByID from 'lib/utils/get-card-by-id';
 
 const createWarcryObject = cardId => {
   const CARD_OBJECT = getCardByID(cardId);

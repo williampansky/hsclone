@@ -1,6 +1,6 @@
-import discardCard from 'moves/discard-card';
-import drawCard from 'moves/draw-card';
-import health from 'state/health';
+import discardCard from 'lib/moves/discard-card';
+import drawCard from 'lib/moves/draw-card';
+import health from 'lib/state/health';
 
 /**
  * Draws or discards a single card at the start of the current player's turn.

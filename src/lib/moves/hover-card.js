@@ -1,4 +1,4 @@
-import hoveringCardIndex from 'state/hovering-card-index';
+import hoveringCardIndex from 'lib/state/hovering-card-index';
 const { set } = hoveringCardIndex;
 
 /**

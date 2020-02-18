@@ -1,17 +1,17 @@
 // state
-import boards from 'state/boards';
-import counts from 'state/counts';
-import energy from 'state/energy';
+import boards from 'lib/state/boards';
+import counts from 'lib/state/counts';
+import energy from 'lib/state/energy';
 
 // moves
-import selectCard from 'moves/select-card';
+import selectCard from 'lib/moves/select-card';
 
 // utils
-import copyCardToPlayedCards from 'utils/copy-card-to-played-cards';
-import createBoardSlotObject from 'creators/create-board-slot-object';
-import createMinionObject from 'creators/create-minion-object';
-import playSpellByCardId from 'spells/play-spell-card-by-id';
-import removeCardFromHand from 'utils/remove-card-from-hand';
+import copyCardToPlayedCards from 'lib/utils/copy-card-to-played-cards';
+import createBoardSlotObject from 'lib/creators/create-board-slot-object';
+import createMinionObject from 'lib/creators/create-minion-object';
+import playSpellByCardId from 'lib/spells/play-spell-card-by-id';
+import removeCardFromHand from 'lib/utils/remove-card-from-hand';
 import TYPE from 'enums/type.enums';
 
 /**

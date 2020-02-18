@@ -1,4 +1,4 @@
-import counts from 'state/counts';
+import counts from 'lib/state/counts';
 
 /**
  * Discard a single card from your deck into your `playedCards` array.

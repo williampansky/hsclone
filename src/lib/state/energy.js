@@ -1,5 +1,5 @@
 import { add, subtract } from 'mathjs';
-import limitNumberWithinRange from 'utils/range-limit';
+import limitNumberWithinRange from 'lib/utils/range-limit';
 
 const energy = {
   __DATA_MODEL: {

@@ -1,4 +1,4 @@
-const CORE_DECK_NEUTRAL = require('../data/debug/CORE_DECK_NEUTRAL.json');
+import CORE_DECK_NEUTRAL from 'data/debug/CORE_DECK_NEUTRAL.json';
 
 export default {
   // Start the match by initiating each player's deck from the

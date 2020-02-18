@@ -1,5 +1,5 @@
-const CORE = require('../data/debug/cards.json');
-const ENTOURAGE = require('../data/debug/entourage.json');
+import CORE from 'data/debug/cards.json';
+import ENTOURAGE from 'data/debug/entourage.json';
 
 const CARD_DATABASE = {
   ...CORE,

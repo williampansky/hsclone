@@ -12,7 +12,7 @@
             "port": 8000,
             "restart": true,
             "runtimeExecutable": "nodemon",
-            "program": "${workspaceFolder}/src/server.js",
+            "program": "${workspaceFolder}/server.js",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "runtimeArgs": [

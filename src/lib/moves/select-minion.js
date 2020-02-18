@@ -1,7 +1,7 @@
-import canBeAttacked from 'state/can-be-attacked';
-import selectedMinionIndex from 'state/selected-minion-index';
-import selectedMinionObject from 'state/selected-minion-object';
-import boards from 'state/boards';
+import canBeAttacked from 'lib/state/can-be-attacked';
+import selectedMinionIndex from 'lib/state/selected-minion-index';
+import selectedMinionObject from 'lib/state/selected-minion-object';
+import boards from 'lib/state/boards';
 
 /**
  * Sets `selectedMinionIndex` & `selectedMinionObject` of the current player.

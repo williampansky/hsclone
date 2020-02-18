@@ -1,7 +1,7 @@
-import counts from 'state/counts';
-import drawCard from 'moves/draw-card';
+import counts from 'lib/state/counts';
+import drawCard from 'lib/moves/draw-card';
 import GAME_CONFIG from 'config/game.config';
-import getCardByID from 'utils/get-card-by-id';
+import getCardByID from 'lib/utils/get-card-by-id';
 
 export default {
   onBegin: (G, ctx) => {

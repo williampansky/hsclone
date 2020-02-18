@@ -29,8 +29,8 @@
     "node-sass": "^4.13.1"
   },
   "scripts": {
-    "server": "node src/server.js",
-    "start": "react-scripts start",
+    "server": "node server.js",
+    "start": "babel-node server.js",
     "start1": "PORT=3001 react-scripts start",
     "start2": "PORT=3002 react-scripts start ",
     "build": "react-scripts build",

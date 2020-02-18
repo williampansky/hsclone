@@ -1,6 +1,6 @@
-import boards from 'state/boards';
-import health from 'state/health';
-import selectMinion from 'moves/select-minion';
+import boards from 'lib/state/boards';
+import health from 'lib/state/health';
+import selectMinion from 'lib/moves/select-minion';
 
 /**
  * Attacks a player with the current player's selectedMinionObject.

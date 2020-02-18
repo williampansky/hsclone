@@ -1,4 +1,4 @@
-import limitNumberWithinRange from 'utils/range-limit';
+import limitNumberWithinRange from 'lib/utils/range-limit';
 
 const health = {
   __DATA_MODEL: {

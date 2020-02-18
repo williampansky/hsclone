@@ -1,5 +1,5 @@
-import selectedCardIndex from 'state/selected-card-index';
-import selectedCardObject from 'state/selected-card-object';
+import selectedCardIndex from 'lib/state/selected-card-index';
+import selectedCardObject from 'lib/state/selected-card-object';
 
 /**
  * Sets the `selectedCardIndex` and `selectedCardObject`

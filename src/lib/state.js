@@ -1,17 +1,17 @@
-import boards from 'state/boards';
-import buffs from 'state/buffs';
-import canBeAttacked from 'state/can-be-attacked';
-import counts from 'state/counts';
-import energy from 'state/energy';
-import health from 'state/health';
-import hoveringCardIndex from 'state/hovering-card-index';
-import playedCards from 'state/played-cards';
-import players from 'state/players';
-import selectedCardIndex from 'state/selected-card-index';
-import selectedCardObject from 'state/selected-card-object';
-import selectedMinionIndex from 'state/selected-minion-index';
-import selectedMinionObject from 'state/selected-minion-object';
-import warcryObject from 'state/warcry-object';
+import boards from 'lib/state/boards';
+import buffs from 'lib/state/buffs';
+import canBeAttacked from 'lib/state/can-be-attacked';
+import counts from 'lib/state/counts';
+import energy from 'lib/state/energy';
+import health from 'lib/state/health';
+import hoveringCardIndex from 'lib/state/hovering-card-index';
+import playedCards from 'lib/state/played-cards';
+import players from 'lib/state/players';
+import selectedCardIndex from 'lib/state/selected-card-index';
+import selectedCardObject from 'lib/state/selected-card-object';
+import selectedMinionIndex from 'lib/state/selected-minion-index';
+import selectedMinionObject from 'lib/state/selected-minion-object';
+import warcryObject from 'lib/state/warcry-object';
 
 export default {
   buffs: buffs.__DATA_MODEL,

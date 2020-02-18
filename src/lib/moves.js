@@ -1,12 +1,12 @@
-import attackMinion from 'moves/attack-minion';
-import attackPlayer from 'moves/attack-player';
-import discardCard from 'moves/discard-card';
-import drawCard from 'moves/draw-card';
-import forfeitGame from 'moves/forfeit-game';
-import hoverCard from 'moves/hover-card';
-import playCard from 'moves/play-card';
-import selectCard from 'moves/select-card';
-import selectMinion from 'moves/select-minion';
+import attackMinion from 'lib/moves/attack-minion';
+import attackPlayer from 'lib/moves/attack-player';
+import discardCard from 'lib/moves/discard-card';
+import drawCard from 'lib/moves/draw-card';
+import forfeitGame from 'lib/moves/forfeit-game';
+import hoverCard from 'lib/moves/hover-card';
+import playCard from 'lib/moves/play-card';
+import selectCard from 'lib/moves/select-card';
+import selectMinion from 'lib/moves/select-minion';
 
 export default {
   attackMinion: {

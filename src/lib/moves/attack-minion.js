@@ -1,5 +1,5 @@
-import boards from 'state/boards';
-import selectMinion from 'moves/select-minion';
+import boards from 'lib/state/boards';
+import selectMinion from 'lib/moves/select-minion';
 
 /**
  * Attacks a minion (index) with the current player's selectedMinionObject.

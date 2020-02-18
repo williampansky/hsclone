@@ -1,4 +1,4 @@
-import castTheOrb from 'spells/cast-the-orb';
+import castTheOrb from 'lib/spells/cast-the-orb';
 
 const playSpellByCardId = (G, ctx, cardId, target = null) => {
   // prettier-ignore
