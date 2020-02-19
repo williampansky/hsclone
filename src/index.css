@@ -1,6 +1,6 @@
 .debug-panel {
   z-index: 9000 !important;
-  display: none !important;
+  /* display: none !important; */
 }
 
 .debug-panel .pane {

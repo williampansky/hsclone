@@ -38,8 +38,10 @@ const mappedCore = incomingCore.map(item => {
       collectible: collectible === 'checked' ? true : false,
       elite: elite === 'checked' ? true : false,
       imageSrc: parseImageSrc(imageSrc),
-      mechanics: GAME_CONFIG.enableMechanics ? mechanics.split(',') : '',
-      text: GAME_CONFIG.text ? text : ''
+      mechanics: GAME_CONFIG.debugData.enableMechanics
+        ? mechanics.split(',')
+        : '',
+      text: GAME_CONFIG.debugData.text ? text : ''
     }
   };
 });
@@ -80,8 +82,10 @@ const mappedEntourage = incomingEntourage.map(item => {
       collectible: collectible === 'checked' ? true : false,
       elite: elite === 'checked' ? true : false,
       imageSrc: parseImageSrc(imageSrc),
-      mechanics: GAME_CONFIG.enableMechanics ? mechanics.split(',') : '',
-      text: GAME_CONFIG.text ? text : ''
+      mechanics: GAME_CONFIG.debugData.enableMechanics
+        ? mechanics.split(',')
+        : '',
+      text: GAME_CONFIG.debugData.text ? text : ''
     }
   };
 });

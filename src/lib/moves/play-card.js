@@ -10,6 +10,8 @@ import selectCard from 'lib/moves/select-card';
 import copyCardToPlayedCards from 'lib/utils/copy-card-to-played-cards';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import createMinionObject from 'lib/creators/create-minion-object';
+import GAME_CONFIG from 'config/game.config';
+import initCardMechanics from 'lib/mechanics/init-mechanics';
 import playSpellByCardId from 'lib/spells/play-spell-card-by-id';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
 import TYPE from 'enums/type.enums';
@@ -64,7 +66,8 @@ export const playMinionCard = (G, ctx, index, cardId, cardObj, boardObj) => {
   counts.deincrementHand(G, currentPlayer);
 
   // check and init and mechanics
-  // initCardMechanics(G, ctx, cardObj, index);
+  if (GAME_CONFIG.debugData.enableMechanics)
+    initCardMechanics(G, ctx, cardObj, index);
 
   // reset selectedCardObject
   G.selectedCardIndex[currentPlayer] = null;

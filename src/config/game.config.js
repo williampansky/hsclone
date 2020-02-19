@@ -3,10 +3,10 @@ const GAME_CONFIG = {
     enableAttack: true,
     enableCost: true,
     enableHealth: true,
-    enableMechanics: false,
+    enableMechanics: true,
     enableSet: true,
     enableSpellType: true,
-    enableText: false
+    enableText: true
   },
   matchConfig: {
     enableInitHandsStage: true

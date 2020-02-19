@@ -5,41 +5,19 @@ import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
 import winner from 'lib/state/winner';
 
 const onBegin = (G, ctx) => {
-  const PLAY_ORDER = G.turnOrder;
-  const CURRENT_PLAYER = ctx.currentPlayer;
-  const PREVIOUS_PLAYER = PLAY_ORDER.find(player => player !== CURRENT_PLAYER);
+  const { currentPlayer } = ctx;
 
-  // const YOUR_BOARD = G.boards[CURRENT_PLAYER];
-  // const THEIR_BOARD = G.boards[PREVIOUS_PLAYER];
-
-  energy.incrementTotal(G, CURRENT_PLAYER);
-  energy.matchTotal(G, CURRENT_PLAYER);
+  energy.incrementTotal(G, currentPlayer);
+  energy.matchTotal(G, currentPlayer);
   drawCardAtStartOfTurn(G, ctx);
 
-  // for (let i = 0; i < G.boards[PREVIOUS_PLAYER].length; i++) {
-  //   // enable canAttack on your preview board minions
-  //   disableMinionCanAttack(G, PREVIOUS_PLAYER, i);
-  // }
-
-  for (let i = 0; i < G.boards[CURRENT_PLAYER].length; i++) {
+  for (let i = 0; i < G.boards[currentPlayer].length; i++) {
     // disable canBeAttacked on your board minions
-    boards.disableCanBeAttacked(G, CURRENT_PLAYER, i);
+    boards.disableCanBeAttacked(G, currentPlayer, i);
 
     // enable canAttack on your board minions
-    boards.enableCanAttack(G, CURRENT_PLAYER, i);
+    boards.enableCanAttack(G, currentPlayer, i);
   }
-
-  // // enable canBeAttacked & disable canAttack on THEIR board slots
-  // for (let i = 0; i < Object.keys(THEIR_BOARD).length; i++) {
-  //   enableMinionCanBeAttacked(G, PREVIOUS_PLAYER, i);
-  //   disableMinionCanAttack(G, PREVIOUS_PLAYER, i);
-  // }
-
-  // // disable canBeAttacked & enable canAttack on YOUR board slots
-  // for (let i = 0; i < Object.keys(YOUR_BOARD).length; i++) {
-  //   disableMinionCanBeAttacked(G, CURRENT_PLAYER, i);
-  //   enableMinionCanAttack(G, CURRENT_PLAYER, i);
-  // }
 
   // reset both player's interaction hover states
   G.hoveringCardIndex[0] = null;

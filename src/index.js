@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Client } from 'boardgame.io/react';
+import { Lobby } from 'boardgame.io/react';
 import { SocketIO } from 'boardgame.io/multiplayer';
 import { HSclone } from './lib/game';
 import GameWrapper from './components/game-wrapper/GameWrapper';
