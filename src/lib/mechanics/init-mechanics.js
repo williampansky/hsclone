@@ -1,4 +1,4 @@
-import initBoons from '.lib/mechanics/init-boons';
+import initBoons from 'lib/mechanics/init-boons';
 import initBuffs from 'lib/mechanics/init-buffs';
 import initCurses from 'lib/mechanics/init-curses';
 import initGuard from 'lib/mechanics/init-guard';
