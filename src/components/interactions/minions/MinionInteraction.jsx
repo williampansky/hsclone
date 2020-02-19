@@ -1,5 +1,4 @@
 import React from 'react';
-import css from 'components/interactions/minions/minion-interactions.module.scss';
 
 export default function MinionInteraction({
   G,
@@ -19,20 +18,19 @@ export default function MinionInteraction({
 }) {
   const { selectedMinionIndex } = G;
   const { currentPlayer } = ctx;
-  const { attackMinion, selectMinion } = moves;
+  const { attackMinion, deselectMinion, selectMinion } = moves;
 
+  const MINION_IS_SELECTED = selectedMinionIndex[currentPlayer] !== null;
   const HAS_GUARD = hasGuard;
   const IS_ATTACKING = board === 'YourBoard' && isAttacking;
   const CAN_ATTACK = board === 'YourBoard' && canAttack;
   const CAN_BE_ATTACKED =
-    board === 'TheirBoard' &&
-    canBeAttacked &&
-    selectedMinionIndex[currentPlayer] !== null;
+    board === 'TheirBoard' && canBeAttacked && MINION_IS_SELECTED;
 
   function handleClick() {
     if (board === 'YourBoard') {
       if (!CAN_ATTACK) return;
-      if (IS_ATTACKING) return selectMinion();
+      if (IS_ATTACKING) return deselectMinion();
       else return selectMinion(data, index);
     }
 
@@ -47,11 +45,11 @@ export default function MinionInteraction({
       data-file="interactions/minions/MinionInteraction"
       data-render={render}
       className={[
-        css['minion--interaction_layer'],
-        CAN_ATTACK ? css['minion--can_attack'] : '',
-        CAN_BE_ATTACKED ? css['minion--can_be_attacked'] : '',
-        HAS_GUARD ? css['minion--has_guard'] : '',
-        IS_ATTACKING ? css['minion--is_attacking'] : ''
+        'minion-interaction-layer',
+        CAN_ATTACK ? 'minion--can_attack' : '',
+        CAN_BE_ATTACKED ? 'minion--can_be_attacked' : '',
+        HAS_GUARD ? 'minion--has_guard' : '',
+        IS_ATTACKING ? 'minion--is_attacking' : ''
       ].join(' ')}
       onClick={() => handleClick()}
     />

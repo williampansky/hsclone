@@ -1,6 +1,6 @@
 import boards from 'lib/state/boards';
 import buffs from 'lib/state/buffs';
-import canBeAttacked from 'lib/state/can-be-attacked';
+import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import counts from 'lib/state/counts';
 import energy from 'lib/state/energy';
 import health from 'lib/state/health';
@@ -15,7 +15,7 @@ import warcryObject from 'lib/state/warcry-object';
 
 export default {
   buffs: buffs.__DATA_MODEL,
-  canBeAttacked: canBeAttacked.__DATA_MODEL,
+  playerCanBeAttacked: playerCanBeAttacked.__DATA_MODEL,
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
   playerClass: {

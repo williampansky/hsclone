@@ -1,10 +1,9 @@
 import React from 'react';
-import css from './player-energy.module.scss';
 
 export default function PlayerEnergy({ energy }) {
   const { current, total } = energy;
   return (
-    <div className={css['player-energy']} data-file="PlayerEnergy">
+    <div data-file="player-energy/PlayerEnergy" className={'player-energy'}>
       {current}/{total}
     </div>
   );

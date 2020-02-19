@@ -33,3 +33,7 @@
     width: 7.5%;
   }
 }
+
+.spell-slot ~ .board-is-active .drop-area {
+  opacity: 0;
+}

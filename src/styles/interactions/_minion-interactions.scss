@@ -1,30 +1,21 @@
-.minion--interaction_layer {
+.minion-interaction-layer {
   border-top-left-radius: var(--minion-border-radius);
   border-top-right-radius: var(--minion-border-radius);
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
   height: 100%;
-  z-index: 100;
+  width: 100%;
+  @include position-absolute(0, 0, 0, 0, 100);
 
   & + div:before,
   & + div:after {
     border-radius: var(--minion-border-radius);
     content: '';
     height: 100%;
-    left: 0;
-    opacity: 0;
     opacity: 1;
     pointer-events: none;
-    position: absolute;
-    top: 0;
     width: 100%;
     transition: 200ms ease-in-out;
     transition-property: box-shadow, opacity;
-    z-index: -1;
+    @include position-absolute(0, 0, 0, 0, -1);
   }
 
   &[data-render='false'] {
@@ -32,24 +23,7 @@
   }
 }
 
-.minion--has_guard {
-  border-radius: 0;
-
-  & ~ div > div:nth-child(1) {
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-  }
-}
-
-.minion--has_stampede {
-  box-sizing: border-box;
-}
-
-.minion--has_warcry {
-  box-sizing: border-box;
-}
-
-.minion--can_attack {
+.minion-interaction-layer.minion--can_attack {
   cursor: pointer;
 
   & + div:before {
@@ -57,7 +31,24 @@
   }
 }
 
-.minion--is_attacking {
+.minion-interaction-layer.minion--has_guard {
+  border-radius: 0;
+
+  & ~ div > div:nth-child(1) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+.minion-interaction-layer.minion--has_warcry {
+  box-sizing: border-box;
+}
+
+.minion-interaction-layer.minion--has_stampede {
+  box-sizing: border-box;
+}
+
+.minion-interaction-layer.minion--is_attacking {
   & + div:before {
     opacity: 0;
   }
@@ -72,7 +63,7 @@
   }
 }
 
-.minion--is_not_attacking {
+.minion-interaction-layer.minion--is_not_attacking {
   cursor: default;
   pointer-events: none;
 
@@ -82,6 +73,30 @@
 
   & + div:after {
     animation: none;
+  }
+}
+
+.minion-interaction-layer.minion--can_be_attacked {
+  cursor: pointer;
+
+  & + div:before {
+    opacity: 0;
+  }
+
+  & + div:after {
+    animation: none;
+    box-shadow: 0 0 5px #c43800;
+  }
+
+  &.minion--has_guard + div:after {
+    animation: none;
+    box-shadow: 0 0 5px #c43800;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+
+  &:hover + div:after {
+    box-shadow: 0 0 20px #c43800;
   }
 }
 
@@ -109,29 +124,5 @@
   }
   100% {
     box-shadow: 0 0 5px #ecd24f;
-  }
-}
-
-.minion--can_be_attacked {
-  cursor: pointer;
-
-  & + div:before {
-    opacity: 0;
-  }
-
-  & + div:after {
-    animation: none;
-    box-shadow: 0 0 5px #c43800;
-  }
-
-  &.minion--has_guard + div:after {
-    animation: none;
-    box-shadow: 0 0 5px #c43800;
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-  }
-
-  &:hover + div:after {
-    box-shadow: 0 0 20px #c43800;
   }
 }

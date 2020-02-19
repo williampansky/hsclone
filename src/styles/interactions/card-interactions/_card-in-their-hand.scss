@@ -17,6 +17,7 @@
 
   &:before {
     content: '';
+    border-radius: var(--card-border-radius);
     box-shadow: -5px 5px 5px hsla(0, 0%, 0%, 0.15);
     left: 0;
     height: var(--card-height);
@@ -28,12 +29,14 @@
   }
 
   &:after {
+    border-radius: var(--card-border-radius);
     content: none;
   }
 }
 
 .card-they-are-hovering:after {
   animation: isAttackingGlow 2500ms infinite;
+  border-radius: var(--card-border-radius);
   bottom: 0;
   content: '';
   left: 0;
@@ -46,6 +49,7 @@
 
 .card-they-have-selected {
   animation: selectedRotation 10000ms infinite;
+  border-radius: var(--card-border-radius);
   animation-timing-function: ease-in-out;
   top: calc(var(--card-height) / 2);
   z-index: 100;

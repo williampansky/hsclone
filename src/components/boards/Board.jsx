@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// styles
-import css from './board.module.scss';
-
 // child components
 import EndTurnButton from 'components/end-turn/EndTurn';
 import TheirBoard from 'components/boards/TheirBoard';
@@ -30,7 +27,7 @@ export default function Board({
   theirID
 }) {
   return (
-    <div data-file="boards/Board" className={css['board']}>
+    <div data-file="boards/Board" className={'board'}>
       <TheirBoard
         G={G}
         ctx={ctx}

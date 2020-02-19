@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// styles
-import boardCSS from 'components/board-play-areas/board-play-area.module.scss';
-import slotCSS from 'components/board-slots/board-slot.module.scss';
-
 // child components
 // import BoardDropArea from './BoardDropArea';
 import BoardDropArea from 'components/board-drop-areas/BoardDropArea';
@@ -24,6 +20,8 @@ export default function YourBoardPlayerArea({
   const SELECTED_CARD_OBJECT = selectedCardObject[yourID];
   const CARD_IS_SELECTED = SELECTED_CARD_OBJECT !== null;
   const CARD_ID = SELECTED_CARD_OBJECT && SELECTED_CARD_OBJECT.id;
+  const CARD_TYPE = SELECTED_CARD_OBJECT && SELECTED_CARD_OBJECT.type;
+  const CARD_SPELLTYPE = SELECTED_CARD_OBJECT && SELECTED_CARD_OBJECT.spellType;
 
   function handleClick(index, id = CARD_ID) {
     if (boards[yourID][index]) return;
@@ -37,21 +35,26 @@ export default function YourBoardPlayerArea({
   return (
     <React.Fragment>
       <div
-        className={[
-          boardCSS['board-play-area'],
-          boardCSS['your-board-play-area'],
-          CARD_IS_SELECTED ? slotCSS['board-is-active'] : ''
-        ].join(' ')}
         data-file="board-play-areas/YourBoardPlayArea"
+        className={[
+          'board-play-area',
+          'your-board-play-area',
+          CARD_IS_SELECTED && CARD_SPELLTYPE !== 'GLOBAL'
+            ? 'board-is-active'
+            : ''
+        ].join(' ')}
       >
-        <BoardDropArea
-          G={G}
-          ctx={ctx}
-          moves={moves}
-          index={0}
-          onClick={() => dropMinion(0)}
-          boardIsActive={CARD_IS_SELECTED}
-        />
+        {boards[yourID].length <= 6 ? (
+          <BoardDropArea
+            G={G}
+            ctx={ctx}
+            moves={moves}
+            index={0}
+            onClick={() => dropMinion(0)}
+            boardIsActive={CARD_IS_SELECTED && CARD_SPELLTYPE !== 'GLOBAL'}
+            areaIsAlone={CARD_IS_SELECTED && boards[yourID].length === 0}
+          />
+        ) : null}
         {boards[yourID].map((card, index) => {
           return (
             <React.Fragment key={`fragment_${index}`}>
@@ -67,14 +70,18 @@ export default function YourBoardPlayerArea({
                 yourID={yourID}
                 onClick={() => handleClick(index)}
               />
-              <BoardDropArea
-                G={G}
-                ctx={ctx}
-                moves={moves}
-                index={index + 1}
-                boardIsActive={CARD_IS_SELECTED}
-                onClick={() => dropMinion(index + 1)}
-              />
+              {boards[yourID].length <= 6 ? (
+                <BoardDropArea
+                  G={G}
+                  ctx={ctx}
+                  moves={moves}
+                  index={index + 1}
+                  boardIsActive={
+                    CARD_IS_SELECTED && CARD_SPELLTYPE !== 'GLOBAL'
+                  }
+                  onClick={() => dropMinion(index + 1)}
+                />
+              ) : null}
             </React.Fragment>
           );
         })}

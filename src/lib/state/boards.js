@@ -1,4 +1,4 @@
-import canBeAttacked from 'lib/state/can-be-attacked';
+import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import limitNumberWithinRange from 'lib/utils/range-limit';
 
 const boards = {
@@ -61,18 +61,18 @@ export const addToMinionHealth = (G, player, index, amount) => {
  */
 export const determineAttackingMinionTargets = (G, player) => {
   const { boards } = G;
-  const BOARD = boards[player];
-  const MINION_HAS_GUARD = BOARD.find(b => b.hasGuard === true) ? true : false;
+  const MINION_HAS_GUARD = boards[player].find(slot => slot.hasGuard === true)
+    ? true
+    : false;
 
-  if (MINION_HAS_GUARD) canBeAttacked.disable(G, player);
-  else if (!MINION_HAS_GUARD) canBeAttacked.enable(G, player);
+  if (MINION_HAS_GUARD) playerCanBeAttacked.disable(G, player);
+  else if (!MINION_HAS_GUARD) playerCanBeAttacked.enable(G, player);
 
-  // first, enable all minions to be attackable
-  for (let i = 0; i < G.boards[player].length; i++) {
-    enableMinionCanBeAttacked(G, player, i);
-    if (!G.boards[player].hasGuard === false)
-      disableMinionCanBeAttacked(G, player, i);
-  }
+  G.boards[player].forEach((slot, i) => {
+    if (slot.hasGuard === true) enableMinionCanBeAttacked(G, player, i);
+    else if (MINION_HAS_GUARD) disableMinionCanBeAttacked(G, player, i);
+    else enableMinionCanBeAttacked(G, player, i);
+  });
 };
 
 /**

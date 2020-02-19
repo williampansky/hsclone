@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// styles
-import css from 'components/hands/hands.module.scss';
-import interactionStyles from 'components/interactions/cards/card-interactions.module.scss';
-
 // child components
 import PlayerEnergy from 'components/player-energy/PlayerEnergy';
 import CardInteraction from 'components/interactions/cards/CardInteraction';
@@ -17,17 +13,14 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
 
   return (
     <div
-      data-file="YourHand"
+      data-file="hands/YourHand"
       data-number-of-cards={handLength}
-      className={[css['hand'], css['hands--your_hand']].join(' ')}
+      className={['hand', 'hands--your_hand'].join(' ')}
     >
       {selectedCardIndex[yourID] === 0 ? (
         <div
           data-index={0}
-          className={[
-            interactionStyles['card-in-your-hand'],
-            interactionStyles['card-placeholder']
-          ].join(' ')}
+          className={['card-in-your-hand', 'card-placeholder'].join(' ')}
         />
       ) : null}
 
@@ -48,10 +41,7 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
             {cardIsSelected && selectedCardIndex[yourID] === index ? (
               <div
                 data-index={index}
-                className={[
-                  interactionStyles['card-in-your-hand'],
-                  interactionStyles['card-placeholder']
-                ].join(' ')}
+                className={['card-in-your-hand', 'card-placeholder'].join(' ')}
               />
             ) : null}
           </React.Fragment>

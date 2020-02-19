@@ -1,6 +1,5 @@
 import React from 'react';
 import GameMenuTrigger from 'components/game-menu/GameMenuTrigger';
-import 'components/game-menu/game-menu.scss';
 
 export default function GameMenu({
   G,

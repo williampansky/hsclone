@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 import avatars from 'config/avatars.config';
 import SPELLTYPE from 'enums/spellType.enums';
 
-// styles
-import css from './board.module.scss';
-
 // child components
 import SpellSlot from 'components/board-slots/SpellSlot';
 import YourAvatar from 'components/avatars/YourAvatar';
@@ -26,7 +23,7 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
   }
 
   return (
-    <div data-file="boards/YourBoard" className={css['your-board']}>
+    <div data-file="boards/YourBoard" className={'your-board'}>
       {spellType === SPELLTYPE[1] ? (
         <SpellSlot index={0} onClick={() => castGlobalSpell()} />
       ) : null}

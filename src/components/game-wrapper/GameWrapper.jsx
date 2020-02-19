@@ -65,19 +65,6 @@ export default function GameWrapper(props) {
 
   return props ? (
     <React.Fragment>
-      {gameover && <GameOver winner={winner} />}
-
-      {showMenu && (
-        <GameMenu
-          G={G}
-          moves={moves}
-          isActive={isActive}
-          yourID={yourID}
-          showMenu={showMenu}
-          toggleMenuFn={() => toggleMenu()}
-        />
-      )}
-
       <div
         data-file="GameWrapper"
         className={['game-wrapper', gameover ? 'game-over' : ''].join(' ')}
@@ -111,6 +98,19 @@ export default function GameWrapper(props) {
           yourID={yourID}
         />
       </div>
+
+      {gameover && <GameOver winner={winner} />}
+
+      {showMenu && (
+        <GameMenu
+          G={G}
+          moves={moves}
+          isActive={isActive}
+          yourID={yourID}
+          showMenu={showMenu}
+          toggleMenuFn={() => toggleMenu()}
+        />
+      )}
     </React.Fragment>
   ) : null;
 }

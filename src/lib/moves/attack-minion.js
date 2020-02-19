@@ -22,11 +22,6 @@ const attackMinion = (G, ctx, index) => {
   // eject if MINION_BEING_ATTACKED can't be attacked
   if (MINION_BEING_ATTACKED && !MINION_BEING_ATTACKED.canBeAttacked) return;
 
-  // eject if a MINION_BEING_ATTACKED's sibling has gaurd
-  for (let i = 0; i < G.boards[otherPlayer].length; i++) {
-    if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
-  }
-
   // Subtract `ATTACKING_MINION.currentAttack`
   // from MINION_BEING_ATTACKED_INDEX's currentHealth value
   boards.subtractFromMinionHealth(

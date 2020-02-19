@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import css from './end-turn.module.scss';
 
 export default function EndTurnButton({
   G,
@@ -19,7 +18,7 @@ export default function EndTurnButton({
   }
 
   return (
-    <div data-file="EndTurn" className={css['end-turn']}>
+    <div data-file="EndTurn" className={'end-turn'}>
       <div
         style={{
           color: 'white',
@@ -34,7 +33,7 @@ export default function EndTurnButton({
       </div>
 
       <button
-        className={css['end-turn-button']}
+        className={'end-turn-button'}
         disabled={!isActive}
         onClick={event => handleClick(event)}
       >

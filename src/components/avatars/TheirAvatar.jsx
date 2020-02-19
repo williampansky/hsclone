@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// styles
-import css from './avatar.module.scss';
-
 export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
-  const { health, canBeAttacked, selectedMinionIndex, warcryObject } = G;
+  const { health, playerCanBeAttacked, selectedMinionIndex, warcryObject } = G;
   const { attackPlayer } = moves;
 
   const THEIR_HEALTH = health[theirID];
-  const CAN_BE_ATTACKED = canBeAttacked[theirID];
+  const CAN_BE_ATTACKED = playerCanBeAttacked[theirID];
   const ATTACKING_MINION_INDEX = selectedMinionIndex[yourID] !== null;
   // const ATTACKING_WITH_WARCRY = warcryObject[yourID];
 
@@ -21,19 +18,19 @@ export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
     <div
       data-file="avatars/TheirAvatar"
       className={[
-        css['player-avatar'],
-        css['their-avatar'],
+        'player-avatar',
+        'their-avatar',
         CAN_BE_ATTACKED && ATTACKING_MINION_INDEX
-          ? css['player-avatar--can_be_attacked']
+          ? 'player-avatar--can_be_attacked'
           : ''
       ].join(' ')}
       onClick={() => handleClick()}
     >
-      <div className={[css['player-health']].join(' ')}>{THEIR_HEALTH}</div>
-      <div className={css['avatar-image-wrapper']}>
+      <div className={['player-health'].join(' ')}>{THEIR_HEALTH}</div>
+      <div className={'avatar-image-wrapper'}>
         {src && (
           <div
-            className={css['avatar-image']}
+            className={'avatar-image'}
             style={{ backgroundImage: `url(${src})` }}
           />
         )}

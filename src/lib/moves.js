@@ -1,5 +1,6 @@
 import attackMinion from 'lib/moves/attack-minion';
 import attackPlayer from 'lib/moves/attack-player';
+import deselectMinion from 'lib/moves/deselect-minion';
 import discardCard from 'lib/moves/discard-card';
 import drawCard from 'lib/moves/draw-card';
 import forfeitGame from 'lib/moves/forfeit-game';
@@ -19,6 +20,12 @@ export default {
     client: false,
     move: (G, ctx, index) => {
       return attackPlayer(G, ctx, index);
+    }
+  },
+  deselectMinion: {
+    client: false,
+    move: (G, ctx) => {
+      return deselectMinion(G, ctx);
     }
   },
   discardCard: {

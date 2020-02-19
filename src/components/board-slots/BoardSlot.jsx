@@ -1,5 +1,4 @@
 import React from 'react';
-import css from 'components/board-slots/board-slot.module.scss';
 import MinionInteraction from 'components/interactions/minions/MinionInteraction';
 import Minion from 'components/minion/Minion';
 
@@ -34,10 +33,10 @@ export default function BoardSlot({
       data-slot={index}
       data-render={render}
       className={[
-        css['board-slot'],
-        data === null ? css['is-empty'] : '',
-        data !== null ? css['has-minion'] : '',
-        data === null && !canDrop ? css['cannot-drop-minion'] : ''
+        'board-slot',
+        data === null ? 'is-empty' : '',
+        data !== null ? 'has-minion' : '',
+        data === null && !canDrop ? 'cannot-drop-minion' : ''
       ].join(' ')}
       onClick={onClick}
     >

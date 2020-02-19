@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// styles
-import css from 'components/hands/hands.module.scss';
-import interactionStyles from 'components/interactions/cards/card-interactions.module.scss';
-
 // child components
 import CardBack from 'components/cards/CardBack';
 import GameMenuTrigger from 'components/game-menu/GameMenuTrigger';
@@ -52,27 +48,21 @@ export default function TheirHand({ G, theirID, toggleMenuFn }) {
 
     switch (key) {
       case 'selected':
-        return [
-          interactionStyles['card-in-their-hand'],
-          interactionStyles['card-they-have-selected']
-        ].join(' ');
+        return ['card-in-their-hand', 'card-they-have-selected'].join(' ');
 
       case 'hover':
-        return [
-          interactionStyles['card-in-their-hand'],
-          interactionStyles['card-they-are-hovering']
-        ].join(' ');
+        return ['card-in-their-hand', 'card-they-are-hovering'].join(' ');
 
       default:
-        return interactionStyles['card-in-their-hand'];
+        return 'card-in-their-hand';
     }
   }
 
   return (
     <div
-      className={[css['hand'], css['hands--their_hand']].join(' ')}
-      data-file="TheirHand"
+      data-file="hands/TheirHand"
       data-number-of-cards={handLength}
+      className={['hand', 'hands--their_hand'].join(' ')}
     >
       <GameMenuTrigger toggleMenuFn={toggleMenuFn} />
 

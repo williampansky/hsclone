@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useHover from 'react-use-hover';
 
-// styles
-import css from 'components/interactions/cards/card-interactions.module.scss';
-
 // child components
 import Card from 'components/cards/Card';
 import CardIsPlayable from 'components/interactions/cards/layers/CardIsPlayable';
@@ -103,7 +100,7 @@ export default function CardInteraction({
       data-index={index}
       data-is-playable={IS_PLAYABLE}
       data-is-selected={IS_SELECTED}
-      className={css['card-in-your-hand']}
+      className={'card-in-your-hand'}
       style={yourHandStyle}
       {...hoverProps}
     >

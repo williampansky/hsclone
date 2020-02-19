@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// styles
-import css from './avatar.module.scss';
-
 export default function YourAvatar({ G, moves, yourID, src }) {
   const { health, canBeAttacked } = G;
   const YOUR_HEALTH = health[yourID];
@@ -13,16 +10,16 @@ export default function YourAvatar({ G, moves, yourID, src }) {
     <div
       data-file="avatars/YourAvatar"
       className={[
-        css['player-avatar'],
-        css['your-avatar']
+        'player-avatar',
+        'your-avatar'
         // CAN_BE_ATTACKED ? css['player-avatar--can_be_attacked'] : ''
       ].join(' ')}
     >
-      <div className={[css['player-health']].join(' ')}>{YOUR_HEALTH}</div>
-      <div className={css['avatar-image-wrapper']}>
+      <div className={['player-health'].join(' ')}>{YOUR_HEALTH}</div>
+      <div className={'avatar-image-wrapper'}>
         {src && (
           <div
-            className={css['avatar-image']}
+            className={'avatar-image'}
             style={{ backgroundImage: `url(${src})` }}
           />
         )}

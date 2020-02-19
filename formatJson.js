@@ -41,7 +41,7 @@ const mappedCore = incomingCore.map(item => {
       mechanics: GAME_CONFIG.debugData.enableMechanics
         ? mechanics.split(',')
         : '',
-      text: GAME_CONFIG.debugData.text ? text : ''
+      text: GAME_CONFIG.debugData.enableText ? text : ''
     }
   };
 });
@@ -85,7 +85,7 @@ const mappedEntourage = incomingEntourage.map(item => {
       mechanics: GAME_CONFIG.debugData.enableMechanics
         ? mechanics.split(',')
         : '',
-      text: GAME_CONFIG.debugData.text ? text : ''
+      text: GAME_CONFIG.debugData.enableText ? text : ''
     }
   };
 });

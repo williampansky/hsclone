@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import useHover from 'react-use-hover';
-import css from './minion.module.scss';
-import Card from 'components/cards/Card';
 
 export default function Minion({
   currentAttack,
@@ -45,13 +43,13 @@ export default function Minion({
   });
 
   return health >= 0 ? (
-    <div className={[css['minion']].join(' ')}>
-      {/* <div className={css['info-trigger']} {...hoverProps} /> */}
-      <div className={css['image-wrapper']}>
+    <div className={['minion'].join(' ')}>
+      {/* <div className={'info-trigger'} {...hoverProps} /> */}
+      <div className={'image-wrapper'}>
         <img alt={name} role="presentation" src={imageSrc} />
       </div>
-      <div className={css['attack-wrapper']}>{currentAttack}</div>
-      <div className={css['health-wrapper']}>{currentHealth}</div>
+      <div className={'attack-wrapper'}>{currentAttack}</div>
+      <div className={'health-wrapper'}>{currentHealth}</div>
 
       {/* {isHovering ? (
         <article>

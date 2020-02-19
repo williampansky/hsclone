@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 // configs
 import avatars from 'config/avatars.config';
 
-// styles
-import css from './board.module.scss';
-
 // child components
 import TheirAvatar from 'components/avatars/TheirAvatar';
 import TheirBoardPlayerArea from 'components/board-play-areas/TheirBoardPlayArea';
@@ -22,7 +19,7 @@ export default function TheirBoard({
   const { playerClass } = G;
 
   return (
-    <div data-file="boards/TheirBoard" className={css['their-board']}>
+    <div data-file="boards/TheirBoard" className={'their-board'}>
       <TheirAvatar
         G={G}
         moves={moves}

@@ -1,5 +1,4 @@
 import React from 'react';
-import dropCSS from 'components/board-drop-areas/board-drop-area.module.scss';
 
 export default function BoardDropArea({
   G,
@@ -7,18 +6,17 @@ export default function BoardDropArea({
   moves,
   index,
   onClick,
-  boardIsActive
+  boardIsActive,
+  areaIsAlone
 }) {
-  // const BOARD_IS_ACTIVE = cardIsSelected && spellType !== 'GLOBAL';
-  // const AREA_IS_ALONE = BOARD_IS_ACTIVE && G.boards[playerID].length === 0;
-
   return (
     <div
+      data-file="board-drop-areas/BoardDropArea"
       data-index={index}
       className={[
-        dropCSS['drop-area'],
-        boardIsActive ? dropCSS['board-is-active'] : ''
-        // AREA_IS_ALONE ? dropCSS['area-is-alone'] : ''
+        'drop-area',
+        boardIsActive ? 'board-is-active' : '',
+        areaIsAlone ? 'area-is-alone' : ''
       ].join(' ')}
       onClick={onClick}
     ></div>

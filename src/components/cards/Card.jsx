@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import css from './cards.module.scss';
-import { fontSizeBasedOnCharacterLength } from '../../utils/text';
-import createMarkup from '../../utils/createMarkup';
+import { fontSizeBasedOnCharacterLength } from 'utils/text';
+import createMarkup from 'utils/createMarkup';
 
 export default function Card({
   artist,
@@ -85,20 +84,20 @@ export default function Card({
   }
 
   return (
-    <div className={css['card']}>
-      <div className={css['card-cost']}>{cost}</div>
-      <div className={css['card-image']} style={cardImage} />
-      <div className={css['card-name']} style={fontSize}>
+    <div className={'card'}>
+      <div className={'card-cost'}>{cost}</div>
+      <div className={'card-image'} style={cardImage} />
+      <div className={'card-name'} style={fontSize}>
         {cardName(name, inspiration)}
       </div>
-      <div className={css['card-text']}>
+      <div className={'card-text'}>
         <p dangerouslySetInnerHTML={createMarkup(text)} />
       </div>
-      <div className={css['card-type']}>{type}</div>
-      {IS_MINION && <div className={css['card-attack']}>{attack}</div>}
-      {IS_MINION && <div className={css['card-health']}>{health}</div>}
-      {IS_WEAPON && <div className={css['card-weapon-attack']}>{attack}</div>}
-      {IS_WEAPON && <div className={css['card-weapon-health']}>{health}</div>}
+      <div className={'card-type'}>{type}</div>
+      {IS_MINION && <div className={'card-attack'}>{attack}</div>}
+      {IS_MINION && <div className={'card-health'}>{health}</div>}
+      {IS_WEAPON && <div className={'card-weapon-attack'}>{attack}</div>}
+      {IS_WEAPON && <div className={'card-weapon-health'}>{health}</div>}
 
       {metaAttributes.map((attr, index) => {
         const { name, content } = attr;

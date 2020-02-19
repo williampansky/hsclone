@@ -15,7 +15,7 @@ export default function CardSelection({
   const { counts, energy, players, selectedCardIndex } = G;
 
   return (
-    <div data-file="CardSelection" className="card-selection-modal">
+    <div data-file="CardSelection" className={'card-selection-modal'}>
       {array.map((card, index) => {
         return (
           <CardInteraction

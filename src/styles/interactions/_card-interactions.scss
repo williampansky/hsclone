@@ -1,7 +1,7 @@
-@import 'styles/keyframes';
-@import 'styles/card-in-their-hand';
-@import 'styles/card-in-your-hand';
-@import 'styles/number-of-cards-in-hand';
+@import 'card-interactions/keyframes';
+@import 'card-interactions/card-in-their-hand';
+@import 'card-interactions/card-in-your-hand';
+@import 'card-interactions/number-of-cards-in-hand';
 
 .card--is_playable {
   border-radius: var(--card-border-radius);
