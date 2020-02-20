@@ -2,10 +2,10 @@
  * Removes card from your hand.
  * @param {{}} G
  * @param {string} player
- * @param {string} cardId
+ * @param {string} uuid
  */
-const removeCardFromHand = (G, player, cardId) => {
-  const newHand = G.players[player].hand.filter(c => c.id !== cardId);
+const removeCardFromHand = (G, player, uuid) => {
+  const newHand = G.players[player].hand.filter(c => c.uuid !== uuid);
   G.players[player].hand = newHand;
 };
 

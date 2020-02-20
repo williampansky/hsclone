@@ -19,7 +19,7 @@ test(`should remove a card from player's hand`, () => {
     currentPlayer: '0'
   };
 
-  removeCardFromHand(G, ctx.currentPlayer, CARD_ID);
+  removeCardFromHand(G, ctx.currentPlayer, MINION_CARD.uuid);
 
   expect(G).toEqual({
     players: {

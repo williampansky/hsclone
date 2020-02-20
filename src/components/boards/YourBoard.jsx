@@ -16,10 +16,11 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
 
   const selectedCard = selectedCardObject[yourID];
   const cardId = selectedCard && selectedCard.id;
+  const cardUUID = selectedCard && selectedCard.uuid;
   const spellType = selectedCard && selectedCard.spellType;
 
-  function castGlobalSpell(index = 0, id = cardId) {
-    return playCard(index, id);
+  function castGlobalSpell(index = 0, uuid = cardUUID, id = cardId) {
+    return playCard(index, uuid, id);
   }
 
   return (

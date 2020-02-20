@@ -23,30 +23,40 @@ import TYPE from 'enums/type.enums';
  * @param {{}} ctx
  * @param {{}} cardObject
  * @param {number} index
+ * @param {string} uuid
+ * @param {string} cardId=null
  */
-const playCard = (G, ctx, index, cardId = null) => {
+const playCard = (G, ctx, index, uuid, cardId = null) => {
   if (!cardId) return;
 
-  const CARD_OBJECT = createMinionObject(cardId);
-  if (!CARD_OBJECT) return;
+  const CARD_OBJ = createMinionObject(cardId);
+  if (!CARD_OBJ) return;
 
-  const BOARD_SLOT_OBJ = createBoardSlotObject(cardId);
-  if (!BOARD_SLOT_OBJ) return;
+  const SLOT_OBJ = createBoardSlotObject(cardId);
+  if (!SLOT_OBJ) return;
 
-  const { type } = CARD_OBJECT;
+  const { cost, type } = CARD_OBJ;
   switch (type) {
     case TYPE[1]:
-      return playMinionCard(G, ctx, index, cardId, CARD_OBJECT, BOARD_SLOT_OBJ);
+      return playMinionCard(G, ctx, index, uuid, cardId, CARD_OBJ, SLOT_OBJ);
 
     case TYPE[3]:
-      return playSpellCard(G, ctx, index, cardId, CARD_OBJECT.cost);
+      return playSpellCard(G, ctx, index, uuid, cardId, cost);
 
     default:
       return;
   }
 };
 
-export const playMinionCard = (G, ctx, index, cardId, cardObj, boardObj) => {
+export const playMinionCard = (
+  G,
+  ctx,
+  index,
+  uuid,
+  cardId,
+  cardObj,
+  boardObj
+) => {
   const { currentPlayer } = ctx;
   const { cost } = cardObj;
 
@@ -60,7 +70,7 @@ export const playMinionCard = (G, ctx, index, cardId, cardObj, boardObj) => {
   copyCardToPlayedCards(G, currentPlayer, cardId);
 
   // and then remove card from your hand
-  removeCardFromHand(G, currentPlayer, cardId);
+  removeCardFromHand(G, currentPlayer, uuid);
 
   // then deincrement your hand count
   counts.deincrementHand(G, currentPlayer);
@@ -74,24 +84,32 @@ export const playMinionCard = (G, ctx, index, cardId, cardObj, boardObj) => {
   G.selectedCardObject[currentPlayer] = null;
 };
 
-export const playSpellCard = (G, ctx, index, cardId, cardCost, target) => {
+export const playSpellCard = (
+  G,
+  ctx,
+  index,
+  uuid,
+  cardId,
+  cardCost,
+  target
+) => {
   switch (index) {
     case 0:
-      return playGlobalSpellCard(G, ctx, cardId, cardCost);
+      return playGlobalSpellCard(G, ctx, uuid, cardId, cardCost);
 
     default:
       break;
   }
 };
 
-export const playGlobalSpellCard = (G, ctx, cardId, cardCost) => {
+export const playGlobalSpellCard = (G, ctx, uuid, cardId, cardCost) => {
   const { currentPlayer } = ctx;
 
   energy.subtract(G, currentPlayer, cardCost);
   playSpellByCardId(G, ctx, cardId);
   selectCard(G, ctx);
   copyCardToPlayedCards(G, currentPlayer, cardId);
-  removeCardFromHand(G, currentPlayer, cardId);
+  removeCardFromHand(G, currentPlayer, uuid);
   counts.deincrementHand(G, currentPlayer);
 };
 

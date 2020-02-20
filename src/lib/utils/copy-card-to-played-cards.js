@@ -5,10 +5,8 @@
  * @param {string} cardId
  */
 const copyCardToPlayedCards = (G, player, cardId) => {
-  // prettier-ignore
-  G.playedCards[player].push(
-    G.players[player].hand.find(c => c.id === cardId)
-  );
+  const cardToPushId = G.players[player].hand.find(c => c.id === cardId).id;
+  G.playedCards[player].push(cardToPushId);
 };
 
 export default copyCardToPlayedCards;

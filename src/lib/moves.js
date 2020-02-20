@@ -66,8 +66,8 @@ export default {
   },
   playCard: {
     client: false,
-    move: (G, ctx, index, cardId) => {
-      return playCard(G, ctx, index, cardId);
+    move: (G, ctx, index, uuid, cardId) => {
+      return playCard(G, ctx, index, uuid, cardId);
     }
   }
 };

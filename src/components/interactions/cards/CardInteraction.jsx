@@ -64,6 +64,7 @@ export default function CardInteraction({
     set,
     sounds,
     spellDamage,
+    uuid,
     targetingArrowText,
     text,
     type
@@ -135,6 +136,7 @@ export default function CardInteraction({
         set={set}
         sounds={sounds}
         spellDamage={spellDamage}
+        uuid={uuid}
         targetingArrowText={targetingArrowText}
         text={text}
         type={type}

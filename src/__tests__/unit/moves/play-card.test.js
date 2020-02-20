@@ -6,8 +6,6 @@ test(`plays a minion card and adds it to the board`, () => {
   const CARD_ID = 'CORE_024';
   const MINION_CARD = getCardByID(CARD_ID);
   const SLOT_OBJ = createBoardSlotObject(CARD_ID);
-  const SOME_CARD = getCardByID('CORE_002');
-  const SOME_OTHER_CARD = getCardByID('CORE_012');
 
   const G = {
     counts: {
@@ -30,7 +28,7 @@ test(`plays a minion card and adds it to the board`, () => {
       }
     },
     playedCards: {
-      '0': [SOME_CARD, SOME_OTHER_CARD]
+      '0': ['CORE_002', 'CORE_012']
     },
     selectedCardIndex: {
       '0': 0
@@ -44,7 +42,7 @@ test(`plays a minion card and adds it to the board`, () => {
     currentPlayer: '0'
   };
 
-  playCard(G, ctx, 0, CARD_ID);
+  playCard(G, ctx, 0, MINION_CARD.uuid, CARD_ID);
 
   expect(G).toEqual({
     counts: {
@@ -67,7 +65,7 @@ test(`plays a minion card and adds it to the board`, () => {
       }
     },
     playedCards: {
-      '0': [SOME_CARD, SOME_OTHER_CARD, MINION_CARD]
+      '0': ['CORE_002', 'CORE_012', CARD_ID]
     },
     selectedCardIndex: {
       '0': null

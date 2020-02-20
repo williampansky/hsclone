@@ -31,7 +31,7 @@ test(`should copy a card from player's hand to their playedCard's array`, () => 
       }
     },
     playedCards: {
-      '0': [MINION_CARD]
+      '0': [MINION_CARD.id]
     }
   });
 });

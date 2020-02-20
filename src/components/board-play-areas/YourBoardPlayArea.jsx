@@ -19,19 +19,20 @@ export default function YourBoardPlayerArea({
   const SELECTED_CARD_OBJECT = selectedCardObject[yourID];
 
   const CARD_ID = SELECTED_CARD_OBJECT && SELECTED_CARD_OBJECT.id;
+  const CARD_UUID = SELECTED_CARD_OBJECT && SELECTED_CARD_OBJECT.uuid;
   const CARD_TYPE = SELECTED_CARD_OBJECT && SELECTED_CARD_OBJECT.type;
   const CARD_SPELLTYPE = SELECTED_CARD_OBJECT && SELECTED_CARD_OBJECT.spellType;
 
   const CARD_IS_SELECTED = SELECTED_CARD_OBJECT !== null;
   const BOARD_IS_ACTIVE = CARD_IS_SELECTED && CARD_SPELLTYPE !== 'GLOBAL';
 
-  function handleClick(index, id = CARD_ID) {
+  function handleClick(index, uuid = CARD_UUID, id = CARD_ID) {
     if (boards[yourID][index]) return;
-    return playCard(index, id);
+    return playCard(index, uuid, id);
   }
 
-  function dropMinion(index, id = CARD_ID) {
-    return playCard(index, id);
+  function dropMinion(index, uuid = CARD_UUID, id = CARD_ID) {
+    return playCard(index, uuid, id);
   }
 
   return (

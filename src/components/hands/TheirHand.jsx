@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import CardBack from 'components/cards/CardBack';
 import GameMenuTrigger from 'components/game-menu/GameMenuTrigger';
 import PlayerEnergy from 'components/player-energy/PlayerEnergy';
+import limitNumberWithinRange from 'lib/utils/range-limit';
 
 export default function TheirHand({ G, theirID, toggleMenuFn }) {
   const {
@@ -95,20 +96,23 @@ TheirHand.propTypes = {
   theirID: PropTypes.string
 };
 
-// prettier-ignore
-// abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
 function calcOffset(index, total = 10, offsetRange = 80) {
-  // index = index + 1;
-  if (total <= 4) {
-    if (index === 0) return Math.abs((index + 1) * offsetRange);
-  }
+  // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
+  const MIN = 10;
+  const MAX = 50;
 
-  return Math.abs((index - (total - 1) / 2) / (total - 2) * offsetRange);
+  const calculation = Math.abs(
+    ((index - (total - 1) / 2) / (total - 2)) * offsetRange
+  );
+
+  return limitNumberWithinRange(calculation, MAX, MIN);
 }
 
-// prettier-ignore
-// ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
 function calcRotate(index, total = 10, rotationRange = 50) {
-  // index = index + 1;
-  return (index - (total - 1) / 2) / (total - 2) * rotationRange;
+  // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
+  const MIN = -25;
+  const MAX = 25;
+
+  const calculation = ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
+  return limitNumberWithinRange(calculation, MAX, MIN);
 }
