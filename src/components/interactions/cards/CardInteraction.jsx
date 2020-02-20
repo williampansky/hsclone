@@ -17,7 +17,7 @@ export default function CardInteraction({
   index,
   numberOfCards
 }) {
-  const { selectedCardIndex } = G;
+  const { selectedCardIndex, warcryObject } = G;
   const { currentPlayer, phase } = ctx;
   const { hoverCard, selectCard } = moves;
 
@@ -71,7 +71,9 @@ export default function CardInteraction({
   } = card;
 
   const IS_YOUR_TURN = isActive;
-  const IS_PLAYABLE = isActive && cost <= G.energy[yourID].current;
+  const WARCRY_OBJECT_ACTIVE = warcryObject[yourID] !== null;
+  const CAN_AFFORD = cost <= G.energy[yourID].current;
+  const IS_PLAYABLE = IS_YOUR_TURN && CAN_AFFORD && !WARCRY_OBJECT_ACTIVE;
   const IS_SELECTED = G.selectedCardIndex[yourID] === index;
 
   const yourHandStyle = {

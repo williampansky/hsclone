@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 // child components
 import PlayerEnergy from 'components/player-energy/PlayerEnergy';
 import CardInteraction from 'components/interactions/cards/CardInteraction';
+import WarcryObject from 'components/warcrys/WarcryObject';
 
 export default function YourHand({ G, ctx, moves, isActive, yourID }) {
-  const { counts, energy, players, selectedCardIndex } = G;
+  const { counts, energy, players, selectedCardIndex, warcryObject } = G;
   const yourHand = players[yourID] && players[yourID].hand;
   const handLength = counts[yourID] && counts[yourID].hand;
   const cardIsSelected = selectedCardIndex[yourID];
+  const activeWarcryObject = warcryObject[yourID];
 
   return (
     <div
@@ -47,6 +49,7 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
           </React.Fragment>
         );
       })}
+      {activeWarcryObject && <WarcryObject data={activeWarcryObject} />}
       <PlayerEnergy energy={energy[yourID]} />
     </div>
   );

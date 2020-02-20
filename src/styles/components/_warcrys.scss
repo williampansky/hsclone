@@ -1,0 +1,27 @@
+.warcry-object {
+  border-radius: 50%;
+  min-width: 150px;
+  min-height: 150px;
+  background: white;
+  position: absolute;
+  right: 4%;
+  top: -10vh;
+  z-index: 100;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  user-select: none;
+}
+
+.warcry-object-label {
+  font-size: 0.6275em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.warcry-object-text {
+  font-size: 1em;
+}

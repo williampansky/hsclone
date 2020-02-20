@@ -6,6 +6,7 @@
   right: 0;
   top: calc(50% - var(--board-yourHand-height));
   z-index: 100;
+  user-select: none;
 }
 
 .end-turn-button {
