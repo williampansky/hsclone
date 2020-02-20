@@ -19,12 +19,10 @@ const drawCardAtStartOfTurn = (G, ctx) => {
   if (currentPlayerHasLessThan10Cards) drawCard(G, ctx, currentPlayer);
   else discardCard(G, ctx, currentPlayer);
 
-  if (currentPlayerDeckLength === 0)
-    health.subtractFromPlayerHealth(
-      G,
-      currentPlayer,
-      Math.abs(G.counts[currentPlayer].deck)
-    );
+  if (currentPlayerDeckLength === 0) {
+    const positiveInteger = Math.abs(G.counts[currentPlayer].deck);
+    health.subtract(G, currentPlayer, positiveInteger);
+  }
 };
 
 export default drawCardAtStartOfTurn;

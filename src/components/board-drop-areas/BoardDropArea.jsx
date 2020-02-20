@@ -1,13 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function BoardDropArea({
-  G,
-  ctx,
-  moves,
-  index,
-  onClick,
+  areaIsAlone,
   boardIsActive,
-  areaIsAlone
+  index,
+  onClick
 }) {
   return (
     <div
@@ -22,3 +20,10 @@ export default function BoardDropArea({
     ></div>
   );
 }
+
+BoardDropArea.propTypes = {
+  areaIsAlone: PropTypes.bool,
+  boardIsActive: PropTypes.bool,
+  index: PropTypes.number,
+  onClick: PropTypes.func
+};
