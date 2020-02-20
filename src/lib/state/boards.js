@@ -1,5 +1,6 @@
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import limitNumberWithinRange from 'lib/utils/range-limit';
+import recalculateCardMechanics from 'lib/mechanics/recalculate-mechanics';
 
 const boards = {
   __DATA_MODEL: {
@@ -27,11 +28,11 @@ const boards = {
   enableCanBeAttacked: (G, player, index) => {
     return enableMinionCanBeAttacked(G, player, index);
   },
-  killMinion: (G, player, index) => {
-    return killMinion(G, player, index);
+  killMinion: (G, ctx, player, boardSlot, index) => {
+    return killMinion(G, ctx, player, boardSlot, index);
   },
-  killMinionIfHealthReachesZero: (G, player, index) => {
-    return killMinionIfHealthReachesZero(G, player, index);
+  killMinionIfHealthReachesZero: (G, ctx, player, boardSlot, index) => {
+    return killMinionIfHealthReachesZero(G, ctx, player, boardSlot, index);
   },
   placeCardOnBoard: (G, player, boardSlotObject, index) => {
     return placeCardOnBoard(G, player, boardSlotObject, index);
@@ -138,22 +139,34 @@ export const enableMinionCanBeAttacked = (G, player, index) => {
 /**
  * Kill a single active minion.
  * @param {{}} G
+ * @param {{}} ctx
  * @param {string} player
+ * @param {{}} boardSlot
  * @param {number} index
  */
-export const killMinion = (G, player, index) => {
+export const killMinion = (G, ctx, player, boardSlot, index) => {
+  const { minionData } = boardSlot;
   G.boards[player].splice(index, 1);
+  recalculateCardMechanics(G, ctx, player, minionData, index);
 };
 
 /**
  * Kill a single active minion if its currentHealth reaches zero.
  * @param {{}} G
+ * @param {{}} ctx
  * @param {string} player
+ * @param {{}} boardSlot
  * @param {number} index
  */
-export const killMinionIfHealthReachesZero = (G, player, index) => {
+export const killMinionIfHealthReachesZero = (
+  G,
+  ctx,
+  player,
+  boardSlot,
+  index
+) => {
   if (G.boards[player][index].currentHealth <= 0)
-    G.boards[player].splice(index, 1);
+    killMinion(G, ctx, player, boardSlot, index);
 };
 
 /**
