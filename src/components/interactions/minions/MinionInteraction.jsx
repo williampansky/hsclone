@@ -16,25 +16,31 @@ export default function MinionInteraction({
   hasGuard,
   isAttacking
 }) {
-  const { selectedMinionIndex } = G;
+  const { selectedMinionIndex, warcryObject } = G;
   const { currentPlayer } = ctx;
   const { attackMinion, deselectMinion, selectMinion } = moves;
 
-  const MINION_IS_SELECTED = selectedMinionIndex[currentPlayer] !== null;
+  const tBoard = board === 'TheirBoard';
+  const yBoard = board === 'YourBoard';
+
+  const SELECTED_WARCRY = warcryObject[currentPlayer] !== null;
+  const SELECTED_MINION = selectedMinionIndex[currentPlayer] !== null;
   const HAS_GUARD = hasGuard;
-  const IS_ATTACKING = board === 'YourBoard' && isAttacking;
-  const CAN_ATTACK = board === 'YourBoard' && canAttack;
-  const CAN_BE_ATTACKED =
-    board === 'TheirBoard' && canBeAttacked && MINION_IS_SELECTED;
+  const IS_ATTACKING = yBoard && isAttacking;
+  const CAN_ATTACK = yBoard && canAttack;
+
+  const canBeAttackedByWarcry = tBoard && canBeAttacked && SELECTED_WARCRY;
+  const canBeAttackedByMinion = tBoard && canBeAttacked && SELECTED_MINION;
+  const CAN_BE_ATTACKED = canBeAttackedByMinion || canBeAttackedByWarcry;
 
   function handleClick() {
-    if (board === 'YourBoard') {
+    if (yBoard) {
       if (!CAN_ATTACK) return;
       if (IS_ATTACKING) return deselectMinion();
       else return selectMinion(data, index);
     }
 
-    if (board === 'TheirBoard') {
+    if (tBoard) {
       if (!CAN_BE_ATTACKED) return;
       if (CAN_BE_ATTACKED) return attackMinion(index);
     }

@@ -8,7 +8,7 @@ import CAST_WARCRY_CORE_006 from 'lib/warcrys/objects/CAST_WARCRY_CORE_006';
  * @param {string} targetCtx Target context; MINION || PLAYER
  * @param {string} targetIdx Target index if targetCtx is MINION
  */
-const castWarycrySpell = (G, ctx, targetCtx, targetIdx) => {
+const castWarcrySpell = (G, ctx, targetCtx, targetIdx) => {
   const { warcryObject } = G;
   const { currentPlayer } = ctx;
   const { id } = warcryObject[currentPlayer];
@@ -24,4 +24,4 @@ const castWarycrySpell = (G, ctx, targetCtx, targetIdx) => {
   }
 };
 
-export default castWarycrySpell;
+export default castWarcrySpell;

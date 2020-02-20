@@ -1,17 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
 export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
+  const CONTEXT = WARCRY_TARGET_CONTEXT;
   const { health, playerCanBeAttacked, selectedMinionIndex, warcryObject } = G;
-  const { attackPlayer } = moves;
-
+  const { attackPlayer, castWarcrySpell } = moves;
   const THEIR_HEALTH = health[theirID];
-  const CAN_BE_ATTACKED = playerCanBeAttacked[theirID];
-  const ATTACKING_MINION_INDEX = selectedMinionIndex[yourID] !== null;
-  // const ATTACKING_WITH_WARCRY = warcryObject[yourID];
+
+  const canBeAttacked = playerCanBeAttacked[theirID];
+
+  const attackingMinionIndex = selectedMinionIndex[yourID] !== null;
+  const activeWarcryObject = warcryObject[yourID] !== null;
+
+  const canBeAttackedByMinion = canBeAttacked && attackingMinionIndex;
+  const canBeAttackedByWarcry = canBeAttacked && activeWarcryObject;
+  const CAN_BE_ATTACKED = canBeAttackedByMinion || canBeAttackedByWarcry;
 
   function handleClick() {
-    if (ATTACKING_MINION_INDEX) return attackPlayer();
+    if (CAN_BE_ATTACKED) {
+      if (canBeAttackedByMinion) return attackPlayer();
+      if (canBeAttackedByWarcry) return castWarcrySpell(CONTEXT[2]);
+    }
   }
 
   return (
@@ -20,9 +30,7 @@ export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
       className={[
         'player-avatar',
         'their-avatar',
-        CAN_BE_ATTACKED && ATTACKING_MINION_INDEX
-          ? 'player-avatar--can_be_attacked'
-          : ''
+        CAN_BE_ATTACKED ? 'player-avatar--can_be_attacked' : ''
       ].join(' ')}
       onClick={() => handleClick()}
     >
