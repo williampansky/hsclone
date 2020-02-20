@@ -1,4 +1,4 @@
-// import initBoons from 'lib/mechanics/init-boons';
+import recalculateBoons from 'lib/mechanics/recalculate-boons';
 import recalculateBuffs from 'lib/mechanics/recalculate-buffs';
 // import initCurses from 'lib/mechanics/init-curses';
 // import initGuard from 'lib/mechanics/init-guard';
@@ -9,7 +9,7 @@ import MECHANICS from 'enums/mechanics.enums';
 // prettier-ignore
 const recalculateCardMechanics = (G, ctx, player, card, index) => {
   const { mechanics } = card;
-  // if (mechanics.find(m => m === MECHANICS[1])) recalculateBoons(G, ctx, card, index);
+  if (mechanics.find(m => m === MECHANICS[1])) recalculateBoons(G, ctx, card, index);
   if (mechanics.find(m => m === MECHANICS[2])) recalculateBuffs(G, ctx, player, card, index);
   // if (mechanics.find(m => m === MECHANICS[3])) recalculateCurses(G, ctx, index);
   // if (mechanics.find(m => m === MECHANICS[4])) recalculateGuard(G, ctx, index);
