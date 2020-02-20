@@ -4,10 +4,10 @@ const recalculateCoreBuff = (G, player, card) => {
 
   // prettier-ignore
   switch (id) {
-    case 'CORE_011':  return givePlayerSpellDamage(G, player, amount);
-    case 'CORE_015':  return givePlayerSpellDamage(G, player, amount);
-    case 'CORE_028':  return givePlayerSpellDamage(G, player, amount);
-    case 'CORE_037':  return givePlayerSpellDamage(G, player, amount);
+    case 'CORE_011':  return removeFromPlayerSpellDamage(G, player, amount);
+    case 'CORE_015':  return removeFromPlayerSpellDamage(G, player, amount);
+    case 'CORE_028':  return removeFromPlayerSpellDamage(G, player, amount);
+    case 'CORE_037':  return removeFromPlayerSpellDamage(G, player, amount);
     default:          break;
   }
 };
@@ -18,7 +18,7 @@ const recalculateCoreBuff = (G, player, card) => {
  * @param {string} player
  * @param {number} amount
  */
-const givePlayerSpellDamage = (G, player, amount) => {
+const removeFromPlayerSpellDamage = (G, player, amount) => {
   const currentSpellDamage = G.buffs[player].spellDamage;
   G.buffs[player].spellDamage = currentSpellDamage - amount;
 };
