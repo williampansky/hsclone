@@ -22,7 +22,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_026':  return CORE_026(G, ctx, cardId);
     case 'CORE_032':  return CORE_032(G, ctx, cardId);
     case 'CORE_033':  return CORE_033(G, ctx, cardId);
-    case 'CORE_035':  return CORE_035(G, ctx, cardId);
+    case 'CORE_035':  return CORE_035(G, ctx, otherPlayer);
     case 'CORE_036':  return CORE_036(G, ctx, cardId);
     default:          break;
   }
@@ -124,10 +124,7 @@ const CORE_033 = (G, ctx, cardId) => {
 /**
  * Attack the enemy hero for 3 damage.
  */
-const CORE_035 = (G, ctx) => {
-  const { turnOrder } = G;
-  const { currentPlayer } = ctx;
-  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+const CORE_035 = (G, ctx, otherPlayer) => {
   health.subtract(G, otherPlayer, 3);
 };
 
