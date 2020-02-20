@@ -6,17 +6,47 @@ import getCardByID from 'lib/utils/get-card-by-id';
 test(`WARCRY(CORE_001)`, () => {
   const CARD_ID = 'CORE_001';
   const ctx = { currentPlayer: '0' };
-  const G = { warcryObject: { '0': null } };
+  const TURN_ORDER = ['0', '1'];
+
+  const G = {
+    health: { '0': 30, '1': 30 },
+    playerCanBeAttacked: { '0': false, '1': false },
+    boards: { '0': [], '1': [] },
+    warcryObject: { '0': null },
+    turnOrder: TURN_ORDER
+  };
+
   initCoreWarcry(G, ctx, CARD_ID);
-  expect(G).toEqual({ warcryObject: { '0': createWarcryObject(CARD_ID) } });
+  expect(G).toEqual({
+    health: { '0': 30, '1': 30 },
+    playerCanBeAttacked: { '0': false, '1': true },
+    boards: { '0': [], '1': [] },
+    warcryObject: { '0': createWarcryObject(CARD_ID) },
+    turnOrder: TURN_ORDER
+  });
 });
 
 test(`WARCRY(CORE_006)`, () => {
   const CARD_ID = 'CORE_006';
   const ctx = { currentPlayer: '0' };
-  const G = { warcryObject: { '0': null } };
+  const TURN_ORDER = ['0', '1'];
+
+  const G = {
+    health: { '0': 30, '1': 30 },
+    playerCanBeAttacked: { '0': false, '1': false },
+    boards: { '0': [], '1': [] },
+    warcryObject: { '0': null },
+    turnOrder: TURN_ORDER
+  };
+
   initCoreWarcry(G, ctx, CARD_ID);
-  expect(G).toEqual({ warcryObject: { '0': createWarcryObject(CARD_ID) } });
+  expect(G).toEqual({
+    health: { '0': 30, '1': 30 },
+    playerCanBeAttacked: { '0': false, '1': true },
+    boards: { '0': [], '1': [] },
+    warcryObject: { '0': createWarcryObject(CARD_ID) },
+    turnOrder: TURN_ORDER
+  });
 });
 
 test(`WARCRY(CORE_012) - board under max capacity`, () => {
@@ -24,17 +54,13 @@ test(`WARCRY(CORE_012) - board under max capacity`, () => {
   const PARENT_MINION = createBoardSlotObject(CARD_ID);
   const ENTOURAGE_MINION = createBoardSlotObject(`${CARD_ID}a`);
   const ctx = { currentPlayer: '0' };
-  const G = {
-    boards: {
-      '0': [PARENT_MINION]
-    }
-  };
+  const TURN_ORDER = ['0', '1'];
+  const G = { boards: { '0': [PARENT_MINION] }, turnOrder: TURN_ORDER };
 
   initCoreWarcry(G, ctx, CARD_ID);
   expect(G).toEqual({
-    boards: {
-      '0': [PARENT_MINION, ENTOURAGE_MINION]
-    }
+    boards: { '0': [PARENT_MINION, ENTOURAGE_MINION] },
+    turnOrder: TURN_ORDER
   });
 });
 
@@ -42,6 +68,7 @@ test(`WARCRY(CORE_012) - board at max capacity`, () => {
   const CARD_ID = 'CORE_012';
   const PARENT_MINION = createBoardSlotObject(CARD_ID);
   const ctx = { currentPlayer: '0' };
+  const TURN_ORDER = ['0', '1'];
   const G = {
     boards: {
       '0': [
@@ -53,7 +80,8 @@ test(`WARCRY(CORE_012) - board at max capacity`, () => {
         'OTHER_MINION',
         PARENT_MINION
       ]
-    }
+    },
+    turnOrder: TURN_ORDER
   };
 
   initCoreWarcry(G, ctx, CARD_ID);
@@ -68,16 +96,19 @@ test(`WARCRY(CORE_012) - board at max capacity`, () => {
         'OTHER_MINION',
         PARENT_MINION
       ]
-    }
+    },
+    turnOrder: TURN_ORDER
   });
 });
 
 test(`WARCRY(CORE_013)`, () => {
   const CARD_ID = 'CORE_013';
   const ctx = { currentPlayer: '0' };
+  const TURN_ORDER = ['0', '1'];
   const G = {
     counts: { '0': { deck: 1, hand: 0 } },
-    players: { '0': { deck: [CARD_ID], hand: [] } }
+    players: { '0': { deck: [CARD_ID], hand: [] } },
+    turnOrder: TURN_ORDER
   };
   initCoreWarcry(G, ctx, CARD_ID);
   expect(G.counts['0']).toEqual({ deck: 0, hand: 1 });
@@ -88,9 +119,13 @@ test(`WARCRY(CORE_013)`, () => {
 test(`WARCRY(CORE_016)`, () => {
   const CARD_ID = 'CORE_016';
   const ctx = { currentPlayer: '0' };
-  const G = { warcryObject: { '0': null } };
+  const TURN_ORDER = ['0', '1'];
+  const G = { warcryObject: { '0': null }, turnOrder: TURN_ORDER };
   initCoreWarcry(G, ctx, CARD_ID);
-  expect(G).toEqual({ warcryObject: { '0': createWarcryObject(CARD_ID) } });
+  expect(G).toEqual({
+    warcryObject: { '0': createWarcryObject(CARD_ID) },
+    turnOrder: TURN_ORDER
+  });
 });
 
 // Provide +1/+1 to one of your minions.
@@ -98,7 +133,7 @@ test(`WARCRY(CORE_021)`, () => {
   const CARD_ID = 'CORE_021';
   const WARCRY_MINION = getCardByID(CARD_ID);
   const OTHER_MINION1 = getCardByID('CORE_014');
-
+  const TURN_ORDER = ['0', '1'];
   const G = {
     boards: {
       '0': [
@@ -123,7 +158,8 @@ test(`WARCRY(CORE_021)`, () => {
           totalHealth: WARCRY_MINION.health
         }
       ]
-    }
+    },
+    turnOrder: TURN_ORDER
   };
 
   const ctx = { currentPlayer: '0' };
@@ -155,16 +191,19 @@ test(`WARCRY(CORE_021)`, () => {
           totalHealth: WARCRY_MINION.health
         }
       ]
-    }
+    },
+    turnOrder: TURN_ORDER
   });
 });
 
 test(`WARCRY(CORE_026)`, () => {
   const CARD_ID = 'CORE_026';
   const ctx = { currentPlayer: '0' };
+  const TURN_ORDER = ['0', '1'];
   const G = {
     counts: { '0': { deck: 1, hand: 0 } },
-    players: { '0': { deck: [CARD_ID], hand: [] } }
+    players: { '0': { deck: [CARD_ID], hand: [] } },
+    turnOrder: TURN_ORDER
   };
 
   initCoreWarcry(G, ctx, CARD_ID);
@@ -179,7 +218,8 @@ test(`WARCRY(CORE_032)`, () => {
   const CARD_ID = 'CORE_032';
   const WARCRY_MINION = getCardByID(CARD_ID);
   const OTHER_MINION1 = getCardByID('CORE_014'); // max health is 3
-
+  const TURN_ORDER = ['0', '1'];
+  const ctx = { currentPlayer: '0' };
   const G = {
     health: {
       '0': 25
@@ -207,10 +247,10 @@ test(`WARCRY(CORE_032)`, () => {
           totalHealth: WARCRY_MINION.health
         }
       ]
-    }
+    },
+    turnOrder: TURN_ORDER
   };
 
-  const ctx = { currentPlayer: '0' };
   initCoreWarcry(G, ctx, CARD_ID);
 
   expect(G).toEqual({
@@ -240,7 +280,8 @@ test(`WARCRY(CORE_032)`, () => {
           totalHealth: WARCRY_MINION.health
         }
       ]
-    }
+    },
+    turnOrder: TURN_ORDER
   });
 });
 
@@ -250,7 +291,8 @@ test(`WARCRY(CORE_033)`, () => {
   const MINION = getCardByID(CARD_ID);
   const OTHER_MINION1 = getCardByID('CORE_016');
   const OTHER_MINION2 = getCardByID('CORE_036');
-
+  const TURN_ORDER = ['0', '1'];
+  const ctx = { currentPlayer: '0' };
   const G = {
     boards: {
       '0': [
@@ -285,10 +327,10 @@ test(`WARCRY(CORE_033)`, () => {
           totalHealth: MINION.health
         }
       ]
-    }
+    },
+    turnOrder: TURN_ORDER
   };
 
-  const ctx = { currentPlayer: '0' };
   initCoreWarcry(G, ctx, CARD_ID);
 
   expect(G).toEqual({
@@ -325,7 +367,8 @@ test(`WARCRY(CORE_033)`, () => {
           totalHealth: MINION.health
         }
       ]
-    }
+    },
+    turnOrder: TURN_ORDER
   });
 });
 
@@ -341,8 +384,12 @@ test(`WARCRY(CORE_035)`, () => {
 
 test(`WARCRY(CORE_036)`, () => {
   const CARD_ID = 'CORE_036';
-  const G = { warcryObject: { '1': null } };
+  const TURN_ORDER = ['0', '1'];
   const ctx = { currentPlayer: '1' };
+  const G = { warcryObject: { '1': null }, turnOrder: TURN_ORDER };
   initCoreWarcry(G, ctx, CARD_ID);
-  expect(G).toEqual({ warcryObject: { '1': createWarcryObject(CARD_ID) } });
+  expect(G).toEqual({
+    warcryObject: { '1': createWarcryObject(CARD_ID) },
+    turnOrder: TURN_ORDER
+  });
 });

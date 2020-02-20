@@ -1,5 +1,5 @@
-import { CAST_WARCRY_CORE_001 } from '../warcrys/objects/CAST_WARCRY_CORE_001';
-import { CAST_WARCRY_CORE_006 } from '../warcrys/objects/CAST_WARCRY_CORE_006';
+import CAST_WARCRY_CORE_001 from 'lib/warcrys/objects/CAST_WARCRY_CORE_001';
+import CAST_WARCRY_CORE_006 from 'lib/warcrys/objects/CAST_WARCRY_CORE_006';
 
 /**
  * Casts a targeted Warcry spell object.

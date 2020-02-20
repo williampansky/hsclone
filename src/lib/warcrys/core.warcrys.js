@@ -5,10 +5,14 @@ import createWarcryObject from 'lib/creators/create-warcry-object';
 import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
+  const { turnOrder } = G;
+  const { currentPlayer } = ctx;
+  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+
   // prettier-ignore
   switch (cardId) {
-    case 'CORE_001':  return CORE_001(G, ctx, cardId);
-    case 'CORE_006':  return CORE_006(G, ctx, cardId);
+    case 'CORE_001':  return CORE_001(G, ctx, cardId, otherPlayer);
+    case 'CORE_006':  return CORE_006(G, ctx, cardId, otherPlayer);
     case 'CORE_012':  return CORE_012(G, ctx, cardId);
     case 'CORE_013':  return CORE_013(G, ctx, cardId);
     case 'CORE_016':  return CORE_016(G, ctx, cardId);
@@ -24,12 +28,14 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
   }
 };
 
-const CORE_001 = (G, ctx, cardId) => {
+const CORE_001 = (G, ctx, cardId, otherPlayer) => {
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
+  boards.determineWarcryTargets(G, otherPlayer);
 };
 
-const CORE_006 = (G, ctx, cardId) => {
+const CORE_006 = (G, ctx, cardId, otherPlayer) => {
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
+  boards.determineWarcryTargets(G, otherPlayer);
 };
 
 const CORE_012 = (G, ctx, cardId) => {

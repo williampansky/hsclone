@@ -12,6 +12,9 @@ const boards = {
   determineTargets: (G, player) => {
     return determineAttackingMinionTargets(G, player);
   },
+  determineWarcryTargets: (G, player) => {
+    return determineWarcrySpellTargets(G, player);
+  },
   disableCanAttack: (G, player, index) => {
     return disableMinionCanAttack(G, player, index);
   },
@@ -72,6 +75,19 @@ export const determineAttackingMinionTargets = (G, player) => {
     if (slot.hasGuard === true) enableMinionCanBeAttacked(G, player, i);
     else if (MINION_HAS_GUARD) disableMinionCanBeAttacked(G, player, i);
     else enableMinionCanBeAttacked(G, player, i);
+  });
+};
+
+/**
+ * When a player plays a minion with a targeted Warcry spell object;
+ * we need to determine the possible targets.
+ * @param {{}} G
+ * @param {string} player
+ */
+export const determineWarcrySpellTargets = (G, player) => {
+  playerCanBeAttacked.enable(G, player);
+  G.boards[player].forEach((slot, i) => {
+    enableMinionCanBeAttacked(G, player, i);
   });
 };
 
