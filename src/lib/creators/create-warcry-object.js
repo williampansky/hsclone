@@ -6,6 +6,7 @@ const createWarcryObject = cardId => {
     id: CARD_OBJECT.id,
     attack: CARD_OBJECT.warcryObjectNumber,
     spellType: CARD_OBJECT.spellType,
+    spellContext: CARD_OBJECT.spellContext,
     targetingArrowText: CARD_OBJECT.targetingArrowText
   };
 };
