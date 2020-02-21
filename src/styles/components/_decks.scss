@@ -1,0 +1,33 @@
+.deck {
+  position: absolute;
+  right: calc(calc(var(--card-height) / 1.4) / -2.5);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.deck .deck__card {
+  position: absolute;
+
+  &:before {
+    content: '';
+    box-shadow: 0 2px 10px hsla(0, 0%, 0%, 0.415);
+    border-radius: var(--card-border-radius);
+    left: 0;
+    height: var(--card-height);
+    position: absolute;
+    top: 0;
+    transition: box-shadow 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    width: 100%;
+    pointer-events: none;
+  }
+}
+
+// prettier-ignore
+.deck .deck__card {
+  &:nth-child(1) { transform: translateX(-50px); }
+  &:nth-child(2) { transform: translateX(-25px); }
+  &:nth-child(3) { transform: translateX(0); }
+}

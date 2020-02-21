@@ -7,6 +7,7 @@ import avatars from 'config/avatars.config';
 // child components
 import TheirAvatar from 'components/avatars/TheirAvatar';
 import TheirBoardPlayerArea from 'components/board-play-areas/TheirBoardPlayArea';
+import TheirDeck from 'components/decks/YourDeck';
 
 export default function TheirBoard({
   G,
@@ -16,7 +17,8 @@ export default function TheirBoard({
   theirID,
   yourID
 }) {
-  const { playerClass } = G;
+  const { counts, playerClass } = G;
+  const theirDeckLength = counts[theirID].deck;
 
   return (
     <div data-file="boards/TheirBoard" className={'their-board'}>
@@ -28,6 +30,9 @@ export default function TheirBoard({
         theirID={theirID}
         yourID={yourID}
       />
+
+      <TheirDeck length={theirDeckLength} />
+
       <TheirBoardPlayerArea
         G={G}
         ctx={ctx}

@@ -9,11 +9,13 @@ import SPELLTYPE from 'enums/spellType.enums';
 import SpellSlot from 'components/board-slots/SpellSlot';
 import YourAvatar from 'components/avatars/YourAvatar';
 import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
+import YourDeck from 'components/decks/YourDeck';
 
 export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
-  const { playerClass, selectedCardObject } = G;
+  const { counts, playerClass, selectedCardObject } = G;
   const { playCard } = moves;
 
+  const yourDeckLength = counts[yourID].deck;
   const selectedCard = selectedCardObject[yourID];
   const cardId = selectedCard && selectedCard.id;
   const cardUUID = selectedCard && selectedCard.uuid;
@@ -28,6 +30,7 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
       {spellType === SPELLTYPE[1] ? (
         <SpellSlot index={0} onClick={() => castGlobalSpell()} />
       ) : null}
+
       <YourBoardPlayArea
         G={G}
         ctx={ctx}
@@ -36,6 +39,9 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
         board="YourBoard"
         yourID={yourID}
       />
+
+      <YourDeck length={yourDeckLength} />
+
       <YourAvatar
         G={G}
         moves={moves}

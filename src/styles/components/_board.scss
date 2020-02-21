@@ -16,6 +16,7 @@
   flex-flow: column nowrap;
   height: calc(100% / 2);
   justify-content: flex-start;
+  position: relative;
   margin: auto auto 0;
   width: 100%;
 }
@@ -29,6 +30,7 @@
   flex-flow: column nowrap;
   height: calc(100% / 2);
   justify-content: flex-end;
+  position: relative;
   margin: auto auto 0;
   width: 100%;
 }
