@@ -1,3 +1,10 @@
+/**
+ * Returns the corresponding Buff effect from the CORE card set.
+ * @param {{}} G
+ * @param {string} player
+ * @param {string} cardId
+ * @param {number} index
+ */
 const initCoreBuff = (G, player, cardId) => {
   // prettier-ignore
   switch (cardId) {

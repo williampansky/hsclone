@@ -1,5 +1,12 @@
 import getCardByID from 'lib/utils/get-card-by-id';
 
+/**
+ * Returns the adjustment function per the CORE cardId.
+ * @param {{}} G
+ * @param {string} player
+ * @param {string} cardId
+ * @param {number} index
+ */
 const recalculateCoreBoon = (G, player, cardId, index) => {
   // prettier-ignore
   switch (cardId) {
@@ -11,6 +18,9 @@ const recalculateCoreBoon = (G, player, cardId, index) => {
 
 /**
  * Your other minions of this type have +1 Attack.
+ * @param {{}} G
+ * @param {string} player
+ * @param {string} cardId
  */
 const CORE_003 = (G, player, cardId) => {
   const MINION_TYPE = getCardByID(cardId).type;
@@ -33,6 +43,9 @@ const CORE_003 = (G, player, cardId) => {
 
 /**
  * Your other minions have +1 Attack.
+ * @param {{}} G
+ * @param {string} player
+ * @param {string} cardId
  */
 const CORE_019 = (G, player, cardId) => {
   const transformEach = (G, player, index) => {

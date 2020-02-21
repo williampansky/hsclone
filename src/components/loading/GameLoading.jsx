@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+/**
+ * @see https://codepen.io/duanhongchang/pen/fwigG
+ */
 export default function GameLoading() {
   return (
     <Component>

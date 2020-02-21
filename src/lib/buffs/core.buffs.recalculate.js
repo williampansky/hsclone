@@ -1,6 +1,12 @@
+/**
+ * Returns the adjustment function per the CORE cardId.
+ * @param {{}} G
+ * @param {string} player
+ * @param {{}} card
+ */
 const recalculateCoreBuff = (G, player, card) => {
-  const { id, warcryObjectNumber } = card;
-  const amount = warcryObjectNumber;
+  const { id, warcryNumber } = card;
+  const amount = warcryNumber;
 
   // prettier-ignore
   switch (id) {

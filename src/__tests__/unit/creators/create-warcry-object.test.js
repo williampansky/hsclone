@@ -8,8 +8,9 @@ test(`should generate the relevant warcryObject based on provided cardId param`,
 
   expect(result).toEqual({
     id: expectedMinionData.id,
-    attack: expectedMinionData.warcryObjectNumber,
+    amount: expectedMinionData.warcryNumber,
     spellType: expectedMinionData.spellType,
+    spellContext: expectedMinionData.spellContext,
     targetingArrowText: expectedMinionData.targetingArrowText
   });
 });
