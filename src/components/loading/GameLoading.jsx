@@ -79,10 +79,10 @@ const Label = styled.div`
 `;
 
 const LabelText = styled.span`
-  animation: fade 1s linear infinite;
+  animation: fadingText 1s linear infinite;
   vertical-align: middle;
 
-  @keyframes fade {
+  @keyframes fadingText {
     from {
       opacity: 1;
     }

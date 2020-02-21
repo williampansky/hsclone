@@ -1,10 +1,32 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import EnergySlot from 'components/player-energy/EnergySlot';
 
 export default function PlayerEnergy({ energy }) {
   const { current, total } = energy;
   return (
     <div data-file="player-energy/PlayerEnergy" className={'player-energy'}>
-      {current}/{total}
+      {/* {current}/{total} */}
+      <div className={'player-energy__energy-bar'}>
+        {Array.from(Array(10)).map((_, index) => {
+          index = index + 1;
+          return (
+            <EnergySlot
+              empty={index >= current}
+              filled={index <= current}
+              key={index}
+              number={index}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
+
+PlayerEnergy.propTypes = {
+  energy: PropTypes.shape({
+    current: PropTypes.number,
+    total: PropTypes.number
+  })
+};

@@ -80,6 +80,7 @@
 }
 
 .card .card-text {
+  box-sizing: content-box;
   align-items: center;
   bottom: 15px;
   display: flex;
@@ -119,10 +120,11 @@
   letter-spacing: 0.0875em;
   margin: 0 auto;
   padding: 0.2em 0.15em;
-  position: relative;
+  position: absolute;
   text-align: center;
   user-select: none;
   width: 100%;
+  bottom: 0;
 }
 
 .card .card-attack {

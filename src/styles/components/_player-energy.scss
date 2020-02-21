@@ -1,13 +1,109 @@
 .player-energy {
-  box-sizing: border-box;
   position: absolute;
   left: auto;
   right: 0;
-  margin: 0 20px;
+  margin: 0;
   height: 100%;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
   user-select: none;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.player-energy__energy-bar {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.energy-bar__energy-slot {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 30px;
+  font-size: 1em;
+  overflow: hidden;
+  position: relative;
+
+  & > div {
+    font-family: sans-serif;
+    pointer-events: none;
+    // height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  & + .energy-bar__energy-slot {
+    border-left: 1px solid #444;
+  }
+}
+
+// prettier-ignore
+.energy-bar__energy-slot {
+  &:nth-child(2)  { animation-delay: 400ms; }
+  &:nth-child(3)  { animation-delay: 600ms; }
+  &:nth-child(4)  { animation-delay: 800ms; }
+  &:nth-child(5)  { animation-delay: 1000ms; }
+  &:nth-child(6)  { animation-delay: 1200ms; }
+  &:nth-child(7)  { animation-delay: 1400ms; }
+  &:nth-child(8)  { animation-delay: 1600ms; }
+  &:nth-child(9)  { animation-delay: 1800ms; }
+  &:nth-child(10) { animation-delay: 2000ms; }
+}
+
+.energy-slot--empty {
+  background: #222;
+  color: #999;
+}
+
+.energy-slot--filled {
+  background: linear-gradient(
+    -90deg,
+    #3cf,
+    rgb(75, 210, 255),
+    #00bbff,
+    rgb(75, 210, 255),
+    #3cf
+  );
+  background-size: 400% 100%;
+  // background: #3cf;
+  // color: #06546e;
+  // animation: Gradient 4s ease infinite;
+
+  & > div {
+    color: black;
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+    background-size: inherit;
+    // background-image: inherit;
+    // animation: Gradient 4s ease infinite;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    background-size: inherit;
+    background-image: inherit;
+    animation: inherit;
+    left: 0px;
+    right: 0px;
+    top: 2px;
+    height: 100%;
+    filter: blur(1rem);
+    pointer-events: none;
+  }
+}
+
+@keyframes Gradient {
+  50% {
+    background-position: 140% 50%;
+    transform: skew(-2deg);
+  }
 }
