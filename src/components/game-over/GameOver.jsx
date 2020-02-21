@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function GameOver({ winner }) {
+export default function GameOver({ yourID, theirID, winner }) {
   return (
     <div data-file="GameOver" className={'game-over'}>
-      <h1>Player {winner} wins!</h1>
+      {winner === yourID ? (
+        <h1>Victory is yours!</h1>
+      ) : (
+        <h1>You have been defeated!</h1>
+      )}
     </div>
   );
 }
 
 GameOver.propTypes = {
+  yourID: PropTypes.string,
+  theirID: PropTypes.string,
   winner: PropTypes.string
 };

@@ -67,7 +67,11 @@ export default function GameWrapper(props) {
     <React.Fragment>
       <div
         data-file="GameWrapper"
-        className={['game-wrapper', gameover ? 'game-over' : ''].join(' ')}
+        className={[
+          'game-wrapper',
+          gameover ? 'game-over' : '',
+          gameover && winner === yourID ? 'victory' : 'defeat'
+        ].join(' ')}
       >
         <TheirHand G={G} theirID={theirID} toggleMenuFn={() => toggleMenu()} />
         <Board
@@ -99,7 +103,9 @@ export default function GameWrapper(props) {
         />
       </div>
 
-      {gameover && <GameOver winner={winner} />}
+      {gameover && (
+        <GameOver theirID={theirID} yourID={yourID} winner={winner} />
+      )}
 
       {showMenu && (
         <GameMenu

@@ -14,6 +14,7 @@
   z-index: 9001;
 
   h1 {
+    animation: fadeInText 800ms ease-in-out forwards;
     color: white;
     text-align: center;
   }
@@ -28,6 +29,12 @@
   }
 }
 
+// prettier-ignore
+.game-wrapper {
+  &.defeat:before { background: rgba(29, 0, 0, 0.625); }
+  &.victory:before { background: rgba(20, 62, 72, 0.625); }
+}
+
 @keyframes blur {
   0% {
     filter: blur(0);
@@ -39,6 +46,16 @@
 }
 
 @keyframes fadeOut {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInText {
   0% {
     opacity: 0;
   }
