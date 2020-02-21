@@ -5,6 +5,7 @@ import { Lobby } from 'boardgame.io/react';
 import { SocketIO } from 'boardgame.io/multiplayer';
 import { HSclone } from './lib/game';
 import GameWrapper from './components/game-wrapper/GameWrapper';
+import GameLoading from 'components/loading/GameLoading';
 import './index.css';
 import './styles/game.scss';
 import * as serviceWorker from './serviceWorker';
@@ -15,6 +16,7 @@ const REDUX_DEVTOOLS =
 const HScloneClient = Client({
   game: HSclone,
   board: GameWrapper,
+  loading: GameLoading,
   debug: true,
   multiplayer: SocketIO({ server: 'localhost:8000' }),
   enhancer: REDUX_DEVTOOLS
