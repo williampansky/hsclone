@@ -6,14 +6,14 @@ export default function PlayerEnergy({ energy }) {
   const { current, total } = energy;
   return (
     <div data-file="player-energy/PlayerEnergy" className={'player-energy'}>
-      {/* {current}/{total} */}
       <div className={'player-energy__energy-bar'}>
         {Array.from(Array(10)).map((_, index) => {
           index = index + 1;
           return (
             <EnergySlot
-              empty={index >= current}
-              filled={index <= current}
+              available={total >= index}
+              empty={current <= index}
+              filled={current >= index}
               key={index}
               number={index}
             />

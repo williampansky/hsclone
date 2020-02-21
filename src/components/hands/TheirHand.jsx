@@ -59,6 +59,28 @@ export default function TheirHand({ G, theirID, toggleMenuFn }) {
     }
   }
 
+  function calcOffset(index, total = 10, offsetRange = 80) {
+    // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
+    const MIN = 10;
+    const MAX = 50;
+
+    const calculation = Math.abs(
+      ((index - (total - 1) / 2) / (total - 2)) * offsetRange
+    );
+
+    return limitNumberWithinRange(calculation, MAX, MIN);
+  }
+
+  function calcRotate(index, total = 10, rotationRange = 50) {
+    // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
+    const MIN = -25;
+    const MAX = 25;
+
+    const calculation =
+      ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
+    return limitNumberWithinRange(calculation, MAX, MIN);
+  }
+
   return (
     <div
       data-file="hands/TheirHand"
@@ -95,24 +117,3 @@ TheirHand.propTypes = {
   }),
   theirID: PropTypes.string
 };
-
-function calcOffset(index, total = 10, offsetRange = 80) {
-  // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
-  const MIN = 10;
-  const MAX = 50;
-
-  const calculation = Math.abs(
-    ((index - (total - 1) / 2) / (total - 2)) * offsetRange
-  );
-
-  return limitNumberWithinRange(calculation, MAX, MIN);
-}
-
-function calcRotate(index, total = 10, rotationRange = 50) {
-  // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
-  const MIN = -25;
-  const MAX = 25;
-
-  const calculation = ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
-  return limitNumberWithinRange(calculation, MAX, MIN);
-}

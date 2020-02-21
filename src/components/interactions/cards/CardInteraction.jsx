@@ -6,6 +6,7 @@ import useHover from 'react-use-hover';
 import Card from 'components/cards/Card';
 import CardIsPlayable from 'components/interactions/cards/layers/CardIsPlayable';
 import CardIsSelected from 'components/interactions/cards/layers/CardIsSelected';
+import limitNumberWithinRange from 'lib/utils/range-limit';
 
 export default function CardInteraction({
   G,
@@ -84,6 +85,28 @@ export default function CardInteraction({
     `
   };
 
+  function calcOffset(index, total = 10, offsetRange = 80) {
+    // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
+    const MIN = 10;
+    const MAX = 60;
+
+    const calculation = Math.abs(
+      ((index - (total - 1) / 2) / (total - 2)) * offsetRange
+    );
+
+    return limitNumberWithinRange(calculation, MAX, MIN);
+  }
+
+  // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
+  function calcRotate(index, total = 10, rotationRange = 50) {
+    const MIN = -25;
+    const MAX = 25;
+    const calculation =
+      ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
+
+    return limitNumberWithinRange(calculation, MAX, MIN);
+  }
+
   function selectPlayableCard(index) {
     hoverCard(null);
     return selectCard(card, index);
@@ -157,17 +180,3 @@ CardInteraction.propTypes = {
   index: PropTypes.number,
   numberOfCards: PropTypes.number
 };
-
-// prettier-ignore
-// abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
-function calcOffset(index, total = 10, offsetRange = 80) {
-  // index = index + 1;
-  return Math.abs((index - (total - 1) / 2) / (total - 2) * offsetRange);
-}
-
-// prettier-ignore
-// ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
-function calcRotate(index, total = 10, rotationRange = 50) {
-  // index = index + 1;
-  return (index - (total - 1) / 2) / (total - 2) * rotationRange;
-}

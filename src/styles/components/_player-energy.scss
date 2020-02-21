@@ -22,6 +22,8 @@
 }
 
 .energy-bar__energy-slot {
+  background: #222;
+  color: #999;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -31,6 +33,28 @@
   font-size: 1em;
   overflow: hidden;
   position: relative;
+  transition: all 400ms cubic-bezier(0.19, 1, 0.22, 1);
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    z-index: 0;
+    opacity: 0;
+    transition: all 400ms cubic-bezier(0.19, 1, 0.22, 1);
+    background: linear-gradient(
+      -90deg,
+      #3cf,
+      rgb(75, 210, 255),
+      #00bbff,
+      rgb(75, 210, 255),
+      #3cf
+    );
+    background-size: 400% 100%;
+  }
 
   & > div {
     font-family: sans-serif;
@@ -47,43 +71,68 @@
 
 // prettier-ignore
 .energy-bar__energy-slot {
-  &:nth-child(2)  { animation-delay: 400ms; }
-  &:nth-child(3)  { animation-delay: 600ms; }
-  &:nth-child(4)  { animation-delay: 800ms; }
-  &:nth-child(5)  { animation-delay: 1000ms; }
-  &:nth-child(6)  { animation-delay: 1200ms; }
-  &:nth-child(7)  { animation-delay: 1400ms; }
-  &:nth-child(8)  { animation-delay: 1600ms; }
-  &:nth-child(9)  { animation-delay: 1800ms; }
-  &:nth-child(10) { animation-delay: 2000ms; }
+  &:nth-child(1), &:nth-child(1):before  { transition-delay: 500ms; }
+  &:nth-child(2), &:nth-child(2):before  { transition-delay: 450ms; }
+  &:nth-child(3), &:nth-child(3):before  { transition-delay: 400ms; }
+  &:nth-child(4), &:nth-child(4):before  { transition-delay: 350ms; }
+  &:nth-child(5), &:nth-child(5):before  { transition-delay: 300ms; }
+  &:nth-child(6), &:nth-child(6):before  { transition-delay: 250ms; }
+  &:nth-child(7), &:nth-child(7):before  { transition-delay: 200ms; }
+  &:nth-child(8), &:nth-child(8):before  { transition-delay: 150ms; }
+  &:nth-child(9), &:nth-child(9):before  { transition-delay: 100ms; }
+  &:nth-child(10), &:nth-child(10):before { transition-delay: 50ms; }
 }
 
-.energy-slot--empty {
+// prettier-ignore
+.energy-bar__energy-slot {
+  &.energy-slot--filled:nth-child(1), &.energy-slot--filled:nth-child(1):before  { transition-delay: 0ms; }
+  &.energy-slot--filled:nth-child(2), &.energy-slot--filled:nth-child(2):before  { transition-delay: 50ms; }
+  &.energy-slot--filled:nth-child(3), &.energy-slot--filled:nth-child(3):before  { transition-delay: 100ms; }
+  &.energy-slot--filled:nth-child(4), &.energy-slot--filled:nth-child(4):before  { transition-delay: 150ms; }
+  &.energy-slot--filled:nth-child(5), &.energy-slot--filled:nth-child(5):before  { transition-delay: 200ms; }
+  &.energy-slot--filled:nth-child(6), &.energy-slot--filled:nth-child(6):before  { transition-delay: 250ms; }
+  &.energy-slot--filled:nth-child(7), &.energy-slot--filled:nth-child(7):before  { transition-delay: 300ms; }
+  &.energy-slot--filled:nth-child(8), &.energy-slot--filled:nth-child(8):before  { transition-delay: 350ms; }
+  &.energy-slot--filled:nth-child(9), &.energy-slot--filled:nth-child(9):before  { transition-delay: 400ms; }
+  &.energy-slot--filled:nth-child(10), &.energy-slot--filled:nth-child(10):before { transition-delay: 450ms; }
+}
+
+.energy-bar__energy-slot .icon {
+  height: initial;
+  width: 10px;
+
+  svg {
+    width: 10px;
+    height: initial;
+  }
+
+  svg [fill='#000000'] {
+    fill: #615e5e;
+  }
+}
+
+.energy-slot--available {
   background: #222;
   color: #999;
+  transition: all 400ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+// .energy-slot--empty {
+//   background: #222;
+//   color: #999;
+// }
+
 .energy-slot--filled {
-  background: linear-gradient(
-    -90deg,
-    #3cf,
-    rgb(75, 210, 255),
-    #00bbff,
-    rgb(75, 210, 255),
-    #3cf
-  );
-  background-size: 400% 100%;
-  // background: #3cf;
-  // color: #06546e;
-  // animation: Gradient 4s ease infinite;
+  &:before {
+    height: 100%;
+    opacity: 1;
+  }
 
   & > div {
-    color: black;
-    mix-blend-mode: overlay;
+    color: #14556b;
+    // mix-blend-mode: overlay;
     border-radius: inherit;
     background-size: inherit;
-    // background-image: inherit;
-    // animation: Gradient 4s ease infinite;
   }
 
   &:after {
@@ -98,12 +147,5 @@
     height: 100%;
     filter: blur(1rem);
     pointer-events: none;
-  }
-}
-
-@keyframes Gradient {
-  50% {
-    background-position: 140% 50%;
-    transform: skew(-2deg);
   }
 }

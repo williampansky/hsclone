@@ -42,7 +42,7 @@ export default function MinionInteraction({
 
   function handleClick() {
     if (yBoard) {
-      if (!CAN_ATTACK || !CAN_BE_HEALED) return;
+      if (!CAN_ATTACK) return;
       if (IS_ATTACKING) return deselectMinion();
       else return selectMinion(data, index);
     }
