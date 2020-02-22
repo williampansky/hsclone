@@ -134,18 +134,35 @@
     border-radius: inherit;
     background-size: inherit;
   }
+}
 
-  &:after {
-    content: '';
-    position: absolute;
-    background-size: inherit;
-    background-image: inherit;
-    animation: inherit;
-    left: 0px;
-    right: 0px;
-    top: 2px;
-    height: 100%;
-    filter: blur(1rem);
-    pointer-events: none;
+.energy-slot--will-cost {
+  background: #a5ddf1;
+  transition-delay: 0ms !important;
+
+  &:before {
+    animation: blinkBefore 1200ms ease-in-out infinite;
   }
+
+  // prettier-ignore
+  @keyframes blinkBefore {
+    0%    { opacity: 1; }
+    50%   { opacity: 0; }
+    100%  { opacity: 1; }
+  }
+}
+
+.energy-slot--locked {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.675);
+
+  // &:after {
+  //   border: 1px solid rgba(255, 255, 255, 0.175);
+  //   content: '';
+  //   position: absolute;
+  //   height: 80%;
+  //   width: 80%;
+  //   margin: auto;
+  //   // filter: blur(1px);
+  //   pointer-events: none;
+  // }
 }

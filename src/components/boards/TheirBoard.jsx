@@ -17,8 +17,10 @@ export default function TheirBoard({
   theirID,
   yourID
 }) {
-  const { counts, playerClass } = G;
+  const { counts, playerClass, cardBack } = G;
   const theirDeckLength = counts[theirID].deck;
+
+  const theirCardBackImageSrc = cardBack[theirID];
 
   return (
     <div data-file="boards/TheirBoard" className={'their-board'}>
@@ -31,8 +33,6 @@ export default function TheirBoard({
         yourID={yourID}
       />
 
-      <TheirDeck length={theirDeckLength} />
-
       <TheirBoardPlayerArea
         G={G}
         ctx={ctx}
@@ -41,6 +41,12 @@ export default function TheirBoard({
         board="TheirBoard"
         theirID={theirID}
         yourID={yourID}
+      />
+
+      <TheirDeck
+        board="TheirBoard"
+        cardBackSrc={theirCardBackImageSrc}
+        length={theirDeckLength}
       />
     </div>
   );

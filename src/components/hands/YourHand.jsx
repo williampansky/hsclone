@@ -7,10 +7,20 @@ import CardInteraction from 'components/interactions/cards/CardInteraction';
 import WarcryObject from 'components/warcrys/WarcryObject';
 
 export default function YourHand({ G, ctx, moves, isActive, yourID }) {
-  const { counts, energy, players, selectedCardIndex, warcryObject } = G;
+  const {
+    counts,
+    energy,
+    players,
+    selectedCardIndex,
+    selectedCardObject,
+    warcryObject
+  } = G;
+
   const yourHand = players[yourID] && players[yourID].hand;
   const handLength = counts[yourID] && counts[yourID].hand;
   const cardIsSelected = selectedCardIndex[yourID];
+  const selectedCardObj = selectedCardObject[yourID];
+  const selectedCardCost = selectedCardObj && selectedCardObj.cost;
   const activeWarcryObject = warcryObject[yourID];
 
   return (
@@ -50,7 +60,7 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
         );
       })}
       {activeWarcryObject && <WarcryObject data={activeWarcryObject} />}
-      <PlayerEnergy energy={energy[yourID]} />
+      <PlayerEnergy energy={energy[yourID]} selectedCost={selectedCardCost} />
     </div>
   );
 }

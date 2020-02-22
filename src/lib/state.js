@@ -1,6 +1,7 @@
 import boards from 'lib/state/boards';
 import buffs from 'lib/state/buffs';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import cardBack from 'lib/state/cardBack';
 import counts from 'lib/state/counts';
 import energy from 'lib/state/energy';
 import health from 'lib/state/health';
@@ -32,6 +33,7 @@ export default {
   selectedMinionIndex: selectedMinionIndex.__DATA_MODEL,
   selectedMinionObject: selectedMinionObject.__DATA_MODEL,
   warcryObject: warcryObject.__DATA_MODEL,
+  cardBack: cardBack.__DATA_MODEL,
   turnOrder: ['0', '1'].sort(() => {
     return Math.random() - 0.5;
   })

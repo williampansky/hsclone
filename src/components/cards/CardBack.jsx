@@ -1,13 +1,18 @@
 import React from 'react';
-import image from 'assets/images/card-back-temp.jpg';
+import PropTypes from 'prop-types';
+// import image from 'assets/images/card-back-temp2.png';
 
-export default function CardBack() {
+export default function CardBack({ imageSrc }) {
   return (
     <div
       className={['card', 'card-back'].join(' ')}
       style={{
-        backgroundImage: `url(${image})`
+        backgroundImage: `url(assets/images/${imageSrc})`
       }}
     />
   );
 }
+
+CardBack.propTypes = {
+  imageSrc: PropTypes.string
+};

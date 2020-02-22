@@ -12,9 +12,10 @@ import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
 import YourDeck from 'components/decks/YourDeck';
 
 export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
-  const { counts, playerClass, selectedCardObject } = G;
+  const { counts, playerClass, selectedCardObject, cardBack } = G;
   const { playCard } = moves;
 
+  const yourCardBackImageSrc = cardBack[yourID];
   const yourDeckLength = counts[yourID].deck;
   const selectedCard = selectedCardObject[yourID];
   const cardId = selectedCard && selectedCard.id;
@@ -40,7 +41,11 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
         yourID={yourID}
       />
 
-      <YourDeck length={yourDeckLength} />
+      <YourDeck
+        board="YourBoard"
+        cardBackSrc={yourCardBackImageSrc}
+        length={yourDeckLength}
+      />
 
       <YourAvatar
         G={G}

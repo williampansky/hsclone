@@ -1,22 +1,30 @@
+// prettier-ignore
 :root {
+  /* ================================ */
   /* layout vars */
-  --board-theirHand-background-color: #2525;
-  --board-theirHand-height: 45px;
-  --board-theirHand-zIndex: 200;
-  --board-yourHand-background-color: #2525;
-  --board-yourHand-height: 45px;
-  --board-yourHand-zIndex: 200;
+  --board-theirHand-background-color:   #2525;
+  --board-theirHand-height:             45px;
+  --board-theirHand-zIndex:             200;
+  --board-yourHand-background-color:    #2525;
+  --board-yourHand-height:              45px;
+  --board-yourHand-zIndex:              200;
   --board-players-hands-height: calc(
     var(--board-theirHand-height) + var(--board-yourHand-height)
   );
 
+  /* ================================ */
   /* card vars */
-  --card-background-color: #ededed;
-  --card-border-radius: 3px;
-  --card-height: 250px;
+  --card-background-color:            #ededed;
+  --card-border-radius:                 8px;
+  --card-height:                        250px;
 
+  /* ================================ */
   /* minion vars */
-  --minion-height: 150px;
-  --minion-border-radius: 25%;
-  --minion-stat-offset: -4.165px;
+  --minion-height:                      150px;
+  --minion-border-radius:               25%;
+  --minion-stat-offset:                 -4.165px;
+
+  /* ================================ */
+  /* deck vars */
+  --deck-offset:                        100px;
 }

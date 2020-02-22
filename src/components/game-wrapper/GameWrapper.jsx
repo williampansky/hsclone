@@ -31,12 +31,16 @@ export default function GameWrapper(props) {
     isConnected,
     credentials
   } = props;
-  const { winner } = G;
+  const { winner, cardBack } = G;
   const { gameover } = ctx;
 
   // id declarations
   const yourID = playerID === '0' ? '0' : '1';
   const theirID = playerID === '0' ? '1' : '0';
+
+  // card graphic declarations
+  const theirCardBackImageSrc = cardBack[theirID];
+  const yourCardBackImageSrc = cardBack[yourID];
 
   function toggleMenu() {
     return !showMenu
@@ -73,7 +77,12 @@ export default function GameWrapper(props) {
           gameover && winner === yourID ? 'victory' : 'defeat'
         ].join(' ')}
       >
-        <TheirHand G={G} theirID={theirID} toggleMenuFn={() => toggleMenu()} />
+        <TheirHand
+          G={G}
+          cardBackSrc={theirCardBackImageSrc}
+          theirID={theirID}
+          toggleMenuFn={() => toggleMenu()}
+        />
         <Board
           G={G}
           ctx={ctx}
@@ -99,6 +108,7 @@ export default function GameWrapper(props) {
           ctx={ctx}
           moves={moves}
           isActive={isActive}
+          cardBackSrc={yourCardBackImageSrc}
           yourID={yourID}
         />
       </div>

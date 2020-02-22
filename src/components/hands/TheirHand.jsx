@@ -7,7 +7,7 @@ import GameMenuTrigger from 'components/game-menu/GameMenuTrigger';
 import PlayerEnergy from 'components/player-energy/PlayerEnergy';
 import limitNumberWithinRange from 'lib/utils/range-limit';
 
-export default function TheirHand({ G, theirID, toggleMenuFn }) {
+export default function TheirHand({ G, theirID, cardBackSrc, toggleMenuFn }) {
   const {
     counts,
     energy,
@@ -97,7 +97,7 @@ export default function TheirHand({ G, theirID, toggleMenuFn }) {
             className={classes(index)}
             style={{ transform: transforms(index) }}
           >
-            <CardBack />
+            <CardBack imageSrc={cardBackSrc} />
           </div>
         );
       })}

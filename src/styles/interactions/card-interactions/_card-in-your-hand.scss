@@ -17,7 +17,7 @@
 
   &:before {
     content: '';
-    box-shadow: -5px 5px 5px hsla(0, 0%, 0%, 0.15);
+    box-shadow: -5px 5px 5px hsla(0, 0%, 0%, 0.925);
     left: 0;
     height: var(--card-height);
     position: absolute;
@@ -50,7 +50,7 @@
   z-index: 100;
 
   &:before {
-    box-shadow: 0 10px 20px hsla(0, 0%, 0%, 0.4);
+    box-shadow: 0 10px 20px hsla(0, 0%, 0%, 0.925);
   }
 
   &:after {
@@ -65,7 +65,7 @@
 .card-in-your-hand[data-is-selected='true'] {
   position: absolute;
   right: 4%;
-  top: calc(-1 * var(--card-height));
+  top: calc(-1.1 * var(--card-height));
   transform: translateY(0) rotate(0) scale(1) !important;
   // transform: translate(-200%, -75%) rotate(0) scale(1) !important;
   z-index: 100;

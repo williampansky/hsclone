@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import EnergySlot from 'components/player-energy/EnergySlot';
 
-export default function PlayerEnergy({ energy }) {
+export default function PlayerEnergy({ energy, selectedCost }) {
   const { current, total } = energy;
   return (
     <div data-file="player-energy/PlayerEnergy" className={'player-energy'}>
@@ -16,6 +16,7 @@ export default function PlayerEnergy({ energy }) {
               filled={current >= index}
               key={index}
               number={index}
+              willCost={selectedCost >= index}
             />
           );
         })}
@@ -28,5 +29,6 @@ PlayerEnergy.propTypes = {
   energy: PropTypes.shape({
     current: PropTypes.number,
     total: PropTypes.number
-  })
+  }),
+  selectedCost: PropTypes.number
 };

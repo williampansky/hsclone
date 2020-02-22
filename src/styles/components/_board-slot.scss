@@ -57,3 +57,22 @@
   opacity: 0;
   pointer-events: none;
 }
+
+.board-slot.animate-minion-drop {
+  animation-name: dropDown;
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+
+  @keyframes dropDown {
+    0% {
+      opacity: 0;
+      transform: scale(1.8);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

@@ -18,7 +18,7 @@
   &:before {
     content: '';
     border-radius: var(--card-border-radius);
-    box-shadow: -5px 5px 5px hsla(0, 0%, 0%, 0.15);
+    box-shadow: -5px 5px 5px hsla(0, 0%, 0%, 0.925);
     left: 0;
     height: var(--card-height);
     position: absolute;
@@ -55,7 +55,7 @@
   z-index: 100;
 
   &:before {
-    box-shadow: 0 10px 20px hsla(0, 0%, 0%, 0.4);
+    box-shadow: 0 10px 20px hsla(0, 0%, 0%, 0.925);
   }
 
   &:after {

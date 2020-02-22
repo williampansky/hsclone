@@ -2,14 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ReactSVG } from 'react-svg';
 
-export default function PlayerEnergy({ available, empty, filled, number }) {
+export default function PlayerEnergy({
+  available,
+  empty,
+  filled,
+  number,
+  willCost
+}) {
   return (
     <div
       data-file="player-energy/EnergySlot"
       className={[
         'energy-bar__energy-slot',
         available ? 'energy-slot--available' : '',
-        filled ? 'energy-slot--filled' : ''
+        !available ? 'energy-slot--locked' : '',
+        filled ? 'energy-slot--filled' : '',
+        willCost ? 'energy-slot--will-cost' : ''
       ].join(' ')}
     >
       {available ? (
