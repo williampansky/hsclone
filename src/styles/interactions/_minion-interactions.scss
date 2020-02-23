@@ -34,9 +34,17 @@
 .minion-interaction-layer.minion--has_guard {
   border-radius: 0;
 
-  & ~ div > div:nth-child(1) {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+  & ~ .minion,
+  & ~ .minion:before,
+  & ~ .minion:after,
+  & ~ .minion .image-wrapper,
+  & ~ .minion .image-wrapper:before,
+  & ~ .minion .image-wrapper:after,
+  & ~ .minion .minion__bezel,
+  & ~ .minion .minion__bezel:before,
+  & ~ .minion .minion__bezel:after {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
   }
 }
 

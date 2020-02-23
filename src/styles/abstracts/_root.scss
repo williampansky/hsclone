@@ -2,10 +2,10 @@
 :root {
   /* ================================ */
   /* layout vars */
-  --board-theirHand-background-color:   #2525;
+  --board-theirHand-background-color:   #151515;
   --board-theirHand-height:             45px;
   --board-theirHand-zIndex:             200;
-  --board-yourHand-background-color:    #2525;
+  --board-yourHand-background-color:    #151515;
   --board-yourHand-height:              45px;
   --board-yourHand-zIndex:              200;
   --board-players-hands-height: calc(
@@ -21,8 +21,16 @@
   /* ================================ */
   /* minion vars */
   --minion-height:                      150px;
-  --minion-border-radius:               25%;
-  --minion-stat-offset:                 -4.165px;
+  --minion-border-radius:               50%;
+  --minion-stat-offset:                 5.165px;
+
+  /* ================================ */
+  /* avatar vars */
+  --avatar-border-radius:               65%;
+
+  /* ================================ */
+  /* player health vars */
+  --player-health-size:                 50px;
 
   /* ================================ */
   /* deck vars */

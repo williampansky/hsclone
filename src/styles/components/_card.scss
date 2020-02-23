@@ -11,31 +11,48 @@
 }
 
 .card .card-cost {
+  font-family: 'Carter One', sans-serif;
   align-items: center;
   background-image: radial-gradient(
     circle,
     hsla(197, 100%, 80%, 1),
     hsla(197, 90%, 65%, 1)
   );
-  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 50%;
-  border-right: 1px solid rgba(0, 0, 0, 0.15);
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  // border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  // border-left: 1px solid rgba(255, 255, 255, 0.15);
+  // border-right: 1px solid rgba(0, 0, 0, 0.15);
+  // border-top: 1px solid rgba(255, 255, 255, 0.25);
   color: #042c3c;
   display: flex;
   flex-flow: column nowrap;
-  font-size: 0.875em;
+  font-size: 1em;
   font-weight: 600;
-  height: calc(var(--card-height) / 10);
+  height: calc(var(--card-height) / 8);
   justify-content: center;
+  overflow: hidden;
   left: -8.675px;
   line-height: 1;
   position: absolute;
   top: -8.675px;
   user-select: none;
-  width: calc(var(--card-height) / 10);
+  width: calc(var(--card-height) / 8);
   z-index: 5;
+  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.925),
+    0px 0px 4px rgba(0, 0, 0, 0.465);
+
+  &:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+    border-radius: 50%;
+    border-top: 4px solid rgb(195, 238, 255);
+    border-bottom: 4px solid rgb(56, 164, 207);
+    filter: blur(2px);
+    @include position-absolute(0, 0, 0, 0, 0);
+  }
 }
 
 .card .card-image {
@@ -54,9 +71,11 @@
   overflow: hidden;
   position: relative;
   user-select: none;
+  box-shadow: inset 0px 0px 0px 2px rgba(190, 190, 190, 0.265);
 }
 
 .card .card-name {
+  font-family: 'Carter One', sans-serif;
   align-items: center;
   background: #d0deb3;
   border-radius: calc(var(--card-border-radius) / 2);
@@ -79,6 +98,69 @@
   z-index: 2;
 }
 
+.card .card__name__ribbon__wrapper {
+  font-family: 'Carter One', sans-serif;
+  position: relative;
+  top: -2px;
+
+  .card__name__ribbon__front {
+    line-height: 1;
+    background-color: rgb(39, 5, 78);
+    height: calc(var(--card-height) * 0.095);
+    width: calc(100% + 20px);
+    position: relative;
+    left: -10px;
+    z-index: 2;
+    color: #f8f8f8;
+    text-align: center;
+    text-shadow: 0 1px 2px rgb(125, 50, 211);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card__name__ribbon-edge-topleft,
+  .card__name__ribbon-edge-topright,
+  .card__name__ribbon-edge-bottomleft,
+  .card__name__ribbon-edge-bottomright {
+    position: absolute;
+    z-index: 1;
+    border-style: solid;
+    height: 0;
+    width: 0;
+  }
+
+  .card__name__ribbon-edge-bottomleft,
+  .card__name__ribbon-edge-bottomright {
+    top: calc(var(--card-height) * 0.095);
+  }
+  .card__name__ribbon-edge-topleft,
+  .card__name__ribbon-edge-bottomleft {
+    left: -10px;
+    border-color: transparent rgb(18, 0, 37) transparent transparent;
+  }
+  .card__name__ribbon-edge-topleft {
+    top: -5px;
+    border-width: 5px 10px 0 0;
+  }
+  .card__name__ribbon-edge-bottomleft {
+    border-width: 0 10px 0 0;
+  }
+  .card__name__ribbon-edge-topright,
+  .card__name__ribbon-edge-bottomright {
+    right: -10px;
+    border-color: transparent transparent transparent rgb(18, 0, 37);
+  }
+  .card__name__ribbon-edge-topright {
+    top: 0;
+    border-width: 0 0 0 10px;
+  }
+  .card__name__ribbon-edge-bottomright {
+    border-width: 0 0 5px 10px;
+  }
+}
+
 .card .card-text {
   box-sizing: content-box;
   align-items: center;
@@ -87,7 +169,7 @@
   flex-flow: column nowrap;
   font-size: 1em;
   font-weight: normal;
-  height: 25%;
+  height: 30%;
   justify-content: center;
   line-height: calc(1.45 / var(--card-height));
   margin: 0;
@@ -104,6 +186,7 @@
 }
 
 .card .card-type {
+  font-family: 'Carter One', sans-serif;
   align-items: center;
   background: lightgray;
   border-radius: calc(var(--card-border-radius) / 2);
@@ -114,7 +197,7 @@
   box-sizing: border-box;
   display: flex;
   flex-flow: column nowrap;
-  font-size: 0.715em;
+  font-size: 0.7em;
   height: 5%;
   justify-content: center;
   letter-spacing: 0.0875em;
@@ -128,41 +211,93 @@
 }
 
 .card .card-attack {
+  font-family: 'Carter One', sans-serif;
   align-items: center;
-  background: #f59b2b;
+  background: radial-gradient(
+    circle at 50% 15%,
+    white -10px,
+    rgb(232, 233, 141) 3%,
+    rgb(197, 173, 37) 60%
+  );
   border-radius: 50%;
-  bottom: -4.165px;
+  bottom: -6.165px;
   color: #6f3205;
   display: flex;
   flex-flow: column nowrap;
-  font-size: 0.875em;
+  font-size: 1em;
   font-weight: 600;
-  height: calc(var(--card-height) / 10);
+  height: calc(var(--card-height) / 8);
   justify-content: center;
-  left: -4.165px;
+  left: -6.165px;
   line-height: 1;
   position: absolute;
+  overflow: hidden;
   user-select: none;
-  width: calc(var(--card-height) / 10);
+  width: calc(var(--card-height) / 8);
   z-index: 5;
+  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.925),
+    0px 0px 4px rgba(0, 0, 0, 0.465);
+
+  &:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+    border-radius: 50%;
+    border-top: 4px solid rgb(254, 255, 200);
+    border-bottom: 4px solid rgb(179, 154, 18);
+    filter: blur(2px);
+    @include position-absolute(0, 0, 0, 0, 0);
+  }
 }
 
 .card .card-health {
+  font-family: 'Carter One', sans-serif;
   align-items: center;
-  background: #840802;
+  background: radial-gradient(
+    circle at 50% 15%,
+    white -10px,
+    rgb(233, 141, 141) 3%,
+    rgb(197, 37, 37) 60%
+  );
   border-radius: 50%;
-  bottom: -4.165px;
-  color: #ff9792;
+  bottom: -6.165px;
+  color: rgb(121, 21, 21);
   display: flex;
   flex-flow: column nowrap;
-  font-size: 0.875em;
+  font-size: 1em;
   font-weight: 600;
-  height: calc(var(--card-height) / 10);
+  height: calc(var(--card-height) / 8);
   justify-content: center;
   line-height: 1;
   position: absolute;
-  right: -4.165px;
+  overflow: hidden;
+  right: -6.165px;
   user-select: none;
-  width: calc(var(--card-height) / 10);
+  width: calc(var(--card-height) / 8);
   z-index: 5;
+  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.925),
+    0px 0px 4px rgba(0, 0, 0, 0.465);
+
+  &:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+    border-radius: 50%;
+    border-top: 4px solid rgb(255, 198, 198);
+    border-bottom: 4px solid rgb(145, 9, 9);
+    filter: blur(2px);
+    @include position-absolute(0, 0, 0, 0, 0);
+  }
+}
+
+.card .text__value {
+  color: white;
+  position: relative;
+  top: 0.5px;
+  left: 0;
+  text-shadow: 0px 0px 2px black;
 }

@@ -85,19 +85,43 @@ export default function Card({
 
   return (
     <div className={'card'}>
-      <div className={'card-cost'}>{cost}</div>
+      <div className={'card-cost'}>
+        <div className={'text__value'}>{cost}</div>
+      </div>
       <div className={'card-image'} style={cardImage} />
-      <div className={'card-name'} style={fontSize}>
-        {cardName(name, inspiration)}
+      <div className="card__name__ribbon__wrapper" style={fontSize}>
+        <div className="card__name__ribbon__front">
+          <div className={'name__value'}>{cardName(name, inspiration)}</div>
+        </div>
+        <div className="card__name__ribbon-edge-topleft"></div>
+        <div className="card__name__ribbon-edge-topright"></div>
+        <div className="card__name__ribbon-edge-bottomleft"></div>
+        <div className="card__name__ribbon-edge-bottomright"></div>
       </div>
       <div className={'card-text'}>
         <p dangerouslySetInnerHTML={createMarkup(text)} />
       </div>
       <div className={'card-type'}>{type}</div>
-      {IS_MINION && <div className={'card-attack'}>{attack}</div>}
-      {IS_MINION && <div className={'card-health'}>{health}</div>}
-      {IS_WEAPON && <div className={'card-weapon-attack'}>{attack}</div>}
-      {IS_WEAPON && <div className={'card-weapon-health'}>{health}</div>}
+      {IS_MINION && (
+        <div className={'card-attack'}>
+          <div className={'text__value'}>{attack}</div>
+        </div>
+      )}
+      {IS_MINION && (
+        <div className={'card-health'}>
+          <div className={'text__value'}>{health}</div>
+        </div>
+      )}
+      {IS_WEAPON && (
+        <div className={'card-weapon-attack'}>
+          <div className={'text__value'}>{attack}</div>
+        </div>
+      )}
+      {IS_WEAPON && (
+        <div className={'card-weapon-health'}>
+          <div className={'text__value'}>{health}</div>
+        </div>
+      )}
 
       {metaAttributes.map((attr, index) => {
         const { name, content } = attr;

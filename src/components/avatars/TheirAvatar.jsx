@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
+import PlayerHealth from 'components/avatars/PlayerHealth';
 
 export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
   const CONTEXT = WARCRY_TARGET_CONTEXT;
@@ -27,14 +28,16 @@ export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
   return (
     <div
       data-file="avatars/TheirAvatar"
-      className={[
-        'player-avatar',
-        'their-avatar',
-        CAN_BE_ATTACKED ? 'player-avatar--can_be_attacked' : ''
-      ].join(' ')}
-      onClick={() => handleClick()}
+      className={['player-avatar', 'their-avatar', 'effect--bezel'].join(' ')}
     >
-      <div className={['player-health'].join(' ')}>{THEIR_HEALTH}</div>
+      {CAN_BE_ATTACKED && (
+        <div
+          className={'player-avatar--can_be_attacked'}
+          onClick={() => handleClick()}
+        />
+      )}
+
+      <PlayerHealth health={THEIR_HEALTH} />
       <div className={'avatar-image-wrapper'}>
         {src && (
           <div

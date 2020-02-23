@@ -62,6 +62,7 @@
     // height: 100%;
     position: relative;
     z-index: 1;
+    font-family: 'Carter One', sans-serif;
   }
 
   & + .energy-bar__energy-slot {
@@ -129,10 +130,12 @@
   }
 
   & > div {
-    color: #14556b;
+    // color: #14556b;
+    color: white;
     // mix-blend-mode: overlay;
     border-radius: inherit;
     background-size: inherit;
+    text-shadow: 0px 0px 2px black;
   }
 }
 

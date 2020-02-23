@@ -48,8 +48,13 @@ export default function Minion({
       <div className={'image-wrapper'}>
         <img alt={name} role="presentation" src={imageSrc} />
       </div>
-      <div className={'attack-wrapper'}>{currentAttack}</div>
-      <div className={'health-wrapper'}>{currentHealth}</div>
+      <div className={'attack-wrapper'}>
+        <div className={'text__value'}>{currentAttack}</div>
+      </div>
+      <div className={'health-wrapper'}>
+        <div className={'text__value'}>{currentHealth}</div>
+      </div>
+      <div className={'minion__bezel'} />
 
       {/* {isHovering ? (
         <article>

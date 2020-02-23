@@ -12,6 +12,10 @@
   font-size: calc(var(--minion-height) / 8);
   user-select: none;
   z-index: 1;
+  font-family: 'Carter One', sans-serif;
+  font-size: 14px;
+  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.925),
+    0px 0px 10px rgba(0, 0, 0, 0.465);
 
   @media (max-height: 768px) {
     transform: scale(0.75);
@@ -85,6 +89,8 @@
   .image-wrapper {
     border-top-left-radius: var(--minion-border-radius);
     border-top-right-radius: var(--minion-border-radius);
+    border-bottom-left-radius: var(--minion-border-radius);
+    border-bottom-right-radius: var(--minion-border-radius);
     border-top: 1px solid rgba(255, 255, 255, 0.465);
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     position: relative;
@@ -96,6 +102,8 @@
     justify-content: flex-start;
     overflow: hidden;
     object-fit: cover;
+    position: relative;
+    z-index: 1;
 
     img {
       width: 100%;
@@ -103,17 +111,33 @@
       pointer-events: none;
       object-fit: cover;
     }
+
+    &:before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      pointer-events: none;
+      border-radius: var(--avatar-border-radius);
+      box-shadow: inset 0px 0px 0px 2px rgba(190, 190, 190, 0.265);
+      @include position-absolute(0, 0, 0, 0, 0);
+    }
   }
 
   .attack-wrapper {
     align-items: center;
-    background: #f59b2b;
+    background: radial-gradient(
+      circle at 50% 15%,
+      white -10px,
+      rgb(232, 233, 141) 3%,
+      rgb(197, 173, 37) 60%
+    );
     border-radius: 50%;
     bottom: var(--minion-stat-offset);
     color: #6f3205;
     display: flex;
     flex-flow: column nowrap;
-    font-size: 0.875em;
+    font-size: 1em;
     font-weight: 600;
     height: calc(var(--minion-height) / 5);
     justify-content: center;
@@ -122,24 +146,104 @@
     position: absolute;
     width: calc(var(--minion-height) / 5);
     z-index: 5;
+    overflow: hidden;
+    box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.925),
+      0px 0px 10px rgba(0, 0, 0, 0.465);
+
+    &:before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      pointer-events: none;
+      border-radius: 50%;
+      border-top: 4px solid rgb(254, 255, 200);
+      border-bottom: 4px solid rgb(179, 154, 18);
+      filter: blur(2px);
+      @include position-absolute(0, 0, 0, 0, 0);
+    }
   }
 
   .health-wrapper {
     align-items: center;
-    background: #840802;
+    background: radial-gradient(
+      circle at 50% 15%,
+      white -10px,
+      rgb(233, 141, 141) 3%,
+      rgb(197, 37, 37) 60%
+    );
     border-radius: 50%;
     bottom: var(--minion-stat-offset);
-    color: #ff9792;
+    color: rgb(121, 21, 21);
     display: flex;
     flex-flow: column nowrap;
-    font-size: 0.875em;
+    font-size: 1em;
     font-weight: 600;
     height: calc(var(--minion-height) / 5);
     justify-content: center;
     line-height: 1;
+    overflow: hidden;
     position: absolute;
     right: var(--minion-stat-offset);
     width: calc(var(--minion-height) / 5);
     z-index: 5;
+    box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.925),
+      0px 0px 10px rgba(0, 0, 0, 0.465);
+
+    &:before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      pointer-events: none;
+      border-radius: 50%;
+      border-top: 4px solid rgb(255, 198, 198);
+      border-bottom: 4px solid rgb(145, 9, 9);
+      filter: blur(2px);
+      @include position-absolute(0, 0, 0, 0, 0);
+    }
+  }
+
+  .text__value {
+    color: white;
+    position: relative;
+    top: 1px;
+    left: -0.5px;
+    text-shadow: 0px 0px 2px black;
+  }
+
+  .minion__bezel {
+    border-radius: var(--minion-border-radius);
+    height: 100%;
+    width: 100%;
+    background-color: #565656;
+    background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(white),
+      color-stop(1%, white),
+      color-stop(2%, black),
+      color-stop(5%, white),
+      color-stop(95%, white),
+      color-stop(98%, black),
+      color-stop(99%, white),
+      to(white)
+    );
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    border-bottom: 3px solid #0d0d0d;
+    box-sizing: border-box;
+    box-shadow: inset 0px 0px 10px 0px rgba(190, 190, 190, 0.8);
+    @include position-absolute(0, 0, 0, 0, 0);
+
+    &:after {
+      content: '';
+      width: 101%;
+      height: 101%;
+      background: #000;
+      position: absolute;
+      border-radius: var(--avatar-border-radius);
+    }
   }
 }

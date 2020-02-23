@@ -7,12 +7,17 @@
   top: calc(52.5% - var(--board-yourHand-height));
   z-index: 100;
   user-select: none;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 0.03em;
 }
 
 // prettier-ignore
 .end__turn__button {
+  appearance: none;
+  background: transparent;
+  border-radius: 0;
+  border: 1px solid rgb(101, 237, 255);
+  box-sizing: border-box;
   box-shadow: 
     -1px 1px 10px rgba(0, 0, 0, 0.925),
     0 1px 2px rgba(75, 210, 255, 0.425),
@@ -20,42 +25,25 @@
     1px 0 2px rgba(75, 210, 255, 0.425),
     -1px 0 2px rgba(75, 210, 255, 0.425),
     inset 0 1px 10px rgba(1, 98, 155, 0.425);
-  appearance: none;
-  border-radius: 0;
-  border: 1px solid rgb(101, 237, 255);
-  box-sizing: border-box;
   color: inherit;
   cursor: pointer;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: center;
   font: inherit;
-  line-height: 38px;
+  height: 38px;
+  letter-spacing: inherit;
   margin: 0;
   min-width: 150px;
   overflow: visible;
-  padding: 0 15px;
-  text-align: center;
+  padding: 0;
   position: relative;
+  text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  transition-property: box-shadow, color, background-color, border-color;
-  transition: 0.1s ease-in-out;
+  transition-property: background-color, border-color, box-shadow, color,;
+  transition: 100ms ease-in-out;
   vertical-align: middle;
-  background: transparent;
-  height: 38px;
-  letter-spacing: inherit;
+  @include display-flex(column nowrap, center, center);
 
   &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
     background: linear-gradient(
       -90deg,
       #3cf,
@@ -65,29 +53,11 @@
       #3cf
     );
     background-size: 400% 100%;
-    z-index: -1;
+    content: '';
+    height: 100%;
+    width: 100%;
+    @include position-absolute(0, 0, 0, 0, -1);
   }
-
-  // &:after {
-  //   content: '';
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   height: 100%;
-  //   width: 100%;
-  //   background: linear-gradient(
-  //     -90deg,
-  //     #3cf,
-  //     rgb(75, 210, 255),
-  //     #00bbff,
-  //     rgb(75, 210, 255),
-  //     #3cf
-  //   );
-  //   background-size: 400% 100%;
-  //   z-index: -1;
-  // }
 
   // prettier-ignore
   &:hover {
@@ -112,14 +82,19 @@
 }
 
 .end__turn__button__text {
+  font-family: 'Carter One', sans-serif;
   color: black;
-  pointer-events: none;
-  user-select: none;
-  transition: 100ms ease;
-  position: absolute;
-  line-height: 1;
   font-size: 1em;
+  height: 100%;
+  width: 100%;
   letter-spacing: inherit;
+  line-height: 1;
+  margin: 0 auto;
+  pointer-events: none;
+  position: absolute;
+  transition: 100ms ease;
+  user-select: none;
+  @include display-flex(column nowrap, center, center);
 
   &.--default {
     opacity: 1;
@@ -143,8 +118,4 @@
     &.--default { opacity: 0; }
     &.--hover   { opacity: 0.875; }
   }
-
-  // .end__turn__button:hover & {
-  //   mix-blend-mode: normal;
-  // }
 }
