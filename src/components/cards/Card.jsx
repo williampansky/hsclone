@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { fontSizeBasedOnCharacterLength } from 'utils/text';
 import createMarkup from 'utils/createMarkup';
+import TYPE from 'enums/type.enums';
 
 export default function Card({
   artist,
@@ -66,8 +67,9 @@ export default function Card({
     { name: 'type', content: type }
   ];
 
-  const IS_MINION = type === 'MINION' ? true : false;
-  const IS_WEAPON = type === 'WEAPON' ? true : false;
+  const IS_MINION = type === TYPE[1] ? true : false;
+  const IS_SPELL = type === TYPE[3] ? true : false;
+  const IS_WEAPON = type === TYPE[4] ? true : false;
 
   const cardImage = {
     backgroundImage: isGolden ? `url(${goldenImageSrc})` : `url(${imageSrc})`
@@ -84,37 +86,59 @@ export default function Card({
   }
 
   return (
-    <div className={'card'}>
-      <div className={'card-cost'}>
+    <div
+      className={[
+        'card',
+        IS_MINION ? '--is-minion' : '',
+        IS_SPELL ? '--is-spell' : '',
+        IS_WEAPON ? '--is-weapon' : ''
+      ].join(' ')}
+    >
+      <div className={'card__cost'}>
         <div className={'text__value'}>{cost}</div>
       </div>
-      <div className={'card-image'} style={cardImage} />
-      <div className={'card-name'} style={fontSize}>
+
+      {IS_MINION && (
+        <div className={'card__image__wrapper'}>
+          <div className={'card__image'} style={cardImage} />
+          <div className={'minion__bezel'} />
+        </div>
+      )}
+
+      {IS_SPELL && (
+        <div className={'card__image__wrapper'}>
+          <div className={'card__image'} style={cardImage} />
+        </div>
+      )}
+
+      <div className={'card__name'} style={fontSize}>
         <div className={'name__value'}>{cardName(name, inspiration)}</div>
       </div>
-      <div className={'card-text'}>
+      <div className={'card__text'}>
         <p dangerouslySetInnerHTML={createMarkup(text)} />
       </div>
-      <div className={'card-type'}>{type}</div>
+      <div className={'card__type'}>{type}</div>
+
       {IS_MINION && (
-        <div className={'card-attack'}>
-          <div className={'text__value'}>{attack}</div>
-        </div>
+        <React.Fragment>
+          <div className={'card__attack'}>
+            <div className={'text__value'}>{attack}</div>
+          </div>
+          <div className={'card__health'}>
+            <div className={'text__value'}>{health}</div>
+          </div>
+        </React.Fragment>
       )}
-      {IS_MINION && (
-        <div className={'card-health'}>
-          <div className={'text__value'}>{health}</div>
-        </div>
-      )}
+
       {IS_WEAPON && (
-        <div className={'card-weapon-attack'}>
-          <div className={'text__value'}>{attack}</div>
-        </div>
-      )}
-      {IS_WEAPON && (
-        <div className={'card-weapon-health'}>
-          <div className={'text__value'}>{health}</div>
-        </div>
+        <React.Fragment>
+          <div className={'card__weapon__attack'}>
+            <div className={'text__value'}>{attack}</div>
+          </div>
+          <div className={'card__weapon__health'}>
+            <div className={'text__value'}>{health}</div>
+          </div>
+        </React.Fragment>
       )}
 
       {metaAttributes.map((attr, index) => {

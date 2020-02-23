@@ -1,5 +1,6 @@
 import CAST_WARCRY_CORE_001 from 'lib/warcrys/objects/CAST_WARCRY_CORE_001';
 import CAST_WARCRY_CORE_006 from 'lib/warcrys/objects/CAST_WARCRY_CORE_006';
+import CAST_WARCRY_CORE_036 from 'lib/warcrys/objects/CAST_WARCRY_CORE_036';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -20,6 +21,7 @@ const castWarcrySpell = (G, ctx, targetCtx, targetIdx) => {
   switch (id) {
     case 'CORE_001':  return CAST_WARCRY_CORE_001(G, ctx, targetCtx, targetIdx);
     case 'CORE_006':  return CAST_WARCRY_CORE_006(G, ctx, targetCtx, targetIdx);
+    case 'CORE_036':  return CAST_WARCRY_CORE_036(G, ctx, targetCtx, targetIdx);
     default:          return;
   }
 };

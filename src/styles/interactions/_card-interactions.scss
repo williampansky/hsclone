@@ -55,10 +55,11 @@
     width: max-content;
     transition: 200ms ease-in-out;
     opacity: 0;
+    transform: translateY(-150%);
   }
 
   &:hover .deselect-label {
     opacity: 1;
-    transform: translateY(-150%);
+    transform: translateY(-200%);
   }
 }

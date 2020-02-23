@@ -23,7 +23,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_032':  return CORE_032(G, ctx, cardId);
     case 'CORE_033':  return CORE_033(G, ctx, cardId);
     case 'CORE_035':  return CORE_035(G, ctx, otherPlayer);
-    case 'CORE_036':  return CORE_036(G, ctx, cardId);
+    case 'CORE_036':  return CORE_036(G, ctx, cardId, otherPlayer);
     default:          break;
   }
 };
@@ -51,9 +51,21 @@ const CORE_016 = (G, ctx, cardId) => {
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
 };
 
+/**
+ * Calls for backup in the form of a 1/1 creature.
+ * @param {{}} G
+ * @param {{}} ctx
+ * @param {string} cardId
+ */
 const CORE_020 = (G, ctx, cardId) => {
   if (G.boards[ctx.currentPlayer].length === 7) return; // max minions
-  G.boards[ctx.currentPlayer].push(createBoardSlotObject(`${cardId}a`));
+  G.boards[ctx.currentPlayer].push(
+    createBoardSlotObject(
+      `${cardId}${['a', 'b'].sort(() => {
+        return Math.random() - 0.5;
+      })}`
+    )
+  );
 };
 
 /**
@@ -129,10 +141,11 @@ const CORE_035 = (G, ctx, otherPlayer) => {
 };
 
 /**
- * Deal 2 damage to anyone.
+ * Deal 2 damage to the enemy player or one of their minions.
  */
-const CORE_036 = (G, ctx, cardId) => {
+const CORE_036 = (G, ctx, cardId, otherPlayer) => {
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
+  boards.determineWarcryTargets(G, otherPlayer);
 };
 
 export default initCoreWarcry;
