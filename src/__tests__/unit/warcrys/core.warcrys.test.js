@@ -385,11 +385,20 @@ test(`WARCRY(CORE_035)`, () => {
 test(`WARCRY(CORE_036)`, () => {
   const CARD_ID = 'CORE_036';
   const TURN_ORDER = ['0', '1'];
-  const ctx = { currentPlayer: '1' };
-  const G = { warcryObject: { '1': null }, turnOrder: TURN_ORDER };
+  const ctx = { currentPlayer: '0' };
+  const G = {
+    health: { '0': 30, '1': 30 },
+    playerCanBeAttacked: { '0': false, '1': false },
+    boards: { '0': [], '1': [] },
+    warcryObject: { '0': null },
+    turnOrder: TURN_ORDER
+  };
   initCoreWarcry(G, ctx, CARD_ID);
   expect(G).toEqual({
-    warcryObject: { '1': createWarcryObject(CARD_ID) },
+    health: { '0': 30, '1': 30 },
+    playerCanBeAttacked: { '0': false, '1': true },
+    boards: { '0': [], '1': [] },
+    warcryObject: { '0': createWarcryObject(CARD_ID) },
     turnOrder: TURN_ORDER
   });
 });
