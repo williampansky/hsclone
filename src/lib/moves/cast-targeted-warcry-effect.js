@@ -1,6 +1,4 @@
-import CAST_WARCRY_CORE_001 from 'lib/warcrys/objects/CAST_WARCRY_CORE_001';
-import CAST_WARCRY_CORE_006 from 'lib/warcrys/objects/CAST_WARCRY_CORE_006';
-import CAST_WARCRY_CORE_036 from 'lib/warcrys/objects/CAST_WARCRY_CORE_036';
+import attackWithWarcryEffect from 'lib/warcry-effects/attack-with-warcry-effect';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -8,20 +6,23 @@ import CAST_WARCRY_CORE_036 from 'lib/warcrys/objects/CAST_WARCRY_CORE_036';
  * @param {{}} ctx
  * @param {string} targetCtx Target context; MINION || PLAYER
  * @param {string} targetIdx Target index if targetCtx is MINION
+ * @param {number} warcryNum minion.warcryNumber
  */
-const castTargetedWarcryEffect = (G, ctx, targetCtx, targetIdx) => {
+const castTargetedWarcryEffect = (G, ctx, targetCtx, targetIdx, warcryNum) => {
   const { warcryObject } = G;
   const { currentPlayer } = ctx;
   const { id } = warcryObject[currentPlayer];
+  const func = attackWithWarcryEffect;
 
   // clear warcryObject
   G.warcryObject[currentPlayer] = null;
 
   // prettier-ignore
   switch (id) {
-    case 'CORE_001':  return CAST_WARCRY_CORE_001(G, ctx, targetCtx, targetIdx);
-    case 'CORE_006':  return CAST_WARCRY_CORE_006(G, ctx, targetCtx, targetIdx);
-    case 'CORE_036':  return CAST_WARCRY_CORE_036(G, ctx, targetCtx, targetIdx);
+    case 'CORE_001':  return func(G, ctx, targetCtx, targetIdx, warcryNum);
+    case 'CORE_006':  return func(G, ctx, targetCtx, targetIdx, warcryNum);
+    case 'CORE_016':  return func(G, ctx, targetCtx, targetIdx, warcryNum);
+    case 'CORE_036':  return func(G, ctx, targetCtx, targetIdx, warcryNum);
     default:          return;
   }
 };
