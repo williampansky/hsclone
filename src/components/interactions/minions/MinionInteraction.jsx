@@ -21,7 +21,12 @@ export default function MinionInteraction({
   const CONTEXT = WARCRY_TARGET_CONTEXT;
   const { selectedMinionIndex, warcryObject } = G;
   const { currentPlayer } = ctx;
-  const { attackMinion, castWarcrySpell, deselectMinion, selectMinion } = moves;
+  const {
+    attackMinion,
+    castTargetedWarcryEffect,
+    deselectMinion,
+    selectMinion
+  } = moves;
 
   const tBoard = board === 'TheirBoard';
   const yBoard = board === 'YourBoard';
@@ -51,7 +56,8 @@ export default function MinionInteraction({
       if (!CAN_BE_ATTACKED) return;
       if (CAN_BE_ATTACKED) {
         if (canBeAttackedByMinion) return attackMinion(index);
-        if (canBeAttackedByWarcry) return castWarcrySpell(CONTEXT[1], index);
+        if (canBeAttackedByWarcry)
+          return castTargetedWarcryEffect(CONTEXT[1], index);
       }
     }
   }

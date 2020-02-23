@@ -6,7 +6,7 @@ import PlayerHealth from 'components/avatars/PlayerHealth';
 export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
   const CONTEXT = WARCRY_TARGET_CONTEXT;
   const { health, playerCanBeAttacked, selectedMinionIndex, warcryObject } = G;
-  const { attackPlayer, castWarcrySpell } = moves;
+  const { attackPlayer, castTargetedWarcryEffect } = moves;
   const THEIR_HEALTH = health[theirID];
 
   const canBeAttacked = playerCanBeAttacked[theirID];
@@ -21,7 +21,7 @@ export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
   function handleClick() {
     if (CAN_BE_ATTACKED) {
       if (canBeAttackedByMinion) return attackPlayer();
-      if (canBeAttackedByWarcry) return castWarcrySpell(CONTEXT[2]);
+      if (canBeAttackedByWarcry) return castTargetedWarcryEffect(CONTEXT[2]);
     }
   }
 
