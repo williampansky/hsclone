@@ -9,7 +9,7 @@ import SPELLTYPE from 'enums/spellType.enums';
 import SpellSlot from 'components/board-slots/SpellSlot';
 import YourAvatar from 'components/avatars/YourAvatar';
 import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
-import YourDeck from 'components/decks/YourDeck';
+import Deck from 'components/decks/Deck';
 
 export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
   const { counts, playerClass, selectedCardObject, cardBack } = G;
@@ -41,7 +41,7 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
         yourID={yourID}
       />
 
-      <YourDeck
+      <Deck
         board="YourBoard"
         cardBackSrc={yourCardBackImageSrc}
         length={yourDeckLength}

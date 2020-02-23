@@ -77,8 +77,8 @@ export default function Card({
     fontSize: `${fontSizeBasedOnCharacterLength(name)}em`
   };
 
-  function cardName(name = name, ins = inspiration) {
-    if (name) return name;
+  function cardName(hasName = name, ins = inspiration) {
+    if (hasName) return hasName;
     else if (ins) return ins;
     else return 'Unknown';
   }
@@ -89,14 +89,8 @@ export default function Card({
         <div className={'text__value'}>{cost}</div>
       </div>
       <div className={'card-image'} style={cardImage} />
-      <div className="card__name__ribbon__wrapper" style={fontSize}>
-        <div className="card__name__ribbon__front">
-          <div className={'name__value'}>{cardName(name, inspiration)}</div>
-        </div>
-        <div className="card__name__ribbon-edge-topleft"></div>
-        <div className="card__name__ribbon-edge-topright"></div>
-        <div className="card__name__ribbon-edge-bottomleft"></div>
-        <div className="card__name__ribbon-edge-bottomright"></div>
+      <div className={'card-name'} style={fontSize}>
+        <div className={'name__value'}>{cardName(name, inspiration)}</div>
       </div>
       <div className={'card-text'}>
         <p dangerouslySetInnerHTML={createMarkup(text)} />

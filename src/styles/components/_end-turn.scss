@@ -7,7 +7,7 @@
   top: calc(52.5% - var(--board-yourHand-height));
   z-index: 100;
   user-select: none;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 0.03em;
 }
 
@@ -85,10 +85,10 @@
   font-family: 'Carter One', sans-serif;
   color: black;
   font-size: 1em;
-  height: 100%;
+  // height: 100%;
   width: 100%;
   letter-spacing: inherit;
-  line-height: 1;
+  line-height: 0;
   margin: 0 auto;
   pointer-events: none;
   position: absolute;

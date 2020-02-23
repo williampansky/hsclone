@@ -32,6 +32,12 @@
     border-color: rgba(255, 255, 255, 0.625);
     width: 7.5%;
   }
+
+  @keyframes ants {
+    to {
+      background-position: 100%;
+    }
+  }
 }
 
 .spell-slot ~ .board-is-active .drop-area {

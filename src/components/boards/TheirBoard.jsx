@@ -7,7 +7,7 @@ import avatars from 'config/avatars.config';
 // child components
 import TheirAvatar from 'components/avatars/TheirAvatar';
 import TheirBoardPlayerArea from 'components/board-play-areas/TheirBoardPlayArea';
-import TheirDeck from 'components/decks/YourDeck';
+import Deck from 'components/decks/Deck';
 
 export default function TheirBoard({
   G,
@@ -43,7 +43,7 @@ export default function TheirBoard({
         yourID={yourID}
       />
 
-      <TheirDeck
+      <Deck
         board="TheirBoard"
         cardBackSrc={theirCardBackImageSrc}
         length={theirDeckLength}

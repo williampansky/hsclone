@@ -77,8 +77,8 @@
 .card .card-name {
   font-family: 'Carter One', sans-serif;
   align-items: center;
-  background: #d0deb3;
-  border-radius: calc(var(--card-border-radius) / 2);
+  background: #746d75;
+  // border-radius: calc(var(--card-border-radius) / 2);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   bottom: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -94,77 +94,20 @@
   position: relative;
   text-align: center;
   user-select: none;
-  width: 90%;
+  width: 100%;
   z-index: 2;
-}
 
-.card .card__name__ribbon__wrapper {
-  font-family: 'Carter One', sans-serif;
-  position: relative;
-  top: -2px;
-
-  .card__name__ribbon__front {
-    line-height: 1;
-    background-color: rgb(39, 5, 78);
-    height: calc(var(--card-height) * 0.095);
-    width: calc(100% + 20px);
-    position: relative;
-    left: -10px;
-    z-index: 2;
-    color: #f8f8f8;
-    text-align: center;
-    text-shadow: 0 1px 2px rgb(125, 50, 211);
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .card__name__ribbon-edge-topleft,
-  .card__name__ribbon-edge-topright,
-  .card__name__ribbon-edge-bottomleft,
-  .card__name__ribbon-edge-bottomright {
-    position: absolute;
-    z-index: 1;
-    border-style: solid;
-    height: 0;
-    width: 0;
-  }
-
-  .card__name__ribbon-edge-bottomleft,
-  .card__name__ribbon-edge-bottomright {
-    top: calc(var(--card-height) * 0.095);
-  }
-  .card__name__ribbon-edge-topleft,
-  .card__name__ribbon-edge-bottomleft {
-    left: -10px;
-    border-color: transparent rgb(18, 0, 37) transparent transparent;
-  }
-  .card__name__ribbon-edge-topleft {
-    top: -5px;
-    border-width: 5px 10px 0 0;
-  }
-  .card__name__ribbon-edge-bottomleft {
-    border-width: 0 10px 0 0;
-  }
-  .card__name__ribbon-edge-topright,
-  .card__name__ribbon-edge-bottomright {
-    right: -10px;
-    border-color: transparent transparent transparent rgb(18, 0, 37);
-  }
-  .card__name__ribbon-edge-topright {
-    top: 0;
-    border-width: 0 0 0 10px;
-  }
-  .card__name__ribbon-edge-bottomright {
-    border-width: 0 0 5px 10px;
+  .name__value {
+    color: white;
+    text-shadow: 0px 0px 2px black;
   }
 }
 
 .card .card-text {
+  background-color: #f3f2ee;
   box-sizing: content-box;
   align-items: center;
-  bottom: 15px;
+  top: -25px;
   display: flex;
   flex-flow: column nowrap;
   font-size: 1em;
@@ -182,6 +125,18 @@
     margin: 0;
     pointer-events: none;
     user-select: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  &:after {
+    background-image: url('https://cdn.shopify.com/s/files/1/1750/4945/products/classic_avalanche_white_felt_600p_600x.jpg');
+    background-size: cover;
+    background-position: center center;
+    // content: '';
+    @include position-absolute(0, 0, 0, 0, 0);
+    width: 100%;
+    height: 100%;
   }
 }
 
