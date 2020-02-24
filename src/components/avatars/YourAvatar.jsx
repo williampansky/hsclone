@@ -17,7 +17,7 @@ export default function YourAvatar({ G, moves, yourID, src }) {
         // CAN_BE_ATTACKED ? css['player-avatar--can_be_attacked'] : ''
       ].join(' ')}
     >
-      <PlayerHealth health={YOUR_HEALTH} />
+      <PlayerHealth health={YOUR_HEALTH} player="YourHealth" />
       <div className={'avatar-image-wrapper'}>
         {src && (
           <div

@@ -37,7 +37,7 @@ export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
         />
       )}
 
-      <PlayerHealth health={THEIR_HEALTH} />
+      <PlayerHealth health={THEIR_HEALTH} player="TheirHealth" />
       <div className={'avatar-image-wrapper'}>
         {src && (
           <div

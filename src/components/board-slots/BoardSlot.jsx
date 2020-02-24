@@ -1,6 +1,7 @@
 import React from 'react';
 import MinionInteraction from 'components/interactions/minions/MinionInteraction';
 import Minion from 'components/minion/Minion';
+import MINION_HAS_GUARD from 'components/mechanics/MINION_HAS_GUARD';
 
 export default function BoardSlot({
   G,
@@ -21,6 +22,7 @@ export default function BoardSlot({
   const {
     canAttack,
     canBeAttacked,
+    canBeHealed,
     currentAttack,
     currentHealth,
     hasGuard,
@@ -52,12 +54,14 @@ export default function BoardSlot({
           data={data}
           canAttack={canAttack}
           canBeAttacked={canBeAttacked}
+          canBeHealed={canBeAttacked}
           currentAttack={currentAttack}
           currentHealth={currentHealth}
           hasGuard={hasGuard}
           isAttacking={selectedMinionIndex[yourID] === index}
         />
       )}
+      {minionData && hasGuard && <MINION_HAS_GUARD />}
       {minionData && (
         <Minion
           currentAttack={currentAttack}
