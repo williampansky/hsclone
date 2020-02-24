@@ -23,13 +23,13 @@ const Component = styled.div`
   border-radius: 50%;
   display: flex;
   flex-flow: column nowrap;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: bold;
   height: var(--player-health-size);
   justify-content: center;
   position: absolute;
   width: var(--player-health-size);
-  z-index: 0;
+  z-index: 1;
 
   top: ${p => (p.player === 'YourHealth' ? '20%' : 'auto')};
   bottom: ${p => (p.player === 'YourHealth' ? 'auto' : '20%')};
@@ -67,6 +67,20 @@ const HealthValue = styled.div`
   color: white;
   font-size: 1em;
   line-height: 1;
-  text-shadow: 0px 1px 1px rgba(112, 9, 32, 0.825),
-    0px 1px 1px rgba(51, 2, 13, 0.665);
+  font-family: 'Carter One', sans-serif;
+  text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black;
+  /* text-shadow: 0px 1px 1px rgba(112, 9, 32, 0.825),
+    0px 1px 1px rgba(51, 2, 13, 0.665); */
 `;
