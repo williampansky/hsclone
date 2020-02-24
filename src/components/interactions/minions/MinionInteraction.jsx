@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import SPELL_CONTEXT from 'enums/spellContext.enum';
 
@@ -77,3 +78,20 @@ export default function MinionInteraction({
     />
   );
 }
+
+MinionInteraction.propTypes = {
+  G: PropTypes.object,
+  ctx: PropTypes.object,
+  moves: PropTypes.object,
+  isActive: PropTypes.bool,
+  index: PropTypes.number,
+  render: PropTypes.bool,
+  board: PropTypes.string,
+  data: PropTypes.object,
+  canAttack: PropTypes.bool,
+  canBeAttacked: PropTypes.bool,
+  currentAttack: PropTypes.number,
+  currentHealth: PropTypes.number,
+  hasGuard: PropTypes.bool,
+  isAttacking: PropTypes.bool
+};

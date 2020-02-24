@@ -8,14 +8,14 @@ import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
  * @param {{}} ctx
  * @param {string} targetContext
  * @param {number} targetIndex
- * @param {number} damageNum
+ * @param {number} healAmount
  */
 const attackWithWarcryEffect = (
   G,
   ctx,
   targetContext,
   targetIndex,
-  damageNum
+  healAmount
 ) => {
   const { currentPlayer } = ctx;
   const target = G.turnOrder.find(p => p !== currentPlayer);
@@ -23,20 +23,19 @@ const attackWithWarcryEffect = (
 
   switch (targetContext) {
     case WARCRY_TARGET_CONTEXT[1]:
-      return castAtMinion(G, ctx, target, targetSlot, targetIndex, damageNum);
+      return castAtMinion(G, ctx, target, targetSlot, targetIndex, healAmount);
 
     default:
-      return castAtPlayer(G, target, damageNum);
+      return castAtPlayer(G, target, healAmount);
   }
 };
 
-const castAtMinion = (G, ctx, target, targetSlot, targetIndex, damageNum) => {
-  boards.subtractFromMinionHealth(G, target, targetIndex, damageNum);
-  boards.killMinionIfHealthReachesZero(G, ctx, target, targetSlot, targetIndex);
+const castAtMinion = (G, target, targetIndex, healAmount) => {
+  boards.addToMinionHealth(G, target, targetIndex, healAmount);
 };
 
-const castAtPlayer = (G, target, damageNum) => {
-  health.subtract(G, target, damageNum);
+const castAtPlayer = (G, target, healAmount) => {
+  health.add(G, target, healAmount);
 };
 
 export default attackWithWarcryEffect;
