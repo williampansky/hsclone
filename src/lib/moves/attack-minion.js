@@ -47,14 +47,14 @@ const attackMinion = (G, ctx, index) => {
   selectMinion(G, ctx);
 
   // kill ANY minions with health <= 0 and reset states
-  boards.killMinionIfHealthReachesZero(
+  boards.killMinionIfHealthIsZero(
     G,
     ctx,
     currentPlayer,
     ATTACKING_MINION,
     ATTACKING_MINION_INDEX
   );
-  boards.killMinionIfHealthReachesZero(
+  boards.killMinionIfHealthIsZero(
     G,
     ctx,
     otherPlayer,

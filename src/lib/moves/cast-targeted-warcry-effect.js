@@ -1,5 +1,7 @@
 import attackWithWarcryEffect from 'lib/warcry-effects/attack-with-warcry-effect';
 import healWithWarcryEffect from 'lib/warcry-effects/heal-with-warcry-effect';
+import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import boards from 'lib/state/boards';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -18,6 +20,13 @@ const castTargetedWarcryEffect = (G, ctx, context, targetCtx, targetIdx) => {
 
   // clear warcryObject
   G.warcryObject[currentPlayer] = null;
+
+  // disable all playerCanBeAttacked
+  playerCanBeAttacked.disable(G, '0');
+  playerCanBeAttacked.disable(G, '1');
+
+  // disable all canBeAttacked
+  // boards.disableCanBeAttacked;
 
   // prettier-ignore
   switch (id) {

@@ -32,7 +32,7 @@ const attackWithWarcryEffect = (
 
 const castAtMinion = (G, ctx, target, targetSlot, targetIndex, damageNum) => {
   boards.subtractFromMinionHealth(G, target, targetIndex, damageNum);
-  boards.killMinionIfHealthReachesZero(G, ctx, target, targetSlot, targetIndex);
+  boards.killMinionIfHealthIsZero(G, ctx, target, targetSlot, targetIndex);
 };
 
 const castAtPlayer = (G, target, damageNum) => {

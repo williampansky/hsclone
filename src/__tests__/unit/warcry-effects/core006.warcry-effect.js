@@ -14,6 +14,7 @@ test(`heals self with CORE_006 Warcry`, () => {
     health: { '0': 29, '1': 30 },
     boards: { '0': [MINION_OBJECT], '1': [] },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   };
 
@@ -22,6 +23,7 @@ test(`heals self with CORE_006 Warcry`, () => {
     health: { '0': 30, '1': 30 },
     boards: { '0': [MINION_OBJECT], '1': [] },
     warcryObject: { '0': null, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   });
 });
@@ -36,6 +38,7 @@ test(`heals opponent with CORE_006 Warcry`, () => {
     health: { '0': 30, '1': 25 },
     boards: { '0': [MINION_OBJECT], '1': [] },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   };
 
@@ -44,6 +47,7 @@ test(`heals opponent with CORE_006 Warcry`, () => {
     health: { '0': 30, '1': 27 },
     boards: { '0': [MINION_OBJECT], '1': [] },
     warcryObject: { '0': null, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   });
 });
@@ -61,6 +65,7 @@ test(`heals a friendly minion with CORE_006 Warcry`, () => {
       '1': []
     },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   };
 
@@ -78,6 +83,7 @@ test(`heals a friendly minion with CORE_006 Warcry`, () => {
       '1': []
     },
     warcryObject: { '0': null, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   });
 });
@@ -95,6 +101,7 @@ test(`heals an opponent's minion with CORE_006 Warcry`, () => {
       '1': [{ ...OPPONENT_MINION_OBJECT, currentHealth: 3 }]
     },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   };
 
@@ -112,6 +119,7 @@ test(`heals an opponent's minion with CORE_006 Warcry`, () => {
       '1': [{ ...OPPONENT_MINION_OBJECT, currentHealth: 5 }]
     },
     warcryObject: { '0': null, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   });
 });

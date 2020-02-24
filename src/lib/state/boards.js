@@ -3,53 +3,67 @@ import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import limitNumberWithinRange from 'lib/utils/range-limit';
 import recalculateCardMechanics from 'lib/mechanics/recalculate-mechanics';
 
+import {
+  _dMCA,
+  _dAMCA,
+  _eMCA,
+  _eAMCA
+} from 'lib/state/board-methods/can-attack';
+
+import {
+  _dMCBA,
+  _dAMCBA,
+  _eMCBA,
+  _eAMCBA
+} from 'lib/state/board-methods/can-be-attacked';
+
+import {
+  _dMCBH,
+  _dAMCBH,
+  _eMCBH,
+  _eAMCBH
+} from 'lib/state/board-methods/can-be-healed';
+
+// prettier-ignore
 const boards = {
   __DATA_MODEL: {
     '0': [],
     '1': []
   },
-  addToMinionHealth: (G, player, index, amount) => {
-    return addToMinionHealth(G, player, index, amount);
-  },
-  determineAttackTargets: (G, player) => {
-    return determineAttackingMinionTargets(G, player);
-  },
-  determineHealTargets: (G, player) => {
-    return determineHealingMinionTargets(G, player);
-  },
-  determineWarcryTargets: (G, player) => {
-    return determineWarcrySpellTargets(G, player);
-  },
-  disableCanAttack: (G, player, index) => {
-    return disableMinionCanAttack(G, player, index);
-  },
-  disableCanBeAttacked: (G, player, index) => {
-    return disableMinionCanBeAttacked(G, player, index);
-  },
-  disableCanBeHealed: (G, player, index) => {
-    return disableMinionCanBeHealed(G, player, index);
-  },
-  enableCanAttack: (G, player, index) => {
-    return enableMinionCanAttack(G, player, index);
-  },
-  enableCanBeAttacked: (G, player, index) => {
-    return enableMinionCanBeAttacked(G, player, index);
-  },
-  enableCanBeHealed: (G, player, index) => {
-    return enableMinionCanBeHealed(G, player, index);
-  },
-  killMinion: (G, ctx, player, boardSlot, index) => {
-    return killMinion(G, ctx, player, boardSlot, index);
-  },
-  killMinionIfHealthReachesZero: (G, ctx, player, boardSlot, index) => {
-    return killMinionIfHealthReachesZero(G, ctx, player, boardSlot, index);
-  },
-  placeCardOnBoard: (G, player, boardSlotObject, index) => {
-    return placeCardOnBoard(G, player, boardSlotObject, index);
-  },
-  subtractFromMinionHealth: (G, player, index, amount) => {
-    return subtractFromMinionHealth(G, player, index, amount);
-  }
+
+  // minion health
+  addToMinionHealth: (G, player, index, amount) => _aTMH(G, player, index, amount),
+  subtractFromMinionHealth: (G, player, index, amount) => _sFMH(G, player, index, amount),
+
+  // target determination
+  determineAttackTargets: (G, player) => _dAMT(G, player),
+  determineHealTargets: (G, player) => _dHMT(G, player),
+  determineWarcryTargets: (G, player) => _dWT(G, player),
+
+  // canAttack
+  disableCanAttack: (G, player, index) => _dMCA(G, player, index),
+  disableAllCanAttack: (G, player) => _dAMCA(G, player),
+  enableCanAttack: (G, player, index) => _eMCA(G, player, index),
+  enableAllCanAttack: (G, player) => _eAMCA(G, player),
+  
+  // canBeAttacked
+  disableCanBeAttacked: (G, player, index) => _dMCBA(G, player, index),
+  disableAllCanBeAttacked: (G, player) => _dAMCBA(G, player),
+  enableCanBeAttacked: (G, player, index) => _eMCBA(G, player, index),
+  enableAllCanBeAttacked: (G, player) => _eAMCBA(G, player),
+
+  // canBeHealed
+  disableCanBeHealed: (G, player, index) => _dMCBH(G, player, index),
+  disableAllCanBeHealed: (G, player, index) => _dAMCBH(G, player, index),
+  enableCanBeHealed: (G, player, index) => _eMCBH(G, player, index),
+  enableAllCanBeHealed: (G, player, index) => _eAMCBH(G, player, index),
+
+  // kill minion methods
+  killMinion: (G, ctx, player, boardSlot, index) => _kM(G, ctx, player, boardSlot, index),
+  killMinionIfHealthIsZero: (G, ctx, player, boardSlot, index) => _kM0(G, ctx, player, boardSlot, index),
+
+  // card placement
+  placeCardOnBoard: (G, player, boardSlotObject, index) => _pC(G, player, boardSlotObject, index),
 };
 
 /**
@@ -59,7 +73,7 @@ const boards = {
  * @param {number} index
  * @param {number} amount
  */
-export const addToMinionHealth = (G, player, index, amount) => {
+export const _aTMH = (G, player, index, amount) => {
   const totalHealth = G.boards[player][index].totalHealth;
   const calculation = G.boards[player][index].currentHealth + amount;
   const newHealth = limitNumberWithinRange(calculation, totalHealth);
@@ -73,7 +87,7 @@ export const addToMinionHealth = (G, player, index, amount) => {
  * @param {{}} G
  * @param {string} player
  */
-export const determineAttackingMinionTargets = (G, player) => {
+export const _dAMT = (G, player) => {
   const { boards } = G;
   const MINION_HAS_GUARD = boards[player].find(slot => slot.hasGuard === true)
     ? true
@@ -83,9 +97,9 @@ export const determineAttackingMinionTargets = (G, player) => {
   else if (!MINION_HAS_GUARD) playerCanBeAttacked.enable(G, player);
 
   G.boards[player].forEach((slot, i) => {
-    if (slot.hasGuard === true) enableMinionCanBeAttacked(G, player, i);
-    else if (MINION_HAS_GUARD) disableMinionCanBeAttacked(G, player, i);
-    else enableMinionCanBeAttacked(G, player, i);
+    if (slot.hasGuard === true) _eMCBA(G, player, i);
+    else if (MINION_HAS_GUARD) _dMCBA(G, player, i);
+    else _eMCBA(G, player, i);
   });
 };
 
@@ -94,10 +108,10 @@ export const determineAttackingMinionTargets = (G, player) => {
  * @param {{}} G
  * @param {string} player
  */
-export const determineHealingMinionTargets = (G, player) => {
+export const _dHMT = (G, player) => {
   playerCanBeHealed.enable(G, player);
   G.boards[player].forEach((slot, i) => {
-    enableMinionCanBeHealed(G, player, i);
+    _eMCBH(G, player, i);
   });
 };
 
@@ -107,77 +121,11 @@ export const determineHealingMinionTargets = (G, player) => {
  * @param {{}} G
  * @param {string} player
  */
-export const determineWarcrySpellTargets = (G, player) => {
+export const _dWT = (G, player) => {
   playerCanBeAttacked.enable(G, player);
   G.boards[player].forEach((slot, i) => {
-    enableMinionCanBeAttacked(G, player, i);
+    _eMCBA(G, player, i);
   });
-};
-
-/**
- * Disables `canAttack` of the player's board index object.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- */
-export const disableMinionCanAttack = (G, player, index) => {
-  if (!G.boards[player][index]) return;
-  G.boards[player][index].canAttack = false;
-};
-
-/**
- * Disables `canBeAttacked` of the player's board index object.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- */
-export const disableMinionCanBeAttacked = (G, player, index) => {
-  if (!G.boards[player][index]) return;
-  G.boards[player][index].canBeAttacked = false;
-};
-
-/**
- * Disables `canBeHealed` of the player's board index object.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- */
-export const disableMinionCanBeHealed = (G, player, index) => {
-  if (!G.boards[player][index]) return;
-  G.boards[player][index].canBeHealed = false;
-};
-
-/**
- * Enables `canAttack` of the player's board index object.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- */
-export const enableMinionCanAttack = (G, player, index) => {
-  if (!G.boards[player][index]) return;
-  G.boards[player][index].canAttack = true;
-};
-
-/**
- * Enables `canBeAttacked` of the player's board index object.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- */
-export const enableMinionCanBeAttacked = (G, player, index) => {
-  if (!G.boards[player][index]) return;
-  G.boards[player][index].canBeAttacked = true;
-};
-
-/**
- * Enables `canBeHealed` of the player's board index object.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- */
-export const enableMinionCanBeHealed = (G, player, index) => {
-  if (!G.boards[player][index]) return;
-  G.boards[player][index].canBeHealed = true;
 };
 
 /**
@@ -188,7 +136,7 @@ export const enableMinionCanBeHealed = (G, player, index) => {
  * @param {{}} boardSlot
  * @param {number} index
  */
-export const killMinion = (G, ctx, player, boardSlot, index) => {
+export const _kM = (G, ctx, player, boardSlot, index) => {
   const { minionData } = boardSlot;
   G.boards[player].splice(index, 1);
   recalculateCardMechanics(G, ctx, player, minionData, index);
@@ -202,15 +150,9 @@ export const killMinion = (G, ctx, player, boardSlot, index) => {
  * @param {{}} boardSlot
  * @param {number} index
  */
-export const killMinionIfHealthReachesZero = (
-  G,
-  ctx,
-  player,
-  boardSlot,
-  index
-) => {
+export const _kM0 = (G, ctx, player, boardSlot, index) => {
   if (G.boards[player][index].currentHealth <= 0)
-    killMinion(G, ctx, player, boardSlot, index);
+    _kM(G, ctx, player, boardSlot, index);
 };
 
 /**
@@ -221,7 +163,7 @@ export const killMinionIfHealthReachesZero = (
  * @param {{}} boardSlotObject
  * @param {number} index defaults to zero
  */
-export const placeCardOnBoard = (G, player, boardSlotObject, index = 0) => {
+export const _pC = (G, player, boardSlotObject, index = 0) => {
   const newBoard = [
     ...G.boards[player].slice(0, index),
     boardSlotObject,
@@ -239,7 +181,7 @@ export const placeCardOnBoard = (G, player, boardSlotObject, index = 0) => {
  * @param {number} index
  * @param {number} amount
  */
-export const subtractFromMinionHealth = (G, player, index, amount) => {
+export const _sFMH = (G, player, index, amount) => {
   const totalHealth = G.boards[player][index].totalHealth;
   const calculation = G.boards[player][index].currentHealth - amount;
   const newHealth = limitNumberWithinRange(calculation, totalHealth);

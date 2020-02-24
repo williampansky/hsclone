@@ -11,6 +11,7 @@ test(`attacks opponent's player with CORE_001 warcry effect`, () => {
     health: { '1': 30 },
     boards: { '0': [], '1': [] },
     warcryObject: { '0': createWarcryObject(CARD_ID) },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -20,6 +21,7 @@ test(`attacks opponent's player with CORE_001 warcry effect`, () => {
     health: { '1': 29 },
     boards: { '0': [], '1': [] },
     warcryObject: { '0': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -33,6 +35,7 @@ test(`attacks opponent's minion with CORE_036 warcry effect, but doesn't kill it
   const G = {
     boards: { '0': [MINION_OBJECT], '1': [TARGET_MINION_OBJECT] },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -50,6 +53,7 @@ test(`attacks opponent's minion with CORE_036 warcry effect, but doesn't kill it
       '1': [{ ...TARGET_MINION_OBJECT, currentHealth: 5 }]
     },
     warcryObject: { '0': null, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -63,6 +67,7 @@ test(`kills opponent's minion with CORE_016 warcry effect`, () => {
   const G = {
     boards: { '0': [MINION_OBJECT], '1': [TARGET_MINION_OBJECT] },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -80,6 +85,7 @@ test(`kills opponent's minion with CORE_016 warcry effect`, () => {
       '1': []
     },
     warcryObject: { '0': null, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -91,6 +97,7 @@ test(`heals self (player) with CORE_006 warcry effect`, () => {
     health: { '0': 25 },
     boards: { '0': [], '1': [] },
     warcryObject: { '0': createWarcryObject(CARD_ID) },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -100,6 +107,7 @@ test(`heals self (player) with CORE_006 warcry effect`, () => {
     health: { '0': 27 },
     boards: { '0': [], '1': [] },
     warcryObject: { '0': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -111,6 +119,7 @@ test(`heals opponent's player with CORE_006 warcry effect`, () => {
     health: { '1': 25 },
     boards: { '0': [], '1': [] },
     warcryObject: { '0': createWarcryObject(CARD_ID) },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -120,6 +129,7 @@ test(`heals opponent's player with CORE_006 warcry effect`, () => {
     health: { '1': 27 },
     boards: { '0': [], '1': [] },
     warcryObject: { '0': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -136,6 +146,7 @@ test(`heals friendly minion with CORE_006 warcry effect`, () => {
       '1': []
     },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -153,6 +164,7 @@ test(`heals friendly minion with CORE_006 warcry effect`, () => {
       '1': []
     },
     warcryObject: { '0': null, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -169,6 +181,7 @@ test(`heals opponent's minion with CORE_006 warcry effect`, () => {
       '1': [{ ...TARGET_MINION_OBJECT, currentHealth: 5 }]
     },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -186,6 +199,7 @@ test(`heals opponent's minion with CORE_006 warcry effect`, () => {
       '1': [{ ...TARGET_MINION_OBJECT, currentHealth: 7 }]
     },
     warcryObject: { '0': null, '1': null },
+    playerCanBeAttacked: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
