@@ -1,5 +1,4 @@
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
-import getCardByID from 'lib/utils/get-card-by-id';
 import createWarcryObject from 'lib/creators/create-warcry-object';
 import castTargetedWarcryEffect from 'lib/moves/cast-targeted-warcry-effect';
 import TARGET_CONTEXT from 'enums/target-context.enum';
