@@ -25,12 +25,4 @@ const playerCanBeAttacked = {
   }
 };
 
-const enablePlayerCanBeAttacked = (G, player) => {
-  G.canBeAttacked[player] = true;
-};
-
-const disablePlayerCanBeAttacked = (G, player) => {
-  G.canBeAttacked[player] = false;
-};
-
 export default playerCanBeAttacked;

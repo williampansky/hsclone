@@ -9,6 +9,7 @@ const createBoardSlotObject = cardId => {
   return {
     canAttack: false,
     canBeAttacked: false,
+    canBeHealed: false,
     currentAttack: attack,
     currentHealth: health,
     hasGuard: false,

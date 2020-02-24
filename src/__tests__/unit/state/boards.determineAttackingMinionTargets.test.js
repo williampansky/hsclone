@@ -18,7 +18,7 @@ test(`determines minion targets, no guard on board`, () => {
     turnOrder: TURN_ORDER
   };
 
-  boards.determineTargets(G, ctx.currentPlayer);
+  boards.determineAttackTargets(G, ctx.currentPlayer);
   expect(G).toEqual({
     boards: {
       '0': [
@@ -52,7 +52,7 @@ test(`determines minion targets, one guard minion on board`, () => {
     turnOrder: TURN_ORDER
   };
 
-  boards.determineTargets(G, ctx.currentPlayer);
+  boards.determineAttackTargets(G, ctx.currentPlayer);
   expect(G).toEqual({
     boards: {
       '0': [

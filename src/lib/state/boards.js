@@ -1,4 +1,5 @@
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import limitNumberWithinRange from 'lib/utils/range-limit';
 import recalculateCardMechanics from 'lib/mechanics/recalculate-mechanics';
 
@@ -10,8 +11,11 @@ const boards = {
   addToMinionHealth: (G, player, index, amount) => {
     return addToMinionHealth(G, player, index, amount);
   },
-  determineTargets: (G, player) => {
+  determineAttackTargets: (G, player) => {
     return determineAttackingMinionTargets(G, player);
+  },
+  determineHealTargets: (G, player) => {
+    return determineHealingMinionTargets(G, player);
   },
   determineWarcryTargets: (G, player) => {
     return determineWarcrySpellTargets(G, player);
@@ -22,11 +26,17 @@ const boards = {
   disableCanBeAttacked: (G, player, index) => {
     return disableMinionCanBeAttacked(G, player, index);
   },
+  disableCanBeHealed: (G, player, index) => {
+    return disableMinionCanBeHealed(G, player, index);
+  },
   enableCanAttack: (G, player, index) => {
     return enableMinionCanAttack(G, player, index);
   },
   enableCanBeAttacked: (G, player, index) => {
     return enableMinionCanBeAttacked(G, player, index);
+  },
+  enableCanBeHealed: (G, player, index) => {
+    return enableMinionCanBeHealed(G, player, index);
   },
   killMinion: (G, ctx, player, boardSlot, index) => {
     return killMinion(G, ctx, player, boardSlot, index);
@@ -80,6 +90,18 @@ export const determineAttackingMinionTargets = (G, player) => {
 };
 
 /**
+ * When a player plays a heal action, calulate the possible targets.
+ * @param {{}} G
+ * @param {string} player
+ */
+export const determineHealingMinionTargets = (G, player) => {
+  playerCanBeHealed.enable(G, player);
+  G.boards[player].forEach((slot, i) => {
+    enableMinionCanBeHealed(G, player, i);
+  });
+};
+
+/**
  * When a player plays a minion with a targeted Warcry spell object;
  * we need to determine the possible targets.
  * @param {{}} G
@@ -115,6 +137,17 @@ export const disableMinionCanBeAttacked = (G, player, index) => {
 };
 
 /**
+ * Disables `canBeHealed` of the player's board index object.
+ * @param {{}} G
+ * @param {string} player
+ * @param {number} index
+ */
+export const disableMinionCanBeHealed = (G, player, index) => {
+  if (!G.boards[player][index]) return;
+  G.boards[player][index].canBeHealed = false;
+};
+
+/**
  * Enables `canAttack` of the player's board index object.
  * @param {{}} G
  * @param {string} player
@@ -134,6 +167,17 @@ export const enableMinionCanAttack = (G, player, index) => {
 export const enableMinionCanBeAttacked = (G, player, index) => {
   if (!G.boards[player][index]) return;
   G.boards[player][index].canBeAttacked = true;
+};
+
+/**
+ * Enables `canBeHealed` of the player's board index object.
+ * @param {{}} G
+ * @param {string} player
+ * @param {number} index
+ */
+export const enableMinionCanBeHealed = (G, player, index) => {
+  if (!G.boards[player][index]) return;
+  G.boards[player][index].canBeHealed = true;
 };
 
 /**
