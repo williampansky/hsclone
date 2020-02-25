@@ -1,5 +1,5 @@
 import boards from 'lib/state/boards';
-import selectMinion from 'lib/moves/select-minion';
+import deselectMinion from 'lib/moves/deselect-minion';
 
 /**
  * Attacks a minion (index) with the current player's selectedMinionObject.
@@ -43,8 +43,11 @@ const attackMinion = (G, ctx, index) => {
   // disable ATTACKING_MINION's ability to attack
   boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
 
+  // disable MINION_BEING_ATTACKED's ability to be attacked
+  boards.disableCanBeAttacked(G, currentPlayer, MINION_BEING_ATTACKED_INDEX);
+
   // reset currentPlayer's selectedMinionIndex & selectedMinionObject value
-  selectMinion(G, ctx);
+  deselectMinion(G, ctx);
 
   // kill ANY minions with health <= 0 and reset states
   boards.killMinionIfHealthIsZero(
