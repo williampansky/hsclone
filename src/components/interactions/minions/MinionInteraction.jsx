@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import MINION_CAN_ATTACK from 'components/interactions/minions/MINION_CAN_ATTACK';
 import MINION_CAN_BE_ATTACKED from 'components/interactions/minions/MINION_CAN_BE_ATTACKED';
+import MINION_CAN_BE_HEALED from 'components/interactions/minions/MINION_CAN_BE_HEALED';
 import MINION_IS_ATTACKING from 'components/interactions/minions/MINION_IS_ATTACKING';
 
 export default function MinionInteraction({
@@ -57,6 +58,16 @@ export default function MinionInteraction({
 
       {canBeAttacked && !canAttack ? (
         <MINION_CAN_BE_ATTACKED G={G} ctx={ctx} moves={moves} index={index} />
+      ) : null}
+
+      {canBeHealed && !canBeAttacked && !canAttack ? (
+        <MINION_CAN_BE_HEALED
+          G={G}
+          ctx={ctx}
+          moves={moves}
+          board={board}
+          index={index}
+        />
       ) : null}
     </Component>
   );

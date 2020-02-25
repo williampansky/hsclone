@@ -1,6 +1,7 @@
 import attackWithWarcryEffect from 'lib/warcry-effects/attack-with-warcry-effect';
 import healWithWarcryEffect from 'lib/warcry-effects/heal-with-warcry-effect';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import boards from 'lib/state/boards';
 
 /**
@@ -24,6 +25,10 @@ const castTargetedWarcryEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   // disable all playerCanBeAttacked
   playerCanBeAttacked.disable(G, '0');
   playerCanBeAttacked.disable(G, '1');
+
+  // disable all playerCanBeHealed
+  playerCanBeHealed.disable(G, '0');
+  playerCanBeHealed.disable(G, '1');
 
   // disable all canBeAttacked
   boards.disableAllCanBeAttacked(G, '0');

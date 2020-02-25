@@ -7,13 +7,14 @@ test(`determines healable targets`, () => {
   const G = {
     boards: {
       '0': [
-        { canBeHealed: false },
-        { canBeHealed: false },
-        { canBeHealed: false },
-        { canBeHealed: false },
-        { canBeHealed: false }
+        { canAttack: false, canBeAttacked: false, canBeHealed: false },
+        { canAttack: false, canBeAttacked: false, canBeHealed: false },
+        { canAttack: false, canBeAttacked: false, canBeHealed: false },
+        { canAttack: false, canBeAttacked: false, canBeHealed: false },
+        { canAttack: false, canBeAttacked: false, canBeHealed: false }
       ]
     },
+    playerCanBeAttacked: { '0': false },
     playerCanBeHealed: { '0': false },
     turnOrder: TURN_ORDER
   };
@@ -22,13 +23,14 @@ test(`determines healable targets`, () => {
   expect(G).toEqual({
     boards: {
       '0': [
-        { canBeHealed: true },
-        { canBeHealed: true },
-        { canBeHealed: true },
-        { canBeHealed: true },
-        { canBeHealed: true }
+        { canAttack: false, canBeAttacked: false, canBeHealed: true },
+        { canAttack: false, canBeAttacked: false, canBeHealed: true },
+        { canAttack: false, canBeAttacked: false, canBeHealed: true },
+        { canAttack: false, canBeAttacked: false, canBeHealed: true },
+        { canAttack: false, canBeAttacked: false, canBeHealed: true }
       ]
     },
+    playerCanBeAttacked: { '0': false },
     playerCanBeHealed: { '0': true },
     turnOrder: TURN_ORDER
   });

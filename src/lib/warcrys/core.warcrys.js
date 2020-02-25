@@ -35,7 +35,8 @@ const CORE_001 = (G, ctx, cardId, otherPlayer) => {
 
 const CORE_006 = (G, ctx, cardId, otherPlayer) => {
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
-  boards.determineWarcryTargets(G, otherPlayer);
+  boards.determineHealTargets(G, ctx.currentPlayer);
+  boards.determineHealTargets(G, otherPlayer);
 };
 
 const CORE_012 = (G, ctx, cardId) => {

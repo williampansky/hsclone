@@ -26,11 +26,13 @@ export default function TheirBoard({
     <div data-file="boards/TheirBoard" className={'their-board'}>
       <TheirAvatar
         G={G}
+        ctx={ctx}
         moves={moves}
         isActive={isActive}
-        src={avatars[playerClass[theirID]]}
+        board="TheirBoard"
         theirID={theirID}
         yourID={yourID}
+        src={avatars[playerClass[theirID]]}
       />
 
       <TheirBoardPlayerArea

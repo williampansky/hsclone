@@ -4,7 +4,7 @@ import { _dMCA, _dAMCA, _eMCA, _eAMCA } from 'lib/state/board-methods/can-attack
 import { _dMCBA, _dAMCBA, _eMCBA, _eAMCBA } from 'lib/state/board-methods/can-be-attacked';
 // prettier-ignore
 import { _dMCBH, _dAMCBH, _eMCBH, _eAMCBH } from 'lib/state/board-methods/can-be-healed';
-import { _dAMT, _dHMT, _dWT } from 'lib/state/board-methods/determinations';
+import { _dAMT, _dHT, _dWT } from 'lib/state/board-methods/determinations';
 import { _kM, _kM0 } from 'lib/state/board-methods/kill-minion';
 import { _aTMH, _sFMH } from 'lib/state/board-methods/minion-health';
 import { _pC } from 'lib/state/board-methods/place-card-on-board';
@@ -22,7 +22,7 @@ const boards = {
 
   // target determination
   determineAttackTargets: (G, player) => _dAMT(G, player),
-  determineHealTargets: (G, player) => _dHMT(G, player),
+  determineHealTargets: (G, player) => _dHT(G, player),
   determineWarcryTargets: (G, player) => _dWT(G, player),
 
   // canAttack

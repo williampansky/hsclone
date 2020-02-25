@@ -34,7 +34,11 @@ test(`WARCRY(CORE_006)`, () => {
   const G = {
     health: { '0': 30, '1': 30 },
     playerCanBeAttacked: { '0': false, '1': false },
-    boards: { '0': [], '1': [] },
+    playerCanBeHealed: { '0': false, '1': false },
+    boards: {
+      '0': [{ canAttack: true, canBeAttacked: false, canBeHealed: false }],
+      '1': [{ canAttack: false, canBeAttacked: true, canBeHealed: false }]
+    },
     warcryObject: { '0': null },
     turnOrder: TURN_ORDER
   };
@@ -42,8 +46,12 @@ test(`WARCRY(CORE_006)`, () => {
   initCoreWarcry(G, ctx, CARD_ID);
   expect(G).toEqual({
     health: { '0': 30, '1': 30 },
-    playerCanBeAttacked: { '0': false, '1': true },
-    boards: { '0': [], '1': [] },
+    playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': true, '1': true },
+    boards: {
+      '0': [{ canAttack: false, canBeAttacked: false, canBeHealed: true }],
+      '1': [{ canAttack: false, canBeAttacked: false, canBeHealed: true }]
+    },
     warcryObject: { '0': createWarcryObject(CARD_ID) },
     turnOrder: TURN_ORDER
   });

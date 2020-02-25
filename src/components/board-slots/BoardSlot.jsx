@@ -54,7 +54,7 @@ export default function BoardSlot({
           data={data}
           canAttack={canAttack}
           canBeAttacked={canBeAttacked}
-          canBeHealed={canBeAttacked}
+          canBeHealed={canBeHealed}
           currentAttack={currentAttack}
           currentHealth={currentHealth}
           hasGuard={hasGuard}

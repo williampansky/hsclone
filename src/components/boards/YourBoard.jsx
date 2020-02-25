@@ -49,7 +49,10 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
 
       <YourAvatar
         G={G}
+        ctx={ctx}
         moves={moves}
+        isActive={isActive}
+        board="YourBoard"
         yourID={yourID}
         src={avatars[playerClass[yourID]]}
       />
@@ -61,5 +64,6 @@ YourBoard.propTypes = {
   G: PropTypes.object,
   ctx: PropTypes.object,
   moves: PropTypes.object,
+  isActive: PropTypes.bool,
   yourID: PropTypes.string
 };

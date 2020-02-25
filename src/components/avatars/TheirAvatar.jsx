@@ -2,10 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import PlayerHealth from 'components/avatars/PlayerHealth';
+import AvatarInteraction from 'components/interactions/avatars/AvatarInteraction';
 
-export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
+export default function TheirAvatar({
+  G,
+  ctx,
+  moves,
+  isActive,
+  board,
+  theirID,
+  yourID,
+  src
+}) {
   const CONTEXT = WARCRY_TARGET_CONTEXT;
-  const { health, playerCanBeAttacked, selectedMinionIndex, warcryObject } = G;
+  const {
+    health,
+    playerCanBeAttacked,
+    playerCanBeHealed,
+    selectedMinionIndex,
+    warcryObject
+  } = G;
   const { attackPlayer, castTargetedWarcryEffect } = moves;
   const THEIR_HEALTH = health[theirID];
 
@@ -46,16 +62,28 @@ export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
           />
         )}
       </div>
+
+      <AvatarInteraction
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        isActive={isActive}
+        board={board}
+        playerCanBeHealed={playerCanBeHealed[theirID]}
+      />
     </div>
   );
 }
 
 TheirAvatar.propTypes = {
   G: PropTypes.object,
+  ctx: PropTypes.object,
   moves: PropTypes.object,
-  src: PropTypes.string,
+  isActive: PropTypes.bool,
+  board: PropTypes.string,
   theirID: PropTypes.string,
-  yourID: PropTypes.string
+  yourID: PropTypes.string,
+  src: PropTypes.string
 };
 
 TheirAvatar.defaultProps = {
