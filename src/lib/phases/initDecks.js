@@ -1,12 +1,13 @@
-import CORE_DECK_NEUTRAL from 'data/debug/CORE_DECK_NEUTRAL.json';
+import CORE_DECK_NEUTRAL_01 from 'data/debug/CORE_DECK_NEUTRAL_01.json';
+import CORE_DECK_NEUTRAL_02 from 'data/debug/CORE_DECK_NEUTRAL_02.json';
 
 export default {
   // Start the match by initiating each player's deck from the
   // component (client-side) state into the G state.
   // @TODO fix later on for deck selection/lobby/etc
   onBegin: (G, ctx) => {
-    G.players[0].deck = ctx.random.Shuffle(CORE_DECK_NEUTRAL);
-    G.players[1].deck = ctx.random.Shuffle(CORE_DECK_NEUTRAL);
+    G.players[0].deck = ctx.random.Shuffle(CORE_DECK_NEUTRAL_01);
+    G.players[1].deck = ctx.random.Shuffle(CORE_DECK_NEUTRAL_02);
   },
 
   // End phase when both player's decks are full (30 cards)
