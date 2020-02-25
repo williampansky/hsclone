@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
+import TARGET_CONTEXT from 'enums/target-context.enum';
 
 export default function MINION_CAN_BE_ATTACKED({ G, ctx, moves, index }) {
   const { warcryObject } = G;
@@ -9,9 +10,13 @@ export default function MINION_CAN_BE_ATTACKED({ G, ctx, moves, index }) {
   const { attackMinion, castTargetedWarcryEffect } = moves;
 
   function handleClick() {
-    return warcryObject[currentPlayer] !== null
-      ? castTargetedWarcryEffect(WARCRY_TARGET_CONTEXT[1], index)
-      : attackMinion(index);
+    if (warcryObject[currentPlayer] !== null)
+      return castTargetedWarcryEffect(
+        TARGET_CONTEXT[2],
+        WARCRY_TARGET_CONTEXT[1],
+        index
+      );
+    return attackMinion(index);
   }
 
   return (

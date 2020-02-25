@@ -7,11 +7,11 @@ import boards from 'lib/state/boards';
  * Casts a targeted Warcry spell object.
  * @param {{}} G
  * @param {{}} ctx
- * @param {string} context Either SELF || OPPONENT
+ * @param {string} playerCtx Either SELF || OPPONENT
  * @param {string} targetCtx Target context; MINION || PLAYER
  * @param {string} targetIdx Target index if targetCtx is MINION
  */
-const castTargetedWarcryEffect = (G, ctx, context, targetCtx, targetIdx) => {
+const castTargetedWarcryEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   const { warcryObject } = G;
   const { currentPlayer } = ctx;
   const { id, amount } = warcryObject[currentPlayer];
@@ -26,12 +26,17 @@ const castTargetedWarcryEffect = (G, ctx, context, targetCtx, targetIdx) => {
   playerCanBeAttacked.disable(G, '1');
 
   // disable all canBeAttacked
-  // boards.disableCanBeAttacked;
+  boards.disableAllCanBeAttacked(G, '0');
+  boards.disableAllCanBeAttacked(G, '1');
+
+  // disable all canBeHealed
+  boards.disableAllCanBeHealed(G, '0');
+  boards.disableAllCanBeHealed(G, '1');
 
   // prettier-ignore
   switch (id) {
     case 'CORE_001':  return attack(G, ctx, targetCtx, targetIdx, amount);
-    case 'CORE_006':  return heal(G, ctx, context, targetCtx, targetIdx, amount);
+    case 'CORE_006':  return heal(G, ctx, playerCtx, targetCtx, targetIdx, amount);
     case 'CORE_016':  return attack(G, ctx, targetCtx, targetIdx, amount);
     case 'CORE_036':  return attack(G, ctx, targetCtx, targetIdx, amount);
     default:          return;

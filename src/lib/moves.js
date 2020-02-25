@@ -25,8 +25,8 @@ export default {
   },
   castTargetedWarcryEffect: {
     client: false,
-    move: (G, ctx, targetCtx, targetIdx) => {
-      return castTargetedWarcryEffect(G, ctx, targetCtx, targetIdx);
+    move: (G, ctx, playerCtx, targetCtx, targetIdx) => {
+      return castTargetedWarcryEffect(G, ctx, playerCtx, targetCtx, targetIdx);
     }
   },
   deselectMinion: {

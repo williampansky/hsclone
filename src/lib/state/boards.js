@@ -39,9 +39,9 @@ const boards = {
 
   // canBeHealed
   disableCanBeHealed: (G, player, index) => _dMCBH(G, player, index),
-  disableAllCanBeHealed: (G, player, index) => _dAMCBH(G, player, index),
+  disableAllCanBeHealed: (G, player) => _dAMCBH(G, player),
   enableCanBeHealed: (G, player, index) => _eMCBH(G, player, index),
-  enableAllCanBeHealed: (G, player, index) => _eAMCBH(G, player, index),
+  enableAllCanBeHealed: (G, player) => _eAMCBH(G, player),
 
   // kill minion methods
   killMinion: (G, ctx, player, boardSlot, index) => _kM(G, ctx, player, boardSlot, index),
