@@ -1,4 +1,5 @@
 .card {
+  border-top: 1px solid rgba(255, 255, 255, 0.465);
   background: var(--card-background-color);
   border-radius: var(--card-border-radius);
   box-sizing: border-box;
@@ -8,6 +9,7 @@
   position: relative;
   user-select: none;
   width: calc(var(--card-height) / 1.4);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.425);
 }
 
 .card .card__cost {
@@ -102,7 +104,7 @@
     z-index: 3;
     height: 50%;
     width: 50%;
-    box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.925),
+    box-shadow: 0px 0px 4.5px rgba(0, 0, 0, 0.925),
       0px 0px 12.5px rgba(0, 0, 0, 0.465);
   }
 
@@ -142,6 +144,7 @@
     @include position-absolute(0, 0, 0, 0, 0);
 
     &:before {
+      border-top: 1px solid rgba(255, 255, 255, 0.465);
       content: '';
       width: 112%;
       height: 106%;

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import MINION_CAN_ATTACK from 'components/interactions/minions/MINION_CAN_ATTACK';
 import MINION_CAN_BE_ATTACKED from 'components/interactions/minions/MINION_CAN_BE_ATTACKED';
 import MINION_CAN_BE_HEALED from 'components/interactions/minions/MINION_CAN_BE_HEALED';
@@ -13,7 +12,6 @@ export default function MinionInteraction({
   moves,
   isActive,
   index,
-  render,
   board,
   data,
   canAttack,
@@ -22,41 +20,17 @@ export default function MinionInteraction({
   hasGuard,
   isAttacking
 }) {
-  const {
-    attackMinion,
-    castTargetedWarcryEffect,
-    deselectMinion,
-    selectMinion
-  } = moves;
-
-  // function handleClick() {
-  //   if (board === 'YourBoard') {
-  //     if (!canAttack) return;
-  //     if (isAttacking) return deselectMinion();
-  //     else return selectMinion(data, index);
-  //   }
-
-  //   if (board === 'TheirBoard') {
-  //     if (!canBeAttacked) return;
-  //     if (CAN_BE_ATTACKED) {
-  //       if (canBeAttackedByMinion) return attackMinion(index);
-  //       if (canBeAttackedByWarcry)
-  //         return castTargetedWarcryEffect(WARCRY_TARGET_CONTEXT[1], index);
-  //     }
-  //   }
-  // }
-
   return (
     <Component data-file="interactions/minions/MinionInteraction">
-      {canAttack && !isAttacking ? (
+      {board === 'YourBoard' && canAttack && !isAttacking ? (
         <MINION_CAN_ATTACK moves={moves} data={data} index={index} />
       ) : null}
 
-      {canAttack && isAttacking ? (
+      {board === 'YourBoard' && canAttack && isAttacking ? (
         <MINION_IS_ATTACKING moves={moves} data={data} index={index} />
       ) : null}
 
-      {canBeAttacked && !canAttack ? (
+      {board === 'TheirBoard' && canBeAttacked && !canAttack ? (
         <MINION_CAN_BE_ATTACKED G={G} ctx={ctx} moves={moves} index={index} />
       ) : null}
 

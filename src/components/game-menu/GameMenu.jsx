@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import GameMenuTrigger from 'components/game-menu/GameMenuTrigger';
+import ForfeitGameButton from 'components/game-menu/ForfeitGameButton';
 
 export default function GameMenu({
   G,
@@ -9,25 +11,20 @@ export default function GameMenu({
   showMenu,
   toggleMenuFn
 }) {
-  const { forfeitGame } = moves;
-
-  function handleForfeitGame(event) {
-    event.target.blur();
-    return forfeitGame(yourID);
-  }
-
   return (
     <div data-file="GameMenu" className="game-menu">
       <GameMenuTrigger showMenu={showMenu} toggleMenuFn={toggleMenuFn} />
       <h1>Menu</h1>
-      <button
-        className="forfeit-game-button"
-        disabled={!isActive}
-        onClick={event => handleForfeitGame(event)}
-      >
-        Forfeit game
-      </button>
-      {!isActive && <div>Can only forfeit on your turn.</div>}
+      <ForfeitGameButton moves={moves} isActive={isActive} yourID={yourID} />
     </div>
   );
 }
+
+GameMenu.propTypes = {
+  G: PropTypes.object,
+  moves: PropTypes.object,
+  isActive: PropTypes.bool,
+  yourID: PropTypes.string,
+  showMenu: PropTypes.bool,
+  toggleMenuFn: PropTypes.func
+};

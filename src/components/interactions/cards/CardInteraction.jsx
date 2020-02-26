@@ -81,17 +81,17 @@ export default function CardInteraction({
     transform: `
       translateY(calc(${calcOffset(index, numberOfCards + 1)} * 1px)) 
       rotate(calc(${calcRotate(index, numberOfCards + 1)} * 0.875deg)) 
-      scale(0.675)
+      scale(0.475)
     `
   };
 
   function calcOffset(index, total = 10, offsetRange = 80) {
     // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
-    const MIN = 10;
+    const MIN = 0;
     const MAX = 60;
 
     const calculation = Math.abs(
-      ((index - (total - 1) / 2) / (total - 2)) * offsetRange
+      ((index - (total - 1.5) / 2) / (total - 2)) * offsetRange
     );
 
     return limitNumberWithinRange(calculation, MAX, MIN);
@@ -99,7 +99,7 @@ export default function CardInteraction({
 
   // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
   function calcRotate(index, total = 10, rotationRange = 50) {
-    const MIN = -25;
+    const MIN = -15;
     const MAX = 25;
     const calculation =
       ((index - (total - 1) / 2) / (total - 2)) * rotationRange;

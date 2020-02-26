@@ -1,5 +1,7 @@
 import boards from 'lib/state/boards';
 import health from 'lib/state/health';
+import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import selectMinion from 'lib/moves/select-minion';
 
 /**
@@ -33,6 +35,14 @@ const attackPlayer = (G, ctx) => {
 
   // reset currentPlayer's selectedMinionIndex & selectedMinionObject value
   selectMinion(G, ctx);
+
+  // disable all playerCanBeAttacked
+  playerCanBeAttacked.disable(G, '0');
+  playerCanBeAttacked.disable(G, '1');
+
+  // disable all playerCanBeHealed
+  playerCanBeHealed.disable(G, '0');
+  playerCanBeHealed.disable(G, '1');
 };
 
 export default attackPlayer;

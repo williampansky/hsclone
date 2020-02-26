@@ -8,7 +8,7 @@ export default {
   // component (client-side) state into the G state.
   // @TODO fix later on for deck selection/lobby/etc
   onBegin: (G, ctx) => {
-    G.players[0].deck = ctx.random.Shuffle(CORE_006_DECK);
+    G.players[0].deck = ctx.random.Shuffle(CORE_DECK_NEUTRAL_01);
     G.players[1].deck = ctx.random.Shuffle(CORE_DECK_NEUTRAL_02);
   },
 

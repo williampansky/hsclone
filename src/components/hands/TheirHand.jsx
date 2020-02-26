@@ -31,12 +31,12 @@ export default function TheirHand({ G, theirID, cardBackSrc, toggleMenuFn }) {
       case 'hover':
         return `translateY(calc(${calcOffset(idx, handLength)} * 1px)) 
         rotate(calc(${calcRotate(idx, handLength)} * -0.25deg)) 
-        scale(0.675)`;
+        scale(0.475)`;
 
       default:
         return `translateY(calc(${calcOffset(idx, handLength)} * -1px)) 
         rotate(calc(${calcRotate(idx, handLength)} * -1deg)) 
-        scale(0.675)`;
+        scale(0.475)`;
     }
   }
 

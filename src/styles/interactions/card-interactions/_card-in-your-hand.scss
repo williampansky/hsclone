@@ -16,6 +16,7 @@
   }
 
   &:before {
+    border-radius: var(--card-border-radius);
     content: '';
     box-shadow: -5px 5px 5px hsla(0, 0%, 0%, 0.925);
     left: 0;
@@ -38,6 +39,7 @@
     right: 0;
     top: 0;
     pointer-events: none;
+    z-index: 0;
   }
 }
 

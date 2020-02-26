@@ -41,7 +41,7 @@ export default function YourPlayerArea({
 const Component = styled.div`
   border-top: 1px solid rgba(255, 255, 255, 0.465);
   width: 100%;
-  background: #72535e;
+  background: var(--board-yourPlayerArea-background-color);
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -54,7 +54,7 @@ const Component = styled.div`
 const AvatarWrapper = styled.div`
   border-top-left-radius: var(--avatar-border-radius);
   border-top-right-radius: var(--avatar-border-radius);
-  background: #72535e;
+  background: var(--board-yourPlayerArea-background-color);
   border-top: 1px solid rgba(255, 255, 255, 0.465);
   display: flex;
   flex-flow: column nowrap;
@@ -79,7 +79,7 @@ const AvatarHealthWrapper = styled.div`
   position: absolute;
   width: calc(var(--player-health-size) * 1.25);
   z-index: 1;
-  background: #72535e;
+  background: var(--board-yourPlayerArea-background-color);
   top: 20%;
   left: -8%;
 `;
