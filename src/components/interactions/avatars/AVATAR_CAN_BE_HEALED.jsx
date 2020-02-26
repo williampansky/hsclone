@@ -33,15 +33,12 @@ AVATAR_CAN_BE_HEALED.propTypes = {
   board: PropTypes.string
 };
 
+const BR = 'var(--avatar-border-radius)';
 const Component = styled.div`
-  border-top-left-radius: ${p =>
-    p.board === 'YourBoard' ? 'var(--avatar-border-radius)' : '0'};
-  border-top-right-radius: ${p =>
-    p.board === 'YourBoard' ? 'var(--avatar-border-radius)' : '0'};
-  border-bottom-left-radius: ${p =>
-    p.board === 'TheirBoard' ? 'var(--avatar-border-radius)' : '0'};
-  border-bottom-right-radius: ${p =>
-    p.board === 'TheirBoard' ? 'var(--avatar-border-radius)' : '0'};
+  border-top-left-radius: ${p => (p.board === 'YourBoard' ? BR : '0')};
+  border-top-right-radius: ${p => (p.board === 'YourBoard' ? BR : '0')};
+  border-bottom-left-radius: ${p => (p.board === 'TheirBoard' ? BR : '0')};
+  border-bottom-right-radius: ${p => (p.board === 'TheirBoard' ? BR : '0')};
   box-shadow: 0 0 5px #ff48e1;
   cursor: pointer;
   height: 100%;

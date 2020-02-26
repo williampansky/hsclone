@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import avatars from 'config/avatars.config';
 
 // child components
-import TheirAvatar from 'components/avatars/TheirAvatar';
+import TheirPlayerArea from 'components/player-areas/TheirPlayerArea';
 import TheirBoardPlayerArea from 'components/board-play-areas/TheirBoardPlayArea';
 import Deck from 'components/decks/Deck';
 
@@ -24,15 +24,15 @@ export default function TheirBoard({
 
   return (
     <div data-file="boards/TheirBoard" className={'their-board'}>
-      <TheirAvatar
+      <TheirPlayerArea
         G={G}
         ctx={ctx}
         moves={moves}
         isActive={isActive}
         board="TheirBoard"
         theirID={theirID}
-        yourID={yourID}
-        src={avatars[playerClass[theirID]]}
+        avatars={avatars}
+        playerClass={playerClass}
       />
 
       <TheirBoardPlayerArea

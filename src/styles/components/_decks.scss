@@ -5,10 +5,11 @@
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 70%;
   font-size: 12px;
   width: var(--deck-offset);
   right: calc(calc(var(--deck-offset) + 1px) * -1);
+  z-index: 0;
 }
 
 .deck__card {

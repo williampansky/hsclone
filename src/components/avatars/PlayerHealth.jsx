@@ -33,8 +33,8 @@ const Component = styled.div`
 
   top: ${p => (p.player === 'YourHealth' ? '20%' : 'auto')};
   bottom: ${p => (p.player === 'YourHealth' ? 'auto' : '20%')};
-  right: ${p => (p.player === 'YourHealth' ? 'auto' : '-5%')};
-  left: ${p => (p.player === 'YourHealth' ? '-5%' : 'auto')};
+  right: ${p => (p.player === 'YourHealth' ? 'auto' : '-15%')};
+  left: ${p => (p.player === 'YourHealth' ? '-15%' : 'auto')};
 
   .svg {
     width: var(--player-health-size);

@@ -1,7 +1,7 @@
 .player-avatar {
-  height: 20vh;
-  min-height: 20vh;
-  width: 250px;
+  height: var(--avatar-height);
+  min-height: var(--avatar-height);
+  width: var(--avatar-width);
   position: relative;
   z-index: 1;
   user-select: none;

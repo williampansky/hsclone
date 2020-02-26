@@ -55,25 +55,33 @@ const onEnd = (G, ctx) => {
   for (let i = 0; i < G.boards[PREVIOUS_PLAYER].length; i++)
     boards.disableCanAttack(G, PREVIOUS_PLAYER, i);
 
+  // reset both player's canBeAttacked states
+  G.playerCanBeAttacked['0'] = null;
+  G.playerCanBeAttacked['1'] = null;
+
+  // reset both player's canBeHealed states
+  G.playerCanBeHealed['0'] = null;
+  G.playerCanBeHealed['1'] = null;
+
   // reset both player's interaction hover states
-  G.hoveringCardIndex[0] = null;
-  G.hoveringCardIndex[1] = null;
+  G.hoveringCardIndex['0'] = null;
+  G.hoveringCardIndex['1'] = null;
 
   // reset both player's selected card states
-  G.selectedCardIndex[0] = null;
-  G.selectedCardIndex[1] = null;
-  G.selectedCardObject[0] = null;
-  G.selectedCardObject[1] = null;
+  G.selectedCardIndex['0'] = null;
+  G.selectedCardIndex['1'] = null;
+  G.selectedCardObject['0'] = null;
+  G.selectedCardObject['1'] = null;
 
   // reset both player's selected minion states
-  G.selectedMinionIndex[0] = null;
-  G.selectedMinionIndex[1] = null;
-  G.selectedMinionObject[0] = null;
-  G.selectedMinionObject[1] = null;
+  G.selectedMinionIndex['0'] = null;
+  G.selectedMinionIndex['1'] = null;
+  G.selectedMinionObject['0'] = null;
+  G.selectedMinionObject['1'] = null;
 
   // reset both player's warcry states
-  G.warcryObject[0] = null;
-  G.warcryObject[1] = null;
+  G.warcryObject['0'] = null;
+  G.warcryObject['1'] = null;
 };
 
 export default {

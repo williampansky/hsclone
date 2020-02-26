@@ -5,10 +5,17 @@
   --board-theirHand-background-color:   #151515;
   --board-theirHand-height:             45px;
   --board-theirHand-zIndex:             200;
+  --board-theirPlayerArea-height:       85px;
+  --board-theirPlayerArea-zIndex:       190;
   --board-yourHand-background-color:    #151515;
   --board-yourHand-height:              45px;
   --board-yourHand-zIndex:              200;
-  --board-players-hands-height: calc(
+  --board-yourPlayerArea-height:        85px;
+  --board-yourPlayerArea-zIndex:        190;
+  --board-hands-height: calc(
+    var(--board-theirHand-height) + var(--board-yourHand-height)
+  );
+  --board-playerAreas-height: calc(
     var(--board-theirHand-height) + var(--board-yourHand-height)
   );
 
@@ -27,6 +34,8 @@
   /* ================================ */
   /* avatar vars */
   --avatar-border-radius:               65%;
+  --avatar-height:                      155px;
+  --avatar-width:                       175px;
 
   /* ================================ */
   /* player health vars */
