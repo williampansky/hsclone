@@ -4,8 +4,10 @@ import useHover from 'react-use-hover';
 
 // child components
 import Card from 'components/cards/Card';
-import CardIsPlayable from 'components/interactions/cards/layers/CardIsPlayable';
-import CardIsSelected from 'components/interactions/cards/layers/CardIsSelected';
+import CARD_IS_PLAYABLE from 'components/interactions/cards/CARD_IS_PLAYABLE';
+import CARD_IS_PLAYABLE_EFFECT from 'components/interactions/cards/CARD_IS_PLAYABLE_EFFECT';
+import CARD_IS_SELECTED from 'components/interactions/cards/CARD_IS_SELECTED';
+import CARD_IS_SELECTED_EFFECT from 'components/interactions/cards/CARD_IS_SELECTED_EFFECT';
 import limitNumberWithinRange from 'lib/utils/range-limit';
 
 export default function CardInteraction({
@@ -132,10 +134,11 @@ export default function CardInteraction({
     >
       {IS_YOUR_TURN ? (
         <React.Fragment>
-          {IS_SELECTED && <CardIsSelected onClick={() => deselectPlayableCard()} />}
-          {IS_PLAYABLE && !IS_SELECTED && <CardIsPlayable onClick={() => selectPlayableCard(index)} />}
+          {IS_SELECTED && <CARD_IS_SELECTED_EFFECT />}
+          {IS_PLAYABLE && !IS_SELECTED && <CARD_IS_PLAYABLE_EFFECT />}
         </React.Fragment>
       ) : null}
+
       <Card
         artist={artist}
         attack={attack}
@@ -166,6 +169,13 @@ export default function CardInteraction({
         text={text}
         type={type}
       />
+
+      {IS_YOUR_TURN ? (
+        <React.Fragment>
+          {IS_SELECTED && <CARD_IS_SELECTED onClick={() => deselectPlayableCard()} />}
+          {IS_PLAYABLE && !IS_SELECTED && <CARD_IS_PLAYABLE onClick={() => selectPlayableCard(index)} />}
+        </React.Fragment>
+      ) : null}
     </div>
   );
 }

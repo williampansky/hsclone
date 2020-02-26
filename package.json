@@ -40,7 +40,7 @@
     "server": "node server.js",
     "start": "babel-node server.js",
     "start1": "PORT=3001 react-app-rewired start --hot",
-    "start2": "PORT=3002 react-app-rewired start ",
+    "start2": "PORT=3002 react-app-rewired start --hot",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "unit": "jest",

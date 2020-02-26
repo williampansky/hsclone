@@ -46,7 +46,7 @@ const Component = styled.div`
   flex-flow: column nowrap;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 0 calc(var(--board-yourPlayerArea-height) / 3);
+  padding: 0 0 calc(var(--board-yourPlayerArea-height) / 8);
   height: var(--board-yourPlayerArea-height);
   position: relative;
 `;
