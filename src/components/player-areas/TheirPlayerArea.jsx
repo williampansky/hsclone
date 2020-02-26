@@ -50,6 +50,7 @@ const Component = styled.div`
   padding: var(--board-theirPlayerArea-height) 0 0;
   height: var(--board-theirPlayerArea-height);
   position: relative;
+  z-index: 1;
 `;
 
 const AvatarWrapper = styled.div`

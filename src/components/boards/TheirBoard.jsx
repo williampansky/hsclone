@@ -58,5 +58,7 @@ TheirBoard.propTypes = {
   G: PropTypes.object,
   ctx: PropTypes.object,
   moves: PropTypes.object,
-  theirID: PropTypes.string
+  isActive: PropTypes.bool,
+  theirID: PropTypes.string,
+  yourID: PropTypes.string
 };
