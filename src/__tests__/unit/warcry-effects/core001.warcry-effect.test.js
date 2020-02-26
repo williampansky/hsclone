@@ -18,6 +18,7 @@ test(`attacks a player with CORE_001 warcry`, () => {
     boards: { '0': [MINION_OBJECT], '1': [] },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   };
 
@@ -27,6 +28,7 @@ test(`attacks a player with CORE_001 warcry`, () => {
     boards: { '0': [MINION_OBJECT], '1': [] },
     warcryObject: { '0': null, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   });
 });
@@ -45,6 +47,7 @@ test(`attacks a minion with CORE_001 warcry, but doesn't kill it`, () => {
     boards: { '0': [MINION_OBJECT], '1': [TARGET_MINION_OBJECT] },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   };
 
@@ -63,6 +66,7 @@ test(`attacks a minion with CORE_001 warcry, but doesn't kill it`, () => {
     },
     warcryObject: { '0': null, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   });
 });
@@ -81,6 +85,7 @@ test(`kills a minion with the CORE_001 warcry`, () => {
     boards: { '0': [MINION_OBJECT], '1': [TARGET_MINION_OBJECT] },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   };
 
@@ -95,6 +100,7 @@ test(`kills a minion with the CORE_001 warcry`, () => {
     boards: { '0': [MINION_OBJECT], '1': [] },
     warcryObject: { '0': null, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: TURN_ORDER
   });
 });

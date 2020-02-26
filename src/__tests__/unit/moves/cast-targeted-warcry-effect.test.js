@@ -12,6 +12,7 @@ test(`attacks opponent's player with CORE_001 warcry effect`, () => {
     boards: { '0': [], '1': [] },
     warcryObject: { '0': createWarcryObject(CARD_ID) },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -22,6 +23,7 @@ test(`attacks opponent's player with CORE_001 warcry effect`, () => {
     boards: { '0': [], '1': [] },
     warcryObject: { '0': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -36,6 +38,7 @@ test(`attacks opponent's minion with CORE_036 warcry effect, but doesn't kill it
     boards: { '0': [MINION_OBJECT], '1': [TARGET_MINION_OBJECT] },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -54,6 +57,7 @@ test(`attacks opponent's minion with CORE_036 warcry effect, but doesn't kill it
     },
     warcryObject: { '0': null, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -68,6 +72,7 @@ test(`kills opponent's minion with CORE_016 warcry effect`, () => {
     boards: { '0': [MINION_OBJECT], '1': [TARGET_MINION_OBJECT] },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -86,6 +91,7 @@ test(`kills opponent's minion with CORE_016 warcry effect`, () => {
     },
     warcryObject: { '0': null, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -98,6 +104,7 @@ test(`heals self (player) with CORE_006 warcry effect`, () => {
     boards: { '0': [], '1': [] },
     warcryObject: { '0': createWarcryObject(CARD_ID) },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -108,6 +115,7 @@ test(`heals self (player) with CORE_006 warcry effect`, () => {
     boards: { '0': [], '1': [] },
     warcryObject: { '0': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -120,6 +128,7 @@ test(`heals opponent's player with CORE_006 warcry effect`, () => {
     boards: { '0': [], '1': [] },
     warcryObject: { '0': createWarcryObject(CARD_ID) },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -130,6 +139,7 @@ test(`heals opponent's player with CORE_006 warcry effect`, () => {
     boards: { '0': [], '1': [] },
     warcryObject: { '0': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -147,6 +157,7 @@ test(`heals friendly minion with CORE_006 warcry effect`, () => {
     },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -165,6 +176,7 @@ test(`heals friendly minion with CORE_006 warcry effect`, () => {
     },
     warcryObject: { '0': null, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
@@ -182,6 +194,7 @@ test(`heals opponent's minion with CORE_006 warcry effect`, () => {
     },
     warcryObject: { '0': WARCRY_OBJECT, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   };
 
@@ -200,6 +213,7 @@ test(`heals opponent's minion with CORE_006 warcry effect`, () => {
     },
     warcryObject: { '0': null, '1': null },
     playerCanBeAttacked: { '0': false, '1': false },
+    playerCanBeHealed: { '0': false, '1': false },
     turnOrder: ['0', '1']
   });
 });
