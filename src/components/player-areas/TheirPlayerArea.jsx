@@ -7,13 +7,14 @@ import TARGET_CONTEXT from 'enums/target-context.enum';
 import YourAvatar from 'components/avatars/YourAvatar';
 import TheirAvatar from 'components/avatars/TheirAvatar';
 
-export default function YourPlayerArea({
+export default function TheirPlayerArea({
   G,
   ctx,
   moves,
   isActive,
   board,
   theirID,
+  yourID,
   avatars,
   playerClass
 }) {
@@ -32,6 +33,7 @@ export default function YourPlayerArea({
           isActive={isActive}
           board={board}
           theirID={theirID}
+          yourID={yourID}
           src={avatars[playerClass[theirID]]}
         />
       </AvatarWrapper>

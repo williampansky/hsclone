@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import PlayerHealth from 'components/avatars/PlayerHealth';
 import AvatarInteraction from 'components/interactions/avatars/AvatarInteraction';
+import TARGET_CONTEXT from 'enums/target-context.enum';
+import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
 export default function TheirAvatar({
   G,
@@ -14,7 +15,6 @@ export default function TheirAvatar({
   yourID,
   src
 }) {
-  const CONTEXT = WARCRY_TARGET_CONTEXT;
   const {
     health,
     playerCanBeAttacked,
@@ -32,27 +32,12 @@ export default function TheirAvatar({
 
   const canBeAttackedByMinion = canBeAttacked && attackingMinionIndex;
   const canBeAttackedByWarcry = canBeAttacked && activeWarcryObject;
-  const CAN_BE_ATTACKED = canBeAttackedByMinion || canBeAttackedByWarcry;
-
-  function handleClick() {
-    if (CAN_BE_ATTACKED) {
-      if (canBeAttackedByMinion) return attackPlayer();
-      if (canBeAttackedByWarcry) return castTargetedWarcryEffect(CONTEXT[2]);
-    }
-  }
 
   return (
     <div
       data-file="avatars/TheirAvatar"
       className={['player-avatar', 'their-avatar', 'effect--bezel'].join(' ')}
     >
-      {CAN_BE_ATTACKED && (
-        <div
-          className={'player-avatar--can_be_attacked'}
-          onClick={() => handleClick()}
-        />
-      )}
-
       <PlayerHealth health={THEIR_HEALTH} player="TheirHealth" />
       <div className={'avatar-image-wrapper'}>
         {src && (
@@ -69,6 +54,9 @@ export default function TheirAvatar({
         moves={moves}
         isActive={isActive}
         board={board}
+        theirID={theirID}
+        yourID={yourID}
+        playerCanBeAttacked={playerCanBeAttacked[theirID]}
         playerCanBeHealed={playerCanBeHealed[theirID]}
       />
     </div>

@@ -31,6 +31,7 @@ export default function TheirBoard({
         isActive={isActive}
         board="TheirBoard"
         theirID={theirID}
+        yourID={yourID}
         avatars={avatars}
         playerClass={playerClass}
       />

@@ -27,6 +27,7 @@ const Component = styled.div`
   font-weight: bold;
   height: var(--player-health-size);
   justify-content: center;
+  pointer-events: none;
   position: absolute;
   width: var(--player-health-size);
   z-index: 1;
@@ -68,6 +69,7 @@ const HealthValue = styled.div`
   font-size: 1em;
   line-height: 1;
   font-family: 'Carter One', sans-serif;
+  pointer-events: none;
   text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
     0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
     0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
