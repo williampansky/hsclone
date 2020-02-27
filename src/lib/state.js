@@ -2,6 +2,8 @@ import boards from 'lib/state/boards';
 import buffs from 'lib/state/buffs';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
+import playerCanAttack from 'lib/state/player-can-attack';
+import playerWeapon from 'lib/state/player-weapon';
 import cardBack from 'lib/state/cardBack';
 import counts from 'lib/state/counts';
 import energy from 'lib/state/energy';
@@ -19,6 +21,8 @@ export default {
   buffs: buffs.__DATA_MODEL,
   playerCanBeAttacked: playerCanBeAttacked.__DATA_MODEL,
   playerCanBeHealed: playerCanBeHealed.__DATA_MODEL,
+  playerCanAttack: playerCanAttack.__DATA_MODEL,
+  playerWeapon: playerWeapon.__DATA_MODEL,
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
   playerClass: {

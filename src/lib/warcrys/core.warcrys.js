@@ -3,6 +3,8 @@ import health from 'lib/state/health';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import createWarcryObject from 'lib/creators/create-warcry-object';
 import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
+import playerCanAttack from 'lib/state/player-can-attack';
+import playerWeapon from 'lib/state/player-weapon';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
@@ -13,6 +15,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
   switch (cardId) {
     case 'CORE_001':  return CORE_001(G, ctx, cardId, otherPlayer);
     case 'CORE_006':  return CORE_006(G, ctx, cardId, otherPlayer);
+    case 'CORE_007':  return CORE_007(G, ctx, cardId, otherPlayer);
     case 'CORE_012':  return CORE_012(G, ctx, cardId);
     case 'CORE_013':  return CORE_013(G, ctx, cardId);
     case 'CORE_016':  return CORE_016(G, ctx, cardId);
@@ -37,6 +40,11 @@ const CORE_006 = (G, ctx, cardId, otherPlayer) => {
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
   boards.determineHealTargets(G, ctx.currentPlayer);
   boards.determineHealTargets(G, otherPlayer);
+};
+
+const CORE_007 = (G, ctx, cardId, otherPlayer) => {
+  playerCanAttack.disable(G, otherPlayer);
+  playerWeapon.unequip(G, otherPlayer);
 };
 
 const CORE_012 = (G, ctx, cardId) => {

@@ -57,6 +57,25 @@ test(`WARCRY(CORE_006)`, () => {
   });
 });
 
+test(`WARCRY(CORE_007)`, () => {
+  const CARD_ID = 'CORE_007';
+  const ctx = { currentPlayer: '0' };
+  const TURN_ORDER = ['0', '1'];
+
+  const G = {
+    playerCanAttack: { '0': false, '1': false },
+    playerWeapon: { '0': null, '1': { key: 'TEMP_WEAPON_OBJ' } },
+    turnOrder: TURN_ORDER
+  };
+
+  initCoreWarcry(G, ctx, CARD_ID);
+  expect(G).toEqual({
+    playerCanAttack: { '0': false, '1': false },
+    playerWeapon: { '0': null, '1': null },
+    turnOrder: TURN_ORDER
+  });
+});
+
 test(`WARCRY(CORE_012) - board under max capacity`, () => {
   const CARD_ID = 'CORE_012';
   const PARENT_MINION = createBoardSlotObject(CARD_ID);
