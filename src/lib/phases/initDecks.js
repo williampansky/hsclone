@@ -1,5 +1,6 @@
 import CORE_001_DECK from 'data/debug/single-card-id-arrays/CORE_001_DECK.json';
 import CORE_006_DECK from 'data/debug/single-card-id-arrays/CORE_006_DECK.json';
+import CORE_021_DECK from 'data/debug/single-card-id-arrays/CORE_021_DECK.json';
 import CORE_DECK_NEUTRAL_01 from 'data/debug/CORE_DECK_NEUTRAL_01.json';
 import CORE_DECK_NEUTRAL_02 from 'data/debug/CORE_DECK_NEUTRAL_02.json';
 
@@ -8,7 +9,7 @@ export default {
   // component (client-side) state into the G state.
   // @TODO fix later on for deck selection/lobby/etc
   onBegin: (G, ctx) => {
-    G.players[0].deck = ctx.random.Shuffle(CORE_DECK_NEUTRAL_01);
+    G.players[0].deck = ctx.random.Shuffle(CORE_021_DECK);
     G.players[1].deck = ctx.random.Shuffle(CORE_DECK_NEUTRAL_02);
   },
 

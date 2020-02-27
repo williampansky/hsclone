@@ -1,6 +1,7 @@
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import { _dMCBA, _eMCBA } from 'lib/state/board-methods/can-be-attacked';
+import { _eMCBB } from 'lib/state/board-methods/can-be-buffed';
 import { _eMCBH } from 'lib/state/board-methods/can-be-healed';
 import { _dMCA } from './can-attack';
 
@@ -28,17 +29,27 @@ export const _dAMT = (G, player) => {
 };
 
 /**
+ * Determine Buffing Minion Targets
+ * When a player plays a heal action, calculate the possible targets.
+ * @param {{}} G
+ * @param {string} player
+ */
+export const _dBT = (G, player, index) => {
+  G.boards[player].forEach((_, i) => {
+    if (i !== index) _eMCBB(G, player, i);
+  });
+};
+
+/**
  * Determine Healing Minion Targets
  * When a player plays a heal action, calulate the possible targets.
  * @param {{}} G
  * @param {string} player
  */
-export const _dHT = (G, player) => {
+export const _dHT = (G, player, index) => {
   playerCanBeAttacked.disable(G, player);
   playerCanBeHealed.enable(G, player);
   G.boards[player].forEach((_, i) => {
-    _dMCA(G, player, i);
-    _dMCBA(G, player, i);
     _eMCBH(G, player, i);
   });
 };

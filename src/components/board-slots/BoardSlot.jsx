@@ -22,6 +22,7 @@ export default function BoardSlot({
   const {
     canAttack,
     canBeAttacked,
+    canBeBuffed,
     canBeHealed,
     currentAttack,
     currentHealth,
@@ -54,6 +55,7 @@ export default function BoardSlot({
           data={data}
           canAttack={canAttack}
           canBeAttacked={canBeAttacked}
+          canBeBuffed={canBeBuffed}
           canBeHealed={canBeHealed}
           currentAttack={currentAttack}
           currentHealth={currentHealth}

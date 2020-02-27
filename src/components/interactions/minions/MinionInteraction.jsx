@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import MINION_CAN_ATTACK from 'components/interactions/minions/MINION_CAN_ATTACK';
-import MINION_CAN_BE_ATTACKED from 'components/interactions/minions/MINION_CAN_BE_ATTACKED';
-import MINION_CAN_BE_HEALED from 'components/interactions/minions/MINION_CAN_BE_HEALED';
-import MINION_IS_ATTACKING from 'components/interactions/minions/MINION_IS_ATTACKING';
+import TheirMinionInteractions from 'components/interactions/minions/TheirMinionInteractions';
+import YourMinionInteractions from 'components/interactions/minions/YourMinionInteractions';
 
 export default function MinionInteraction({
   G,
@@ -16,35 +13,44 @@ export default function MinionInteraction({
   data,
   canAttack,
   canBeAttacked,
+  canBeBuffed,
   canBeHealed,
   hasGuard,
   isAttacking
 }) {
-  return (
-    <Component data-file="interactions/minions/MinionInteraction">
-      {board === 'YourBoard' && canAttack && !isAttacking ? (
-        <MINION_CAN_ATTACK moves={moves} data={data} index={index} />
-      ) : null}
-
-      {board === 'YourBoard' && canAttack && isAttacking ? (
-        <MINION_IS_ATTACKING moves={moves} data={data} index={index} />
-      ) : null}
-
-      {board === 'TheirBoard' && canBeAttacked && !canAttack ? (
-        <MINION_CAN_BE_ATTACKED G={G} ctx={ctx} moves={moves} index={index} />
-      ) : null}
-
-      {canBeHealed && !canBeAttacked && !canAttack ? (
-        <MINION_CAN_BE_HEALED
+  switch (board) {
+    case 'TheirBoard':
+      return (
+        <TheirMinionInteractions
           G={G}
           ctx={ctx}
           moves={moves}
-          board={board}
+          data={data}
           index={index}
+          canAttack={canAttack}
+          canBeAttacked={canBeAttacked}
+          canBeBuffed={canBeBuffed}
+          canBeHealed={canBeHealed}
+          isAttacking={isAttacking}
         />
-      ) : null}
-    </Component>
-  );
+      );
+
+    default:
+      return (
+        <YourMinionInteractions
+          G={G}
+          ctx={ctx}
+          moves={moves}
+          data={data}
+          index={index}
+          canAttack={canAttack}
+          canBeAttacked={canBeAttacked}
+          canBeBuffed={canBeBuffed}
+          canBeHealed={canBeHealed}
+          isAttacking={isAttacking}
+        />
+      );
+  }
 }
 
 MinionInteraction.propTypes = {
@@ -58,15 +64,10 @@ MinionInteraction.propTypes = {
   data: PropTypes.object,
   canAttack: PropTypes.bool,
   canBeAttacked: PropTypes.bool,
+  canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
   currentAttack: PropTypes.number,
   currentHealth: PropTypes.number,
   hasGuard: PropTypes.bool,
   isAttacking: PropTypes.bool
 };
-
-const Component = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-`;

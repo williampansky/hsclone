@@ -2,10 +2,12 @@
 import { _dMCA, _dAMCA, _eMCA, _eAMCA } from 'lib/state/board-methods/can-attack';
 // prettier-ignore
 import { _dMCBA, _dAMCBA, _eMCBA, _eAMCBA } from 'lib/state/board-methods/can-be-attacked';
-import { _dMCBB, _eMCBB } from 'lib/state/board-methods/can-be-buffed';
+// prettier-ignore
+import { _dMCBB, _dAMCBB, _eMCBB, _eAMCBB } from 'lib/state/board-methods/can-be-buffed';
 // prettier-ignore
 import { _dMCBH, _dAMCBH, _eMCBH, _eAMCBH } from 'lib/state/board-methods/can-be-healed';
-import { _dAMT, _dHT, _dWT } from 'lib/state/board-methods/determinations';
+// prettier-ignore
+import { _dAMT, _dBT, _dHT, _dWT } from 'lib/state/board-methods/determinations';
 import { _kM, _kM0 } from 'lib/state/board-methods/kill-minion';
 import { _aTMH, _sFMH } from 'lib/state/board-methods/minion-health';
 import { _pC } from 'lib/state/board-methods/place-card-on-board';
@@ -23,7 +25,8 @@ const boards = {
 
   // target determination
   determineAttackTargets: (G, player) => _dAMT(G, player),
-  determineHealTargets: (G, player) => _dHT(G, player),
+  determineBuffTargets: (G, player, index) => _dBT(G, player, index),
+  determineHealTargets: (G, player, index) => _dHT(G, player, index),
   determineWarcryTargets: (G, player) => _dWT(G, player),
 
   // canAttack
@@ -40,7 +43,9 @@ const boards = {
   
   // canBeBuffed
   disableCanBeBuffed: (G, player, index) => _dMCBB(G, player, index),
+  disableAllCanBeBuffed: (G, player) => _dAMCBB(G, player),
   enableCanBeBuffed: (G, player, index) => _eMCBB(G, player, index),
+  enableAllCanBeBuffed: (G, player) => _eAMCBB(G, player),
 
   // canBeHealed
   disableCanBeHealed: (G, player, index) => _dMCBH(G, player, index),

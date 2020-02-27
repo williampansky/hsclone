@@ -1,4 +1,5 @@
 import attackWithWarcryEffect from 'lib/warcry-effects/attack-with-warcry-effect';
+import buffWithWarcryEffect from 'lib/warcry-effects/buff-with-warcry-effect';
 import healWithWarcryEffect from 'lib/warcry-effects/heal-with-warcry-effect';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
@@ -17,6 +18,7 @@ const castTargetedWarcryEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   const { currentPlayer } = ctx;
   const { id, amount } = warcryObject[currentPlayer];
   const attack = attackWithWarcryEffect;
+  const buff = buffWithWarcryEffect;
   const heal = healWithWarcryEffect;
 
   // clear warcryObject
@@ -34,6 +36,10 @@ const castTargetedWarcryEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   boards.disableAllCanBeAttacked(G, '0');
   boards.disableAllCanBeAttacked(G, '1');
 
+  // disable all canBeAttacked
+  boards.disableAllCanBeBuffed(G, '0');
+  boards.disableAllCanBeBuffed(G, '1');
+
   // disable all canBeHealed
   boards.disableAllCanBeHealed(G, '0');
   boards.disableAllCanBeHealed(G, '1');
@@ -43,6 +49,7 @@ const castTargetedWarcryEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
     case 'CORE_001':  return attack(G, ctx, targetCtx, targetIdx, amount);
     case 'CORE_006':  return heal(G, ctx, playerCtx, targetCtx, targetIdx, amount);
     case 'CORE_016':  return attack(G, ctx, targetCtx, targetIdx, amount);
+    case 'CORE_021':  return buff(G, ctx, targetIdx, amount);
     case 'CORE_036':  return attack(G, ctx, targetCtx, targetIdx, amount);
     default:          return;
   }
