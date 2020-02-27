@@ -46,7 +46,11 @@ export default function Minion({
     <div className={['minion'].join(' ')}>
       {/* <div className={'info-trigger'} {...hoverProps} /> */}
       <div className={'image-wrapper'}>
-        <img alt={name} role="presentation" src={imageSrc} />
+        <div
+          className="image"
+          style={{ backgroundImage: `url(${imageSrc})` }}
+        />
+        {/* <img alt={name} role="presentation" src={imageSrc} /> */}
       </div>
       <div className={'attack-wrapper'}>
         <div className={'text__value'}>{currentAttack}</div>

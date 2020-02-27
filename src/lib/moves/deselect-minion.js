@@ -17,7 +17,7 @@ const deselectMinion = (G, ctx) => {
   selectedMinionIndex.reset(G, currentPlayer);
   selectedMinionObject.reset(G, currentPlayer);
   playerCanBeAttacked.disable(G, otherPlayer);
-  G.boards[otherPlayer].forEach((slot, i) => {
+  G.boards[otherPlayer].forEach((_, i) => {
     boards.disableCanBeAttacked(G, otherPlayer, i);
   });
 };

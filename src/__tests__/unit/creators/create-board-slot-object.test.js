@@ -9,8 +9,11 @@ test(`should create an object for a new board slot`, () => {
   expect(result).toEqual({
     canAttack: false,
     canBeAttacked: false,
+    canBeBuffed: false,
+    canBeHealed: false,
     currentAttack: expectedMinionData.attack,
     currentHealth: expectedMinionData.health,
+    hasBoon: false,
     hasGuard: false,
     minionData: expectedMinionData,
     totalAttack: expectedMinionData.attack,

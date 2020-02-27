@@ -3,6 +3,9 @@ import boards from 'lib/state/boards';
 import energy from 'lib/state/energy';
 import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
 import winner from 'lib/state/winner';
+import playerCanAttack from 'lib/state/player-can-attack';
+import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import playerCanBeHealed from 'lib/state/player-can-be-healed';
 
 const onBegin = (G, ctx) => {
   const { currentPlayer } = ctx;
@@ -42,38 +45,54 @@ const onBegin = (G, ctx) => {
 
 const onEnd = (G, ctx) => {
   const { health, turnOrder } = G;
-  const CURRENT_PLAYER = ctx.currentPlayer;
-  const PREVIOUS_PLAYER = turnOrder.find(player => player !== CURRENT_PLAYER);
 
   const PLAYER0_HEALTH = health[turnOrder['0']];
   if (PLAYER0_HEALTH === 0) winner.set(G, turnOrder['0']);
   else winner.set(G, turnOrder['1']);
 
   // disable all minions canAttack
-  for (let i = 0; i < G.boards[CURRENT_PLAYER].length; i++)
-    boards.disableCanAttack(G, CURRENT_PLAYER, i);
-  for (let i = 0; i < G.boards[PREVIOUS_PLAYER].length; i++)
-    boards.disableCanAttack(G, PREVIOUS_PLAYER, i);
+  boards.disableAllCanAttack(G, '0');
+  boards.disableAllCanAttack(G, '1');
+
+  // disable all minions canBeAttacked
+  boards.disableAllCanBeAttacked(G, '0');
+  boards.disableAllCanBeAttacked(G, '1');
+
+  // disable all minions canBeHealed
+  boards.disableAllCanBeHealed(G, '0');
+  boards.disableAllCanBeHealed(G, '1');
+
+  // reset both player's canAttack states
+  playerCanAttack.disable(G, ['0']);
+  playerCanAttack.disable(G, ['1']);
+
+  // reset both player's canBeAttacked states
+  playerCanBeAttacked.disable(G, ['0']);
+  playerCanBeAttacked.disable(G, ['1']);
+
+  // reset both player's canBeHealed states
+  playerCanBeHealed.disable(G, ['0']);
+  playerCanBeHealed.disable(G, ['1']);
 
   // reset both player's interaction hover states
-  G.hoveringCardIndex[0] = null;
-  G.hoveringCardIndex[1] = null;
+  G.hoveringCardIndex['0'] = null;
+  G.hoveringCardIndex['1'] = null;
 
   // reset both player's selected card states
-  G.selectedCardIndex[0] = null;
-  G.selectedCardIndex[1] = null;
-  G.selectedCardObject[0] = null;
-  G.selectedCardObject[1] = null;
+  G.selectedCardIndex['0'] = null;
+  G.selectedCardIndex['1'] = null;
+  G.selectedCardObject['0'] = null;
+  G.selectedCardObject['1'] = null;
 
   // reset both player's selected minion states
-  G.selectedMinionIndex[0] = null;
-  G.selectedMinionIndex[1] = null;
-  G.selectedMinionObject[0] = null;
-  G.selectedMinionObject[1] = null;
+  G.selectedMinionIndex['0'] = null;
+  G.selectedMinionIndex['1'] = null;
+  G.selectedMinionObject['0'] = null;
+  G.selectedMinionObject['1'] = null;
 
   // reset both player's warcry states
-  G.warcryObject[0] = null;
-  G.warcryObject[1] = null;
+  G.warcryObject['0'] = null;
+  G.warcryObject['1'] = null;
 };
 
 export default {

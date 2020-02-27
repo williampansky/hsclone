@@ -7,7 +7,7 @@ import SPELLTYPE from 'enums/spellType.enums';
 
 // child components
 import SpellSlot from 'components/board-slots/SpellSlot';
-import YourAvatar from 'components/avatars/YourAvatar';
+import YourPlayerArea from 'components/player-areas/YourPlayerArea';
 import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
 import Deck from 'components/decks/Deck';
 
@@ -47,11 +47,15 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
         length={yourDeckLength}
       />
 
-      <YourAvatar
+      <YourPlayerArea
         G={G}
+        ctx={ctx}
         moves={moves}
+        isActive={isActive}
+        board="YourBoard"
         yourID={yourID}
-        src={avatars[playerClass[yourID]]}
+        avatars={avatars}
+        playerClass={playerClass}
       />
     </div>
   );
@@ -61,5 +65,6 @@ YourBoard.propTypes = {
   G: PropTypes.object,
   ctx: PropTypes.object,
   moves: PropTypes.object,
+  isActive: PropTypes.bool,
   yourID: PropTypes.string
 };

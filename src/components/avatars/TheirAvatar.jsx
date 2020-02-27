@@ -1,12 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import PlayerHealth from 'components/avatars/PlayerHealth';
+import AvatarInteraction from 'components/interactions/avatars/AvatarInteraction';
+import TARGET_CONTEXT from 'enums/target-context.enum';
+import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
-export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
-  const CONTEXT = WARCRY_TARGET_CONTEXT;
-  const { health, playerCanBeAttacked, selectedMinionIndex, warcryObject } = G;
-  const { attackPlayer, castWarcrySpell } = moves;
+export default function TheirAvatar({
+  G,
+  ctx,
+  moves,
+  isActive,
+  board,
+  theirID,
+  yourID,
+  src
+}) {
+  const {
+    health,
+    playerCanBeAttacked,
+    playerCanBeHealed,
+    selectedMinionIndex,
+    warcryObject
+  } = G;
+  const { attackPlayer, castTargetedWarcryEffect } = moves;
   const THEIR_HEALTH = health[theirID];
 
   const canBeAttacked = playerCanBeAttacked[theirID];
@@ -16,28 +32,13 @@ export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
 
   const canBeAttackedByMinion = canBeAttacked && attackingMinionIndex;
   const canBeAttackedByWarcry = canBeAttacked && activeWarcryObject;
-  const CAN_BE_ATTACKED = canBeAttackedByMinion || canBeAttackedByWarcry;
-
-  function handleClick() {
-    if (CAN_BE_ATTACKED) {
-      if (canBeAttackedByMinion) return attackPlayer();
-      if (canBeAttackedByWarcry) return castWarcrySpell(CONTEXT[2]);
-    }
-  }
 
   return (
     <div
       data-file="avatars/TheirAvatar"
       className={['player-avatar', 'their-avatar', 'effect--bezel'].join(' ')}
     >
-      {CAN_BE_ATTACKED && (
-        <div
-          className={'player-avatar--can_be_attacked'}
-          onClick={() => handleClick()}
-        />
-      )}
-
-      <PlayerHealth health={THEIR_HEALTH} />
+      <PlayerHealth health={THEIR_HEALTH} player="TheirHealth" />
       <div className={'avatar-image-wrapper'}>
         {src && (
           <div
@@ -46,16 +47,31 @@ export default function TheirAvatar({ G, moves, src, theirID, yourID }) {
           />
         )}
       </div>
+
+      <AvatarInteraction
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        isActive={isActive}
+        board={board}
+        theirID={theirID}
+        yourID={yourID}
+        playerCanBeAttacked={playerCanBeAttacked[theirID]}
+        playerCanBeHealed={playerCanBeHealed[theirID]}
+      />
     </div>
   );
 }
 
 TheirAvatar.propTypes = {
   G: PropTypes.object,
+  ctx: PropTypes.object,
   moves: PropTypes.object,
-  src: PropTypes.string,
+  isActive: PropTypes.bool,
+  board: PropTypes.string,
   theirID: PropTypes.string,
-  yourID: PropTypes.string
+  yourID: PropTypes.string,
+  src: PropTypes.string
 };
 
 TheirAvatar.defaultProps = {

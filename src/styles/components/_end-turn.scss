@@ -83,7 +83,7 @@
 
 .end__turn__button__text {
   font-family: 'Carter One', sans-serif;
-  color: black;
+  color: white;
   font-size: 1em;
   // height: 100%;
   width: 100%;
@@ -95,6 +95,19 @@
   transition: 100ms ease;
   user-select: none;
   @include display-flex(column nowrap, center, center);
+  text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+    0 0 1px black;
 
   &.--default {
     opacity: 1;

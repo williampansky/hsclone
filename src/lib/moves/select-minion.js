@@ -21,7 +21,7 @@ const selectMinion = (G, ctx, minionObject = null, index = null) => {
   selectedMinionIndex.set(G, currentPlayer, index);
   selectedMinionObject.set(G, currentPlayer, minionObject);
   playerCanBeAttacked.enable(G, otherPlayer);
-  boards.determineTargets(G, otherPlayer);
+  boards.determineAttackTargets(G, otherPlayer);
 };
 
 export default selectMinion;

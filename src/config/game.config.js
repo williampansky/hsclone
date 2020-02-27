@@ -1,7 +1,7 @@
 const GAME_CONFIG = {
   debugData: {
     enableAttack: true,
-    enableCost: true,
+    enableCost: false,
     enableHealth: true,
     enableMechanics: true,
     enableSet: true,

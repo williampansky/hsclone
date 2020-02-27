@@ -1,206 +1,64 @@
-import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
-import limitNumberWithinRange from 'lib/utils/range-limit';
-import recalculateCardMechanics from 'lib/mechanics/recalculate-mechanics';
+// prettier-ignore
+import { _dMCA, _dAMCA, _eMCA, _eAMCA } from 'lib/state/board-methods/can-attack';
+// prettier-ignore
+import { _dMCBA, _dAMCBA, _eMCBA, _eAMCBA } from 'lib/state/board-methods/can-be-attacked';
+// prettier-ignore
+import { _dMCBB, _dAMCBB, _eMCBB, _eAMCBB } from 'lib/state/board-methods/can-be-buffed';
+// prettier-ignore
+import { _dMCBH, _dAMCBH, _eMCBH, _eAMCBH } from 'lib/state/board-methods/can-be-healed';
+// prettier-ignore
+import { _dAMT, _dBT, _dHT, _dWT } from 'lib/state/board-methods/determinations';
+import { _kM, _kM0 } from 'lib/state/board-methods/kill-minion';
+import { _aTMH, _sFMH } from 'lib/state/board-methods/minion-health';
+import { _pC } from 'lib/state/board-methods/place-card-on-board';
 
+// prettier-ignore
 const boards = {
   __DATA_MODEL: {
     '0': [],
     '1': []
   },
-  addToMinionHealth: (G, player, index, amount) => {
-    return addToMinionHealth(G, player, index, amount);
-  },
-  determineTargets: (G, player) => {
-    return determineAttackingMinionTargets(G, player);
-  },
-  determineWarcryTargets: (G, player) => {
-    return determineWarcrySpellTargets(G, player);
-  },
-  disableCanAttack: (G, player, index) => {
-    return disableMinionCanAttack(G, player, index);
-  },
-  disableCanBeAttacked: (G, player, index) => {
-    return disableMinionCanBeAttacked(G, player, index);
-  },
-  enableCanAttack: (G, player, index) => {
-    return enableMinionCanAttack(G, player, index);
-  },
-  enableCanBeAttacked: (G, player, index) => {
-    return enableMinionCanBeAttacked(G, player, index);
-  },
-  killMinion: (G, ctx, player, boardSlot, index) => {
-    return killMinion(G, ctx, player, boardSlot, index);
-  },
-  killMinionIfHealthReachesZero: (G, ctx, player, boardSlot, index) => {
-    return killMinionIfHealthReachesZero(G, ctx, player, boardSlot, index);
-  },
-  placeCardOnBoard: (G, player, boardSlotObject, index) => {
-    return placeCardOnBoard(G, player, boardSlotObject, index);
-  },
-  subtractFromMinionHealth: (G, player, index, amount) => {
-    return subtractFromMinionHealth(G, player, index, amount);
-  }
-};
 
-/**
- * Add health to a minion.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- * @param {number} amount
- */
-export const addToMinionHealth = (G, player, index, amount) => {
-  const totalHealth = G.boards[player][index].totalHealth;
-  const calculation = G.boards[player][index].currentHealth + amount;
-  const newHealth = limitNumberWithinRange(calculation, totalHealth);
+  // minion health
+  addToMinionHealth: (G, player, index, amount) => _aTMH(G, player, index, amount),
+  subtractFromMinionHealth: (G, player, index, amount) => _sFMH(G, player, index, amount),
 
-  G.boards[player][index].currentHealth = newHealth;
-};
+  // target determination
+  determineAttackTargets: (G, player) => _dAMT(G, player),
+  determineBuffTargets: (G, player, index) => _dBT(G, player, index),
+  determineHealTargets: (G, player, index) => _dHT(G, player, index),
+  determineWarcryTargets: (G, player) => _dWT(G, player),
 
-/**
- * When a player selects a minion that can attack, we need to determine
- * its possible targets—both opposing minions and the opposing player.
- * @param {{}} G
- * @param {string} player
- */
-export const determineAttackingMinionTargets = (G, player) => {
-  const { boards } = G;
-  const MINION_HAS_GUARD = boards[player].find(slot => slot.hasGuard === true)
-    ? true
-    : false;
+  // canAttack
+  disableCanAttack: (G, player, index) => _dMCA(G, player, index),
+  disableAllCanAttack: (G, player) => _dAMCA(G, player),
+  enableCanAttack: (G, player, index) => _eMCA(G, player, index),
+  enableAllCanAttack: (G, player) => _eAMCA(G, player),
+  
+  // canBeAttacked
+  disableCanBeAttacked: (G, player, index) => _dMCBA(G, player, index),
+  disableAllCanBeAttacked: (G, player) => _dAMCBA(G, player),
+  enableCanBeAttacked: (G, player, index) => _eMCBA(G, player, index),
+  enableAllCanBeAttacked: (G, player) => _eAMCBA(G, player),
+  
+  // canBeBuffed
+  disableCanBeBuffed: (G, player, index) => _dMCBB(G, player, index),
+  disableAllCanBeBuffed: (G, player) => _dAMCBB(G, player),
+  enableCanBeBuffed: (G, player, index) => _eMCBB(G, player, index),
+  enableAllCanBeBuffed: (G, player) => _eAMCBB(G, player),
 
-  if (MINION_HAS_GUARD) playerCanBeAttacked.disable(G, player);
-  else if (!MINION_HAS_GUARD) playerCanBeAttacked.enable(G, player);
+  // canBeHealed
+  disableCanBeHealed: (G, player, index) => _dMCBH(G, player, index),
+  disableAllCanBeHealed: (G, player) => _dAMCBH(G, player),
+  enableCanBeHealed: (G, player, index) => _eMCBH(G, player, index),
+  enableAllCanBeHealed: (G, player) => _eAMCBH(G, player),
 
-  G.boards[player].forEach((slot, i) => {
-    if (slot.hasGuard === true) enableMinionCanBeAttacked(G, player, i);
-    else if (MINION_HAS_GUARD) disableMinionCanBeAttacked(G, player, i);
-    else enableMinionCanBeAttacked(G, player, i);
-  });
-};
+  // kill minion methods
+  killMinion: (G, ctx, player, boardSlot, index) => _kM(G, ctx, player, boardSlot, index),
+  killMinionIfHealthIsZero: (G, ctx, player, boardSlot, index) => _kM0(G, ctx, player, boardSlot, index),
 
-/**
- * When a player plays a minion with a targeted Warcry spell object;
- * we need to determine the possible targets.
- * @param {{}} G
- * @param {string} player
- */
-export const determineWarcrySpellTargets = (G, player) => {
-  playerCanBeAttacked.enable(G, player);
-  G.boards[player].forEach((slot, i) => {
-    enableMinionCanBeAttacked(G, player, i);
-  });
-};
-
-/**
- * Disables `canAttack` of the player's board index object.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- */
-export const disableMinionCanAttack = (G, player, index) => {
-  if (!G.boards[player][index]) return;
-  G.boards[player][index].canAttack = false;
-};
-
-/**
- * Disables `canBeAttacked` of the player's board index object.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- */
-export const disableMinionCanBeAttacked = (G, player, index) => {
-  if (!G.boards[player][index]) return;
-  G.boards[player][index].canBeAttacked = false;
-};
-
-/**
- * Enables `canAttack` of the player's board index object.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- */
-export const enableMinionCanAttack = (G, player, index) => {
-  if (!G.boards[player][index]) return;
-  G.boards[player][index].canAttack = true;
-};
-
-/**
- * Enables `canBeAttacked` of the player's board index object.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- */
-export const enableMinionCanBeAttacked = (G, player, index) => {
-  if (!G.boards[player][index]) return;
-  G.boards[player][index].canBeAttacked = true;
-};
-
-/**
- * Kill a single active minion.
- * @param {{}} G
- * @param {{}} ctx
- * @param {string} player
- * @param {{}} boardSlot
- * @param {number} index
- */
-export const killMinion = (G, ctx, player, boardSlot, index) => {
-  const { minionData } = boardSlot;
-  G.boards[player].splice(index, 1);
-  recalculateCardMechanics(G, ctx, player, minionData, index);
-};
-
-/**
- * Kill a single active minion if its currentHealth reaches zero.
- * @param {{}} G
- * @param {{}} ctx
- * @param {string} player
- * @param {{}} boardSlot
- * @param {number} index
- */
-export const killMinionIfHealthReachesZero = (
-  G,
-  ctx,
-  player,
-  boardSlot,
-  index
-) => {
-  if (G.boards[player][index].currentHealth <= 0)
-    killMinion(G, ctx, player, boardSlot, index);
-};
-
-/**
- * Places a slot object in the specific `index` of a player's board.
- *
- * @param {{}} G
- * @param {string} player
- * @param {{}} boardSlotObject
- * @param {number} index defaults to zero
- */
-export const placeCardOnBoard = (G, player, boardSlotObject, index = 0) => {
-  const newBoard = [
-    ...G.boards[player].slice(0, index),
-    boardSlotObject,
-    ...G.boards[player].slice(index)
-  ];
-
-  // swap new board in
-  G.boards[player] = newBoard;
-};
-
-/**
- * Subtract health from a minion.
- * @param {{}} G
- * @param {string} player
- * @param {number} index
- * @param {number} amount
- */
-export const subtractFromMinionHealth = (G, player, index, amount) => {
-  const totalHealth = G.boards[player][index].totalHealth;
-  const calculation = G.boards[player][index].currentHealth - amount;
-  const newHealth = limitNumberWithinRange(calculation, totalHealth);
-
-  G.boards[player][index].currentHealth = newHealth;
+  // card placement
+  placeCardOnBoard: (G, player, boardSlotObject, index) => _pC(G, player, boardSlotObject, index),
 };
 
 export default boards;

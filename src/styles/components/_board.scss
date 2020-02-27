@@ -1,7 +1,7 @@
 .board {
   box-sizing: border-box;
   background: black;
-  height: calc(100vh - var(--board-players-hands-height));
+  height: calc(100vh - var(--board-hands-height));
   overflow: hidden;
   position: relative;
   width: 100vw;

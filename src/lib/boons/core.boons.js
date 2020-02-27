@@ -10,9 +10,8 @@ import getCardByID from 'lib/utils/get-card-by-id';
 const initCoreBoon = (G, player, cardId, index) => {
   // prettier-ignore
   switch (cardId) {
-    case 'CORE_003':  return CORE_003(G, player, cardId);
-    case 'CORE_019':  return CORE_019(G, player, cardId);
-    case 'CORE_041':  return CORE_041(G, player, cardId);
+    case 'CORE_003':  return CORE_003(G, player, cardId, index);
+    case 'CORE_019':  return CORE_019(G, player, cardId, index);
     default:          break;
   }
 };
@@ -22,23 +21,24 @@ const initCoreBoon = (G, player, cardId, index) => {
  * @param {{}} G
  * @param {string} player
  * @param {string} cardId
+ * @param {number} index
  */
-const CORE_003 = (G, player, cardId) => {
-  const MINION_TYPE = getCardByID(cardId).type;
+const CORE_003 = (G, player, cardId, index) => {
+  const MINION_RACE = getCardByID(cardId).race;
 
-  const transformEach = (G, player, index) => {
+  G.boards[player].forEach((_, i) => {
+    if (i === index) return;
+    if (G.boards[player][i].minionData.race === MINION_RACE)
+      transformEach(G, player, i);
+  });
+
+  // transformation method
+  function transformEach(G, player, index) {
     G.boards[player][index] = {
       ...G.boards[player][index],
       currentAttack: G.boards[player][index].currentAttack + 1,
       totalAttack: G.boards[player][index].totalAttack + 1
     };
-  };
-
-  for (let i = 0; i < G.boards[player].length; i++) {
-    if (G.boards[player][i].minionData.id !== cardId) {
-      if (G.boards[player][i].minionData.type === MINION_TYPE)
-        transformEach(G, player, i);
-    }
   }
 };
 
@@ -47,42 +47,22 @@ const CORE_003 = (G, player, cardId) => {
  * @param {{}} G
  * @param {string} player
  * @param {string} cardId
+ * @param {number} index
  */
-const CORE_019 = (G, player, cardId) => {
-  const transformEach = (G, player, index) => {
+const CORE_019 = (G, player, cardId, index) => {
+  G.boards[player].forEach((_, i) => {
+    if (i === index) return;
+    if (G.boards[player][i].minionData.id !== cardId)
+      transformEach(G, player, i);
+  });
+
+  // transformation method
+  function transformEach(G, player, index) {
     G.boards[player][index] = {
       ...G.boards[player][index],
       currentAttack: G.boards[player][index].currentAttack + 1,
       totalAttack: G.boards[player][index].totalAttack + 1
     };
-  };
-
-  for (let i = 0; i < G.boards[player].length; i++) {
-    if (G.boards[player][i].minionData.id !== cardId)
-      transformEach(G, player, i);
-  }
-};
-
-/**
- * Gift all your other minions with a permanent +1/+1.
- * @param {{}} G
- * @param {string} player
- * @param {string} cardId
- */
-const CORE_041 = (G, player, cardId) => {
-  const transformEach = (G, player, index) => {
-    G.boards[player][index] = {
-      ...G.boards[player][index],
-      currentAttack: G.boards[player][index].currentAttack + 1,
-      currentHealth: G.boards[player][index].currentHealth + 1,
-      totalAttack: G.boards[player][index].totalAttack + 1,
-      totalHealth: G.boards[player][index].totalHealth + 1
-    };
-  };
-
-  for (let i = 0; i < G.boards[player].length; i++) {
-    if (G.boards[player][i].minionData.id !== cardId)
-      transformEach(G, player, i);
   }
 };
 

@@ -1,6 +1,6 @@
 import attackMinion from 'lib/moves/attack-minion';
 import attackPlayer from 'lib/moves/attack-player';
-import castWarcrySpell from 'lib/moves/cast-warcry-spell';
+import castTargetedWarcryEffect from 'lib/moves/cast-targeted-warcry-effect';
 import deselectMinion from 'lib/moves/deselect-minion';
 import discardCard from 'lib/moves/discard-card';
 import drawCard from 'lib/moves/draw-card';
@@ -23,10 +23,10 @@ export default {
       return attackPlayer(G, ctx, index);
     }
   },
-  castWarcrySpell: {
+  castTargetedWarcryEffect: {
     client: false,
-    move: (G, ctx, targetCtx, targetIdx) => {
-      return castWarcrySpell(G, ctx, targetCtx, targetIdx);
+    move: (G, ctx, playerCtx, targetCtx, targetIdx) => {
+      return castTargetedWarcryEffect(G, ctx, playerCtx, targetCtx, targetIdx);
     }
   },
   deselectMinion: {
