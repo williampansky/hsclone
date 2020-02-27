@@ -11,7 +11,7 @@ const initCoreBoon = (G, player, cardId, index) => {
   // prettier-ignore
   switch (cardId) {
     case 'CORE_003':  return CORE_003(G, player, cardId, index);
-    case 'CORE_019':  return CORE_019(G, player, cardId);
+    case 'CORE_019':  return CORE_019(G, player, cardId, index);
     default:          break;
   }
 };
@@ -47,9 +47,11 @@ const CORE_003 = (G, player, cardId, index) => {
  * @param {{}} G
  * @param {string} player
  * @param {string} cardId
+ * @param {number} index
  */
-const CORE_019 = (G, player, cardId) => {
+const CORE_019 = (G, player, cardId, index) => {
   G.boards[player].forEach((_, i) => {
+    if (i === index) return;
     if (G.boards[player][i].minionData.id !== cardId)
       transformEach(G, player, i);
   });
