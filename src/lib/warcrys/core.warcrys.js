@@ -24,7 +24,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_025':  return CORE_025(G, ctx, cardId);
     case 'CORE_026':  return CORE_026(G, ctx, cardId);
     case 'CORE_032':  return CORE_032(G, ctx, cardId);
-    case 'CORE_033':  return CORE_033(G, ctx, cardId);
+    case 'CORE_033':  return CORE_033(G, ctx, index);
     case 'CORE_035':  return CORE_035(G, ctx, otherPlayer);
     case 'CORE_036':  return CORE_036(G, ctx, cardId, otherPlayer);
     default:          break;
@@ -113,14 +113,14 @@ const CORE_032 = (G, ctx, cardId) => {
 /**
  * Gain +1/+1 for each of your other active minions.
  */
-const CORE_033 = (G, ctx, cardId) => {
+const CORE_033 = (G, ctx, index) => {
+  const { currentPlayer } = ctx;
+
   // (length - 1) since we don't count CORE_033 itself
-  const NUMBER_OF_MINIONS = parseInt(G.boards[ctx.currentPlayer].length - 1);
-  const isTargetId = obj => obj.minionData.id === cardId;
-  const targetIndex = G.boards[ctx.currentPlayer].findIndex(isTargetId);
+  const NUMBER_OF_MINIONS = parseInt(G.boards[currentPlayer].length - 1);
 
   // add to CORE_033's current values
-  transformTarget(G, ctx.currentPlayer, targetIndex);
+  transformTarget(G, currentPlayer, index);
 
   // transformation method
   function transformTarget(G, player, index) {
