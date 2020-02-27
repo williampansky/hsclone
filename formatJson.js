@@ -21,6 +21,7 @@ const mappedCore = incomingCore.map(item => {
     artist,
     cardClass,
     collectible,
+    cost,
     elite,
     id,
     imageSrc,
@@ -36,6 +37,7 @@ const mappedCore = incomingCore.map(item => {
       artist: artist ? artist : null,
       cardClass: parseCardClass(cardClass),
       collectible: collectible === 'checked' ? true : false,
+      cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
       elite: elite === 'checked' ? true : false,
       imageSrc: parseImageSrc(imageSrc),
       mechanics: GAME_CONFIG.debugData.enableMechanics
@@ -65,6 +67,7 @@ const mappedEntourage = incomingEntourage.map(item => {
     artist,
     cardClass,
     collectible,
+    cost,
     elite,
     id,
     imageSrc,
@@ -80,6 +83,7 @@ const mappedEntourage = incomingEntourage.map(item => {
       artist: artist ? artist : null,
       cardClass: parseCardClass(cardClass),
       collectible: collectible === 'checked' ? true : false,
+      cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
       elite: elite === 'checked' ? true : false,
       imageSrc: parseImageSrc(imageSrc),
       mechanics: GAME_CONFIG.debugData.enableMechanics
