@@ -71,8 +71,8 @@ const onEnd = (G, ctx) => {
   playerCanBeAttacked.disable(G, ['1']);
 
   // reset both player's canBeHealed states
-  playerCanBeHealed(G, ['0']);
-  playerCanBeHealed(G, ['1']);
+  playerCanBeHealed.disable(G, ['0']);
+  playerCanBeHealed.disable(G, ['1']);
 
   // reset both player's interaction hover states
   G.hoveringCardIndex['0'] = null;
