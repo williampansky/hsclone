@@ -2,6 +2,7 @@
 import { _dMCA, _dAMCA, _eMCA, _eAMCA } from 'lib/state/board-methods/can-attack';
 // prettier-ignore
 import { _dMCBA, _dAMCBA, _eMCBA, _eAMCBA } from 'lib/state/board-methods/can-be-attacked';
+import { _dMCBB, _eMCBB } from 'lib/state/board-methods/can-be-buffed';
 // prettier-ignore
 import { _dMCBH, _dAMCBH, _eMCBH, _eAMCBH } from 'lib/state/board-methods/can-be-healed';
 import { _dAMT, _dHT, _dWT } from 'lib/state/board-methods/determinations';
@@ -36,6 +37,10 @@ const boards = {
   disableAllCanBeAttacked: (G, player) => _dAMCBA(G, player),
   enableCanBeAttacked: (G, player, index) => _eMCBA(G, player, index),
   enableAllCanBeAttacked: (G, player) => _eAMCBA(G, player),
+  
+  // canBeBuffed
+  disableCanBeBuffed: (G, player, index) => _dMCBB(G, player, index),
+  enableCanBeBuffed: (G, player, index) => _eMCBB(G, player, index),
 
   // canBeHealed
   disableCanBeHealed: (G, player, index) => _dMCBH(G, player, index),
