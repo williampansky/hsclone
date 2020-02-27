@@ -50,10 +50,16 @@ const onEnd = (G, ctx) => {
   else winner.set(G, turnOrder['1']);
 
   // disable all minions canAttack
-  for (let i = 0; i < G.boards[CURRENT_PLAYER].length; i++)
-    boards.disableCanAttack(G, CURRENT_PLAYER, i);
-  for (let i = 0; i < G.boards[PREVIOUS_PLAYER].length; i++)
-    boards.disableCanAttack(G, PREVIOUS_PLAYER, i);
+  boards.disableAllCanAttack(G, '0');
+  boards.disableAllCanAttack(G, '1');
+
+  // disable all minions canBeAttacked
+  boards.disableAllCanBeAttacked(G, '0');
+  boards.disableAllCanBeAttacked(G, '1');
+
+  // disable all minions canBeHealed
+  boards.disableAllCanBeHealed(G, '0');
+  boards.disableAllCanBeHealed(G, '1');
 
   // reset both player's canBeAttacked states
   G.playerCanBeAttacked['0'] = null;
