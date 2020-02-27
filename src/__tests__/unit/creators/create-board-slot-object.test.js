@@ -13,6 +13,7 @@ test(`should create an object for a new board slot`, () => {
     canBeHealed: false,
     currentAttack: expectedMinionData.attack,
     currentHealth: expectedMinionData.health,
+    hasBoon: false,
     hasGuard: false,
     minionData: expectedMinionData,
     totalAttack: expectedMinionData.attack,

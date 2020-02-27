@@ -23,21 +23,20 @@ const recalculateCoreBoon = (G, player, cardId, index) => {
  * @param {string} cardId
  */
 const CORE_003 = (G, player, cardId) => {
-  const MINION_TYPE = getCardByID(cardId).type;
+  const MINION_RACE = getCardByID(cardId).race;
 
-  const transformEach = (G, player, index) => {
+  G.boards[player].forEach((_, i) => {
+    if (G.boards[player][i].minionData.race === MINION_RACE)
+      transformEach(G, player, i);
+  });
+
+  // transformation method
+  function transformEach(G, player, index) {
     G.boards[player][index] = {
       ...G.boards[player][index],
       currentAttack: G.boards[player][index].currentAttack - 1,
       totalAttack: G.boards[player][index].totalAttack - 1
     };
-  };
-
-  for (let i = 0; i < G.boards[player].length; i++) {
-    if (G.boards[player][i].minionData.id !== cardId) {
-      if (G.boards[player][i].minionData.type === MINION_TYPE)
-        transformEach(G, player, i);
-    }
   }
 };
 
@@ -48,17 +47,18 @@ const CORE_003 = (G, player, cardId) => {
  * @param {string} cardId
  */
 const CORE_019 = (G, player, cardId) => {
-  const transformEach = (G, player, index) => {
+  G.boards[player].forEach((_, i) => {
+    if (G.boards[player][i].minionData.id !== cardId)
+      transformEach(G, player, i);
+  });
+
+  // transformation method
+  function transformEach(G, player, index) {
     G.boards[player][index] = {
       ...G.boards[player][index],
       currentAttack: G.boards[player][index].currentAttack - 1,
       totalAttack: G.boards[player][index].totalAttack - 1
     };
-  };
-
-  for (let i = 0; i < G.boards[player].length; i++) {
-    if (G.boards[player][i].minionData.id !== cardId)
-      transformEach(G, player, i);
   }
 };
 

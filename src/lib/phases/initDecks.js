@@ -1,4 +1,4 @@
-const DECK1 = require('data/debug/single-card-id-arrays/CORE_041_DECK.json');
+const DECK1 = require('data/debug/single-card-type-arrays/MURLOC_TEMP_DECK.json');
 const DECK2 = require('data/debug/CORE_DECK_NEUTRAL_02.json');
 
 export default {
