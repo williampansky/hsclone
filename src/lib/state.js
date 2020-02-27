@@ -3,6 +3,8 @@ import buffs from 'lib/state/buffs';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import playerCanAttack from 'lib/state/player-can-attack';
+import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
+import playerShieldPoints from 'lib/state/player-shield-points';
 import playerWeapon from 'lib/state/player-weapon';
 import cardBack from 'lib/state/cardBack';
 import counts from 'lib/state/counts';
@@ -22,6 +24,8 @@ export default {
   playerCanBeAttacked: playerCanBeAttacked.__DATA_MODEL,
   playerCanBeHealed: playerCanBeHealed.__DATA_MODEL,
   playerCanAttack: playerCanAttack.__DATA_MODEL,
+  playerCanUseClassSkill: playerCanUseClassSkill.__DATA_MODEL,
+  playerShieldPoints: playerShieldPoints.__DATA_MODEL,
   playerWeapon: playerWeapon.__DATA_MODEL,
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
