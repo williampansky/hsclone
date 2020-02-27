@@ -3,6 +3,9 @@ import boards from 'lib/state/boards';
 import energy from 'lib/state/energy';
 import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
 import winner from 'lib/state/winner';
+import playerCanAttack from 'lib/state/player-can-attack';
+import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import playerCanBeHealed from 'lib/state/player-can-be-healed';
 
 const onBegin = (G, ctx) => {
   const { currentPlayer } = ctx;
@@ -42,8 +45,6 @@ const onBegin = (G, ctx) => {
 
 const onEnd = (G, ctx) => {
   const { health, turnOrder } = G;
-  const CURRENT_PLAYER = ctx.currentPlayer;
-  const PREVIOUS_PLAYER = turnOrder.find(player => player !== CURRENT_PLAYER);
 
   const PLAYER0_HEALTH = health[turnOrder['0']];
   if (PLAYER0_HEALTH === 0) winner.set(G, turnOrder['0']);
@@ -61,13 +62,17 @@ const onEnd = (G, ctx) => {
   boards.disableAllCanBeHealed(G, '0');
   boards.disableAllCanBeHealed(G, '1');
 
+  // reset both player's canAttack states
+  playerCanAttack.disable(G, ['0']);
+  playerCanAttack.disable(G, ['1']);
+
   // reset both player's canBeAttacked states
-  G.playerCanBeAttacked['0'] = null;
-  G.playerCanBeAttacked['1'] = null;
+  playerCanBeAttacked.disable(G, ['0']);
+  playerCanBeAttacked.disable(G, ['1']);
 
   // reset both player's canBeHealed states
-  G.playerCanBeHealed['0'] = null;
-  G.playerCanBeHealed['1'] = null;
+  playerCanBeHealed(G, ['0']);
+  playerCanBeHealed(G, ['1']);
 
   // reset both player's interaction hover states
   G.hoveringCardIndex['0'] = null;
