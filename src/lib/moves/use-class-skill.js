@@ -1,5 +1,6 @@
 import CARDCLASS from 'enums/cardClass.enums';
 import gainShieldPoints from 'lib/class-skills/gain-shield-points';
+import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
 
 /**
  * Activates a playerClass skill.
@@ -9,9 +10,16 @@ import gainShieldPoints from 'lib/class-skills/gain-shield-points';
  */
 const useClassSkill = (G, ctx) => {
   const { playerClass } = G;
+  const { currentPlayer } = ctx;
+
+  // eject if player can't use class skill
+  if (!G.playerCanUseClassSkill[currentPlayer]) return;
+
+  // disable player's use of class skill after use
+  playerCanUseClassSkill.disable(G, currentPlayer);
 
   // prettier-ignore
-  switch (playerClass) {
+  switch (playerClass[currentPlayer]) {
     // case CARDCLASS[1]: return initTargetedDamage(G, ctx);   // AUGUR
     // case CARDCLASS[2]: return iniTargetedSpell(G, ctx);     // SORCERER
     // case CARDCLASS[3]: return summonKnight(G, ctx);         // KNIGHT COMMANDER
