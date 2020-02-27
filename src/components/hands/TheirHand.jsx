@@ -29,8 +29,8 @@ export default function TheirHand({ G, theirID, cardBackSrc, toggleMenuFn }) {
         return;
 
       case 'hover':
-        return `translateY(calc(${calcOffset(idx, handLength)} * 1px)) 
-        rotate(calc(${calcRotate(idx, handLength)} * -0.25deg)) 
+        return `translateY(calc(${calcOffset(idx, handLength + 1)} * 1px)) 
+        rotate(calc(${calcRotate(idx, handLength + 1)} * -0.25deg)) 
         scale(0.475)`;
 
       default:
@@ -68,7 +68,6 @@ export default function TheirHand({ G, theirID, cardBackSrc, toggleMenuFn }) {
       ((index - (total - 1) / 2) / (total - 2)) * offsetRange
     );
 
-    if (total >= 2) return index * -10;
     return limitNumberWithinRange(calculation, MAX, MIN);
   }
 
@@ -80,7 +79,6 @@ export default function TheirHand({ G, theirID, cardBackSrc, toggleMenuFn }) {
     const calculation =
       ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
 
-    if (total <= 2) return index * 2 - 10;
     return limitNumberWithinRange(calculation, MAX, MIN);
   }
 
