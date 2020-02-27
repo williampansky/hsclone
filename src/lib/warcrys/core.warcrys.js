@@ -27,6 +27,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_033':  return CORE_033(G, ctx, index);
     case 'CORE_035':  return CORE_035(G, ctx, otherPlayer);
     case 'CORE_036':  return CORE_036(G, ctx, cardId, otherPlayer);
+    case 'CORE_041':  return CORE_041(G, ctx, index);
     default:          break;
   }
 };
@@ -151,6 +152,35 @@ const CORE_035 = (G, ctx, otherPlayer) => {
 const CORE_036 = (G, ctx, cardId, otherPlayer) => {
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
   boards.determineWarcryTargets(G, otherPlayer);
+};
+
+/**
+ * Gift all your other minions with a permanent +1/+1 stat boost.
+ */
+const CORE_041 = (G, ctx, index) => {
+  const { currentPlayer } = ctx;
+
+  // enhance all minions except itself
+  G.boards[currentPlayer].forEach((_, i) => {
+    if (index !== i) transformTarget(G, currentPlayer, i);
+  });
+
+  // transformation method
+  function transformTarget(G, player, index) {
+    const AP = parseInt(G.boards[player][index].currentAttack);
+    const HP = parseInt(G.boards[player][index].currentHealth);
+
+    const newAP = AP + 1;
+    const newHP = HP + 1;
+
+    G.boards[player][index] = {
+      ...G.boards[player][index],
+      currentAttack: newAP,
+      currentHealth: newHP,
+      totalAttack: newAP,
+      totalHealth: newHP
+    };
+  }
 };
 
 export default initCoreWarcry;

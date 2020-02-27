@@ -436,3 +436,91 @@ test(`WARCRY(CORE_036)`, () => {
     turnOrder: TURN_ORDER
   });
 });
+
+// Gift all your other minions with a permanent +1/+1 stat boost.
+test(`WARCRY(CORE_041)`, () => {
+  const CARD_ID = 'CORE_041';
+  const CARD_MINION = getCardByID(CARD_ID);
+  const OTHER_MINION1 = getCardByID('CORE_014');
+  const OTHER_MINION2 = getCardByID('CORE_024');
+  const ctx = { currentPlayer: '0' };
+  const TURN_ORDER = ['0', '1'];
+
+  const G = {
+    boards: {
+      '0': [
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack,
+          currentHealth: OTHER_MINION1.health,
+          hasGuard: false,
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack,
+          totalHealth: OTHER_MINION1.health
+        },
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: CARD_MINION.attack,
+          currentHealth: CARD_MINION.health,
+          hasGuard: false,
+          minionData: CARD_MINION,
+          totalAttack: CARD_MINION.attack,
+          totalHealth: CARD_MINION.health
+        },
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: OTHER_MINION2.attack,
+          currentHealth: OTHER_MINION2.health,
+          hasGuard: false,
+          minionData: OTHER_MINION2,
+          totalAttack: OTHER_MINION2.attack,
+          totalHealth: OTHER_MINION2.health
+        }
+      ]
+    },
+    turnOrder: TURN_ORDER
+  };
+
+  initCoreWarcry(G, ctx, CARD_ID, 1);
+
+  expect(G).toEqual({
+    boards: {
+      '0': [
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: OTHER_MINION1.attack + 1,
+          currentHealth: OTHER_MINION1.health + 1,
+          hasGuard: false,
+          minionData: OTHER_MINION1,
+          totalAttack: OTHER_MINION1.attack + 1,
+          totalHealth: OTHER_MINION1.health + 1
+        },
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: CARD_MINION.attack,
+          currentHealth: CARD_MINION.health,
+          hasGuard: false,
+          minionData: CARD_MINION,
+          totalAttack: CARD_MINION.attack,
+          totalHealth: CARD_MINION.health
+        },
+        {
+          canAttack: false,
+          canBeAttacked: false,
+          currentAttack: OTHER_MINION2.attack + 1,
+          currentHealth: OTHER_MINION2.health + 1,
+          hasGuard: false,
+          minionData: OTHER_MINION2,
+          totalAttack: OTHER_MINION2.attack + 1,
+          totalHealth: OTHER_MINION2.health + 1
+        }
+      ]
+    },
+    turnOrder: TURN_ORDER
+  });
+});
