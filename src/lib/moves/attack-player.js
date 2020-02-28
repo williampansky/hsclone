@@ -3,6 +3,7 @@ import health from 'lib/state/health';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import selectMinion from 'lib/moves/select-minion';
+import playerShieldPoints from 'lib/state/player-shield-points';
 
 /**
  * Attacks a player with the current player's selectedMinionObject.
@@ -26,15 +27,29 @@ const attackPlayer = (G, ctx) => {
     if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
   }
 
-  // Subtract `ATTACKING_MINION.currentAttack`
-  // from PLAYER_BEING_ATTACKED's health value
-  health.subtract(G, PLAYER_BEING_ATTACKED, ATTACKING_MINION.currentAttack);
+  // remove shieldPoints first, then health
+  if (G.playerShieldPoints[otherPlayer] !== 0) {
+    const preDIFF = Math.abs(
+      G.playerShieldPoints[otherPlayer] - ATTACKING_MINION.currentAttack
+    );
+
+    playerShieldPoints.remove(G, otherPlayer, ATTACKING_MINION.currentAttack);
+    if (G.playerShieldPoints[otherPlayer] === 0)
+      health.subtract(G, PLAYER_BEING_ATTACKED, preDIFF);
+  } else {
+    // Subtract `ATTACKING_MINION.currentAttack`
+    // from PLAYER_BEING_ATTACKED's health value
+    health.subtract(G, PLAYER_BEING_ATTACKED, ATTACKING_MINION.currentAttack);
+  }
 
   // disable ATTACKING_MINION's ability to attack
   boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
 
   // reset currentPlayer's selectedMinionIndex & selectedMinionObject value
   selectMinion(G, ctx);
+
+  // then disable opponent minions canBeAttacked
+  boards.disableAllCanBeAttacked(G, otherPlayer);
 
   // disable all playerCanBeAttacked
   playerCanBeAttacked.disable(G, '0');

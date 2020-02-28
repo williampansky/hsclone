@@ -30,8 +30,8 @@ export default {
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
   playerClass: {
-    '0': 'SOCERER',
-    '1': 'GUARDIAN'
+    '0': 'BERSERKER',
+    '1': 'BERSERKER'
   },
   players: players.__DATA_MODEL,
   boards: boards.__DATA_MODEL,

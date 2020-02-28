@@ -1,9 +1,10 @@
 import { add, subtract } from 'mathjs';
+import limitNumberWithinRange from 'lib/utils/range-limit';
 
 const playerShieldPoints = {
   __DATA_MODEL: {
-    '0': 0,
-    '1': 0
+    '0': 4,
+    '1': 4
   },
 
   /**
@@ -26,7 +27,8 @@ const playerShieldPoints = {
    */
   remove: (G, player, amount) => {
     const oldValue = G.playerShieldPoints[player];
-    const newValue = subtract(Number(oldValue), amount);
+    const calculation = subtract(Number(oldValue), amount);
+    const newValue = limitNumberWithinRange(calculation, Infinity, 0);
     G.playerShieldPoints[player] = newValue;
   }
 };

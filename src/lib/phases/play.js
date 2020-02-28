@@ -6,6 +6,7 @@ import winner from 'lib/state/winner';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
+import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
 
 const onBegin = (G, ctx) => {
   const { currentPlayer } = ctx;
@@ -21,6 +22,10 @@ const onBegin = (G, ctx) => {
     // enable canAttack on your board minions
     boards.enableCanAttack(G, currentPlayer, i);
   }
+
+  // if player has enough energy; enable playerCanUseClassSkill
+  if (G.energy[currentPlayer].current >= 2)
+    playerCanUseClassSkill.enable(G, currentPlayer);
 
   // reset both player's interaction hover states
   G.hoveringCardIndex[0] = null;

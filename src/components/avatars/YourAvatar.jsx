@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlayerHealth from 'components/avatars/PlayerHealth';
+import PlayerHealth from 'components/player-health/PlayerHealth';
 import AvatarInteraction from 'components/interactions/avatars/AvatarInteraction';
 
 export default function YourAvatar({
@@ -12,8 +12,9 @@ export default function YourAvatar({
   yourID,
   src
 }) {
-  const { health, playerCanBeHealed } = G;
+  const { health, playerShieldPoints, playerCanBeHealed } = G;
   const YOUR_HEALTH = health[yourID];
+  const YOUR_SHIELD = playerShieldPoints[yourID];
   // const CAN_BE_ATTACKED = canBeAttacked[yourID];
 
   return (
@@ -26,7 +27,12 @@ export default function YourAvatar({
         // CAN_BE_ATTACKED ? css['player-avatar--can_be_attacked'] : ''
       ].join(' ')}
     >
-      <PlayerHealth health={YOUR_HEALTH} player="YourHealth" />
+      <PlayerHealth
+        health={YOUR_HEALTH}
+        player="YourHealth"
+        shieldPoints={YOUR_SHIELD}
+      />
+
       <div className={'avatar-image-wrapper'}>
         {src && (
           <div
