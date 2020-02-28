@@ -1,5 +1,5 @@
 import CARDCLASS from 'enums/cardClass.enums';
-import useClassSkill from 'lib/moves/use-class-skill';
+import initClassSkill from 'lib/moves/init-class-skill';
 
 test(`should provide 2 shieldPoints to currentPlayer`, () => {
   const ctx = { currentPlayer: '0' };
@@ -10,7 +10,7 @@ test(`should provide 2 shieldPoints to currentPlayer`, () => {
     turnOrder: ['0', '1']
   };
 
-  useClassSkill(G, ctx);
+  initClassSkill(G, ctx);
   expect(G.playerShieldPoints).toEqual({ '0': 2, '1': 0 });
   expect(G.playerCanUseClassSkill).toEqual({ '0': false, '1': false });
 });

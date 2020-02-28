@@ -8,7 +8,7 @@ import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
  * @param {{}} G
  * @param {{}} ctx
  */
-const useClassSkill = (G, ctx) => {
+const initClassSkill = (G, ctx) => {
   const { playerClass } = G;
   const { currentPlayer } = ctx;
 
@@ -34,4 +34,4 @@ const useClassSkill = (G, ctx) => {
   }
 };
 
-export default useClassSkill;
+export default initClassSkill;

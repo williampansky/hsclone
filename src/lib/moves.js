@@ -6,6 +6,7 @@ import discardCard from 'lib/moves/discard-card';
 import drawCard from 'lib/moves/draw-card';
 import forfeitGame from 'lib/moves/forfeit-game';
 import hoverCard from 'lib/moves/hover-card';
+import initClassSkill from './moves/init-class-skill';
 import playCard from 'lib/moves/play-card';
 import selectCard from 'lib/moves/select-card';
 import selectMinion from 'lib/moves/select-minion';
@@ -57,6 +58,12 @@ export default {
     client: false,
     move: (G, ctx, index) => {
       return hoverCard(G, ctx, index);
+    }
+  },
+  initClassSkill: {
+    client: false,
+    move: (G, ctx) => {
+      return initClassSkill(G, ctx);
     }
   },
   selectCard: {
