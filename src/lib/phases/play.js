@@ -1,3 +1,4 @@
+import GAME_CONFIG from 'config/game.config';
 import { TurnOrder } from 'boardgame.io/core';
 import boards from 'lib/state/boards';
 import energy from 'lib/state/energy';
@@ -24,7 +25,9 @@ const onBegin = (G, ctx) => {
   }
 
   // if player has enough energy; enable playerCanUseClassSkill
-  if (G.energy[currentPlayer].current >= 2)
+  if (!GAME_CONFIG.debugData.enableCost)
+    playerCanUseClassSkill.enable(G, currentPlayer);
+  else if (G.energy[currentPlayer].current >= 2)
     playerCanUseClassSkill.enable(G, currentPlayer);
 
   // reset both player's interaction hover states

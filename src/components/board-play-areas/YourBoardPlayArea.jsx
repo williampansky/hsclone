@@ -24,7 +24,8 @@ export default function YourBoardPlayerArea({
   const CARD_SPELLTYPE = SELECTED_CARD_OBJECT && SELECTED_CARD_OBJECT.spellType;
 
   const CARD_IS_SELECTED = SELECTED_CARD_OBJECT !== null;
-  const BOARD_IS_ACTIVE = CARD_IS_SELECTED && CARD_SPELLTYPE !== 'GLOBAL';
+  const BOARD_IS_ACTIVE =
+    CARD_IS_SELECTED && CARD_TYPE === 'MINION' && CARD_SPELLTYPE !== 'GLOBAL';
 
   function handleClick(index, uuid = CARD_UUID, id = CARD_ID) {
     if (boards[yourID][index]) return;

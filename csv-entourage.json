@@ -20,7 +20,6 @@
     "mechanics": "",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "CORE_012",
     "artist": ""
   },
   {
@@ -44,7 +43,6 @@
     "mechanics": "",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "CORE_020",
     "artist": ""
   },
   {
@@ -68,7 +66,6 @@
     "mechanics": "",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "CORE_020",
     "artist": ""
   },
   {
@@ -92,7 +89,6 @@
     "mechanics": "",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "CORE_025",
     "artist": ""
   },
   {
@@ -102,7 +98,7 @@
     "imageSrc": "Healing_Totem_-_Hearthstone_Wiki (https://dl.airtable.com/.attachments/ad9ea260e8bc8eaebdddcf47222b98e2/180839b3/Healing_Totem_-_Hearthstone_Wiki)",
     "rarity": "FREE",
     "type": "MINION",
-    "race": "Totem(temp)",
+    "race": "IDOL",
     "cardClass": "7 MYSTIC",
     "set": "CORE",
     "cost": 1,
@@ -116,7 +112,6 @@
     "mechanics": "",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -126,7 +121,7 @@
     "imageSrc": "Searing_Totem_-_Hearthstone_Wiki (https://dl.airtable.com/.attachments/838dd390f9e1e5ba34bca97e55058611/2ca8a3c7/Searing_Totem_-_Hearthstone_Wiki)",
     "rarity": "FREE",
     "type": "MINION",
-    "race": "Totem(temp)",
+    "race": "IDOL",
     "cardClass": "7 MYSTIC",
     "set": "CORE",
     "cost": 1,
@@ -140,7 +135,6 @@
     "mechanics": "",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -150,7 +144,7 @@
     "imageSrc": "Stoneclaw_Totem_art__World_of_warcraft_Fantasy_races_Eldritch_... (https://dl.airtable.com/.attachments/8961f4aed4e3326e9213c3eaa0ea93ee/ed32d9da/Stoneclaw_Totem_art__World_of_warcraft_Fantasy_races_Eldritch_...)",
     "rarity": "FREE",
     "type": "MINION",
-    "race": "Totem(temp)",
+    "race": "IDOL",
     "cardClass": "7 MYSTIC",
     "set": "CORE",
     "cost": 1,
@@ -164,7 +158,6 @@
     "mechanics": "GUARD",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -174,7 +167,7 @@
     "imageSrc": "Wrath_of_Air_Totem__Hearthstone__Warcraft_art_Blizzard_... (https://dl.airtable.com/.attachments/3f4ac0739d5924e589cea6e5a2d3ebae/a9d08f5f/Wrath_of_Air_Totem__Hearthstone__Warcraft_art_Blizzard_...)",
     "rarity": "FREE",
     "type": "MINION",
-    "race": "Totem(temp)",
+    "race": "IDOL",
     "cardClass": "7 MYSTIC",
     "set": "CORE",
     "cost": 1,
@@ -188,7 +181,6 @@
     "mechanics": "BUFF",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -199,7 +191,7 @@
     "rarity": "FREE",
     "type": "MINION",
     "race": "NONE",
-    "cardClass": "4 NECROMANCER",
+    "cardClass": "4 KNIGHT COMMANDER",
     "set": "CORE",
     "cost": 1,
     "attack": 1,
@@ -212,7 +204,6 @@
     "mechanics": "",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -236,7 +227,6 @@
     "mechanics": "",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -260,7 +250,6 @@
     "mechanics": "GUARD",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -284,7 +273,6 @@
     "mechanics": "GUARD",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -308,7 +296,6 @@
     "mechanics": "",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -332,7 +319,6 @@
     "mechanics": "STAMPEDE",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -356,7 +342,6 @@
     "mechanics": "BOON",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   },
   {
@@ -380,7 +365,6 @@
     "mechanics": "GUARD",
     "targetingArrowText": "",
     "flavor": "",
-    "PARENT": "",
     "artist": ""
   }
 ]
