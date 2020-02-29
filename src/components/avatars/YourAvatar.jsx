@@ -12,7 +12,13 @@ export default function YourAvatar({
   yourID,
   src
 }) {
-  const { health, playerShieldPoints, playerCanBeHealed } = G;
+  const {
+    health,
+    playerCanAttack,
+    playerCanBeHealed,
+    playerIsAttacking,
+    playerShieldPoints
+  } = G;
   const YOUR_HEALTH = health[yourID];
   const YOUR_SHIELD = playerShieldPoints[yourID];
   // const CAN_BE_ATTACKED = canBeAttacked[yourID];
@@ -48,7 +54,9 @@ export default function YourAvatar({
         moves={moves}
         isActive={isActive}
         board={board}
+        playerCanAttack={playerCanAttack[yourID]}
         playerCanBeHealed={playerCanBeHealed[yourID]}
+        playerIsAttacking={playerIsAttacking[yourID]}
       />
     </div>
   );

@@ -6,15 +6,19 @@ import energy from 'lib/state/energy';
 // moves
 import selectCard from 'lib/moves/select-card';
 
+// enums & configs
+import GAME_CONFIG from 'config/game.config';
+import TYPE from 'enums/type.enums';
+
 // utils
 import copyCardToPlayedCards from 'lib/utils/copy-card-to-played-cards';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import createMinionObject from 'lib/creators/create-minion-object';
-import GAME_CONFIG from 'config/game.config';
 import initCardMechanics from 'lib/mechanics/init-mechanics';
 import playSpellByCardId from 'lib/spells/play-spell-card-by-id';
+import playWeaponByCardId from 'lib/weapons/play-weapon-card-by-id';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
-import TYPE from 'enums/type.enums';
+import playerCanAttack from 'lib/state/player-can-attack';
 
 /**
  * Plays the provided card.
@@ -42,6 +46,9 @@ const playCard = (G, ctx, index, uuid, cardId = null) => {
 
     case TYPE[3]:
       return playSpellCard(G, ctx, index, uuid, cardId, cost);
+
+    case TYPE[4]:
+      return playWeaponCard(G, ctx, uuid, cardId, cost);
 
     default:
       return;
@@ -107,6 +114,18 @@ export const playGlobalSpellCard = (G, ctx, uuid, cardId, cardCost) => {
 
   energy.subtract(G, currentPlayer, cardCost);
   playSpellByCardId(G, ctx, cardId);
+  selectCard(G, ctx);
+  copyCardToPlayedCards(G, currentPlayer, cardId);
+  removeCardFromHand(G, currentPlayer, uuid);
+  counts.deincrementHand(G, currentPlayer);
+};
+
+export const playWeaponCard = (G, ctx, uuid, cardId, cardCost) => {
+  const { currentPlayer } = ctx;
+
+  energy.subtract(G, currentPlayer, cardCost);
+  playWeaponByCardId(G, currentPlayer, cardId);
+  playerCanAttack.enable(G, currentPlayer);
   selectCard(G, ctx);
   copyCardToPlayedCards(G, currentPlayer, cardId);
   removeCardFromHand(G, currentPlayer, uuid);

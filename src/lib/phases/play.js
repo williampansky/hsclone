@@ -30,6 +30,10 @@ const onBegin = (G, ctx) => {
   else if (G.energy[currentPlayer].current >= 2)
     playerCanUseClassSkill.enable(G, currentPlayer);
 
+  // if player has weapon, enable attack
+  if (G.playerWeapon[currentPlayer] !== null)
+    playerCanAttack.enable(G, currentPlayer);
+
   // reset both player's interaction hover states
   G.hoveringCardIndex[0] = null;
   G.hoveringCardIndex[1] = null;
@@ -58,49 +62,45 @@ const onEnd = (G, ctx) => {
   if (PLAYER0_HEALTH === 0) winner.set(G, turnOrder['0']);
   else winner.set(G, turnOrder['1']);
 
-  // disable all minions canAttack
-  boards.disableAllCanAttack(G, '0');
-  boards.disableAllCanAttack(G, '1');
+  // reset player[0] minion states
+  G.boards['0'].forEach((slot, i) => {
+    G.boards['0'][i] = {
+      ...slot,
+      canAttack: false,
+      canBeAttacked: false,
+      canBeBuffed: false,
+      canBeHealed: false
+    };
+  });
 
-  // disable all minions canBeAttacked
-  boards.disableAllCanBeAttacked(G, '0');
-  boards.disableAllCanBeAttacked(G, '1');
+  // reset player[1] minion states
+  G.boards['1'].forEach((slot, i) => {
+    G.boards['1'][i] = {
+      ...slot,
+      canAttack: false,
+      canBeAttacked: false,
+      canBeBuffed: false,
+      canBeHealed: false
+    };
+  });
 
-  // disable all minions canBeHealed
-  boards.disableAllCanBeHealed(G, '0');
-  boards.disableAllCanBeHealed(G, '1');
+  // reset player states
+  G.playerCanAttack = { '0': false, '1': false };
+  G.playerCanBeAttacked = { '0': false, '1': false };
+  G.playerCanBeHealed = { '0': false, '1': false };
+  G.playerIsAttacking = { '0': false, '1': false };
 
-  // reset both player's canAttack states
-  playerCanAttack.disable(G, ['0']);
-  playerCanAttack.disable(G, ['1']);
+  // reset card states
+  G.hoveringCardIndex = { '0': null, '1': null };
+  G.selectedCardIndex = { '0': null, '1': null };
+  G.selectedCardObject = { '0': null, '1': null };
 
-  // reset both player's canBeAttacked states
-  playerCanBeAttacked.disable(G, ['0']);
-  playerCanBeAttacked.disable(G, ['1']);
+  // reset minion states
+  G.selectedMinionIndex = { '0': null, '1': null };
+  G.selectedMinionObject = { '0': null, '1': null };
 
-  // reset both player's canBeHealed states
-  playerCanBeHealed.disable(G, ['0']);
-  playerCanBeHealed.disable(G, ['1']);
-
-  // reset both player's interaction hover states
-  G.hoveringCardIndex['0'] = null;
-  G.hoveringCardIndex['1'] = null;
-
-  // reset both player's selected card states
-  G.selectedCardIndex['0'] = null;
-  G.selectedCardIndex['1'] = null;
-  G.selectedCardObject['0'] = null;
-  G.selectedCardObject['1'] = null;
-
-  // reset both player's selected minion states
-  G.selectedMinionIndex['0'] = null;
-  G.selectedMinionIndex['1'] = null;
-  G.selectedMinionObject['0'] = null;
-  G.selectedMinionObject['1'] = null;
-
-  // reset both player's warcry states
-  G.warcryObject['0'] = null;
-  G.warcryObject['1'] = null;
+  // reset warcry states
+  G.warcryObject = { '0': null, '1': null };
 };
 
 export default {

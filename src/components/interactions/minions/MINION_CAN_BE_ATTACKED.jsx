@@ -5,17 +5,25 @@ import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 
 export default function MINION_CAN_BE_ATTACKED({ G, ctx, moves, index }) {
-  const { warcryObject } = G;
+  const { playerIsAttacking, warcryObject, turnOrder } = G;
   const { currentPlayer } = ctx;
-  const { attackMinion, castTargetedWarcryEffect } = moves;
+  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+  const {
+    attackMinion,
+    attackMinionWithPlayer,
+    castTargetedWarcryEffect
+  } = moves;
 
   function handleClick() {
+    if (playerIsAttacking[currentPlayer]) return attackMinionWithPlayer(index);
+
     if (warcryObject[currentPlayer] !== null)
       return castTargetedWarcryEffect(
         TARGET_CONTEXT[2],
         WARCRY_TARGET_CONTEXT[1],
         index
       );
+
     return attackMinion(index);
   }
 
