@@ -5,8 +5,6 @@ import energy from 'lib/state/energy';
 import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
 import winner from 'lib/state/winner';
 import playerCanAttack from 'lib/state/player-can-attack';
-import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
-import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
 
 const onBegin = (G, ctx) => {
@@ -34,25 +32,17 @@ const onBegin = (G, ctx) => {
   if (G.playerWeapon[currentPlayer] !== null)
     playerCanAttack.enable(G, currentPlayer);
 
-  // reset both player's interaction hover states
-  G.hoveringCardIndex[0] = null;
-  G.hoveringCardIndex[1] = null;
+  // reset card states
+  G.hoveringCardIndex = { '0': null, '1': null };
+  G.selectedCardIndex = { '0': null, '1': null };
+  G.selectedCardObject = { '0': null, '1': null };
 
-  // reset both player's selected card states
-  G.selectedCardIndex[0] = null;
-  G.selectedCardIndex[1] = null;
-  G.selectedCardObject[0] = null;
-  G.selectedCardObject[1] = null;
+  // reset minion states
+  G.selectedMinionIndex = { '0': null, '1': null };
+  G.selectedMinionObject = { '0': null, '1': null };
 
-  // reset both player's selected minion states
-  G.selectedMinionIndex[0] = null;
-  G.selectedMinionIndex[1] = null;
-  G.selectedMinionObject[0] = null;
-  G.selectedMinionObject[1] = null;
-
-  // reset both player's warcry states
-  G.warcryObject[0] = null;
-  G.warcryObject[1] = null;
+  // reset warcry states
+  G.warcryObject = { '0': null, '1': null };
 };
 
 const onEnd = (G, ctx) => {
