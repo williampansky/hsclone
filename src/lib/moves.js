@@ -14,6 +14,7 @@ import playCard from 'lib/moves/play-card';
 import selectCard from 'lib/moves/select-card';
 import selectMinion from 'lib/moves/select-minion';
 import terminatePlayerWeaponAttack from 'lib/moves/terminate-player-weapon-attack';
+import boards from './state/boards';
 
 export default {
   attackMinion: {
@@ -68,6 +69,12 @@ export default {
     client: false,
     move: (G, ctx, player) => {
       return forfeitGame(G, ctx, player);
+    }
+  },
+  giveMinionStampede: {
+    client: false,
+    move: (G, ctx, index) => {
+      return boards.enableCanAttack(G, ctx.currentPlayer, index);
     }
   },
   hoverCard: {

@@ -14,7 +14,7 @@
   user-select: none;
   z-index: 1;
   font-family: 'Carter One', sans-serif;
-  font-size: 14px;
+  font-size: 20px;
   box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.925),
     0px 0px 10px rgba(0, 0, 0, 0.465);
 
@@ -231,6 +231,19 @@
       0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
       0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
       0 0 1px black;
+  }
+
+  &.--is-damaged .health-wrapper {
+    background: radial-gradient(
+      circle at 50% 15%,
+      white -10px,
+      #ffabab 3%,
+      #ff5757 60%
+    );
+  }
+
+  &.--is-damaged .health-wrapper .text__value {
+    color: #ff4800;
   }
 
   .minion__bezel {

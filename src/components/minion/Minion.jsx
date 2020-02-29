@@ -6,7 +6,8 @@ export default function Minion({
   currentHealth,
   data,
   p,
-  slot
+  slot,
+  totalHealth
 }) {
   const {
     artist,
@@ -43,14 +44,18 @@ export default function Minion({
   });
 
   return health >= 0 ? (
-    <div className={['minion'].join(' ')}>
+    <div
+      className={[
+        'minion',
+        currentHealth !== totalHealth ? '--is-damaged' : ''
+      ].join(' ')}
+    >
       {/* <div className={'info-trigger'} {...hoverProps} /> */}
       <div className={'image-wrapper'}>
         <div
           className="image"
           style={{ backgroundImage: `url(${imageSrc})` }}
         />
-        {/* <img alt={name} role="presentation" src={imageSrc} /> */}
       </div>
       <div className={'attack-wrapper'}>
         <div className={'text__value'}>{currentAttack}</div>
@@ -59,39 +64,6 @@ export default function Minion({
         <div className={'text__value'}>{currentHealth}</div>
       </div>
       <div className={'minion__bezel'} />
-
-      {/* {isHovering ? (
-        <article>
-          <Card
-            artist={artist}
-            attack={attack}
-            cardClass={cardClass}
-            collectible={collectible}
-            cost={cost}
-            elite={elite}
-            entourage={entourage}
-            flavor={flavor}
-            goldenImageSrc={goldenImageSrc}
-            health={health}
-            hideStats={hideStats}
-            howToEarn={howToEarn}
-            howToEarnGolden={howToEarnGolden}
-            id={id}
-            imageSrc={imageSrc}
-            mechanics={mechanics}
-            name={name}
-            playRequirements={playRequirements}
-            race={race}
-            rarity={rarity}
-            set={set}
-            sounds={sounds}
-            spellDamage={spellDamage}
-            targetingArrowText={targetingArrowText}
-            text={text}
-            type={type}
-          />
-        </article>
-      ) : null} */}
     </div>
   ) : null;
 }

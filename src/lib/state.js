@@ -18,6 +18,7 @@ import selectedCardIndex from 'lib/state/selected-card-index';
 import selectedCardObject from 'lib/state/selected-card-object';
 import selectedMinionIndex from 'lib/state/selected-minion-index';
 import selectedMinionObject from 'lib/state/selected-minion-object';
+import spellObject from 'lib/state/spell-object';
 import warcryObject from 'lib/state/warcry-object';
 
 export default {
@@ -44,6 +45,7 @@ export default {
   selectedCardObject: selectedCardObject.__DATA_MODEL,
   selectedMinionIndex: selectedMinionIndex.__DATA_MODEL,
   selectedMinionObject: selectedMinionObject.__DATA_MODEL,
+  spellObject: spellObject.__DATA_MODEL,
   warcryObject: warcryObject.__DATA_MODEL,
   cardBack: cardBack.__DATA_MODEL,
   turnOrder: ['0', '1'].sort(() => {

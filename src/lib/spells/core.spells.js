@@ -1,9 +1,10 @@
 import boards from 'lib/state/boards';
-import playerCanAttack from 'lib/state/player-can-attack';
-import playWeaponByCardId from 'lib/weapons/play-weapon-card-by-id';
-import playerShieldPoints from 'lib/state/player-shield-points';
+import createSpellObject from 'lib/creators/create-spell-object';
 import drawCard from 'lib/moves/draw-card';
 import getCardByID from 'lib/utils/get-card-by-id';
+import playerCanAttack from 'lib/state/player-can-attack';
+import playerShieldPoints from 'lib/state/player-shield-points';
+import playWeaponByCardId from 'lib/weapons/play-weapon-card-by-id';
 
 const initCoreSpell = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
@@ -12,12 +13,18 @@ const initCoreSpell = (G, ctx, cardId, index) => {
 
   // prettier-ignore
   switch (cardId) {
+    case 'CORE_123':  return CORE_123(G, ctx, currentPlayer);
     case 'CORE_124':  return CORE_124(G, ctx, currentPlayer, otherPlayer, cardId);
     case 'CORE_125':  return CORE_125(G, ctx, otherPlayer, cardId);
+    case 'CORE_126':  return CORE_126(G, ctx, currentPlayer, otherPlayer, cardId);
     case 'CORE_127':  return CORE_127(G, ctx, currentPlayer, cardId);
     case 'CORE_129':  return CORE_129(G, ctx, currentPlayer, cardId);
     default:          break;
   }
+};
+
+const CORE_123 = (G, ctx, player) => {
+  boards.enableAllCanBeBuffed(G, player);
 };
 
 const CORE_124 = (G, ctx, currentPlayer, otherPlayer, cardId) => {
@@ -61,6 +68,14 @@ const CORE_125 = (G, ctx, player, cardId) => {
     G.boards[player][randomIdx2],
     randomIdx2
   );
+};
+
+const CORE_126 = (G, ctx, currentPlayer, otherPlayer, cardId) => {
+  G.spellObject[currentPlayer] = createSpellObject(cardId);
+  G.boards[otherPlayer].forEach((slot, i) => {
+    if (slot.currentHealth !== slot.totalHealth)
+      boards.enableCanBeAttacked(G, otherPlayer, i);
+  });
 };
 
 const CORE_127 = (G, ctx, player, cardId) => {
