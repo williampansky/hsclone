@@ -102,18 +102,18 @@ export const playSpellCard = (
 ) => {
   switch (index) {
     case 0:
-      return playGlobalSpellCard(G, ctx, uuid, cardId, cardCost);
+      return playGlobalSpellCard(G, ctx, index, uuid, cardId, cardCost);
 
     default:
       break;
   }
 };
 
-export const playGlobalSpellCard = (G, ctx, uuid, cardId, cardCost) => {
+export const playGlobalSpellCard = (G, ctx, index, uuid, cardId, cardCost) => {
   const { currentPlayer } = ctx;
 
   energy.subtract(G, currentPlayer, cardCost);
-  playSpellByCardId(G, ctx, cardId);
+  playSpellByCardId(G, ctx, cardId, index);
   selectCard(G, ctx);
   copyCardToPlayedCards(G, currentPlayer, cardId);
   removeCardFromHand(G, currentPlayer, uuid);
