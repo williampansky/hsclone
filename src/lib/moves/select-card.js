@@ -12,8 +12,6 @@ import SPELLTYPE from 'enums/spellType.enums';
  * @param {{}} ctx
  * @param {{}} cardObject
  * @param {number} index
- * @requires selectedCardObject
- * @requires selectedCardObject
  */
 const selectCard = (G, ctx, cardObject = null, index = null) => {
   const { turnOrder } = G;
@@ -24,9 +22,32 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
   selectedCardObject.set(G, currentPlayer, cardObject);
 
   if (cardObject === null) return;
-  const { id, spellType, type } = cardObject;
+
+  const { id, spellContext, spellType, type } = cardObject;
+  G.selectedCardType[currentPlayer] = type;
+  G.selectedCardSpellType[currentPlayer] = spellType;
+  G.selectedCardSpellContext[currentPlayer] = spellContext;
+
   if (type === TYPE[3] && spellType === SPELLTYPE[2]) {
+    // prettier-ignore
+    switch (id) {
+      case 'CORE_123':  return CORE_123(G, ctx, currentPlayer);
+      case 'CORE_126':  return CORE_126(G, ctx, otherPlayer);
+      default:          return;
+    }
   }
+};
+
+const CORE_123 = (G, ctx, player) => {
+  G.boards[player].forEach((slot, i) => {
+    slot.canBeBuffed = true;
+  });
+};
+
+const CORE_126 = (G, ctx, player) => {
+  G.boards[player].forEach((slot, i) => {
+    if (slot.totalHealth > slot.currentHealth) slot.canBeAttacked = true;
+  });
 };
 
 export default selectCard;

@@ -28,7 +28,7 @@ export default function PlayerWeapon({
 PlayerWeapon.propTypes = {
   canUse: PropTypes.bool,
   weaponAttack: PropTypes.number,
-  weaponHealth: PropTypes.number,
+  weaponHealth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   weaponImageSrc: PropTypes.string
 };
 

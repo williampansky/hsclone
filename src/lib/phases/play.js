@@ -6,6 +6,7 @@ import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
 import winner from 'lib/state/winner';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
+import getCardByID from 'lib/utils/get-card-by-id';
 
 const onBegin = (G, ctx) => {
   const { currentPlayer } = ctx;
@@ -43,6 +44,9 @@ const onBegin = (G, ctx) => {
 
   // reset warcry states
   G.warcryObject = { '0': null, '1': null };
+
+  // DEBUG
+  G.players[ctx.currentPlayer].hand.push(getCardByID('CORE_127'));
 };
 
 const onEnd = (G, ctx) => {

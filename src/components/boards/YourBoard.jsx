@@ -14,7 +14,14 @@ import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
 import YourPlayerArea from 'components/player-areas/YourPlayerArea';
 
 export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
-  const { counts, playerClass, selectedCardObject, cardBack } = G;
+  const {
+    counts,
+    playerClass,
+    selectedCardObject,
+    selectedCardType,
+    selectedCardSpellType,
+    cardBack
+  } = G;
   const { playCard } = moves;
 
   const yourCardBackImageSrc = cardBack[yourID];
@@ -22,8 +29,8 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
   const selectedCard = selectedCardObject[yourID];
   const cardId = selectedCard && selectedCard.id;
   const cardUUID = selectedCard && selectedCard.uuid;
-  const cardType = selectedCard && selectedCard.type;
-  const spellType = selectedCard && selectedCard.spellType;
+  const cardType = selectedCard && selectedCardType[yourID];
+  const spellType = selectedCard && selectedCardSpellType[yourID];
 
   function castGlobalSpell(index = 0, uuid = cardUUID, id = cardId) {
     return playCard(index, uuid, id);

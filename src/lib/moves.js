@@ -3,6 +3,8 @@ import attackMinionWithPlayer from 'lib/moves/attack-minion-with-player';
 import attackPlayer from 'lib/moves/attack-player';
 import attackPlayerWithPlayer from 'lib/moves/attack-player-with-player';
 import castTargetedWarcryEffect from 'lib/moves/cast-targeted-warcry-effect';
+import castTargetedSpellEffect from 'lib/moves/cast-targeted-spell-effect';
+import deselectCard from 'lib/moves/deselect-card';
 import deselectMinion from 'lib/moves/deselect-minion';
 import discardCard from 'lib/moves/discard-card';
 import drawCard from 'lib/moves/draw-card';
@@ -14,9 +16,16 @@ import playCard from 'lib/moves/play-card';
 import selectCard from 'lib/moves/select-card';
 import selectMinion from 'lib/moves/select-minion';
 import terminatePlayerWeaponAttack from 'lib/moves/terminate-player-weapon-attack';
-import boards from './state/boards';
+import boards from 'lib/state/boards';
+import getCardByID from 'lib/utils/get-card-by-id';
 
 export default {
+  addCardToHand: {
+    client: false,
+    move: (G, ctx, cardId) => {
+      G.players[ctx.currentPlayer].hand.push(getCardByID(cardId));
+    }
+  },
   attackMinion: {
     client: false,
     move: (G, ctx, index) => {
@@ -41,10 +50,22 @@ export default {
       return attackPlayerWithPlayer(G, ctx);
     }
   },
+  castTargetedSpellEffect: {
+    client: false,
+    move: (G, ctx, playerCtx, targetCtx, targetIdx) => {
+      return castTargetedSpellEffect(G, ctx, playerCtx, targetCtx, targetIdx);
+    }
+  },
   castTargetedWarcryEffect: {
     client: false,
     move: (G, ctx, playerCtx, targetCtx, targetIdx) => {
       return castTargetedWarcryEffect(G, ctx, playerCtx, targetCtx, targetIdx);
+    }
+  },
+  deselectCard: {
+    client: false,
+    move: (G, ctx) => {
+      return deselectCard(G, ctx);
     }
   },
   deselectMinion: {
@@ -93,6 +114,12 @@ export default {
     client: false,
     move: (G, ctx) => {
       return initPlayerWeaponAttack(G, ctx);
+    }
+  },
+  killMinion: {
+    client: false,
+    move: (G, ctx, player, boardSlot, index) => {
+      return boards.killMinion(G, ctx, player, boardSlot, index);
     }
   },
   selectCard: {

@@ -22,7 +22,7 @@ export default function CardInteraction({
 }) {
   const { selectedCardIndex, warcryObject } = G;
   const { currentPlayer, phase } = ctx;
-  const { hoverCard, selectCard } = moves;
+  const { deselectCard, hoverCard, selectCard } = moves;
 
   const [isHovering, hoverProps] = useHover({
     mouseEnterDelayMS: 0,
@@ -80,13 +80,14 @@ export default function CardInteraction({
   const IS_PLAYABLE = IS_YOUR_TURN && CAN_AFFORD && !WARCRY_OBJECT_ACTIVE;
   const IS_SELECTED = G.selectedCardIndex[yourID] === index;
 
-  const yourHandStyle = {
-    transform: `
-      translateY(calc(${calcOffset(index, numberOfCards + 1)} * 1px)) 
-      rotate(calc(${calcRotate(index, numberOfCards + 1)} * 0.875deg)) 
-      scale(0.475)
-    `
-  };
+  // const yourHandStyle = {
+  //   transform: `transformY(0) scale(0.475)`
+  //   // transform: `
+  //   //   translateY(calc(${calcOffset(index, numberOfCards + 1)} * 1px))
+  //   //   rotate(calc(${calcRotate(index, numberOfCards + 1)} * 0.875deg))
+  //   //   scale(0.475)
+  //   // `
+  // };
 
   function calcOffset(index, total = 10, offsetRange = 80) {
     // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
@@ -116,7 +117,7 @@ export default function CardInteraction({
   }
 
   function deselectPlayableCard() {
-    selectCard(null, null);
+    deselectCard();
     setTimeout(() => {
       hoverCard(null);
     }, 0);
@@ -125,12 +126,11 @@ export default function CardInteraction({
   // prettier-ignore
   return (
     <div
-      data-file="CardInteractionLayer"
+      data-file="interactions/cards/CardInteractionLayer"
       data-index={index}
       data-is-playable={IS_PLAYABLE}
       data-is-selected={IS_SELECTED}
       className={'card-in-your-hand'}
-      style={yourHandStyle}
       {...hoverProps}
     >
       {IS_YOUR_TURN ? (

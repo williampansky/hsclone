@@ -42,6 +42,9 @@ export default {
   playedCards: playedCards.__DATA_MODEL,
   hoveringCardIndex: hoveringCardIndex.__DATA_MODEL,
   selectedCardIndex: selectedCardIndex.__DATA_MODEL,
+  selectedCardType: { '0': null, '1': null },
+  selectedCardSpellType: { '0': null, '1': null },
+  selectedCardSpellContext: { '0': null, '1': null },
   selectedCardObject: selectedCardObject.__DATA_MODEL,
   selectedMinionIndex: selectedMinionIndex.__DATA_MODEL,
   selectedMinionObject: selectedMinionObject.__DATA_MODEL,
@@ -49,6 +52,7 @@ export default {
   warcryObject: warcryObject.__DATA_MODEL,
   cardBack: cardBack.__DATA_MODEL,
   turnOrder: ['0', '1'].sort(() => {
-    return Math.random() - 0.5;
+    // return Math.random() - 0.5;
+    return ['0', '1'];
   })
 };

@@ -6,6 +6,7 @@ const playWeaponByCardId = (G, player, cardId) => {
 
   // prettier-ignore
   switch (cardId) {
+    case 'CORE_127':    return EQUIP_WEAPON(G, player, weaponObj);
     case 'CORE_128':    return EQUIP_WEAPON(G, player, weaponObj);
     case 'CORE_132':    return EQUIP_WEAPON(G, player, weaponObj);
     default:            return null;

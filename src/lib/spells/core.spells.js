@@ -24,7 +24,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
 };
 
 const CORE_123 = (G, ctx, player) => {
-  boards.enableAllCanBeBuffed(G, player);
+  // boards.enableAllCanBeBuffed(G, player);
 };
 
 const CORE_124 = (G, ctx, currentPlayer, otherPlayer, cardId) => {
