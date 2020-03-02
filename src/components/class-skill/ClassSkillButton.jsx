@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ReactSVG } from 'react-svg';
 import CARDCLASS from 'enums/cardClass.enums';
+import CLASS_SKILL_DESCRIPTIONS from 'enums/classSkillDescriptions.enums';
 
 export default function ClassSkillButton({
   G,
@@ -23,15 +24,15 @@ export default function ClassSkillButton({
   function classText(string) {
     // prettier-ignore
     switch (string) {
-      case CARDCLASS[1]:  return 'Gain 1 Attack and 1 Shield Point.';
-      case CARDCLASS[2]:  return 'Backstab your opponent for 2 damage.';
-      case CARDCLASS[3]:  return 'Attack something for 1 damage.';
-      case CARDCLASS[4]:  return 'Summon a 1/1 Loyal Knight minion.';
-      case CARDCLASS[5]:  return 'Heal yourself or a friendly minion for 2 HP.';
-      case CARDCLASS[6]:  return 'Equip a 1/2 Shuriken throwing star.';
-      case CARDCLASS[7]:  return 'Summon a random Mystic Idol';
-      case CARDCLASS[8]:  return 'Trade 2 HP to Draw a Card';
-      case CARDCLASS[9]:  return 'Gain Energy Shield Points';
+      case CARDCLASS[1]:  return CLASS_SKILL_DESCRIPTIONS[1];
+      case CARDCLASS[2]:  return CLASS_SKILL_DESCRIPTIONS[2];
+      case CARDCLASS[3]:  return CLASS_SKILL_DESCRIPTIONS[3];
+      case CARDCLASS[4]:  return CLASS_SKILL_DESCRIPTIONS[4];
+      case CARDCLASS[5]:  return CLASS_SKILL_DESCRIPTIONS[5];
+      case CARDCLASS[6]:  return CLASS_SKILL_DESCRIPTIONS[6];
+      case CARDCLASS[7]:  return CLASS_SKILL_DESCRIPTIONS[7];
+      case CARDCLASS[8]:  return CLASS_SKILL_DESCRIPTIONS[8];
+      case CARDCLASS[9]:  return CLASS_SKILL_DESCRIPTIONS[9];
       default:            return;
     }
   }
