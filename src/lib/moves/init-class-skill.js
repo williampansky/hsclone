@@ -1,6 +1,9 @@
 import CARDCLASS from 'enums/cardClass.enums';
-import gainShieldPoints from 'lib/class-skills/gain-shield-points';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
+import {
+  gainShieldPoints,
+  tradeHealthForCard
+} from 'lib/class-skills/class-skills';
 
 /**
  * Activates a playerClass skill.
@@ -26,7 +29,7 @@ const initClassSkill = (G, ctx) => {
     // case CARDCLASS[4]: return initTargetedHeal(G, ctx);     // WHITE MAGE
     // case CARDCLASS[5]: return equipShuriken(G, ctx);        // NINJA
     // case CARDCLASS[6]: return summonRandomIdol(G, ctx);     // MYSTIC
-    // case CARDCLASS[7]: return sarcificLifeForCard(G, ctx);  // NECROMANCER
+    case CARDCLASS[7]: return tradeHealthForCard(G, ctx);   // NECROMANCER
     case CARDCLASS[8]: return gainShieldPoints(G, ctx);     // BERSERKER
 
     default:

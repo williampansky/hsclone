@@ -40,6 +40,7 @@ export default function YourPlayerArea({
           ctx={ctx}
           moves={moves}
           isActive={isActive}
+          playerClass={playerClass[yourID]}
           canUse={playerCanUseClassSkill[yourID]}
         />
 

@@ -3,13 +3,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ReactSVG } from 'react-svg';
+import CARDCLASS from 'enums/cardClass.enums';
 
-export default function ClassSkillButton({ G, ctx, moves, isActive, canUse }) {
+export default function ClassSkillButton({
+  G,
+  ctx,
+  moves,
+  isActive,
+  playerClass,
+  canUse
+}) {
   const { initClassSkill } = moves;
 
   function handleClick() {
     if (!isActive || !canUse) return;
     return initClassSkill(G, ctx);
+  }
+
+  function classText(string) {
+    // prettier-ignore
+    switch (string) {
+      case CARDCLASS[7]:  return 'Trade 2 HP to Draw a Card';
+      case CARDCLASS[8]:  return 'Gain Energy Shield Points';
+      default:            return;
+    }
   }
 
   return (
@@ -24,7 +41,7 @@ export default function ClassSkillButton({ G, ctx, moves, isActive, canUse }) {
         </Cost>
       ) : null}
       <TextValue>
-        <span>{`Gain Energy Shield Points`}</span>
+        <span>{classText(playerClass)}</span>
       </TextValue>
     </Component>
   );
