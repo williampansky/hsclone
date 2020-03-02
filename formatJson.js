@@ -62,7 +62,11 @@ base
           cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
           imageSrc: parseImageSrcObject(imageSrc),
-          mechanics: GAME_CONFIG.debugData.enableMechanics ? mechanics : '',
+          mechanics: GAME_CONFIG.debugData.enableMechanics
+            ? mechanics
+              ? mechanics
+              : []
+            : '',
           text: GAME_CONFIG.debugData.enableText ? text : ''
         }
       };
