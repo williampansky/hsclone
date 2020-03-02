@@ -23,8 +23,15 @@ export default function ClassSkillButton({
   function classText(string) {
     // prettier-ignore
     switch (string) {
-      case CARDCLASS[7]:  return 'Trade 2 HP to Draw a Card';
-      case CARDCLASS[8]:  return 'Gain Energy Shield Points';
+      case CARDCLASS[1]:  return 'Gain 1 Attack and 1 Shield Point.';
+      case CARDCLASS[2]:  return 'Backstab your opponent for 2 damage.';
+      case CARDCLASS[3]:  return 'Attack something for 1 damage.';
+      case CARDCLASS[4]:  return 'Summon a 1/1 Loyal Knight minion.';
+      case CARDCLASS[5]:  return 'Heal yourself or a friendly minion for 2 HP.';
+      case CARDCLASS[6]:  return 'Equip a 1/2 Shuriken throwing star.';
+      case CARDCLASS[7]:  return 'Summon a random Mystic Idol';
+      case CARDCLASS[8]:  return 'Trade 2 HP to Draw a Card';
+      case CARDCLASS[9]:  return 'Gain Energy Shield Points';
       default:            return;
     }
   }
