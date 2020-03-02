@@ -46,7 +46,7 @@ const onBegin = (G, ctx) => {
   G.warcryObject = { '0': null, '1': null };
 
   // DEBUG
-  G.players[ctx.currentPlayer].hand.push(getCardByID('CORE_127'));
+  G.players[ctx.currentPlayer].hand.push(getCardByID('CORE_122'));
 };
 
 const onEnd = (G, ctx) => {

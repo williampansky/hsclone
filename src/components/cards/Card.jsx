@@ -82,7 +82,7 @@ export default function Card({
   };
 
   function cardName(hasName = name, ins = inspiration) {
-    if (hasName) return hasName;
+    if (hasName && hasName !== 'CARD NAME') return hasName;
     else if (ins) return ins;
     else return 'Unknown';
   }
