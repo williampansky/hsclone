@@ -9,7 +9,8 @@ const GAME_CONFIG = {
     enableText: true
   },
   matchConfig: {
-    enableInitHandsStage: true
+    enableInitHandsStage: true,
+    enableRandomTurnOrder: false
   }
 };
 

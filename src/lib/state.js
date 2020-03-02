@@ -20,6 +20,7 @@ import selectedMinionIndex from 'lib/state/selected-minion-index';
 import selectedMinionObject from 'lib/state/selected-minion-object';
 import spellObject from 'lib/state/spell-object';
 import warcryObject from 'lib/state/warcry-object';
+import GAME_CONFIG from 'config/game.config';
 
 export default {
   buffs: buffs.__DATA_MODEL,
@@ -52,7 +53,7 @@ export default {
   warcryObject: warcryObject.__DATA_MODEL,
   cardBack: cardBack.__DATA_MODEL,
   turnOrder: ['0', '1'].sort(() => {
-    // return Math.random() - 0.5;
-    return ['0', '1'];
+    if (!GAME_CONFIG.matchConfig.enableRandomTurnOrder) return ['0', '1'];
+    return Math.random() - 0.5;
   })
 };
