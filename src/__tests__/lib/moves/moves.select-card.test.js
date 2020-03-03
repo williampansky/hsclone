@@ -35,14 +35,8 @@ test(`should select global spell card`, () => {
   // set up a specific board scenario
   const HScloneScenario = {
     ...HSclone,
-    setup: () => ({
-      ...HSclone.setup(),
-      turnOrder: ['0', '1']
-    }),
-    ctx: {
-      ...HSclone.ctx,
-      phase: 'play'
-    }
+    setup: () => ({ ...HSclone.setup(), turnOrder: ['0', '1'] }),
+    ctx: { ...HSclone.ctx, phase: 'play' }
   };
 
   // initialize the client w/ custom scenario
@@ -71,14 +65,8 @@ test(`should select targeted spell card`, () => {
   // set up a specific board scenario
   const HScloneScenario = {
     ...HSclone,
-    setup: () => ({
-      ...HSclone.setup(),
-      turnOrder: ['0', '1']
-    }),
-    ctx: {
-      ...HSclone.ctx,
-      phase: 'play'
-    }
+    setup: () => ({ ...HSclone.setup(), turnOrder: ['0', '1'] }),
+    ctx: { ...HSclone.ctx, phase: 'play' }
   };
 
   // initialize the client w/ custom scenario
