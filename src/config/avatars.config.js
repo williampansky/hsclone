@@ -1,6 +1,13 @@
 export default {
+  AUGUR: '',
+  ASSASSIN:
+    'http://coolvibe.com/wp-content/uploads/2013/11/Concept-Art-Jiyeon-Joo-Assassin-992x1322.jpg',
   SOCERER:
     'https://princessofdragons.files.wordpress.com/2015/04/fantasy-art-dmitry-khrapovitsky-mage.jpg',
+  KNIGHT_COMMANDER: '',
+  WHITE_MAGE: '',
+  NINJA: '',
+  MYSTIC: '',
   NECROMANCER:
     'https://www.bing.com/th?id=OIP.K2a9SsX2U_3ekllw9BPgrwHaJQ&pid=Api&rs=1',
   BERSERKER:

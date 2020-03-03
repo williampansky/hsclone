@@ -88,8 +88,10 @@ base
 
 // ENTOURAGE
 base
-  .table('CORE')
-  .list()
+  .table('ENTOURAGE')
+  .list({
+    maxRecords: 200
+  })
   .then(resp => {
     const mappedEntourage = resp.records.map(item => {
       const { fields } = item;

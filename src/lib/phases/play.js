@@ -46,7 +46,14 @@ const onBegin = (G, ctx) => {
   G.warcryObject = { '0': null, '1': null };
 
   // DEBUG
-  // G.players[ctx.currentPlayer].hand.push(getCardByID('CORE_122'));
+  if (
+    GAME_CONFIG.debugData.debugCard !== null ||
+    GAME_CONFIG.debugData.debugCard !== '' ||
+    GAME_CONFIG.debugData.debugCard !== false
+  )
+    G.players[ctx.currentPlayer].hand.push(
+      getCardByID(GAME_CONFIG.debugData.debugCard)
+    );
 };
 
 const onEnd = (G, ctx) => {

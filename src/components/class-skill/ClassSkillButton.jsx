@@ -21,6 +21,22 @@ export default function ClassSkillButton({
     return initClassSkill(G, ctx);
   }
 
+  function classSkillImage(string) {
+    // prettier-ignore
+    switch (string) {
+      case CARDCLASS[1]:  return require('assets/images/class-skills/1.jpg');
+      case CARDCLASS[2]:  return require('assets/images/class-skills/2.jpg');
+      case CARDCLASS[3]:  return require('assets/images/class-skills/3.jpg');
+      case CARDCLASS[4]:  return require('assets/images/class-skills/4.jpg');
+      case CARDCLASS[5]:  return require('assets/images/class-skills/5.jpg');
+      case CARDCLASS[6]:  return require('assets/images/class-skills/6.jpg');
+      case CARDCLASS[7]:  return require('assets/images/class-skills/7.jpg');
+      case CARDCLASS[8]:  return require('assets/images/class-skills/8.jpg');
+      case CARDCLASS[9]:  return require('assets/images/class-skills/9.jpg');
+      default:            return;
+    }
+  }
+
   function classText(string) {
     // prettier-ignore
     switch (string) {
@@ -39,6 +55,7 @@ export default function ClassSkillButton({
 
   return (
     <Component
+      backgroundImage={classSkillImage(playerClass)}
       data-file="class-skill/ClassSkillButton"
       canUse={canUse}
       onClick={() => handleClick()}
@@ -48,7 +65,7 @@ export default function ClassSkillButton({
           <TextValue>{`2`}</TextValue>
         </Cost>
       ) : null}
-      <TextValue>
+      <TextValue canUse={canUse}>
         <span>{classText(playerClass)}</span>
       </TextValue>
     </Component>
@@ -75,6 +92,8 @@ const Cost = styled.div`
   left: 5px;
   line-height: 1;
   position: absolute;
+  transform: ${p => (p.canUse ? 'scale(1)' : 'scale(0)')};
+  transition: transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
   top: 0;
   user-select: none;
   width: calc(var(--card-height) / 8);
@@ -89,7 +108,6 @@ const Cost = styled.div`
     background: transparent;
     pointer-events: none;
     border-radius: 50%;
-    border-top: 4px solid rgb(195, 238, 255);
     border-bottom: 4px solid rgb(56, 164, 207);
     filter: blur(2px);
     position: absolute;
@@ -110,6 +128,12 @@ const TextValue = styled.div`
   font-family: 'Carter One', sans-serif;
   text-align: center;
   pointer-events: none;
+  z-index: 1;
+  position: relative;
+  opacity: 1;
+  transition: 200ms ease-in-out;
+  transition-property: transform opacity;
+  transform: scale(0.85);
   text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
     0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
     0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
@@ -139,7 +163,11 @@ const b = 'inset 0 0 8px rgba(0, 0, 0, 0.25)';
 
 const Component = styled.div`
   align-items: center;
-  background: ${p => (p.canUse ? '#333' : '#999')};
+  background-image: ${p => `url(${p.backgroundImage})`};
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background: ${p => (p.canUse ? '#333' : '#999')}; */
   border-radius: 50%;
   cursor: ${p => (p.canUse ? 'pointer' : 'not-allowed')};
   display: flex;
@@ -151,8 +179,8 @@ const Component = styled.div`
   top: 20px;
   user-select: none;
   width: 120px;
-  border-top: 1px solid rgba(255, 255, 255, 0.465);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: 1px solid rgba(255, 255, 255, 1);
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
   box-shadow: 0px 0px 4.5px rgba(0, 0, 0, 0.925),
     0px 0px 12.5px rgba(0, 0, 0, 0.465);
 
@@ -165,5 +193,27 @@ const Component = styled.div`
     width: 100%;
     pointer-events: none;
     position: absolute;
+    z-index: 1;
+  }
+
+  &:after {
+    background: ${p => (p.canUse ? 'rgba(0, 0, 0, .2)' : 'rgba(0, 0, 0, .8)')};
+    border-radius: 50%;
+    content: '';
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+    transition: background 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  &:hover ${TextValue} {
+    transform: ${p => (p.canUse ? 'scale(1)' : 'scale(0.85)')};
+  }
+
+  ${Cost} > ${TextValue} {
+    opacity: 1;
+    transform: scale(1);
   }
 `;

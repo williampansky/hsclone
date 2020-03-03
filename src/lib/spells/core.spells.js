@@ -5,14 +5,18 @@ import getCardByID from 'lib/utils/get-card-by-id';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerShieldPoints from 'lib/state/player-shield-points';
 import playWeaponByCardId from 'lib/weapons/play-weapon-card-by-id';
+import health from 'lib/state/health';
 
 const initCoreSpell = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+  const spellObj = getCardByID(cardId);
+  const damageNumber = spellObj && spellObj.warcryNumber;
 
   // prettier-ignore
   switch (cardId) {
+    case 'CORE_121':  return CORE_121(G, ctx, currentPlayer, otherPlayer, damageNumber);
     case 'CORE_123':  return CORE_123(G, ctx, currentPlayer);
     case 'CORE_124':  return CORE_124(G, ctx, currentPlayer, otherPlayer, cardId);
     case 'CORE_125':  return CORE_125(G, ctx, otherPlayer, cardId);
@@ -21,6 +25,20 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     case 'CORE_129':  return CORE_129(G, ctx, currentPlayer, cardId);
     default:          break;
   }
+};
+
+const CORE_121 = (G, ctx, currentPlayer, otherPlayer, damageNumber) => {
+  health.subtract(G, currentPlayer, damageNumber);
+  G.boards[currentPlayer].forEach((slot, i) => {
+    boards.subtractFromMinionHealth(G, currentPlayer, i, damageNumber);
+    boards.killMinionIfHealthIsZero(G, ctx, currentPlayer, slot, i);
+  });
+
+  health.subtract(G, otherPlayer, damageNumber);
+  G.boards[otherPlayer].forEach((slot, i) => {
+    boards.subtractFromMinionHealth(G, otherPlayer, i, damageNumber);
+    boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
+  });
 };
 
 const CORE_123 = (G, ctx, player) => {

@@ -45,7 +45,7 @@ const playCard = (G, ctx, index, uuid, cardId = null) => {
       return playMinionCard(G, ctx, index, uuid, cardId, CARD_OBJ, SLOT_OBJ);
 
     case TYPE[3]:
-      return playSpellCard(G, ctx, index, uuid, cardId, cost);
+      return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
 
     case TYPE[4]:
       return playWeaponCard(G, ctx, uuid, cardId, cost);
@@ -89,24 +89,6 @@ export const playMinionCard = (
   // reset selectedCardObject
   G.selectedCardIndex[currentPlayer] = null;
   G.selectedCardObject[currentPlayer] = null;
-};
-
-export const playSpellCard = (
-  G,
-  ctx,
-  index,
-  uuid,
-  cardId,
-  cardCost,
-  target
-) => {
-  switch (index) {
-    case 0:
-      return playGlobalSpellCard(G, ctx, index, uuid, cardId, cardCost);
-
-    default:
-      break;
-  }
 };
 
 export const playGlobalSpellCard = (G, ctx, index, uuid, cardId, cardCost) => {

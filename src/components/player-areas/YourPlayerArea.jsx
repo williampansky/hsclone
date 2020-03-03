@@ -60,7 +60,7 @@ export default function YourPlayerArea({
           isActive={isActive}
           board="YourBoard"
           yourID={yourID}
-          src={avatars[playerClass[yourID]]}
+          playerClass={playerClass[yourID]}
         />
         <AvatarHealthWrapper />
       </AvatarWrapper>

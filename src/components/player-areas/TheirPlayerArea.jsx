@@ -34,7 +34,7 @@ export default function TheirPlayerArea({
           board={board}
           theirID={theirID}
           yourID={yourID}
-          src={avatars[playerClass[theirID]]}
+          playerClass={playerClass[theirID]}
         />
       </AvatarWrapper>
     </Component>
