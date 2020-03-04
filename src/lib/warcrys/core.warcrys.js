@@ -7,6 +7,7 @@ import playerCanAttack from 'lib/state/player-can-attack';
 import playerWeapon from 'lib/state/player-weapon';
 import getCardByID from 'lib/utils/get-card-by-id';
 import { discardCardFromHandByIndex } from 'lib/moves/discard-card';
+import counts from 'lib/state/counts';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
   const { turnOrder } = G;

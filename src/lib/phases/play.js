@@ -7,6 +7,7 @@ import winner from 'lib/state/winner';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
 import getCardByID from 'lib/utils/get-card-by-id';
+import counts from 'lib/state/counts';
 
 const onBegin = (G, ctx) => {
   const { currentPlayer } = ctx;
@@ -50,10 +51,11 @@ const onBegin = (G, ctx) => {
     GAME_CONFIG.debugData.debugCard !== null ||
     GAME_CONFIG.debugData.debugCard !== '' ||
     GAME_CONFIG.debugData.debugCard !== false
-  )
-    G.players[ctx.currentPlayer].hand.push(
-      getCardByID(GAME_CONFIG.debugData.debugCard)
-    );
+  ) {
+    const debugCardID = GAME_CONFIG.debugData.debugCard;
+    G.players[ctx.currentPlayer].hand.push(getCardByID(debugCardID));
+    counts.incrementHand(G, ctx.currentPlayer);
+  }
 };
 
 const onEnd = (G, ctx) => {

@@ -29,6 +29,12 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   const THEIR_SLOT = G.boards[otherPlayer][targetIdx];
   const YOUR_SLOT = G.boards[otherPlayer][targetIdx];
 
+  energy.subtract(G, currentPlayer, cost);
+  deselectCard(G, ctx);
+  copyCardToPlayedCards(G, currentPlayer, id);
+  removeCardFromHand(G, currentPlayer, uuid);
+  counts.deincrementHand(G, currentPlayer);
+
   // prettier-ignore
   switch (id) {
     case 'CORE_115':  CORE_115(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetIdx); break;
@@ -62,12 +68,6 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   // disable all canBeHealed
   boards.disableAllCanBeHealed(G, '0');
   boards.disableAllCanBeHealed(G, '1');
-
-  energy.subtract(G, currentPlayer, cost);
-  deselectCard(G, ctx);
-  copyCardToPlayedCards(G, currentPlayer, id);
-  removeCardFromHand(G, currentPlayer, uuid);
-  counts.deincrementHand(G, currentPlayer);
 };
 
 const CORE_115 = (G, ctx, currentPlayer, otherPlayer, boardSlot, index) => {
