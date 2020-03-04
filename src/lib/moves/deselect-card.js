@@ -14,11 +14,18 @@ const deselectCard = (G, ctx) => {
 
   selectedCardIndex.reset(G, currentPlayer);
   selectedCardObject.reset(G, currentPlayer);
+
+  G.boards[otherPlayer].forEach((slot, i) => {
+    slot.canBeAttacked = false;
+  });
+
   G.selectedCardType[currentPlayer] = null;
   G.selectedCardSpellType[currentPlayer] = null;
   G.selectedCardSpellContext[currentPlayer] = null;
+
   G.boards[currentPlayer].forEach((slot, i) => {
     slot.canBeBuffed = false;
+    slot.canBeHealed = false;
   });
 };
 

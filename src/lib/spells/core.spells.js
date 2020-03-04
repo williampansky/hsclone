@@ -16,6 +16,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
 
   // prettier-ignore
   switch (cardId) {
+    case 'CORE_120':  return CORE_121(G, ctx, otherPlayer, damageNumber);
     case 'CORE_121':  return CORE_121(G, ctx, currentPlayer, otherPlayer, damageNumber);
     case 'CORE_123':  return CORE_123(G, ctx, currentPlayer);
     case 'CORE_124':  return CORE_124(G, ctx, currentPlayer, otherPlayer, cardId);

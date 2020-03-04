@@ -208,9 +208,9 @@ const Component = styled.div`
     transition: background 800ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 
-  &:hover ${TextValue} {
+  /* &:hover ${TextValue} {
     transform: ${p => (p.canUse ? 'scale(1)' : 'scale(0.85)')};
-  }
+  } */
 
   ${Cost} > ${TextValue} {
     opacity: 1;

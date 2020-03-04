@@ -25,6 +25,7 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
 
   // prettier-ignore
   switch (id) {
+    case 'CORE_120':  CORE_120(G, ctx, otherPlayer, G.boards[otherPlayer][targetIdx], targetIdx); break;
     case 'CORE_123':  CORE_123(G, currentPlayer, targetIdx); break;
     case 'CORE_126':  CORE_126(G, ctx, otherPlayer, G.boards[otherPlayer][targetIdx], targetIdx); break;
     default:          return;
@@ -58,6 +59,11 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   copyCardToPlayedCards(G, currentPlayer, id);
   removeCardFromHand(G, currentPlayer, uuid);
   counts.deincrementHand(G, currentPlayer);
+};
+
+const CORE_120 = (G, ctx, player, boardSlot, index) => {
+  boards.subtractFromMinionHealth(G, player, index, 4);
+  boards.killMinionIfHealthIsZero(G, ctx, player, boardSlot, index);
 };
 
 const CORE_123 = (G, player, index) => {

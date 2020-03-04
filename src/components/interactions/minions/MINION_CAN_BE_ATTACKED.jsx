@@ -7,28 +7,17 @@ import TYPE from 'enums/type.enums';
 import SPELLTYPE from 'enums/spellType.enums';
 
 export default function MINION_CAN_BE_ATTACKED({ G, ctx, moves, index }) {
-  const { playerIsAttacking, selectedCardObject, warcryObject, turnOrder } = G;
+  const { playerIsAttacking, warcryObject, turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
   const {
     attackMinion,
     attackMinionWithPlayer,
-    castTargetedWarcryEffect,
-    castTargetedSpellEffect
+    castTargetedWarcryEffect
   } = moves;
 
-  const currentCard = selectedCardObject[currentPlayer];
-  const cardType = currentCard && currentCard.type;
-
   function handleClick() {
-    if (cardType === TYPE[3] && SPELLTYPE[2])
-      return castTargetedSpellEffect(
-        TARGET_CONTEXT[2],
-        WARCRY_TARGET_CONTEXT[1],
-        index
-      );
-    else if (playerIsAttacking[currentPlayer])
-      return attackMinionWithPlayer(index);
+    if (playerIsAttacking[currentPlayer]) return attackMinionWithPlayer(index);
     else if (warcryObject[currentPlayer] !== null)
       return castTargetedWarcryEffect(
         TARGET_CONTEXT[2],
