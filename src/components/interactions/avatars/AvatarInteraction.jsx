@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import AVATAR_CAN_ATTACK from 'components/interactions/avatars/AVATAR_CAN_ATTACK';
 import AVATAR_CAN_BE_ATTACKED_BY_MINION from 'components/interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_MINION';
 import AVATAR_CAN_BE_ATTACKED_BY_PLAYER from 'components/interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_PLAYER';
+import AVATAR_CAN_BE_ATTACKED_BY_SPELL from 'components/interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_SPELL';
 import AVATAR_CAN_BE_ATTACKED_BY_WARCRY from 'components/interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_WARCRY';
 import AVATAR_CAN_BE_HEALED from 'components/interactions/avatars/AVATAR_CAN_BE_HEALED';
 import AVATAR_IS_ATTACKING from 'components/interactions/avatars/AVATAR_IS_ATTACKING';
@@ -26,6 +27,12 @@ export default function AvatarInteraction({
   const attackingMinionObject = selectedMinionObject[yourID] !== null;
   const activeWarcryObject = warcryObject[yourID] !== null;
 
+  const canBeAttackedBySpell =
+    playerCanBeAttacked &&
+    !attackingMinionIndex &&
+    !attackingMinionObject &&
+    !activeWarcryObject;
+
   const canBeAttackedByWarcry =
     playerCanBeAttacked &&
     !attackingMinionIndex &&
@@ -40,6 +47,7 @@ export default function AvatarInteraction({
 
   const canBeAttackedByPlayer =
     playerCanBeAttacked &&
+    playerCanAttack &&
     !attackingMinionIndex &&
     !attackingMinionObject &&
     !activeWarcryObject;
@@ -52,6 +60,10 @@ export default function AvatarInteraction({
 
       {playerCanAttack && playerIsAttacking ? (
         <AVATAR_IS_ATTACKING G={G} ctx={ctx} moves={moves} board={board} />
+      ) : null}
+
+      {canBeAttackedBySpell ? (
+        <AVATAR_CAN_BE_ATTACKED_BY_SPELL moves={moves} />
       ) : null}
 
       {canBeAttackedByWarcry ? (

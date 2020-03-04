@@ -3,6 +3,7 @@ import selectedCardObject from 'lib/state/selected-card-object';
 import boards from 'lib/state/boards';
 import TYPE from 'enums/type.enums';
 import SPELLTYPE from 'enums/spellType.enums';
+import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 
 /**
  * Sets the `selectedCardIndex` and `selectedCardObject`
@@ -31,9 +32,10 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
   if (type === TYPE[3] && spellType === SPELLTYPE[2]) {
     // prettier-ignore
     switch (id) {
-      case 'CORE_115':  return enableCanBeAttacked(G, ctx, otherPlayer);
-      case 'CORE_119':  return enableCanBeAttacked(G, ctx, otherPlayer);
-      case 'CORE_120':  return enableCanBeAttacked(G, ctx, otherPlayer);
+      case 'CORE_115':  return enableMinionCanBeAttacked(G, ctx, otherPlayer);
+      case 'CORE_116':  return enableBothCanBeAttacked(G, ctx, otherPlayer);
+      case 'CORE_119':  return enableBothCanBeAttacked(G, ctx, otherPlayer);
+      case 'CORE_120':  return enableMinionCanBeAttacked(G, ctx, otherPlayer);
       case 'CORE_123':  return CORE_123(G, ctx, currentPlayer);
       case 'CORE_126':  return CORE_126(G, ctx, otherPlayer);
       default:          return;
@@ -41,7 +43,12 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
   }
 };
 
-const enableCanBeAttacked = (G, ctx, player) => {
+const enableBothCanBeAttacked = (G, ctx, player) => {
+  G.boards[player].forEach((slot, i) => (slot.canBeAttacked = true));
+  playerCanBeAttacked.enable(G, player);
+};
+
+const enableMinionCanBeAttacked = (G, ctx, player) => {
   G.boards[player].forEach((slot, i) => (slot.canBeAttacked = true));
 };
 

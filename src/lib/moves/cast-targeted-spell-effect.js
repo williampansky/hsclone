@@ -8,6 +8,8 @@ import removeCardFromHand from 'lib/utils/remove-card-from-hand';
 import counts from 'lib/state/counts';
 import drawCard from './draw-card';
 import health from 'lib/state/health';
+import { discardCardFromHandByIndex } from 'lib/moves/discard-card';
+import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -30,6 +32,7 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   // prettier-ignore
   switch (id) {
     case 'CORE_115':  CORE_115(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetIdx); break;
+    case 'CORE_116':  CORE_116(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetCtx, targetIdx); break;
     case 'CORE_119':  CORE_119(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetIdx); break;
     case 'CORE_120':  CORE_120(G, ctx, otherPlayer, THEIR_SLOT, targetIdx); break;
     case 'CORE_123':  CORE_123(G, currentPlayer, targetIdx); break;
@@ -71,6 +74,28 @@ const CORE_115 = (G, ctx, currentPlayer, otherPlayer, boardSlot, index) => {
   boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
   boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, boardSlot, index);
   if (boardSlot.currentHealth === 0) drawCard(G, ctx, currentPlayer, 1);
+};
+
+const CORE_116 = (
+  G,
+  ctx,
+  currentPlayer,
+  otherPlayer,
+  boardSlot,
+  targetCtx,
+  index
+) => {
+  const AMOUNT = 4;
+  const randomIdx = ctx.random.Die(G.players[currentPlayer].hand.length);
+
+  if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+    health.subtract(G, otherPlayer, AMOUNT);
+  } else {
+    boards.subtractFromMinionHealth(G, otherPlayer, index, AMOUNT);
+    boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, boardSlot, index);
+  }
+
+  discardCardFromHandByIndex(G, currentPlayer, randomIdx);
 };
 
 const CORE_119 = (G, ctx, currentPlayer, otherPlayer, boardSlot, index) => {
