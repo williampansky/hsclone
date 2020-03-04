@@ -39,7 +39,7 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   switch (id) {
     case 'CORE_115':  CORE_115(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetIdx); break;
     case 'CORE_116':  CORE_116(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetCtx, targetIdx); break;
-    case 'CORE_119':  CORE_119(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetIdx); break;
+    case 'CORE_119':  CORE_119(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetCtx, targetIdx); break;
     case 'CORE_120':  CORE_120(G, ctx, otherPlayer, THEIR_SLOT, targetIdx); break;
     case 'CORE_123':  CORE_123(G, currentPlayer, targetIdx); break;
     case 'CORE_126':  CORE_126(G, ctx, otherPlayer, THEIR_SLOT, targetIdx); break;
@@ -98,10 +98,24 @@ const CORE_116 = (
   discardCardFromHandByIndex(G, currentPlayer, randomIdx);
 };
 
-const CORE_119 = (G, ctx, currentPlayer, otherPlayer, boardSlot, index) => {
+const CORE_119 = (
+  G,
+  ctx,
+  currentPlayer,
+  otherPlayer,
+  boardSlot,
+  targetCtx,
+  index
+) => {
   const AMOUNT = 2;
-  boards.subtractFromMinionHealth(G, otherPlayer, index, AMOUNT);
-  boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, boardSlot, index);
+
+  if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+    health.subtract(G, otherPlayer, AMOUNT);
+  } else {
+    boards.subtractFromMinionHealth(G, otherPlayer, index, AMOUNT);
+    boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, boardSlot, index);
+  }
+
   health.add(G, currentPlayer, AMOUNT);
 };
 
