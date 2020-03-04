@@ -59,7 +59,8 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
           </React.Fragment>
         );
       })}
-      {activeWarcryObject && <WarcryObject data={activeWarcryObject} />}
+
+      {activeWarcryObject ? <WarcryObject data={activeWarcryObject} /> : null}
       <PlayerEnergy energy={energy[yourID]} selectedCost={selectedCardCost} />
     </div>
   );
@@ -70,7 +71,9 @@ YourHand.propTypes = {
     counts: PropTypes.object,
     energy: PropTypes.object,
     players: PropTypes.object,
-    selectedCardIndex: PropTypes.object
+    selectedCardIndex: PropTypes.number,
+    selectedCardObject: PropTypes.object,
+    warcryObject: PropTypes.object
   }),
   ctx: PropTypes.object,
   moves: PropTypes.object,

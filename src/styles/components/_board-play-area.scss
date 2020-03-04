@@ -4,17 +4,17 @@
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
-  // height: calc(100% / 2.25);
   justify-content: center;
   min-height: 150px;
+  padding: 2.5% 2%;
   position: relative;
-  width: calc(100% / 1.05);
+  width: calc(100% / 1.35);
 }
 
 .their-board-play-area {
-  margin: auto auto 2%;
+  margin: auto 0 0;
 }
 
 .your-board-play-area {
-  margin: 2% auto auto;
+  margin: 0 0 auto;
 }
