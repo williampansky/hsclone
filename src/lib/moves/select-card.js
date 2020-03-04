@@ -31,7 +31,8 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
   if (type === TYPE[3] && spellType === SPELLTYPE[2]) {
     // prettier-ignore
     switch (id) {
-      case 'CORE_120':  return CORE_120(G, ctx, otherPlayer);
+      case 'CORE_115':  return enableCanBeAttacked(G, ctx, otherPlayer);
+      case 'CORE_120':  return enableCanBeAttacked(G, ctx, otherPlayer);
       case 'CORE_123':  return CORE_123(G, ctx, currentPlayer);
       case 'CORE_126':  return CORE_126(G, ctx, otherPlayer);
       default:          return;
@@ -39,7 +40,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
   }
 };
 
-const CORE_120 = (G, ctx, player) => {
+const enableCanBeAttacked = (G, ctx, player) => {
   G.boards[player].forEach((slot, i) => (slot.canBeAttacked = true));
 };
 
