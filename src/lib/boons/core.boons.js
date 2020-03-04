@@ -11,7 +11,7 @@ const initCoreBoon = (G, player, cardId, index) => {
   // prettier-ignore
   switch (cardId) {
     case 'CORE_003':  return CORE_003(G, player, cardId, index);
-    case 'CORE_019':  return CORE_019(G, player, cardId, index);
+    case 'CORE_019':  return CORE_019(G, player, index);
     default:          break;
   }
 };
@@ -27,7 +27,7 @@ const CORE_003 = (G, player, cardId, index) => {
   const MINION_RACE = getCardByID(cardId).race;
 
   G.boards[player].forEach((_, i) => {
-    if (i === index) return;
+    if (i === index) return; // dont buff itself
     if (G.boards[player][i].minionData.race === MINION_RACE)
       transformEach(G, player, i);
   });
@@ -43,17 +43,15 @@ const CORE_003 = (G, player, cardId, index) => {
 };
 
 /**
- * Your other minions have +1 Attack.
+ * All your other minions have +1 Attack.
  * @param {{}} G
  * @param {string} player
- * @param {string} cardId
  * @param {number} index
  */
-const CORE_019 = (G, player, cardId, index) => {
+const CORE_019 = (G, player, index) => {
   G.boards[player].forEach((_, i) => {
     if (i === index) return;
-    if (G.boards[player][i].minionData.id !== cardId)
-      transformEach(G, player, i);
+    transformEach(G, player, i);
   });
 
   // transformation method

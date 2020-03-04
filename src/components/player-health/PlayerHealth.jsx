@@ -3,19 +3,22 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ReactSVG } from 'react-svg';
 import svg from 'assets/svgs/sphere.svg';
+import PlayerShield from 'components/player-health/PlayerShield';
 
-export default function PlayerHealth({ health, player }) {
+export default function PlayerHealth({ health, player, shieldPoints }) {
   return (
-    <Component data-file="avatars/PlayerHealth" player={player}>
+    <Component data-file="player-health/PlayerHealth" player={player}>
       <ReactSVG className="svg" src={svg} />
       <HealthValue>{health}</HealthValue>
+      <PlayerShield player={player} shieldPoints={shieldPoints} />
     </Component>
   );
 }
 
 PlayerHealth.propTypes = {
   health: PropTypes.number,
-  player: PropTypes.string
+  player: PropTypes.string,
+  shieldPoints: PropTypes.number
 };
 
 const Component = styled.div`

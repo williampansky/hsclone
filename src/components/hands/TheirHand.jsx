@@ -29,14 +29,20 @@ export default function TheirHand({ G, theirID, cardBackSrc, toggleMenuFn }) {
         return;
 
       case 'hover':
-        return `translateY(calc(${calcOffset(idx, handLength + 1)} * 1px)) 
-        rotate(calc(${calcRotate(idx, handLength + 1)} * -0.25deg)) 
-        scale(0.475)`;
+        return `translateY(0) scale(0.475)`;
 
       default:
-        return `translateY(calc(${calcOffset(idx, handLength + 1)} * -1px)) 
-        rotate(calc(${calcRotate(idx, handLength + 1)} * -1deg)) 
-        scale(0.475)`;
+        return `translateY(-15px) scale(0.475)`;
+
+      // case 'hover':
+      //   return `translateY(calc(${calcOffset(idx, handLength + 1)} * 1px))
+      //   rotate(calc(${calcRotate(idx, handLength + 1)} * -0.25deg))
+      //   scale(0.475)`;
+
+      // default:
+      //   return `translateY(calc(${calcOffset(idx, handLength + 1)} * -1px))
+      //   rotate(calc(${calcRotate(idx, handLength + 1)} * -1deg))
+      //   scale(0.475)`;
     }
   }
 

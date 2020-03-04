@@ -10,12 +10,11 @@
  */
 const stripSecrets = (G, playerID) => ({
   ...G,
-  players: {
-    [playerID]: G.players[playerID]
-  },
-  selectedCardObject: {
-    [playerID]: G.selectedCardObject[playerID]
-  }
+  players: { [playerID]: G.players[playerID] },
+  selectedCardObject: { [playerID]: G.selectedCardObject[playerID] },
+  selectedCardType: { [playerID]: G.selectedCardType[playerID] },
+  selectedCardSpellType: { [playerID]: G.selectedCardSpellType[playerID] },
+  selectedCardSpellContext: { [playerID]: G.selectedCardSpellContext[playerID] }
 });
 
 export default stripSecrets;

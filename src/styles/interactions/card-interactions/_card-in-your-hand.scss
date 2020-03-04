@@ -8,6 +8,7 @@
   top: 0;
   transition: 800ms cubic-bezier(0.19, 1, 0.22, 1);
   transition-property: transform;
+  transform: translateY(0) scale(0.475);
   // user-select: none;
   z-index: 1; // make sure to NOT animate z-index
 

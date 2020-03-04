@@ -3,7 +3,6 @@ import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import { _dMCBA, _eMCBA } from 'lib/state/board-methods/can-be-attacked';
 import { _eMCBB } from 'lib/state/board-methods/can-be-buffed';
 import { _eMCBH } from 'lib/state/board-methods/can-be-healed';
-import { _dMCA } from './can-attack';
 
 /**
  * Determine Attacking Minion Targets
@@ -52,6 +51,18 @@ export const _dHT = (G, player, index) => {
   G.boards[player].forEach((_, i) => {
     _eMCBH(G, player, i);
   });
+};
+
+/**
+ * Determine Spell Targets
+ * When a player plays a minion with a targeted Spell spell object;
+ * we need to determine the possible targets.
+ * @param {{}} G
+ * @param {string} player
+ */
+export const _dST = (G, player) => {
+  playerCanBeAttacked.enable(G, player);
+  G.boards[player].forEach((_, i) => _eMCBA(G, player, i));
 };
 
 /**

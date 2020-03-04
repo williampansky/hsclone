@@ -20,6 +20,14 @@ export const discardSingleCard = (G, player) => {
   );
 }
 
+// prettier-ignore
+export const discardCardFromHandByIndex = (G, player, index) => {
+  counts.deincrementHand(G, player); // .............. set counts[player].deck
+  G.playedCards[player].push( // ..................... pushes to playedCards
+    G.players[player].hand.splice(index, 1)[0] // .... splices from deck
+  );
+}
+
 export const discardMultipleCards = (G, player, amountToDiscard) => {
   for (let i = 0; i < amountToDiscard; i++) discardSingleCard(G, player);
 };

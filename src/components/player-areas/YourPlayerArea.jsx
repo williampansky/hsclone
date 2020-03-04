@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 import YourAvatar from 'components/avatars/YourAvatar';
+import ClassSkillButton from 'components/class-skill/ClassSkillButton';
+import PlayerWeapon from 'components/player-weapon/PlayerWeapon';
 
 export default function YourPlayerArea({
   G,
@@ -16,13 +18,41 @@ export default function YourPlayerArea({
   avatars,
   playerClass
 }) {
-  const { warcryObject } = G;
+  const {
+    playerCanAttack,
+    playerCanUseClassSkill,
+    playerWeapon,
+    warcryObject
+  } = G;
   const { currentPlayer } = ctx;
   const { castTargetedWarcryEffect } = moves;
+
+  const WEAPON = playerWeapon[yourID];
+  const WEAPON_AP = WEAPON && WEAPON.attack;
+  const WEAPON_HP = WEAPON && WEAPON.health;
+  const WEAPON_IMG = WEAPON && WEAPON.imageSrc;
 
   return (
     <Component board={board} data-file="player-areas/YourPlayerArea">
       <AvatarWrapper board={board}>
+        <ClassSkillButton
+          G={G}
+          ctx={ctx}
+          moves={moves}
+          isActive={isActive}
+          playerClass={playerClass[yourID]}
+          canUse={playerCanUseClassSkill[yourID]}
+        />
+
+        {playerWeapon[yourID] !== null ? (
+          <PlayerWeapon
+            canUse={playerCanAttack[yourID]}
+            weaponAttack={WEAPON_AP}
+            weaponHealth={WEAPON_HP}
+            weaponImageSrc={WEAPON_IMG}
+          />
+        ) : null}
+
         <YourAvatar
           G={G}
           ctx={ctx}
@@ -30,7 +60,7 @@ export default function YourPlayerArea({
           isActive={isActive}
           board="YourBoard"
           yourID={yourID}
-          src={avatars[playerClass[yourID]]}
+          playerClass={playerClass[yourID]}
         />
         <AvatarHealthWrapper />
       </AvatarWrapper>
@@ -80,6 +110,6 @@ const AvatarHealthWrapper = styled.div`
   width: calc(var(--player-health-size) * 1.25);
   z-index: 1;
   background: var(--board-yourPlayerArea-background-color);
-  top: 20%;
+  top: 21%;
   left: -8%;
 `;

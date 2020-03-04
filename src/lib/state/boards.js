@@ -7,16 +7,22 @@ import { _dMCBB, _dAMCBB, _eMCBB, _eAMCBB } from 'lib/state/board-methods/can-be
 // prettier-ignore
 import { _dMCBH, _dAMCBH, _eMCBH, _eAMCBH } from 'lib/state/board-methods/can-be-healed';
 // prettier-ignore
-import { _dAMT, _dBT, _dHT, _dWT } from 'lib/state/board-methods/determinations';
+import { _dAMT, _dBT, _dHT, _dST, _dWT } from 'lib/state/board-methods/determinations';
 import { _kM, _kM0 } from 'lib/state/board-methods/kill-minion';
 import { _aTMH, _sFMH } from 'lib/state/board-methods/minion-health';
 import { _pC } from 'lib/state/board-methods/place-card-on-board';
+import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 
 // prettier-ignore
 const boards = {
   __DATA_MODEL: {
-    '0': [],
-    '1': []
+    '0': [createBoardSlotObject('CORE_034')],
+    '1': [
+      {
+        ...createBoardSlotObject('CORE_034'),
+        currentHealth: 5
+      }
+    ]
   },
 
   // minion health
@@ -27,6 +33,7 @@ const boards = {
   determineAttackTargets: (G, player) => _dAMT(G, player),
   determineBuffTargets: (G, player, index) => _dBT(G, player, index),
   determineHealTargets: (G, player, index) => _dHT(G, player, index),
+  determineSpellTargets: (G, player) => _dST(G, player),
   determineWarcryTargets: (G, player) => _dWT(G, player),
 
   // canAttack

@@ -29,7 +29,8 @@ export default function BoardSlot({
     currentHealth,
     hasBoon,
     hasGuard,
-    minionData
+    minionData,
+    totalHealth
   } = data;
 
   return (
@@ -73,6 +74,7 @@ export default function BoardSlot({
           currentHealth={currentHealth}
           data={minionData}
           slot={index}
+          totalHealth={totalHealth}
         />
       )}
     </div>

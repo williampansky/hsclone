@@ -387,8 +387,8 @@ test(`WARCRY(CORE_033)`, () => {
           currentHealth: MINION.health + 2,
           hasGuard: false,
           minionData: MINION,
-          totalAttack: MINION.attack,
-          totalHealth: MINION.health
+          totalAttack: MINION.attack + 2,
+          totalHealth: MINION.health + 2
         },
         {
           canAttack: false,

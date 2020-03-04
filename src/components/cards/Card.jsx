@@ -30,6 +30,7 @@ export default function Card({
   set,
   sounds,
   spellDamage,
+  spellType,
   targetingArrowText,
   text,
   type,
@@ -62,6 +63,7 @@ export default function Card({
     { name: 'sounds.deathSound', content: deathSound },
     { name: 'sounds.dropSound', content: dropSound },
     { name: 'spellDamage', content: spellDamage },
+    { name: 'spellType', content: spellType },
     { name: 'targetingText', content: targetingArrowText },
     { name: 'text', content: text },
     { name: 'type', content: type }
@@ -80,7 +82,7 @@ export default function Card({
   };
 
   function cardName(hasName = name, ins = inspiration) {
-    if (hasName) return hasName;
+    if (hasName && hasName !== 'CARD NAME') return hasName;
     else if (ins) return ins;
     else return 'Unknown';
   }
@@ -98,18 +100,10 @@ export default function Card({
         <div className={'text__value'}>{cost}</div>
       </div>
 
-      {IS_MINION && (
-        <div className={'card__image__wrapper'}>
-          <div className={'card__image'} style={cardImage} />
-          <div className={'minion__bezel'} />
-        </div>
-      )}
-
-      {IS_SPELL && (
-        <div className={'card__image__wrapper'}>
-          <div className={'card__image'} style={cardImage} />
-        </div>
-      )}
+      <div className={'card__image__wrapper'}>
+        <div className={'card__image'} style={cardImage} />
+        {IS_MINION && <div className={'minion__bezel'} />}
+      </div>
 
       <div className={'card__name'} style={fontSize}>
         <div className={'name__value'}>{cardName(name, inspiration)}</div>

@@ -21,6 +21,17 @@ const castTargetedWarcryEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   const buff = buffWithWarcryEffect;
   const heal = healWithWarcryEffect;
 
+  // prettier-ignore
+  switch (id) {
+    case 'CORE_001':  attack(G, ctx, targetCtx, targetIdx, amount); break;
+    case 'CORE_006':  heal(G, ctx, playerCtx, targetCtx, targetIdx, amount); break;
+    case 'CORE_016':  attack(G, ctx, targetCtx, targetIdx, amount); break;
+    case 'CORE_021':  buff(G, ctx, targetIdx, amount); break;
+    case 'CORE_036':  attack(G, ctx, targetCtx, targetIdx, amount); break;
+    case 'CORE_112':  attack(G, ctx, targetCtx, targetIdx, amount); break;
+    default:          return;
+  }
+
   // clear warcryObject
   G.warcryObject[currentPlayer] = null;
 
@@ -43,16 +54,6 @@ const castTargetedWarcryEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   // disable all canBeHealed
   boards.disableAllCanBeHealed(G, '0');
   boards.disableAllCanBeHealed(G, '1');
-
-  // prettier-ignore
-  switch (id) {
-    case 'CORE_001':  return attack(G, ctx, targetCtx, targetIdx, amount);
-    case 'CORE_006':  return heal(G, ctx, playerCtx, targetCtx, targetIdx, amount);
-    case 'CORE_016':  return attack(G, ctx, targetCtx, targetIdx, amount);
-    case 'CORE_021':  return buff(G, ctx, targetIdx, amount);
-    case 'CORE_036':  return attack(G, ctx, targetCtx, targetIdx, amount);
-    default:          return;
-  }
 };
 
 export default castTargetedWarcryEffect;

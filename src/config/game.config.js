@@ -1,5 +1,6 @@
 const GAME_CONFIG = {
   debugData: {
+    debugCard: 'CORE_112',
     enableAttack: true,
     enableCost: false,
     enableHealth: true,
@@ -9,7 +10,8 @@ const GAME_CONFIG = {
     enableText: true
   },
   matchConfig: {
-    enableInitHandsStage: true
+    enableInitHandsStage: true,
+    enableRandomTurnOrder: false
   }
 };
 

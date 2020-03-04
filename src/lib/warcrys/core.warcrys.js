@@ -5,11 +5,16 @@ import createWarcryObject from 'lib/creators/create-warcry-object';
 import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerWeapon from 'lib/state/player-weapon';
+import getCardByID from 'lib/utils/get-card-by-id';
+import { discardCardFromHandByIndex } from 'lib/moves/discard-card';
+import counts from 'lib/state/counts';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+  const cardObj = getCardByID(cardId);
+  const warcryNumber = cardObj && cardObj.warcryNumber;
 
   // prettier-ignore
   switch (cardId) {
@@ -28,6 +33,9 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_035':  return CORE_035(G, ctx, otherPlayer);
     case 'CORE_036':  return CORE_036(G, ctx, cardId, otherPlayer);
     case 'CORE_041':  return CORE_041(G, ctx, index);
+    case 'CORE_112':  return CORE_112(G, ctx, cardId, otherPlayer);
+    case 'CORE_118':  return CORE_118(G, ctx, cardId);
+    case 'CORE_122':  return CORE_122(G, ctx, currentPlayer, otherPlayer, warcryNumber, index);
     default:          break;
   }
 };
@@ -134,7 +142,9 @@ const CORE_033 = (G, ctx, index) => {
     G.boards[player][index] = {
       ...G.boards[player][index],
       currentAttack: newAP,
-      currentHealth: newHP
+      currentHealth: newHP,
+      totalAttack: newAP,
+      totalHealth: newHP
     };
   }
 };
@@ -181,6 +191,36 @@ const CORE_041 = (G, ctx, index) => {
       totalHealth: newHP
     };
   }
+};
+
+/**
+ * Deal 3 damage.
+ */
+const CORE_112 = (G, ctx, cardId, otherPlayer) => {
+  G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
+  boards.determineWarcryTargets(G, otherPlayer);
+};
+
+const CORE_118 = (G, ctx) => {
+  const randomIdx = ctx.random.Die(G.players[ctx.currentPlayer].hand.length);
+  discardCardFromHandByIndex(G, ctx.currentPlayer, randomIdx);
+};
+
+/**
+ * Deal 1 damage to everyone except itself.
+ */
+const CORE_122 = (G, ctx, currentPlayer, otherPlayer, amount, index) => {
+  G.boards[currentPlayer].forEach((slot, i) => {
+    if (i !== index) {
+      boards.subtractFromMinionHealth(G, currentPlayer, i, amount);
+      boards.killMinionIfHealthIsZero(G, ctx, currentPlayer, slot, i);
+    }
+  });
+
+  G.boards[otherPlayer].forEach((slot, i) => {
+    boards.subtractFromMinionHealth(G, otherPlayer, i, amount);
+    boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
+  });
 };
 
 export default initCoreWarcry;
