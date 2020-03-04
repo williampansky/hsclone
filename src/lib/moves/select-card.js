@@ -32,6 +32,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
     // prettier-ignore
     switch (id) {
       case 'CORE_115':  return enableCanBeAttacked(G, ctx, otherPlayer);
+      case 'CORE_119':  return enableCanBeAttacked(G, ctx, otherPlayer);
       case 'CORE_120':  return enableCanBeAttacked(G, ctx, otherPlayer);
       case 'CORE_123':  return CORE_123(G, ctx, currentPlayer);
       case 'CORE_126':  return CORE_126(G, ctx, otherPlayer);
