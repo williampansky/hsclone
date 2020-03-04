@@ -6,6 +6,7 @@ import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerWeapon from 'lib/state/player-weapon';
 import getCardByID from 'lib/utils/get-card-by-id';
+import { discardCardFromHandByIndex } from 'lib/moves/discard-card';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
@@ -22,6 +23,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_012':  return CORE_012(G, ctx, cardId);
     case 'CORE_013':  return CORE_013(G, ctx, cardId);
     case 'CORE_016':  return CORE_016(G, ctx, cardId);
+    case 'CORE_118':  return CORE_118(G, ctx, cardId);
     case 'CORE_020':  return CORE_020(G, ctx, cardId);
     case 'CORE_021':  return CORE_021(G, ctx, cardId, index);
     case 'CORE_025':  return CORE_025(G, ctx, cardId);
@@ -63,6 +65,11 @@ const CORE_013 = (G, ctx) => {
 
 const CORE_016 = (G, ctx, cardId) => {
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
+};
+
+const CORE_118 = (G, ctx) => {
+  const randomIdx = ctx.random.Die(G.players[ctx.currentPlayer].hand.length);
+  discardCardFromHandByIndex(G, ctx.currentPlayer, randomIdx);
 };
 
 /**
