@@ -28,6 +28,7 @@ const castTargetedWarcryEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
     case 'CORE_016':  attack(G, ctx, targetCtx, targetIdx, amount); break;
     case 'CORE_021':  buff(G, ctx, targetIdx, amount); break;
     case 'CORE_036':  attack(G, ctx, targetCtx, targetIdx, amount); break;
+    case 'CORE_112':  attack(G, ctx, targetCtx, targetIdx, amount); break;
     default:          return;
   }
 

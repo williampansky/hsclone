@@ -5,7 +5,7 @@
 
 .debug-panel .pane {
   background: #111 !important;
-  /* width: 380px !important; */
+  width: 320px !important;
 }
 
 .debug-panel .label,

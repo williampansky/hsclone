@@ -16,13 +16,13 @@ const onBegin = (G, ctx) => {
   energy.matchTotal(G, currentPlayer);
   drawCardAtStartOfTurn(G, ctx);
 
-  for (let i = 0; i < G.boards[currentPlayer].length; i++) {
+  G.boards[currentPlayer].forEach((slot, i) => {
     // disable canBeAttacked on your board minions
     boards.disableCanBeAttacked(G, currentPlayer, i);
 
     // enable canAttack on your board minions
-    boards.enableCanAttack(G, currentPlayer, i);
-  }
+    if (slot.currentAttack >= 1) boards.enableCanAttack(G, currentPlayer, i);
+  });
 
   // if player has enough energy; enable playerCanUseClassSkill
   if (!GAME_CONFIG.debugData.enableCost)
