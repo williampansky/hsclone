@@ -35,17 +35,6 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   removeCardFromHand(G, currentPlayer, uuid);
   counts.deincrementHand(G, currentPlayer);
 
-  // prettier-ignore
-  switch (id) {
-    case 'CORE_115':  CORE_115(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetIdx); break;
-    case 'CORE_116':  CORE_116(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetCtx, targetIdx); break;
-    case 'CORE_119':  CORE_119(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetCtx, targetIdx); break;
-    case 'CORE_120':  CORE_120(G, ctx, otherPlayer, THEIR_SLOT, targetIdx); break;
-    case 'CORE_123':  CORE_123(G, currentPlayer, targetIdx); break;
-    case 'CORE_126':  CORE_126(G, ctx, otherPlayer, THEIR_SLOT, targetIdx); break;
-    default:          return;
-  }
-
   // clear warcryObject
   G.warcryObject[currentPlayer] = null;
 
@@ -68,6 +57,17 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   // disable all canBeHealed
   boards.disableAllCanBeHealed(G, '0');
   boards.disableAllCanBeHealed(G, '1');
+
+  // prettier-ignore
+  switch (id) {
+    case 'CORE_115':  return CORE_115(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetIdx);
+    case 'CORE_116':  return CORE_116(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetCtx, targetIdx);
+    case 'CORE_119':  return CORE_119(G, ctx, currentPlayer, otherPlayer, THEIR_SLOT, targetCtx, targetIdx);
+    case 'CORE_120':  return CORE_120(G, ctx, otherPlayer, THEIR_SLOT, targetIdx);
+    case 'CORE_123':  return CORE_123(G, currentPlayer, targetIdx);
+    case 'CORE_126':  return CORE_126(G, ctx, otherPlayer, THEIR_SLOT, targetIdx);
+    default:          return;
+  }
 };
 
 const CORE_115 = (G, ctx, currentPlayer, otherPlayer, boardSlot, index) => {

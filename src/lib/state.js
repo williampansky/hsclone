@@ -35,8 +35,8 @@ export default {
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
   playerClass: {
-    '0': CARDCLASS[8],
-    '1': CARDCLASS[8]
+    '0': CARDCLASS[7],
+    '1': CARDCLASS[7]
   },
   players: players.__DATA_MODEL,
   boards: boards.__DATA_MODEL,

@@ -34,6 +34,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_035':  return CORE_035(G, ctx, otherPlayer);
     case 'CORE_036':  return CORE_036(G, ctx, cardId, otherPlayer);
     case 'CORE_041':  return CORE_041(G, ctx, index);
+    case 'CORE_112':  return CORE_112(G, ctx, cardId, otherPlayer);
     case 'CORE_122':  return CORE_122(G, ctx, currentPlayer, otherPlayer, warcryNumber, index);
     default:          break;
   }
@@ -195,6 +196,14 @@ const CORE_041 = (G, ctx, index) => {
       totalHealth: newHP
     };
   }
+};
+
+/**
+ * Deal 3 damage.
+ */
+const CORE_112 = (G, ctx, cardId, otherPlayer) => {
+  G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
+  boards.determineWarcryTargets(G, otherPlayer);
 };
 
 /**

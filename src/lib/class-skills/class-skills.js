@@ -44,12 +44,16 @@ export const gainShieldPoints = (G, ctx, amount = 2) => {
  * @param {{}} ctx
  */
 export const initTargetedHeal = (G, ctx) => {
+  const { turnOrder } = G;
   const { currentPlayer } = ctx;
+  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+
   G.spellObject[currentPlayer] = createSpellObject('GAME_009');
   G.playerCanBeHealed[currentPlayer] = true;
-  G.boards[currentPlayer].forEach(slot => {
-    return (slot.canBeHealed = true);
-  });
+  G.boards[currentPlayer].forEach(slot => (slot.canBeHealed = true));
+
+  G.playerCanBeHealed[otherPlayer] = true;
+  G.boards[otherPlayer].forEach(slot => (slot.canBeHealed = true));
 };
 
 /**
@@ -89,17 +93,28 @@ export const summonKnight = (G, ctx) => {
 };
 
 /**
- * Summon a random Mystic Idol minion.
+ * Summon a random Mystic Idol.
  * @param {{}} G
  * @param {{}} ctx
  */
 export const summonRandomIdol = (G, ctx) => {
-  const { currentPlayer } = ctx;
+  const { currentPlayer, random } = ctx;
+
   if (G.boards[currentPlayer].length === 7) return; // max minions
+
   const idols = ['GAME_003', 'GAME_004', 'GAME_005', 'GAME_006'];
-  const randomIdolIndex = Math.floor(Math.random() * 4);
-  const randomIdol = createBoardSlotObject(idols[randomIdolIndex]);
-  G.boards[ctx.currentPlayer].push(randomIdol);
+  const randomIdolID = random.Shuffle(idols);
+  const randomIdol = createBoardSlotObject(randomIdolID[0]);
+
+  // GAME_005 needs the Guard mechanic
+  if (randomIdolID[0] === 'GAME_005') {
+    G.boards[currentPlayer].push({
+      ...randomIdol,
+      hasGuard: true
+    });
+  } else {
+    G.boards[currentPlayer].push(randomIdol);
+  }
 };
 
 /**
