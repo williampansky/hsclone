@@ -68,7 +68,7 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, index) => {
       boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       break;
 
-    // Give a minion <strong>Guard</strong> and +2/+2 stats.
+    // Give a minion <strong>Guard</strong>, then +2 Attack and +2 Health.
     case 'CORE_046':
       G.boards[currentPlayer][index] = {
         ...YOUR_SLOT,
@@ -135,13 +135,76 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, index) => {
 
     // Deal 3 damage to a character and Disable it.
     case 'CORE_066':
-      if (THEIR_SLOT.race === RACE[2]) {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 5);
-        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        health.subtract(G, otherPlayer, 3);
+        playerIsDisabled.enable(G, otherPlayer);
       } else {
         boards.subtractFromMinionHealth(G, otherPlayer, index, 3);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+        G.boards[otherPlayer][index].isDisabled = true;
       }
+      break;
+
+    // Deal 6 targeted damage.
+    case 'CORE_069':
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        health.subtract(G, otherPlayer, 6);
+      } else {
+        boards.subtractFromMinionHealth(G, otherPlayer, index, 6);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+      }
+      break;
+
+    // Transform a minion into a 1/1 Creature.
+    case 'CORE_070':
+      G.boards[otherPlayer][index] = {
+        ...G.boards[otherPlayer][index],
+        currentAttack: 1,
+        currentHealth: 1,
+        minionData: {
+          ...G.boards[otherPlayer][index].minionData,
+          race: RACE[2]
+        },
+        totalAttack: 1,
+        totalHealth: 1
+      };
+      break;
+
+    // Change a minion's Health down to 1.
+    case 'CORE_073':
+      G.boards[currentPlayer][index].currentAttack = Math.abs(
+        G.boards[currentPlayer][index].currentAttack + 3
+      );
+      break;
+
+    // Give a minion <strong>Energy Shield</strong>.
+    case 'CORE_074':
+      G.boards[currentPlayer][index].hasEnergyShield = true;
+      break;
+
+    // Change a minion's Health down to 1.
+    case 'CORE_075':
+      G.boards[otherPlayer][index].currentAttack = 1;
+      break;
+
+    // Restore 6 Health to yourself or a friendly minion.
+    case 'CORE_077':
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        health.add(G, currentPlayer, 6);
+      } else {
+        boards.addToMinionHealth(G, otherPlayer, index, 6);
+      }
+      break;
+
+    // Give a minion +4 Attack and +4 Health.
+    case 'CORE_078':
+      G.boards[currentPlayer][index] = {
+        ...G.boards[currentPlayer][index],
+        currentAttack: G.boards[currentPlayer][index].currentAttack + 4,
+        currentHealth: G.boards[currentPlayer][index].currentHealth + 4,
+        totalAttack: G.boards[currentPlayer][index].totalAttack + 4,
+        totalHealth: G.boards[currentPlayer][index].totalHealth + 4
+      };
       break;
 
     // Attack something for 3 damage and then draw a card.
