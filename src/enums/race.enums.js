@@ -5,7 +5,7 @@ const RACE = {
   4: 'UNDEAD',
   5: 'ROBOT',
   6: 'Murloc(temp)',
-  7: 'Totem(temp)',
+  7: 'IDOL',
   8: 'Pirate(temp)',
   9: 'Dragon(temp)'
 };

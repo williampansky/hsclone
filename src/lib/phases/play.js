@@ -22,6 +22,10 @@ const onBegin = (G, ctx) => {
 
     // enable canAttack on your board minions
     if (slot.currentAttack >= 1) boards.enableCanAttack(G, currentPlayer, i);
+
+    // reset current player's minion stats back to total values,
+    // which should reset turn-only enhancements
+    slot.currentAttack = slot.totalAttack;
   });
 
   // if player has enough energy; enable playerCanUseClassSkill
