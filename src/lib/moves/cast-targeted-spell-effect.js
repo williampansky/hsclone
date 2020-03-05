@@ -12,6 +12,7 @@ import removeCardFromHand from 'lib/utils/remove-card-from-hand';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import RACE from 'enums/race.enums';
 import playerIsDisabled from 'lib/state/player-is-disabled';
+import getCardByID from 'lib/utils/get-card-by-id';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -124,7 +125,7 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, index) => {
 
     // If you control a creature, deal 5 damage to a target—else, deal 3 damage.
     case 'CORE_058':
-      if (THEIR_SLOT.race === RACE[2]) {
+      if (THEIR_SLOT.minionData.race === RACE[2]) {
         boards.subtractFromMinionHealth(G, otherPlayer, index, 5);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       } else {
@@ -267,6 +268,15 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, index) => {
         G.playerWeapon[currentPlayer].attack + 2;
       break;
 
+    // Return one of your opponent's minions to their hand.
+    case 'CORE_096':
+      counts.incrementHand(G, otherPlayer);
+      G.boards[otherPlayer] = G.boards[otherPlayer].splice(index, 1);
+      G.players[otherPlayer].hand.push(
+        getCardByID(G.boards[otherPlayer][index].minionData.id)
+      );
+      break;
+
     // Deal 1 targeted damage and then draw a card.
     case 'CORE_097':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
@@ -313,10 +323,13 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, index) => {
 
     // Gain 5 health by sacrificing one of your Undead minions.
     case 'CORE_113':
-      if (THEIR_SLOT.race === RACE[4]) {
-        boards.killMinion(G, ctx, currentPlayer, YOUR_SLOT, index);
-        health.add(G, currentPlayer, 5);
-      }
+      boards.killMinion(G, ctx, currentPlayer, YOUR_SLOT, index);
+      health.add(G, currentPlayer, 5);
+      break;
+
+    // Choose <i>any</i> enemy minion; kill it at the start of your next turn.
+    case 'CORE_114':
+      G.boards[otherPlayer][index].willExpire = true;
       break;
 
     // Deal 1 damage to a minion. If that kills it, draw a card.
@@ -360,7 +373,7 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, index) => {
       boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       break;
 
-    // Give a friendly minion <strong>Stampede</strong>; but it can only attack enemy minions.
+    // Give a friendly minion <strong>Stampede</strong>.
     case 'CORE_123':
       G.boards[currentPlayer][index].canAttack = true;
       break;

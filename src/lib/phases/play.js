@@ -22,7 +22,9 @@ const onBegin = (G, ctx) => {
     boards.disableCanBeAttacked(G, currentPlayer, i);
 
     // enable canAttack on your board minions
-    if (slot.currentAttack >= 1) boards.enableCanAttack(G, currentPlayer, i);
+    if (slot.currentAttack >= 1) {
+      boards.enableCanAttack(G, currentPlayer, i);
+    }
 
     // reset current player's minion stats back to total values,
     // which should reset turn-only enhancements
@@ -30,6 +32,11 @@ const onBegin = (G, ctx) => {
 
     // reset isDisabled state back to false
     slot.isDisabled = false;
+
+    // kill minion if willExpire = true
+    if (slot.willExpire === true) {
+      boards.killMinion(G, ctx, currentPlayer, slot, i);
+    }
   });
 
   // reset isDisabled state back to false
