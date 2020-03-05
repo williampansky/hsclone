@@ -25,7 +25,7 @@ export default function YourPlayerArea({
     warcryObject
   } = G;
   const { currentPlayer } = ctx;
-  const { castTargetedWarcryEffect } = moves;
+  const { castTargetedWarcry } = moves;
 
   const WEAPON = playerWeapon[yourID];
   const WEAPON_AP = WEAPON && WEAPON.attack;

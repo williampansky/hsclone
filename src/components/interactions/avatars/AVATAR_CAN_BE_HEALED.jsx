@@ -7,11 +7,11 @@ import TARGET_CONTEXT from 'enums/target-context.enum';
 export default function AVATAR_CAN_BE_HEALED({ G, ctx, moves, board }) {
   const { warcryObject } = G;
   const { currentPlayer } = ctx;
-  const { castTargetedWarcryEffect } = moves;
+  const { castTargetedWarcry } = moves;
 
   function handleClick() {
     if (warcryObject[currentPlayer] !== null)
-      return castTargetedWarcryEffect(
+      return castTargetedWarcry(
         board === 'YourBoard' ? TARGET_CONTEXT[1] : TARGET_CONTEXT[2],
         WARCRY_TARGET_CONTEXT[2]
       );

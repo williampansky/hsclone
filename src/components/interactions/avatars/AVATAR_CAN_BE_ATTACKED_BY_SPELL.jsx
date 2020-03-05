@@ -5,12 +5,12 @@ import TARGET_CONTEXT from 'enums/target-context.enum';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
 export default function AVATAR_CAN_BE_ATTACKED_BY_SPELL({ moves }) {
-  const { castTargetedSpellEffect } = moves;
+  const { castTargetedSpell } = moves;
   return (
     <Component
       data-file="interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_SPELL"
       onClick={() =>
-        castTargetedSpellEffect(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[2])
+        castTargetedSpell(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[2])
       }
     />
   );

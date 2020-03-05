@@ -24,7 +24,7 @@ export default function TheirAvatar({
     selectedMinionIndex,
     warcryObject
   } = G;
-  const { attackPlayer, castTargetedWarcryEffect } = moves;
+  const { attackPlayer, castTargetedWarcry } = moves;
   const THEIR_HEALTH = health[theirID];
   const THEIR_SHIELD = playerShieldPoints[theirID];
 

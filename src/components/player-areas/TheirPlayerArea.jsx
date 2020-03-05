@@ -20,7 +20,7 @@ export default function TheirPlayerArea({
 }) {
   const { warcryObject } = G;
   const { currentPlayer } = ctx;
-  const { castTargetedWarcryEffect } = moves;
+  const { castTargetedWarcry } = moves;
 
   return (
     <Component board={board} data-file="player-areas/TheirPlayerArea">

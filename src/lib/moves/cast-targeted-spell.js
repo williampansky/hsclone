@@ -23,7 +23,7 @@ import getCardByID from 'lib/utils/get-card-by-id';
  * @param {string} targetCtx Target context; MINION || PLAYER
  * @param {string} index Target index if targetCtx is MINION
  */
-const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, index) => {
+const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   const { selectedCardObject, turnOrder } = G;
   const { currentPlayer, random } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
@@ -388,4 +388,4 @@ const castTargetedSpellEffect = (G, ctx, playerCtx, targetCtx, index) => {
   }
 };
 
-export default castTargetedSpellEffect;
+export default castTargetedSpell;

@@ -1,6 +1,6 @@
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import createWarcryObject from 'lib/creators/create-warcry-object';
-import castTargetedWarcryEffect from 'lib/moves/cast-targeted-warcry-effect';
+import castTargetedWarcry from 'lib/moves/cast-targeted-warcry';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
@@ -19,7 +19,7 @@ test(`heals self with CORE_006 Warcry`, () => {
     turnOrder: TURN_ORDER
   };
 
-  castTargetedWarcryEffect(G, ctx, TARGET_CONTEXT[1]);
+  castTargetedWarcry(G, ctx, TARGET_CONTEXT[1]);
   expect(G).toEqual({
     health: { '0': 30, '1': 30 },
     boards: { '0': [MINION_OBJECT], '1': [] },
@@ -45,7 +45,7 @@ test(`heals opponent with CORE_006 Warcry`, () => {
     turnOrder: TURN_ORDER
   };
 
-  castTargetedWarcryEffect(G, ctx, TARGET_CONTEXT[2]);
+  castTargetedWarcry(G, ctx, TARGET_CONTEXT[2]);
   expect(G).toEqual({
     health: { '0': 30, '1': 27 },
     boards: { '0': [MINION_OBJECT], '1': [] },
@@ -74,13 +74,7 @@ test(`heals a friendly minion with CORE_006 Warcry`, () => {
     turnOrder: TURN_ORDER
   };
 
-  castTargetedWarcryEffect(
-    G,
-    ctx,
-    TARGET_CONTEXT[1],
-    WARCRY_TARGET_CONTEXT[1],
-    1
-  );
+  castTargetedWarcry(G, ctx, TARGET_CONTEXT[1], WARCRY_TARGET_CONTEXT[1], 1);
 
   expect(G).toEqual({
     boards: {
@@ -112,13 +106,7 @@ test(`heals an opponent's minion with CORE_006 Warcry`, () => {
     turnOrder: TURN_ORDER
   };
 
-  castTargetedWarcryEffect(
-    G,
-    ctx,
-    TARGET_CONTEXT[2],
-    WARCRY_TARGET_CONTEXT[1],
-    0
-  );
+  castTargetedWarcry(G, ctx, TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[1], 0);
 
   expect(G).toEqual({
     boards: {

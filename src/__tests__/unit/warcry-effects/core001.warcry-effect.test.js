@@ -1,6 +1,6 @@
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import createWarcryObject from 'lib/creators/create-warcry-object';
-import castTargetedWarcryEffect from 'lib/moves/cast-targeted-warcry-effect';
+import castTargetedWarcry from 'lib/moves/cast-targeted-warcry';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
@@ -22,7 +22,7 @@ test(`attacks a player with CORE_001 warcry`, () => {
     turnOrder: TURN_ORDER
   };
 
-  castTargetedWarcryEffect(G, ctx, TARGET_CONTEXT[2]);
+  castTargetedWarcry(G, ctx, TARGET_CONTEXT[2]);
   expect(G).toEqual({
     health: { '0': 30, '1': 29 },
     boards: { '0': [MINION_OBJECT], '1': [] },
@@ -51,13 +51,7 @@ test(`attacks a minion with CORE_001 warcry, but doesn't kill it`, () => {
     turnOrder: TURN_ORDER
   };
 
-  castTargetedWarcryEffect(
-    G,
-    ctx,
-    TARGET_CONTEXT[2],
-    WARCRY_TARGET_CONTEXT[1],
-    0
-  );
+  castTargetedWarcry(G, ctx, TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[1], 0);
 
   expect(G).toEqual({
     boards: {
@@ -89,13 +83,7 @@ test(`kills a minion with the CORE_001 warcry`, () => {
     turnOrder: TURN_ORDER
   };
 
-  castTargetedWarcryEffect(
-    G,
-    ctx,
-    TARGET_CONTEXT[2],
-    WARCRY_TARGET_CONTEXT[1],
-    0
-  );
+  castTargetedWarcry(G, ctx, TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[1], 0);
   expect(G).toEqual({
     boards: { '0': [MINION_OBJECT], '1': [] },
     warcryObject: { '0': null, '1': null },

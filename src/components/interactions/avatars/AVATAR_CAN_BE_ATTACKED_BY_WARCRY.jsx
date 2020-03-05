@@ -5,12 +5,12 @@ import TARGET_CONTEXT from 'enums/target-context.enum';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
 export default function AVATAR_CAN_BE_ATTACKED_BY_WARCRY({ moves }) {
-  const { castTargetedWarcryEffect } = moves;
+  const { castTargetedWarcry } = moves;
   return (
     <Component
       data-file="interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_WARCRY"
       onClick={() =>
-        castTargetedWarcryEffect(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[2])
+        castTargetedWarcry(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[2])
       }
     />
   );

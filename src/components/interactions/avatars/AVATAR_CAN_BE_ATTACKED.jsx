@@ -13,7 +13,7 @@ export default function AVATAR_CAN_BE_ATTACKED({
 }) {
   const { warcryObject, selectedMinionIndex, selectedMinionObject } = G;
   const { currentPlayer } = ctx;
-  const { attackPlayer, castTargetedWarcryEffect } = moves;
+  const { attackPlayer, castTargetedWarcry } = moves;
 
   const attackingMinionIndex = selectedMinionIndex[yourID] !== null;
   const attackingMinionObject = selectedMinionObject[yourID] !== null;
@@ -28,7 +28,7 @@ export default function AVATAR_CAN_BE_ATTACKED({
         board={board}
         data-file="interactions/avatars/AVATAR_CAN_BE_ATTACKED:WARCRY"
         onClick={() =>
-          castTargetedWarcryEffect(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[2])
+          castTargetedWarcry(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[2])
         }
       />
     );

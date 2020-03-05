@@ -13,7 +13,7 @@ import boards from 'lib/state/boards';
  * @param {string} targetCtx Target context; MINION || PLAYER
  * @param {string} targetIdx Target index if targetCtx is MINION
  */
-const castTargetedWarcryEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
+const castTargetedWarcry = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   const { warcryObject } = G;
   const { currentPlayer } = ctx;
   const { id, amount } = warcryObject[currentPlayer];
@@ -56,4 +56,4 @@ const castTargetedWarcryEffect = (G, ctx, playerCtx, targetCtx, targetIdx) => {
   boards.disableAllCanBeHealed(G, '1');
 };
 
-export default castTargetedWarcryEffect;
+export default castTargetedWarcry;

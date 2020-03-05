@@ -7,17 +7,17 @@ import TARGET_CONTEXT from 'enums/target-context.enum';
 export default function MINION_CAN_BE_BUFFED({ G, ctx, moves, index }) {
   const { selectedCardObject, warcryObject } = G;
   const { currentPlayer } = ctx;
-  const { castTargetedSpellEffect, castTargetedWarcryEffect } = moves;
+  const { castTargetedSpell, castTargetedWarcry } = moves;
 
   function handleClick() {
     if (selectedCardObject[currentPlayer] !== null) {
-      return castTargetedSpellEffect(
+      return castTargetedSpell(
         TARGET_CONTEXT[1],
         WARCRY_TARGET_CONTEXT[1],
         index
       );
     } else if (warcryObject[currentPlayer] !== null)
-      return castTargetedWarcryEffect(
+      return castTargetedWarcry(
         TARGET_CONTEXT[1],
         WARCRY_TARGET_CONTEXT[1],
         index

@@ -10,16 +10,12 @@ export default function MINION_CAN_BE_ATTACKED({ G, ctx, moves, index }) {
   const { playerIsAttacking, warcryObject, turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
-  const {
-    attackMinion,
-    attackMinionWithPlayer,
-    castTargetedWarcryEffect
-  } = moves;
+  const { attackMinion, attackMinionWithPlayer, castTargetedWarcry } = moves;
 
   function handleClick() {
     if (playerIsAttacking[currentPlayer]) return attackMinionWithPlayer(index);
     else if (warcryObject[currentPlayer] !== null)
-      return castTargetedWarcryEffect(
+      return castTargetedWarcry(
         TARGET_CONTEXT[2],
         WARCRY_TARGET_CONTEXT[1],
         index

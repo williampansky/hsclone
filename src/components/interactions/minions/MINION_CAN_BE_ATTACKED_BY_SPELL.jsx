@@ -10,16 +10,12 @@ export default function MINION_CAN_BE_ATTACKED_BY_SPELL({
   moves,
   index
 }) {
-  const { castTargetedSpellEffect } = moves;
+  const { castTargetedSpell } = moves;
   return (
     <Component
       data-file="interactions/minions/MINION_CAN_BE_ATTACKED_BY_SPELL"
       onClick={() =>
-        castTargetedSpellEffect(
-          TARGET_CONTEXT[2],
-          WARCRY_TARGET_CONTEXT[1],
-          index
-        )
+        castTargetedSpell(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[1], index)
       }
     />
   );
