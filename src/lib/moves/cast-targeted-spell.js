@@ -261,13 +261,6 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       break;
 
-    // Give your equipped weapon 2 additional attack points.
-    case 'CORE_094':
-      if (!G.playerWeapon[currentPlayer]) return;
-      G.playerWeapon[currentPlayer].attack =
-        G.playerWeapon[currentPlayer].attack + 2;
-      break;
-
     // Return one of your opponent's minions to their hand.
     case 'CORE_096':
       counts.incrementHand(G, otherPlayer);
