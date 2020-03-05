@@ -14,98 +14,76 @@ const initCoreSpell = (G, ctx, cardId, index) => {
   const spellObj = getCardByID(cardId);
   const damageNumber = spellObj && spellObj.warcryNumber;
 
-  // prettier-ignore
-  switch (cardId) {
-    case 'CORE_121':  return CORE_121(G, ctx, currentPlayer, otherPlayer, damageNumber);
-    case 'CORE_123':  return CORE_123(G, ctx, currentPlayer);
-    case 'CORE_124':  return CORE_124(G, ctx, currentPlayer, otherPlayer, cardId);
-    case 'CORE_125':  return CORE_125(G, ctx, otherPlayer, cardId);
-    case 'CORE_126':  return CORE_126(G, ctx, currentPlayer, otherPlayer, cardId);
-    case 'CORE_127':  return CORE_127(G, ctx, currentPlayer, cardId);
-    case 'CORE_129':  return CORE_129(G, ctx, currentPlayer, cardId);
-    default:          break;
+  // const YOUR_BOARD = G.boards[currentPlayer];
+  const THEIR_BOARD = G.boards[otherPlayer];
+
+  function getRandomIndex(length) {
+    return Math.floor(Math.random() * (length - 0) + 0);
   }
-};
 
-const CORE_121 = (G, ctx, currentPlayer, otherPlayer, damageNumber) => {
-  health.subtract(G, currentPlayer, damageNumber);
-  G.boards[currentPlayer].forEach((slot, i) => {
-    boards.subtractFromMinionHealth(G, currentPlayer, i, damageNumber);
-    boards.killMinionIfHealthIsZero(G, ctx, currentPlayer, slot, i);
-  });
+  const theirRandomIdx1 = getRandomIndex(THEIR_BOARD.length);
+  const theirRandomIdx2 = getRandomIndex(THEIR_BOARD.length);
 
-  health.subtract(G, otherPlayer, damageNumber);
-  G.boards[otherPlayer].forEach((slot, i) => {
-    boards.subtractFromMinionHealth(G, otherPlayer, i, damageNumber);
-    boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
-  });
-};
+  switch (cardId) {
+    // Deal 3 damage to everyone.
+    case 'CORE_121':
+      health.subtract(G, currentPlayer, damageNumber);
+      G.boards[currentPlayer].forEach((slot, i) => {
+        boards.subtractFromMinionHealth(G, currentPlayer, i, damageNumber);
+        boards.killMinionIfHealthIsZero(G, ctx, currentPlayer, slot, i);
+      });
 
-const CORE_123 = (G, ctx, player) => {
-  // boards.enableAllCanBeBuffed(G, player);
-};
+      health.subtract(G, otherPlayer, damageNumber);
+      G.boards[otherPlayer].forEach((slot, i) => {
+        boards.subtractFromMinionHealth(G, otherPlayer, i, damageNumber);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
+      });
+      break;
 
-const CORE_124 = (G, ctx, currentPlayer, otherPlayer, cardId) => {
-  const cardObj = getCardByID(cardId);
-  const warcryNumber = cardObj && cardObj.warcryNumber;
+    // Attack every minion for 1 damage.
+    case 'CORE_124':
+      G.boards[currentPlayer].forEach((slot, i) => {
+        boards.subtractFromMinionHealth(G, currentPlayer, i, damageNumber);
+        boards.killMinionIfHealthIsZero(G, ctx, currentPlayer, slot, i);
+      });
 
-  G.boards[currentPlayer].forEach((slot, i) => {
-    boards.subtractFromMinionHealth(G, currentPlayer, i, warcryNumber);
-    boards.killMinionIfHealthIsZero(G, ctx, currentPlayer, slot, i);
-  });
+      G.boards[otherPlayer].forEach((slot, i) => {
+        boards.subtractFromMinionHealth(G, otherPlayer, i, damageNumber);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
+      });
+      break;
 
-  G.boards[otherPlayer].forEach((slot, i) => {
-    boards.subtractFromMinionHealth(G, otherPlayer, i, warcryNumber);
-    boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
-  });
-};
+    // Attack two random enemy minions for 2 damage each.
+    case 'CORE_125':
+      G.boards[otherPlayer].forEach((slot, i) => {
+        if (i === theirRandomIdx1 || i === theirRandomIdx2) {
+          boards.subtractFromMinionHealth(G, otherPlayer, i, damageNumber);
+          boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
+        }
+      });
+      break;
 
-const CORE_125 = (G, ctx, player, cardId) => {
-  const cardObj = getCardByID(cardId);
-  const warcryNumber = cardObj && cardObj.warcryNumber;
-  const board = G.boards[player];
-  const boardLength = board && board.length;
+    case 'CORE_126':
+      G.spellObject[currentPlayer] = createSpellObject(cardId);
+      G.boards[otherPlayer].forEach((slot, i) => {
+        if (slot.currentHealth !== slot.totalHealth)
+          boards.enableCanBeAttacked(G, otherPlayer, i);
+      });
+      break;
 
-  const randomIdx1 = Math.floor(Math.random() * (boardLength - 0) + 0);
-  const randomIdx2 = Math.floor(Math.random() * (boardLength - 0) + 0);
+    case 'CORE_127':
+      playerCanAttack.enable(G, currentPlayer);
+      playWeaponByCardId(G, currentPlayer, cardId);
+      break;
 
-  boards.subtractFromMinionHealth(G, player, randomIdx1, warcryNumber);
-  boards.killMinionIfHealthIsZero(
-    G,
-    ctx,
-    player,
-    G.boards[player][randomIdx1],
-    randomIdx1
-  );
+    case 'CORE_129':
+      playerShieldPoints.add(G, currentPlayer, damageNumber);
+      drawCard(G, ctx, currentPlayer, 1);
+      break;
 
-  boards.subtractFromMinionHealth(G, player, randomIdx2, warcryNumber);
-  boards.killMinionIfHealthIsZero(
-    G,
-    ctx,
-    player,
-    G.boards[player][randomIdx2],
-    randomIdx2
-  );
-};
-
-const CORE_126 = (G, ctx, currentPlayer, otherPlayer, cardId) => {
-  G.spellObject[currentPlayer] = createSpellObject(cardId);
-  G.boards[otherPlayer].forEach((slot, i) => {
-    if (slot.currentHealth !== slot.totalHealth)
-      boards.enableCanBeAttacked(G, otherPlayer, i);
-  });
-};
-
-const CORE_127 = (G, ctx, player, cardId) => {
-  playerCanAttack.enable(G, player);
-  playWeaponByCardId(G, player, cardId);
-};
-
-const CORE_129 = (G, ctx, player, cardId) => {
-  const cardObj = getCardByID(cardId);
-  const warcryNumber = cardObj && cardObj.warcryNumber;
-  playerShieldPoints.add(G, player, warcryNumber);
-  drawCard(G, ctx, player, 1);
+    default:
+      break;
+  }
 };
 
 export default initCoreSpell;
