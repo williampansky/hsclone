@@ -8,6 +8,7 @@ import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
 import getCardByID from 'lib/utils/get-card-by-id';
 import counts from 'lib/state/counts';
+import playerIsDisabled from 'lib/state/player-is-disabled';
 
 const onBegin = (G, ctx) => {
   const { currentPlayer } = ctx;
@@ -26,7 +27,13 @@ const onBegin = (G, ctx) => {
     // reset current player's minion stats back to total values,
     // which should reset turn-only enhancements
     slot.currentAttack = slot.totalAttack;
+
+    // reset isDisabled state back to false
+    slot.isDisabled = false;
   });
+
+  // reset isDisabled state back to false
+  playerIsDisabled.disable(G, currentPlayer);
 
   // if player has enough energy; enable playerCanUseClassSkill
   if (!GAME_CONFIG.debugData.enableCost)

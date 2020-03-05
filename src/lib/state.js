@@ -22,6 +22,7 @@ import selectedMinionObject from 'lib/state/selected-minion-object';
 import spellObject from 'lib/state/spell-object';
 import warcryObject from 'lib/state/warcry-object';
 import CARDCLASS from 'enums/cardClass.enums';
+import playerIsDisabled from './state/player-is-disabled';
 
 export default {
   buffs: buffs.__DATA_MODEL,
@@ -29,6 +30,7 @@ export default {
   playerCanBeHealed: playerCanBeHealed.__DATA_MODEL,
   playerCanAttack: playerCanAttack.__DATA_MODEL,
   playerIsAttacking: playerIsAttacking.__DATA_MODEL,
+  playerIsDisabled: playerIsDisabled.__DATA_MODEL,
   playerCanUseClassSkill: playerCanUseClassSkill.__DATA_MODEL,
   playerShieldPoints: playerShieldPoints.__DATA_MODEL,
   playerWeapon: playerWeapon.__DATA_MODEL,
