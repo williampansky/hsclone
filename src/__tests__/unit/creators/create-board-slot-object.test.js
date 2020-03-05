@@ -15,9 +15,13 @@ test(`should create an object for a new board slot`, () => {
     currentHealth: expectedMinionData.health,
     hasBoon: false,
     hasGuard: false,
+    isConcealed: false,
+    isCursed: false,
+    isDisabled: false,
     minionData: expectedMinionData,
     totalAttack: expectedMinionData.attack,
-    totalHealth: expectedMinionData.health
+    totalHealth: expectedMinionData.health,
+    willExpire: false
   });
 });
 
