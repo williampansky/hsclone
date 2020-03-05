@@ -15,6 +15,7 @@ const createBoardSlotObject = cardId => {
     currentHealth: health,
     hasBoon: false,
     hasGuard: false,
+    isDisabled: false,
     minionData: minionObject,
     totalAttack: attack,
     totalHealth: health
