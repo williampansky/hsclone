@@ -9,6 +9,7 @@ import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
 import getCardByID from 'lib/utils/get-card-by-id';
 import counts from 'lib/state/counts';
 import playerIsDisabled from 'lib/state/player-is-disabled';
+import playerAttackValue from 'lib/state/playerAttackValue';
 
 const onBegin = (G, ctx) => {
   const { currentPlayer } = ctx;
@@ -41,6 +42,15 @@ const onBegin = (G, ctx) => {
 
   // reset isDisabled state back to false
   playerIsDisabled.disable(G, currentPlayer);
+
+  // either set attack value to weapon's attack
+  if (G.playerWeapon[currentPlayer] !== null) {
+    const atkValue = G.playerWeapon[currentPlayer].attack;
+    playerAttackValue.set(G, currentPlayer, atkValue);
+  } else {
+    // or reset playerAttackValue state back to false
+    playerAttackValue.reset(G, currentPlayer);
+  }
 
   // if player has enough energy; enable playerCanUseClassSkill
   if (!GAME_CONFIG.debugData.enableCost)
