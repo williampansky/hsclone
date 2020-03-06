@@ -21,7 +21,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
 
   // const YOUR_BOARD = G.boards[currentPlayer];
   const THEIR_BOARD = G.boards[otherPlayer];
-  const THEIR_HAND = G.players[otherPlayer].hand;
+  // const THEIR_HAND = G.players[otherPlayer].hand;
 
   function getRandomIndex(length) {
     return Math.floor(Math.random() * (length - 0) + 0);
@@ -31,7 +31,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     return random.Shuffle(array)[0];
   }
 
-  const theirRandomCardId = getRandomCardId(THEIR_HAND);
+  // const theirRandomCardId = getRandomCardId(THEIR_HAND);
   const theirRandomIdx1 = getRandomIndex(THEIR_BOARD.length);
   const theirRandomIdx2 = getRandomIndex(THEIR_BOARD.length);
   const theirRandomIdx3 = getRandomIndex(THEIR_BOARD.length);
@@ -170,9 +170,9 @@ const initCoreSpell = (G, ctx, cardId, index) => {
 
     // Create a copy of one of the cards in your opponent's hand.
     case 'CORE_084':
-      if (G.players[currentPlayer].hand.length === 10) return;
-      G.players[currentPlayer].hand.push(getCardByID(theirRandomCardId));
-      counts.incrementHand(G, currentPlayer);
+      // if (G.players[currentPlayer].hand.length === 10) return;
+      // G.players[currentPlayer].hand.push(getCardByID(theirRandomCardId));
+      // counts.incrementHand(G, currentPlayer);
       break;
 
     // Restore 5 Health to yourself.

@@ -25,11 +25,11 @@ export default function MinionInteraction({
   hasBoon,
   hasEnergyShield,
   hasGuard,
+  hasOnslaught,
   isAttacking,
   isConcealed,
   isCursed,
   isDisabled,
-  hasOnslaught,
   totalAttack,
   totalHealth,
   willExpire
@@ -46,9 +46,9 @@ export default function MinionInteraction({
           canAttack={canAttack}
           canBeAttacked={canBeAttacked}
           canBeBuffed={canBeBuffed}
-          canBeHealed={canBeHealed}
           canbeDebuffed={canbeDebuffed}
           canbeExpired={canbeExpired}
+          canBeHealed={canBeHealed}
           canbeReturned={canbeReturned}
           canbeSacrificed={canbeSacrificed}
           canbeStolen={canbeStolen}
@@ -57,11 +57,11 @@ export default function MinionInteraction({
           hasBoon={hasBoon}
           hasEnergyShield={hasEnergyShield}
           hasGuard={hasGuard}
+          hasOnslaught={hasOnslaught}
           isAttacking={isAttacking}
           isConcealed={isConcealed}
           isCursed={isCursed}
           isDisabled={isDisabled}
-          hasOnslaught={hasOnslaught}
           willExpire={willExpire}
         />
       );
@@ -77,9 +77,9 @@ export default function MinionInteraction({
           canAttack={canAttack}
           canBeAttacked={canBeAttacked}
           canBeBuffed={canBeBuffed}
-          canBeHealed={canBeHealed}
           canbeDebuffed={canbeDebuffed}
           canbeExpired={canbeExpired}
+          canBeHealed={canBeHealed}
           canbeReturned={canbeReturned}
           canbeSacrificed={canbeSacrificed}
           canbeStolen={canbeStolen}
@@ -88,11 +88,11 @@ export default function MinionInteraction({
           hasBoon={hasBoon}
           hasEnergyShield={hasEnergyShield}
           hasGuard={hasGuard}
+          hasOnslaught={hasOnslaught}
           isAttacking={isAttacking}
           isConcealed={isConcealed}
           isCursed={isCursed}
           isDisabled={isDisabled}
-          hasOnslaught={hasOnslaught}
           willExpire={willExpire}
         />
       );
@@ -127,7 +127,7 @@ MinionInteraction.propTypes = {
   isCursed: PropTypes.bool,
   isDisabled: PropTypes.bool,
   hasOnslaught: PropTypes.bool,
-  totalAttack: PropTypes.bool,
-  totalHealth: PropTypes.bool,
+  totalAttack: PropTypes.number,
+  totalHealth: PropTypes.number,
   willExpire: PropTypes.bool
 };

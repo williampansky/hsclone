@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { fontSizeBasedOnCharacterLength } from 'utils/text';
 import createMarkup from 'utils/createMarkup';
 import TYPE from 'enums/type.enums';
+import RACE from 'enums/race.enums';
 
 export default function Card({
   artist,
@@ -111,7 +112,16 @@ export default function Card({
       <div className={'card__text'}>
         <p dangerouslySetInnerHTML={createMarkup(text)} />
       </div>
-      <div className={'card__type'}>{type}</div>
+
+      {IS_MINION ? (
+        race !== RACE[1] ? (
+          <div className={'card__type'}>{race}</div>
+        ) : (
+          <div className={'card__type'}>{type}</div>
+        )
+      ) : (
+        <div className={'card__type'}>{type}</div>
+      )}
 
       {IS_MINION && (
         <React.Fragment>

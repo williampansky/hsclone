@@ -67,14 +67,7 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
 }
 
 YourHand.propTypes = {
-  G: PropTypes.shape({
-    counts: PropTypes.object,
-    energy: PropTypes.object,
-    players: PropTypes.object,
-    selectedCardIndex: PropTypes.number,
-    selectedCardObject: PropTypes.object,
-    warcryObject: PropTypes.object
-  }),
+  G: PropTypes.object,
   ctx: PropTypes.object,
   moves: PropTypes.object,
   isActive: PropTypes.bool,

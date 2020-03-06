@@ -28,11 +28,11 @@ export default function TheirMinionInteractions({
   hasBoon,
   hasEnergyShield,
   hasGuard,
+  hasOnslaught,
   isAttacking,
   isConcealed,
   isCursed,
   isDisabled,
-  hasOnslaught,
   willExpire
 }) {
   const { selectedCardObject } = G;
@@ -45,19 +45,22 @@ export default function TheirMinionInteractions({
   const canBeAttackedBySpell =
     canBeAttacked && cardType === TYPE[3] && cardSpellType === SPELLTYPE[2];
 
-  const CAN_BE_SPELLED = MINION_CAN_BE_ATTACKED_BY_SPELL;
-  const CAN_BE_ATTACKED = MINION_CAN_BE_ATTACKED;
-  const CAN_BE_HEALED = MINION_CAN_BE_HEALED;
+  if (canBeAttackedBySpell)
+    return (
+      <MINION_CAN_BE_ATTACKED_BY_SPELL
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        index={index}
+      />
+    );
 
-  if (canBeHealed) {
-    return <CAN_BE_HEALED G={G} ctx={ctx} moves={moves} index={index} />;
-  } else if (canBeAttackedBySpell) {
-    return <CAN_BE_SPELLED G={G} ctx={ctx} moves={moves} index={index} />;
-  } else if (canBeAttacked) {
-    return <CAN_BE_ATTACKED G={G} ctx={ctx} moves={moves} index={index} />;
-  } else {
-    return null;
-  }
+  if (canBeAttacked)
+    return (
+      <MINION_CAN_BE_ATTACKED G={G} ctx={ctx} moves={moves} index={index} />
+    );
+
+  return null;
 }
 
 TheirMinionInteractions.propTypes = {
@@ -80,10 +83,10 @@ TheirMinionInteractions.propTypes = {
   hasBoon: PropTypes.bool,
   hasEnergyShield: PropTypes.bool,
   hasGuard: PropTypes.bool,
+  hasOnslaught: PropTypes.bool,
   isAttacking: PropTypes.bool,
   isConcealed: PropTypes.bool,
   isCursed: PropTypes.bool,
   isDisabled: PropTypes.bool,
-  hasOnslaught: PropTypes.bool,
   willExpire: PropTypes.bool
 };

@@ -4,6 +4,7 @@ import MINION_CAN_ATTACK from 'components/interactions/minions/MINION_CAN_ATTACK
 import MINION_CAN_BE_BUFFED from 'components/interactions/minions/MINION_CAN_BE_BUFFED';
 import MINION_CAN_BE_HEALED from 'components/interactions/minions/MINION_CAN_BE_HEALED';
 import MINION_IS_ATTACKING from 'components/interactions/minions/MINION_IS_ATTACKING';
+import MINION_CAN_BE_SACRIFICED from 'components/interactions/minions/MINION_CAN_BE_SACRIFICED';
 
 export default function YourMinionInteractions({
   G,
@@ -25,29 +26,30 @@ export default function YourMinionInteractions({
   hasBoon,
   hasEnergyShield,
   hasGuard,
+  hasOnslaught,
   isAttacking,
   isConcealed,
   isCursed,
   isDisabled,
-  hasOnslaught,
   willExpire
 }) {
-  const CAN_ATTACK = MINION_CAN_ATTACK;
-  const CAN_BE_BUFFED = MINION_CAN_BE_BUFFED;
-  const CAN_BE_HEALED = MINION_CAN_BE_HEALED;
-  const IS_ATTACKING = MINION_IS_ATTACKING;
+  if (canBeHealed)
+    return <MINION_CAN_BE_HEALED G={G} ctx={ctx} moves={moves} index={index} />;
 
-  if (canBeHealed) {
-    return <CAN_BE_HEALED G={G} ctx={ctx} moves={moves} index={index} />;
-  } else if (canBeBuffed) {
-    return <CAN_BE_BUFFED G={G} ctx={ctx} moves={moves} index={index} />;
-  } else if (canAttack && !isAttacking) {
-    return <CAN_ATTACK moves={moves} data={data} index={index} />;
-  } else if (canAttack && isAttacking) {
-    return <IS_ATTACKING moves={moves} data={data} index={index} />;
-  } else {
-    return null;
-  }
+  if (canBeBuffed)
+    return <MINION_CAN_BE_BUFFED G={G} ctx={ctx} moves={moves} index={index} />;
+
+  if (canbeSacrificed)
+    return (
+      <MINION_CAN_BE_SACRIFICED G={G} ctx={ctx} moves={moves} index={index} />
+    );
+
+  if (canAttack && !isAttacking)
+    return <MINION_CAN_ATTACK data={data} moves={moves} index={index} />;
+
+  if (canAttack && isAttacking) return <MINION_IS_ATTACKING moves={moves} />;
+
+  return null;
 }
 
 YourMinionInteractions.propTypes = {
@@ -70,10 +72,10 @@ YourMinionInteractions.propTypes = {
   hasBoon: PropTypes.bool,
   hasEnergyShield: PropTypes.bool,
   hasGuard: PropTypes.bool,
+  hasOnslaught: PropTypes.bool,
   isAttacking: PropTypes.bool,
   isConcealed: PropTypes.bool,
   isCursed: PropTypes.bool,
   isDisabled: PropTypes.bool,
-  hasOnslaught: PropTypes.bool,
   willExpire: PropTypes.bool
 };

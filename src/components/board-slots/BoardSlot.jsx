@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MinionInteraction from 'components/interactions/minions/MinionInteraction';
 import Minion from 'components/minion/Minion';
 import MINION_HAS_BOON from 'components/mechanics/MINION_HAS_BOON';
@@ -24,9 +25,9 @@ export default function BoardSlot({
     canAttack,
     canBeAttacked,
     canBeBuffed,
-    canBeHealed,
     canbeDebuffed,
     canbeExpired,
+    canBeHealed,
     canbeReturned,
     canbeSacrificed,
     canbeStolen,
@@ -37,11 +38,11 @@ export default function BoardSlot({
     hasBoon,
     hasEnergyShield,
     hasGuard,
+    hasOnslaught,
     isConcealed,
     isCursed,
     isDisabled,
     minionData,
-    hasOnslaught,
     totalAttack,
     totalHealth,
     willExpire
@@ -84,11 +85,11 @@ export default function BoardSlot({
           hasBoon={hasBoon}
           hasEnergyShield={hasEnergyShield}
           hasGuard={hasGuard}
+          hasOnslaught={hasOnslaught}
           isAttacking={selectedMinionIndex[yourID] === index}
           isConcealed={isConcealed}
           isCursed={isCursed}
           isDisabled={isDisabled}
-          hasOnslaught={hasOnslaught}
           totalAttack={totalAttack}
           totalHealth={totalHealth}
           willExpire={willExpire}
@@ -108,6 +109,43 @@ export default function BoardSlot({
     </div>
   );
 }
+
+BoardSlot.propTypes = {
+  G: PropTypes.object,
+  ctx: PropTypes.object,
+  moves: PropTypes.object,
+  isActive: PropTypes.bool,
+  index: PropTypes.number,
+  render: PropTypes.bool,
+  board: PropTypes.string,
+  canDrop: PropTypes.bool,
+  onClick: PropTypes.func,
+  theirID: PropTypes.string,
+  yourID: PropTypes.string,
+  data: PropTypes.object,
+  canAttack: PropTypes.bool,
+  canBeAttacked: PropTypes.bool,
+  canBeBuffed: PropTypes.bool,
+  canBeHealed: PropTypes.bool,
+  canbeDebuffed: PropTypes.bool,
+  canbeExpired: PropTypes.bool,
+  canbeReturned: PropTypes.bool,
+  canbeSacrificed: PropTypes.bool,
+  canbeStolen: PropTypes.bool,
+  canReceiveEnergyShield: PropTypes.bool,
+  canReceiveOnslaught: PropTypes.bool,
+  hasBoon: PropTypes.bool,
+  hasEnergyShield: PropTypes.bool,
+  hasGuard: PropTypes.bool,
+  isAttacking: PropTypes.bool,
+  isConcealed: PropTypes.bool,
+  isCursed: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  hasOnslaught: PropTypes.bool,
+  totalAttack: PropTypes.bool,
+  totalHealth: PropTypes.bool,
+  willExpire: PropTypes.bool
+};
 
 BoardSlot.defaultProps = {
   data: {
