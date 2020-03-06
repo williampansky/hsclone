@@ -9,7 +9,7 @@ import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
 import getCardByID from 'lib/utils/get-card-by-id';
 import counts from 'lib/state/counts';
 import playerIsDisabled from 'lib/state/player-is-disabled';
-import playerAttackValue from 'lib/state/playerAttackValue';
+import playerAttackValue from 'lib/state/player-attack-value';
 
 const onBegin = (G, ctx) => {
   const { currentPlayer } = ctx;

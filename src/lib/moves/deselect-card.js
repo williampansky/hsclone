@@ -24,8 +24,16 @@ const deselectCard = (G, ctx) => {
   G.selectedCardSpellContext[currentPlayer] = null;
 
   G.boards[currentPlayer].forEach((slot, i) => {
+    slot.canBeAttacked = false;
     slot.canBeBuffed = false;
     slot.canBeHealed = false;
+    slot.canbeDebuffed = false;
+    slot.canbeExpired = false;
+    slot.canbeReturned = false;
+    slot.canbeSacrificed = false;
+    slot.canbeStolen = false;
+    slot.canReceiveEnergyShield = false;
+    slot.canReceiveOnslaught = false;
   });
 };
 

@@ -8,6 +8,7 @@ import playerWeapon from 'lib/state/player-weapon';
 import getCardByID from 'lib/utils/get-card-by-id';
 import { discardCardFromHandByIndex } from 'lib/moves/discard-card';
 import counts from 'lib/state/counts';
+import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
@@ -197,6 +198,7 @@ const CORE_041 = (G, ctx, index) => {
  * Deal 3 damage.
  */
 const CORE_112 = (G, ctx, cardId, otherPlayer) => {
+  playerCanBeAttacked.enable(G, otherPlayer);
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
   boards.determineWarcryTargets(G, otherPlayer);
 };

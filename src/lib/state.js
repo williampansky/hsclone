@@ -7,6 +7,7 @@ import energy from 'lib/state/energy';
 import health from 'lib/state/health';
 import hoveringCardIndex from 'lib/state/hovering-card-index';
 import playedCards from 'lib/state/played-cards';
+import playerAttackValue from 'lib/state/player-attack-value';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
@@ -34,11 +35,12 @@ export default {
   playerCanUseClassSkill: playerCanUseClassSkill.__DATA_MODEL,
   playerShieldPoints: playerShieldPoints.__DATA_MODEL,
   playerWeapon: playerWeapon.__DATA_MODEL,
+  playerAttackValue: playerAttackValue.__DATA_MODEL,
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
   playerClass: {
-    '0': CARDCLASS[7],
-    '1': CARDCLASS[7]
+    '0': CARDCLASS[8],
+    '1': CARDCLASS[8]
   },
   players: players.__DATA_MODEL,
   boards: boards.__DATA_MODEL,

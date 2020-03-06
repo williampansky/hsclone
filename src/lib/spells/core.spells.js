@@ -10,7 +10,7 @@ import RACE from 'enums/race.enums';
 import counts from 'lib/state/counts';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import energy from 'lib/state/energy';
-import playerAttackValue from 'lib/state/playerAttackValue';
+import playerAttackValue from 'lib/state/player-attack-value';
 
 const initCoreSpell = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
