@@ -87,12 +87,6 @@ const onBegin = (G, ctx) => {
 };
 
 const onEnd = (G, ctx) => {
-  const { health, turnOrder } = G;
-
-  const PLAYER0_HEALTH = health[turnOrder['0']];
-  if (PLAYER0_HEALTH === 0) winner.set(G, turnOrder['0']);
-  else winner.set(G, turnOrder['1']);
-
   // reset player[0] minion states
   G.boards['0'].forEach((slot, i) => {
     G.boards['0'][i] = {
@@ -134,10 +128,19 @@ const onEnd = (G, ctx) => {
   G.warcryObject = { '0': null, '1': null };
 };
 
+const endIf = (G, ctx) => {
+  const { health, turnOrder } = G;
+
+  const PLAYER0_HEALTH = health[turnOrder['0']];
+  if (PLAYER0_HEALTH === 0) winner.set(G, turnOrder['0']);
+  else winner.set(G, turnOrder['1']);
+};
+
 export default {
   turn: {
     order: TurnOrder.CUSTOM_FROM('turnOrder'),
     onBegin: (G, ctx) => onBegin(G, ctx),
-    onEnd: (G, ctx) => onEnd(G, ctx)
+    onEnd: (G, ctx) => onEnd(G, ctx),
+    endIf: (G, ctx) => endIf(G, ctx)
   }
 };
