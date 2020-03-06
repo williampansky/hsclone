@@ -123,9 +123,9 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       G.boards[otherPlayer][index].currentHealth = 1;
       break;
 
-    // If you control a creature, deal 5 damage to a target—else, deal 3 damage.
+    // If you control a Creature, deal 5 damage to a target—else, deal 3 damage.
     case 'CORE_058':
-      if (THEIR_SLOT.minionData.race === RACE[2]) {
+      if (THEIR_SLOT.minionData.race === RACE[1]) {
         boards.subtractFromMinionHealth(G, otherPlayer, index, 5);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       } else {
@@ -164,7 +164,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
         currentHealth: 1,
         minionData: {
           ...G.boards[otherPlayer][index].minionData,
-          race: RACE[2]
+          race: RACE[1]
         },
         totalAttack: 1,
         totalHealth: 1

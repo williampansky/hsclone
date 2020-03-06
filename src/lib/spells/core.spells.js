@@ -224,7 +224,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Give your Idols +2 additional Health.
     case 'CORE_104':
       G.boards[currentPlayer].forEach(slot => {
-        if (slot.minionData.race === RACE[7]) {
+        if (slot.minionData.race === RACE[6]) {
           slot.currentHealth = slot.currentHealth + 2;
         }
       });

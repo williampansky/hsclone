@@ -114,7 +114,7 @@ export default function Card({
       </div>
 
       {IS_MINION ? (
-        race !== RACE[1] ? (
+        race !== RACE[0] ? (
           <div className={'card__type'}>{race}</div>
         ) : (
           <div className={'card__type'}>{type}</div>
