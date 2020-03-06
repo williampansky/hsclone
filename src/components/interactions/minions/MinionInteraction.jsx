@@ -15,8 +15,24 @@ export default function MinionInteraction({
   canBeAttacked,
   canBeBuffed,
   canBeHealed,
+  canbeDebuffed,
+  canbeExpired,
+  canbeReturned,
+  canbeSacrificed,
+  canbeStolen,
+  canReceiveEnergyShield,
+  canReceiveOnslaught,
+  hasBoon,
+  hasEnergyShield,
   hasGuard,
-  isAttacking
+  isAttacking,
+  isConcealed,
+  isCursed,
+  isDisabled,
+  hasOnslaught,
+  totalAttack,
+  totalHealth,
+  willExpire
 }) {
   switch (board) {
     case 'TheirBoard':
@@ -31,7 +47,22 @@ export default function MinionInteraction({
           canBeAttacked={canBeAttacked}
           canBeBuffed={canBeBuffed}
           canBeHealed={canBeHealed}
+          canbeDebuffed={canbeDebuffed}
+          canbeExpired={canbeExpired}
+          canbeReturned={canbeReturned}
+          canbeSacrificed={canbeSacrificed}
+          canbeStolen={canbeStolen}
+          canReceiveEnergyShield={canReceiveEnergyShield}
+          canReceiveOnslaught={canReceiveOnslaught}
+          hasBoon={hasBoon}
+          hasEnergyShield={hasEnergyShield}
+          hasGuard={hasGuard}
           isAttacking={isAttacking}
+          isConcealed={isConcealed}
+          isCursed={isCursed}
+          isDisabled={isDisabled}
+          hasOnslaught={hasOnslaught}
+          willExpire={willExpire}
         />
       );
 
@@ -47,7 +78,22 @@ export default function MinionInteraction({
           canBeAttacked={canBeAttacked}
           canBeBuffed={canBeBuffed}
           canBeHealed={canBeHealed}
+          canbeDebuffed={canbeDebuffed}
+          canbeExpired={canbeExpired}
+          canbeReturned={canbeReturned}
+          canbeSacrificed={canbeSacrificed}
+          canbeStolen={canbeStolen}
+          canReceiveEnergyShield={canReceiveEnergyShield}
+          canReceiveOnslaught={canReceiveOnslaught}
+          hasBoon={hasBoon}
+          hasEnergyShield={hasEnergyShield}
+          hasGuard={hasGuard}
           isAttacking={isAttacking}
+          isConcealed={isConcealed}
+          isCursed={isCursed}
+          isDisabled={isDisabled}
+          hasOnslaught={hasOnslaught}
+          willExpire={willExpire}
         />
       );
   }
@@ -66,8 +112,22 @@ MinionInteraction.propTypes = {
   canBeAttacked: PropTypes.bool,
   canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
-  currentAttack: PropTypes.number,
-  currentHealth: PropTypes.number,
+  canbeDebuffed: PropTypes.bool,
+  canbeExpired: PropTypes.bool,
+  canbeReturned: PropTypes.bool,
+  canbeSacrificed: PropTypes.bool,
+  canbeStolen: PropTypes.bool,
+  canReceiveEnergyShield: PropTypes.bool,
+  canReceiveOnslaught: PropTypes.bool,
+  hasBoon: PropTypes.bool,
+  hasEnergyShield: PropTypes.bool,
   hasGuard: PropTypes.bool,
-  isAttacking: PropTypes.bool
+  isAttacking: PropTypes.bool,
+  isConcealed: PropTypes.bool,
+  isCursed: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  hasOnslaught: PropTypes.bool,
+  totalAttack: PropTypes.bool,
+  totalHealth: PropTypes.bool,
+  willExpire: PropTypes.bool
 };

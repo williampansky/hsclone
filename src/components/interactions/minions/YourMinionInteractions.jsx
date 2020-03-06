@@ -12,10 +12,25 @@ export default function YourMinionInteractions({
   data,
   index,
   canAttack,
+  canBeAttacked,
   canBeBuffed,
   canBeHealed,
+  canbeDebuffed,
+  canbeExpired,
+  canbeReturned,
+  canbeSacrificed,
+  canbeStolen,
+  canReceiveEnergyShield,
+  canReceiveOnslaught,
+  hasBoon,
+  hasEnergyShield,
   hasGuard,
-  isAttacking
+  isAttacking,
+  isConcealed,
+  isCursed,
+  isDisabled,
+  hasOnslaught,
+  willExpire
 }) {
   const CAN_ATTACK = MINION_CAN_ATTACK;
   const CAN_BE_BUFFED = MINION_CAN_BE_BUFFED;
@@ -41,9 +56,24 @@ YourMinionInteractions.propTypes = {
   moves: PropTypes.object,
   data: PropTypes.object,
   index: PropTypes.number,
-  hasGuard: PropTypes.bool,
   canAttack: PropTypes.bool,
+  canBeAttacked: PropTypes.bool,
   canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
-  isAttacking: PropTypes.bool
+  canbeDebuffed: PropTypes.bool,
+  canbeExpired: PropTypes.bool,
+  canbeReturned: PropTypes.bool,
+  canbeSacrificed: PropTypes.bool,
+  canbeStolen: PropTypes.bool,
+  canReceiveEnergyShield: PropTypes.bool,
+  canReceiveOnslaught: PropTypes.bool,
+  hasBoon: PropTypes.bool,
+  hasEnergyShield: PropTypes.bool,
+  hasGuard: PropTypes.bool,
+  isAttacking: PropTypes.bool,
+  isConcealed: PropTypes.bool,
+  isCursed: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  hasOnslaught: PropTypes.bool,
+  willExpire: PropTypes.bool
 };

@@ -25,12 +25,26 @@ export default function BoardSlot({
     canBeAttacked,
     canBeBuffed,
     canBeHealed,
+    canbeDebuffed,
+    canbeExpired,
+    canbeReturned,
+    canbeSacrificed,
+    canbeStolen,
+    canReceiveEnergyShield,
+    canReceiveOnslaught,
     currentAttack,
     currentHealth,
     hasBoon,
+    hasEnergyShield,
     hasGuard,
+    isConcealed,
+    isCursed,
+    isDisabled,
     minionData,
-    totalHealth
+    hasOnslaught,
+    totalAttack,
+    totalHealth,
+    willExpire
   } = data;
 
   return (
@@ -60,10 +74,24 @@ export default function BoardSlot({
           canBeAttacked={canBeAttacked}
           canBeBuffed={canBeBuffed}
           canBeHealed={canBeHealed}
-          currentAttack={currentAttack}
-          currentHealth={currentHealth}
+          canbeDebuffed={canbeDebuffed}
+          canbeExpired={canbeExpired}
+          canbeReturned={canbeReturned}
+          canbeSacrificed={canbeSacrificed}
+          canbeStolen={canbeStolen}
+          canReceiveEnergyShield={canReceiveEnergyShield}
+          canReceiveOnslaught={canReceiveOnslaught}
+          hasBoon={hasBoon}
+          hasEnergyShield={hasEnergyShield}
           hasGuard={hasGuard}
           isAttacking={selectedMinionIndex[yourID] === index}
+          isConcealed={isConcealed}
+          isCursed={isCursed}
+          isDisabled={isDisabled}
+          hasOnslaught={hasOnslaught}
+          totalAttack={totalAttack}
+          totalHealth={totalHealth}
+          willExpire={willExpire}
         />
       )}
       {minionData && hasBoon && <MINION_HAS_BOON />}
