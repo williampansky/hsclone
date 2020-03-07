@@ -200,7 +200,9 @@ const CORE_041 = (G, ctx, index) => {
 const CORE_112 = (G, ctx, cardId, otherPlayer) => {
   playerCanBeAttacked.enable(G, otherPlayer);
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
-  boards.determineWarcryTargets(G, otherPlayer);
+  G.boards[otherPlayer].forEach(slot => {
+    slot.canBeAttackedByWarcry = true;
+  });
 };
 
 const CORE_118 = (G, ctx) => {

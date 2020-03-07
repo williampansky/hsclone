@@ -43,8 +43,13 @@ const attackMinion = (G, ctx, index) => {
     MINION_BEING_ATTACKED.currentAttack
   );
 
-  // disable ATTACKING_MINION's ability to attack
-  boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  // if minion has onslaught, allow it to attack again
+  if (G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasOnslaught) {
+    boards.enableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  } else {
+    // disable ATTACKING_MINION's ability to attack
+    boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  }
 
   // disable MINION_BEING_ATTACKED's ability to be attacked
   boards.disableCanBeAttacked(G, currentPlayer, MINION_BEING_ATTACKED_INDEX);

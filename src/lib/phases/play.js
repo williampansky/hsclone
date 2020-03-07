@@ -29,7 +29,7 @@ const onBegin = (G, ctx) => {
       boards.enableCanAttack(G, currentPlayer, i);
     }
 
-    // reset current player's minion stats back to total values,
+    // reset player's minion stats back to total values,
     // which should reset turn-only enhancements
     slot.currentAttack = slot.totalAttack;
 
@@ -50,6 +50,10 @@ const onBegin = (G, ctx) => {
   });
 
   G.boards[otherPlayer].forEach((slot, i) => {
+    // reset player's minion stats back to total values,
+    // which should reset turn-only enhancements
+    slot.currentAttack = slot.totalAttack;
+
     // handle expiration mechanic
     if (slot.willExpire === true) {
       // deincrement willExpireIn integer

@@ -305,8 +305,11 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
 
     // Give a friendly character +3 Attack this turn.
     case 'CORE_106':
-      G.boards[currentPlayer][index].currentAttack =
-        G.boards[currentPlayer][index].currentAttack + 3;
+      G.boards[currentPlayer][index] = {
+        ...G.boards[currentPlayer][index],
+        currentAttack: G.boards[currentPlayer][index].currentAttack + 3,
+        totalAttack: G.boards[currentPlayer][index].totalAttack + 3
+      };
       break;
 
     // Give a minion <strong>Onslaught</strong>.

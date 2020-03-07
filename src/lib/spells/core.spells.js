@@ -226,6 +226,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
       G.boards[currentPlayer].forEach(slot => {
         if (slot.minionData.race === RACE[6]) {
           slot.currentHealth = slot.currentHealth + 2;
+          slot.totalHealth = slot.totalHealth + 2;
         }
       });
       break;

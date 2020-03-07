@@ -47,7 +47,7 @@ export default function Minion({
     <div
       className={[
         'minion',
-        currentHealth !== totalHealth ? '--is-damaged' : ''
+        currentHealth < totalHealth ? '--is-damaged' : ''
       ].join(' ')}
     >
       {/* <div className={'info-trigger'} {...hoverProps} /> */}

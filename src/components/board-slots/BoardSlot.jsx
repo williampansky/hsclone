@@ -6,6 +6,9 @@ import HasBoon from 'components/mechanics/HasBoon';
 import HasGuard from 'components/mechanics/HasGuard';
 import WillExpire from 'components/mechanics/WillExpire';
 import HasEnergyShield from 'components/mechanics/HasEnergyShield';
+import IsConcealed from 'components/mechanics/IsConcealed';
+import IsDisabled from 'components/mechanics/IsDisabled';
+import HasOnslaught from 'components/mechanics/HasOnslaught';
 
 export default function BoardSlot({
   G,
@@ -106,9 +109,12 @@ export default function BoardSlot({
 
       {/* mechanics */}
       {minionData && hasBoon && <HasBoon />}
+      {minionData && hasEnergyShield && <HasEnergyShield />}
       {minionData && hasGuard && <HasGuard />}
-      {/* {minionData && willExpire && <WillExpire />} */}
-      {minionData && willExpire && <HasEnergyShield />}
+      {minionData && hasOnslaught && <HasOnslaught />}
+      {minionData && isConcealed && <IsConcealed />}
+      {minionData && isDisabled && <IsDisabled />}
+      {minionData && willExpire && <WillExpire />}
 
       {/* visible minion component */}
       {minionData && (

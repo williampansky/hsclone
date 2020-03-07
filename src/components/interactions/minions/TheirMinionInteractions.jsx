@@ -36,20 +36,20 @@ export default function TheirMinionInteractions({
   isDisabled,
   willExpire
 }) {
-  if (canBeAttackedByMinion) {
-    return <CanBeAttackedByMinion moves={moves} index={index} />;
-  }
-
-  if (canBeAttackedByPlayer) {
-    return <CanBeAttackedByPlayer moves={moves} index={index} />;
-  }
-
   if (canBeAttackedBySpell) {
     return <CanBeAttackedBySpell moves={moves} index={index} />;
   }
 
   if (canBeAttackedByWarcry) {
     return <CanBeAttackedByWarcry moves={moves} index={index} />;
+  }
+
+  if (canBeAttackedByMinion) {
+    return <CanBeAttackedByMinion moves={moves} index={index} />;
+  }
+
+  if (canBeAttackedByPlayer) {
+    return <CanBeAttackedByPlayer moves={moves} index={index} />;
   }
 
   if (canBeExpired) {

@@ -42,8 +42,13 @@ const attackPlayer = (G, ctx) => {
     health.subtract(G, PLAYER_BEING_ATTACKED, ATTACKING_MINION.currentAttack);
   }
 
-  // disable ATTACKING_MINION's ability to attack
-  boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  // if minion has onslaught, allow it to attack again
+  if (G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasOnslaught) {
+    boards.enableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  } else {
+    // disable ATTACKING_MINION's ability to attack
+    boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  }
 
   // reset currentPlayer's selectedMinionIndex & selectedMinionObject value
   selectMinion(G, ctx);
