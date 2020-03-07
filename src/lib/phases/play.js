@@ -25,7 +25,7 @@ const onBegin = (G, ctx) => {
     boards.disableCanBeAttacked(G, currentPlayer, i);
 
     // enable canAttack on your board minions
-    if (slot.currentAttack >= 1) {
+    if (slot.currentAttack >= 1 && !slot.isDisabled) {
       boards.enableCanAttack(G, currentPlayer, i);
     }
 
@@ -33,8 +33,16 @@ const onBegin = (G, ctx) => {
     // which should reset turn-only enhancements
     slot.currentAttack = slot.totalAttack;
 
-    // reset isDisabled state back to false
-    slot.isDisabled = false;
+    // handle disabled mechanic
+    if (slot.isDisabled === true) {
+      // deincrement isDisabledFor integer
+      slot.isDisabledFor = Math.abs(slot.isDisabledFor - 1);
+
+      // re-enable minion if disabled integer hits zero
+      if (slot.isDisabledFor === 0) slot.isDisabled = false;
+    } else {
+      slot.isDisabledFor = 2;
+    }
 
     // handle expiration mechanic
     if (slot.willExpire === true) {
@@ -53,6 +61,17 @@ const onBegin = (G, ctx) => {
     // reset player's minion stats back to total values,
     // which should reset turn-only enhancements
     slot.currentAttack = slot.totalAttack;
+
+    // handle disabled mechanic
+    if (slot.isDisabled === true) {
+      // deincrement isDisabledFor integer
+      slot.isDisabledFor = Math.abs(slot.isDisabledFor - 1);
+
+      // re-enable minion if disabled integer hits zero
+      if (slot.isDisabledFor === 0) slot.isDisabled = false;
+    } else {
+      slot.isDisabledFor = 2;
+    }
 
     // handle expiration mechanic
     if (slot.willExpire === true) {

@@ -29,6 +29,7 @@ const createBoardSlotObject = cardId => {
     isConcealed: false,
     isCursed: false,
     isDisabled: false,
+    isDisabledFor: 2,
     minionData: minionObject,
     hasOnslaught: false,
     totalAttack: attack,
