@@ -17,11 +17,10 @@ export const _dMCBA = (G, player, index) => {
  * @param {{}} G
  * @param {string} player
  * @param {number} index
- * @deprecated
  */
 export const _eMCBA = (G, player, index) => {
   if (!G.boards[player][index]) return;
-  G.boards[player][index].canBeAttacked = true;
+  G.boards[player][index].canBeAttackedByMinion = true;
 };
 
 /**

@@ -4,6 +4,7 @@ import MinionInteraction from 'components/interactions/minions/MinionInteraction
 import Minion from 'components/minion/Minion';
 import MINION_HAS_BOON from 'components/mechanics/MINION_HAS_BOON';
 import MINION_HAS_GUARD from 'components/mechanics/MINION_HAS_GUARD';
+import WillExpire from 'components/mechanics/WillExpire';
 
 export default function BoardSlot({
   G,
@@ -103,6 +104,7 @@ export default function BoardSlot({
       )}
       {minionData && hasBoon && <MINION_HAS_BOON />}
       {minionData && hasGuard && <MINION_HAS_GUARD />}
+      {minionData && willExpire && <WillExpire />}
       {minionData && (
         <Minion
           currentAttack={currentAttack}

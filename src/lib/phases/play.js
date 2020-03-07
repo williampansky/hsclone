@@ -12,7 +12,9 @@ import playerIsDisabled from 'lib/state/player-is-disabled';
 import playerAttackValue from 'lib/state/player-attack-value';
 
 const onBegin = (G, ctx) => {
+  const { turnOrder } = G;
   const { currentPlayer } = ctx;
+  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
 
   energy.incrementTotal(G, currentPlayer);
   energy.matchTotal(G, currentPlayer);
@@ -34,9 +36,30 @@ const onBegin = (G, ctx) => {
     // reset isDisabled state back to false
     slot.isDisabled = false;
 
-    // kill minion if willExpire = true
+    // handle expiration mechanic
     if (slot.willExpire === true) {
-      boards.killMinion(G, ctx, currentPlayer, slot, i);
+      // deincrement willExpireIn integer
+      slot.willExpireIn = Math.abs(slot.willExpireIn - 1);
+
+      // kill minion if expiration integer hits zero
+      if (slot.willExpireIn === 0)
+        boards.killMinion(G, ctx, currentPlayer, slot, i);
+    } else {
+      slot.willExpireIn = 2;
+    }
+  });
+
+  G.boards[otherPlayer].forEach((slot, i) => {
+    // handle expiration mechanic
+    if (slot.willExpire === true) {
+      // deincrement willExpireIn integer
+      slot.willExpireIn = Math.abs(slot.willExpireIn - 1);
+
+      // kill minion if expiration integer hits zero
+      if (slot.willExpireIn === 0)
+        boards.killMinion(G, ctx, otherPlayer, slot, i);
+    } else {
+      slot.willExpireIn = 2;
     }
   });
 
@@ -134,19 +157,17 @@ const onEnd = (G, ctx) => {
   G.warcryObject = { '0': null, '1': null };
 };
 
-const endIf = (G, ctx) => {
-  const { health, turnOrder } = G;
-
-  const PLAYER0_HEALTH = health[turnOrder['0']];
-  if (PLAYER0_HEALTH === 0) winner.set(G, turnOrder['0']);
-  else winner.set(G, turnOrder['1']);
+const endIf = G => {
+  const PLAYER0_HEALTH = G.health[G.turnOrder['0']];
+  if (PLAYER0_HEALTH === 0) G.winner = G.turnOrder['0'];
+  else G.winner = G.turnOrder['1'];
 };
 
 export default {
   turn: {
     order: TurnOrder.CUSTOM_FROM('turnOrder'),
     onBegin: (G, ctx) => onBegin(G, ctx),
-    onEnd: (G, ctx) => onEnd(G, ctx),
-    endIf: (G, ctx) => endIf(G, ctx)
+    onEnd: (G, ctx) => onEnd(G, ctx)
+    // endIf: G => endIf(G)
   }
 };

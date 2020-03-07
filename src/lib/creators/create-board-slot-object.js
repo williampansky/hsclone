@@ -33,7 +33,8 @@ const createBoardSlotObject = cardId => {
     hasOnslaught: false,
     totalAttack: attack,
     totalHealth: health,
-    willExpire: false
+    willExpire: false,
+    willExpireIn: 2
   };
 };
 

@@ -323,6 +323,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     // Choose <i>any</i> enemy minion; kill it at the start of your next turn.
     case 'CORE_114':
       G.boards[otherPlayer][index].willExpire = true;
+      G.boards[otherPlayer][index].canBeExpired = false;
       break;
 
     // Deal 1 damage to a minion. If that kills it, draw a card.
