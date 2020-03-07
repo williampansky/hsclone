@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MinionInteraction from 'components/interactions/minions/MinionInteraction';
 import Minion from 'components/minion/Minion';
-import MINION_HAS_BOON from 'components/mechanics/MINION_HAS_BOON';
-import MINION_HAS_GUARD from 'components/mechanics/MINION_HAS_GUARD';
+import HasBoon from 'components/mechanics/HasBoon';
+import HasGuard from 'components/mechanics/HasGuard';
 import WillExpire from 'components/mechanics/WillExpire';
+import HasEnergyShield from 'components/mechanics/HasEnergyShield';
 
 export default function BoardSlot({
   G,
@@ -21,7 +22,6 @@ export default function BoardSlot({
   theirID
 }) {
   const { selectedMinionIndex } = G;
-  const { currentPlayer } = ctx;
   const {
     canAttack,
     canBeAttackedByMinion,
@@ -65,6 +65,7 @@ export default function BoardSlot({
       ].join(' ')}
       onClick={onClick}
     >
+      {/* interactions layer */}
       {minionData && (
         <MinionInteraction
           G={G}
@@ -102,9 +103,14 @@ export default function BoardSlot({
           willExpire={willExpire}
         />
       )}
-      {minionData && hasBoon && <MINION_HAS_BOON />}
-      {minionData && hasGuard && <MINION_HAS_GUARD />}
-      {minionData && willExpire && <WillExpire />}
+
+      {/* mechanics */}
+      {minionData && hasBoon && <HasBoon />}
+      {minionData && hasGuard && <HasGuard />}
+      {/* {minionData && willExpire && <WillExpire />} */}
+      {minionData && willExpire && <HasEnergyShield />}
+
+      {/* visible minion component */}
       {minionData && (
         <Minion
           currentAttack={currentAttack}

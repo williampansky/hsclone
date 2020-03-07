@@ -2,26 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default function MINION_HAS_GUARD() {
-  return <Component data-file="mechanics/MINION_HAS_GUARD" />;
+export default function HasGuard() {
+  return <Component data-file="mechanics/HasGuard" />;
 }
 
-MINION_HAS_GUARD.propTypes = {
+HasGuard.propTypes = {
   moves: PropTypes.object,
   data: PropTypes.object,
   index: PropTypes.number
 };
-
-const Comp = styled.div`
-  background-image: url('https://cdn.pixabay.com/photo/2015/04/11/10/08/shield-717505_960_720.png');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: absolute;
-  width: 120%;
-  height: 110%;
-  top: 0;
-`;
 
 const Component = styled.div`
   position: absolute;

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function MINION_HAS_BOON() {
-  return <Component data-file="mechanics/MINION_HAS_BOON" />;
+export default function HasBoon() {
+  return <Component data-file="mechanics/HasBoon" />;
 }
 
 const Component = styled.div`
