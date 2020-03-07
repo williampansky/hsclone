@@ -13,6 +13,7 @@ import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import RACE from 'enums/race.enums';
 import playerIsDisabled from 'lib/state/player-is-disabled';
 import getCardByID from 'lib/utils/get-card-by-id';
+import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -158,17 +159,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
 
     // Transform a minion into a 1/1 Creature.
     case 'CORE_070':
-      G.boards[otherPlayer][index] = {
-        ...G.boards[otherPlayer][index],
-        currentAttack: 1,
-        currentHealth: 1,
-        minionData: {
-          ...G.boards[otherPlayer][index].minionData,
-          race: RACE[1]
-        },
-        totalAttack: 1,
-        totalHealth: 1
-      };
+      G.boards[otherPlayer][index] = createBoardSlotObject('CORE_070a');
       break;
 
     // Change a minion's Health down to 1.
@@ -307,14 +298,21 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     case 'CORE_106':
       G.boards[currentPlayer][index] = {
         ...G.boards[currentPlayer][index],
-        currentAttack: G.boards[currentPlayer][index].currentAttack + 3,
-        totalAttack: G.boards[currentPlayer][index].totalAttack + 3
+        currentAttack: G.boards[currentPlayer][index].currentAttack + 3
       };
       break;
 
     // Give a minion <strong>Onslaught</strong>.
     case 'CORE_107':
       G.boards[currentPlayer][index].hasOnslaught = true;
+      break;
+
+    // Transform a minion into a 0/1 Creature with <strong>Guard</strong>.
+    case 'CORE_109':
+      G.boards[otherPlayer][index] = {
+        ...createBoardSlotObject('CORE_109a'),
+        hasGuard: true
+      };
       break;
 
     // Gain 5 health by sacrificing one of your Undead minions.

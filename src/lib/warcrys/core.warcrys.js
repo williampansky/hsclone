@@ -34,6 +34,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
     case 'CORE_035':  return CORE_035(G, ctx, otherPlayer);
     case 'CORE_036':  return CORE_036(G, ctx, cardId, otherPlayer);
     case 'CORE_041':  return CORE_041(G, ctx, index);
+    case 'CORE_110':  return CORE_110(G, ctx, cardId);
     case 'CORE_112':  return CORE_112(G, ctx, cardId, otherPlayer);
     case 'CORE_118':  return CORE_118(G, ctx, cardId);
     case 'CORE_122':  return CORE_122(G, ctx, currentPlayer, otherPlayer, warcryNumber, index);
@@ -192,6 +193,16 @@ const CORE_041 = (G, ctx, index) => {
       totalHealth: newHP
     };
   }
+};
+
+/**
+ * <strong>Warcry:</strong> Give a friendly minion <strong>Onslaught</strong>.
+ */
+const CORE_110 = (G, ctx, cardId) => {
+  G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
+  G.boards[ctx.currentPlayer].forEach(slot => {
+    slot.canReceiveOnslaught = true;
+  });
 };
 
 /**

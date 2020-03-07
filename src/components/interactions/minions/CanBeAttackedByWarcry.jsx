@@ -5,12 +5,12 @@ import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 
 export default function CanBeAttackedByWarcry({ moves, index }) {
-  const { castTargetedSpell } = moves;
+  const { castTargetedWarcry } = moves;
   return (
     <Component
       data-file="interactions/minions/CanBeAttackedByWarcry"
       onClick={() =>
-        castTargetedSpell(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[1], index)
+        castTargetedWarcry(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[1], index)
       }
     />
   );

@@ -4,19 +4,26 @@ import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 
-export default function CanReceiveOnslaught({ moves, index }) {
-  const { castTargetedSpell } = moves;
+export default function CanReceiveOnslaught({ G, ctx, moves, index }) {
+  const { castTargetedSpell, castTargetedWarcry } = moves;
+
+  function handleClick() {
+    return G.warcryObject[ctx.currentPlayer] !== null
+      ? castTargetedWarcry(TARGET_CONTEXT[1], WARCRY_TARGET_CONTEXT[1], index)
+      : castTargetedSpell(TARGET_CONTEXT[1], WARCRY_TARGET_CONTEXT[1], index);
+  }
+
   return (
     <Component
       data-file="interactions/minions/CanReceiveOnslaught"
-      onClick={() =>
-        castTargetedSpell(TARGET_CONTEXT[1], WARCRY_TARGET_CONTEXT[1], index)
-      }
+      onClick={() => handleClick()}
     />
   );
 }
 
 CanReceiveOnslaught.propTypes = {
+  G: PropTypes.object,
+  ctx: PropTypes.object,
   moves: PropTypes.object,
   index: PropTypes.number
 };

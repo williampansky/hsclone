@@ -14,9 +14,10 @@ import boards from 'lib/state/boards';
  * @param {string} targetIdx Target index if targetCtx is MINION
  */
 const castTargetedWarcry = (G, ctx, playerCtx, targetCtx, targetIdx) => {
-  const { warcryObject } = G;
+  const { warcryObject, turnOrder } = G;
   const { currentPlayer } = ctx;
   const { id, amount } = warcryObject[currentPlayer];
+  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
   const attack = attackWithWarcryEffect;
   const buff = buffWithWarcryEffect;
   const heal = healWithWarcryEffect;
@@ -28,32 +29,48 @@ const castTargetedWarcry = (G, ctx, playerCtx, targetCtx, targetIdx) => {
     case 'CORE_016':  attack(G, ctx, targetCtx, targetIdx, amount); break;
     case 'CORE_021':  buff(G, ctx, targetIdx, amount); break;
     case 'CORE_036':  attack(G, ctx, targetCtx, targetIdx, amount); break;
+    case 'CORE_110':  G.boards[currentPlayer][targetIdx].hasOnslaught = true; break;
     case 'CORE_112':  attack(G, ctx, targetCtx, targetIdx, amount); break;
     default:          return;
   }
 
-  // clear warcryObject
+  // clear warcry object and card states
   G.warcryObject[currentPlayer] = null;
+  G.selectedCardType[currentPlayer] = null;
+  G.selectedCardSpellType[currentPlayer] = null;
+  G.selectedCardSpellContext[currentPlayer] = null;
 
-  // disable all playerCanBeAttacked
-  playerCanBeAttacked.disable(G, '0');
-  playerCanBeAttacked.disable(G, '1');
+  G.boards[currentPlayer].forEach(slot => {
+    slot.canBeAttackedByMinion = false;
+    slot.canBeAttackedByPlayer = false;
+    slot.canBeAttackedBySpell = false;
+    slot.canBeAttackedByWarcry = false;
+    slot.canBeBuffed = false;
+    slot.canBeHealed = false;
+    slot.canBeDebuffed = false;
+    slot.canBeExpired = false;
+    slot.canBeReturned = false;
+    slot.canBeSacrificed = false;
+    slot.canBeStolen = false;
+    slot.canReceiveEnergyShield = false;
+    slot.canReceiveOnslaught = false;
+  });
 
-  // disable all playerCanBeHealed
-  playerCanBeHealed.disable(G, '0');
-  playerCanBeHealed.disable(G, '1');
-
-  // disable all can be attacked
-  boards.disableAllCanBeAttacked(G, '0');
-  boards.disableAllCanBeAttacked(G, '1');
-
-  // disable all can be attacked
-  boards.disableAllCanBeBuffed(G, '0');
-  boards.disableAllCanBeBuffed(G, '1');
-
-  // disable all canBeHealed
-  boards.disableAllCanBeHealed(G, '0');
-  boards.disableAllCanBeHealed(G, '1');
+  G.boards[otherPlayer].forEach(slot => {
+    slot.canBeAttackedByMinion = false;
+    slot.canBeAttackedByPlayer = false;
+    slot.canBeAttackedBySpell = false;
+    slot.canBeAttackedByWarcry = false;
+    slot.canBeBuffed = false;
+    slot.canBeHealed = false;
+    slot.canBeDebuffed = false;
+    slot.canBeExpired = false;
+    slot.canBeReturned = false;
+    slot.canBeSacrificed = false;
+    slot.canBeStolen = false;
+    slot.canReceiveEnergyShield = false;
+    slot.canReceiveOnslaught = false;
+  });
 };
 
 export default castTargetedWarcry;

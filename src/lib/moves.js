@@ -125,6 +125,7 @@ export default {
   selectCard: {
     client: false,
     move: (G, ctx, cardObject, index) => {
+      deselectCard(G, ctx);
       return selectCard(G, ctx, cardObject, index);
     }
   },

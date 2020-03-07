@@ -72,7 +72,7 @@ export default function YourMinionInteractions({
   }
 
   if (canReceiveOnslaught) {
-    return <CanReceiveOnslaught moves={moves} index={index} />;
+    return <CanReceiveOnslaught G={G} ctx={ctx} moves={moves} index={index} />;
   }
 
   if (canAttack && !isAttacking) {

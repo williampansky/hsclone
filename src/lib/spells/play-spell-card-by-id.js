@@ -16,6 +16,7 @@ const playSpellByCardId = (G, ctx, cardId, target = null) => {
     case 'CORE_065':
     case 'CORE_067':
     case 'CORE_068':
+    case 'CORE_070':
     case 'CORE_072':
     case 'CORE_079':
     case 'CORE_084':
@@ -26,6 +27,7 @@ const playSpellByCardId = (G, ctx, cardId, target = null) => {
     case 'CORE_098':
     case 'CORE_102':
     case 'CORE_104':
+    case 'CORE_109':
     case 'CORE_111':
     case 'CORE_121':
     case 'CORE_124':

@@ -248,6 +248,12 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      case 'CORE_109':
+        G.boards[otherPlayer].forEach(slot => {
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
+        });
+        break;
+
       case 'CORE_113':
         G.boards[currentPlayer].forEach(slot => {
           if (slot.minionData.race === RACE[3]) slot.canBeSacrificed = true;

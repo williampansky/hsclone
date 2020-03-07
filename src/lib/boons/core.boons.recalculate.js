@@ -11,6 +11,17 @@ const recalculateCoreBoon = (G, player, cardId, index) => {
   // prettier-ignore
   switch (cardId) {
     case 'CORE_003':  return CORE_003(G, player, cardId);
+
+    // Provide adjacent minions with +2 Attack.
+    case 'CORE_108':
+      G.boards[player].forEach((slot, i) => {
+        if (i === index - 1 || i === index + 1 || i === index) {
+          slot.currentAttack = slot.minionData.attack;
+          slot.totalAttack = slot.minionData.attack;
+        }
+      });
+      break;
+    
     case 'CORE_019':  return CORE_019(G, player, cardId);
     default:          break;
   }

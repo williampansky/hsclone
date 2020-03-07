@@ -48,7 +48,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "unit": "jest",
-    "format": "node -r esm formatJson.js",
+    "airtable": "node -r esm formatJson.js",
     "eject": "react-scripts eject"
   }
 }
