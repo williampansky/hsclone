@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import TYPE from 'enums/type.enums';
 import SPELLTYPE from 'enums/spellType.enums';
 
-import MINION_CAN_BE_ATTACKED_BY_SPELL from 'components/interactions/minions/MINION_CAN_BE_ATTACKED_BY_SPELL';
-import MINION_CAN_BE_ATTACKED from 'components/interactions/minions/MINION_CAN_BE_ATTACKED';
+import CanBeAttackedBySpell from 'components/interactions/minions/CanBeAttackedBySpell';
+import CanBeAttacked from 'components/interactions/minions/CanBeAttacked';
 import MINION_CAN_BE_HEALED from 'components/interactions/minions/MINION_CAN_BE_HEALED';
 
 export default function TheirMinionInteractions({
@@ -46,19 +46,10 @@ export default function TheirMinionInteractions({
     canBeAttacked && cardType === TYPE[3] && cardSpellType === SPELLTYPE[2];
 
   if (canBeAttackedBySpell)
-    return (
-      <MINION_CAN_BE_ATTACKED_BY_SPELL
-        G={G}
-        ctx={ctx}
-        moves={moves}
-        index={index}
-      />
-    );
+    return <CanBeAttackedBySpell G={G} ctx={ctx} moves={moves} index={index} />;
 
   if (canBeAttacked)
-    return (
-      <MINION_CAN_BE_ATTACKED G={G} ctx={ctx} moves={moves} index={index} />
-    );
+    return <CanBeAttacked G={G} ctx={ctx} moves={moves} index={index} />;
 
   return null;
 }

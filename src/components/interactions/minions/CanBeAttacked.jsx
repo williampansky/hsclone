@@ -6,7 +6,7 @@ import TARGET_CONTEXT from 'enums/target-context.enum';
 import TYPE from 'enums/type.enums';
 import SPELLTYPE from 'enums/spellType.enums';
 
-export default function MINION_CAN_BE_ATTACKED({ G, ctx, moves, index }) {
+export default function CanBeAttacked({ G, ctx, moves, index }) {
   const { playerIsAttacking, warcryObject, turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
@@ -26,13 +26,13 @@ export default function MINION_CAN_BE_ATTACKED({ G, ctx, moves, index }) {
 
   return (
     <Component
-      data-file="interactions/minions/MINION_CAN_BE_ATTACKED"
+      data-file="interactions/minions/CanBeAttacked"
       onClick={() => handleClick()}
     />
   );
 }
 
-MINION_CAN_BE_ATTACKED.propTypes = {
+CanBeAttacked.propTypes = {
   G: PropTypes.object,
   ctx: PropTypes.object,
   moves: PropTypes.object,

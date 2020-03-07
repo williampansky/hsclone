@@ -41,7 +41,7 @@ const attackPlayerWithPlayer = (G, ctx) => {
   // disable all playerCanBeAttacked
   G.playerCanBeAttacked = { '0': false, '1': false };
 
-  // then disable opponent minions canBeAttacked
+  // then disable opponent minions can be attacked
   boards.disableAllCanBeAttacked(G, otherPlayer);
 
   // destroy weapon if health reaches zero

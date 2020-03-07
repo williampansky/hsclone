@@ -50,11 +50,11 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   playerCanBeHealed.disable(G, '0');
   playerCanBeHealed.disable(G, '1');
 
-  // disable all canBeAttacked
+  // disable all can be attacked
   boards.disableAllCanBeAttacked(G, '0');
   boards.disableAllCanBeAttacked(G, '1');
 
-  // disable all canBeAttacked
+  // disable all can be attacked
   boards.disableAllCanBeBuffed(G, '0');
   boards.disableAllCanBeBuffed(G, '1');
 

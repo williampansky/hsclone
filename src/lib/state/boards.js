@@ -42,7 +42,7 @@ const boards = {
   enableCanAttack: (G, player, index) => _eMCA(G, player, index),
   enableAllCanAttack: (G, player) => _eAMCA(G, player),
   
-  // canBeAttacked
+  // can be attacked
   disableCanBeAttacked: (G, player, index) => _dMCBA(G, player, index),
   disableAllCanBeAttacked: (G, player) => _dAMCBA(G, player),
   enableCanBeAttacked: (G, player, index) => _eMCBA(G, player, index),

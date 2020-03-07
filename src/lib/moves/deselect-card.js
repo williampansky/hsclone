@@ -15,16 +15,22 @@ const deselectCard = (G, ctx) => {
   selectedCardIndex.reset(G, currentPlayer);
   selectedCardObject.reset(G, currentPlayer);
 
-  G.boards[otherPlayer].forEach((slot, i) => {
-    slot.canBeAttacked = false;
+  G.boards[otherPlayer].forEach(slot => {
+    slot.canBeAttackedByMinion = false;
+    slot.canBeAttackedByPlayer = false;
+    slot.canBeAttackedBySpell = false;
+    slot.canBeAttackedByWarcry = false;
   });
 
   G.selectedCardType[currentPlayer] = null;
   G.selectedCardSpellType[currentPlayer] = null;
   G.selectedCardSpellContext[currentPlayer] = null;
 
-  G.boards[currentPlayer].forEach((slot, i) => {
-    slot.canBeAttacked = false;
+  G.boards[currentPlayer].forEach(slot => {
+    slot.canBeAttackedByMinion = false;
+    slot.canBeAttackedByPlayer = false;
+    slot.canBeAttackedBySpell = false;
+    slot.canBeAttackedByWarcry = false;
     slot.canBeBuffed = false;
     slot.canBeHealed = false;
     slot.canbeDebuffed = false;

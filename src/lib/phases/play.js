@@ -19,7 +19,7 @@ const onBegin = (G, ctx) => {
   drawCardAtStartOfTurn(G, ctx);
 
   G.boards[currentPlayer].forEach((slot, i) => {
-    // disable canBeAttacked on your board minions
+    // disable can be attacked on your board minions
     boards.disableCanBeAttacked(G, currentPlayer, i);
 
     // enable canAttack on your board minions
@@ -92,7 +92,10 @@ const onEnd = (G, ctx) => {
     G.boards['0'][i] = {
       ...slot,
       canAttack: false,
-      canBeAttacked: false,
+      canBeAttackedByMinion: false,
+      canBeAttackedByPlayer: false,
+      canBeAttackedBySpell: false,
+      canBeAttackedByWarcry: false,
       canBeBuffed: false,
       canBeHealed: false
     };
@@ -103,7 +106,10 @@ const onEnd = (G, ctx) => {
     G.boards['1'][i] = {
       ...slot,
       canAttack: false,
-      canBeAttacked: false,
+      canBeAttackedByMinion: false,
+      canBeAttackedByPlayer: false,
+      canBeAttackedBySpell: false,
+      canBeAttackedByWarcry: false,
       canBeBuffed: false,
       canBeHealed: false
     };

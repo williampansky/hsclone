@@ -14,13 +14,16 @@ const attackMinion = (G, ctx, index) => {
 
   const ATTACKING_MINION = selectedMinionObject[currentPlayer];
   const ATTACKING_MINION_INDEX = selectedMinionIndex[currentPlayer];
+
   // eject if ATTACKING_MINION can't attack
   if (ATTACKING_MINION && !ATTACKING_MINION.canAttack) return;
 
   const MINION_BEING_ATTACKED = G.boards[otherPlayer][index];
   const MINION_BEING_ATTACKED_INDEX = index;
+
   // eject if MINION_BEING_ATTACKED can't be attacked
-  if (MINION_BEING_ATTACKED && !MINION_BEING_ATTACKED.canBeAttacked) return;
+  if (MINION_BEING_ATTACKED && !MINION_BEING_ATTACKED.canBeAttackedByMinion)
+    return;
 
   // Subtract `ATTACKING_MINION.currentAttack`
   // from MINION_BEING_ATTACKED_INDEX's currentHealth value

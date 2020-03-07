@@ -8,7 +8,10 @@ const createBoardSlotObject = cardId => {
 
   return {
     canAttack: false,
-    canBeAttacked: false,
+    canBeAttackedByMinion: false,
+    canBeAttackedByPlayer: false,
+    canBeAttackedBySpell: false,
+    canBeAttackedByWarcry: false,
     canBeBuffed: false,
     canBeHealed: false,
     canbeDebuffed: false,

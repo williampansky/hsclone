@@ -32,10 +32,11 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
 
   if (type === TYPE[3] && spellType === SPELLTYPE[2]) {
     switch (id) {
+      // Deal 1 damage to a selected target.
       case 'CORE_044':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttacked = true;
+          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
         });
         break;
 
@@ -52,24 +53,27 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      // Choose an enemy minion; deal 4 damage to it and 1 damage to all other enemies.
       case 'CORE_050':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttacked = true;
+          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
         });
         break;
 
+      // Deal 5 damage and then draw a card.
       case 'CORE_051':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttacked = true;
+          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
         });
         break;
 
+      // Attack something for 2 damage.
       case 'CORE_053':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttacked = true;
+          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
         });
         break;
 
@@ -79,30 +83,34 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      // If you control a Creature, deal 5 damage to a target—else, deal 3 damage.
       case 'CORE_058':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttacked = true;
+          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
         });
         break;
 
+      // Deal 3 damage to a character and Disable it.
       case 'CORE_066':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttacked = true;
+          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
         });
         break;
 
+      // Deal 6 targeted damage.
       case 'CORE_069':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttacked = true;
+          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
         });
         break;
 
+      // Transform a minion into a 1/1 Creature.
       case 'CORE_070':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttacked = true;
+          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
         });
         break;
 
@@ -137,15 +145,17 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      // Attack something for 3 damage and then draw a card.
       case 'CORE_080':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttacked = true;
+          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
         });
         break;
 
+      // Deal 2 targeted damage.
       case 'CORE_083':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttacked = true;
+          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
         });
         break;
 
@@ -161,17 +171,19 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      // Kill an enemy minion that has 3 or less Attack.
       case 'CORE_089':
         G.boards[otherPlayer].forEach(slot => {
           if (!slot.isConcealed && slot.currentAttack <= 3)
-            slot.canbeAttacked = true;
+            slot.canbeAttackedBySpell = true;
         });
         break;
 
+      // Kill an enemy minion that has 5 or more Attack.
       case 'CORE_090':
         G.boards[otherPlayer].forEach(slot => {
           if (!slot.isConcealed && slot.currentAttack >= 5)
-            slot.canbeAttacked = true;
+            slot.canbeAttackedBySpell = true;
         });
         break;
 
@@ -181,10 +193,11 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      // Deal 2 damage to one of your enemy's undamaged minions.
       case 'CORE_093':
         G.boards[otherPlayer].forEach(slot => {
           if (!slot.isConcealed && slot.totalHealth === slot.currentHealth)
-            slot.canbeAttacked = true;
+            slot.canbeAttackedSpell = true;
         });
         break;
 
@@ -194,16 +207,18 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      // Deal 1 targeted damage and then draw a card.
       case 'CORE_097':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canBeAttacked = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
+      // Kill an any enemy minion.
       case 'CORE_101':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canBeAttacked = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -213,10 +228,11 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      // Deal 1 damage to an enemy character and Disable it.
       case 'CORE_105':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canBeAttacked = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -244,29 +260,33 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      // Deal 1 damage to a minion. If that kills it, draw a card.
       case 'CORE_115':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canBeAttacked = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
+      // Deal 4 damage. Discard a random card.
       case 'CORE_116':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canBeAttacked = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
+      // Deal 2 damage and heal yourself for that amount.
       case 'CORE_119':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canBeAttacked = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
+      // Blast a minion for 4 damage.
       case 'CORE_120':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canBeAttacked = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -276,9 +296,11 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      // Obliterate an already damaged minion.
       case 'CORE_126':
         G.boards[otherPlayer].forEach(slot => {
-          if (slot.totalHealth > slot.currentHealth) slot.canBeAttacked = true;
+          if (slot.totalHealth > slot.currentHealth)
+            slot.canBeAttackedBySpell = true;
         });
         break;
 

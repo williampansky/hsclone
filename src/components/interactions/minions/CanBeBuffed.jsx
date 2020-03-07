@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 
-export default function MINION_CAN_BE_BUFFED({ G, ctx, moves, index }) {
+export default function CanBeBuffed({ G, ctx, moves, index }) {
   const { selectedCardObject, warcryObject } = G;
   const { currentPlayer } = ctx;
   const { castTargetedSpell, castTargetedWarcry } = moves;
@@ -26,13 +26,13 @@ export default function MINION_CAN_BE_BUFFED({ G, ctx, moves, index }) {
 
   return (
     <Component
-      data-file="interactions/minions/MINION_CAN_BE_BUFFED"
+      data-file="interactions/minions/CanBeBuffed"
       onClick={() => handleClick()}
     />
   );
 }
 
-MINION_CAN_BE_BUFFED.propTypes = {
+CanBeBuffed.propTypes = {
   G: PropTypes.object,
   ctx: PropTypes.object,
   moves: PropTypes.object,

@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default function MINION_CAN_ATTACK({ moves, data, index }) {
+export default function CanAttack({ moves, data, index }) {
   const { selectMinion } = moves;
 
   return (
     <Component
-      data-file="interactions/minions/MINION_CAN_ATTACK"
+      data-file="interactions/minions/CanAttack"
       onClick={() => selectMinion(data, index)}
     />
   );
 }
 
-MINION_CAN_ATTACK.propTypes = {
+CanAttack.propTypes = {
   moves: PropTypes.object,
   data: PropTypes.object,
   index: PropTypes.number

@@ -4,16 +4,11 @@ import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 
-export default function MINION_CAN_BE_ATTACKED_BY_SPELL({
-  G,
-  ctx,
-  moves,
-  index
-}) {
+export default function CanBeAttackedBySpell({ G, ctx, moves, index }) {
   const { castTargetedSpell } = moves;
   return (
     <Component
-      data-file="interactions/minions/MINION_CAN_BE_ATTACKED_BY_SPELL"
+      data-file="interactions/minions/CanBeAttackedBySpell"
       onClick={() =>
         castTargetedSpell(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[1], index)
       }
@@ -21,7 +16,7 @@ export default function MINION_CAN_BE_ATTACKED_BY_SPELL({
   );
 }
 
-MINION_CAN_BE_ATTACKED_BY_SPELL.propTypes = {
+CanBeAttackedBySpell.propTypes = {
   G: PropTypes.object,
   ctx: PropTypes.object,
   moves: PropTypes.object,

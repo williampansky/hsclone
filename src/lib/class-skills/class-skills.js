@@ -78,7 +78,7 @@ export const initTargetedSpell = (G, ctx) => {
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
   G.spellObject[currentPlayer] = createSpellObject('GAME_010');
   G.playerCanBeAttacked[otherPlayer] = true;
-  G.boards[otherPlayer].forEach(slot => (slot.canBeAttacked = true));
+  G.boards[otherPlayer].forEach(slot => (slot.canBeAttackedBySpell = true));
 };
 
 /**

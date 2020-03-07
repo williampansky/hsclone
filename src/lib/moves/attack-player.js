@@ -48,7 +48,7 @@ const attackPlayer = (G, ctx) => {
   // reset currentPlayer's selectedMinionIndex & selectedMinionObject value
   selectMinion(G, ctx);
 
-  // then disable opponent minions canBeAttacked
+  // then disable opponent minions can be attacked
   boards.disableAllCanBeAttacked(G, otherPlayer);
 
   // disable all playerCanBeAttacked

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MINION_CAN_ATTACK from 'components/interactions/minions/MINION_CAN_ATTACK';
-import MINION_CAN_BE_BUFFED from 'components/interactions/minions/MINION_CAN_BE_BUFFED';
+import CanAttack from 'components/interactions/minions/CanAttack';
+import CanBeBuffed from 'components/interactions/minions/CanBeBuffed';
 import MINION_CAN_BE_HEALED from 'components/interactions/minions/MINION_CAN_BE_HEALED';
 import MINION_IS_ATTACKING from 'components/interactions/minions/MINION_IS_ATTACKING';
 import MINION_CAN_BE_SACRIFICED from 'components/interactions/minions/MINION_CAN_BE_SACRIFICED';
@@ -37,7 +37,7 @@ export default function YourMinionInteractions({
     return <MINION_CAN_BE_HEALED G={G} ctx={ctx} moves={moves} index={index} />;
 
   if (canBeBuffed)
-    return <MINION_CAN_BE_BUFFED G={G} ctx={ctx} moves={moves} index={index} />;
+    return <CanBeBuffed G={G} ctx={ctx} moves={moves} index={index} />;
 
   if (canbeSacrificed)
     return (
@@ -45,7 +45,7 @@ export default function YourMinionInteractions({
     );
 
   if (canAttack && !isAttacking)
-    return <MINION_CAN_ATTACK data={data} moves={moves} index={index} />;
+    return <CanAttack data={data} moves={moves} index={index} />;
 
   if (canAttack && isAttacking) return <MINION_IS_ATTACKING moves={moves} />;
 
