@@ -1,22 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
-import TARGET_CONTEXT from 'enums/target-context.enum';
 
-export default function CanBeAttackedBySpell({ moves, index }) {
-  const { castTargetedSpell } = moves;
+export default function CanBeAttackedByPlayer({ moves, index }) {
+  const { attackMinionWithPlayer } = moves;
   return (
     <Component
-      data-file="interactions/minions/CanBeAttackedBySpell"
-      onClick={() =>
-        castTargetedSpell(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[1], index)
-      }
+      data-file="interactions/minions/CanBeAttackedByPlayer"
+      onClick={() => attackMinionWithPlayer(index)}
     />
   );
 }
 
-CanBeAttackedBySpell.propTypes = {
+CanBeAttackedByPlayer.propTypes = {
   moves: PropTypes.object,
   index: PropTypes.number
 };

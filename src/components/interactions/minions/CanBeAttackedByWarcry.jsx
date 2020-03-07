@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 
-export default function CanBeAttackedBySpell({ moves, index }) {
+export default function CanBeAttackedByWarcry({ moves, index }) {
   const { castTargetedSpell } = moves;
   return (
     <Component
-      data-file="interactions/minions/CanBeAttackedBySpell"
+      data-file="interactions/minions/CanBeAttackedByWarcry"
       onClick={() =>
         castTargetedSpell(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[1], index)
       }
@@ -16,7 +16,7 @@ export default function CanBeAttackedBySpell({ moves, index }) {
   );
 }
 
-CanBeAttackedBySpell.propTypes = {
+CanBeAttackedByWarcry.propTypes = {
   moves: PropTypes.object,
   index: PropTypes.number
 };

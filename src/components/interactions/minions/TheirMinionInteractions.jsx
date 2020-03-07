@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CanBeAttackedByMinion from 'components/interactions/minions/CanBeAttackedByMinion';
+import CanBeAttackedByPlayer from 'components/interactions/minions/CanBeAttackedByPlayer';
 import CanBeAttackedBySpell from 'components/interactions/minions/CanBeAttackedBySpell';
+import CanBeAttackedByWarcry from 'components/interactions/minions/CanBeAttackedByWarcry';
 
 export default function TheirMinionInteractions({
   G,
@@ -32,8 +35,14 @@ export default function TheirMinionInteractions({
   isDisabled,
   willExpire
 }) {
+  if (canBeAttackedByMinion)
+    return <CanBeAttackedByMinion moves={moves} index={index} />;
+  if (canBeAttackedByPlayer)
+    return <CanBeAttackedByPlayer moves={moves} index={index} />;
   if (canBeAttackedBySpell)
-    return <CanBeAttackedBySpell G={G} ctx={ctx} moves={moves} index={index} />;
+    return <CanBeAttackedBySpell moves={moves} index={index} />;
+  if (canBeAttackedByWarcry)
+    return <CanBeAttackedByWarcry moves={moves} index={index} />;
 
   return null;
 }
