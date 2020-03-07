@@ -33,11 +33,11 @@ const deselectCard = (G, ctx) => {
     slot.canBeAttackedByWarcry = false;
     slot.canBeBuffed = false;
     slot.canBeHealed = false;
-    slot.canbeDebuffed = false;
-    slot.canbeExpired = false;
-    slot.canbeReturned = false;
-    slot.canbeSacrificed = false;
-    slot.canbeStolen = false;
+    slot.canBeDebuffed = false;
+    slot.canBeExpired = false;
+    slot.canBeReturned = false;
+    slot.canBeSacrificed = false;
+    slot.canBeStolen = false;
     slot.canReceiveEnergyShield = false;
     slot.canReceiveOnslaught = false;
   });

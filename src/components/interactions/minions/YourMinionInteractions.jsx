@@ -8,6 +8,10 @@ import CanBeHealed from 'components/interactions/minions/CanBeHealed';
 import CanBeSacrificed from 'components/interactions/minions/CanBeSacrificed';
 import CanBeExpired from 'components/interactions/minions/CanBeExpired';
 import IsAttacking from 'components/interactions/minions/IsAttacking';
+import CanBeReturned from 'components/interactions/minions/CanBeReturned';
+import CanBeStolen from 'components/interactions/minions/CanBeStolen';
+import CanReceiveEnergyShield from 'components/interactions/minions/CanReceiveEnergyShield';
+import CanReceiveOnslaught from 'components/interactions/minions/CanReceiveOnslaught';
 
 export default function YourMinionInteractions({
   G,
@@ -16,17 +20,13 @@ export default function YourMinionInteractions({
   data,
   index,
   canAttack,
-  canBeAttackedByMinion,
-  canBeAttackedByPlayer,
-  canBeAttackedBySpell,
-  canBeAttackedByWarcry,
   canBeBuffed,
   canBeHealed,
-  canbeDebuffed,
-  canbeExpired,
-  canbeReturned,
-  canbeSacrificed,
-  canbeStolen,
+  canBeDebuffed,
+  canBeExpired,
+  canBeReturned,
+  canBeSacrificed,
+  canBeStolen,
   canReceiveEnergyShield,
   canReceiveOnslaught,
   hasBoon,
@@ -39,22 +39,49 @@ export default function YourMinionInteractions({
   isDisabled,
   willExpire
 }) {
-  if (canBeHealed)
+  if (canBeHealed) {
     return <CanBeHealed G={G} ctx={ctx} moves={moves} index={index} />;
+  }
 
-  if (canBeBuffed)
+  if (canBeBuffed) {
     return <CanBeBuffed G={G} ctx={ctx} moves={moves} index={index} />;
+  }
 
-  if (canbeDebuffed) return <CanBeDebuffed moves={moves} index={index} />;
+  if (canBeDebuffed) {
+    return <CanBeDebuffed moves={moves} index={index} />;
+  }
 
-  if (canbeExpired) return <CanBeExpired moves={moves} index={index} />;
+  if (canBeExpired) {
+    return <CanBeExpired moves={moves} index={index} />;
+  }
 
-  if (canbeSacrificed) return <CanBeSacrificed moves={moves} index={index} />;
+  if (canBeReturned) {
+    return <CanBeReturned moves={moves} index={index} />;
+  }
 
-  if (canAttack && !isAttacking)
+  if (canBeSacrificed) {
+    return <CanBeSacrificed moves={moves} index={index} />;
+  }
+
+  if (canBeStolen) {
+    return <CanBeStolen moves={moves} index={index} />;
+  }
+
+  if (canReceiveEnergyShield) {
+    return <CanReceiveEnergyShield moves={moves} index={index} />;
+  }
+
+  if (canReceiveOnslaught) {
+    return <CanReceiveOnslaught moves={moves} index={index} />;
+  }
+
+  if (canAttack && !isAttacking) {
     return <CanAttack data={data} moves={moves} index={index} />;
+  }
 
-  if (canAttack && isAttacking) return <IsAttacking moves={moves} />;
+  if (canAttack && isAttacking) {
+    return <IsAttacking moves={moves} />;
+  }
 
   return null;
 }
@@ -72,11 +99,11 @@ YourMinionInteractions.propTypes = {
   canBeAttackedByWarcry: PropTypes.bool,
   canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
-  canbeDebuffed: PropTypes.bool,
-  canbeExpired: PropTypes.bool,
-  canbeReturned: PropTypes.bool,
-  canbeSacrificed: PropTypes.bool,
-  canbeStolen: PropTypes.bool,
+  canBeDebuffed: PropTypes.bool,
+  canBeExpired: PropTypes.bool,
+  canBeReturned: PropTypes.bool,
+  canBeSacrificed: PropTypes.bool,
+  canBeStolen: PropTypes.bool,
   canReceiveEnergyShield: PropTypes.bool,
   canReceiveOnslaught: PropTypes.bool,
   hasBoon: PropTypes.bool,

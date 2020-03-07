@@ -36,7 +36,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       case 'CORE_044':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -57,7 +57,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       case 'CORE_050':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -65,7 +65,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       case 'CORE_051':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -73,13 +73,13 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       case 'CORE_053':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
       case 'CORE_056':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeDebuffed = true;
+          if (!slot.isConcealed) slot.canBeDebuffed = true;
         });
         break;
 
@@ -87,7 +87,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       case 'CORE_058':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -95,7 +95,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       case 'CORE_066':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -103,20 +103,20 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       case 'CORE_069':
         playerCanBeAttacked.enable(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
       // Transform a minion into a 1/1 Creature.
       case 'CORE_070':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
       case 'CORE_073':
         G.boards[currentPlayer].forEach(slot => {
-          slot.canbeDebuffed = true;
+          slot.canBeDebuffed = true;
         });
         break;
 
@@ -128,7 +128,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
 
       case 'CORE_075':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeDebuffed = true;
+          if (!slot.isConcealed) slot.canBeDebuffed = true;
         });
         break;
 
@@ -148,14 +148,14 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       // Attack something for 3 damage and then draw a card.
       case 'CORE_080':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
       // Deal 2 targeted damage.
       case 'CORE_083':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeAttackedBySpell = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -175,7 +175,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       case 'CORE_089':
         G.boards[otherPlayer].forEach(slot => {
           if (!slot.isConcealed && slot.currentAttack <= 3)
-            slot.canbeAttackedBySpell = true;
+            slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -183,13 +183,13 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       case 'CORE_090':
         G.boards[otherPlayer].forEach(slot => {
           if (!slot.isConcealed && slot.currentAttack >= 5)
-            slot.canbeAttackedBySpell = true;
+            slot.canBeAttackedBySpell = true;
         });
         break;
 
       case 'CORE_092':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeStolen = true;
+          if (!slot.isConcealed) slot.canBeStolen = true;
         });
         break;
 
@@ -197,13 +197,13 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       case 'CORE_093':
         G.boards[otherPlayer].forEach(slot => {
           if (!slot.isConcealed && slot.totalHealth === slot.currentHealth)
-            slot.canbeAttackedSpell = true;
+            slot.canBeAttackedSpell = true;
         });
         break;
 
       case 'CORE_096':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canbeReturned = true;
+          if (!slot.isConcealed) slot.canBeReturned = true;
         });
         break;
 
@@ -250,13 +250,13 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
 
       case 'CORE_113':
         G.boards[currentPlayer].forEach(slot => {
-          if (slot.minionData.race === RACE[3]) slot.canbeSacrificed = true;
+          if (slot.minionData.race === RACE[3]) slot.canBeSacrificed = true;
         });
         break;
 
       case 'CORE_114':
         G.boards[otherPlayer].forEach(slot => {
-          slot.canbeExpired = true;
+          slot.canBeExpired = true;
         });
         break;
 

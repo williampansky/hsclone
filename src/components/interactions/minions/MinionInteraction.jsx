@@ -18,11 +18,11 @@ export default function MinionInteraction({
   canBeAttackedByWarcry,
   canBeBuffed,
   canBeHealed,
-  canbeDebuffed,
-  canbeExpired,
-  canbeReturned,
-  canbeSacrificed,
-  canbeStolen,
+  canBeDebuffed,
+  canBeExpired,
+  canBeReturned,
+  canBeSacrificed,
+  canBeStolen,
   canReceiveEnergyShield,
   canReceiveOnslaught,
   hasBoon,
@@ -52,12 +52,12 @@ export default function MinionInteraction({
           canBeAttackedBySpell={canBeAttackedBySpell}
           canBeAttackedByWarcry={canBeAttackedByWarcry}
           canBeBuffed={canBeBuffed}
-          canbeDebuffed={canbeDebuffed}
-          canbeExpired={canbeExpired}
+          canBeDebuffed={canBeDebuffed}
+          canBeExpired={canBeExpired}
           canBeHealed={canBeHealed}
-          canbeReturned={canbeReturned}
-          canbeSacrificed={canbeSacrificed}
-          canbeStolen={canbeStolen}
+          canBeReturned={canBeReturned}
+          canBeSacrificed={canBeSacrificed}
+          canBeStolen={canBeStolen}
           canReceiveEnergyShield={canReceiveEnergyShield}
           canReceiveOnslaught={canReceiveOnslaught}
           hasBoon={hasBoon}
@@ -86,12 +86,12 @@ export default function MinionInteraction({
           canBeAttackedBySpell={canBeAttackedBySpell}
           canBeAttackedByWarcry={canBeAttackedByWarcry}
           canBeBuffed={canBeBuffed}
-          canbeDebuffed={canbeDebuffed}
-          canbeExpired={canbeExpired}
+          canBeDebuffed={canBeDebuffed}
+          canBeExpired={canBeExpired}
           canBeHealed={canBeHealed}
-          canbeReturned={canbeReturned}
-          canbeSacrificed={canbeSacrificed}
-          canbeStolen={canbeStolen}
+          canBeReturned={canBeReturned}
+          canBeSacrificed={canBeSacrificed}
+          canBeStolen={canBeStolen}
           canReceiveEnergyShield={canReceiveEnergyShield}
           canReceiveOnslaught={canReceiveOnslaught}
           hasBoon={hasBoon}
@@ -124,11 +124,11 @@ MinionInteraction.propTypes = {
   canBeAttackedByWarcry: PropTypes.bool,
   canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
-  canbeDebuffed: PropTypes.bool,
-  canbeExpired: PropTypes.bool,
-  canbeReturned: PropTypes.bool,
-  canbeSacrificed: PropTypes.bool,
-  canbeStolen: PropTypes.bool,
+  canBeDebuffed: PropTypes.bool,
+  canBeExpired: PropTypes.bool,
+  canBeReturned: PropTypes.bool,
+  canBeSacrificed: PropTypes.bool,
+  canBeStolen: PropTypes.bool,
   canReceiveEnergyShield: PropTypes.bool,
   canReceiveOnslaught: PropTypes.bool,
   hasBoon: PropTypes.bool,

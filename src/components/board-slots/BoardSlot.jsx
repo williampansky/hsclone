@@ -28,12 +28,12 @@ export default function BoardSlot({
     canBeAttackedBySpell,
     canBeAttackedByWarcry,
     canBeBuffed,
-    canbeDebuffed,
-    canbeExpired,
+    canBeDebuffed,
+    canBeExpired,
     canBeHealed,
-    canbeReturned,
-    canbeSacrificed,
-    canbeStolen,
+    canBeReturned,
+    canBeSacrificed,
+    canBeStolen,
     canReceiveEnergyShield,
     canReceiveOnslaught,
     currentAttack,
@@ -81,11 +81,11 @@ export default function BoardSlot({
           canBeAttackedByWarcry={canBeAttackedByWarcry}
           canBeBuffed={canBeBuffed}
           canBeHealed={canBeHealed}
-          canbeDebuffed={canbeDebuffed}
-          canbeExpired={canbeExpired}
-          canbeReturned={canbeReturned}
-          canbeSacrificed={canbeSacrificed}
-          canbeStolen={canbeStolen}
+          canBeDebuffed={canBeDebuffed}
+          canBeExpired={canBeExpired}
+          canBeReturned={canBeReturned}
+          canBeSacrificed={canBeSacrificed}
+          canBeStolen={canBeStolen}
           canReceiveEnergyShield={canReceiveEnergyShield}
           canReceiveOnslaught={canReceiveOnslaught}
           hasBoon={hasBoon}
@@ -136,11 +136,11 @@ BoardSlot.propTypes = {
   canBeAttackedByWarcry: PropTypes.bool,
   canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
-  canbeDebuffed: PropTypes.bool,
-  canbeExpired: PropTypes.bool,
-  canbeReturned: PropTypes.bool,
-  canbeSacrificed: PropTypes.bool,
-  canbeStolen: PropTypes.bool,
+  canBeDebuffed: PropTypes.bool,
+  canBeExpired: PropTypes.bool,
+  canBeReturned: PropTypes.bool,
+  canBeSacrificed: PropTypes.bool,
+  canBeStolen: PropTypes.bool,
   canReceiveEnergyShield: PropTypes.bool,
   canReceiveOnslaught: PropTypes.bool,
   hasBoon: PropTypes.bool,
