@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import CanAttack from 'components/interactions/minions/CanAttack';
 import CanBeBuffed from 'components/interactions/minions/CanBeBuffed';
+import CanBeDebuffed from 'components/interactions/minions/CanBeDebuffed';
 import CanBeHealed from 'components/interactions/minions/CanBeHealed';
 import CanBeSacrificed from 'components/interactions/minions/CanBeSacrificed';
+import CanBeExpired from 'components/interactions/minions/CanBeExpired';
 import IsAttacking from 'components/interactions/minions/IsAttacking';
 
 export default function YourMinionInteractions({
@@ -41,6 +44,10 @@ export default function YourMinionInteractions({
 
   if (canBeBuffed)
     return <CanBeBuffed G={G} ctx={ctx} moves={moves} index={index} />;
+
+  if (canbeDebuffed) return <CanBeDebuffed moves={moves} index={index} />;
+
+  if (canbeExpired) return <CanBeExpired moves={moves} index={index} />;
 
   if (canbeSacrificed) return <CanBeSacrificed moves={moves} index={index} />;
 
