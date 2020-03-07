@@ -23,7 +23,10 @@ export default function BoardSlot({
   const { currentPlayer } = ctx;
   const {
     canAttack,
-    canBeAttacked,
+    canBeAttackedByMinion,
+    canBeAttackedByPlayer,
+    canBeAttackedBySpell,
+    canBeAttackedByWarcry,
     canBeBuffed,
     canbeDebuffed,
     canbeExpired,
@@ -72,7 +75,10 @@ export default function BoardSlot({
           render={render}
           data={data}
           canAttack={canAttack}
-          canBeAttacked={canBeAttacked}
+          canBeAttackedByMinion={canBeAttackedByMinion}
+          canBeAttackedByPlayer={canBeAttackedByPlayer}
+          canBeAttackedBySpell={canBeAttackedBySpell}
+          canBeAttackedByWarcry={canBeAttackedByWarcry}
           canBeBuffed={canBeBuffed}
           canBeHealed={canBeHealed}
           canbeDebuffed={canbeDebuffed}
@@ -124,7 +130,10 @@ BoardSlot.propTypes = {
   yourID: PropTypes.string,
   data: PropTypes.object,
   canAttack: PropTypes.bool,
-  canBeAttacked: PropTypes.bool,
+  canBeAttackedByMinion: PropTypes.bool,
+  canBeAttackedByPlayer: PropTypes.bool,
+  canBeAttackedBySpell: PropTypes.bool,
+  canBeAttackedByWarcry: PropTypes.bool,
   canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
   canbeDebuffed: PropTypes.bool,
@@ -150,7 +159,10 @@ BoardSlot.propTypes = {
 BoardSlot.defaultProps = {
   data: {
     canAttack: false,
-    canBeAttacked: false,
+    canBeAttackedByMinion: false,
+    canBeAttackedByPlayer: false,
+    canBeAttackedBySpell: false,
+    canBeAttackedByWarcry: false,
     currentAttack: 0,
     currentHealth: 0,
     hasGuard: false,

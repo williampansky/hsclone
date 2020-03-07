@@ -22,7 +22,6 @@ export default function YourAvatar({
   } = G;
   const YOUR_HEALTH = health[yourID];
   const YOUR_SHIELD = playerShieldPoints[yourID];
-  // const CAN_BE_ATTACKED = canBeAttacked[yourID];
 
   function classImage(string) {
     // prettier-ignore

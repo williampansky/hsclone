@@ -12,7 +12,10 @@ export default function MinionInteraction({
   board,
   data,
   canAttack,
-  canBeAttacked,
+  canBeAttackedByMinion,
+  canBeAttackedByPlayer,
+  canBeAttackedBySpell,
+  canBeAttackedByWarcry,
   canBeBuffed,
   canBeHealed,
   canbeDebuffed,
@@ -44,7 +47,10 @@ export default function MinionInteraction({
           data={data}
           index={index}
           canAttack={canAttack}
-          canBeAttacked={canBeAttacked}
+          canBeAttackedByMinion={canBeAttackedByMinion}
+          canBeAttackedByPlayer={canBeAttackedByPlayer}
+          canBeAttackedBySpell={canBeAttackedBySpell}
+          canBeAttackedByWarcry={canBeAttackedByWarcry}
           canBeBuffed={canBeBuffed}
           canbeDebuffed={canbeDebuffed}
           canbeExpired={canbeExpired}
@@ -75,7 +81,10 @@ export default function MinionInteraction({
           data={data}
           index={index}
           canAttack={canAttack}
-          canBeAttacked={canBeAttacked}
+          canBeAttackedByMinion={canBeAttackedByMinion}
+          canBeAttackedByPlayer={canBeAttackedByPlayer}
+          canBeAttackedBySpell={canBeAttackedBySpell}
+          canBeAttackedByWarcry={canBeAttackedByWarcry}
           canBeBuffed={canBeBuffed}
           canbeDebuffed={canbeDebuffed}
           canbeExpired={canbeExpired}
@@ -109,7 +118,10 @@ MinionInteraction.propTypes = {
   board: PropTypes.string,
   data: PropTypes.object,
   canAttack: PropTypes.bool,
-  canBeAttacked: PropTypes.bool,
+  canBeAttackedByMinion: PropTypes.bool,
+  canBeAttackedByPlayer: PropTypes.bool,
+  canBeAttackedBySpell: PropTypes.bool,
+  canBeAttackedByWarcry: PropTypes.bool,
   canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
   canbeDebuffed: PropTypes.bool,

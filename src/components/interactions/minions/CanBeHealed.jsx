@@ -4,28 +4,39 @@ import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 
-export default function MINION_CAN_BE_SACRIFICED({ G, ctx, moves, index }) {
-  const { castTargetedSpell } = moves;
+export default function CanBeHealed({ G, ctx, moves, board, index }) {
+  const { warcryObject } = G;
+  const { currentPlayer } = ctx;
+  const { castTargetedWarcry } = moves;
+
+  function handleClick() {
+    if (warcryObject[currentPlayer] !== null)
+      return castTargetedWarcry(
+        board === 'YourBoard' ? TARGET_CONTEXT[1] : TARGET_CONTEXT[2],
+        WARCRY_TARGET_CONTEXT[1],
+        index
+      );
+  }
+
   return (
     <Component
-      data-file="interactions/minions/MINION_CAN_BE_SACRIFICED"
-      onClick={() =>
-        castTargetedSpell(TARGET_CONTEXT[1], WARCRY_TARGET_CONTEXT[1], index)
-      }
+      data-file="interactions/minions/CanBeHealed"
+      onClick={() => handleClick()}
     />
   );
 }
 
-MINION_CAN_BE_SACRIFICED.propTypes = {
+CanBeHealed.propTypes = {
   G: PropTypes.object,
   ctx: PropTypes.object,
   moves: PropTypes.object,
+  board: PropTypes.string,
   index: PropTypes.number
 };
 
 const Component = styled.div`
   border-radius: var(--minion-border-radius);
-  box-shadow: 0 0 10px #3af32d;
+  box-shadow: 0 0 5px #ff48e1;
   cursor: pointer;
   height: 100%;
   opacity: 1;
@@ -35,6 +46,6 @@ const Component = styled.div`
   position: absolute;
 
   &:hover {
-    box-shadow: 0 0 20px #3af32d;
+    box-shadow: 0 0 20px #ff48e1;
   }
 `;

@@ -4,31 +4,26 @@ import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 
-export default function MINION_CAN_RECEIVE_STAMPEDE({ G, ctx, moves, index }) {
-  const { giveMinionStampede } = moves;
-
-  function handleClick() {
-    return giveMinionStampede(index);
-  }
-
+export default function CanBeSacrificed({ moves, index }) {
+  const { castTargetedSpell } = moves;
   return (
     <Component
-      data-file="interactions/minions/MINION_CAN_RECEIVE_STAMPEDE"
-      onClick={() => handleClick()}
+      data-file="interactions/minions/CanBeSacrificed"
+      onClick={() =>
+        castTargetedSpell(TARGET_CONTEXT[1], WARCRY_TARGET_CONTEXT[1], index)
+      }
     />
   );
 }
 
-MINION_CAN_RECEIVE_STAMPEDE.propTypes = {
-  G: PropTypes.object,
-  ctx: PropTypes.object,
+CanBeSacrificed.propTypes = {
   moves: PropTypes.object,
   index: PropTypes.number
 };
 
 const Component = styled.div`
   border-radius: var(--minion-border-radius);
-  box-shadow: 0 0 5px #ffe626, 0 0 10px #26ffd5;
+  box-shadow: 0 0 10px #3af32d;
   cursor: pointer;
   height: 100%;
   opacity: 1;
@@ -38,6 +33,6 @@ const Component = styled.div`
   position: absolute;
 
   &:hover {
-    box-shadow: 0 0 10px #ffe626, 0 0 20px #26ffd5;
+    box-shadow: 0 0 20px #3af32d;
   }
 `;

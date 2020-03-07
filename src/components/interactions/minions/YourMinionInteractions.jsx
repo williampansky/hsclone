@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CanAttack from 'components/interactions/minions/CanAttack';
 import CanBeBuffed from 'components/interactions/minions/CanBeBuffed';
-import MINION_CAN_BE_HEALED from 'components/interactions/minions/MINION_CAN_BE_HEALED';
-import MINION_IS_ATTACKING from 'components/interactions/minions/MINION_IS_ATTACKING';
-import MINION_CAN_BE_SACRIFICED from 'components/interactions/minions/MINION_CAN_BE_SACRIFICED';
+import CanBeHealed from 'components/interactions/minions/CanBeHealed';
+import CanBeSacrificed from 'components/interactions/minions/CanBeSacrificed';
+import IsAttacking from 'components/interactions/minions/IsAttacking';
 
 export default function YourMinionInteractions({
   G,
@@ -13,7 +13,10 @@ export default function YourMinionInteractions({
   data,
   index,
   canAttack,
-  canBeAttacked,
+  canBeAttackedByMinion,
+  canBeAttackedByPlayer,
+  canBeAttackedBySpell,
+  canBeAttackedByWarcry,
   canBeBuffed,
   canBeHealed,
   canbeDebuffed,
@@ -34,20 +37,17 @@ export default function YourMinionInteractions({
   willExpire
 }) {
   if (canBeHealed)
-    return <MINION_CAN_BE_HEALED G={G} ctx={ctx} moves={moves} index={index} />;
+    return <CanBeHealed G={G} ctx={ctx} moves={moves} index={index} />;
 
   if (canBeBuffed)
     return <CanBeBuffed G={G} ctx={ctx} moves={moves} index={index} />;
 
-  if (canbeSacrificed)
-    return (
-      <MINION_CAN_BE_SACRIFICED G={G} ctx={ctx} moves={moves} index={index} />
-    );
+  if (canbeSacrificed) return <CanBeSacrificed moves={moves} index={index} />;
 
   if (canAttack && !isAttacking)
     return <CanAttack data={data} moves={moves} index={index} />;
 
-  if (canAttack && isAttacking) return <MINION_IS_ATTACKING moves={moves} />;
+  if (canAttack && isAttacking) return <IsAttacking moves={moves} />;
 
   return null;
 }
@@ -59,7 +59,10 @@ YourMinionInteractions.propTypes = {
   data: PropTypes.object,
   index: PropTypes.number,
   canAttack: PropTypes.bool,
-  canBeAttacked: PropTypes.bool,
+  canBeAttackedByMinion: PropTypes.bool,
+  canBeAttackedByPlayer: PropTypes.bool,
+  canBeAttackedBySpell: PropTypes.bool,
+  canBeAttackedByWarcry: PropTypes.bool,
   canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
   canbeDebuffed: PropTypes.bool,

@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import TYPE from 'enums/type.enums';
-import SPELLTYPE from 'enums/spellType.enums';
-
 import CanBeAttackedBySpell from 'components/interactions/minions/CanBeAttackedBySpell';
-import CanBeAttacked from 'components/interactions/minions/CanBeAttacked';
-import MINION_CAN_BE_HEALED from 'components/interactions/minions/MINION_CAN_BE_HEALED';
 
 export default function TheirMinionInteractions({
   G,
@@ -15,7 +9,10 @@ export default function TheirMinionInteractions({
   data,
   index,
   canAttack,
-  canBeAttacked,
+  canBeAttackedByMinion,
+  canBeAttackedByPlayer,
+  canBeAttackedBySpell,
+  canBeAttackedByWarcry,
   canBeBuffed,
   canBeHealed,
   canbeDebuffed,
@@ -35,21 +32,8 @@ export default function TheirMinionInteractions({
   isDisabled,
   willExpire
 }) {
-  const { selectedCardObject } = G;
-  const { currentPlayer } = ctx;
-
-  const currentCard = selectedCardObject[currentPlayer];
-  const cardType = currentCard && currentCard.type;
-  const cardSpellType = currentCard && currentCard.spellType;
-
-  const canBeAttackedBySpell =
-    canBeAttacked && cardType === TYPE[3] && cardSpellType === SPELLTYPE[2];
-
   if (canBeAttackedBySpell)
     return <CanBeAttackedBySpell G={G} ctx={ctx} moves={moves} index={index} />;
-
-  if (canBeAttacked)
-    return <CanBeAttacked G={G} ctx={ctx} moves={moves} index={index} />;
 
   return null;
 }
@@ -61,7 +45,10 @@ TheirMinionInteractions.propTypes = {
   data: PropTypes.object,
   index: PropTypes.number,
   canAttack: PropTypes.bool,
-  canBeAttacked: PropTypes.bool,
+  canBeAttackedByMinion: PropTypes.bool,
+  canBeAttackedByPlayer: PropTypes.bool,
+  canBeAttackedBySpell: PropTypes.bool,
+  canBeAttackedByWarcry: PropTypes.bool,
   canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
   canbeDebuffed: PropTypes.bool,

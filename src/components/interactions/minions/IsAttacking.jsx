@@ -2,21 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default function MINION_IS_ATTACKING({ moves }) {
+export default function IsAttacking({ moves }) {
   const { deselectMinion } = moves;
 
   return (
     <Component
-      data-file="interactions/minions/MINION_IS_ATTACKING"
+      data-file="interactions/minions/IsAttacking"
       onClick={() => deselectMinion()}
     />
   );
 }
 
-MINION_IS_ATTACKING.propTypes = {
-  moves: PropTypes.object,
-  data: PropTypes.object,
-  index: PropTypes.number
+IsAttacking.propTypes = {
+  moves: PropTypes.object
 };
 
 const Component = styled.div`
