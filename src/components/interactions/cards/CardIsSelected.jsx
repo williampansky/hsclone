@@ -2,18 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default function CARD_IS_SELECTED({ onClick }) {
+export default function CardIsSelected({ onClick }) {
   return (
-    <Component
-      data-file="interactions/cards/CARD_IS_SELECTED"
-      onClick={onClick}
-    >
+    <Component data-file="interactions/cards/CardIsSelected" onClick={onClick}>
       <DeselectLabel>Deselect Card</DeselectLabel>
     </Component>
   );
 }
 
-CARD_IS_SELECTED.propTypes = {
+CardIsSelected.propTypes = {
   onClick: PropTypes.func
 };
 

@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useHover from 'react-use-hover';
+import limitNumberWithinRange from 'lib/utils/range-limit';
 
 // child components
 import Card from 'components/cards/Card';
-import CARD_IS_PLAYABLE from 'components/interactions/cards/CARD_IS_PLAYABLE';
-import CARD_IS_PLAYABLE_EFFECT from 'components/interactions/cards/CARD_IS_PLAYABLE_EFFECT';
-import CARD_IS_SELECTED from 'components/interactions/cards/CARD_IS_SELECTED';
-import CARD_IS_SELECTED_EFFECT from 'components/interactions/cards/CARD_IS_SELECTED_EFFECT';
-import limitNumberWithinRange from 'lib/utils/range-limit';
+import CardIsPlayable from 'components/interactions/cards/CardIsPlayable';
+import CardIsPlayableEffect from 'components/interactions/cards/CardIsPlayableEffect';
+import CardIsSelected from 'components/interactions/cards/CardIsSelected';
+import CardIsSelectedEffect from 'components/interactions/cards/CardIsSelectedEffect';
 
 export default function CardInteraction({
   G,
@@ -17,8 +17,7 @@ export default function CardInteraction({
   isActive,
   yourID,
   card,
-  index,
-  numberOfCards
+  index
 }) {
   const { selectedCardIndex, warcryObject } = G;
   const { currentPlayer, phase } = ctx;
@@ -31,14 +30,14 @@ export default function CardInteraction({
 
   const nullCardIndex = selectedCardIndex[currentPlayer] === null;
 
-  const dispatchHover = React.useCallback(
+  const dispatchHover = useCallback(
     (hovering, nullIdx) => {
       hovering && nullIdx ? hoverCard(index) : hoverCard(null);
     },
     [hoverCard, index]
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     phase === 'play' && isActive && dispatchHover(isHovering, nullCardIndex);
   }, [isActive, phase, isHovering, nullCardIndex, dispatchHover]);
 
@@ -74,10 +73,9 @@ export default function CardInteraction({
     type
   } = card;
 
-  const IS_YOUR_TURN = isActive;
   const WARCRY_OBJECT_ACTIVE = warcryObject[yourID] !== null;
   const CAN_AFFORD = cost <= G.energy[yourID].current;
-  const IS_PLAYABLE = IS_YOUR_TURN && CAN_AFFORD && !WARCRY_OBJECT_ACTIVE;
+  const IS_PLAYABLE = isActive && CAN_AFFORD && !WARCRY_OBJECT_ACTIVE;
   const IS_SELECTED = G.selectedCardIndex[yourID] === index;
 
   // const yourHandStyle = {
@@ -133,10 +131,10 @@ export default function CardInteraction({
       className={'card-in-your-hand'}
       {...hoverProps}
     >
-      {IS_YOUR_TURN ? (
+      {isActive ? (
         <React.Fragment>
-          {IS_SELECTED && <CARD_IS_SELECTED_EFFECT />}
-          {IS_PLAYABLE && !IS_SELECTED && <CARD_IS_PLAYABLE_EFFECT />}
+          {IS_SELECTED && <CardIsSelectedEffect />}
+          {IS_PLAYABLE && !IS_SELECTED && <CardIsPlayableEffect />}
         </React.Fragment>
       ) : null}
 
@@ -172,10 +170,10 @@ export default function CardInteraction({
         type={type}
       />
 
-      {IS_YOUR_TURN ? (
+      {isActive ? (
         <React.Fragment>
-          {IS_SELECTED && <CARD_IS_SELECTED onClick={() => deselectPlayableCard()} />}
-          {IS_PLAYABLE && !IS_SELECTED && <CARD_IS_PLAYABLE onClick={() => selectPlayableCard(index)} />}
+          {IS_SELECTED && <CardIsSelected onClick={() => deselectPlayableCard()} />}
+          {IS_PLAYABLE && !IS_SELECTED && <CardIsPlayable onClick={() => selectPlayableCard(index)} />}
         </React.Fragment>
       ) : null}
     </div>

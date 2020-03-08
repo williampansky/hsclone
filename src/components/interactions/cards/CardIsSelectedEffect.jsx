@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function CARD_IS_PLAYABLE_EFFECT() {
-  return <CardEffect data-file="interactions/cards/CARD_IS_PLAYABLE_EFFECT" />;
+export default function CardIsSelectedEffect() {
+  return <CardEffect data-file="interactions/cards/CardIsSelectedEffect" />;
 }
 
 const CardEffect = styled.div`

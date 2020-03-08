@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default function CARD_IS_PLAYABLE({ onClick }) {
+export default function CardIsPlayable({ onClick }) {
   return (
     <Component
-      data-file="interactions/cards/CARD_IS_PLAYABLE"
+      data-file="interactions/cards/CardIsPlayable"
       onClick={onClick}
     />
   );
 }
 
-CARD_IS_PLAYABLE.propTypes = {
+CardIsPlayable.propTypes = {
   onClick: PropTypes.func
 };
 
