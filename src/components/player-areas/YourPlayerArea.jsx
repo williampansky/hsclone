@@ -1,12 +1,11 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
-import TARGET_CONTEXT from 'enums/target-context.enum';
-import YourAvatar from 'components/avatars/YourAvatar';
+
+// children
 import ClassSkillButton from 'components/class-skill/ClassSkillButton';
 import PlayerWeapon from 'components/player-weapon/PlayerWeapon';
+import YourAvatar from 'components/avatars/YourAvatar';
 
 export default function YourPlayerArea({
   G,
@@ -15,18 +14,14 @@ export default function YourPlayerArea({
   isActive,
   board,
   yourID,
-  avatars,
   playerClass
 }) {
   const {
     playerCanAttack,
     playerCanUseClassSkill,
     playerAttackValue,
-    playerWeapon,
-    warcryObject
+    playerWeapon
   } = G;
-  const { currentPlayer } = ctx;
-  const { castTargetedWarcry } = moves;
 
   const WEAPON = playerWeapon[yourID];
   const WEAPON_AP = WEAPON && WEAPON.attack;
@@ -69,6 +64,16 @@ export default function YourPlayerArea({
     </Component>
   );
 }
+
+YourPlayerArea.propTypes = {
+  G: PropTypes.object,
+  ctx: PropTypes.object,
+  moves: PropTypes.object,
+  isActive: PropTypes.bool,
+  board: PropTypes.string,
+  yourID: PropTypes.string,
+  playerClass: PropTypes.string
+};
 
 const Component = styled.div`
   border-top: 1px solid rgba(255, 255, 255, 0.465);

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
 import TARGET_CONTEXT from 'enums/target-context.enum';
+import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
 export default function CanBeHealed({ G, ctx, moves, board, index }) {
   const { warcryObject } = G;
@@ -12,7 +13,7 @@ export default function CanBeHealed({ G, ctx, moves, board, index }) {
   function handleClick() {
     if (warcryObject[currentPlayer] !== null)
       return castTargetedWarcry(
-        board === 'YourBoard' ? TARGET_CONTEXT[1] : TARGET_CONTEXT[2],
+        board === PLAYER_BOARDS[1] ? TARGET_CONTEXT[1] : TARGET_CONTEXT[2],
         WARCRY_TARGET_CONTEXT[1],
         index
       );

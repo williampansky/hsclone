@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // configs
-import avatars from 'config/avatars.config';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
 import SPELLTYPE from 'enums/spellType.enums';
 import TYPE from 'enums/type.enums';
 
@@ -55,12 +55,12 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
         ctx={ctx}
         moves={moves}
         isActive={isActive}
-        board="YourBoard"
+        board={PLAYER_BOARDS[1]}
         yourID={yourID}
       />
 
       <Deck
-        board="YourBoard"
+        board={PLAYER_BOARDS[1]}
         cardBackSrc={yourCardBackImageSrc}
         length={yourDeckLength}
       />
@@ -70,9 +70,8 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
         ctx={ctx}
         moves={moves}
         isActive={isActive}
-        board="YourBoard"
+        board={PLAYER_BOARDS[1]}
         yourID={yourID}
-        avatars={avatars}
         playerClass={playerClass}
       />
     </div>
