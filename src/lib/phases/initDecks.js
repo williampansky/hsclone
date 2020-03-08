@@ -1,5 +1,5 @@
-const DECK1 = require('data/debug/CORE_DECK_MYSTIC_01.json');
-const DECK2 = require('data/debug/CORE_DECK_MYSTIC_01.json');
+const DECK1 = require('data/debug/CORE_DECK_NINJA_01.json');
+const DECK2 = require('data/debug/CORE_DECK_NINJA_01.json');
 
 export default {
   // Start the match by initiating each player's deck from the

@@ -21,6 +21,7 @@ export default function YourPlayerArea({
   const {
     playerCanAttack,
     playerCanUseClassSkill,
+    playerAttackValue,
     playerWeapon,
     warcryObject
   } = G;
@@ -47,6 +48,7 @@ export default function YourPlayerArea({
         {playerWeapon[yourID] !== null ? (
           <PlayerWeapon
             canUse={playerCanAttack[yourID]}
+            playerAttackValue={playerAttackValue[yourID]}
             weaponAttack={WEAPON_AP}
             weaponHealth={WEAPON_HP}
             weaponImageSrc={WEAPON_IMG}

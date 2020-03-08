@@ -5,10 +5,12 @@ import styled from 'styled-components';
 
 export default function PlayerWeapon({
   canUse,
+  playerAttackValue,
   weaponAttack,
   weaponHealth,
   weaponImageSrc
 }) {
+  const AP_VALUE = playerAttackValue !== 0 ? playerAttackValue : weaponAttack;
   return (
     <Component
       data-file="player-weapon/PlayerWeapon"
@@ -16,7 +18,7 @@ export default function PlayerWeapon({
       canUse={canUse}
     >
       <Sphere contentContext="attack">
-        <TextValue>{weaponAttack}</TextValue>
+        <TextValue>{AP_VALUE}</TextValue>
       </Sphere>
       <Sphere contentContext="health">
         <TextValue>{weaponHealth}</TextValue>
@@ -27,6 +29,7 @@ export default function PlayerWeapon({
 
 PlayerWeapon.propTypes = {
   canUse: PropTypes.bool,
+  playerAttackValue: PropTypes.number,
   weaponAttack: PropTypes.number,
   weaponHealth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   weaponImageSrc: PropTypes.string

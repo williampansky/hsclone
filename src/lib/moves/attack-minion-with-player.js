@@ -9,13 +9,15 @@ import playerShieldPoints from 'lib/state/player-shield-points';
  * @param {index} number
  */
 const attackMinionWithPlayer = (G, ctx, index) => {
-  const { playerWeapon, turnOrder } = G;
+  const { playerWeapon, playerAttackValue, turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
 
+  const ATTACKING_PLAYER_VALUE = playerAttackValue[currentPlayer];
   const ATTACKING_PLAYER_WEAPON = playerWeapon[currentPlayer];
   if (ATTACKING_PLAYER_WEAPON === null) return;
   const WEAPON_AP = ATTACKING_PLAYER_WEAPON.attack;
+  const PLAYER_AP = ATTACKING_PLAYER_VALUE;
 
   const MINION_BEING_ATTACKED = G.boards[otherPlayer][index];
   if (!MINION_BEING_ATTACKED) return;
@@ -38,8 +40,8 @@ const attackMinionWithPlayer = (G, ctx, index) => {
     health.subtract(G, currentPlayer, MBA_AP);
   }
 
-  // Subtract WEAPON_AP from MINION_BEING_ATTACKED's currentHealth value
-  boards.subtractFromMinionHealth(G, otherPlayer, index, WEAPON_AP);
+  // Subtract PLAYER_AP from MINION_BEING_ATTACKED's currentHealth value
+  boards.subtractFromMinionHealth(G, otherPlayer, index, PLAYER_AP);
   boards.killMinionIfHealthIsZero(
     G,
     ctx,

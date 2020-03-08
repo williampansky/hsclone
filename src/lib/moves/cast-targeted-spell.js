@@ -273,6 +273,11 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       }
       break;
 
+    // Kill an any enemy minion.
+    case 'CORE_101':
+      boards.killMinion(G, ctx, otherPlayer, THEIR_SLOT, index);
+      break;
+
     // Restore a minion to full Health and give it <strong>Guard</strong>.
     case 'CORE_103':
       G.boards[currentPlayer][index] = {

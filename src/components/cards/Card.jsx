@@ -211,7 +211,7 @@ Card.defaultProps = {
   mechanics: [],
   name: 'CARD NAME',
   playRequirements: [],
-  race: 'None',
+  race: 'Minion',
   rarity: 'Free',
   set: 'Free',
   sounds: {

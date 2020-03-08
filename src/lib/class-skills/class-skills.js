@@ -5,6 +5,7 @@ import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import playerWeapon from 'lib/state/player-weapon';
 import createWeaponObject from 'lib/creators/create-weapon-object';
 import createSpellObject from 'lib/creators/create-spell-object';
+import playerCanAttack from 'lib/state/player-can-attack';
 
 /**
  * Backstab your opponent for 2 damage.
@@ -19,12 +20,13 @@ export const backstabOpponent = (G, ctx, amount = 2) => {
 };
 
 /**
- * Equip a 1/2 Shuriken throwing star.
+ * Equip a 1/2 Shuriken.
  * @param {{}} G
  * @param {{}} ctx
  */
 export const equipShuriken = (G, ctx) => {
   const { currentPlayer } = ctx;
+  playerCanAttack.enable(G, currentPlayer);
   playerWeapon.equip(G, currentPlayer, createWeaponObject('GAME_008'));
 };
 
@@ -98,11 +100,11 @@ export const summonKnight = (G, ctx) => {
  * @param {{}} ctx
  */
 export const summonRandomIdol = (G, ctx) => {
+  let idols = ['GAME_003', 'GAME_004', 'GAME_005', 'GAME_006'];
   const { currentPlayer, random } = ctx;
 
   if (G.boards[currentPlayer].length === 7) return; // max minions
 
-  const idols = ['GAME_003', 'GAME_004', 'GAME_005', 'GAME_006'];
   const randomIdolID = random.Shuffle(idols);
   const randomIdol = createBoardSlotObject(randomIdolID[0]);
 
@@ -112,6 +114,10 @@ export const summonRandomIdol = (G, ctx) => {
       ...randomIdol,
       hasGuard: true
     });
+  } else if (randomIdolID[0] === 'GAME_006') {
+    G.buffs[currentPlayer].spellDamage = Math.abs(
+      G.buffs[currentPlayer].spellDamage + 1
+    );
   } else {
     G.boards[currentPlayer].push(randomIdol);
   }

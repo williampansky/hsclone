@@ -1,4 +1,5 @@
 import recalculateCoreBuff from 'lib/buffs/core.buffs.recalculate';
+import recalculateGameBuff from 'lib/buffs/game.buffs.recalculate';
 import SET from 'enums/set.enums';
 
 const recalculateBuffs = (G, ctx, player, card, index) => {
@@ -9,7 +10,7 @@ const recalculateBuffs = (G, ctx, player, card, index) => {
       return recalculateCoreBuff(G, player, card);
 
     default:
-      return;
+      return recalculateGameBuff(G, player, card);
   }
 };
 

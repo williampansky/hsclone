@@ -13,7 +13,9 @@ const initPlayerWeaponAttack = (G, ctx) => {
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
 
   playerIsAttacking.enable(G, currentPlayer);
-  boards.determineAttackTargets(G, otherPlayer);
+  G.boards[otherPlayer].forEach(slot => {
+    slot.canBeAttackedByPlayer = true;
+  });
 };
 
 export default initPlayerWeaponAttack;

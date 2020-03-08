@@ -198,8 +198,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Give your equipped weapon 2 additional attack points.
     case 'CORE_094':
       if (!G.playerWeapon[currentPlayer]) return;
-      G.playerWeapon[currentPlayer].attack =
-        G.playerWeapon[currentPlayer].attack + 2;
+      playerAttackValue.set(G, currentPlayer, 2);
       break;
 
     // Deal 3 damage to the enemy player.
