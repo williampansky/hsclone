@@ -7,7 +7,6 @@ import playerCanAttack from 'lib/state/player-can-attack';
 import playerWeapon from 'lib/state/player-weapon';
 import getCardByID from 'lib/utils/get-card-by-id';
 import { discardCardFromHandByIndex } from 'lib/moves/discard-card';
-import counts from 'lib/state/counts';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
@@ -17,28 +16,58 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
   const cardObj = getCardByID(cardId);
   const warcryNumber = cardObj && cardObj.warcryNumber;
 
-  // prettier-ignore
   switch (cardId) {
-    case 'CORE_001':  return CORE_001(G, ctx, cardId, otherPlayer);
-    case 'CORE_006':  return CORE_006(G, ctx, cardId, index, otherPlayer);
-    case 'CORE_007':  return CORE_007(G, ctx, cardId, otherPlayer);
-    case 'CORE_012':  return CORE_012(G, ctx, cardId);
-    case 'CORE_013':  return CORE_013(G, ctx, cardId);
-    case 'CORE_016':  return CORE_016(G, ctx, cardId);
-    case 'CORE_020':  return CORE_020(G, ctx, cardId);
-    case 'CORE_021':  return CORE_021(G, ctx, cardId, index);
-    case 'CORE_025':  return CORE_025(G, ctx, cardId);
-    case 'CORE_026':  return CORE_026(G, ctx, cardId);
-    case 'CORE_032':  return CORE_032(G, ctx, cardId);
-    case 'CORE_033':  return CORE_033(G, ctx, index);
-    case 'CORE_035':  return CORE_035(G, ctx, otherPlayer);
-    case 'CORE_036':  return CORE_036(G, ctx, cardId, otherPlayer);
-    case 'CORE_041':  return CORE_041(G, ctx, index);
-    case 'CORE_110':  return CORE_110(G, ctx, cardId);
-    case 'CORE_112':  return CORE_112(G, ctx, cardId, otherPlayer);
-    case 'CORE_118':  return CORE_118(G, ctx, cardId);
-    case 'CORE_122':  return CORE_122(G, ctx, currentPlayer, otherPlayer, warcryNumber, index);
-    default:          break;
+    case 'CORE_001':
+      return CORE_001(G, ctx, cardId, otherPlayer);
+    case 'CORE_006':
+      return CORE_006(G, ctx, cardId, index, otherPlayer);
+    case 'CORE_007':
+      return CORE_007(G, ctx, cardId, otherPlayer);
+    case 'CORE_012':
+      return CORE_012(G, ctx, cardId);
+    case 'CORE_013':
+      return CORE_013(G, ctx, cardId);
+    case 'CORE_016':
+      return CORE_016(G, ctx, cardId);
+    case 'CORE_020':
+      return CORE_020(G, ctx, cardId);
+    case 'CORE_021':
+      return CORE_021(G, ctx, cardId, index);
+    case 'CORE_025':
+      return CORE_025(G, ctx, cardId);
+    case 'CORE_026':
+      return CORE_026(G, ctx, cardId);
+    case 'CORE_032':
+      return CORE_032(G, ctx, cardId);
+    case 'CORE_033':
+      return CORE_033(G, ctx, index);
+    case 'CORE_035':
+      return CORE_035(G, ctx, otherPlayer);
+    case 'CORE_036':
+      return CORE_036(G, ctx, cardId, otherPlayer);
+    case 'CORE_041':
+      return CORE_041(G, ctx, index);
+
+    /**
+     * <strong>Warcry:</strong> Give a friendly minion <em>Onslaught</em>.
+     */
+    case 'CORE_099':
+      G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
+      G.boards[ctx.currentPlayer].forEach((slot, i) => {
+        if (index !== i) slot.canReceiveOnslaught = true;
+      });
+      break;
+
+    case 'CORE_110':
+      return CORE_110(G, ctx, cardId);
+    case 'CORE_112':
+      return CORE_112(G, ctx, cardId, otherPlayer);
+    case 'CORE_118':
+      return CORE_118(G, ctx, cardId);
+    case 'CORE_122':
+      return CORE_122(G, ctx, currentPlayer, otherPlayer, warcryNumber, index);
+    default:
+      break;
   }
 };
 

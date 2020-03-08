@@ -21,6 +21,7 @@ export default function TheirAvatar({
     playerShieldPoints,
     playerCanBeAttacked,
     playerCanBeHealed,
+    playerIsAttacking,
     selectedMinionIndex,
     warcryObject
   } = G;
@@ -79,6 +80,7 @@ export default function TheirAvatar({
         board={board}
         theirID={theirID}
         yourID={yourID}
+        playerIsAttacking={playerIsAttacking[yourID]}
         playerCanBeAttacked={playerCanBeAttacked[theirID]}
         playerCanBeHealed={playerCanBeHealed[theirID]}
       />

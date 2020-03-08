@@ -253,12 +253,13 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       break;
 
     // Return one of your opponent's minions to their hand.
+    // @todo
     case 'CORE_096':
-      counts.incrementHand(G, otherPlayer);
+      G.counts[otherPlayer].hand = Math.abs(G.counts[otherPlayer].hand + 1);
       G.boards[otherPlayer] = G.boards[otherPlayer].splice(index, 1);
-      G.players[otherPlayer].hand.push(
-        getCardByID(G.boards[otherPlayer][index].minionData.id)
-      );
+      // G.players[otherPlayer].hand.push(
+      //   getCardByID(G.boards[otherPlayer][index].minionData.id)
+      // );
       break;
 
     // Deal 1 targeted damage and then draw a card.

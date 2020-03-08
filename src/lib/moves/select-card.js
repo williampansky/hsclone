@@ -196,8 +196,8 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
       // Deal 2 damage to one of your enemy's undamaged minions.
       case 'CORE_093':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed && slot.totalHealth === slot.currentHealth)
-            slot.canBeAttackedSpell = true;
+          if (!slot.isConcealed && slot.currentHealth === slot.totalHealth)
+            slot.canBeAttackedBySpell = true;
         });
         break;
 

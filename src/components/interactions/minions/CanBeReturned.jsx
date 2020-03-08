@@ -4,13 +4,17 @@ import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 
-export default function CanBeReturned({ moves, index }) {
+export default function CanBeReturned({ moves, index, targetContext }) {
   const { castTargetedSpell } = moves;
   return (
     <Component
       data-file="interactions/minions/CanBeReturned"
       onClick={() =>
-        castTargetedSpell(TARGET_CONTEXT[1], WARCRY_TARGET_CONTEXT[1], index)
+        castTargetedSpell(
+          TARGET_CONTEXT[targetContext],
+          WARCRY_TARGET_CONTEXT[1],
+          index
+        )
       }
     />
   );
@@ -18,7 +22,8 @@ export default function CanBeReturned({ moves, index }) {
 
 CanBeReturned.propTypes = {
   moves: PropTypes.object,
-  index: PropTypes.number
+  index: PropTypes.number,
+  targetContext: PropTypes.number
 };
 
 const Component = styled.div`

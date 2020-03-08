@@ -6,6 +6,7 @@ import playerWeapon from 'lib/state/player-weapon';
 import createWeaponObject from 'lib/creators/create-weapon-object';
 import createSpellObject from 'lib/creators/create-spell-object';
 import playerCanAttack from 'lib/state/player-can-attack';
+import playerAttackValue from 'lib/state/player-attack-value';
 
 /**
  * Backstab your opponent for 2 damage.
@@ -28,6 +29,7 @@ export const equipShuriken = (G, ctx) => {
   const { currentPlayer } = ctx;
   playerCanAttack.enable(G, currentPlayer);
   playerWeapon.equip(G, currentPlayer, createWeaponObject('GAME_008'));
+  G.playerAttackValue[currentPlayer] = 1;
 };
 
 /**

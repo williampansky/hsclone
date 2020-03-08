@@ -41,6 +41,22 @@ const deselectCard = (G, ctx) => {
     slot.canReceiveEnergyShield = false;
     slot.canReceiveOnslaught = false;
   });
+
+  G.boards[otherPlayer].forEach(slot => {
+    slot.canBeAttackedByMinion = false;
+    slot.canBeAttackedByPlayer = false;
+    slot.canBeAttackedBySpell = false;
+    slot.canBeAttackedByWarcry = false;
+    slot.canBeBuffed = false;
+    slot.canBeHealed = false;
+    slot.canBeDebuffed = false;
+    slot.canBeExpired = false;
+    slot.canBeReturned = false;
+    slot.canBeSacrificed = false;
+    slot.canBeStolen = false;
+    slot.canReceiveEnergyShield = false;
+    slot.canReceiveOnslaught = false;
+  });
 };
 
 export default deselectCard;

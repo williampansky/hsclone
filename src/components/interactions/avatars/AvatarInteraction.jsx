@@ -29,6 +29,7 @@ export default function AvatarInteraction({
 
   const canBeAttackedBySpell =
     playerCanBeAttacked &&
+    !playerIsAttacking &&
     !attackingMinionIndex &&
     !attackingMinionObject &&
     !activeWarcryObject;
@@ -47,7 +48,7 @@ export default function AvatarInteraction({
 
   const canBeAttackedByPlayer =
     playerCanBeAttacked &&
-    playerCanAttack &&
+    playerIsAttacking &&
     !attackingMinionIndex &&
     !attackingMinionObject &&
     !activeWarcryObject;

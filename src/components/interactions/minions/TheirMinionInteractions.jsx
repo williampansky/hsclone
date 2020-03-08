@@ -5,6 +5,7 @@ import CanBeAttackedByPlayer from 'components/interactions/minions/CanBeAttacked
 import CanBeAttackedBySpell from 'components/interactions/minions/CanBeAttackedBySpell';
 import CanBeAttackedByWarcry from 'components/interactions/minions/CanBeAttackedByWarcry';
 import CanBeExpired from 'components/interactions/minions/CanBeExpired';
+import CanBeReturned from 'components/interactions/minions/CanBeReturned';
 
 export default function TheirMinionInteractions({
   G,
@@ -50,6 +51,10 @@ export default function TheirMinionInteractions({
 
   if (canBeAttackedByPlayer) {
     return <CanBeAttackedByPlayer moves={moves} index={index} />;
+  }
+
+  if (canBeReturned) {
+    return <CanBeReturned moves={moves} index={index} targetContext={2} />;
   }
 
   if (canBeExpired) {

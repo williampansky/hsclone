@@ -195,6 +195,18 @@ const initCoreSpell = (G, ctx, cardId, index) => {
       });
       break;
 
+    // Return one of your opponent's minions to their hand.
+    case 'CORE_096':
+      G.boards[otherPlayer].forEach(slot => {
+        slot.canBeReturned = true;
+      });
+
+      health.add(G, currentPlayer, 2);
+      G.boards[currentPlayer].forEach((_, i) => {
+        boards.addToMinionHealth(G, currentPlayer, i, 2);
+      });
+      break;
+
     // Give your equipped weapon 2 additional attack points.
     case 'CORE_094':
       if (!G.playerWeapon[currentPlayer]) return;

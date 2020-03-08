@@ -56,7 +56,7 @@ export default function YourMinionInteractions({
   }
 
   if (canBeReturned) {
-    return <CanBeReturned moves={moves} index={index} />;
+    return <CanBeReturned moves={moves} index={index} targetContext={1} />;
   }
 
   if (canBeSacrificed) {
