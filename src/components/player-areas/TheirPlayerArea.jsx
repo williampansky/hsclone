@@ -6,6 +6,7 @@ import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 import YourAvatar from 'components/avatars/YourAvatar';
 import TheirAvatar from 'components/avatars/TheirAvatar';
+import PlayerWeapon from 'components/player-weapon/PlayerWeapon';
 
 export default function TheirPlayerArea({
   G,
@@ -18,14 +19,20 @@ export default function TheirPlayerArea({
   avatars,
   playerClass
 }) {
-  const { warcryObject } = G;
+  const { playerWeapon, playerCanAttack, playerAttackValue, warcryObject } = G;
   const { currentPlayer } = ctx;
   const { castTargetedWarcry } = moves;
+
+  const WEAPON = playerWeapon[theirID];
+  const WEAPON_AP = WEAPON && WEAPON.attack;
+  const WEAPON_HP = WEAPON && WEAPON.health;
+  const WEAPON_IMG = WEAPON && WEAPON.imageSrc;
 
   return (
     <Component board={board} data-file="player-areas/TheirPlayerArea">
       <AvatarWrapper board={board}>
         <AvatarHealthWrapper />
+
         <TheirAvatar
           G={G}
           ctx={ctx}
@@ -36,6 +43,16 @@ export default function TheirPlayerArea({
           yourID={yourID}
           playerClass={playerClass[theirID]}
         />
+
+        {playerWeapon[theirID] !== null ? (
+          <PlayerWeapon
+            canUse={playerCanAttack[theirID]}
+            playerAttackValue={playerAttackValue[theirID]}
+            weaponAttack={WEAPON_AP}
+            weaponHealth={WEAPON_HP}
+            weaponImageSrc={WEAPON_IMG}
+          />
+        ) : null}
       </AvatarWrapper>
     </Component>
   );

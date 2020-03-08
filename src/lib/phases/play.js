@@ -89,14 +89,14 @@ const onBegin = (G, ctx) => {
   // reset isDisabled state back to false
   playerIsDisabled.disable(G, currentPlayer);
 
-  // either set attack value to weapon's attack
-  if (G.playerWeapon[currentPlayer] !== null) {
-    const atkValue = G.playerWeapon[currentPlayer].attack;
-    playerAttackValue.set(G, currentPlayer, atkValue);
-  } else {
-    // or reset playerAttackValue state back to false
-    playerAttackValue.reset(G, currentPlayer);
-  }
+  // // either set attack value to weapon's attack
+  // if (G.playerWeapon[currentPlayer] !== null) {
+  //   const atkValue = G.playerWeapon[currentPlayer].attack;
+  //   playerAttackValue.set(G, currentPlayer, atkValue);
+  // } else {
+  //   // or reset playerAttackValue state back to false
+  //   playerAttackValue.reset(G, currentPlayer);
+  // }
 
   // if player has enough energy; enable playerCanUseClassSkill
   if (!GAME_CONFIG.debugData.enableCost)
@@ -121,11 +121,7 @@ const onBegin = (G, ctx) => {
   G.warcryObject = { '0': null, '1': null };
 
   // DEBUG
-  if (
-    GAME_CONFIG.debugData.debugCard !== null ||
-    GAME_CONFIG.debugData.debugCard !== '' ||
-    GAME_CONFIG.debugData.debugCard !== false
-  ) {
+  if (GAME_CONFIG.debugData.enableDebugCard === true) {
     const debugCardID = GAME_CONFIG.debugData.debugCard;
     G.players[ctx.currentPlayer].hand.push(getCardByID(debugCardID));
     counts.incrementHand(G, ctx.currentPlayer);
