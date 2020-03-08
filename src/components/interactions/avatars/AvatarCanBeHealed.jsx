@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
 
-export default function AVATAR_CAN_BE_HEALED({ G, ctx, moves, board }) {
+export default function AvatarCanBeHealed({ G, ctx, moves, board }) {
   const { warcryObject } = G;
   const { currentPlayer } = ctx;
   const { castTargetedWarcry } = moves;
@@ -12,7 +13,7 @@ export default function AVATAR_CAN_BE_HEALED({ G, ctx, moves, board }) {
   function handleClick() {
     if (warcryObject[currentPlayer] !== null)
       return castTargetedWarcry(
-        board === 'YourBoard' ? TARGET_CONTEXT[1] : TARGET_CONTEXT[2],
+        board === PLAYER_BOARDS[1] ? TARGET_CONTEXT[1] : TARGET_CONTEXT[2],
         WARCRY_TARGET_CONTEXT[2]
       );
   }
@@ -20,13 +21,13 @@ export default function AVATAR_CAN_BE_HEALED({ G, ctx, moves, board }) {
   return (
     <Component
       board={board}
-      data-file="interactions/avatars/AVATAR_CAN_BE_HEALED"
+      data-file="interactions/avatars/AvatarCanBeHealed"
       onClick={() => handleClick()}
     />
   );
 }
 
-AVATAR_CAN_BE_HEALED.propTypes = {
+AvatarCanBeHealed.propTypes = {
   G: PropTypes.object,
   ctx: PropTypes.object,
   moves: PropTypes.object,

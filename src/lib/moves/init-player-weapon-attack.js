@@ -18,8 +18,11 @@ const initPlayerWeaponAttack = (G, ctx) => {
 
   playerIsAttacking.enable(G, currentPlayer);
 
-  if (MINION_HAS_GUARD) playerCanBeAttacked.disable(G, otherPlayer);
-  else if (!MINION_HAS_GUARD) playerCanBeAttacked.enable(G, otherPlayer);
+  if (MINION_HAS_GUARD) {
+    playerCanBeAttacked.disable(G, otherPlayer);
+  } else if (!MINION_HAS_GUARD) {
+    playerCanBeAttacked.enableByPlayer(G, otherPlayer);
+  }
 
   G.boards[otherPlayer].forEach(slot => {
     if (slot.hasGuard === true) slot.canBeAttackedByPlayer = true;

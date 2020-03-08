@@ -43,7 +43,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   // clear warcryObject
   G.warcryObject[currentPlayer] = null;
 
-  // disable all playerCanBeAttacked
+  // disable all player can be attacked
   playerCanBeAttacked.disable(G, '0');
   playerCanBeAttacked.disable(G, '1');
 

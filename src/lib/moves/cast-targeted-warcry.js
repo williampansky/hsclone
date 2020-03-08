@@ -1,9 +1,6 @@
 import attackWithWarcryEffect from 'lib/warcry-effects/attack-with-warcry-effect';
 import buffWithWarcryEffect from 'lib/warcry-effects/buff-with-warcry-effect';
 import healWithWarcryEffect from 'lib/warcry-effects/heal-with-warcry-effect';
-import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
-import playerCanBeHealed from 'lib/state/player-can-be-healed';
-import boards from 'lib/state/boards';
 
 /**
  * Casts a targeted Warcry spell object.

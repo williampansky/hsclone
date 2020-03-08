@@ -238,7 +238,7 @@ const CORE_110 = (G, ctx, cardId) => {
  * Deal 3 damage.
  */
 const CORE_112 = (G, ctx, cardId, otherPlayer) => {
-  playerCanBeAttacked.enable(G, otherPlayer);
+  playerCanBeAttacked.enableByWarcry(G, otherPlayer);
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
   G.boards[otherPlayer].forEach(slot => {
     slot.canBeAttackedByWarcry = true;

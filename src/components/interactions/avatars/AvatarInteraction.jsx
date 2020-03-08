@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import AVATAR_CAN_ATTACK from 'components/interactions/avatars/AVATAR_CAN_ATTACK';
-import AVATAR_CAN_BE_ATTACKED_BY_MINION from 'components/interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_MINION';
-import AVATAR_CAN_BE_ATTACKED_BY_PLAYER from 'components/interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_PLAYER';
-import AVATAR_CAN_BE_ATTACKED_BY_SPELL from 'components/interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_SPELL';
-import AVATAR_CAN_BE_ATTACKED_BY_WARCRY from 'components/interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_WARCRY';
-import AVATAR_CAN_BE_HEALED from 'components/interactions/avatars/AVATAR_CAN_BE_HEALED';
-import AVATAR_IS_ATTACKING from 'components/interactions/avatars/AVATAR_IS_ATTACKING';
+import AvatarCanAttack from 'components/interactions/avatars/AvatarCanAttack';
+import AvatarCanBeAttackedByMinion from 'components/interactions/avatars/AvatarCanBeAttackedByMinion';
+import AvatarCanBeAttackedByPlayer from 'components/interactions/avatars/AvatarCanBeAttackedByPlayer';
+import AvatarCanBeAttackedBySpell from 'components/interactions/avatars/AvatarCanBeAttackedBySpell';
+import AvatarCanBeAttackedByWarcry from 'components/interactions/avatars/AvatarCanBeAttackedByWarcry';
+import AvatarCanBeHealed from 'components/interactions/avatars/AvatarCanBeHealed';
+import AvatarIsAttacking from 'components/interactions/avatars/AvatarIsAttacking';
 
 export default function AvatarInteraction({
   G,
@@ -15,72 +15,47 @@ export default function AvatarInteraction({
   moves,
   isActive,
   board,
+  theirID,
   yourID,
   playerCanAttack,
-  playerCanBeAttacked,
   playerCanBeHealed,
   playerIsAttacking
 }) {
-  const { warcryObject, selectedMinionIndex, selectedMinionObject } = G;
-
-  const attackingMinionIndex = selectedMinionIndex[yourID] !== null;
-  const attackingMinionObject = selectedMinionObject[yourID] !== null;
-  const activeWarcryObject = warcryObject[yourID] !== null;
-
-  const canBeAttackedBySpell =
-    playerCanBeAttacked &&
-    !playerIsAttacking &&
-    !attackingMinionIndex &&
-    !attackingMinionObject &&
-    !activeWarcryObject;
-
-  const canBeAttackedByWarcry =
-    playerCanBeAttacked &&
-    !attackingMinionIndex &&
-    !attackingMinionObject &&
-    activeWarcryObject;
-
-  const canBeAttackedByMinion =
-    playerCanBeAttacked &&
-    attackingMinionIndex &&
-    attackingMinionObject &&
-    !activeWarcryObject;
-
-  const canBeAttackedByPlayer =
-    playerCanBeAttacked &&
-    playerIsAttacking &&
-    !attackingMinionIndex &&
-    !attackingMinionObject &&
-    !activeWarcryObject;
+  const {
+    playerCanBeAttackedMinion,
+    playerCanBeAttackedPlayer,
+    playerCanBeAttackedSpell,
+    playerCanBeAttackedWarcry
+  } = G;
 
   return (
     <Component data-file="interactions/avatars/AvatarInteraction">
       {playerCanAttack && !playerIsAttacking ? (
-        <AVATAR_CAN_ATTACK G={G} ctx={ctx} moves={moves} board={board} />
+        <AvatarCanAttack G={G} ctx={ctx} moves={moves} board={board} />
       ) : null}
 
       {playerCanAttack && playerIsAttacking ? (
-        <AVATAR_IS_ATTACKING G={G} ctx={ctx} moves={moves} board={board} />
+        <AvatarIsAttacking moves={moves} board={board} />
       ) : null}
 
-      {canBeAttackedBySpell ? (
-        <AVATAR_CAN_BE_ATTACKED_BY_SPELL moves={moves} />
+      {playerCanBeAttackedSpell[theirID] ? (
+        <AvatarCanBeAttackedBySpell moves={moves} />
       ) : null}
 
-      {canBeAttackedByWarcry ? (
-        <AVATAR_CAN_BE_ATTACKED_BY_WARCRY moves={moves} />
+      {playerCanBeAttackedWarcry[theirID] ? (
+        <AvatarCanBeAttackedByWarcry moves={moves} />
       ) : null}
 
-      {canBeAttackedByMinion ? (
-        <AVATAR_CAN_BE_ATTACKED_BY_MINION moves={moves} />
+      {playerCanBeAttackedMinion[theirID] ? (
+        <AvatarCanBeAttackedByMinion moves={moves} />
       ) : null}
 
-      {canBeAttackedByPlayer ? (
-        <AVATAR_CAN_BE_ATTACKED_BY_PLAYER moves={moves} />
+      {playerCanBeAttackedPlayer[theirID] ? (
+        <AvatarCanBeAttackedByPlayer moves={moves} />
       ) : null}
 
       {playerCanBeHealed ? (
-        <AVATAR_CAN_BE_HEALED G={G} ctx={ctx} moves={moves} board={board} />
+        <AvatarCanBeHealed G={G} ctx={ctx} moves={moves} board={board} />
       ) : null}
     </Component>
   );
@@ -93,9 +68,9 @@ AvatarInteraction.propTypes = {
   isActive: PropTypes.bool,
   index: PropTypes.number,
   board: PropTypes.string,
+  theirID: PropTypes.string,
   yourID: PropTypes.string,
   playerCanAttack: PropTypes.bool,
-  playerCanBeAttacked: PropTypes.bool,
   playerCanBeHealed: PropTypes.bool,
   playerIsAttacking: PropTypes.bool
 };

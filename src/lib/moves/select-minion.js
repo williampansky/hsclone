@@ -10,8 +10,6 @@ import boards from 'lib/state/boards';
  * @param {{}} ctx
  * @param {{}} minionObject
  * @param {number} index
- * @requires selectedMinionIndex
- * @requires selectedMinionObject
  */
 const selectMinion = (G, ctx, minionObject = null, index = null) => {
   const { turnOrder } = G;
@@ -20,7 +18,7 @@ const selectMinion = (G, ctx, minionObject = null, index = null) => {
 
   selectedMinionIndex.set(G, currentPlayer, index);
   selectedMinionObject.set(G, currentPlayer, minionObject);
-  playerCanBeAttacked.enable(G, otherPlayer);
+  playerCanBeAttacked.enableByMinion(G, otherPlayer);
   boards.determineAttackTargets(G, otherPlayer);
 };
 

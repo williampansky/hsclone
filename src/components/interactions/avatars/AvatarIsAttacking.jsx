@@ -1,28 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
-import TARGET_CONTEXT from 'enums/target-context.enum';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
 
-export default function AVATAR_CAN_ATTACK({ G, ctx, moves, board }) {
-  const { initPlayerWeaponAttack } = moves;
+export default function AvatarIsAttacking({ moves, board }) {
+  const { terminatePlayerWeaponAttack } = moves;
 
   function handleClick() {
-    if (board === 'YourBoard') return initPlayerWeaponAttack();
+    if (board === PLAYER_BOARDS[1]) return terminatePlayerWeaponAttack();
   }
 
   return (
     <Component
       board={board}
-      data-file="interactions/avatars/AVATAR_CAN_ATTACK"
+      data-file="interactions/avatars/AvatarIsAttacking"
       onClick={() => handleClick()}
     />
   );
 }
 
-AVATAR_CAN_ATTACK.propTypes = {
-  G: PropTypes.object,
-  ctx: PropTypes.object,
+AvatarIsAttacking.propTypes = {
   moves: PropTypes.object,
   board: PropTypes.string
 };
@@ -37,5 +34,5 @@ const Component = styled.div`
   transition: 100ms ease-in-out;
   width: 100%;
   position: absolute;
-  box-shadow: 0px 0px 15px 5px rgba(0, 196, 105, 0.465);
+  box-shadow: 0px 0px 20px 10px rgba(0, 196, 105, 0.625);
 `;

@@ -4,19 +4,19 @@ import styled from 'styled-components';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
-export default function AVATAR_CAN_BE_ATTACKED_BY_SPELL({ moves }) {
-  const { castTargetedSpell } = moves;
+export default function AvatarCanBeAttackedByWarcry({ moves }) {
+  const { castTargetedWarcry } = moves;
   return (
     <Component
-      data-file="interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_SPELL"
+      data-file="interactions/avatars/AvatarCanBeAttackedByWarcry"
       onClick={() =>
-        castTargetedSpell(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[2])
+        castTargetedWarcry(TARGET_CONTEXT[2], WARCRY_TARGET_CONTEXT[2])
       }
     />
   );
 }
 
-AVATAR_CAN_BE_ATTACKED_BY_SPELL.propTypes = {
+AvatarCanBeAttackedByWarcry.propTypes = {
   moves: PropTypes.object
 };
 

@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default function AVATAR_CAN_BE_ATTACKED_BY_PLAYER({ moves }) {
-  const { attackPlayerWithPlayer } = moves;
+export default function AvatarCanBeAttackedByMinion({ moves }) {
+  const { attackPlayer } = moves;
   return (
     <Component
-      data-file="interactions/avatars/AVATAR_CAN_BE_ATTACKED_BY_PLAYER"
-      onClick={() => attackPlayerWithPlayer()}
+      data-file="interactions/avatars/AvatarCanBeAttackedByMinion"
+      onClick={() => attackPlayer()}
     />
   );
 }
 
-AVATAR_CAN_BE_ATTACKED_BY_PLAYER.propTypes = {
+AvatarCanBeAttackedByMinion.propTypes = {
   moves: PropTypes.object
 };
 

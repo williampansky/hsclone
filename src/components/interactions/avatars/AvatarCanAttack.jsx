@@ -1,26 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
 
-export default function AVATAR_IS_ATTACKING({ G, ctx, moves, board }) {
-  const { terminatePlayerWeaponAttack } = moves;
+export default function AvatarCanAttack({ moves, board }) {
+  const { initPlayerWeaponAttack } = moves;
 
   function handleClick() {
-    if (board === 'YourBoard') return terminatePlayerWeaponAttack();
+    if (board === PLAYER_BOARDS[1]) return initPlayerWeaponAttack();
   }
 
   return (
     <Component
       board={board}
-      data-file="interactions/avatars/AVATAR_IS_ATTACKING"
+      data-file="interactions/avatars/AvatarCanAttack"
       onClick={() => handleClick()}
     />
   );
 }
 
-AVATAR_IS_ATTACKING.propTypes = {
-  G: PropTypes.object,
-  ctx: PropTypes.object,
+AvatarCanAttack.propTypes = {
   moves: PropTypes.object,
   board: PropTypes.string
 };
@@ -35,5 +34,5 @@ const Component = styled.div`
   transition: 100ms ease-in-out;
   width: 100%;
   position: absolute;
-  box-shadow: 0px 0px 20px 10px rgba(0, 196, 105, 0.625);
+  box-shadow: 0px 0px 15px 5px rgba(0, 196, 105, 0.465);
 `;

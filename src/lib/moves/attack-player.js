@@ -67,7 +67,7 @@ const attackPlayer = (G, ctx) => {
   // then disable opponent minions can be attacked
   boards.disableAllCanBeAttacked(G, otherPlayer);
 
-  // disable all playerCanBeAttacked
+  // disable all player can be attacked
   playerCanBeAttacked.disable(G, '0');
   playerCanBeAttacked.disable(G, '1');
 

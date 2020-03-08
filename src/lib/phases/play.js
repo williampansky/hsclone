@@ -159,7 +159,10 @@ const onEnd = (G, ctx) => {
 
   // reset player states
   G.playerCanAttack = { '0': false, '1': false };
-  G.playerCanBeAttacked = { '0': false, '1': false };
+  G.playerCanBeAttackedByMinion = { '0': false, '1': false };
+  G.playerCanBeAttackedByPlayer = { '0': false, '1': false };
+  G.playerCanBeAttackedBySpell = { '0': false, '1': false };
+  G.playerCanBeAttackedByWarcry = { '0': false, '1': false };
   G.playerCanBeHealed = { '0': false, '1': false };
   G.playerIsAttacking = { '0': false, '1': false };
 
