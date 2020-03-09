@@ -49,11 +49,18 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
       return CORE_041(G, ctx, index);
 
     /**
+     * <strong>Warcry:</strong> Restore 6 Health to yourself.
+     */
+    case 'CORE_082':
+      health.add(G, currentPlayer, 6);
+      break;
+
+    /**
      * <strong>Warcry:</strong> Give a friendly minion <em>Onslaught</em>.
      */
     case 'CORE_099':
-      G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
-      G.boards[ctx.currentPlayer].forEach((slot, i) => {
+      G.warcryObject[currentPlayer] = createWarcryObject(cardId);
+      G.boards[currentPlayer].forEach((slot, i) => {
         if (index !== i) slot.canReceiveOnslaught = true;
       });
       break;

@@ -20,6 +20,7 @@ export default function YourPlayerArea({
     playerCanAttack,
     playerCanUseClassSkill,
     playerAttackValue,
+    playerIsAttacking,
     playerWeapon
   } = G;
 
@@ -58,6 +59,7 @@ export default function YourPlayerArea({
           board="YourBoard"
           yourID={yourID}
           playerClass={playerClass[yourID]}
+          playerIsAttacking={playerIsAttacking[yourID]}
         />
         <AvatarHealthWrapper />
       </AvatarWrapper>
@@ -72,7 +74,7 @@ YourPlayerArea.propTypes = {
   isActive: PropTypes.bool,
   board: PropTypes.string,
   yourID: PropTypes.string,
-  playerClass: PropTypes.string
+  playerClass: PropTypes.object
 };
 
 const Component = styled.div`

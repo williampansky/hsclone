@@ -27,23 +27,33 @@ const attackMinion = (G, ctx, index) => {
   if (MINION_BEING_ATTACKED && !MINION_BEING_ATTACKED.canBeAttackedByMinion)
     return;
 
-  // Subtract `ATTACKING_MINION.currentAttack`
-  // from MINION_BEING_ATTACKED_INDEX's currentHealth value
-  boards.subtractFromMinionHealth(
-    G,
-    otherPlayer,
-    MINION_BEING_ATTACKED_INDEX,
-    ATTACKING_MINION.currentAttack
-  );
+  // if minion has energy shield; remove that first
+  if (MINION_BEING_ATTACKED.hasEnergyShield) {
+    G.boards[otherPlayer][index].hasEnergyShield = false;
+  } else {
+    // Subtract `ATTACKING_MINION.currentAttack`
+    // from MINION_BEING_ATTACKED_INDEX's currentHealth value
+    boards.subtractFromMinionHealth(
+      G,
+      otherPlayer,
+      MINION_BEING_ATTACKED_INDEX,
+      ATTACKING_MINION.currentAttack
+    );
+  }
 
-  // Subtract `MINION_BEING_ATTACKED.currentAttack`
-  // from ATTACKING_MINION_INDEX's currentHealth value
-  boards.subtractFromMinionHealth(
-    G,
-    currentPlayer,
-    ATTACKING_MINION_INDEX,
-    MINION_BEING_ATTACKED.currentAttack
-  );
+  // if minion has energy shield; remove that first
+  if (ATTACKING_MINION.hasEnergyShield) {
+    G.boards[currentPlayer][index].hasEnergyShield = false;
+  } else {
+    // Subtract `MINION_BEING_ATTACKED.currentAttack`
+    // from ATTACKING_MINION_INDEX's currentHealth value
+    boards.subtractFromMinionHealth(
+      G,
+      currentPlayer,
+      ATTACKING_MINION_INDEX,
+      MINION_BEING_ATTACKED.currentAttack
+    );
+  }
 
   // handle onslaught mechanic
   if (ATTACKING_MINION_HAS_ONSLAUGHT === true) {

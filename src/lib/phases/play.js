@@ -177,6 +177,10 @@ const onEnd = (G, ctx) => {
 
   // reset warcry states
   G.warcryObject = { '0': null, '1': null };
+
+  // reset animation states
+  G.animationStates.playerIsAttackingPlayer['0'] = false;
+  G.animationStates.playerIsAttackingPlayer['1'] = false;
 };
 
 const endIf = G => {

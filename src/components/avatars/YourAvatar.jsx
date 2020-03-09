@@ -11,15 +11,19 @@ export default function YourAvatar({
   isActive,
   board,
   yourID,
-  playerClass
+  playerClass,
+  playerIsAttacking
 }) {
+  const [attackingPlayerClass, setAttackingPlayerClass] = React.useState('');
+
   const {
     health,
     playerCanAttack,
     playerCanBeHealed,
-    playerIsAttacking,
-    playerShieldPoints
+    playerShieldPoints,
+    animationStates: { playerIsAttackingPlayer }
   } = G;
+
   const YOUR_HEALTH = health[yourID];
   const YOUR_SHIELD = playerShieldPoints[yourID];
 
@@ -39,10 +43,32 @@ export default function YourAvatar({
     }
   }
 
+  const PlayerIsAttackingPlayer = playerIsAttackingPlayer[yourID];
+
+  // playerIsAttackingPlayer[yourID]
+  const playerIsAttackingPlayerAnimation = React.useCallback(bool => {
+    if (bool) {
+      setAttackingPlayerClass('player-avatar--is_attacking_player');
+      return setTimeout(() => {
+        setAttackingPlayerClass('');
+      }, 900);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    playerIsAttackingPlayerAnimation(PlayerIsAttackingPlayer);
+  }, [PlayerIsAttackingPlayer, playerIsAttackingPlayerAnimation]);
+
   return (
     <div
       data-file="avatars/YourAvatar"
-      className={['player-avatar', 'your-avatar', 'effect--bezel'].join(' ')}
+      className={[
+        'player-avatar',
+        'your-avatar',
+        'effect--bezel',
+        playerIsAttacking ? 'player-avatar--is_attacking' : '',
+        attackingPlayerClass
+      ].join(' ')}
     >
       <PlayerHealth
         health={YOUR_HEALTH}
@@ -67,7 +93,7 @@ export default function YourAvatar({
         board={board}
         playerCanAttack={playerCanAttack[yourID]}
         playerCanBeHealed={playerCanBeHealed[yourID]}
-        playerIsAttacking={playerIsAttacking[yourID]}
+        playerIsAttacking={playerIsAttacking}
       />
     </div>
   );
@@ -80,7 +106,8 @@ YourAvatar.propTypes = {
   isActive: PropTypes.bool,
   board: PropTypes.string,
   yourID: PropTypes.string,
-  playerClass: PropTypes.string
+  playerClass: PropTypes.string,
+  playerIsAttacking: PropTypes.bool
 };
 
 YourAvatar.defaultProps = {

@@ -27,7 +27,10 @@ import playerIsDisabled from './state/player-is-disabled';
 
 export default {
   buffs: buffs.__DATA_MODEL,
-  playerCanBeAttacked: playerCanBeAttacked.__DATA_MODEL,
+  playerCanBeAttackedByMinion: playerCanBeAttacked.playerCanBeAttackedByMinion,
+  playerCanBeAttackedByPlayer: playerCanBeAttacked.playerCanBeAttackedByPlayer,
+  playerCanBeAttackedBySpell: playerCanBeAttacked.playerCanBeAttackedBySpell,
+  playerCanBeAttackedByWarcry: playerCanBeAttacked.playerCanBeAttackedByWarcry,
   playerCanBeHealed: playerCanBeHealed.__DATA_MODEL,
   playerCanAttack: playerCanAttack.__DATA_MODEL,
   playerIsAttacking: playerIsAttacking.__DATA_MODEL,
@@ -39,8 +42,8 @@ export default {
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
   playerClass: {
-    '0': CARDCLASS[6],
-    '1': CARDCLASS[6]
+    '0': CARDCLASS[4],
+    '1': CARDCLASS[4]
   },
   players: players.__DATA_MODEL,
   boards: boards.__DATA_MODEL,
@@ -57,6 +60,12 @@ export default {
   spellObject: spellObject.__DATA_MODEL,
   warcryObject: warcryObject.__DATA_MODEL,
   cardBack: cardBack.__DATA_MODEL,
+  animationStates: {
+    playerIsAttackingPlayer: {
+      '0': false,
+      '1': false
+    }
+  },
   turnOrder: ['0', '1'].sort(() => {
     if (!GAME_CONFIG.matchConfig.enableRandomTurnOrder) return ['0', '1'];
     return Math.random() - 0.5;

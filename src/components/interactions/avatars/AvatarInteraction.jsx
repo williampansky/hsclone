@@ -22,10 +22,10 @@ export default function AvatarInteraction({
   playerIsAttacking
 }) {
   const {
-    playerCanBeAttackedMinion,
-    playerCanBeAttackedPlayer,
-    playerCanBeAttackedSpell,
-    playerCanBeAttackedWarcry
+    playerCanBeAttackedByMinion,
+    playerCanBeAttackedByPlayer,
+    playerCanBeAttackedBySpell,
+    playerCanBeAttackedByWarcry
   } = G;
 
   return (
@@ -38,19 +38,19 @@ export default function AvatarInteraction({
         <AvatarIsAttacking moves={moves} board={board} />
       ) : null}
 
-      {playerCanBeAttackedSpell[theirID] ? (
+      {playerCanBeAttackedBySpell[theirID] ? (
         <AvatarCanBeAttackedBySpell moves={moves} />
       ) : null}
 
-      {playerCanBeAttackedWarcry[theirID] ? (
+      {playerCanBeAttackedByWarcry[theirID] ? (
         <AvatarCanBeAttackedByWarcry moves={moves} />
       ) : null}
 
-      {playerCanBeAttackedMinion[theirID] ? (
+      {playerCanBeAttackedByMinion[theirID] ? (
         <AvatarCanBeAttackedByMinion moves={moves} />
       ) : null}
 
-      {playerCanBeAttackedPlayer[theirID] ? (
+      {playerCanBeAttackedByPlayer[theirID] ? (
         <AvatarCanBeAttackedByPlayer moves={moves} />
       ) : null}
 

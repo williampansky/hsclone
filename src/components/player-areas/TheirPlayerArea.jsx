@@ -2,9 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
-import TARGET_CONTEXT from 'enums/target-context.enum';
-import YourAvatar from 'components/avatars/YourAvatar';
 import TheirAvatar from 'components/avatars/TheirAvatar';
 import PlayerWeapon from 'components/player-weapon/PlayerWeapon';
 
@@ -16,13 +13,9 @@ export default function TheirPlayerArea({
   board,
   theirID,
   yourID,
-  avatars,
   playerClass
 }) {
-  const { playerWeapon, playerCanAttack, playerAttackValue, warcryObject } = G;
-  const { currentPlayer } = ctx;
-  const { castTargetedWarcry } = moves;
-
+  const { playerWeapon, playerCanAttack, playerAttackValue } = G;
   const WEAPON = playerWeapon[theirID];
   const WEAPON_AP = WEAPON && WEAPON.attack;
   const WEAPON_HP = WEAPON && WEAPON.health;

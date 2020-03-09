@@ -21,6 +21,13 @@ const attackPlayerWithPlayer = (G, ctx) => {
     if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
   }
 
+  G.animationStates.playerIsAttackingPlayer[currentPlayer] = true;
+
+  // weapon-specific mechanics
+  if (playerWeapon[currentPlayer].id === 'CORE_081') {
+    health.add(G, currentPlayer, 2);
+  }
+
   // remove shieldPoints first, then health
   if (G.playerShieldPoints[otherPlayer] !== 0) {
     const preDIFF = Math.abs(G.playerShieldPoints[otherPlayer] - WEAPON_AP);

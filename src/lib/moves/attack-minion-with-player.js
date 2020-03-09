@@ -29,6 +29,11 @@ const attackMinionWithPlayer = (G, ctx, index) => {
     if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
   }
 
+  // weapon-specific mechanics
+  if (playerWeapon[currentPlayer].id === 'CORE_081') {
+    health.add(G, currentPlayer, 2);
+  }
+
   // remove shieldPoints first, then health
   if (G.playerShieldPoints[currentPlayer] !== 0) {
     const preDIFF = Math.abs(G.playerShieldPoints[currentPlayer] - MBA_AP);
@@ -40,15 +45,20 @@ const attackMinionWithPlayer = (G, ctx, index) => {
     health.subtract(G, currentPlayer, MBA_AP);
   }
 
-  // Subtract PLAYER_AP from MINION_BEING_ATTACKED's currentHealth value
-  boards.subtractFromMinionHealth(G, otherPlayer, index, PLAYER_AP);
-  boards.killMinionIfHealthIsZero(
-    G,
-    ctx,
-    otherPlayer,
-    MINION_BEING_ATTACKED,
-    index
-  );
+  // if minion has energy shield; remove that first
+  if (MINION_BEING_ATTACKED.hasEnergyShield) {
+    G.boards[otherPlayer][index].hasEnergyShield = false;
+  } else {
+    // Subtract PLAYER_AP from MINION_BEING_ATTACKED's currentHealth value
+    boards.subtractFromMinionHealth(G, otherPlayer, index, PLAYER_AP);
+    boards.killMinionIfHealthIsZero(
+      G,
+      ctx,
+      otherPlayer,
+      MINION_BEING_ATTACKED,
+      index
+    );
+  }
 
   // disable all playerCanAttack
   G.playerCanAttack = { '0': false, '1': false };

@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlayerHealth from 'components/player-health/PlayerHealth';
 import AvatarInteraction from 'components/interactions/avatars/AvatarInteraction';
-import TARGET_CONTEXT from 'enums/target-context.enum';
-import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import CARDCLASS from 'enums/cardClass.enums';
 
 export default function TheirAvatar({
@@ -19,23 +17,11 @@ export default function TheirAvatar({
   const {
     health,
     playerShieldPoints,
-    playerCanBeAttacked,
     playerCanBeHealed,
-    playerIsAttacking,
-    selectedMinionIndex,
-    warcryObject
+    playerIsAttacking
   } = G;
-  const { attackPlayer, castTargetedWarcry } = moves;
   const THEIR_HEALTH = health[theirID];
   const THEIR_SHIELD = playerShieldPoints[theirID];
-
-  const canBeAttacked = playerCanBeAttacked[theirID];
-
-  const attackingMinionIndex = selectedMinionIndex[yourID] !== null;
-  const activeWarcryObject = warcryObject[yourID] !== null;
-
-  const canBeAttackedByMinion = canBeAttacked && attackingMinionIndex;
-  const canBeAttackedByWarcry = canBeAttacked && activeWarcryObject;
 
   function classImage(string) {
     // prettier-ignore
@@ -81,7 +67,6 @@ export default function TheirAvatar({
         theirID={theirID}
         yourID={yourID}
         playerIsAttacking={playerIsAttacking[yourID]}
-        playerCanBeAttacked={playerCanBeAttacked[theirID]}
         playerCanBeHealed={playerCanBeHealed[theirID]}
       />
     </div>
@@ -96,7 +81,7 @@ TheirAvatar.propTypes = {
   board: PropTypes.string,
   theirID: PropTypes.string,
   yourID: PropTypes.string,
-  src: PropTypes.string
+  playerClass: PropTypes.string
 };
 
 TheirAvatar.defaultProps = {
