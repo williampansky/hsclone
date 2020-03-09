@@ -162,10 +162,13 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       G.boards[otherPlayer][index] = createBoardSlotObject('CORE_070a');
       break;
 
-    // Change a minion's Health down to 1.
+    // Give a minion +3 Attack.
     case 'CORE_073':
       G.boards[currentPlayer][index].currentAttack = Math.abs(
         G.boards[currentPlayer][index].currentAttack + 3
+      );
+      G.boards[currentPlayer][index].totalAttack = Math.abs(
+        G.boards[currentPlayer][index].totalAttack + 3
       );
       break;
 

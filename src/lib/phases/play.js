@@ -122,9 +122,10 @@ const onBegin = (G, ctx) => {
 
   // DEBUG
   if (GAME_CONFIG.debugData.enableDebugCard === true) {
+    if (G.players[currentPlayer].hand.length >= 9) return;
     const debugCardID = GAME_CONFIG.debugData.debugCard;
-    G.players[ctx.currentPlayer].hand.push(getCardByID(debugCardID));
-    counts.incrementHand(G, ctx.currentPlayer);
+    G.players[currentPlayer].hand.push(getCardByID(debugCardID));
+    counts.incrementHand(G, currentPlayer);
   }
 };
 
