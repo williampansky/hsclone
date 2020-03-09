@@ -187,7 +187,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
         health.add(G, currentPlayer, 6);
       } else {
-        boards.addToMinionHealth(G, otherPlayer, index, 6);
+        boards.addToMinionHealth(G, currentPlayer, index, 6);
       }
       break;
 

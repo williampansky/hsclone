@@ -133,7 +133,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         break;
 
       case 'CORE_077':
-        playerCanBeHealed.enableBySpell(G, currentPlayer);
+        playerCanBeHealed.enable(G, currentPlayer);
         G.boards[currentPlayer].forEach(slot => {
           slot.canBeHealed = true;
         });

@@ -8,11 +8,16 @@ import PLAYER_BOARDS from 'enums/playerBoards.enums';
 export default function AvatarCanBeHealed({ G, ctx, moves, board }) {
   const { warcryObject } = G;
   const { currentPlayer } = ctx;
-  const { castTargetedWarcry } = moves;
+  const { castTargetedSpell, castTargetedWarcry } = moves;
 
   function handleClick() {
     if (warcryObject[currentPlayer] !== null)
       return castTargetedWarcry(
+        board === PLAYER_BOARDS[1] ? TARGET_CONTEXT[1] : TARGET_CONTEXT[2],
+        WARCRY_TARGET_CONTEXT[2]
+      );
+    else
+      return castTargetedSpell(
         board === PLAYER_BOARDS[1] ? TARGET_CONTEXT[1] : TARGET_CONTEXT[2],
         WARCRY_TARGET_CONTEXT[2]
       );

@@ -8,11 +8,17 @@ import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 export default function CanBeHealed({ G, ctx, moves, board, index }) {
   const { warcryObject } = G;
   const { currentPlayer } = ctx;
-  const { castTargetedWarcry } = moves;
+  const { castTargetedSpell, castTargetedWarcry } = moves;
 
   function handleClick() {
     if (warcryObject[currentPlayer] !== null)
       return castTargetedWarcry(
+        board === PLAYER_BOARDS[1] ? TARGET_CONTEXT[1] : TARGET_CONTEXT[2],
+        WARCRY_TARGET_CONTEXT[1],
+        index
+      );
+    else
+      return castTargetedSpell(
         board === PLAYER_BOARDS[1] ? TARGET_CONTEXT[1] : TARGET_CONTEXT[2],
         WARCRY_TARGET_CONTEXT[1],
         index
