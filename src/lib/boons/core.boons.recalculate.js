@@ -13,17 +13,6 @@ const recalculateCoreBoon = (G, player, cardId, index) => {
   switch (cardId) {
     case 'CORE_003':  return CORE_003(G, player, cardId);
 
-    // <strong>Boon:</strong> Your other Creatures have +1 attack.
-    case 'CORE_054':
-      G.boards[player].forEach((slot, i) => {
-        if (i === index) return;
-        if (slot.minionData.race === RACE[1]) {
-          slot.currentAttack = slot.currentAttack - 1;
-          slot.totalAttack = slot.totalAttack - 1;
-        }
-      });
-      break;
-
     // Provide adjacent minions with +2 Attack.
     case 'CORE_108':
       G.boards[player].forEach((slot, i) => {
@@ -35,6 +24,29 @@ const recalculateCoreBoon = (G, player, cardId, index) => {
       break;
     
     case 'CORE_019':  return CORE_019(G, player, cardId);
+
+    // <strong>Boon:</strong> Your other Creatures have +1 attack.
+    case 'CORE_054':
+      G.boards[player].forEach((slot, i) => {
+        if (i === index) return;
+        if (slot.minionData.race === RACE[1]) {
+          slot.currentAttack = slot.currentAttack - 1;
+          slot.totalAttack = slot.totalAttack - 1;
+        }
+      });
+      break;
+
+    // <strong>Boon:</strong> Provide your other Creatures with +1 Attack.
+    case 'CORE_057b':
+      G.boards[player].forEach((slot, i) => {
+        if (i === index) return;
+        if (slot.minionData.race === RACE[1]) {
+          slot.currentAttack = slot.currentAttack - 1;
+          slot.totalAttack = slot.totalAttack - 1;
+        }
+      });
+      break;
+
     default:          break;
   }
 };

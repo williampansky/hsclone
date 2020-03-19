@@ -43,7 +43,7 @@ const attackMinion = (G, ctx, index) => {
 
   // if minion has energy shield; remove that first
   if (ATTACKING_MINION.hasEnergyShield) {
-    G.boards[currentPlayer][index].hasEnergyShield = false;
+    G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasEnergyShield = false;
   } else {
     // Subtract `MINION_BEING_ATTACKED.currentAttack`
     // from ATTACKING_MINION_INDEX's currentHealth value

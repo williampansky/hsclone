@@ -67,7 +67,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     case 'CORE_057':
       if (G.boards[currentPlayer].length === 7) return; // max minions
 
-      const entourage = ['CORE_057a', 'CORE_05b', 'CORE_057c'];
+      const entourage = ['CORE_057a', 'CORE_057b', 'CORE_057c'];
       const randomEntourageID = random.Shuffle(entourage);
       const randomEntourage = createBoardSlotObject(randomEntourageID[0]);
 
@@ -79,14 +79,17 @@ const initCoreSpell = (G, ctx, cardId, index) => {
         });
       }
 
-      // CORE_05b gives your other Creatures with +1 Attack.
-      if (randomEntourageID[0] === 'CORE_05b') {
+      // CORE_057b gives your other Creatures with +1 Attack.
+      if (randomEntourageID[0] === 'CORE_057b') {
         G.boards[currentPlayer].forEach(slot => {
           slot.currentAttack = slot.currentAttack + 1;
           slot.totalAttack = slot.totalAttack + 1;
         });
 
-        G.boards[currentPlayer].push(randomEntourage);
+        G.boards[currentPlayer].push({
+          ...randomEntourage,
+          hasBoon: true
+        });
       }
 
       // CORE_057c the Guard mechanic
