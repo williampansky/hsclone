@@ -65,39 +65,42 @@ const initCoreSpell = (G, ctx, cardId, index) => {
 
     // Summon a random Creature companion minion.
     case 'CORE_057':
-      if (G.boards[currentPlayer].length === 7) return; // max minions
+      if (G.boards[currentPlayer].length === 7) return;
+      // max minions
+      else {
+        const entourage = ['CORE_057a', 'CORE_057b', 'CORE_057c'];
+        const randomEntourageID = random.Shuffle(entourage);
+        const randomEntourage = createBoardSlotObject(randomEntourageID[0]);
 
-      const entourage = ['CORE_057a', 'CORE_057b', 'CORE_057c'];
-      const randomEntourageID = random.Shuffle(entourage);
-      const randomEntourage = createBoardSlotObject(randomEntourageID[0]);
+        // CORE_057a needs the Stampede mechanic
+        if (randomEntourageID[0] === 'CORE_057a') {
+          G.boards[currentPlayer].push({
+            ...randomEntourage,
+            canAttack: true
+          });
+        }
 
-      // CORE_057a needs the Stampede mechanic
-      if (randomEntourageID[0] === 'CORE_057a') {
-        G.boards[currentPlayer].push({
-          ...randomEntourage,
-          canAttack: true
-        });
-      }
+        // CORE_057b restore 2 health to all friendlies
+        if (randomEntourageID[0] === 'CORE_057b') {
+          const HEAL_AMOUNT = 2;
 
-      // CORE_057b gives your other Creatures with +1 Attack.
-      if (randomEntourageID[0] === 'CORE_057b') {
-        G.boards[currentPlayer].forEach(slot => {
-          slot.currentAttack = slot.currentAttack + 1;
-          slot.totalAttack = slot.totalAttack + 1;
-        });
+          // heal player
+          health.add(G, ctx.currentPlayer, HEAL_AMOUNT);
 
-        G.boards[currentPlayer].push({
-          ...randomEntourage,
-          hasBoon: true
-        });
-      }
+          // heal minions w/loop method
+          for (let i = 0; i < G.boards[ctx.currentPlayer].length; i++)
+            boards.addToMinionHealth(G, ctx.currentPlayer, i, HEAL_AMOUNT);
 
-      // CORE_057c the Guard mechanic
-      if (randomEntourageID[0] === 'CORE_057c') {
-        G.boards[currentPlayer].push({
-          ...randomEntourage,
-          hasGuard: true
-        });
+          G.boards[currentPlayer].push(randomEntourage);
+        }
+
+        // CORE_057c the Guard mechanic
+        if (randomEntourageID[0] === 'CORE_057c') {
+          G.boards[currentPlayer].push({
+            ...randomEntourage,
+            hasGuard: true
+          });
+        }
       }
       break;
 

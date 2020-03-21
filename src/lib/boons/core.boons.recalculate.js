@@ -36,17 +36,6 @@ const recalculateCoreBoon = (G, player, cardId, index) => {
       });
       break;
 
-    // <strong>Boon:</strong> Provide your other Creatures with +1 Attack.
-    case 'CORE_057b':
-      G.boards[player].forEach((slot, i) => {
-        if (i === index) return;
-        if (slot.minionData.race === RACE[1]) {
-          slot.currentAttack = slot.currentAttack - 1;
-          slot.totalAttack = slot.totalAttack - 1;
-        }
-      });
-      break;
-
     default:          break;
   }
 };

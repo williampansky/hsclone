@@ -14,6 +14,7 @@ import RACE from 'enums/race.enums';
 import playerIsDisabled from 'lib/state/player-is-disabled';
 import getCardByID from 'lib/utils/get-card-by-id';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
+import TARGET_CONTEXT from 'enums/target-context.enum';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -124,14 +125,33 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       G.boards[otherPlayer][index].currentHealth = 1;
       break;
 
-    // If you control a Creature, deal 5 damage to a target—else, deal 3 damage.
+    // Deal 5 damage if you target an enemy Creature; else deal 3 damage.
     case 'CORE_058':
-      if (THEIR_SLOT.minionData.race === RACE[1]) {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 5);
-        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+      if (
+        playerCtx === TARGET_CONTEXT[2] &&
+        targetCtx === WARCRY_TARGET_CONTEXT[2]
+      ) {
+        health.subtract(G, otherPlayer, 3);
       } else {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 3);
-        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+        if (THEIR_SLOT.minionData.race === RACE[1]) {
+          boards.subtractFromMinionHealth(G, otherPlayer, index, 5);
+          boards.killMinionIfHealthIsZero(
+            G,
+            ctx,
+            otherPlayer,
+            THEIR_SLOT,
+            index
+          );
+        } else {
+          boards.subtractFromMinionHealth(G, otherPlayer, index, 3);
+          boards.killMinionIfHealthIsZero(
+            G,
+            ctx,
+            otherPlayer,
+            THEIR_SLOT,
+            index
+          );
+        }
       }
       break;
 

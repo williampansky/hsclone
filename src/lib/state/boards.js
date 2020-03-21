@@ -13,11 +13,12 @@ import { _aTMH, _sFMH } from 'lib/state/board-methods/minion-health';
 import { _pC } from 'lib/state/board-methods/place-card-on-board';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 
+// createBoardSlotObject('CORE_057b')
 // prettier-ignore
 const boards = {
   __DATA_MODEL: {
-    '0': [createBoardSlotObject('CORE_057b')],
-    '1': [createBoardSlotObject('CORE_057b')]
+    '0': [{ ...createBoardSlotObject('CORE_034'), currentHealth: 4 }],
+    '1': [{ ...createBoardSlotObject('CORE_062') }]
   },
 
   // minion health
