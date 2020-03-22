@@ -12,6 +12,7 @@ import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
+import playerUsedClassSkill from 'lib/state/player-used-class-skill';
 import playerIsAttacking from 'lib/state/player-is-attacking';
 import players from 'lib/state/players';
 import playerShieldPoints from 'lib/state/player-shield-points';
@@ -36,6 +37,7 @@ export default {
   playerIsAttacking: playerIsAttacking.__DATA_MODEL,
   playerIsDisabled: playerIsDisabled.__DATA_MODEL,
   playerCanUseClassSkill: playerCanUseClassSkill.__DATA_MODEL,
+  playerUsedClassSkill: playerUsedClassSkill.__DATA_MODEL,
   playerShieldPoints: playerShieldPoints.__DATA_MODEL,
   playerWeapon: playerWeapon.__DATA_MODEL,
   playerAttackValue: playerAttackValue.__DATA_MODEL,

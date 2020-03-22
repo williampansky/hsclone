@@ -120,6 +120,9 @@ const onBegin = (G, ctx) => {
   // reset warcry states
   G.warcryObject = { '0': null, '1': null };
 
+  // reset playerUsedClassSkill states
+  G.playerUsedClassSkill = { '0': false, '1': false };
+
   // DEBUG
   if (GAME_CONFIG.debugData.enableDebugCard === true) {
     if (G.players[currentPlayer].hand.length >= 9) return;

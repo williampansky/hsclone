@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PlayerHealth from 'components/player-health/PlayerHealth';
+import AvatarAnimation from 'components/animations/avatars/AvatarAnimation';
 import AvatarInteraction from 'components/interactions/avatars/AvatarInteraction';
 import CARDCLASS from 'enums/cardClass.enums';
 
@@ -18,7 +19,8 @@ export default function TheirAvatar({
     health,
     playerShieldPoints,
     playerCanBeHealed,
-    playerIsAttacking
+    playerIsAttacking,
+    playerUsedClassSkill
   } = G;
   const THEIR_HEALTH = health[theirID];
   const THEIR_SHIELD = playerShieldPoints[theirID];
@@ -68,6 +70,12 @@ export default function TheirAvatar({
         yourID={yourID}
         playerIsAttacking={playerIsAttacking[yourID]}
         playerCanBeHealed={playerCanBeHealed[theirID]}
+      />
+
+      <AvatarAnimation
+        G={G}
+        youUsedClassSkill={playerUsedClassSkill[yourID]}
+        theyUsedClassSkill={playerUsedClassSkill[theirID]}
       />
     </div>
   );

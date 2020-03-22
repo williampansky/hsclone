@@ -7,6 +7,7 @@ import createWeaponObject from 'lib/creators/create-weapon-object';
 import createSpellObject from 'lib/creators/create-spell-object';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerAttackValue from 'lib/state/player-attack-value';
+import playerUsedClassSkill from 'lib/state/player-used-class-skill';
 
 /**
  * Backstab your opponent for 2 damage.
@@ -17,6 +18,7 @@ export const backstabOpponent = (G, ctx, amount = 2) => {
   const { turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+  playerUsedClassSkill.enable(G, currentPlayer);
   health.subtract(G, otherPlayer, amount);
 };
 
