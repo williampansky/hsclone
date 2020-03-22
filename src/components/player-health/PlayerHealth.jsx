@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ReactSVG } from 'react-svg';
@@ -6,10 +6,21 @@ import svg from 'assets/svgs/sphere.svg';
 import PlayerShield from 'components/player-health/PlayerShield';
 
 export default function PlayerHealth({ health, player, shieldPoints }) {
+  const [animation, setAnimation] = useState(false);
+
+  useEffect(() => {
+    setAnimation(true);
+    setTimeout(() => {
+      setAnimation(false);
+    }, 200);
+  }, [health]);
+
   return (
     <Component data-file="player-health/PlayerHealth" player={player}>
       <ReactSVG className="svg" src={svg} />
-      <HealthValue>{health}</HealthValue>
+      <HealthValue animation={animation} health={health}>
+        {health}
+      </HealthValue>
       <PlayerShield player={player} shieldPoints={shieldPoints} />
     </Component>
   );
@@ -26,7 +37,7 @@ const Component = styled.div`
   border-radius: 50%;
   display: flex;
   flex-flow: column nowrap;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   height: var(--player-health-size);
   justify-content: center;
@@ -68,7 +79,7 @@ const Component = styled.div`
 const HealthValue = styled.div`
   position: absolute;
   z-index: 1;
-  color: white;
+  color: ${p => (p.health < 30 ? '#ff3535' : 'white')};
   font-size: 1em;
   line-height: 1;
   font-family: 'Carter One', sans-serif;
@@ -86,6 +97,6 @@ const HealthValue = styled.div`
     0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
     0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
     0 0 1px black;
-  /* text-shadow: 0px 1px 1px rgba(112, 9, 32, 0.825),
-    0px 1px 1px rgba(51, 2, 13, 0.665); */
+  transform: ${p => (p.animation ? 'scale(1.5)' : 'scale(1)')};
+  transition: transform 100ms ease-in-out;
 `;
