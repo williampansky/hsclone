@@ -10,9 +10,12 @@ import recalculateCardMechanics from 'lib/mechanics/recalculate-mechanics';
  * @param {number} index
  */
 export const _kM = (G, ctx, player, boardSlot, index) => {
+  if (!G.boards[player][index]) return;
   const { minionData } = boardSlot;
-  G.boards[player].splice(index, 1);
-  recalculateCardMechanics(G, ctx, player, minionData, index);
+  if (G.boards[player][index].isDead) {
+    G.boards[player].splice(index, 1);
+    recalculateCardMechanics(G, ctx, player, minionData, index);
+  }
 };
 
 /**

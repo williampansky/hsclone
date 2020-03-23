@@ -9,6 +9,8 @@ import HasEnergyShield from 'components/mechanics/HasEnergyShield';
 import IsConcealed from 'components/mechanics/IsConcealed';
 import IsDisabled from 'components/mechanics/IsDisabled';
 import HasOnslaught from 'components/mechanics/HasOnslaught';
+import IsDeadPoof from 'components/animations/minions/IsDeadPoof';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
 
 export default function BoardSlot({
   G,
@@ -57,107 +59,98 @@ export default function BoardSlot({
     willExpire
   } = data;
 
-  const KillMinion = React.useCallback(() => {
-    return killMinion(theirID, data, index);
-  }, [theirID, data, index, killMinion]);
+  const playerID = board === PLAYER_BOARDS[1] ? yourID : theirID;
 
-  React.useEffect(() => {
-    isDead &&
-      setTimeout(() => {
-        KillMinion();
+  const KillMinion = React.useCallback(
+    index => {
+      return setTimeout(() => {
+        killMinion(playerID, data, index);
       }, 900);
-  }, [isDead, KillMinion]);
+    },
+    [playerID, data, killMinion]
+  );
 
-  if (isDead) {
-    return (
-      <div
-        data-file="board-slots/BoardSlot"
-        data-slot={index}
-        data-render={render}
-        className={'board-slot has-minion'}
-      >
-        <img
-          alt=""
-          className={'poof'}
-          src={require('assets/images/animation-props/poof.gif')}
+  // prettier-ignore
+  React.useEffect(() => {
+    isDead &&  KillMinion(index);
+  }, [index, isDead, KillMinion]);
+
+  return (
+    <div
+      data-file="board-slots/BoardSlot"
+      data-slot={index}
+      data-render={render}
+      className={[
+        'board-slot',
+        data === null ? 'is-empty' : '',
+        data !== null ? 'has-minion' : '',
+        data === null && !canDrop ? 'cannot-drop-minion' : '',
+        isDead ? 'is-dead' : ''
+      ].join(' ')}
+      onClick={onClick}
+    >
+      {/* interactions layer */}
+      {minionData && (
+        <MinionInteraction
+          G={G}
+          ctx={ctx}
+          moves={moves}
+          isActive={isActive}
+          board={board}
+          index={index}
+          render={render}
+          data={data}
+          canAttack={canAttack}
+          canBeAttackedByMinion={canBeAttackedByMinion}
+          canBeAttackedByPlayer={canBeAttackedByPlayer}
+          canBeAttackedBySpell={canBeAttackedBySpell}
+          canBeAttackedByWarcry={canBeAttackedByWarcry}
+          canBeBuffed={canBeBuffed}
+          canBeHealed={canBeHealed}
+          canBeDebuffed={canBeDebuffed}
+          canBeExpired={canBeExpired}
+          canBeReturned={canBeReturned}
+          canBeSacrificed={canBeSacrificed}
+          canBeStolen={canBeStolen}
+          canReceiveEnergyShield={canReceiveEnergyShield}
+          canReceiveOnslaught={canReceiveOnslaught}
+          hasBoon={hasBoon}
+          hasEnergyShield={hasEnergyShield}
+          hasGuard={hasGuard}
+          hasOnslaught={hasOnslaught}
+          isAttacking={selectedMinionIndex[yourID] === index}
+          isConcealed={isConcealed}
+          isCursed={isCursed}
+          isDisabled={isDisabled}
+          totalAttack={totalAttack}
+          totalHealth={totalHealth}
+          willExpire={willExpire}
         />
-      </div>
-    );
-  } else {
-    return (
-      <div
-        data-file="board-slots/BoardSlot"
-        data-slot={index}
-        data-render={render}
-        className={[
-          'board-slot',
-          data === null ? 'is-empty' : '',
-          data !== null ? 'has-minion' : '',
-          data === null && !canDrop ? 'cannot-drop-minion' : ''
-        ].join(' ')}
-        onClick={onClick}
-      >
-        {/* interactions layer */}
-        {minionData && (
-          <MinionInteraction
-            G={G}
-            ctx={ctx}
-            moves={moves}
-            isActive={isActive}
-            board={board}
-            index={index}
-            render={render}
-            data={data}
-            canAttack={canAttack}
-            canBeAttackedByMinion={canBeAttackedByMinion}
-            canBeAttackedByPlayer={canBeAttackedByPlayer}
-            canBeAttackedBySpell={canBeAttackedBySpell}
-            canBeAttackedByWarcry={canBeAttackedByWarcry}
-            canBeBuffed={canBeBuffed}
-            canBeHealed={canBeHealed}
-            canBeDebuffed={canBeDebuffed}
-            canBeExpired={canBeExpired}
-            canBeReturned={canBeReturned}
-            canBeSacrificed={canBeSacrificed}
-            canBeStolen={canBeStolen}
-            canReceiveEnergyShield={canReceiveEnergyShield}
-            canReceiveOnslaught={canReceiveOnslaught}
-            hasBoon={hasBoon}
-            hasEnergyShield={hasEnergyShield}
-            hasGuard={hasGuard}
-            hasOnslaught={hasOnslaught}
-            isAttacking={selectedMinionIndex[yourID] === index}
-            isConcealed={isConcealed}
-            isCursed={isCursed}
-            isDisabled={isDisabled}
-            totalAttack={totalAttack}
-            totalHealth={totalHealth}
-            willExpire={willExpire}
-          />
-        )}
+      )}
 
-        {/* mechanics */}
-        {minionData && hasBoon && <HasBoon />}
-        {minionData && hasEnergyShield && <HasEnergyShield />}
-        {minionData && hasGuard && <HasGuard />}
-        {minionData && hasOnslaught && <HasOnslaught />}
-        {minionData && isConcealed && <IsConcealed />}
-        {minionData && isDisabled && <IsDisabled />}
-        {minionData && willExpire && <WillExpire />}
+      {/* mechanics */}
+      {minionData && hasBoon && <HasBoon />}
+      {minionData && hasEnergyShield && <HasEnergyShield />}
+      {minionData && hasGuard && <HasGuard />}
+      {minionData && hasOnslaught && <HasOnslaught />}
+      {minionData && isConcealed && <IsConcealed />}
+      {minionData && isDisabled && <IsDisabled />}
+      {minionData && willExpire && <WillExpire />}
 
-        {/* visible minion component */}
-        {minionData && (
-          <Minion
-            currentAttack={currentAttack}
-            currentHealth={currentHealth}
-            data={minionData}
-            slot={index}
-            totalHealth={totalHealth}
-          />
-        )}
-      </div>
-    );
-  }
+      {/* visible minion component */}
+      {minionData && (
+        <Minion
+          currentAttack={currentAttack}
+          currentHealth={currentHealth}
+          data={minionData}
+          slot={index}
+          totalHealth={totalHealth}
+        />
+      )}
+
+      {isDead && <IsDeadPoof />}
+    </div>
+  );
 }
 
 BoardSlot.propTypes = {

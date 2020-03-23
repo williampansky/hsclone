@@ -18,7 +18,7 @@ import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 const boards = {
   __DATA_MODEL: {
     '0': [{ ...createBoardSlotObject('CORE_034'), currentHealth: 4 }],
-    '1': [{ ...createBoardSlotObject('CORE_062') }]
+    '1': [{ ...createBoardSlotObject('CORE_062') }, { ...createBoardSlotObject('CORE_062'), hasEnergyShield: true }]
   },
 
   // minion health
