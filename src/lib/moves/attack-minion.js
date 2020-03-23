@@ -71,6 +71,9 @@ const attackMinion = (G, ctx, index) => {
     boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
   }
 
+  // remove concealed once you attack
+  G.boards[currentPlayer][ATTACKING_MINION_INDEX].isConcealed = false;
+
   // disable MINION_BEING_ATTACKED's ability to be attacked
   boards.disableCanBeAttacked(G, currentPlayer, MINION_BEING_ATTACKED_INDEX);
 

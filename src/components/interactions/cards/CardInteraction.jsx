@@ -19,6 +19,7 @@ export default function CardInteraction({
   card,
   index
 }) {
+  const [isAnimating, setIsAnimating] = React.useState(false);
   const { selectedCardIndex, warcryObject } = G;
   const { currentPlayer, phase } = ctx;
   const { deselectCard, hoverCard, selectCard } = moves;
@@ -40,6 +41,12 @@ export default function CardInteraction({
   useEffect(() => {
     phase === 'play' && isActive && dispatchHover(isHovering, nullCardIndex);
   }, [isActive, phase, isHovering, nullCardIndex, dispatchHover]);
+
+  // prettier-ignore
+  useEffect(() => {
+    setIsAnimating(false);
+    // setTimeout(() => { setIsAnimating(false) }, 2000);
+  }, []);
 
   const {
     artist,
@@ -121,14 +128,16 @@ export default function CardInteraction({
     }, 0);
   }
 
-  // prettier-ignore
   return (
     <div
       data-file="interactions/cards/CardInteractionLayer"
       data-index={index}
-      data-is-playable={IS_PLAYABLE}
+      data-is-playable={!isAnimating && IS_PLAYABLE}
       data-is-selected={IS_SELECTED}
-      className={'card-in-your-hand'}
+      className={[
+        'card-in-your-hand',
+        isAnimating ? 'draw-card-animation' : ''
+      ].join(' ')}
       {...hoverProps}
     >
       {isActive ? (
@@ -172,8 +181,12 @@ export default function CardInteraction({
 
       {isActive ? (
         <React.Fragment>
-          {IS_SELECTED && <CardIsSelected onClick={() => deselectPlayableCard()} />}
-          {IS_PLAYABLE && !IS_SELECTED && <CardIsPlayable onClick={() => selectPlayableCard(index)} />}
+          {IS_SELECTED && (
+            <CardIsSelected onClick={() => deselectPlayableCard()} />
+          )}
+          {IS_PLAYABLE && !IS_SELECTED && (
+            <CardIsPlayable onClick={() => selectPlayableCard(index)} />
+          )}
         </React.Fragment>
       ) : null}
     </div>

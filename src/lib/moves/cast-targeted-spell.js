@@ -78,6 +78,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
         currentAttack: YOUR_SLOT.currentAttack + 2,
         currentHealth: YOUR_SLOT.currentHealth + 2,
         hasGuard: true,
+        isConcealed: false,
         totalAttack: YOUR_SLOT.totalAttack + 2,
         totalHealth: YOUR_SLOT.totalHealth + 2
       };
@@ -319,7 +320,8 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       G.boards[currentPlayer][index] = {
         ...G.boards[currentPlayer][index],
         currentHealth: G.boards[currentPlayer][index].totalHealth,
-        hasGuard: true
+        hasGuard: true,
+        isConcealed: false
       };
       break;
 
@@ -352,7 +354,8 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     case 'CORE_109':
       G.boards[otherPlayer][index] = {
         ...createBoardSlotObject('CORE_109a'),
-        hasGuard: true
+        hasGuard: true,
+        isConcealed: false
       };
       break;
 

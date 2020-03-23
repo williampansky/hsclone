@@ -9,6 +9,7 @@ const playSpellByCardId = (G, ctx, cardId, target = null) => {
     case 'CORE_045':
     case 'CORE_048':
     case 'CORE_049':
+    case 'CORE_055':
     case 'CORE_057':
     case 'CORE_060':
     case 'CORE_063':

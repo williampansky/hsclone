@@ -20,6 +20,7 @@ export const _dMCBA = (G, player, index) => {
  */
 export const _eMCBA = (G, player, index) => {
   if (!G.boards[player][index]) return;
+  if (G.boards[player][index].isConcealed === true) return;
   G.boards[player][index].canBeAttackedByMinion = true;
 };
 

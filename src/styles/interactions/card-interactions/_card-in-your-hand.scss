@@ -16,7 +16,7 @@
     pointer-events: none;
   }
 
-  &:before {
+  &[data-is-playable='true']:before {
     border-radius: var(--card-border-radius);
     content: '';
     box-shadow: -5px 5px 5px hsla(0, 0%, 0%, 0.925);
@@ -29,7 +29,7 @@
     pointer-events: none;
   }
 
-  &:after {
+  &[data-is-playable='true']:after {
     animation: none;
     background: #fff;
     bottom: 0;

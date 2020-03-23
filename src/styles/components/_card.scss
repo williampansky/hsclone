@@ -416,3 +416,38 @@
     0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
     0 0 1px black;
 }
+
+// draw/entrance animation
+// prettier-ignore
+.draw-card-animation {
+  .card {
+    // animation: drawCard 2000ms cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  // &:nth-child(1) .card { animation-delay: 0ms; }
+  // &:nth-child(2) .card { animation-delay: 2000ms; }
+  // &:nth-child(3) .card { animation-delay: 4000ms; }
+  // &:nth-child(4) .card { animation-delay: 6000ms; }
+  // &:nth-child(5) .card { animation-delay: 8000ms; }
+  // &:nth-child(6) .card { animation-delay: 10000ms; }
+  // &:nth-child(7) .card { animation-delay: 12000ms; }
+}
+
+@keyframes drawCard {
+  0% {
+    opacity: 0;
+    transform: translate3d(1000%, -200%, 0) scale(0.1) rotate(45deg);
+  }
+  10%,
+  20%,
+  40%,
+  60%,
+  80%,
+  90% {
+    opacity: 1;
+    transform: translate3d(400%, -200%, 0) scale(2.525);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}

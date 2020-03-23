@@ -39,7 +39,10 @@ const castTargetedWarcry = (G, ctx, playerCtx, targetCtx, targetIdx) => {
         ...G.boards[currentPlayer][targetIdx],
         currentAttack: G.boards[currentPlayer][targetIdx].currentAttack + 1,
         currentHealth: G.boards[currentPlayer][targetIdx].currentHealth + 2,
-        hasGuard: true
+        hasGuard: true,
+        isConcealed: false,
+        totalAttack: G.boards[currentPlayer][targetIdx].totalAttack + 1,
+        totalHealth: G.boards[currentPlayer][targetIdx].totalHealth + 2,
       };
       break;
 

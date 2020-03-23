@@ -53,6 +53,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
      * <strong>Warcry:</strong> Give a friendly minion +1 Attack.
      */
     case 'CORE_054':
+      if (G.boards[currentPlayer].length === 1) return;
       G.warcryObject[currentPlayer] = createWarcryObject(cardId);
       G.boards[currentPlayer].forEach((slot, i) => {
         if (index !== i) slot.canBeBuffed = true;
@@ -63,6 +64,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
      * <strong>Warcry</strong>: Buff a friendly minion with <strong>Guard</strong> and +1/+2 stats.
      */
     case 'CORE_059':
+      if (G.boards[currentPlayer].length === 1) return;
       G.warcryObject[currentPlayer] = createWarcryObject(cardId);
       G.boards[currentPlayer].forEach((slot, i) => {
         if (index !== i) slot.canReceiveGuard = true;
@@ -80,6 +82,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
      * <strong>Warcry:</strong> Give a friendly minion <strong>Onslaught</strong>.
      */
     case 'CORE_062':
+      if (G.boards[currentPlayer].length === 1) return;
       G.warcryObject[currentPlayer] = createWarcryObject(cardId);
       G.boards[currentPlayer].forEach((slot, i) => {
         if (index !== i) slot.canReceiveOnslaught = true;
@@ -97,6 +100,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
      * <strong>Warcry:</strong> Give a friendly minion <strong>Onslaught</strong>.
      */
     case 'CORE_099':
+      if (G.boards[currentPlayer].length === 1) return;
       G.warcryObject[currentPlayer] = createWarcryObject(cardId);
       G.boards[currentPlayer].forEach((slot, i) => {
         if (index !== i) slot.canReceiveOnslaught = true;
@@ -273,6 +277,7 @@ const CORE_041 = (G, ctx, index) => {
  * <strong>Warcry:</strong> Give a friendly minion <strong>Onslaught</strong>.
  */
 const CORE_110 = (G, ctx, cardId) => {
+  if (G.boards[ctx.currentPlayer].length === 1) return;
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
   G.boards[ctx.currentPlayer].forEach(slot => {
     slot.canReceiveOnslaught = true;

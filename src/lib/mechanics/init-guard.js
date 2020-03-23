@@ -6,7 +6,8 @@
  */
 const enableMinionHasGuard = (G, player, index) => {
   if (!G.boards[player][index]) return;
-  return (G.boards[player][index].hasGuard = true);
+  G.boards[player][index].hasGuard = true;
+  G.boards[player][index].isConcealed = false;
 };
 
 const initGuard = (G, ctx, index) => {
