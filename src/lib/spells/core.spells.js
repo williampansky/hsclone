@@ -63,6 +63,11 @@ const initCoreSpell = (G, ctx, cardId, index) => {
       energy.incrementTotal(G, currentPlayer);
       break;
 
+    // Draw 2 cards.
+    case 'CORE_055':
+      drawCard(G, ctx, currentPlayer, 2);
+      break;
+
     // Summon a random Creature companion minion.
     case 'CORE_057':
       if (G.boards[currentPlayer].length === 7) return;
@@ -94,11 +99,11 @@ const initCoreSpell = (G, ctx, cardId, index) => {
           G.boards[currentPlayer].push(randomEntourage);
         }
 
-        // CORE_057c the Guard mechanic
+        // CORE_057c has the Concealed mechanic
         if (randomEntourageID[0] === 'CORE_057c') {
           G.boards[currentPlayer].push({
             ...randomEntourage,
-            hasGuard: true
+            isConcealed: true
           });
         }
       }

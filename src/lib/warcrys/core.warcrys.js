@@ -8,6 +8,7 @@ import playerWeapon from 'lib/state/player-weapon';
 import getCardByID from 'lib/utils/get-card-by-id';
 import { discardCardFromHandByIndex } from 'lib/moves/discard-card';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import drawCard from 'lib/moves/draw-card';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
@@ -49,6 +50,43 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
       return CORE_041(G, ctx, index);
 
     /**
+     * <strong>Warcry:</strong> Give a friendly minion +1 Attack.
+     */
+    case 'CORE_054':
+      G.warcryObject[currentPlayer] = createWarcryObject(cardId);
+      G.boards[currentPlayer].forEach((slot, i) => {
+        if (index !== i) slot.canBeBuffed = true;
+      });
+      break;
+
+    /**
+     * <strong>Warcry</strong>: Buff a friendly minion with <strong>Guard</strong> and +1/+2 stats.
+     */
+    case 'CORE_059':
+      G.warcryObject[currentPlayer] = createWarcryObject(cardId);
+      G.boards[currentPlayer].forEach((slot, i) => {
+        if (index !== i) slot.canReceiveGuard = true;
+      });
+      break;
+
+    /**
+     * <strong>Warcry:</strong> Draw 2 cards.
+     */
+    case 'CORE_061':
+      drawCard(G, ctx, currentPlayer, 2);
+      break;
+
+    /**
+     * <strong>Warcry:</strong> Give a friendly minion <strong>Onslaught</strong>.
+     */
+    case 'CORE_062':
+      G.warcryObject[currentPlayer] = createWarcryObject(cardId);
+      G.boards[currentPlayer].forEach((slot, i) => {
+        if (index !== i) slot.canReceiveOnslaught = true;
+      });
+      break;
+
+    /**
      * <strong>Warcry:</strong> Restore 6 Health to yourself.
      */
     case 'CORE_082':
@@ -56,7 +94,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
       break;
 
     /**
-     * <strong>Warcry:</strong> Give a friendly minion <em>Onslaught</em>.
+     * <strong>Warcry:</strong> Give a friendly minion <strong>Onslaught</strong>.
      */
     case 'CORE_099':
       G.warcryObject[currentPlayer] = createWarcryObject(cardId);

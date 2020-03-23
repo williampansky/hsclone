@@ -17,8 +17,8 @@ import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 // prettier-ignore
 const boards = {
   __DATA_MODEL: {
-    '0': [{ ...createBoardSlotObject('CORE_034'), currentHealth: 4 }],
-    '1': [{ ...createBoardSlotObject('CORE_062') }, { ...createBoardSlotObject('CORE_062'), hasEnergyShield: true }]
+    '0': [{ ...createBoardSlotObject('CORE_054') }],
+    '1': []
   },
 
   // minion health

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 export default function HasGuard() {
-  return <Component data-file="mechanics/HasGuard" />;
+  return <Component2 data-file="mechanics/HasGuard" />;
 }
 
 HasGuard.propTypes = {
@@ -12,32 +12,17 @@ HasGuard.propTypes = {
   index: PropTypes.number
 };
 
-const Component = styled.div`
+const Component2 = styled.div`
+  background-image: url('http://www.clker.com/cliparts/D/0/J/J/K/a/shield-hi.png');
+  background-repeat: no-repeat;
+  background-size: contain;
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 112%;
+  top: -5px;
+  right: 0;
+  bottom: 0;
+  left: 0;
   pointer-events: none;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    background: black;
-    pointer-events: none;
-  }
-
-  &:before {
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(50% 15%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    top: -35px;
-  }
-
-  &:after {
-    width: 80%;
-    height: 75%;
-    clip-path: polygon(50% 15%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    bottom: -10px;
-    left: 12px;
-  }
+  z-index: -1;
 `;

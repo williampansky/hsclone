@@ -42,6 +42,7 @@ export default function BoardSlot({
     canBeSacrificed,
     canBeStolen,
     canReceiveEnergyShield,
+    canReceiveGuard,
     canReceiveOnslaught,
     currentAttack,
     currentHealth,
@@ -113,6 +114,7 @@ export default function BoardSlot({
           canBeSacrificed={canBeSacrificed}
           canBeStolen={canBeStolen}
           canReceiveEnergyShield={canReceiveEnergyShield}
+          canReceiveGuard={canReceiveGuard}
           canReceiveOnslaught={canReceiveOnslaught}
           hasBoon={hasBoon}
           hasEnergyShield={hasEnergyShield}

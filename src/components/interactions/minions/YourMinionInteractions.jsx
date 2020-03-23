@@ -12,6 +12,7 @@ import CanBeReturned from 'components/interactions/minions/CanBeReturned';
 import CanBeStolen from 'components/interactions/minions/CanBeStolen';
 import CanReceiveEnergyShield from 'components/interactions/minions/CanReceiveEnergyShield';
 import CanReceiveOnslaught from 'components/interactions/minions/CanReceiveOnslaught';
+import CanReceiveGuard from './CanReceiveGuard';
 
 export default function YourMinionInteractions({
   G,
@@ -28,6 +29,7 @@ export default function YourMinionInteractions({
   canBeSacrificed,
   canBeStolen,
   canReceiveEnergyShield,
+  canReceiveGuard,
   canReceiveOnslaught,
   hasBoon,
   hasEnergyShield,
@@ -69,6 +71,10 @@ export default function YourMinionInteractions({
 
   if (canReceiveEnergyShield) {
     return <CanReceiveEnergyShield moves={moves} index={index} />;
+  }
+
+  if (canReceiveGuard) {
+    return <CanReceiveGuard G={G} ctx={ctx} moves={moves} index={index} />;
   }
 
   if (canReceiveOnslaught) {

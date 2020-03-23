@@ -26,6 +26,27 @@ const castTargetedWarcry = (G, ctx, playerCtx, targetCtx, targetIdx) => {
     case 'CORE_016':  attack(G, ctx, targetCtx, targetIdx, amount); break;
     case 'CORE_021':  buff(G, ctx, targetIdx, amount); break;
     case 'CORE_036':  attack(G, ctx, targetCtx, targetIdx, amount); break;
+
+    case 'CORE_054':
+      G.boards[currentPlayer][targetIdx] = {
+        ...G.boards[currentPlayer][targetIdx],
+        currentAttack: G.boards[currentPlayer][targetIdx].currentAttack + 1
+      };
+      break;
+    
+    case 'CORE_059':
+      G.boards[currentPlayer][targetIdx] = {
+        ...G.boards[currentPlayer][targetIdx],
+        currentAttack: G.boards[currentPlayer][targetIdx].currentAttack + 1,
+        currentHealth: G.boards[currentPlayer][targetIdx].currentHealth + 2,
+        hasGuard: true
+      };
+      break;
+
+    case 'CORE_062':
+      G.boards[currentPlayer][targetIdx].hasOnslaught = true;
+      break;
+
     case 'CORE_099':  G.boards[currentPlayer][targetIdx].hasOnslaught = true; break;
     case 'CORE_110':  G.boards[currentPlayer][targetIdx].hasOnslaught = true; break;
     case 'CORE_112':  attack(G, ctx, targetCtx, targetIdx, amount); break;
@@ -51,6 +72,7 @@ const castTargetedWarcry = (G, ctx, playerCtx, targetCtx, targetIdx) => {
     slot.canBeSacrificed = false;
     slot.canBeStolen = false;
     slot.canReceiveEnergyShield = false;
+    slot.canReceiveGuard = false;
     slot.canReceiveOnslaught = false;
   });
 
@@ -67,6 +89,7 @@ const castTargetedWarcry = (G, ctx, playerCtx, targetCtx, targetIdx) => {
     slot.canBeSacrificed = false;
     slot.canBeStolen = false;
     slot.canReceiveEnergyShield = false;
+    slot.canReceiveGuard = false;
     slot.canReceiveOnslaught = false;
   });
 };

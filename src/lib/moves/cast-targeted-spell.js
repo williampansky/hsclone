@@ -116,13 +116,21 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
 
     // Attack something for 2 damage.
     case 'CORE_053':
-      boards.subtractFromMinionHealth(G, otherPlayer, index, 2);
-      boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        health.subtract(G, otherPlayer, 2);
+      } else {
+        boards.subtractFromMinionHealth(G, otherPlayer, index, 2);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+      }
       break;
 
     // Change a minion's Health down to 1.
     case 'CORE_056':
-      G.boards[otherPlayer][index].currentHealth = 1;
+      G.boards[otherPlayer][index] = {
+        ...G.boards[otherPlayer][index],
+        currentHealth: 1,
+        totalHealth: 1
+      };
       break;
 
     // Deal 5 damage if you target an enemy Creature; else deal 3 damage.
@@ -197,9 +205,13 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       G.boards[currentPlayer][index].hasEnergyShield = true;
       break;
 
-    // Change a minion's Health down to 1.
+    // Change a minion's Attack down to 1.
     case 'CORE_075':
-      G.boards[otherPlayer][index].currentAttack = 1;
+      G.boards[otherPlayer][index] = {
+        ...G.boards[otherPlayer][index],
+        currentAttack: 1,
+        totalAttack: 1
+      };
       break;
 
     // Restore 6 Health to yourself or a friendly minion.

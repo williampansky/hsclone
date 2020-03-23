@@ -24,6 +24,7 @@ export default function MinionInteraction({
   canBeSacrificed,
   canBeStolen,
   canReceiveEnergyShield,
+  canReceiveGuard,
   canReceiveOnslaught,
   hasBoon,
   hasEnergyShield,
@@ -93,6 +94,7 @@ export default function MinionInteraction({
           canBeSacrificed={canBeSacrificed}
           canBeStolen={canBeStolen}
           canReceiveEnergyShield={canReceiveEnergyShield}
+          canReceiveGuard={canReceiveGuard}
           canReceiveOnslaught={canReceiveOnslaught}
           hasBoon={hasBoon}
           hasEnergyShield={hasEnergyShield}
@@ -130,6 +132,7 @@ MinionInteraction.propTypes = {
   canBeSacrificed: PropTypes.bool,
   canBeStolen: PropTypes.bool,
   canReceiveEnergyShield: PropTypes.bool,
+  canReceiveGuard: PropTypes.bool,
   canReceiveOnslaught: PropTypes.bool,
   hasBoon: PropTypes.bool,
   hasEnergyShield: PropTypes.bool,
