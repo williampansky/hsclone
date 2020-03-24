@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 const GIF = require('assets/images/animation-props/nebula-explosion.gif');
 
-export default function CORE_072({ onEnd }) {
+export default function CORE_065({ onEnd }) {
   // prettier-ignore
   useEffect(() => {
     setTimeout(() => { onEnd(); }, 400);
   }, [onEnd]);
 
   return (
-    <Component data-file="animations/global/CORE_072">
+    <Component data-file="animations/global/CORE_065">
       <Explosion src={GIF} />
     </Component>
   );
 }
 
-CORE_072.propTypes = {
+CORE_065.propTypes = {
   onEnd: PropTypes.func
 };
 
