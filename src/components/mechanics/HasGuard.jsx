@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 export default function HasGuard() {
-  return <Component2 data-file="mechanics/HasGuard" />;
+  const [isAnimating, setIsAnimating] = React.useState(false);
+
+  // prettier-ignore
+  React.useEffect(() => {
+    setIsAnimating(true)
+    setTimeout(() => { setIsAnimating(false); }, 200);
+  }, []);
+
+  return <Component data-file="mechanics/HasGuard" />;
 }
 
 HasGuard.propTypes = {
@@ -12,7 +20,7 @@ HasGuard.propTypes = {
   index: PropTypes.number
 };
 
-const Component2 = styled.div`
+const Component = styled.div`
   background-image: url('http://www.clker.com/cliparts/D/0/J/J/K/a/shield-hi.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -24,5 +32,7 @@ const Component2 = styled.div`
   bottom: 0;
   left: 0;
   pointer-events: none;
+  transform: ${p => (p.isAnimating ? 'scale(0.1)' : 'scale(1)')};
+  transition: transform 400ms ease-out;
   z-index: -1;
 `;

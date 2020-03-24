@@ -135,6 +135,12 @@ export default {
       return selectMinion(G, ctx, cardObject, index);
     }
   },
+  setLastPlayedCardId: {
+    client: false,
+    move: G => {
+      G.lastPlayedCardId = null;
+    }
+  },
   playCard: {
     client: false,
     move: (G, ctx, index, uuid, cardId) => {

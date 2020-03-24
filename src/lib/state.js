@@ -44,8 +44,8 @@ export default {
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
   playerClass: {
-    '0': CARDCLASS[2],
-    '1': CARDCLASS[2]
+    '0': CARDCLASS[3],
+    '1': CARDCLASS[3]
   },
   players: players.__DATA_MODEL,
   boards: boards.__DATA_MODEL,
@@ -62,6 +62,7 @@ export default {
   spellObject: spellObject.__DATA_MODEL,
   warcryObject: warcryObject.__DATA_MODEL,
   cardBack: cardBack.__DATA_MODEL,
+  lastPlayedCardId: null,
   animationStates: {
     playerIsAttackingPlayer: {
       '0': false,

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import EndTurnButton from 'components/end-turn/EndTurn';
 import TheirBoard from 'components/boards/TheirBoard';
 import YourBoard from 'components/boards/YourBoard';
+import LightningStrike from 'components/animations/targeted/LightningStrike';
+import GlobalAnimations from 'components/animations/global/GlobalAnimations';
 
 export default function Board({
   G,
@@ -56,6 +58,7 @@ export default function Board({
         isActive={isActive}
         yourID={yourID}
       />
+      <GlobalAnimations G={G} ctx={ctx} moves={moves} />
     </div>
   );
 }

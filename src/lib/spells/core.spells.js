@@ -137,9 +137,15 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     case 'CORE_064':
       if (G.boards[currentPlayer].length === 7) return; // max minions
       if (G.boards[currentPlayer].length <= 5)
-        G.boards[currentPlayer].push(createBoardSlotObject('CORE_064a'));
+        G.boards[currentPlayer].push({
+          ...createBoardSlotObject('CORE_064a'),
+          hasGuard: true
+        });
       if (G.boards[currentPlayer].length <= 6)
-        G.boards[currentPlayer].push(createBoardSlotObject('CORE_064a'));
+        G.boards[currentPlayer].push({
+          ...createBoardSlotObject('CORE_064a'),
+          hasGuard: true
+        });
       break;
 
     // Draw the next 2 cards from your deck.

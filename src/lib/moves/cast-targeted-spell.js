@@ -26,9 +26,13 @@ import TARGET_CONTEXT from 'enums/target-context.enum';
  * @param {string} index Target index if targetCtx is MINION
  */
 const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
-  const { selectedCardObject, turnOrder } = G;
+  const { selectedCardObject, spellObject, turnOrder } = G;
   const { currentPlayer, random } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+
+  if (spellObject[currentPlayer] !== null) {
+    return castTargetedClassSkill(G, ctx, playerCtx, targetCtx, index);
+  }
 
   if (selectedCardObject[currentPlayer] === null) return;
   const { id, cost, uuid } = selectedCardObject[currentPlayer];
@@ -41,7 +45,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   removeCardFromHand(G, currentPlayer, uuid);
   counts.deincrementHand(G, currentPlayer);
 
-  // clear warcryObject
+  G.spellObject[currentPlayer] = null;
   G.warcryObject[currentPlayer] = null;
 
   // disable all player can be attacked
@@ -424,6 +428,46 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
 
     default:
       break;
+  }
+};
+
+const castTargetedClassSkill = (G, ctx, playerCtx, targetCtx, index) => {
+  const { spellObject, turnOrder } = G;
+  const { currentPlayer } = ctx;
+  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+
+  if (spellObject[currentPlayer] === null) return;
+  const THEIR_SLOT = G.boards[otherPlayer][index];
+
+  G.spellObject[currentPlayer] = null;
+  G.warcryObject[currentPlayer] = null;
+
+  // disable all player can be attacked
+  playerCanBeAttacked.disable(G, '0');
+  playerCanBeAttacked.disable(G, '1');
+
+  // disable all playerCanBeHealed
+  playerCanBeHealed.disable(G, '0');
+  playerCanBeHealed.disable(G, '1');
+
+  // disable all can be attacked
+  boards.disableAllCanBeAttacked(G, '0');
+  boards.disableAllCanBeAttacked(G, '1');
+
+  // disable all can be attacked
+  boards.disableAllCanBeBuffed(G, '0');
+  boards.disableAllCanBeBuffed(G, '1');
+
+  // disable all canBeHealed
+  boards.disableAllCanBeHealed(G, '0');
+  boards.disableAllCanBeHealed(G, '1');
+
+  // Deal 1 damage to a selected target.
+  if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+    health.subtract(G, otherPlayer, 1);
+  } else {
+    boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
+    boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
   }
 };
 

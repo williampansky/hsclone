@@ -20,7 +20,7 @@ export default function CardInteraction({
   index
 }) {
   const [isAnimating, setIsAnimating] = React.useState(false);
-  const { selectedCardIndex, warcryObject } = G;
+  const { selectedCardIndex, spellObject, warcryObject } = G;
   const { currentPlayer, phase } = ctx;
   const { deselectCard, hoverCard, selectCard } = moves;
 
@@ -81,8 +81,10 @@ export default function CardInteraction({
   } = card;
 
   const WARCRY_OBJECT_ACTIVE = warcryObject[yourID] !== null;
+  const SPELL_OBJECT_ACTIVE = spellObject[yourID] !== null;
   const CAN_AFFORD = cost <= G.energy[yourID].current;
-  const IS_PLAYABLE = isActive && CAN_AFFORD && !WARCRY_OBJECT_ACTIVE;
+  const IS_PLAYABLE =
+    isActive && CAN_AFFORD && !WARCRY_OBJECT_ACTIVE && !SPELL_OBJECT_ACTIVE;
   const IS_SELECTED = G.selectedCardIndex[yourID] === index;
 
   // const yourHandStyle = {

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // child components
 import PlayerEnergy from 'components/player-energy/PlayerEnergy';
 import CardInteraction from 'components/interactions/cards/CardInteraction';
+import SpellObject from 'components/spells/SpellObject';
 import WarcryObject from 'components/warcrys/WarcryObject';
 
 export default function YourHand({ G, ctx, moves, isActive, yourID }) {
@@ -13,6 +14,7 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
     players,
     selectedCardIndex,
     selectedCardObject,
+    spellObject,
     warcryObject
   } = G;
 
@@ -21,6 +23,7 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
   const cardIsSelected = selectedCardIndex[yourID];
   const selectedCardObj = selectedCardObject[yourID];
   const selectedCardCost = selectedCardObj && selectedCardObj.cost;
+  const activeSpellObject = spellObject[yourID];
   const activeWarcryObject = warcryObject[yourID];
 
   return (
@@ -61,6 +64,7 @@ export default function YourHand({ G, ctx, moves, isActive, yourID }) {
       })}
 
       {activeWarcryObject ? <WarcryObject data={activeWarcryObject} /> : null}
+      {activeSpellObject ? <SpellObject data={activeSpellObject} /> : null}
       <PlayerEnergy energy={energy[yourID]} selectedCost={selectedCardCost} />
     </div>
   );
