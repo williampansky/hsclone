@@ -31,7 +31,8 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
 
   if (spellObject[currentPlayer] !== null) {
-    return castTargetedClassSkill(G, ctx, playerCtx, targetCtx, index);
+    const { id } = spellObject[currentPlayer];
+    return castTargetedClassSkill(G, ctx, playerCtx, targetCtx, index, id);
   }
 
   if (selectedCardObject[currentPlayer] === null) return;
@@ -266,6 +267,9 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       G.boards[currentPlayer][index].currentHealth = Math.abs(
         G.boards[currentPlayer][index].currentHealth + 2
       );
+      G.boards[currentPlayer][index].totalHealth = Math.abs(
+        G.boards[currentPlayer][index].totalHealth + 2
+      );
       drawCard(G, ctx, currentPlayer, 1);
       break;
 
@@ -431,7 +435,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   }
 };
 
-const castTargetedClassSkill = (G, ctx, playerCtx, targetCtx, index) => {
+const castTargetedClassSkill = (G, ctx, playerCtx, targetCtx, index, id) => {
   const { spellObject, turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
@@ -439,6 +443,7 @@ const castTargetedClassSkill = (G, ctx, playerCtx, targetCtx, index) => {
   if (spellObject[currentPlayer] === null) return;
   const THEIR_SLOT = G.boards[otherPlayer][index];
 
+  G.lastPlayedCardId = id;
   G.spellObject[currentPlayer] = null;
   G.warcryObject[currentPlayer] = null;
 
@@ -462,12 +467,28 @@ const castTargetedClassSkill = (G, ctx, playerCtx, targetCtx, index) => {
   boards.disableAllCanBeHealed(G, '0');
   boards.disableAllCanBeHealed(G, '1');
 
-  // Deal 1 damage to a selected target.
-  if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-    health.subtract(G, otherPlayer, 1);
-  } else {
-    boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
-    boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+  switch (id) {
+    case 'GAME_009':
+      // Heal for 2 HP
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        health.add(G, currentPlayer, 2);
+      } else {
+        boards.addToMinionHealth(G, currentPlayer, index, 2);
+      }
+      break;
+
+    case 'GAME_010':
+      // Deal 1 damage to a selected target.
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        health.subtract(G, otherPlayer, 1);
+      } else {
+        boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+      }
+      break;
+
+    default:
+      break;
   }
 };
 

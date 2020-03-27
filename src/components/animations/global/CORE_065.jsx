@@ -6,7 +6,7 @@ const GIF = require('assets/images/animation-props/nebula-explosion.gif');
 export default function CORE_065({ onEnd }) {
   // prettier-ignore
   useEffect(() => {
-    setTimeout(() => { onEnd(); }, 400);
+    setTimeout(() => { onEnd(); }, 500);
   }, [onEnd]);
 
   return (

@@ -47,6 +47,7 @@ export default function MinionInteraction({
           moves={moves}
           data={data}
           index={index}
+          board={board}
           canAttack={canAttack}
           canBeAttackedByMinion={canBeAttackedByMinion}
           canBeAttackedByPlayer={canBeAttackedByPlayer}
@@ -81,6 +82,7 @@ export default function MinionInteraction({
           moves={moves}
           data={data}
           index={index}
+          board={board}
           canAttack={canAttack}
           canBeAttackedByMinion={canBeAttackedByMinion}
           canBeAttackedByPlayer={canBeAttackedByPlayer}

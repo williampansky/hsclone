@@ -74,6 +74,7 @@ export default function TheirAvatar({
 
       <AvatarAnimation
         G={G}
+        moves={moves}
         youUsedClassSkill={playerUsedClassSkill[yourID]}
         theyUsedClassSkill={playerUsedClassSkill[theirID]}
       />

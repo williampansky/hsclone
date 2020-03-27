@@ -20,6 +20,7 @@ export default function YourMinionInteractions({
   moves,
   data,
   index,
+  board,
   canAttack,
   canBeBuffed,
   canBeHealed,
@@ -42,7 +43,9 @@ export default function YourMinionInteractions({
   willExpire
 }) {
   if (canBeHealed) {
-    return <CanBeHealed G={G} ctx={ctx} moves={moves} index={index} />;
+    return (
+      <CanBeHealed G={G} ctx={ctx} moves={moves} index={index} board={board} />
+    );
   }
 
   if (canBeBuffed) {
@@ -98,6 +101,7 @@ YourMinionInteractions.propTypes = {
   moves: PropTypes.object,
   data: PropTypes.object,
   index: PropTypes.number,
+  board: PropTypes.string,
   canAttack: PropTypes.bool,
   canBeAttackedByMinion: PropTypes.bool,
   canBeAttackedByPlayer: PropTypes.bool,
@@ -111,6 +115,7 @@ YourMinionInteractions.propTypes = {
   canBeSacrificed: PropTypes.bool,
   canBeStolen: PropTypes.bool,
   canReceiveEnergyShield: PropTypes.bool,
+  canReceiveGuard: PropTypes.bool,
   canReceiveOnslaught: PropTypes.bool,
   hasBoon: PropTypes.bool,
   hasEnergyShield: PropTypes.bool,

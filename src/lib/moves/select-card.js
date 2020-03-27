@@ -147,6 +147,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
 
       // Attack something for 3 damage and then draw a card.
       case 'CORE_080':
+        playerCanBeAttacked.enableBySpell(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
           if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
@@ -154,6 +155,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
 
       // Deal 2 targeted damage.
       case 'CORE_083':
+        playerCanBeAttacked.enableBySpell(G, otherPlayer);
         G.boards[otherPlayer].forEach(slot => {
           if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
