@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CORE_065 from 'components/animations/global/CORE_065';
+import CORE_091 from 'components/animations/global/CORE_091';
 
 export default function GlobalAnimations({ G, ctx, moves }) {
   const { lastPlayedCardId } = G;
@@ -11,6 +12,7 @@ export default function GlobalAnimations({ G, ctx, moves }) {
   return (
     <Component data-file="animations/global/GlobalAnimations">
       {LPC === 'CORE_065' && <CORE_065 onEnd={setLastPlayedCardId} />}
+      {LPC === 'CORE_091' && <CORE_091 onEnd={setLastPlayedCardId} />}
     </Component>
   );
 }

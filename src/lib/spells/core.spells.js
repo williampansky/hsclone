@@ -200,6 +200,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Deal 2 damage to all of your enemies and then restore
     // that amount of Health to yourself and all your minions.
     case 'CORE_091':
+      G.lastPlayedCardId = cardId;
       health.subtract(G, otherPlayer, 2);
       G.boards[otherPlayer].forEach((slot, i) => {
         boards.subtractFromMinionHealth(G, otherPlayer, i, 2);
