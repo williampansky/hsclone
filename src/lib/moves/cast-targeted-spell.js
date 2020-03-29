@@ -282,12 +282,20 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
 
     // Kill an enemy minion that has 3 or less Attack.
     case 'CORE_089':
-      boards.killMinion(G, ctx, otherPlayer, THEIR_SLOT, index);
+      boards.subtractFromMinionHealth(G, otherPlayer, index, 9000);
+      boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       break;
 
     // Kill an enemy minion that has 5 or more Attack.
     case 'CORE_090':
-      boards.killMinion(G, ctx, otherPlayer, THEIR_SLOT, index);
+      boards.subtractFromMinionHealth(G, otherPlayer, index, 9000);
+      boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+      break;
+
+    // Take control of over on of your opponent's minions.
+    case 'CORE_092':
+      const MIN = G.boards[otherPlayer].splice(index, 1);
+      G.boards[currentPlayer].push(MIN[0]);
       break;
 
     // Deal 2 damage to one of your enemy's undamaged minions.
@@ -296,14 +304,9 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       break;
 
-    // Return one of your opponent's minions to their hand.
-    // @todo
+    // <em>Disable</em> an enemy minion.
     case 'CORE_096':
-      G.counts[otherPlayer].hand = Math.abs(G.counts[otherPlayer].hand + 1);
-      G.boards[otherPlayer] = G.boards[otherPlayer].splice(index, 1);
-      // G.players[otherPlayer].hand.push(
-      //   getCardByID(G.boards[otherPlayer][index].minionData.id)
-      // );
+      G.boards[otherPlayer][index].isDisabled = true;
       break;
 
     // Deal 1 targeted damage and then draw a card.

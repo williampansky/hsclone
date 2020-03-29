@@ -30,8 +30,8 @@ const Component = styled.div`
   width: 100%;
 
   &:before {
-    animation: explosion 100ms ease-out forwards;
-    background: rgba(255, 255, 0, 0.15);
+    animation: explosion 300ms ease-out forwards;
+    background: rgba(255, 255, 0, 0.425);
     border: 4px solid yellow;
     border-radius: 50%;
     content: '';
@@ -48,13 +48,13 @@ const Component = styled.div`
     }
     90% {
       opacity: 1;
-      width: 100vw;
-      height: 100vh;
+      width: 200vw;
+      height: 200vh;
     }
     100% {
       opacity: 0;
-      width: 200vw;
-      height: 200vh;
+      width: 400vw;
+      height: 400vh;
     }
   }
 `;

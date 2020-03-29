@@ -161,12 +161,14 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
         });
         break;
 
+      // Give a minion +2 Health points and then draw a card.
       case 'CORE_086':
         G.boards[currentPlayer].forEach(slot => {
           slot.canBeBuffed = true;
         });
         break;
 
+      // Double a minion's current Health value.
       case 'CORE_088':
         G.boards[currentPlayer].forEach(slot => {
           slot.canBeBuffed = true;
@@ -191,7 +193,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
 
       case 'CORE_092':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canBeStolen = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 
@@ -205,7 +207,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
 
       case 'CORE_096':
         G.boards[otherPlayer].forEach(slot => {
-          if (!slot.isConcealed) slot.canBeReturned = true;
+          if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
         });
         break;
 

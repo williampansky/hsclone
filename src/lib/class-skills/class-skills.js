@@ -58,8 +58,8 @@ export const initTargetedHeal = (G, ctx) => {
   G.playerCanBeHealed[currentPlayer] = true;
   G.boards[currentPlayer].forEach(slot => (slot.canBeHealed = true));
 
-  G.playerCanBeHealed[otherPlayer] = true;
-  G.boards[otherPlayer].forEach(slot => (slot.canBeHealed = true));
+  // G.playerCanBeHealed[otherPlayer] = true;
+  // G.boards[otherPlayer].forEach(slot => (slot.canBeHealed = true));
 };
 
 /**
