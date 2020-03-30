@@ -1,28 +1,100 @@
-import GAME_CONFIG from 'config/game.config';
 import { TurnOrder } from 'boardgame.io/core';
 import boards from 'lib/state/boards';
-import energy from 'lib/state/energy';
+import counts from 'lib/state/counts';
 import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
-import winner from 'lib/state/winner';
+import energy from 'lib/state/energy';
+import GAME_CONFIG from 'config/game.config';
+import getCardByID from 'lib/utils/get-card-by-id';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
-import getCardByID from 'lib/utils/get-card-by-id';
-import counts from 'lib/state/counts';
+import playerIsDisabled from 'lib/state/player-is-disabled';
 
 const onBegin = (G, ctx) => {
+  const { turnOrder } = G;
   const { currentPlayer } = ctx;
+  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
 
   energy.incrementTotal(G, currentPlayer);
   energy.matchTotal(G, currentPlayer);
   drawCardAtStartOfTurn(G, ctx);
 
   G.boards[currentPlayer].forEach((slot, i) => {
-    // disable canBeAttacked on your board minions
+    // disable can be attacked on your board minions
     boards.disableCanBeAttacked(G, currentPlayer, i);
 
     // enable canAttack on your board minions
-    if (slot.currentAttack >= 1) boards.enableCanAttack(G, currentPlayer, i);
+    if (slot.currentAttack >= 1 && !slot.isDisabled) {
+      boards.enableCanAttack(G, currentPlayer, i);
+    }
+
+    // reset player's minion stats back to total values,
+    // which should reset turn-only enhancements
+    slot.currentAttack = slot.totalAttack;
+
+    // handle disabled mechanic
+    if (slot.isDisabled === true) {
+      // deincrement isDisabledFor integer
+      slot.isDisabledFor = Math.abs(slot.isDisabledFor - 1);
+
+      // re-enable minion if disabled integer hits zero
+      if (slot.isDisabledFor === 0) slot.isDisabled = false;
+    } else {
+      slot.isDisabledFor = 2;
+    }
+
+    // handle expiration mechanic
+    if (slot.willExpire === true) {
+      // deincrement willExpireIn integer
+      slot.willExpireIn = Math.abs(slot.willExpireIn - 1);
+
+      // kill minion if expiration integer hits zero
+      if (slot.willExpireIn === 0)
+        boards.killMinion(G, ctx, currentPlayer, slot, i);
+    } else {
+      slot.willExpireIn = 2;
+    }
   });
+
+  G.boards[otherPlayer].forEach((slot, i) => {
+    // reset player's minion stats back to total values,
+    // which should reset turn-only enhancements
+    slot.currentAttack = slot.totalAttack;
+
+    // handle disabled mechanic
+    if (slot.isDisabled === true) {
+      // deincrement isDisabledFor integer
+      slot.isDisabledFor = Math.abs(slot.isDisabledFor - 1);
+
+      // re-enable minion if disabled integer hits zero
+      if (slot.isDisabledFor === 0) slot.isDisabled = false;
+    } else {
+      slot.isDisabledFor = 2;
+    }
+
+    // handle expiration mechanic
+    if (slot.willExpire === true) {
+      // deincrement willExpireIn integer
+      slot.willExpireIn = Math.abs(slot.willExpireIn - 1);
+
+      // kill minion if expiration integer hits zero
+      if (slot.willExpireIn === 0)
+        boards.killMinion(G, ctx, otherPlayer, slot, i);
+    } else {
+      slot.willExpireIn = 2;
+    }
+  });
+
+  // reset isDisabled state back to false
+  playerIsDisabled.disable(G, currentPlayer);
+
+  // // either set attack value to weapon's attack
+  // if (G.playerWeapon[currentPlayer] !== null) {
+  //   const atkValue = G.playerWeapon[currentPlayer].attack;
+  //   playerAttackValue.set(G, currentPlayer, atkValue);
+  // } else {
+  //   // or reset playerAttackValue state back to false
+  //   playerAttackValue.reset(G, currentPlayer);
+  // }
 
   // if player has enough energy; enable playerCanUseClassSkill
   if (!GAME_CONFIG.debugData.enableCost)
@@ -46,31 +118,28 @@ const onBegin = (G, ctx) => {
   // reset warcry states
   G.warcryObject = { '0': null, '1': null };
 
+  // reset playerUsedClassSkill states
+  G.playerUsedClassSkill = { '0': false, '1': false };
+
   // DEBUG
-  if (
-    GAME_CONFIG.debugData.debugCard !== null ||
-    GAME_CONFIG.debugData.debugCard !== '' ||
-    GAME_CONFIG.debugData.debugCard !== false
-  ) {
+  if (GAME_CONFIG.debugData.enableDebugCard === true) {
+    if (G.players[currentPlayer].hand.length >= 9) return;
     const debugCardID = GAME_CONFIG.debugData.debugCard;
-    G.players[ctx.currentPlayer].hand.push(getCardByID(debugCardID));
-    counts.incrementHand(G, ctx.currentPlayer);
+    G.players[currentPlayer].hand.push(getCardByID(debugCardID));
+    counts.incrementHand(G, currentPlayer);
   }
 };
 
 const onEnd = (G, ctx) => {
-  const { health, turnOrder } = G;
-
-  const PLAYER0_HEALTH = health[turnOrder['0']];
-  if (PLAYER0_HEALTH === 0) winner.set(G, turnOrder['0']);
-  else winner.set(G, turnOrder['1']);
-
   // reset player[0] minion states
   G.boards['0'].forEach((slot, i) => {
     G.boards['0'][i] = {
       ...slot,
       canAttack: false,
-      canBeAttacked: false,
+      canBeAttackedByMinion: false,
+      canBeAttackedByPlayer: false,
+      canBeAttackedBySpell: false,
+      canBeAttackedByWarcry: false,
       canBeBuffed: false,
       canBeHealed: false
     };
@@ -81,7 +150,10 @@ const onEnd = (G, ctx) => {
     G.boards['1'][i] = {
       ...slot,
       canAttack: false,
-      canBeAttacked: false,
+      canBeAttackedByMinion: false,
+      canBeAttackedByPlayer: false,
+      canBeAttackedBySpell: false,
+      canBeAttackedByWarcry: false,
       canBeBuffed: false,
       canBeHealed: false
     };
@@ -89,7 +161,10 @@ const onEnd = (G, ctx) => {
 
   // reset player states
   G.playerCanAttack = { '0': false, '1': false };
-  G.playerCanBeAttacked = { '0': false, '1': false };
+  G.playerCanBeAttackedByMinion = { '0': false, '1': false };
+  G.playerCanBeAttackedByPlayer = { '0': false, '1': false };
+  G.playerCanBeAttackedBySpell = { '0': false, '1': false };
+  G.playerCanBeAttackedByWarcry = { '0': false, '1': false };
   G.playerCanBeHealed = { '0': false, '1': false };
   G.playerIsAttacking = { '0': false, '1': false };
 
@@ -104,6 +179,16 @@ const onEnd = (G, ctx) => {
 
   // reset warcry states
   G.warcryObject = { '0': null, '1': null };
+
+  // reset animation states
+  G.animationStates.playerIsAttackingPlayer['0'] = false;
+  G.animationStates.playerIsAttackingPlayer['1'] = false;
+};
+
+const endIf = G => {
+  const PLAYER0_HEALTH = G.health[G.turnOrder['0']];
+  if (PLAYER0_HEALTH === 0) G.winner = G.turnOrder['0'];
+  else G.winner = G.turnOrder['1'];
 };
 
 export default {
@@ -111,5 +196,6 @@ export default {
     order: TurnOrder.CUSTOM_FROM('turnOrder'),
     onBegin: (G, ctx) => onBegin(G, ctx),
     onEnd: (G, ctx) => onEnd(G, ctx)
+    // endIf: G => endIf(G)
   }
 };

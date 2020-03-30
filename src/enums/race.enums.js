@@ -1,13 +1,13 @@
 const RACE = {
-  1: 'NONE',
-  2: 'CREATURE',
-  3: 'PRIMORDIAL',
-  4: 'UNDEAD',
-  5: 'ROBOT',
-  6: 'Murloc(temp)',
-  7: 'Totem(temp)',
-  8: 'Pirate(temp)',
-  9: 'Dragon(temp)'
+  0: 'NONE',
+  1: 'CREATURE',
+  2: 'PRIMORDIAL',
+  3: 'UNDEAD',
+  4: 'ROBOT',
+  5: 'Murloc(temp)',
+  6: 'IDOL',
+  7: 'Pirate(temp)',
+  8: 'Dragon(temp)'
 };
 
 export default RACE;

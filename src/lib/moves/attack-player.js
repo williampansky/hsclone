@@ -19,6 +19,9 @@ const attackPlayer = (G, ctx) => {
   const PLAYER_BEING_ATTACKED = otherPlayer;
   const ATTACKING_MINION = selectedMinionObject[currentPlayer];
   const ATTACKING_MINION_INDEX = selectedMinionIndex[currentPlayer];
+  const ATTACKING_MINION_HAS_ONSLAUGHT = ATTACKING_MINION.hasOnslaught;
+  const ATTACKING_MINION_ONSLAUGHT_COUNT = ATTACKING_MINION.hasOnslaughtAttack;
+
   // eject if ATTACKING_MINION can't attack
   if (ATTACKING_MINION && !ATTACKING_MINION.canAttack) return;
 
@@ -42,16 +45,32 @@ const attackPlayer = (G, ctx) => {
     health.subtract(G, PLAYER_BEING_ATTACKED, ATTACKING_MINION.currentAttack);
   }
 
-  // disable ATTACKING_MINION's ability to attack
-  boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  // handle onslaught mechanic
+  if (ATTACKING_MINION_HAS_ONSLAUGHT === true) {
+    // deincrement hasOnslaughtAttack integer
+    G.boards[currentPlayer][
+      ATTACKING_MINION_INDEX
+    ].hasOnslaughtAttack = Math.abs(
+      G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasOnslaughtAttack - 1
+    );
+
+    if (ATTACKING_MINION_ONSLAUGHT_COUNT === 0)
+      boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  } else {
+    // disable ATTACKING_MINION's ability to attack
+    boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  }
+
+  // remove concealed once you attack
+  G.boards[currentPlayer][ATTACKING_MINION_INDEX].isConcealed = false;
 
   // reset currentPlayer's selectedMinionIndex & selectedMinionObject value
   selectMinion(G, ctx);
 
-  // then disable opponent minions canBeAttacked
+  // then disable opponent minions can be attacked
   boards.disableAllCanBeAttacked(G, otherPlayer);
 
-  // disable all playerCanBeAttacked
+  // disable all player can be attacked
   playerCanBeAttacked.disable(G, '0');
   playerCanBeAttacked.disable(G, '1');
 

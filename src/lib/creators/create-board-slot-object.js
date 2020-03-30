@@ -8,16 +8,37 @@ const createBoardSlotObject = cardId => {
 
   return {
     canAttack: false,
-    canBeAttacked: false,
+    canBeAttackedByMinion: false,
+    canBeAttackedByPlayer: false,
+    canBeAttackedBySpell: false,
+    canBeAttackedByWarcry: false,
     canBeBuffed: false,
     canBeHealed: false,
+    canBeDebuffed: false,
+    canBeExpired: false,
+    canBeReturned: false,
+    canBeSacrificed: false,
+    canBeStolen: false,
+    canReceiveEnergyShield: false,
+    canReceiveGuard: false,
+    canReceiveOnslaught: false,
     currentAttack: attack,
     currentHealth: health,
     hasBoon: false,
+    hasEnergyShield: false,
     hasGuard: false,
+    isConcealed: false,
+    isCursed: false,
+    isDead: false,
+    isDisabled: false,
+    isDisabledFor: 2,
     minionData: minionObject,
+    hasOnslaught: false,
+    hasOnslaughtAttack: 1,
     totalAttack: attack,
-    totalHealth: health
+    totalHealth: health,
+    willExpire: false,
+    willExpireIn: 2
   };
 };
 

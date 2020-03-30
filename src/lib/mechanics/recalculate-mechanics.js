@@ -8,6 +8,7 @@ import MECHANICS from 'enums/mechanics.enums';
 
 // prettier-ignore
 const recalculateCardMechanics = (G, ctx, player, card, index) => {
+  if (!card || (card && !card.mechanics)) return;
   const { mechanics } = card;
   if (mechanics.find(m => m === MECHANICS[1])) recalculateBoons(G, ctx, card, index);
   if (mechanics.find(m => m === MECHANICS[2])) recalculateBuffs(G, ctx, player, card, index);

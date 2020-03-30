@@ -17,8 +17,11 @@ export const _dAMT = (G, player) => {
     ? true
     : false;
 
-  if (MINION_HAS_GUARD) playerCanBeAttacked.disable(G, player);
-  else if (!MINION_HAS_GUARD) playerCanBeAttacked.enable(G, player);
+  if (MINION_HAS_GUARD) {
+    playerCanBeAttacked.disable(G, player);
+  } else if (!MINION_HAS_GUARD) {
+    playerCanBeAttacked.enableByMinion(G, player);
+  }
 
   G.boards[player].forEach((slot, i) => {
     if (slot.hasGuard === true) _eMCBA(G, player, i);
@@ -61,7 +64,7 @@ export const _dHT = (G, player, index) => {
  * @param {string} player
  */
 export const _dST = (G, player) => {
-  playerCanBeAttacked.enable(G, player);
+  playerCanBeAttacked.enableBySpell(G, player);
   G.boards[player].forEach((_, i) => _eMCBA(G, player, i));
 };
 
@@ -73,6 +76,6 @@ export const _dST = (G, player) => {
  * @param {string} player
  */
 export const _dWT = (G, player) => {
-  playerCanBeAttacked.enable(G, player);
+  playerCanBeAttacked.enableByWarcry(G, player);
   G.boards[player].forEach((_, i) => _eMCBA(G, player, i));
 };

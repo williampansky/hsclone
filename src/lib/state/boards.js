@@ -13,16 +13,12 @@ import { _aTMH, _sFMH } from 'lib/state/board-methods/minion-health';
 import { _pC } from 'lib/state/board-methods/place-card-on-board';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 
+// createBoardSlotObject('CORE_057b')
 // prettier-ignore
 const boards = {
   __DATA_MODEL: {
-    '0': [createBoardSlotObject('CORE_034')],
-    '1': [
-      {
-        ...createBoardSlotObject('CORE_034'),
-        currentHealth: 5
-      }
-    ]
+    '0': [{ ...createBoardSlotObject('CORE_057b') }],
+    '1': [{ ...createBoardSlotObject('CORE_082') }]
   },
 
   // minion health
@@ -42,7 +38,7 @@ const boards = {
   enableCanAttack: (G, player, index) => _eMCA(G, player, index),
   enableAllCanAttack: (G, player) => _eAMCA(G, player),
   
-  // canBeAttacked
+  // can be attacked
   disableCanBeAttacked: (G, player, index) => _dMCBA(G, player, index),
   disableAllCanBeAttacked: (G, player) => _dAMCBA(G, player),
   enableCanBeAttacked: (G, player, index) => _eMCBA(G, player, index),

@@ -5,6 +5,9 @@ import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import playerWeapon from 'lib/state/player-weapon';
 import createWeaponObject from 'lib/creators/create-weapon-object';
 import createSpellObject from 'lib/creators/create-spell-object';
+import playerCanAttack from 'lib/state/player-can-attack';
+import playerAttackValue from 'lib/state/player-attack-value';
+import playerUsedClassSkill from 'lib/state/player-used-class-skill';
 
 /**
  * Backstab your opponent for 2 damage.
@@ -15,17 +18,20 @@ export const backstabOpponent = (G, ctx, amount = 2) => {
   const { turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+  playerUsedClassSkill.enable(G, currentPlayer);
   health.subtract(G, otherPlayer, amount);
 };
 
 /**
- * Equip a 1/2 Shuriken throwing star.
+ * Equip a 1/2 Shuriken.
  * @param {{}} G
  * @param {{}} ctx
  */
 export const equipShuriken = (G, ctx) => {
   const { currentPlayer } = ctx;
+  playerCanAttack.enable(G, currentPlayer);
   playerWeapon.equip(G, currentPlayer, createWeaponObject('GAME_008'));
+  G.playerAttackValue[currentPlayer] = 1;
 };
 
 /**
@@ -52,8 +58,8 @@ export const initTargetedHeal = (G, ctx) => {
   G.playerCanBeHealed[currentPlayer] = true;
   G.boards[currentPlayer].forEach(slot => (slot.canBeHealed = true));
 
-  G.playerCanBeHealed[otherPlayer] = true;
-  G.boards[otherPlayer].forEach(slot => (slot.canBeHealed = true));
+  // G.playerCanBeHealed[otherPlayer] = true;
+  // G.boards[otherPlayer].forEach(slot => (slot.canBeHealed = true));
 };
 
 /**
@@ -77,8 +83,10 @@ export const initTargetedSpell = (G, ctx) => {
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
   G.spellObject[currentPlayer] = createSpellObject('GAME_010');
-  G.playerCanBeAttacked[otherPlayer] = true;
-  G.boards[otherPlayer].forEach(slot => (slot.canBeAttacked = true));
+  G.playerCanBeAttackedBySpell[otherPlayer] = true;
+  G.boards[otherPlayer].forEach(slot => {
+    if (!slot.isConcealed) slot.canBeAttackedBySpell = true;
+  });
 };
 
 /**
@@ -98,11 +106,11 @@ export const summonKnight = (G, ctx) => {
  * @param {{}} ctx
  */
 export const summonRandomIdol = (G, ctx) => {
+  let idols = ['GAME_003', 'GAME_004', 'GAME_005', 'GAME_006'];
   const { currentPlayer, random } = ctx;
 
   if (G.boards[currentPlayer].length === 7) return; // max minions
 
-  const idols = ['GAME_003', 'GAME_004', 'GAME_005', 'GAME_006'];
   const randomIdolID = random.Shuffle(idols);
   const randomIdol = createBoardSlotObject(randomIdolID[0]);
 
@@ -112,6 +120,10 @@ export const summonRandomIdol = (G, ctx) => {
       ...randomIdol,
       hasGuard: true
     });
+  } else if (randomIdolID[0] === 'GAME_006') {
+    G.buffs[currentPlayer].spellDamage = Math.abs(
+      G.buffs[currentPlayer].spellDamage + 1
+    );
   } else {
     G.boards[currentPlayer].push(randomIdol);
   }

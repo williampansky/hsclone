@@ -1,8 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MinionInteraction from 'components/interactions/minions/MinionInteraction';
 import Minion from 'components/minion/Minion';
-import MINION_HAS_BOON from 'components/mechanics/MINION_HAS_BOON';
-import MINION_HAS_GUARD from 'components/mechanics/MINION_HAS_GUARD';
+import HasBoon from 'components/mechanics/HasBoon';
+import HasGuard from 'components/mechanics/HasGuard';
+import WillExpire from 'components/mechanics/WillExpire';
+import HasEnergyShield from 'components/mechanics/HasEnergyShield';
+import IsConcealed from 'components/mechanics/IsConcealed';
+import IsDisabled from 'components/mechanics/IsDisabled';
+import HasOnslaught from 'components/mechanics/HasOnslaught';
+import IsDeadPoof from 'components/animations/minions/IsDeadPoof';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
 
 export default function BoardSlot({
   G,
@@ -19,19 +27,54 @@ export default function BoardSlot({
   theirID
 }) {
   const { selectedMinionIndex } = G;
-  const { currentPlayer } = ctx;
+  const { killMinion } = moves;
   const {
     canAttack,
-    canBeAttacked,
+    canBeAttackedByMinion,
+    canBeAttackedByPlayer,
+    canBeAttackedBySpell,
+    canBeAttackedByWarcry,
     canBeBuffed,
+    canBeDebuffed,
+    canBeExpired,
     canBeHealed,
+    canBeReturned,
+    canBeSacrificed,
+    canBeStolen,
+    canReceiveEnergyShield,
+    canReceiveGuard,
+    canReceiveOnslaught,
     currentAttack,
     currentHealth,
     hasBoon,
+    hasEnergyShield,
     hasGuard,
+    hasOnslaught,
+    isConcealed,
+    isCursed,
+    isDisabled,
+    isDead,
     minionData,
-    totalHealth
+    totalAttack,
+    totalHealth,
+    willExpire
   } = data;
+
+  const playerID = board === PLAYER_BOARDS[1] ? yourID : theirID;
+
+  const KillMinion = React.useCallback(
+    index => {
+      return setTimeout(() => {
+        killMinion(playerID, data, index);
+      }, 900);
+    },
+    [playerID, data, killMinion]
+  );
+
+  // prettier-ignore
+  React.useEffect(() => {
+    isDead &&  KillMinion(index);
+  }, [index, isDead, KillMinion]);
 
   return (
     <div
@@ -42,10 +85,12 @@ export default function BoardSlot({
         'board-slot',
         data === null ? 'is-empty' : '',
         data !== null ? 'has-minion' : '',
-        data === null && !canDrop ? 'cannot-drop-minion' : ''
+        data === null && !canDrop ? 'cannot-drop-minion' : '',
+        isDead ? 'is-dead' : ''
       ].join(' ')}
       onClick={onClick}
     >
+      {/* interactions layer */}
       {minionData && (
         <MinionInteraction
           G={G}
@@ -57,17 +102,44 @@ export default function BoardSlot({
           render={render}
           data={data}
           canAttack={canAttack}
-          canBeAttacked={canBeAttacked}
+          canBeAttackedByMinion={canBeAttackedByMinion}
+          canBeAttackedByPlayer={canBeAttackedByPlayer}
+          canBeAttackedBySpell={canBeAttackedBySpell}
+          canBeAttackedByWarcry={canBeAttackedByWarcry}
           canBeBuffed={canBeBuffed}
           canBeHealed={canBeHealed}
-          currentAttack={currentAttack}
-          currentHealth={currentHealth}
+          canBeDebuffed={canBeDebuffed}
+          canBeExpired={canBeExpired}
+          canBeReturned={canBeReturned}
+          canBeSacrificed={canBeSacrificed}
+          canBeStolen={canBeStolen}
+          canReceiveEnergyShield={canReceiveEnergyShield}
+          canReceiveGuard={canReceiveGuard}
+          canReceiveOnslaught={canReceiveOnslaught}
+          hasBoon={hasBoon}
+          hasEnergyShield={hasEnergyShield}
           hasGuard={hasGuard}
+          hasOnslaught={hasOnslaught}
           isAttacking={selectedMinionIndex[yourID] === index}
+          isConcealed={isConcealed}
+          isCursed={isCursed}
+          isDisabled={isDisabled}
+          totalAttack={totalAttack}
+          totalHealth={totalHealth}
+          willExpire={willExpire}
         />
       )}
-      {minionData && hasBoon && <MINION_HAS_BOON />}
-      {minionData && hasGuard && <MINION_HAS_GUARD />}
+
+      {/* mechanics */}
+      {minionData && hasBoon && <HasBoon />}
+      {minionData && hasEnergyShield && <HasEnergyShield />}
+      {minionData && hasGuard && <HasGuard />}
+      {minionData && hasOnslaught && <HasOnslaught />}
+      {minionData && isConcealed && <IsConcealed />}
+      {minionData && isDisabled && <IsDisabled />}
+      {minionData && willExpire && <WillExpire />}
+
+      {/* visible minion component */}
       {minionData && (
         <Minion
           currentAttack={currentAttack}
@@ -77,14 +149,59 @@ export default function BoardSlot({
           totalHealth={totalHealth}
         />
       )}
+
+      {isDead && <IsDeadPoof />}
     </div>
   );
 }
 
+BoardSlot.propTypes = {
+  G: PropTypes.object,
+  ctx: PropTypes.object,
+  moves: PropTypes.object,
+  isActive: PropTypes.bool,
+  index: PropTypes.number,
+  render: PropTypes.bool,
+  board: PropTypes.string,
+  canDrop: PropTypes.bool,
+  onClick: PropTypes.func,
+  theirID: PropTypes.string,
+  yourID: PropTypes.string,
+  data: PropTypes.object,
+  canAttack: PropTypes.bool,
+  canBeAttackedByMinion: PropTypes.bool,
+  canBeAttackedByPlayer: PropTypes.bool,
+  canBeAttackedBySpell: PropTypes.bool,
+  canBeAttackedByWarcry: PropTypes.bool,
+  canBeBuffed: PropTypes.bool,
+  canBeHealed: PropTypes.bool,
+  canBeDebuffed: PropTypes.bool,
+  canBeExpired: PropTypes.bool,
+  canBeReturned: PropTypes.bool,
+  canBeSacrificed: PropTypes.bool,
+  canBeStolen: PropTypes.bool,
+  canReceiveEnergyShield: PropTypes.bool,
+  canReceiveOnslaught: PropTypes.bool,
+  hasBoon: PropTypes.bool,
+  hasEnergyShield: PropTypes.bool,
+  hasGuard: PropTypes.bool,
+  isAttacking: PropTypes.bool,
+  isConcealed: PropTypes.bool,
+  isCursed: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  hasOnslaught: PropTypes.bool,
+  totalAttack: PropTypes.bool,
+  totalHealth: PropTypes.bool,
+  willExpire: PropTypes.bool
+};
+
 BoardSlot.defaultProps = {
   data: {
     canAttack: false,
-    canBeAttacked: false,
+    canBeAttackedByMinion: false,
+    canBeAttackedByPlayer: false,
+    canBeAttackedBySpell: false,
+    canBeAttackedByWarcry: false,
     currentAttack: 0,
     currentHealth: 0,
     hasGuard: false,

@@ -15,8 +15,8 @@
   text-align: center;
   font-size: 12px;
   user-select: none;
-  box-shadow: 0 0 0 6px #222, 0 0 6px 10px #444,
-    0px 0px 8px rgba(0, 0, 0, 0.625), 0px 1px 30px rgba(0, 0, 0, 0.425);
+  box-shadow: 0 0 0 6px #222, 0 0 0px 10px #444, 0px 0px 8px rgba(0, 0, 0, 1),
+    0px 0px 30px rgba(0, 0, 0, 1);
 
   @keyframes translateIntoFrame {
     0% {

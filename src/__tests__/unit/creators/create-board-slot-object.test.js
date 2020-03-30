@@ -11,13 +11,26 @@ test(`should create an object for a new board slot`, () => {
     canBeAttacked: false,
     canBeBuffed: false,
     canBeHealed: false,
+    canbeDebuffed: false,
+    canbeExpired: false,
+    canbeReturned: false,
+    canbeSacrificed: false,
+    canbeStolen: false,
+    canReceiveEnergyShield: false,
+    canReceiveOnslaught: false,
     currentAttack: expectedMinionData.attack,
     currentHealth: expectedMinionData.health,
     hasBoon: false,
+    hasEnergyShield: false,
     hasGuard: false,
+    isConcealed: false,
+    isCursed: false,
+    isDisabled: false,
     minionData: expectedMinionData,
+    hasOnslaught: false,
     totalAttack: expectedMinionData.attack,
-    totalHealth: expectedMinionData.health
+    totalHealth: expectedMinionData.health,
+    willExpire: false
   });
 });
 

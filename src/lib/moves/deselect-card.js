@@ -15,17 +15,48 @@ const deselectCard = (G, ctx) => {
   selectedCardIndex.reset(G, currentPlayer);
   selectedCardObject.reset(G, currentPlayer);
 
-  G.boards[otherPlayer].forEach((slot, i) => {
-    slot.canBeAttacked = false;
+  G.boards[otherPlayer].forEach(slot => {
+    slot.canBeAttackedByMinion = false;
+    slot.canBeAttackedByPlayer = false;
+    slot.canBeAttackedBySpell = false;
+    slot.canBeAttackedByWarcry = false;
   });
 
   G.selectedCardType[currentPlayer] = null;
   G.selectedCardSpellType[currentPlayer] = null;
   G.selectedCardSpellContext[currentPlayer] = null;
+  G.playerCanBeAttackedBySpell = { '0': false, '1': false };
 
-  G.boards[currentPlayer].forEach((slot, i) => {
+  G.boards[currentPlayer].forEach(slot => {
+    slot.canBeAttackedByMinion = false;
+    slot.canBeAttackedByPlayer = false;
+    slot.canBeAttackedBySpell = false;
+    slot.canBeAttackedByWarcry = false;
     slot.canBeBuffed = false;
     slot.canBeHealed = false;
+    slot.canBeDebuffed = false;
+    slot.canBeExpired = false;
+    slot.canBeReturned = false;
+    slot.canBeSacrificed = false;
+    slot.canBeStolen = false;
+    slot.canReceiveEnergyShield = false;
+    slot.canReceiveOnslaught = false;
+  });
+
+  G.boards[otherPlayer].forEach(slot => {
+    slot.canBeAttackedByMinion = false;
+    slot.canBeAttackedByPlayer = false;
+    slot.canBeAttackedBySpell = false;
+    slot.canBeAttackedByWarcry = false;
+    slot.canBeBuffed = false;
+    slot.canBeHealed = false;
+    slot.canBeDebuffed = false;
+    slot.canBeExpired = false;
+    slot.canBeReturned = false;
+    slot.canBeSacrificed = false;
+    slot.canBeStolen = false;
+    slot.canReceiveEnergyShield = false;
+    slot.canReceiveOnslaught = false;
   });
 };
 

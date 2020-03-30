@@ -21,6 +21,13 @@ const attackPlayerWithPlayer = (G, ctx) => {
     if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
   }
 
+  G.animationStates.playerIsAttackingPlayer[currentPlayer] = true;
+
+  // weapon-specific mechanics
+  if (playerWeapon[currentPlayer].id === 'CORE_081') {
+    health.add(G, currentPlayer, 2);
+  }
+
   // remove shieldPoints first, then health
   if (G.playerShieldPoints[otherPlayer] !== 0) {
     const preDIFF = Math.abs(G.playerShieldPoints[otherPlayer] - WEAPON_AP);
@@ -38,10 +45,10 @@ const attackPlayerWithPlayer = (G, ctx) => {
   // disable all playerIsAttacking
   G.playerIsAttacking = { '0': false, '1': false };
 
-  // disable all playerCanBeAttacked
-  G.playerCanBeAttacked = { '0': false, '1': false };
+  // disable all player can be attacked
+  G.playerCanBeAttackedByPlayer = { '0': false, '1': false };
 
-  // then disable opponent minions canBeAttacked
+  // then disable opponent minions can be attacked
   boards.disableAllCanBeAttacked(G, otherPlayer);
 
   // destroy weapon if health reaches zero

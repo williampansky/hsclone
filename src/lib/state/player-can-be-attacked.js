@@ -1,27 +1,29 @@
 const playerCanBeAttacked = {
-  __DATA_MODEL: {
+  playerCanBeAttackedByMinion: {
     '0': false,
     '1': false
   },
-
-  /**
-   * Enables a player's playerCanBeAttacked boolean.
-   * @param {{}} G
-   * @param {string} player
-   */
-  enable: (G, player) => {
-    const result = (G.playerCanBeAttacked[player] = true);
-    return result;
+  playerCanBeAttackedByPlayer: {
+    '0': false,
+    '1': false
   },
-
-  /**
-   * Disables a player's playerCanBeAttacked boolean.
-   * @param {{}} G
-   * @param {string} player
-   */
+  playerCanBeAttackedBySpell: {
+    '0': false,
+    '1': false
+  },
+  playerCanBeAttackedByWarcry: {
+    '0': false,
+    '1': false
+  },
+  enableByMinion: (G, player) => (G.playerCanBeAttackedByMinion[player] = true),
+  enableByPlayer: (G, player) => (G.playerCanBeAttackedByPlayer[player] = true),
+  enableBySpell: (G, player) => (G.playerCanBeAttackedBySpell[player] = true),
+  enableByWarcry: (G, player) => (G.playerCanBeAttackedByWarcry[player] = true),
   disable: (G, player) => {
-    const result = (G.playerCanBeAttacked[player] = false);
-    return result;
+    G.playerCanBeAttackedByMinion[player] = false;
+    G.playerCanBeAttackedByPlayer[player] = false;
+    G.playerCanBeAttackedBySpell[player] = false;
+    G.playerCanBeAttackedByWarcry[player] = false;
   }
 };
 

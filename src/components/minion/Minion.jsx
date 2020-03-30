@@ -43,11 +43,12 @@ export default function Minion({
     mouseLeaveDelayMS: 0
   });
 
-  return health >= 0 ? (
+  return (
     <div
       className={[
         'minion',
-        currentHealth !== totalHealth ? '--is-damaged' : ''
+        currentHealth < totalHealth ? '--is-damaged' : '',
+        currentHealth === 0 ? '--is-dead' : ''
       ].join(' ')}
     >
       {/* <div className={'info-trigger'} {...hoverProps} /> */}
@@ -65,7 +66,7 @@ export default function Minion({
       </div>
       <div className={'minion__bezel'} />
     </div>
-  ) : null;
+  );
 }
 
 Minion.defaultProps = {

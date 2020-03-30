@@ -11,27 +11,22 @@ const counts = {
       timer: 75000
     }
   },
-  deincrementDeck: (G, player) => deincrementDeckCount(G, player),
-  deincrementHand: (G, player) => deincrementHandCount(G, player),
-  incrementDeck: (G, player) => incrementDeckCount(G, player),
-  incrementHand: (G, player) => incrementHandCount(G, player)
-};
+  deincrementDeck: (G, player) => {
+    G.counts[player].deck--;
+  },
 
-export const deincrementDeckCount = (G, player) => {
-  G.counts[player].deck--;
-};
+  deincrementHand: (G, player) => {
+    G.counts[player].hand--;
+  },
 
-export const deincrementHandCount = (G, player) => {
-  G.counts[player].hand--;
-};
+  incrementDeck: (G, player) => {
+    G.counts[player].deck++;
+  },
 
-export const incrementDeckCount = (G, player) => {
-  G.counts[player].deck++;
-};
-
-export const incrementHandCount = (G, player) => {
-  if (G.players[player].deck.length === 0) return;
-  G.counts[player].hand++;
+  incrementHand: (G, player) => {
+    if (G.players[player].deck.length === 0) return;
+    G.counts[player].hand++;
+  }
 };
 
 export default counts;

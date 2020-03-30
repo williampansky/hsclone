@@ -1,7 +1,7 @@
+import boards from 'lib/state/boards';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import selectedMinionIndex from 'lib/state/selected-minion-index';
 import selectedMinionObject from 'lib/state/selected-minion-object';
-import boards from 'lib/state/boards';
 
 /**
  * Resets `selectedMinionIndex` & `selectedMinionObject` of the current player.

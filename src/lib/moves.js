@@ -2,13 +2,15 @@ import attackMinion from 'lib/moves/attack-minion';
 import attackMinionWithPlayer from 'lib/moves/attack-minion-with-player';
 import attackPlayer from 'lib/moves/attack-player';
 import attackPlayerWithPlayer from 'lib/moves/attack-player-with-player';
-import castTargetedWarcryEffect from 'lib/moves/cast-targeted-warcry-effect';
-import castTargetedSpellEffect from 'lib/moves/cast-targeted-spell-effect';
+import boards from 'lib/state/boards';
+import castTargetedSpell from 'lib/moves/cast-targeted-spell';
+import castTargetedWarcry from 'lib/moves/cast-targeted-warcry';
 import deselectCard from 'lib/moves/deselect-card';
 import deselectMinion from 'lib/moves/deselect-minion';
 import discardCard from 'lib/moves/discard-card';
 import drawCard from 'lib/moves/draw-card';
 import forfeitGame from 'lib/moves/forfeit-game';
+import getCardByID from 'lib/utils/get-card-by-id';
 import hoverCard from 'lib/moves/hover-card';
 import initClassSkill from './moves/init-class-skill';
 import initPlayerWeaponAttack from 'lib/moves/init-player-weapon-attack';
@@ -16,8 +18,6 @@ import playCard from 'lib/moves/play-card';
 import selectCard from 'lib/moves/select-card';
 import selectMinion from 'lib/moves/select-minion';
 import terminatePlayerWeaponAttack from 'lib/moves/terminate-player-weapon-attack';
-import boards from 'lib/state/boards';
-import getCardByID from 'lib/utils/get-card-by-id';
 
 export default {
   addCardToHand: {
@@ -50,16 +50,16 @@ export default {
       return attackPlayerWithPlayer(G, ctx);
     }
   },
-  castTargetedSpellEffect: {
+  castTargetedSpell: {
     client: false,
     move: (G, ctx, playerCtx, targetCtx, targetIdx) => {
-      return castTargetedSpellEffect(G, ctx, playerCtx, targetCtx, targetIdx);
+      return castTargetedSpell(G, ctx, playerCtx, targetCtx, targetIdx);
     }
   },
-  castTargetedWarcryEffect: {
+  castTargetedWarcry: {
     client: false,
     move: (G, ctx, playerCtx, targetCtx, targetIdx) => {
-      return castTargetedWarcryEffect(G, ctx, playerCtx, targetCtx, targetIdx);
+      return castTargetedWarcry(G, ctx, playerCtx, targetCtx, targetIdx);
     }
   },
   deselectCard: {
@@ -125,6 +125,7 @@ export default {
   selectCard: {
     client: false,
     move: (G, ctx, cardObject, index) => {
+      deselectCard(G, ctx);
       return selectCard(G, ctx, cardObject, index);
     }
   },
@@ -132,6 +133,12 @@ export default {
     client: false,
     move: (G, ctx, cardObject, index) => {
       return selectMinion(G, ctx, cardObject, index);
+    }
+  },
+  setLastPlayedCardId: {
+    client: false,
+    move: G => {
+      G.lastPlayedCardId = null;
     }
   },
   playCard: {

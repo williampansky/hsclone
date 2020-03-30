@@ -1,4 +1,5 @@
 import getCardByID from 'lib/utils/get-card-by-id';
+import RACE from 'enums/race.enums';
 
 /**
  * Returns the adjustment function per the CORE cardId.
@@ -11,7 +12,30 @@ const recalculateCoreBoon = (G, player, cardId, index) => {
   // prettier-ignore
   switch (cardId) {
     case 'CORE_003':  return CORE_003(G, player, cardId);
+
+    // Provide adjacent minions with +2 Attack.
+    case 'CORE_108':
+      G.boards[player].forEach((slot, i) => {
+        if (i === index - 1 || i === index + 1 || i === index) {
+          slot.currentAttack = slot.minionData.attack;
+          slot.totalAttack = slot.minionData.attack;
+        }
+      });
+      break;
+    
     case 'CORE_019':  return CORE_019(G, player, cardId);
+
+    // <strong>Boon:</strong> Your other Creatures have +1 attack.
+    case 'CORE_054':
+      G.boards[player].forEach((slot, i) => {
+        if (i === index) return;
+        if (slot.minionData.race === RACE[1]) {
+          slot.currentAttack = slot.currentAttack - 1;
+          slot.totalAttack = slot.totalAttack - 1;
+        }
+      });
+      break;
+
     default:          break;
   }
 };

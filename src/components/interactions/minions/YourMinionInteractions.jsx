@@ -1,9 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MINION_CAN_ATTACK from 'components/interactions/minions/MINION_CAN_ATTACK';
-import MINION_CAN_BE_BUFFED from 'components/interactions/minions/MINION_CAN_BE_BUFFED';
-import MINION_CAN_BE_HEALED from 'components/interactions/minions/MINION_CAN_BE_HEALED';
-import MINION_IS_ATTACKING from 'components/interactions/minions/MINION_IS_ATTACKING';
+
+import CanAttack from 'components/interactions/minions/CanAttack';
+import CanBeBuffed from 'components/interactions/minions/CanBeBuffed';
+import CanBeDebuffed from 'components/interactions/minions/CanBeDebuffed';
+import CanBeHealed from 'components/interactions/minions/CanBeHealed';
+import CanBeSacrificed from 'components/interactions/minions/CanBeSacrificed';
+import CanBeExpired from 'components/interactions/minions/CanBeExpired';
+import IsAttacking from 'components/interactions/minions/IsAttacking';
+import CanBeReturned from 'components/interactions/minions/CanBeReturned';
+import CanBeStolen from 'components/interactions/minions/CanBeStolen';
+import CanReceiveEnergyShield from 'components/interactions/minions/CanReceiveEnergyShield';
+import CanReceiveOnslaught from 'components/interactions/minions/CanReceiveOnslaught';
+import CanReceiveGuard from './CanReceiveGuard';
 
 export default function YourMinionInteractions({
   G,
@@ -11,28 +20,79 @@ export default function YourMinionInteractions({
   moves,
   data,
   index,
+  board,
   canAttack,
   canBeBuffed,
   canBeHealed,
+  canBeDebuffed,
+  canBeExpired,
+  canBeReturned,
+  canBeSacrificed,
+  canBeStolen,
+  canReceiveEnergyShield,
+  canReceiveGuard,
+  canReceiveOnslaught,
+  hasBoon,
+  hasEnergyShield,
   hasGuard,
-  isAttacking
+  hasOnslaught,
+  isAttacking,
+  isConcealed,
+  isCursed,
+  isDisabled,
+  willExpire
 }) {
-  const CAN_ATTACK = MINION_CAN_ATTACK;
-  const CAN_BE_BUFFED = MINION_CAN_BE_BUFFED;
-  const CAN_BE_HEALED = MINION_CAN_BE_HEALED;
-  const IS_ATTACKING = MINION_IS_ATTACKING;
-
   if (canBeHealed) {
-    return <CAN_BE_HEALED G={G} ctx={ctx} moves={moves} index={index} />;
-  } else if (canBeBuffed) {
-    return <CAN_BE_BUFFED G={G} ctx={ctx} moves={moves} index={index} />;
-  } else if (canAttack && !isAttacking) {
-    return <CAN_ATTACK moves={moves} data={data} index={index} />;
-  } else if (canAttack && isAttacking) {
-    return <IS_ATTACKING moves={moves} data={data} index={index} />;
-  } else {
-    return null;
+    return (
+      <CanBeHealed G={G} ctx={ctx} moves={moves} index={index} board={board} />
+    );
   }
+
+  if (canBeBuffed) {
+    return <CanBeBuffed G={G} ctx={ctx} moves={moves} index={index} />;
+  }
+
+  if (canBeDebuffed) {
+    return <CanBeDebuffed moves={moves} index={index} />;
+  }
+
+  if (canBeExpired) {
+    return <CanBeExpired moves={moves} index={index} />;
+  }
+
+  if (canBeReturned) {
+    return <CanBeReturned moves={moves} index={index} targetContext={1} />;
+  }
+
+  if (canBeSacrificed) {
+    return <CanBeSacrificed moves={moves} index={index} />;
+  }
+
+  if (canBeStolen) {
+    return <CanBeStolen moves={moves} index={index} />;
+  }
+
+  if (canReceiveEnergyShield) {
+    return <CanReceiveEnergyShield moves={moves} index={index} />;
+  }
+
+  if (canReceiveGuard) {
+    return <CanReceiveGuard G={G} ctx={ctx} moves={moves} index={index} />;
+  }
+
+  if (canReceiveOnslaught) {
+    return <CanReceiveOnslaught G={G} ctx={ctx} moves={moves} index={index} />;
+  }
+
+  if (canAttack && !isAttacking) {
+    return <CanAttack data={data} moves={moves} index={index} />;
+  }
+
+  if (canAttack && isAttacking) {
+    return <IsAttacking moves={moves} />;
+  }
+
+  return null;
 }
 
 YourMinionInteractions.propTypes = {
@@ -41,9 +101,29 @@ YourMinionInteractions.propTypes = {
   moves: PropTypes.object,
   data: PropTypes.object,
   index: PropTypes.number,
-  hasGuard: PropTypes.bool,
+  board: PropTypes.string,
   canAttack: PropTypes.bool,
+  canBeAttackedByMinion: PropTypes.bool,
+  canBeAttackedByPlayer: PropTypes.bool,
+  canBeAttackedBySpell: PropTypes.bool,
+  canBeAttackedByWarcry: PropTypes.bool,
   canBeBuffed: PropTypes.bool,
   canBeHealed: PropTypes.bool,
-  isAttacking: PropTypes.bool
+  canBeDebuffed: PropTypes.bool,
+  canBeExpired: PropTypes.bool,
+  canBeReturned: PropTypes.bool,
+  canBeSacrificed: PropTypes.bool,
+  canBeStolen: PropTypes.bool,
+  canReceiveEnergyShield: PropTypes.bool,
+  canReceiveGuard: PropTypes.bool,
+  canReceiveOnslaught: PropTypes.bool,
+  hasBoon: PropTypes.bool,
+  hasEnergyShield: PropTypes.bool,
+  hasGuard: PropTypes.bool,
+  hasOnslaught: PropTypes.bool,
+  isAttacking: PropTypes.bool,
+  isConcealed: PropTypes.bool,
+  isCursed: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  willExpire: PropTypes.bool
 };

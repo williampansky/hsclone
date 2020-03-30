@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // configs
-import avatars from 'config/avatars.config';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
 
 // child components
-import TheirPlayerArea from 'components/player-areas/TheirPlayerArea';
-import TheirBoardPlayerArea from 'components/board-play-areas/TheirBoardPlayArea';
 import Deck from 'components/decks/Deck';
+import TheirBoardPlayerArea from 'components/board-play-areas/TheirBoardPlayArea';
+import TheirPlayerArea from 'components/player-areas/TheirPlayerArea';
 
 export default function TheirBoard({
   G,
@@ -19,7 +19,6 @@ export default function TheirBoard({
 }) {
   const { counts, playerClass, cardBack } = G;
   const theirDeckLength = counts[theirID].deck;
-
   const theirCardBackImageSrc = cardBack[theirID];
 
   return (
@@ -29,10 +28,9 @@ export default function TheirBoard({
         ctx={ctx}
         moves={moves}
         isActive={isActive}
-        board="TheirBoard"
+        board={PLAYER_BOARDS[2]}
         theirID={theirID}
         yourID={yourID}
-        avatars={avatars}
         playerClass={playerClass}
       />
 
@@ -41,13 +39,13 @@ export default function TheirBoard({
         ctx={ctx}
         moves={moves}
         isActive={isActive}
-        board="TheirBoard"
+        board={PLAYER_BOARDS[2]}
         theirID={theirID}
         yourID={yourID}
       />
 
       <Deck
-        board="TheirBoard"
+        board={PLAYER_BOARDS[2]}
         cardBackSrc={theirCardBackImageSrc}
         length={theirDeckLength}
       />
