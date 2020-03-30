@@ -1,9 +1,10 @@
-import GAME_CONFIG from 'config/game.config';
 import boards from 'lib/state/boards';
 import buffs from 'lib/state/buffs';
 import cardBack from 'lib/state/cardBack';
+import CARDCLASS from 'enums/cardClass.enums';
 import counts from 'lib/state/counts';
 import energy from 'lib/state/energy';
+import GAME_CONFIG from 'config/game.config';
 import health from 'lib/state/health';
 import hoveringCardIndex from 'lib/state/hovering-card-index';
 import playedCards from 'lib/state/played-cards';
@@ -12,10 +13,11 @@ import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
-import playerUsedClassSkill from 'lib/state/player-used-class-skill';
 import playerIsAttacking from 'lib/state/player-is-attacking';
+import playerIsDisabled from './state/player-is-disabled';
 import players from 'lib/state/players';
 import playerShieldPoints from 'lib/state/player-shield-points';
+import playerUsedClassSkill from 'lib/state/player-used-class-skill';
 import playerWeapon from 'lib/state/player-weapon';
 import selectedCardIndex from 'lib/state/selected-card-index';
 import selectedCardObject from 'lib/state/selected-card-object';
@@ -23,8 +25,6 @@ import selectedMinionIndex from 'lib/state/selected-minion-index';
 import selectedMinionObject from 'lib/state/selected-minion-object';
 import spellObject from 'lib/state/spell-object';
 import warcryObject from 'lib/state/warcry-object';
-import CARDCLASS from 'enums/cardClass.enums';
-import playerIsDisabled from './state/player-is-disabled';
 
 export default {
   buffs: buffs.__DATA_MODEL,

@@ -2,19 +2,18 @@ import { discardCardFromHandByIndex } from 'lib/moves/discard-card';
 import boards from 'lib/state/boards';
 import copyCardToPlayedCards from 'lib/utils/copy-card-to-played-cards';
 import counts from 'lib/state/counts';
+import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import deselectCard from './deselect-card';
 import drawCard from './draw-card';
 import energy from 'lib/state/energy';
 import health from 'lib/state/health';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
-import removeCardFromHand from 'lib/utils/remove-card-from-hand';
-import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
-import RACE from 'enums/race.enums';
 import playerIsDisabled from 'lib/state/player-is-disabled';
-import getCardByID from 'lib/utils/get-card-by-id';
-import createBoardSlotObject from 'lib/creators/create-board-slot-object';
+import RACE from 'enums/race.enums';
+import removeCardFromHand from 'lib/utils/remove-card-from-hand';
 import TARGET_CONTEXT from 'enums/target-context.enum';
+import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -292,10 +291,14 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       break;
 
-    // Take control of over on of your opponent's minions.
+    // Take control of over one of your opponent's minions.
     case 'CORE_092':
-      const MIN = G.boards[otherPlayer].splice(index, 1);
-      G.boards[currentPlayer].push(MIN[0]);
+      if (G.boards[currentPlayer].length === 7) {
+        return;
+      } else {
+        const MINION = G.boards[otherPlayer].splice(index, 1);
+        G.boards[currentPlayer].push(MINION[0]);
+      }
       break;
 
     // Deal 2 damage to one of your enemy's undamaged minions.

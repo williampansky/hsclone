@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // configs
-import avatars from 'config/avatars.config';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
 
 // child components
@@ -32,7 +31,6 @@ export default function TheirBoard({
         board={PLAYER_BOARDS[2]}
         theirID={theirID}
         yourID={yourID}
-        avatars={avatars}
         playerClass={playerClass}
       />
 

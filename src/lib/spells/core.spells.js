@@ -1,16 +1,16 @@
 import boards from 'lib/state/boards';
+import counts from 'lib/state/counts';
+import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import createSpellObject from 'lib/creators/create-spell-object';
 import drawCard from 'lib/moves/draw-card';
+import energy from 'lib/state/energy';
 import getCardByID from 'lib/utils/get-card-by-id';
+import health from 'lib/state/health';
+import playerAttackValue from 'lib/state/player-attack-value';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerShieldPoints from 'lib/state/player-shield-points';
 import playWeaponByCardId from 'lib/weapons/play-weapon-card-by-id';
-import health from 'lib/state/health';
 import RACE from 'enums/race.enums';
-import counts from 'lib/state/counts';
-import createBoardSlotObject from 'lib/creators/create-board-slot-object';
-import energy from 'lib/state/energy';
-import playerAttackValue from 'lib/state/player-attack-value';
 
 const initCoreSpell = (G, ctx, cardId, index) => {
   const { turnOrder } = G;

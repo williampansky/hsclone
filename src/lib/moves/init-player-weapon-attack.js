@@ -1,5 +1,5 @@
-import playerIsAttacking from 'lib/state/player-is-attacking';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import playerIsAttacking from 'lib/state/player-is-attacking';
 
 /**
  * Sets `selectedMinionIndex` & `selectedMinionObject` of the current player.

@@ -1,15 +1,13 @@
-import GAME_CONFIG from 'config/game.config';
 import { TurnOrder } from 'boardgame.io/core';
 import boards from 'lib/state/boards';
-import energy from 'lib/state/energy';
+import counts from 'lib/state/counts';
 import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
-import winner from 'lib/state/winner';
+import energy from 'lib/state/energy';
+import GAME_CONFIG from 'config/game.config';
+import getCardByID from 'lib/utils/get-card-by-id';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
-import getCardByID from 'lib/utils/get-card-by-id';
-import counts from 'lib/state/counts';
 import playerIsDisabled from 'lib/state/player-is-disabled';
-import playerAttackValue from 'lib/state/player-attack-value';
 
 const onBegin = (G, ctx) => {
   const { turnOrder } = G;

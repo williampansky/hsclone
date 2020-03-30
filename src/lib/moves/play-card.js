@@ -15,10 +15,10 @@ import copyCardToPlayedCards from 'lib/utils/copy-card-to-played-cards';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import createMinionObject from 'lib/creators/create-minion-object';
 import initCardMechanics from 'lib/mechanics/init-mechanics';
+import playerCanAttack from 'lib/state/player-can-attack';
 import playSpellByCardId from 'lib/spells/play-spell-card-by-id';
 import playWeaponByCardId from 'lib/weapons/play-weapon-card-by-id';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
-import playerCanAttack from 'lib/state/player-can-attack';
 
 /**
  * Plays the provided card.

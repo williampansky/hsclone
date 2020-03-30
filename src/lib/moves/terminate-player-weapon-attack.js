@@ -1,6 +1,6 @@
-import playerIsAttacking from 'lib/state/player-is-attacking';
 import boards from 'lib/state/boards';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import playerIsAttacking from 'lib/state/player-is-attacking';
 
 /**
  * Disables currentPlayer's playerIsAttacking boolean.

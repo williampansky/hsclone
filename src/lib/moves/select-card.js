@@ -1,10 +1,10 @@
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import playerCanBeHealed from 'lib/state/player-can-be-healed';
+import RACE from 'enums/race.enums';
 import selectedCardIndex from 'lib/state/selected-card-index';
 import selectedCardObject from 'lib/state/selected-card-object';
 import SPELLTYPE from 'enums/spellType.enums';
 import TYPE from 'enums/type.enums';
-import RACE from 'enums/race.enums';
-import playerCanBeHealed from 'lib/state/player-can-be-healed';
 
 /**
  * Sets the `selectedCardIndex` and `selectedCardObject`

@@ -1,5 +1,5 @@
-import getCardByID from 'lib/utils/get-card-by-id';
 import counts from 'lib/state/counts';
+import getCardByID from 'lib/utils/get-card-by-id';
 
 /**
  * Draw a card from player's deck to their hand.
@@ -18,14 +18,15 @@ const drawCard = (G, ctx, player, amountToDraw = 1) => {
 
 // prettier-ignore
 export const drawSingleCard = (G, player) => {
-  counts.deincrementDeck(G, player); // ............. set counts[player].deck
-  counts.incrementHand(G, player); // ............... set counts[player].hand
+  if (G.players[player].deck.length === 0) return;  // eject if deck is empty
+  if (G.players[player].hand.length === 10) return; // eject if hand is full
 
-  if (G.players[player].deck.length === 0) return; // eject if deck is empty
+  counts.deincrementDeck(G, player); // .............. set counts[player].deck
+  counts.incrementHand(G, player); // ................ set counts[player].hand
   
-  G.players[player].hand.push( // ................... pushes to hand
-    getCardByID( // ................................. generates card object
-      G.players[player].deck.splice(0, 1)[0] // ..... splices from deck
+  G.players[player].hand.push( // .................... pushes to hand
+    getCardByID( // .................................. generates card object
+      G.players[player].deck.splice(0, 1)[0] // ...... splices from deck
     )
   );
 }

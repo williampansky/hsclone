@@ -1,14 +1,14 @@
+import { discardCardFromHandByIndex } from 'lib/moves/discard-card';
 import boards from 'lib/state/boards';
-import health from 'lib/state/health';
 import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 import createWarcryObject from 'lib/creators/create-warcry-object';
-import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
-import playerCanAttack from 'lib/state/player-can-attack';
-import playerWeapon from 'lib/state/player-weapon';
-import getCardByID from 'lib/utils/get-card-by-id';
-import { discardCardFromHandByIndex } from 'lib/moves/discard-card';
-import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import drawCard from 'lib/moves/draw-card';
+import drawCardAtStartOfTurn from 'lib/utils/draw-turn-start-card';
+import getCardByID from 'lib/utils/get-card-by-id';
+import health from 'lib/state/health';
+import playerCanAttack from 'lib/state/player-can-attack';
+import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
+import playerWeapon from 'lib/state/player-weapon';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
