@@ -4,14 +4,12 @@ const playerAttackValue = {
     '1': 0
   },
   set: (G, player, value) => {
-    if (G.playerWeapon[player] !== null)
-      G.playerAttackValue[player] = Math.abs(
-        G.playerWeapon[player].attack + G.playerAttackValue[player] + value
-      );
-    else
-      G.playerAttackValue[player] = Math.abs(
-        G.playerAttackValue[player] + value
-      );
+    // if (G.playerWeapon[player] !== null)
+    //   G.playerAttackValue[player] = Math.abs(
+    //     G.playerWeapon[player].attack + G.playerAttackValue[player] + value
+    //   );
+    // else
+    G.playerAttackValue[player] = Math.abs(G.playerAttackValue[player] + value);
   },
   reset: (G, player) => {
     G.playerAttackValue[player] = 0;
