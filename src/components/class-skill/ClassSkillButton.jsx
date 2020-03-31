@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ReactSVG } from 'react-svg';
 import CARDCLASS from 'enums/cardClass.enums';
 import CLASS_SKILL_DESCRIPTIONS from 'enums/classSkillDescriptions.enums';
 

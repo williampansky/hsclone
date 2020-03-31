@@ -1,23 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Backstab from 'components/animations/avatars/Backstab';
-import GAME_010 from 'components/animations/minions/GAME_010';
 
-export default function AvatarAnimation({
-  G,
-  moves,
-  youUsedClassSkill,
-  theyUsedClassSkill
-}) {
-  const { lastPlayedCardId } = G;
-  const { setLastPlayedCardId } = moves;
-
-  // prettier-ignore
-  return (
-    <Component data-file="animations/avatars/AvatarAnimation">
-    </Component>
-  );
+export default function AvatarAnimation() {
+  return <Component data-file="animations/avatars/AvatarAnimation"></Component>;
 }
 
 AvatarAnimation.propTypes = {

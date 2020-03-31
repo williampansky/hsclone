@@ -4,11 +4,11 @@ import styled from 'styled-components';
 export default function CardIsPlayableEffect() {
   const [isReady, setIsReady] = React.useState(true);
 
-  // React.useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsReady(true);
-  //   }, 2000);
-  // }, []);
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsReady(true);
+    }, 0);
+  }, []);
 
   return (
     <CardEffect

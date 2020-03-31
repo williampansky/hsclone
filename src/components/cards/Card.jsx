@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { fontSizeBasedOnCharacterLength } from 'utils/text';
@@ -23,6 +22,7 @@ export default function Card({
   id,
   imageSrc,
   inspiration,
+  isGolden,
   mechanics,
   name,
   playRequirements,
@@ -34,8 +34,7 @@ export default function Card({
   spellType,
   targetingArrowText,
   text,
-  type,
-  isGolden
+  type
 }) {
   const { attackSound, deathSound, dropSound } = sounds;
   const metaAttributes = [
@@ -155,40 +154,41 @@ export default function Card({
   );
 }
 
-// Card.propTypes = {
-//   artist: PropTypes.string,
-//   attack: PropTypes.number,
-//   cardClass: PropTypes.string,
-//   collectible: PropTypes.boolean,
-//   cost: PropTypes.number,
-//   elite: PropTypes.boolean,
-//   entourage: PropTypes.array,
-//   flavor: PropTypes.string,
-//   health: PropTypes.number,
-//   hideStats: PropTypes.boolean,
-//   howToEarn: PropTypes.string,
-//   howToEarnGolden: PropTypes.string,
-//   id: PropTypes.string,
-//   images: PropTypes.shape({
-//     backgroundImage: PropTypes.string,
-//     foregroundImage: PropTypes.string
-//   }),
-//   mechanics: PropTypes.array,
-//   name: PropTypes.string,
-//   playRequirements: PropTypes.array,
-//   race: PropTypes.string,
-//   rarity: PropTypes.string,
-//   set: PropTypes.string,
-//   sounds: PropTypes.shape({
-//     attackSound: PropTypes.string,
-//     deathSound: PropTypes.string,
-//     dropSound: PropTypes.string
-//   }),
-//   spellDamage: PropTypes.number,
-//   targetingArrowText: PropTypes.string,
-//   text: PropTypes.string,
-//   type: PropTypes.string
-// };
+Card.propTypes = {
+  artist: PropTypes.string,
+  attack: PropTypes.number,
+  cardClass: PropTypes.string,
+  collectible: PropTypes.bool,
+  cost: PropTypes.number,
+  elite: PropTypes.bool,
+  entourage: PropTypes.array,
+  goldenImageSrc: PropTypes.string,
+  flavor: PropTypes.string,
+  health: PropTypes.number,
+  hideStats: PropTypes.bool,
+  howToEarn: PropTypes.string,
+  howToEarnGolden: PropTypes.string,
+  id: PropTypes.string,
+  imageSrc: PropTypes.string,
+  inspiration: PropTypes.string,
+  isGolden: PropTypes.bool,
+  mechanics: PropTypes.array,
+  name: PropTypes.string,
+  playRequirements: PropTypes.array,
+  race: PropTypes.string,
+  rarity: PropTypes.string,
+  set: PropTypes.string,
+  sounds: PropTypes.shape({
+    attackSound: PropTypes.string,
+    deathSound: PropTypes.string,
+    dropSound: PropTypes.string
+  }),
+  spellDamage: PropTypes.number,
+  spellType: PropTypes.string,
+  targetingArrowText: PropTypes.string,
+  text: PropTypes.string,
+  type: PropTypes.string
+};
 
 Card.defaultProps = {
   // card object props

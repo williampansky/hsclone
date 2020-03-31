@@ -1,47 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import useHover from 'react-use-hover';
+import React from 'react';
+import PropTypes from 'prop-types';
+// import useHover from 'react-use-hover';
 
 export default function Minion({
   currentAttack,
   currentHealth,
   data,
-  p,
-  slot,
   totalHealth
 }) {
-  const {
-    artist,
-    attack,
-    cardClass,
-    collectible,
-    cost,
-    elite,
-    entourage,
-    flavor,
-    goldenImageSrc,
-    health,
-    hideStats,
-    howToEarn,
-    howToEarnGolden,
-    id,
-    imageSrc,
-    mechanics,
-    name,
-    playRequirements,
-    race,
-    rarity,
-    set,
-    sounds,
-    spellDamage,
-    targetingArrowText,
-    text,
-    type
-  } = data;
-
-  const [isHovering, hoverProps] = useHover({
-    mouseEnterDelayMS: 900,
-    mouseLeaveDelayMS: 0
-  });
+  const { imageSrc } = data;
+  // const [isHovering, hoverProps] = useHover({
+  //   mouseEnterDelayMS: 900,
+  //   mouseLeaveDelayMS: 0
+  // });
 
   return (
     <div
@@ -68,6 +39,13 @@ export default function Minion({
     </div>
   );
 }
+
+Minion.propTypes = {
+  currentAttack: PropTypes.number,
+  currentHealth: PropTypes.number,
+  data: PropTypes.object,
+  totalHealth: PropTypes.number
+};
 
 Minion.defaultProps = {
   data: {

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useHover from 'react-use-hover';
-import limitNumberWithinRange from 'lib/utils/range-limit';
+// import limitNumberWithinRange from 'lib/utils/range-limit';
 
 // child components
 import Card from 'components/cards/Card';
@@ -96,27 +96,27 @@ export default function CardInteraction({
   //   // `
   // };
 
-  function calcOffset(index, total = 10, offsetRange = 80) {
-    // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
-    const MIN = 0;
-    const MAX = 60;
+  // function calcOffset(index, total = 10, offsetRange = 80) {
+  //   // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
+  //   const MIN = 0;
+  //   const MAX = 60;
 
-    const calculation = Math.abs(
-      ((index - (total - 1.5) / 2) / (total - 2)) * offsetRange
-    );
+  //   const calculation = Math.abs(
+  //     ((index - (total - 1.5) / 2) / (total - 2)) * offsetRange
+  //   );
 
-    return limitNumberWithinRange(calculation, MAX, MIN);
-  }
+  //   return limitNumberWithinRange(calculation, MAX, MIN);
+  // }
 
-  // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
-  function calcRotate(index, total = 10, rotationRange = 50) {
-    const MIN = -15;
-    const MAX = 25;
-    const calculation =
-      ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
+  // // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
+  // function calcRotate(index, total = 10, rotationRange = 50) {
+  //   const MIN = -15;
+  //   const MAX = 25;
+  //   const calculation =
+  //     ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
 
-    return limitNumberWithinRange(calculation, MAX, MIN);
-  }
+  //   return limitNumberWithinRange(calculation, MAX, MIN);
+  // }
 
   function selectPlayableCard(index) {
     hoverCard(null);

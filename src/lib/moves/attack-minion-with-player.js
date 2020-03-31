@@ -16,7 +16,7 @@ const attackMinionWithPlayer = (G, ctx, index) => {
   const ATTACKING_PLAYER_VALUE = playerAttackValue[currentPlayer];
   const ATTACKING_PLAYER_WEAPON = playerWeapon[currentPlayer];
   if (ATTACKING_PLAYER_WEAPON === null) return;
-  const WEAPON_AP = ATTACKING_PLAYER_WEAPON.attack;
+  // const WEAPON_AP = ATTACKING_PLAYER_WEAPON.attack;
   const PLAYER_AP = ATTACKING_PLAYER_VALUE;
 
   const MINION_BEING_ATTACKED = G.boards[otherPlayer][index];

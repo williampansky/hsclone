@@ -1,13 +1,13 @@
+import createBoardSlotObject from 'lib/creators/create-board-slot-object';
+import createSpellObject from 'lib/creators/create-spell-object';
+import createWeaponObject from 'lib/creators/create-weapon-object';
 import drawCard from 'lib/moves/draw-card';
 import health from 'lib/state/health';
-import playerShieldPoints from 'lib/state/player-shield-points';
-import createBoardSlotObject from 'lib/creators/create-board-slot-object';
-import playerWeapon from 'lib/state/player-weapon';
-import createWeaponObject from 'lib/creators/create-weapon-object';
-import createSpellObject from 'lib/creators/create-spell-object';
+// import playerAttackValue from 'lib/state/player-attack-value';
 import playerCanAttack from 'lib/state/player-can-attack';
-import playerAttackValue from 'lib/state/player-attack-value';
+import playerShieldPoints from 'lib/state/player-shield-points';
 import playerUsedClassSkill from 'lib/state/player-used-class-skill';
+import playerWeapon from 'lib/state/player-weapon';
 
 /**
  * Backstab your opponent for 2 damage.
@@ -50,9 +50,9 @@ export const gainShieldPoints = (G, ctx, amount = 2) => {
  * @param {{}} ctx
  */
 export const initTargetedHeal = (G, ctx) => {
-  const { turnOrder } = G;
+  // const { turnOrder } = G;
   const { currentPlayer } = ctx;
-  const otherPlayer = turnOrder.find(p => p !== currentPlayer);
+  // const otherPlayer = turnOrder.find(p => p !== currentPlayer);
 
   G.spellObject[currentPlayer] = createSpellObject('GAME_009');
   G.playerCanBeHealed[currentPlayer] = true;

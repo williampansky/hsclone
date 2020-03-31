@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import CardBack from 'components/cards/CardBack';
 import GameMenuTrigger from 'components/game-menu/GameMenuTrigger';
 import PlayerEnergy from 'components/player-energy/PlayerEnergy';
-import limitNumberWithinRange from 'lib/utils/range-limit';
+// import limitNumberWithinRange from 'lib/utils/range-limit';
 
 export default function TheirHand({ G, theirID, cardBackSrc, toggleMenuFn }) {
   const {
@@ -65,28 +65,28 @@ export default function TheirHand({ G, theirID, cardBackSrc, toggleMenuFn }) {
     }
   }
 
-  function calcOffset(index, total = 10, offsetRange = 80) {
-    // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
-    const MIN = 10;
-    const MAX = 50;
+  // function calcOffset(index, total = 10, offsetRange = 80) {
+  //   // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
+  //   const MIN = 10;
+  //   const MAX = 50;
 
-    const calculation = Math.abs(
-      ((index - (total - 1) / 2) / (total - 2)) * offsetRange
-    );
+  //   const calculation = Math.abs(
+  //     ((index - (total - 1) / 2) / (total - 2)) * offsetRange
+  //   );
 
-    return limitNumberWithinRange(calculation, MAX, MIN);
-  }
+  //   return limitNumberWithinRange(calculation, MAX, MIN);
+  // }
 
-  function calcRotate(index, total = 10, rotationRange = 50) {
-    // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
-    const MIN = -25;
-    const MAX = 25;
+  // function calcRotate(index, total = 10, rotationRange = 50) {
+  //   // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
+  //   const MIN = -25;
+  //   const MAX = 25;
 
-    const calculation =
-      ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
+  //   const calculation =
+  //     ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
 
-    return limitNumberWithinRange(calculation, MAX, MIN);
-  }
+  //   return limitNumberWithinRange(calculation, MAX, MIN);
+  // }
 
   return (
     <div
@@ -122,5 +122,7 @@ TheirHand.propTypes = {
     selectedCardIndex: PropTypes.object,
     selectedMinionIndex: PropTypes.object
   }),
-  theirID: PropTypes.string
+  theirID: PropTypes.string,
+  cardBackSrc: PropTypes.string,
+  toggleMenuFn: PropTypes.func
 };
