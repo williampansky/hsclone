@@ -1,0 +1,112 @@
+.card__v2 {
+  font-family: 'Carter One', sans-serif;
+  position: relative;
+  height: var(--card-height);
+  width: calc(var(--card-height) / 1.4);
+
+  .card__cost {
+    position: absolute;
+    bottom: 90.5px;
+    left: 14px;
+  }
+
+  .card__attack {
+    position: absolute;
+    bottom: 7px;
+    right: 12.5px;
+    height: 21px;
+    width: 21px;
+    @include display-flex(column nowrap, center, center);
+  }
+
+  .card__health {
+    position: absolute;
+    bottom: 28.15px;
+    right: 43px;
+    height: 21px;
+    width: 21px;
+    @include display-flex(column nowrap, center, center);
+  }
+
+  .card__name {
+    position: absolute;
+    bottom: 66px;
+    left: 16px;
+    font-size: 10px;
+    width: 100px;
+    height: 14px;
+    text-align: center;
+    @include display-flex(column nowrap, center, center);
+  }
+
+  .card__text {
+    position: absolute;
+    font-size: 8px;
+    bottom: 20px;
+    width: 52%;
+    left: 17px;
+    height: 44px;
+    text-align: center;
+    @include display-flex(column nowrap, center, center);
+  }
+
+  .card__text .text__value {
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .card__type {
+    color: white;
+    position: absolute;
+    bottom: 9px;
+    font-size: 6px;
+    left: 22px;
+    width: 55%;
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+
+  .text__value {
+    color: white;
+    line-height: 1;
+    position: relative;
+    top: 0.5px;
+    left: 0;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
+      0 0 1px black;
+  }
+
+  .card__image__wrapper {
+    border-radius: var(--card-border-radius);
+    position: absolute;
+    width: 100%;
+    height: 65%;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  .card__image {
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+  }
+
+  img {
+    height: var(--card-height);
+    width: calc(var(--card-height) / 1.4);
+  }
+}

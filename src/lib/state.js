@@ -1,6 +1,6 @@
 import boards from 'lib/state/boards';
 import buffs from 'lib/state/buffs';
-import cardBack from 'lib/state/cardBack';
+import cardBack from 'lib/state/card-back';
 import CARDCLASS from 'enums/cardClass.enums';
 import counts from 'lib/state/counts';
 import energy from 'lib/state/energy';

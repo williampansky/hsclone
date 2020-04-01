@@ -5,6 +5,7 @@ import useHover from 'react-use-hover';
 
 // child components
 import Card from 'components/cards/Card';
+import CardV2 from 'components/cards/CardV2';
 import CardIsPlayable from 'components/interactions/cards/CardIsPlayable';
 import CardIsPlayableEffect from 'components/interactions/cards/CardIsPlayableEffect';
 import CardIsSelected from 'components/interactions/cards/CardIsSelected';
@@ -149,7 +150,7 @@ export default function CardInteraction({
         </React.Fragment>
       ) : null}
 
-      <Card
+      <CardV2
         artist={artist}
         attack={attack}
         cardClass={cardClass}
