@@ -21,7 +21,7 @@ export default function PlayerHealth({ health, player, shieldPoints }) {
         {health}
       </HealthValue>
       <PlayerShield player={player} shieldPoints={shieldPoints} />
-      <Badge src={`assets/card-assets/ic_attack.png`} />
+      <Badge src={`assets/card-assets/ic_health.png`} />
     </Component>
   );
 }

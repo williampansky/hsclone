@@ -23,7 +23,6 @@ CanBeAttackedBySpell.propTypes = {
 
 const Component = styled.div`
   border-radius: var(--minion-border-radius);
-  box-shadow: 0 0 5px #c43800;
   cursor: pointer;
   height: 100%;
   opacity: 1;

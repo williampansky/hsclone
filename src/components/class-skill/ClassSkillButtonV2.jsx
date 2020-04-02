@@ -78,6 +78,7 @@ const Sphere = styled.img`
   right: -15px;
   top: -12px;
   position: absolute;
+  pointer-events: none;
 `;
 
 const Image = styled.div`

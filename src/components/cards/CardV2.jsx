@@ -136,10 +136,10 @@ export default function Card({
 
       {IS_MINION && (
         <React.Fragment>
-          <div className={'card__attack'}>
+          <div className={'card__attack'} data-value={attack}>
             <div className={'text__value'}>{attack}</div>
           </div>
-          <div className={'card__health'}>
+          <div className={'card__health'} data-value={health}>
             <div className={'text__value'}>{health}</div>
           </div>
         </React.Fragment>
@@ -147,10 +147,10 @@ export default function Card({
 
       {IS_WEAPON && (
         <React.Fragment>
-          <div className={'card__attack'}>
+          <div className={'card__attack'} data-value={attack}>
             <div className={'text__value'}>{attack}</div>
           </div>
-          <div className={'card__health'}>
+          <div className={'card__health'} data-value={health}>
             <div className={'text__value'}>{health}</div>
           </div>
         </React.Fragment>
