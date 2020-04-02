@@ -55,6 +55,12 @@ const Component = styled.div`
   border-bottom: 1px solid rgba(255, 255, 255, 0.465);
   width: 100%;
   background: var(--board-theirPlayerArea-background-color);
+  /* background-image: url('http://www.textures.com/system/gallery/photos/Metal/Painted/38396/MetalPainted0207_1_600.jpg?v=5'); */
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+  background-blend-mode: overlay;
+  image-rendering: pixelated;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;

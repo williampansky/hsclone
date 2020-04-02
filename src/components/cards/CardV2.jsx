@@ -130,7 +130,7 @@ export default function Card({
         )
       ) : (
         <div className={'card__type'}>
-          <div>{race}</div>
+          <div>{type}</div>
         </div>
       )}
 
@@ -147,10 +147,10 @@ export default function Card({
 
       {IS_WEAPON && (
         <React.Fragment>
-          <div className={'card__weapon__attack'}>
+          <div className={'card__attack'}>
             <div className={'text__value'}>{attack}</div>
           </div>
-          <div className={'card__weapon__health'}>
+          <div className={'card__health'}>
             <div className={'text__value'}>{health}</div>
           </div>
         </React.Fragment>
@@ -164,7 +164,35 @@ export default function Card({
           backgroundRepeat: 'no-repeat'
         }}
       /> */}
-      <img src={`assets/images/TCG_vol14_front--${rarity}.png`} alt="" />
+      <img
+        alt=""
+        className={`card__type__image`}
+        src={`assets/card-assets/Card_Type--${type}.png`}
+      />
+
+      {IS_MINION && (
+        <img
+          alt=""
+          className={`card__base__image`}
+          src={`assets/images/TCG_vol14_front--${rarity}.png`}
+        />
+      )}
+
+      {IS_WEAPON && (
+        <img
+          alt=""
+          className={`card__base__image`}
+          src={`assets/images/TCG_vol14_front--${rarity}.png`}
+        />
+      )}
+
+      {IS_SPELL && (
+        <img
+          alt=""
+          className={`card__base__image`}
+          src={`assets/images/TCG_vol14_front--${rarity}--SPELL.png`}
+        />
+      )}
 
       {metaAttributes.map((attr, index) => {
         const { name, content } = attr;
@@ -214,9 +242,9 @@ Card.propTypes = {
 
 Card.defaultProps = {
   // card object props
-  artist: 'Unknown',
+  artist: '',
   attack: 0,
-  cardClass: 'Neutral',
+  cardClass: '',
   collectible: true,
   cost: 0,
   elite: false,
@@ -231,11 +259,11 @@ Card.defaultProps = {
   imageSrc: null,
   inspiration: null,
   mechanics: [],
-  name: 'CARD NAME',
+  name: '',
   playRequirements: [],
-  race: 'Minion',
-  rarity: 'Free',
-  set: 'Free',
+  race: '',
+  rarity: '',
+  set: '',
   sounds: {
     attackSound: null,
     deathSound: null,

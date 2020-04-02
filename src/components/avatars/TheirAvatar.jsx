@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlayerHealth from 'components/player-health/PlayerHealth';
+import PlayerHealth from 'components/player-health/PlayerHealthV2';
 import AvatarAnimation from 'components/animations/avatars/AvatarAnimation';
 import AvatarInteraction from 'components/interactions/avatars/AvatarInteraction';
 import CARDCLASS from 'enums/cardClass.enums';

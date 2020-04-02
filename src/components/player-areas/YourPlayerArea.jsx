@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // children
-import ClassSkillButton from 'components/class-skill/ClassSkillButton';
+import ClassSkillButtonV2 from 'components/class-skill/ClassSkillButtonV2';
 import PlayerWeapon from 'components/player-weapon/PlayerWeapon';
 import YourAvatar from 'components/avatars/YourAvatar';
 
@@ -17,6 +17,7 @@ export default function YourPlayerArea({
   playerClass
 }) {
   const {
+    energy,
     playerCanAttack,
     playerCanUseClassSkill,
     playerAttackValue,
@@ -28,17 +29,19 @@ export default function YourPlayerArea({
   const WEAPON_AP = WEAPON && WEAPON.attack;
   const WEAPON_HP = WEAPON && WEAPON.health;
   const WEAPON_IMG = WEAPON && WEAPON.imageSrc;
+  const CAN_USE_SKILL =
+    playerCanUseClassSkill[yourID] && energy[yourID].current >= 2;
 
   return (
     <Component board={board} data-file="player-areas/YourPlayerArea">
       <AvatarWrapper board={board}>
-        <ClassSkillButton
+        <ClassSkillButtonV2
           G={G}
           ctx={ctx}
           moves={moves}
           isActive={isActive}
           playerClass={playerClass[yourID]}
-          canUse={playerCanUseClassSkill[yourID]}
+          canUse={CAN_USE_SKILL}
         />
 
         {playerWeapon[yourID] !== null ? (
@@ -61,7 +64,6 @@ export default function YourPlayerArea({
           playerClass={playerClass[yourID]}
           playerIsAttacking={playerIsAttacking[yourID]}
         />
-        <AvatarHealthWrapper />
       </AvatarWrapper>
     </Component>
   );
@@ -80,7 +82,13 @@ YourPlayerArea.propTypes = {
 const Component = styled.div`
   border-top: 1px solid rgba(255, 255, 255, 0.465);
   width: 100%;
-  background: var(--board-yourPlayerArea-background-color);
+  background-color: var(--board-yourPlayerArea-background-color);
+  background-image: url('');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+  background-blend-mode: overlay;
+  image-rendering: pixelated;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;

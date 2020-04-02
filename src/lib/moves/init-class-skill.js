@@ -11,6 +11,7 @@ import {
   summonRandomIdol,
   tradeHealthForCard
 } from 'lib/class-skills/class-skills';
+import energy from 'lib/state/energy';
 
 /**
  * Activates a playerClass skill.
@@ -27,6 +28,9 @@ const initClassSkill = (G, ctx) => {
 
   // disable player's use of class skill after use
   playerCanUseClassSkill.disable(G, currentPlayer);
+
+  // remove 2 energy for skill cost
+  energy.subtract(G, currentPlayer, 2);
 
   // prettier-ignore
   switch (playerClass[currentPlayer]) {

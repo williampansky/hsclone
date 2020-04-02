@@ -5,26 +5,32 @@
   width: calc(var(--card-height) / 1.4);
 
   .card__cost {
+    font-size: 26px;
     position: absolute;
-    bottom: 90.5px;
-    left: 14px;
+    bottom: 88.5px;
+    left: 8px;
+    height: 34px;
+    width: 34px;
+    @include display-flex(column nowrap, center, center);
   }
 
   .card__attack {
+    font-size: 24px;
     position: absolute;
-    bottom: 7px;
-    right: 12.5px;
-    height: 21px;
-    width: 21px;
+    bottom: 6px;
+    right: 8.5px;
+    height: 30px;
+    width: 30px;
     @include display-flex(column nowrap, center, center);
   }
 
   .card__health {
+    font-size: 24px;
     position: absolute;
-    bottom: 28.15px;
-    right: 43px;
-    height: 21px;
-    width: 21px;
+    bottom: 32.15px;
+    right: 45px;
+    height: 30px;
+    width: 30px;
     @include display-flex(column nowrap, center, center);
   }
 
@@ -43,11 +49,24 @@
     position: absolute;
     font-size: 8px;
     bottom: 20px;
-    width: 52%;
     left: 17px;
     height: 44px;
     text-align: center;
+    padding: 0 10px;
+    word-spacing: 0.125em;
     @include display-flex(column nowrap, center, center);
+  }
+
+  .card__text strong {
+    color: #ffdd68;
+  }
+
+  &.--is-minion .card__text {
+    width: 48%;
+  }
+
+  &.--is-spell .card__text {
+    width: 56%;
   }
 
   .card__text .text__value {
@@ -64,6 +83,18 @@
     width: 55%;
     text-align: center;
     letter-spacing: 0.03em;
+    text-transform: uppercase;
+    line-height: 1;
+    height: 10px;
+    @include display-flex(column nowrap, center, center);
+  }
+
+  .card__type__image {
+    position: absolute;
+    width: 26px;
+    bottom: 74px;
+    right: 24.5px;
+    image-rendering: pixelated;
   }
 
   .text__value {
@@ -88,25 +119,41 @@
   }
 
   .card__image__wrapper {
+    background-color: #191919;
     border-radius: var(--card-border-radius);
     position: absolute;
     width: 100%;
-    height: 65%;
+    height: 70%;
     overflow: hidden;
     z-index: -1;
+
+    &:before {
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.25);
+      border-radius: var(--card-border-radius);
+      content: '';
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
+      position: absolute;
+      z-index: 1;
+    }
   }
 
   .card__image {
     width: 100%;
-    height: 100%;
-    background-position: center center;
+    height: 120%;
+    background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
     object-fit: cover;
+    position: relative;
+    top: -20px;
+    image-rendering: pixelated;
   }
 
-  img {
+  .card__base__image {
     height: var(--card-height);
     width: calc(var(--card-height) / 1.4);
+    image-rendering: pixelated;
   }
 }

@@ -212,6 +212,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
 
     // Change a minion's Attack down to 1.
     case 'CORE_075':
+      if (G.boards[otherPlayer][index].currentAttack === 0) return;
       G.boards[otherPlayer][index] = {
         ...G.boards[otherPlayer][index],
         currentAttack: 1,
