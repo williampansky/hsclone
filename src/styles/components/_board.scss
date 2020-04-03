@@ -1,15 +1,15 @@
 .board {
   box-sizing: border-box;
   background: black;
-  height: calc(100vh - var(--board-hands-height));
+  // height: calc(100vh - var(--board-hands-height));
+  height: 100%;
   overflow: hidden;
   position: relative;
-  width: 100vw;
+  width: 100%;
 }
 
 .their-board {
   align-items: center;
-  background: #383a38;
   box-shadow: inset 0 0 10px transparent;
   box-sizing: border-box;
   display: flex;
@@ -23,7 +23,6 @@
 
 .your-board {
   align-items: center;
-  background: #414440;
   box-shadow: inset 0 0 10px transparent;
   box-sizing: border-box;
   display: flex;

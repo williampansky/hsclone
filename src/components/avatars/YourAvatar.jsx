@@ -65,7 +65,6 @@ export default function YourAvatar({
       className={[
         'player-avatar',
         'your-avatar',
-        'effect--bezel',
         playerIsAttacking ? 'player-avatar--is_attacking' : '',
         attackingPlayerClass
       ].join(' ')}

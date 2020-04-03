@@ -176,6 +176,7 @@ const onEnd = (G, ctx) => {
   // reset minion states
   G.selectedMinionIndex = { '0': null, '1': null };
   G.selectedMinionObject = { '0': null, '1': null };
+  G.attackedMinionIndex = null;
 
   // reset warcry states
   G.warcryObject = { '0': null, '1': null };

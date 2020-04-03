@@ -44,7 +44,7 @@ export default function TheirAvatar({
   return (
     <div
       data-file="avatars/TheirAvatar"
-      className={['player-avatar', 'their-avatar', 'effect--bezel'].join(' ')}
+      className={['player-avatar', 'their-avatar'].join(' ')}
     >
       <PlayerHealth
         health={THEIR_HEALTH}

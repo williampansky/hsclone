@@ -6,15 +6,23 @@
   flex-flow: row nowrap;
   justify-content: center;
   min-height: 150px;
-  padding: 2.5% 2%;
+  padding: 1% 2%;
   position: relative;
-  width: calc(100% / 1.35);
+  width: calc(100% / 1.7);
+
+  position: absolute;
 }
 
 .their-board-play-area {
-  margin: auto 0 0;
+  top: 29%;
+  left: 20%;
 }
 
 .your-board-play-area {
-  margin: 0 0 auto;
+  bottom: 36%;
+  left: 20%;
+
+  &[data-is-your-turn='true'] {
+    z-index: 200;
+  }
 }

@@ -47,7 +47,7 @@ export default function AvatarInteraction({
       ) : null}
 
       {playerCanBeAttackedByMinion[theirID] ? (
-        <AvatarCanBeAttackedByMinion moves={moves} />
+        <AvatarCanBeAttackedByMinion G={G} ctx={ctx} moves={moves} />
       ) : null}
 
       {playerCanBeAttackedByPlayer[theirID] ? (

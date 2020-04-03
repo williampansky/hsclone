@@ -27,6 +27,12 @@ const attackMinion = (G, ctx, index) => {
   if (MINION_BEING_ATTACKED && !MINION_BEING_ATTACKED.canBeAttackedByMinion)
     return;
 
+  // set attacked minion index for animation
+  G.attackedMinionIndex = MINION_BEING_ATTACKED_INDEX;
+  G.boards[currentPlayer][
+    ATTACKING_MINION_INDEX
+  ].isAttackingMinionIndex = MINION_BEING_ATTACKED_INDEX;
+
   // if minion has energy shield; remove that first
   if (MINION_BEING_ATTACKED.hasEnergyShield) {
     G.boards[otherPlayer][index].hasEnergyShield = false;
@@ -56,20 +62,20 @@ const attackMinion = (G, ctx, index) => {
   }
 
   // handle onslaught mechanic
-  if (ATTACKING_MINION_HAS_ONSLAUGHT === true) {
-    // deincrement hasOnslaughtAttack integer
-    G.boards[currentPlayer][
-      ATTACKING_MINION_INDEX
-    ].hasOnslaughtAttack = Math.abs(
-      G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasOnslaughtAttack - 1
-    );
+  // if (ATTACKING_MINION_HAS_ONSLAUGHT === true) {
+  //   // deincrement hasOnslaughtAttack integer
+  //   G.boards[currentPlayer][
+  //     ATTACKING_MINION_INDEX
+  //   ].hasOnslaughtAttack = Math.abs(
+  //     G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasOnslaughtAttack - 1
+  //   );
 
-    if (ATTACKING_MINION_ONSLAUGHT_COUNT === 0)
-      boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
-  } else {
-    // disable ATTACKING_MINION's ability to attack
-    boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
-  }
+  //   if (ATTACKING_MINION_ONSLAUGHT_COUNT === 0)
+  //     boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  // } else {
+  //   // disable ATTACKING_MINION's ability to attack
+  //   boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  // }
 
   // remove concealed once you attack
   G.boards[currentPlayer][ATTACKING_MINION_INDEX].isConcealed = false;
@@ -95,6 +101,8 @@ const attackMinion = (G, ctx, index) => {
     MINION_BEING_ATTACKED,
     MINION_BEING_ATTACKED_INDEX
   );
+
+  // G.attackedMinionIndex = null;
 };
 
 export default attackMinion;

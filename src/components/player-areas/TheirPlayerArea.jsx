@@ -24,8 +24,6 @@ export default function TheirPlayerArea({
   return (
     <Component board={board} data-file="player-areas/TheirPlayerArea">
       <AvatarWrapper board={board}>
-        <AvatarHealthWrapper />
-
         <TheirAvatar
           G={G}
           ctx={ctx}
@@ -52,15 +50,7 @@ export default function TheirPlayerArea({
 }
 
 const Component = styled.div`
-  border-bottom: 1px solid rgba(255, 255, 255, 0.465);
   width: 100%;
-  background: var(--board-theirPlayerArea-background-color);
-  /* background-image: url('http://www.textures.com/system/gallery/photos/Metal/Painted/38396/MetalPainted0207_1_600.jpg?v=5'); */
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  background-size: cover;
-  background-blend-mode: overlay;
-  image-rendering: pixelated;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -74,8 +64,6 @@ const Component = styled.div`
 const AvatarWrapper = styled.div`
   border-bottom-left-radius: var(--avatar-border-radius);
   border-bottom-right-radius: var(--avatar-border-radius);
-  background: var(--board-theirPlayerArea-background-color);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.465);
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -85,22 +73,4 @@ const AvatarWrapper = styled.div`
   height: calc(var(--avatar-height) * 2);
   width: calc(var(--avatar-width) * 1.15);
   top: calc(var(--avatar-height) / 1.5);
-`;
-
-const AvatarHealthWrapper = styled.div`
-  border-bottom: 1px solid rgba(255, 255, 255, 0.465);
-  align-items: center;
-  border-radius: 50%;
-  display: flex;
-  flex-flow: column nowrap;
-  font-size: 20px;
-  font-weight: bold;
-  height: calc(var(--player-health-size) * 1.25);
-  justify-content: center;
-  position: absolute;
-  width: calc(var(--player-health-size) * 1.25);
-  z-index: 1;
-  background: var(--board-theirPlayerArea-background-color);
-  top: 43%;
-  right: -8%;
 `;

@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 // child components
 import Board from 'components/boards/Board';
+import GameBackground from 'components/game-wrapper/GameBackground';
 import GameMenu from 'components/game-menu/GameMenu';
 import GameOver from 'components/game-over/GameOver';
 import TheirHand from 'components/hands/TheirHand';
 import YourHand from 'components/hands/YourHand';
+import ResizeObserver from './ResizeObserver';
 
 export default function GameWrapper(props) {
   // global state manipulations
@@ -67,6 +69,11 @@ export default function GameWrapper(props) {
     };
   }, [escFunction]);
 
+  useEffect(() => {
+    document.body.style.width = `${1920}px`;
+    document.body.style.height = `${1080}px`;
+  }, []);
+
   return props ? (
     <React.Fragment>
       <div
@@ -77,12 +84,12 @@ export default function GameWrapper(props) {
           gameover && winner === yourID ? 'victory' : 'defeat'
         ].join(' ')}
       >
-        <TheirHand
+        {/* <TheirHand
           G={G}
           cardBackSrc={theirCardBackImageSrc}
           theirID={theirID}
           toggleMenuFn={() => toggleMenu()}
-        />
+        /> */}
         <Board
           G={G}
           ctx={ctx}
@@ -103,13 +110,18 @@ export default function GameWrapper(props) {
           yourID={yourID}
           theirID={theirID}
         />
-        <YourHand
+        {/* <YourHand
           G={G}
           ctx={ctx}
           moves={moves}
           isActive={isActive}
           cardBackSrc={yourCardBackImageSrc}
           yourID={yourID}
+        /> */}
+        <GameBackground
+          backgroundImage="assets/images/Uldaman_Board.jpg"
+          gameWidth={1920}
+          gameHeight={1080}
         />
       </div>
 
@@ -127,6 +139,8 @@ export default function GameWrapper(props) {
           toggleMenuFn={() => toggleMenu()}
         />
       )}
+
+      <ResizeObserver moves={moves} />
     </React.Fragment>
   ) : null;
 }

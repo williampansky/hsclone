@@ -1,12 +1,26 @@
 .player-avatar {
-  height: var(--avatar-height);
-  min-height: var(--avatar-height);
-  width: var(--avatar-width);
+  height: 166px;
+  // min-height: var(--avatar-height);
+  width: 155px;
   position: relative;
   z-index: 1;
   user-select: none;
   transition: 400ms cubic-bezier(0.19, 1, 0.22, 1);
   transition-property: transform;
+
+  &.your-avatar {
+    position: absolute;
+    top: auto;
+    left: 45.65%;
+    bottom: 15.55%;
+  }
+
+  &.their-avatar {
+    position: absolute;
+    top: 10.75%;
+    left: 45.65%;
+    bottom: auto;
+  }
 
   .avatar-image-wrapper {
     width: 100%;
@@ -42,13 +56,7 @@
   }
 }
 
-.their-avatar .avatar-image-wrapper {
-  border-bottom-left-radius: var(--avatar-border-radius);
-  border-bottom-right-radius: var(--avatar-border-radius);
-  border-bottom: 1px solid rgba(80, 80, 80, 0.65);
-}
-
-.your-avatar .avatar-image-wrapper {
+.player-avatar .avatar-image-wrapper {
   border-top-left-radius: var(--avatar-border-radius);
   border-top-right-radius: var(--avatar-border-radius);
   border-top: 1px solid rgba(255, 255, 255, 0.465);
@@ -105,12 +113,7 @@
     border-radius: var(--avatar-border-radius);
   }
 
-  &.their-avatar {
-    border-bottom-left-radius: var(--avatar-border-radius);
-    border-bottom-right-radius: var(--avatar-border-radius);
-  }
-
-  &.your-avatar {
+  &.player-avatar {
     border-top-left-radius: var(--avatar-border-radius);
     border-top-right-radius: var(--avatar-border-radius);
   }

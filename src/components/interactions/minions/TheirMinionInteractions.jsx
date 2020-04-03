@@ -47,7 +47,9 @@ export default function TheirMinionInteractions({
   }
 
   if (canBeAttackedByMinion) {
-    return <CanBeAttackedByMinion moves={moves} index={index} />;
+    return (
+      <CanBeAttackedByMinion G={G} ctx={ctx} moves={moves} index={index} />
+    );
   }
 
   if (canBeAttackedByPlayer) {

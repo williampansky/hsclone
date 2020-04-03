@@ -26,7 +26,7 @@ export default function BoardSlot({
   yourID,
   theirID
 }) {
-  const { selectedMinionIndex } = G;
+  const { selectedMinionIndex, attackedMinionIndex } = G;
   const { killMinion } = moves;
   const {
     canAttack,
@@ -50,6 +50,9 @@ export default function BoardSlot({
     hasEnergyShield,
     hasGuard,
     hasOnslaught,
+    isAttacking,
+    isAttackingMinionIndex,
+    isAttackingPlayer,
     isConcealed,
     isCursed,
     isDisabled,
@@ -76,6 +79,10 @@ export default function BoardSlot({
     isDead &&  KillMinion(index);
   }, [index, isDead, KillMinion]);
 
+  function handleIsAttackingClass(bool) {
+    if (bool) return '--animate-attack';
+  }
+
   return (
     <div
       data-file="board-slots/BoardSlot"
@@ -86,7 +93,12 @@ export default function BoardSlot({
         data === null ? 'is-empty' : '',
         data !== null ? 'has-minion' : '',
         data === null && !canDrop ? 'cannot-drop-minion' : '',
-        isDead ? 'is-dead' : ''
+        isDead ? 'is-dead' : '',
+        isAttacking ? '--is-attacking' : '',
+        isAttackingPlayer === true ? `--target-other-player` : '',
+        isAttackingMinionIndex !== null
+          ? `--target-data-slot-${isAttackingMinionIndex}`
+          : ''
       ].join(' ')}
       onClick={onClick}
     >
@@ -120,7 +132,7 @@ export default function BoardSlot({
           hasEnergyShield={hasEnergyShield}
           hasGuard={hasGuard}
           hasOnslaught={hasOnslaught}
-          isAttacking={selectedMinionIndex[yourID] === index}
+          isAttacking={isAttacking}
           isConcealed={isConcealed}
           isCursed={isCursed}
           isDisabled={isDisabled}

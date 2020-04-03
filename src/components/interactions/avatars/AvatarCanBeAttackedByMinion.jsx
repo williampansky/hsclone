@@ -2,25 +2,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default function AvatarCanBeAttackedByMinion({ moves }) {
-  const { attackPlayer } = moves;
+export default function AvatarCanBeAttackedByMinion({ G, ctx, moves }) {
+  const { selectedMinionIndex } = G;
+  const {
+    attackPlayer,
+    setAttackedMinionIndex,
+    resetMinionIsAttacking,
+    resetMinionIsAttackingPlayer
+  } = moves;
+
+  function handleClick() {
+    attackPlayer();
+
+    setTimeout(() => {
+      setAttackedMinionIndex(null);
+      resetMinionIsAttacking(selectedMinionIndex[ctx.currentPlayer]);
+      resetMinionIsAttackingPlayer(selectedMinionIndex[ctx.currentPlayer]);
+    }, 250);
+  }
+
   return (
     <Component
       data-file="interactions/avatars/AvatarCanBeAttackedByMinion"
-      onClick={() => attackPlayer()}
+      onClick={() => handleClick()}
     />
   );
 }
 
 AvatarCanBeAttackedByMinion.propTypes = {
+  G: PropTypes.object,
+  ctx: PropTypes.object,
   moves: PropTypes.object
 };
 
 const Component = styled.div`
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  border-bottom-left-radius: var(--avatar-border-radius);
-  border-bottom-right-radius: var(--avatar-border-radius);
+  border-top-left-radius: var(--avatar-border-radius);
+  border-top-right-radius: var(--avatar-border-radius);
   box-shadow: 0 0 5px #c43800;
   cursor: pointer;
   height: 100%;

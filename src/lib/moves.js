@@ -122,6 +122,24 @@ export default {
       return boards.killMinion(G, ctx, player, boardSlot, index);
     }
   },
+  resetMinionIsAttacking: {
+    client: false,
+    move: (G, ctx, index) => {
+      G.boards[ctx.currentPlayer][index].isAttacking = false;
+    }
+  },
+  resetMinionIsAttackingIndex: {
+    client: false,
+    move: (G, ctx, index) => {
+      G.boards[ctx.currentPlayer][index].isAttackingMinionIndex = null;
+    }
+  },
+  resetMinionIsAttackingPlayer: {
+    client: false,
+    move: (G, ctx, index) => {
+      G.boards[ctx.currentPlayer][index].isAttackingPlayer = false;
+    }
+  },
   selectCard: {
     client: false,
     move: (G, ctx, cardObject, index) => {
@@ -133,6 +151,12 @@ export default {
     client: false,
     move: (G, ctx, cardObject, index) => {
       return selectMinion(G, ctx, cardObject, index);
+    }
+  },
+  setAttackedMinionIndex: {
+    client: false,
+    move: G => {
+      G.attackedMinionIndex = null;
     }
   },
   setLastPlayedCardId: {

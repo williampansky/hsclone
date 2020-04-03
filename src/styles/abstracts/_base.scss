@@ -18,6 +18,9 @@ body {
   box-sizing: border-box;
 }
 
+#root,
 .bgio-client {
+  height: 100%;
   overflow: hidden;
+  width: 100%;
 }

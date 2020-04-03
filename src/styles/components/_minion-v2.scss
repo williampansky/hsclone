@@ -17,6 +17,13 @@
   font-size: 20px;
   box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.925),
     0px 0px 10px rgba(0, 0, 0, 0.465);
+  transition: 400ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition-property: box-shadow, transform;
+
+  .--is-attacking & {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.925),
+      0px 0px 35px rgba(0, 0, 0, 0.465);
+  }
 
   @media (max-height: 768px) {
     transform: scale(0.75);

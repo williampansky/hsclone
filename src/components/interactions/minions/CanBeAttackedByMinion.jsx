@@ -2,17 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default function CanBeAttackedByMinion({ moves, index }) {
-  const { attackMinion } = moves;
+export default function CanBeAttackedByMinion({ G, ctx, moves, index }) {
+  const { selectedMinionIndex } = G;
+  const {
+    attackMinion,
+    setAttackedMinionIndex,
+    resetMinionIsAttacking,
+    resetMinionIsAttackingIndex
+  } = moves;
+
+  function handleClick() {
+    attackMinion(index);
+
+    setTimeout(() => {
+      setAttackedMinionIndex(null);
+      resetMinionIsAttacking(selectedMinionIndex[ctx.currentPlayer]);
+      resetMinionIsAttackingIndex(selectedMinionIndex[ctx.currentPlayer]);
+    }, 250);
+  }
+
   return (
     <Component
       data-file="interactions/minions/CanBeAttackedByMinion"
-      onClick={() => attackMinion(index)}
+      onClick={() => handleClick()}
     />
   );
 }
 
 CanBeAttackedByMinion.propTypes = {
+  G: PropTypes.object,
+  ctx: PropTypes.object,
   moves: PropTypes.object,
   index: PropTypes.number
 };
