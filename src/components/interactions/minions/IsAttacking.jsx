@@ -23,10 +23,11 @@ const Component = styled.div`
   cursor: pointer;
   height: 100%;
   opacity: 1;
-  transition-property: box-shadow, opacity;
+  transition-property: box-shadow, opacity, transform;
   transition: 200ms ease-in-out;
   width: 100%;
   position: absolute;
+  transform: scale(1.15);
 
   @keyframes isAttackingGlow {
     0% {

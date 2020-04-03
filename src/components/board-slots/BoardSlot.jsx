@@ -95,9 +95,9 @@ export default function BoardSlot({
         data === null && !canDrop ? 'cannot-drop-minion' : '',
         isDead ? 'is-dead' : '',
         isAttacking ? '--is-attacking' : '',
-        isAttackingPlayer === true ? `--target-other-player` : '',
+        isAttackingPlayer === true ? `target__other_player` : '',
         isAttackingMinionIndex !== null
-          ? `--target-data-slot-${isAttackingMinionIndex}`
+          ? `target__slot-${isAttackingMinionIndex}`
           : ''
       ].join(' ')}
       onClick={onClick}

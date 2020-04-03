@@ -23,6 +23,7 @@
   .--is-attacking & {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.925),
       0px 0px 35px rgba(0, 0, 0, 0.465);
+    transform: scale(1.15);
   }
 
   @media (max-height: 768px) {

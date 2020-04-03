@@ -1,0 +1,32 @@
+// prettier-ignore
+.board-play-area {
+  &[data-their-board-length="1"] {
+    [data-slot="0"].target__slot-0 { transform: translate3d(25%, -50%, 0); }
+    &[data-your-board-length="2"] [data-slot="0"].target__slot-0 { transform: translate3d(25%, -50%, 0); }
+    &[data-your-board-length="2"] [data-slot="1"].target__slot-1 { transform: translate3d(-25%, -50%, 0); }
+  }
+  
+  &[data-their-board-length="2"] {
+    &[data-your-board-length="3"] [data-slot="0"].target__slot-0 { transform: translate3d(25%, -50%, 0); }
+    &[data-your-board-length="3"] [data-slot="0"].target__slot-1 { transform: translate3d(155%, -50%, 0); }
+    &[data-your-board-length="3"] [data-slot="1"].target__slot-0 { transform: translate3d(-25%, -50%, 0); }
+    &[data-your-board-length="3"] [data-slot="1"].target__slot-1 { transform: translate3d(25%, -50%, 0); }
+    &[data-your-board-length="3"] [data-slot="2"].target__slot-0 { transform: translate3d(-155%, -50%, 0); }
+    &[data-your-board-length="3"] [data-slot="2"].target__slot-1 { transform: translate3d(-25%, -50%, 0); }
+  }
+
+  &[data-your-board-length="1"] {
+    [data-slot="0"].target__other_player { transform: translate3d(0%, -175%, 0); }
+  }
+  
+  &[data-your-board-length="2"] {
+    [data-slot="0"].target__other_player { transform: translate3d(65%, -175%, 0); }
+    [data-slot="1"].target__other_player { transform: translate3d(-55%, -175%, 0); }
+  }
+  
+  &[data-your-board-length="3"] {
+    [data-slot="0"].target__other_player { transform: translate3d(125%, -175%, 0); }
+    [data-slot="1"].target__other_player { transform: translate3d(0%, -175%, 0); }
+    [data-slot="2"].target__other_player { transform: translate3d(-125%, -175%, 0); }
+  }
+}
