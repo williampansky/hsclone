@@ -159,7 +159,7 @@ const TextValue = styled.div`
   position: relative;
   opacity: 1;
   transition: 200ms ease-in-out;
-  transition-property: transform opacity;
+  transition-property: opacity, transform;
   transform: scale(0.85);
   text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
     0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,

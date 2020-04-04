@@ -238,6 +238,7 @@
 // prettier-ignore
 .minion__v2 {
   [data-value='0'] .text__value { top: 2px; }
+  [data-value='1'] .text__value { left: -0.5px; }
   [data-value='6'] .text__value { left: -1px; }
 }
 

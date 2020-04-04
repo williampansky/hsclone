@@ -7,6 +7,7 @@ import CARDCLASS from 'enums/cardClass.enums';
 import ClassSkillButton from 'components/class-skill/ClassSkillButtonV2';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
 import usePrevious from 'components/hooks/usePrevious';
+import PlayerWeapon from 'components/player-weapon/PlayerWeaponV2';
 
 export default function TheirAvatar({
   G,
@@ -25,7 +26,10 @@ export default function TheirAvatar({
     playerShieldPoints,
     playerCanBeHealed,
     playerIsAttacking,
-    playerUsedClassSkill
+    playerUsedClassSkill,
+    playerCanAttack,
+    playerAttackValue,
+    playerWeapon
   } = G;
   const THEIR_HEALTH = health[theirID];
   const THEIR_SHIELD = playerShieldPoints[theirID];
@@ -82,6 +86,17 @@ export default function TheirAvatar({
         board={PLAYER_BOARDS[2]}
         canUse={playerCanUseClassSkill[theirID] && energy[theirID].current >= 2}
       />
+
+      {/* {playerWeapon[theirID] !== null ? ( */}
+      <PlayerWeapon
+        board={PLAYER_BOARDS[2]}
+        canUse={playerCanAttack[theirID]}
+        playerAttackValue={playerAttackValue[theirID]}
+        weaponAttack={playerWeapon[theirID] && playerWeapon[theirID].attack}
+        weaponHealth={playerWeapon[theirID] && playerWeapon[theirID].health}
+        weaponImageSrc={playerWeapon[theirID] && playerWeapon[theirID].imageSrc}
+      />
+      {/* ) : null} */}
 
       <div
         className={[
