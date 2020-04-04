@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CARDCLASS from 'enums/cardClass.enums';
 import CLASS_SKILL_DESCRIPTIONS from 'enums/classSkillDescriptions.enums';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
 
 export default function ClassSkillButton({
   G,
@@ -11,6 +12,7 @@ export default function ClassSkillButton({
   moves,
   isActive,
   playerClass,
+  board,
   canUse
 }) {
   const { initClassSkill } = moves;
@@ -55,6 +57,7 @@ export default function ClassSkillButton({
   return (
     <Component
       data-file="class-skill/ClassSkillButton"
+      board={board}
       canUse={canUse}
       onClick={() => handleClick()}
     >
@@ -64,10 +67,21 @@ export default function ClassSkillButton({
           <CostGem src={`assets/card-assets/Cost.png`} />
         </Cost>
       ) : null}
-      <TextValue canUse={canUse}>
-        <span>{classText(playerClass)}</span>
-      </TextValue>
-      <Image backgroundImage={classSkillImage(playerClass)} />
+
+      {board === PLAYER_BOARDS[1] ? (
+        canUse ? (
+          <TextValue canUse={canUse}>
+            <span>{classText(playerClass)}</span>
+          </TextValue>
+        ) : null
+      ) : null}
+
+      {canUse ? (
+        <Image backgroundImage={classSkillImage(playerClass)} board={board} />
+      ) : (
+        <Image backgroundImage={`assets/images/Game_logo.png`} board={board} />
+      )}
+
       <Sphere src={`assets/card-assets/Class_Skill_Sphere.png`} />
     </Component>
   );
@@ -94,12 +108,10 @@ const Image = styled.div`
   border-radius: 50%;
   border-top: 1px solid rgba(255, 255, 255, 1);
   border-bottom: 1px solid rgba(0, 0, 0, 1);
-  box-shadow: 0px 0px 4.5px rgba(0, 0, 0, 0.925),
-    0px 0px 12.5px rgba(0, 0, 0, 0.465);
   z-index: 1;
 
   &:before {
-    content: '';
+    content: ${p => (p.board === PLAYER_BOARDS[1] ? '' : 'none')};
     width: 100%;
     height: 100%;
     background: transparent;
@@ -136,8 +148,6 @@ const Cost = styled.div`
   user-select: none;
   width: calc(var(--card-height) / 7);
   z-index: 5;
-  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.925),
-    0px 0px 4px rgba(0, 0, 0, 0.465);
 `;
 
 const TextValue = styled.div`
@@ -174,27 +184,24 @@ const TextValue = styled.div`
   }
 `;
 
-const a =
-  'inset 0 0 12px rgba(0, 0, 0, 0.925), inset 0 0 25px rgba(0, 0, 0, 0.125)';
-const b = 'inset 0 0 8px rgba(0, 0, 0, 0.25)';
+function determineCursor(board, canUse) {
+  if (board === PLAYER_BOARDS[2]) return 'default';
+  return canUse ? 'pointer' : 'not-allowed';
+}
 
 const Component = styled.div`
   align-items: center;
   border-radius: 50%;
-  cursor: ${p => (p.canUse ? 'pointer' : 'not-allowed')};
+  cursor: ${p => determineCursor(p.board, p.canUse)};
   display: flex;
   flex-flow: column nowrap;
   height: 120px;
   justify-content: center;
   position: absolute;
-  right: -135px;
-  top: 20px;
+  right: -155px;
+  top: 45px;
   user-select: none;
   width: 120px;
-  border-top: 1px solid rgba(255, 255, 255, 1);
-  border-bottom: 1px solid rgba(0, 0, 0, 1);
-  box-shadow: 0px 0px 4.5px rgba(0, 0, 0, 0.925),
-    0px 0px 12.5px rgba(0, 0, 0, 0.465);
 
   ${Cost} > ${TextValue} {
     opacity: 1;

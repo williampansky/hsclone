@@ -54,6 +54,12 @@
     transition-property: box-shadow, opacity;
     z-index: -1;
   }
+}
+
+.player-avatar .avatar-image-wrapper {
+  border-top-left-radius: var(--avatar-border-radius);
+  border-top-right-radius: var(--avatar-border-radius);
+  border-top: 1px solid rgba(255, 255, 255, 0.465);
 
   &.--was-attacked {
     animation-name: uk-shake-small;
@@ -61,12 +67,6 @@
     animation-timing-function: ease-out;
     animation-fill-mode: both;
   }
-}
-
-.player-avatar .avatar-image-wrapper {
-  border-top-left-radius: var(--avatar-border-radius);
-  border-top-right-radius: var(--avatar-border-radius);
-  border-top: 1px solid rgba(255, 255, 255, 0.465);
 }
 
 .player-avatar--can_be_attacked {

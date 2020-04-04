@@ -12,6 +12,7 @@ import TheirAvatar from 'components/avatars/TheirAvatar';
 import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
 import TheirBoardPlayerArea from 'components/board-play-areas/TheirBoardPlayArea';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
+import Deck from 'components/decks/Deck';
 
 export default function Board({
   G,
@@ -34,6 +35,8 @@ export default function Board({
   theirID
 }) {
   const {
+    cardBack,
+    counts,
     energy,
     playerCanAttack,
     playerCanUseClassSkill,
@@ -111,6 +114,11 @@ export default function Board({
         playerClass={playerClass[yourID]}
         playerIsAttacking={playerIsAttacking[yourID]}
       />
+      {/* <Deck
+        board={PLAYER_BOARDS[1]}
+        cardBackSrc={cardBack[yourID]}
+        length={counts[yourID].deck}
+      /> */}
     </div>
   );
 }

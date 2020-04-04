@@ -47,9 +47,5 @@ export const HSclone = {
   },
 
   // End game if either player's health reaches zero
-  // prettier-ignore
-  endIf: G => (
-    G.health[G.turnOrder[0]] === 0 ||
-    G.health[G.turnOrder[1]] === 0
-  )
+  endIf: G => G.winner !== null
 };

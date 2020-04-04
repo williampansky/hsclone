@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import PlayerHealth from 'components/player-health/PlayerHealthV2';
 import AvatarInteraction from 'components/interactions/avatars/AvatarInteraction';
 import CARDCLASS from 'enums/cardClass.enums';
+import ClassSkillButton from 'components/class-skill/ClassSkillButtonV2';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
+import usePrevious from 'components/hooks/usePrevious';
 
 export default function YourAvatar({
   G,
@@ -17,6 +20,8 @@ export default function YourAvatar({
   const [attackingPlayerClass, setAttackingPlayerClass] = React.useState('');
 
   const {
+    playerCanUseClassSkill,
+    energy,
     health,
     playerCanAttack,
     playerCanBeHealed,
@@ -26,6 +31,22 @@ export default function YourAvatar({
 
   const YOUR_HEALTH = health[yourID];
   const YOUR_SHIELD = playerShieldPoints[yourID];
+  const [wasAttacked, setWasAttacked] = React.useState(false);
+  const previousCurrentHealth = usePrevious(YOUR_HEALTH);
+
+  const animateWasAttacked = React.useCallback(
+    currentHealth => {
+      currentHealth < previousCurrentHealth && setWasAttacked(true);
+      return setTimeout(() => {
+        setWasAttacked(false);
+      }, 510);
+    },
+    [previousCurrentHealth]
+  );
+
+  React.useEffect(() => {
+    animateWasAttacked(YOUR_HEALTH);
+  }, [YOUR_HEALTH, animateWasAttacked]);
 
   function classImage(string) {
     // prettier-ignore
@@ -75,7 +96,22 @@ export default function YourAvatar({
         shieldPoints={YOUR_SHIELD}
       />
 
-      <div className={'avatar-image-wrapper'}>
+      <ClassSkillButton
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        isActive={isActive}
+        playerClass={playerClass}
+        board={PLAYER_BOARDS[1]}
+        canUse={playerCanUseClassSkill[yourID] && energy[yourID].current >= 2}
+      />
+
+      <div
+        className={[
+          'avatar-image-wrapper',
+          wasAttacked ? '--was-attacked' : ''
+        ].join(' ')}
+      >
         {playerClass && (
           <div
             className={'avatar-image'}

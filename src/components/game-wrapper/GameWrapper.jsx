@@ -33,16 +33,13 @@ export default function GameWrapper(props) {
     isConnected,
     credentials
   } = props;
-  const { winner, cardBack } = G;
+  const { health, winner } = G;
   const { gameover } = ctx;
+  const { setGameWinner } = moves;
 
   // id declarations
   const yourID = playerID === '0' ? '0' : '1';
   const theirID = playerID === '0' ? '1' : '0';
-
-  // card graphic declarations
-  const theirCardBackImageSrc = cardBack[theirID];
-  const yourCardBackImageSrc = cardBack[yourID];
 
   function toggleMenu() {
     return !showMenu
@@ -74,14 +71,23 @@ export default function GameWrapper(props) {
     document.body.style.height = `${1080}px`;
   }, []);
 
+  // health declarations
+  const YOUR_HEALTH = health[yourID];
+  const THEIR_HEALTH = health[theirID];
+
+  useEffect(() => {
+    if (YOUR_HEALTH === 0) setGameWinner(theirID);
+    if (THEIR_HEALTH === 0) setGameWinner(yourID);
+  }, [YOUR_HEALTH, THEIR_HEALTH, setGameWinner]);
+
   return props ? (
     <React.Fragment>
       <div
         data-file="GameWrapper"
         className={[
           'game-wrapper',
-          gameover ? 'game-over' : '',
-          gameover && winner === yourID ? 'victory' : 'defeat'
+          gameover && winner === theirID ? 'game-over defeat' : '',
+          gameover && winner === yourID ? 'game-over victory' : ''
         ].join(' ')}
       >
         {/* <TheirHand

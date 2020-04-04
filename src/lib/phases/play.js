@@ -8,6 +8,7 @@ import getCardByID from 'lib/utils/get-card-by-id';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
 import playerIsDisabled from 'lib/state/player-is-disabled';
+import winner from 'lib/state/winner';
 
 const onBegin = (G, ctx) => {
   const { turnOrder } = G;
@@ -186,17 +187,10 @@ const onEnd = (G, ctx) => {
   G.animationStates.playerIsAttackingPlayer['1'] = false;
 };
 
-const endIf = G => {
-  const PLAYER0_HEALTH = G.health[G.turnOrder['0']];
-  if (PLAYER0_HEALTH === 0) G.winner = G.turnOrder['0'];
-  else G.winner = G.turnOrder['1'];
-};
-
 export default {
   turn: {
     order: TurnOrder.CUSTOM_FROM('turnOrder'),
     onBegin: (G, ctx) => onBegin(G, ctx),
     onEnd: (G, ctx) => onEnd(G, ctx)
-    // endIf: G => endIf(G)
   }
 };

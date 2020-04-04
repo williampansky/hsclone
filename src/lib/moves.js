@@ -159,6 +159,12 @@ export default {
       G.attackedMinionIndex = null;
     }
   },
+  setGameWinner: {
+    client: false,
+    move: (G, ctx, player) => {
+      G.winner = player;
+    }
+  },
   setLastPlayedCardId: {
     client: false,
     move: G => {

@@ -26,7 +26,7 @@ export default function GameOver({
 }
 
 const Component = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -38,6 +38,10 @@ const Component = styled.div`
   z-index: 9001;
   width: ${p => `${p.gameWidth}px`};
   height: ${p => `${p.gameHeight}px`};
+
+  * {
+    user-select: none;
+  }
 
   h1 {
     animation: fadeInText 800ms ease-in-out forwards;

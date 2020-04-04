@@ -11,20 +11,7 @@ import IsDisabled from 'components/mechanics/IsDisabled';
 import HasOnslaught from 'components/mechanics/HasOnslaught';
 import IsDeadPoof from 'components/animations/minions/IsDeadPoof';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
-
-function usePrevious(value) {
-  // The ref object is a generic container whose current property is mutable ...
-  // ... and can hold any value, similar to an instance property on a class
-  const ref = React.useRef();
-
-  // Store current value in ref
-  React.useEffect(() => {
-    ref.current = value;
-  }, [value]); // Only re-run if value changes
-
-  // Return previous value (happens before update in useEffect above)
-  return ref.current;
-}
+import usePrevious from 'components/hooks/usePrevious';
 
 export default function BoardSlot({
   G,
