@@ -55,13 +55,11 @@ const Component = styled.div`
 
   &:before {
     border-radius: 50%;
-    bottom: 20%;
+    top: 13.5%;
     content: '';
-    height: var(--player-health-size);
-    left: auto;
+    height: calc(var(--player-health-size) * 1.35);
     position: absolute;
-    right: -15%;
-    top: auto;
-    width: var(--player-health-size);
+    left: -20%;
+    width: calc(var(--player-health-size) * 1.35);
   }
 `;

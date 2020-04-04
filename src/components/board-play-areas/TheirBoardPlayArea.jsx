@@ -13,6 +13,8 @@ export default function TheirBoardPlayerArea({
   return (
     <div
       data-file="board-play-areas/TheirBoardPlayArea"
+      data-their-board-length={G.boards[theirID].length}
+      data-your-board-length={G.boards[yourID].length}
       className={['board-play-area', 'their-board-play-area'].join(' ')}
     >
       {G.boards[theirID].map((card, index) => {
