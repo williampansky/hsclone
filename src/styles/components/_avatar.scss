@@ -54,6 +54,13 @@
     transition-property: box-shadow, opacity;
     z-index: -1;
   }
+
+  &.--was-attacked {
+    animation-name: uk-shake-small;
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+  }
 }
 
 .player-avatar .avatar-image-wrapper {

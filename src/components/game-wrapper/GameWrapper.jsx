@@ -126,7 +126,13 @@ export default function GameWrapper(props) {
       </div>
 
       {gameover && (
-        <GameOver theirID={theirID} yourID={yourID} winner={winner} />
+        <GameOver
+          gameWidth={1920}
+          gameHeight={1080}
+          theirID={theirID}
+          yourID={yourID}
+          winner={winner}
+        />
       )}
 
       {showMenu && (

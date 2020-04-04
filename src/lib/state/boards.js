@@ -20,10 +20,11 @@ const boards = {
     '0': [
       {...createBoardSlotObject('CORE_057b'), currentHealth: 90, totalHealth: 90},
       {...createBoardSlotObject('CORE_057b'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_057b'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_057b'), currentHealth: 90, totalHealth: 90},
     ],
     '1': [
+      {...createBoardSlotObject('CORE_057b'), currentHealth: 90, totalHealth: 90},
+      {...createBoardSlotObject('CORE_057b'), currentHealth: 90, totalHealth: 90},
+      {...createBoardSlotObject('CORE_057b'), currentHealth: 90, totalHealth: 90},
       {...createBoardSlotObject('CORE_057b'), currentHealth: 90, totalHealth: 90},
     ]
   },

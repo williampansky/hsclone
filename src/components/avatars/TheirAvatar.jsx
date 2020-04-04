@@ -15,6 +15,7 @@ export default function TheirAvatar({
   yourID,
   playerClass
 }) {
+  const [wasAttacked, setWasAttacked] = React.useState(false);
   const {
     health,
     playerShieldPoints,
@@ -24,6 +25,13 @@ export default function TheirAvatar({
   } = G;
   const THEIR_HEALTH = health[theirID];
   const THEIR_SHIELD = playerShieldPoints[theirID];
+
+  React.useEffect(() => {
+    setWasAttacked(true);
+    setTimeout(() => {
+      setWasAttacked(false);
+    }, 510);
+  }, [THEIR_HEALTH]);
 
   function classImage(string) {
     // prettier-ignore
@@ -44,7 +52,11 @@ export default function TheirAvatar({
   return (
     <div
       data-file="avatars/TheirAvatar"
-      className={['player-avatar', 'their-avatar'].join(' ')}
+      className={[
+        'player-avatar',
+        'their-avatar',
+        wasAttacked ? '--was-attacked' : ''
+      ].join(' ')}
     >
       <PlayerHealth
         health={THEIR_HEALTH}

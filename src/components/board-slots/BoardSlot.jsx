@@ -26,6 +26,7 @@ export default function BoardSlot({
   yourID,
   theirID
 }) {
+  const [wasAttacked, setWasAttacked] = React.useState(false);
   const { selectedMinionIndex, attackedMinionIndex } = G;
   const { killMinion } = moves;
   const {
@@ -94,6 +95,7 @@ export default function BoardSlot({
         data !== null ? 'has-minion' : '',
         data === null && !canDrop ? 'cannot-drop-minion' : '',
         isDead ? 'is-dead' : '',
+        wasAttacked ? '--was-attacked' : '',
         isAttacking ? '--is-attacking' : '',
         isAttackingPlayer === true ? `target__other_player` : '',
         isAttackingMinionIndex !== null
