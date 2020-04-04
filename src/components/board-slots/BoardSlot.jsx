@@ -12,6 +12,20 @@ import HasOnslaught from 'components/mechanics/HasOnslaught';
 import IsDeadPoof from 'components/animations/minions/IsDeadPoof';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
 
+function usePrevious(value) {
+  // The ref object is a generic container whose current property is mutable ...
+  // ... and can hold any value, similar to an instance property on a class
+  const ref = React.useRef();
+
+  // Store current value in ref
+  React.useEffect(() => {
+    ref.current = value;
+  }, [value]); // Only re-run if value changes
+
+  // Return previous value (happens before update in useEffect above)
+  return ref.current;
+}
+
 export default function BoardSlot({
   G,
   ctx,
@@ -65,6 +79,28 @@ export default function BoardSlot({
   } = data;
 
   const playerID = board === PLAYER_BOARDS[1] ? yourID : theirID;
+  const previousCurrentHealth = usePrevious(currentHealth);
+
+  const animateWasAttacked = React.useCallback(
+    currentHealth => {
+      if (isActive && board === PLAYER_BOARDS[2]) {
+        currentHealth < previousCurrentHealth && setWasAttacked(true);
+        return setTimeout(() => {
+          setWasAttacked(false);
+        }, 510);
+      } else if (!isActive && board === PLAYER_BOARDS[1]) {
+        currentHealth < previousCurrentHealth && setWasAttacked(true);
+        return setTimeout(() => {
+          setWasAttacked(false);
+        }, 510);
+      }
+    },
+    [board, isActive, previousCurrentHealth]
+  );
+
+  React.useEffect(() => {
+    animateWasAttacked(currentHealth);
+  }, [currentHealth, animateWasAttacked]);
 
   const KillMinion = React.useCallback(
     index => {
@@ -75,9 +111,8 @@ export default function BoardSlot({
     [playerID, data, killMinion]
   );
 
-  // prettier-ignore
   React.useEffect(() => {
-    isDead &&  KillMinion(index);
+    isDead && KillMinion(index);
   }, [index, isDead, KillMinion]);
 
   function handleIsAttackingClass(bool) {

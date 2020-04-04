@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": false,
   "dependencies": {
+    "@billogram/use-previous": "^1.1.0",
     "@hot-loader/react-dom": "^16.11.0",
     "boardgame.io": "0.35.1",
     "dotenv": "^8.2.0",
