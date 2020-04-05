@@ -202,6 +202,14 @@ const Component = styled.div`
   top: 45px;
   user-select: none;
   width: 120px;
+  transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition-property: opacity, transform;
+
+  .player-avatar--is_attacking & {
+    opacity: 0;
+    transform: translateX(-150%) scale(0.5);
+    z-index: -1;
+  }
 
   ${Cost} > ${TextValue} {
     opacity: 1;

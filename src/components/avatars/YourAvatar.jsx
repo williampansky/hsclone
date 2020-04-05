@@ -86,7 +86,12 @@ export default function YourAvatar({
   return (
     <div
       data-file="avatars/YourAvatar"
-      className={['player-avatar', 'your-avatar'].join(' ')}
+      className={[
+        'player-avatar',
+        'your-avatar',
+        playerIsAttacking ? 'player-avatar--is_attacking' : '',
+        attackingPlayerClass
+      ].join(' ')}
     >
       <ClassSkillButton
         G={G}
@@ -119,8 +124,6 @@ export default function YourAvatar({
         className={[
           'avatar-image-wrapper',
           wasAttacked ? '--was-attacked' : ''
-          // playerIsAttacking ? 'player-avatar--is_attacking' : '',
-          // attackingPlayerClass
         ].join(' ')}
       >
         {playerClass && (

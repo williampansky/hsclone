@@ -18,6 +18,7 @@
   // background: var(--board-yourHand-background-color);
   height: var(--board-yourHand-height);
   z-index: var(--board-yourHand-zIndex);
+  z-index: 250;
 }
 
 .active-warcry {

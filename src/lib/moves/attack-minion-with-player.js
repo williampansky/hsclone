@@ -25,9 +25,9 @@ const attackMinionWithPlayer = (G, ctx, index) => {
   // const MBA_HP = MINION_BEING_ATTACKED.health;
 
   // eject if a PLAYER_BEING_ATTACKED's minion has gaurd
-  for (let i = 0; i < G.boards[otherPlayer].length; i++) {
-    if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
-  }
+  // for (let i = 0; i < G.boards[otherPlayer].length; i++) {
+  //   if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
+  // }
 
   // weapon-specific mechanics
   if (playerWeapon[currentPlayer].id === 'CORE_081') {

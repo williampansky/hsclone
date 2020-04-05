@@ -85,6 +85,7 @@ const Component = styled.div`
   height: var(--board-yourHand-height);
   z-index: var(--board-yourHand-zIndex);
   bottom: var(--board-yourHand-height);
+  z-index: 250;
 `;
 
 YourHand.propTypes = {

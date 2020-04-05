@@ -4,8 +4,7 @@ import useHover from 'react-use-hover';
 // import limitNumberWithinRange from 'lib/utils/range-limit';
 
 // child components
-import Card from 'components/cards/Card';
-import CardV2 from 'components/cards/CardV2';
+import Card from 'components/cards/CardV3';
 import CardIsPlayable from 'components/interactions/cards/CardIsPlayable';
 import CardIsPlayableEffect from 'components/interactions/cards/CardIsPlayableEffect';
 import CardIsSelected from 'components/interactions/cards/CardIsSelected';
@@ -150,7 +149,7 @@ export default function CardInteraction({
         </React.Fragment>
       ) : null}
 
-      <CardV2
+      <Card
         artist={artist}
         attack={attack}
         cardClass={cardClass}

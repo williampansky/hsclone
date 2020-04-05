@@ -25,7 +25,6 @@ import selectedMinionIndex from 'lib/state/selected-minion-index';
 import selectedMinionObject from 'lib/state/selected-minion-object';
 import spellObject from 'lib/state/spell-object';
 import warcryObject from 'lib/state/warcry-object';
-import winner from 'lib/state/winner';
 
 export default {
   buffs: buffs.__DATA_MODEL,
@@ -45,8 +44,8 @@ export default {
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
   playerClass: {
-    '0': CARDCLASS[7],
-    '1': CARDCLASS[9]
+    '0': CARDCLASS[6],
+    '1': CARDCLASS[8]
   },
   players: players.__DATA_MODEL,
   boards: boards.__DATA_MODEL,

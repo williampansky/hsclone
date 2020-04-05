@@ -169,6 +169,13 @@ const Component = styled.div`
   top: 45px;
   user-select: none;
   width: 120px;
+  pointer-events: none;
+  transition: transform 400ms cubic-bezier(0.19, 1, 0.22, 1);
+
+  .player-avatar--is_attacking & {
+    transform: translate(75%, 25%) scale(0.75);
+    z-index: 1;
+  }
 
   /* prettier-ignore */
   ${AttackWrapper} {

@@ -256,7 +256,7 @@ Card.defaultProps = {
   howToEarn: null,
   howToEarnGolden: null,
   id: null,
-  imageSrc: null,
+  imageSrc: 'assets/card-assets/card-image-placeholder.jpg',
   inspiration: null,
   mechanics: [],
   name: '',
