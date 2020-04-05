@@ -15,17 +15,18 @@ CardIsSelected.propTypes = {
 };
 
 const DeselectLabel = styled.div`
-  background: #272625;
+  background: rgba(39, 38, 37, 0.65);
   border-radius: var(--card-border-radius);
   color: white;
-  font-size: 0.675em;
+  font-size: 8px;
   line-height: 1;
   margin: 0 auto;
   opacity: 0;
-  padding: 0.15em 0.5em 0.25em;
+  padding: 0.35em 0.85em 0.45em;
   text-align: center;
   transform: translateY(-150%);
   transition: 200ms ease-in-out;
+  transition-property: opacity, transform;
   width: max-content;
 `;
 

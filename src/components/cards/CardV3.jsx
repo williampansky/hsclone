@@ -160,17 +160,32 @@ export default function Card({
         src={`assets/Gem_Rarity_${rarity}.png`}
       />
 
-      <img
-        alt=""
-        className={`card__type__image`}
-        src={`assets/card-assets/Card_Type--${type}.png`}
-      />
+      <div className={`card__type__image__wrapper`}>
+        <img
+          alt=""
+          className={`card__type__image`}
+          src={`assets/card-assets/Card_Type--${type}.png`}
+        />
+        <img
+          alt=""
+          className={`card__type__image__badge`}
+          src={`assets/card-assets/Card_Type_Board.png`}
+        />
+      </div>
 
-      <img
-        alt=""
-        className={`card__base__image`}
-        src={`assets/images/TCG_vol09_front--${rarity}.png`}
-      />
+      {isGolden ? (
+        <img
+          alt=""
+          className={`card__base__image`}
+          src={`assets/images/TCG_vol09_front--GOLDEN.png`}
+        />
+      ) : (
+        <img
+          alt=""
+          className={`card__base__image`}
+          src={`assets/images/TCG_vol09_front--${rarity}.png`}
+        />
+      )}
 
       {metaAttributes.map((attr, index) => {
         const { name, content } = attr;

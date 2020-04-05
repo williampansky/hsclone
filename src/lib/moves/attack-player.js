@@ -49,20 +49,20 @@ const attackPlayer = (G, ctx) => {
   }
 
   // handle onslaught mechanic
-  // if (ATTACKING_MINION_HAS_ONSLAUGHT === true) {
-  //   // deincrement hasOnslaughtAttack integer
-  //   G.boards[currentPlayer][
-  //     ATTACKING_MINION_INDEX
-  //   ].hasOnslaughtAttack = Math.abs(
-  //     G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasOnslaughtAttack - 1
-  //   );
+  if (ATTACKING_MINION_HAS_ONSLAUGHT === true) {
+    // deincrement hasOnslaughtAttack integer
+    G.boards[currentPlayer][
+      ATTACKING_MINION_INDEX
+    ].hasOnslaughtAttack = Math.abs(
+      G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasOnslaughtAttack - 1
+    );
 
-  //   if (ATTACKING_MINION_ONSLAUGHT_COUNT === 0)
-  //     boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
-  // } else {
-  //   // disable ATTACKING_MINION's ability to attack
-  //   boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
-  // }
+    if (ATTACKING_MINION_ONSLAUGHT_COUNT === 0)
+      boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  } else {
+    // disable ATTACKING_MINION's ability to attack
+    boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+  }
 
   // remove concealed once you attack
   G.boards[currentPlayer][ATTACKING_MINION_INDEX].isConcealed = false;

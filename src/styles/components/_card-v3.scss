@@ -64,10 +64,23 @@
 
   .card__type__image {
     position: absolute;
-    width: 22px;
-    bottom: 75px;
-    left: 8px;
+    height: 56%;
+    z-index: 1;
     image-rendering: pixelated;
+
+    &__wrapper {
+      position: absolute;
+      bottom: 55px;
+      left: -14px;
+      @include display-flex(column nowrap, center, center);
+    }
+
+    &__badge {
+      width: 50px;
+      position: relative;
+      image-rendering: pixelated;
+      top: 0.5px;
+    }
   }
 
   .text__value {

@@ -6,6 +6,7 @@
     "@billogram/use-previous": "^1.1.0",
     "@hot-loader/react-dom": "^16.11.0",
     "boardgame.io": "0.35.1",
+    "circletype": "^2.3.0",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "mathjs": "^6.6.0",
