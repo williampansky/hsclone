@@ -18,22 +18,8 @@ import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 const boards = {
   __DATA_MODEL: {
     '0': [
-      {...createBoardSlotObject('CORE_001'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_001'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_001'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_001'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_001'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_001'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_001'), currentHealth: 90, totalHealth: 90},
     ],
     '1': [
-      {...createBoardSlotObject('CORE_002'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_003'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_003'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_003'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_003'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_003'), currentHealth: 90, totalHealth: 90},
-      {...createBoardSlotObject('CORE_003'), currentHealth: 90, totalHealth: 90},
     ]
   },
 

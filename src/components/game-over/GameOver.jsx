@@ -37,7 +37,7 @@ const Component = styled.div`
   justify-content: center;
   z-index: 9001;
   width: ${p => `${p.gameWidth}px`};
-  height: ${p => `${p.gameHeight}px`};
+  height: ${p => `${p.gameHeight - 40}px`};
 
   * {
     user-select: none;

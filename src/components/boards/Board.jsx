@@ -13,6 +13,10 @@ import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
 import TheirBoardPlayerArea from 'components/board-play-areas/TheirBoardPlayArea';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
 import Deck from 'components/decks/Deck';
+import SpellSlot from 'components/board-slots/SpellSlot';
+import WeaponSlot from 'components/board-slots/WeaponSlot';
+import SPELLTYPE from 'enums/spellType.enums';
+import TYPE from 'enums/type.enums';
 
 export default function Board({
   G,
@@ -43,11 +47,37 @@ export default function Board({
     playerAttackValue,
     playerIsAttacking,
     playerClass,
-    playerWeapon
+    playerWeapon,
+    selectedCardObject,
+    selectedCardType,
+    selectedCardSpellType
   } = G;
+
+  const { playCard } = moves;
+
+  const selectedCard = selectedCardObject[yourID];
+  const cardId = selectedCard && selectedCard.id;
+  const cardUUID = selectedCard && selectedCard.uuid;
+  const cardType = selectedCard && selectedCardType[yourID];
+  const spellType = selectedCard && selectedCardSpellType[yourID];
+
+  function castGlobalSpell(index = 0, uuid = cardUUID, id = cardId) {
+    return playCard(index, uuid, id);
+  }
+
+  function equipPlayerWeapon(index = 0, uuid = cardUUID, id = cardId) {
+    return playCard(index, uuid, id);
+  }
 
   return (
     <div data-file="boards/Board" className={'board'}>
+      {cardType === TYPE[3] && spellType === SPELLTYPE[1] ? (
+        <SpellSlot index={0} onClick={() => castGlobalSpell()} />
+      ) : null}
+
+      {cardType === TYPE[4] ? (
+        <WeaponSlot index={0} onClick={() => equipPlayerWeapon()} />
+      ) : null}
       {/* <TheirBoard
         G={G}
         ctx={ctx}

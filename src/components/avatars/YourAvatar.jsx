@@ -86,19 +86,8 @@ export default function YourAvatar({
   return (
     <div
       data-file="avatars/YourAvatar"
-      className={[
-        'player-avatar',
-        'your-avatar',
-        playerIsAttacking ? 'player-avatar--is_attacking' : '',
-        attackingPlayerClass
-      ].join(' ')}
+      className={['player-avatar', 'your-avatar'].join(' ')}
     >
-      <PlayerHealth
-        health={YOUR_HEALTH}
-        player="YourHealth"
-        shieldPoints={YOUR_SHIELD}
-      />
-
       <ClassSkillButton
         G={G}
         ctx={ctx}
@@ -109,21 +98,29 @@ export default function YourAvatar({
         canUse={playerCanUseClassSkill[yourID] && energy[yourID].current >= 2}
       />
 
-      {/* {playerWeapon[yourID] !== null ? ( */}
-      <PlayerWeapon
-        board={PLAYER_BOARDS[1]}
-        canUse={playerCanAttack[yourID]}
-        playerAttackValue={playerAttackValue[yourID]}
-        weaponAttack={playerWeapon[yourID] && playerWeapon[yourID].attack}
-        weaponHealth={playerWeapon[yourID] && playerWeapon[yourID].health}
-        weaponImageSrc={playerWeapon[yourID] && playerWeapon[yourID].imageSrc}
+      {playerWeapon[yourID] !== null ? (
+        <PlayerWeapon
+          board={PLAYER_BOARDS[1]}
+          canUse={playerCanAttack[yourID]}
+          playerAttackValue={playerAttackValue[yourID]}
+          weaponAttack={playerWeapon[yourID] && playerWeapon[yourID].attack}
+          weaponHealth={playerWeapon[yourID] && playerWeapon[yourID].health}
+          weaponImageSrc={playerWeapon[yourID] && playerWeapon[yourID].imageSrc}
+        />
+      ) : null}
+
+      <PlayerHealth
+        health={YOUR_HEALTH}
+        player="YourHealth"
+        shieldPoints={YOUR_SHIELD}
       />
-      {/* ) : null} */}
 
       <div
         className={[
           'avatar-image-wrapper',
           wasAttacked ? '--was-attacked' : ''
+          // playerIsAttacking ? 'player-avatar--is_attacking' : '',
+          // attackingPlayerClass
         ].join(' ')}
       >
         {playerClass && (

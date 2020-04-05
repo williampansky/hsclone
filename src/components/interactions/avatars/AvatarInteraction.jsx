@@ -83,4 +83,9 @@ const Component = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  transition: 200ms cubic-bezier(0.19, 1, 0.22, 1);
+
+  .player-avatar--is_attacking ~ & {
+    transform: scale(1.1) translateY(-2vh);
+  }
 `;

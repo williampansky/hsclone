@@ -6,8 +6,8 @@ import Board from 'components/boards/Board';
 import GameBackground from 'components/game-wrapper/GameBackground';
 import GameMenu from 'components/game-menu/GameMenu';
 import GameOver from 'components/game-over/GameOver';
-import TheirHand from 'components/hands/TheirHand';
-import YourHand from 'components/hands/YourHand';
+import TheirHand from 'components/hands/TheirHandV2';
+import YourHand from 'components/hands/YourHandV2';
 import ResizeObserver from './ResizeObserver';
 
 export default function GameWrapper(props) {
@@ -33,7 +33,7 @@ export default function GameWrapper(props) {
     isConnected,
     credentials
   } = props;
-  const { health, winner } = G;
+  const { cardBack, health, winner } = G;
   const { gameover } = ctx;
   const { setGameWinner } = moves;
 
@@ -68,7 +68,7 @@ export default function GameWrapper(props) {
 
   useEffect(() => {
     document.body.style.width = `${1920}px`;
-    document.body.style.height = `${1080}px`;
+    document.body.style.height = `${1080 - 40}px`;
   }, []);
 
   // health declarations
@@ -90,12 +90,13 @@ export default function GameWrapper(props) {
           gameover && winner === yourID ? 'game-over victory' : ''
         ].join(' ')}
       >
-        {/* <TheirHand
+        <TheirHand
           G={G}
-          cardBackSrc={theirCardBackImageSrc}
+          cardBackSrc={cardBack[theirID]}
           theirID={theirID}
           toggleMenuFn={() => toggleMenu()}
-        /> */}
+          gameWidth={1920}
+        />
         <Board
           G={G}
           ctx={ctx}
@@ -116,14 +117,15 @@ export default function GameWrapper(props) {
           yourID={yourID}
           theirID={theirID}
         />
-        {/* <YourHand
+        <YourHand
           G={G}
           ctx={ctx}
           moves={moves}
           isActive={isActive}
-          cardBackSrc={yourCardBackImageSrc}
+          cardBackSrc={cardBack[yourID]}
           yourID={yourID}
-        /> */}
+          gameWidth={1920}
+        />
         <GameBackground
           backgroundImage="assets/images/Uldaman_Board.jpg"
           gameWidth={1920}

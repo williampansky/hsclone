@@ -65,12 +65,24 @@
   cursor: pointer;
 }
 
+// prettier-ignore
 .card-in-your-hand[data-is-selected='true'] {
-  position: absolute;
-  right: 4%;
-  top: calc(-1.1 * var(--card-height));
-  transform: translateY(0) rotate(0) scale(1.35) !important;
-  // transform: translate(-200%, -75%) rotate(0) scale(1) !important;
+  $scale: 1.35;
+  $offset: 42.5;
+  $base: 660.5%;
+
+  transform: translate(0%, -85%) rotate(0) scale($scale) !important;
+
+  // &[data-index="0"] { transform: translate(460.5%, -85%) rotate(0) scale($scale) !important; }
+  // &[data-index="1"] { transform: translate(418%, -85%) rotate(0) scale($scale) !important; }
+  // &[data-index="2"] { transform: translate(375.5%, -85%) rotate(0) scale($scale) !important; }
+  // &[data-index="3"] { transform: translate(333%, -85%) rotate(0) scale($scale) !important; }
+  // &[data-index="4"] { transform: translate(290.5%, -85%) rotate(0) scale($scale) !important; }
+  // &[data-index="5"] { transform: translate(248%, -85%) rotate(0) scale($scale) !important; }
+  // &[data-index="6"] { transform: translate(205.5%, -85%) rotate(0) scale($scale) !important; }
+  // &[data-index="7"] { transform: translate(163%, -85%) rotate(0) scale($scale) !important; }
+  // &[data-index="8"] { transform: translate(120.5%, -85%) rotate(0) scale($scale) !important; }
+  // &[data-index="9"] { transform: translate(78%, -85%) rotate(0) scale($scale) !important; }
   z-index: 100;
 
   &:before {

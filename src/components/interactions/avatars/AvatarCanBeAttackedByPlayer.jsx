@@ -17,10 +17,8 @@ AvatarCanBeAttackedByPlayer.propTypes = {
 };
 
 const Component = styled.div`
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: var(--avatar-border-radius);
-  border-bottom-right-radius: var(--avatar-border-radius);
+  border-top-left-radius: var(--avatar-border-radius);
+  border-top-right-radius: var(--avatar-border-radius);
   box-shadow: 0 0 5px #c43800;
   cursor: pointer;
   height: 100%;
@@ -36,13 +34,11 @@ const Component = styled.div`
 
   &:before {
     border-radius: 50%;
-    bottom: 20%;
+    top: 13.5%;
     content: '';
-    height: var(--player-health-size);
-    left: auto;
+    height: calc(var(--player-health-size) * 1.35);
     position: absolute;
-    right: -15%;
-    top: auto;
-    width: var(--player-health-size);
+    left: -20%;
+    width: calc(var(--player-health-size) * 1.35);
   }
 `;

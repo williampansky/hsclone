@@ -87,16 +87,18 @@ export default function TheirAvatar({
         canUse={playerCanUseClassSkill[theirID] && energy[theirID].current >= 2}
       />
 
-      {/* {playerWeapon[theirID] !== null ? ( */}
-      <PlayerWeapon
-        board={PLAYER_BOARDS[2]}
-        canUse={playerCanAttack[theirID]}
-        playerAttackValue={playerAttackValue[theirID]}
-        weaponAttack={playerWeapon[theirID] && playerWeapon[theirID].attack}
-        weaponHealth={playerWeapon[theirID] && playerWeapon[theirID].health}
-        weaponImageSrc={playerWeapon[theirID] && playerWeapon[theirID].imageSrc}
-      />
-      {/* ) : null} */}
+      {playerWeapon[theirID] !== null ? (
+        <PlayerWeapon
+          board={PLAYER_BOARDS[2]}
+          canUse={playerCanAttack[theirID]}
+          playerAttackValue={playerAttackValue[theirID]}
+          weaponAttack={playerWeapon[theirID] && playerWeapon[theirID].attack}
+          weaponHealth={playerWeapon[theirID] && playerWeapon[theirID].health}
+          weaponImageSrc={
+            playerWeapon[theirID] && playerWeapon[theirID].imageSrc
+          }
+        />
+      ) : null}
 
       <div
         className={[

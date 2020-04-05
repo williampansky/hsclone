@@ -14,11 +14,6 @@ export default function PlayerWeapon({
   weaponHealth,
   weaponImageSrc
 }) {
-  playerAttackValue = 1;
-  weaponAttack = 2;
-  weaponHealth = 2;
-  weaponImageSrc =
-    'http://orig11.deviantart.net/1139/f/2015/273/d/1/knight_by_soft_h-d9bfr95.jpg';
   const AP_VALUE = playerAttackValue !== 0 ? playerAttackValue : weaponAttack;
 
   return (
@@ -161,15 +156,10 @@ const TextValue = styled.div`
     0 0 1px black;
 `;
 
-function determineCursor(board, canUse) {
-  if (board === PLAYER_BOARDS[2]) return 'default';
-  return canUse ? 'pointer' : 'not-allowed';
-}
-
 const Component = styled.div`
   align-items: center;
   border-radius: 50%;
-  cursor: ${p => determineCursor(p.board, p.canUse)};
+  cursor: default;
   display: flex;
   flex-flow: column nowrap;
   height: 120px;

@@ -20,7 +20,7 @@ export default function GameBackground({
 const Component = styled.div`
   position: absolute;
   width: ${p => `${p.gameWidth}px`};
-  height: ${p => `${p.gameHeight}px`};
+  height: ${p => `${p.gameHeight - 40}px`};
   background-image: ${p => `url('${p.backgroundImage}')`};
   background-size: cover;
   background-repeat: no-repeat;
