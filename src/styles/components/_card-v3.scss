@@ -27,13 +27,13 @@
 
   .card__text {
     position: absolute;
-    font-size: 10px;
+    font-size: 12px;
     bottom: 0;
     left: 0;
     height: 72px;
     text-align: center;
     width: 100%;
-    padding: 4px 24px 24px;
+    padding: 4px 20px 20px;
     word-spacing: 0.125em;
     @include display-flex(column nowrap, center, center);
   }

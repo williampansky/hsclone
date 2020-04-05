@@ -21,10 +21,8 @@ AvatarCanBeAttackedBySpell.propTypes = {
 };
 
 const Component = styled.div`
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: var(--avatar-border-radius);
-  border-bottom-right-radius: var(--avatar-border-radius);
+  border-top-left-radius: var(--avatar-border-radius);
+  border-top-right-radius: var(--avatar-border-radius);
   box-shadow: 0 0 5px #c43800;
   cursor: pointer;
   height: 100%;

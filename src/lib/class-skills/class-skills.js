@@ -14,7 +14,7 @@ import playerWeapon from 'lib/state/player-weapon';
  * @param {{}} G
  * @param {{}} ctx
  */
-export const backstabOpponent = (G, ctx, amount = 2) => {
+export const snipeOpponent = (G, ctx, amount = 2) => {
   const { turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);

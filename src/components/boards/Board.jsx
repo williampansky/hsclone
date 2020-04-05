@@ -17,6 +17,8 @@ import SpellSlot from 'components/board-slots/SpellSlot';
 import WeaponSlot from 'components/board-slots/WeaponSlot';
 import SPELLTYPE from 'enums/spellType.enums';
 import TYPE from 'enums/type.enums';
+import SpellObject from 'components/spells/SpellObject';
+import WarcryObject from 'components/warcrys/WarcryObject';
 
 export default function Board({
   G,
@@ -50,7 +52,9 @@ export default function Board({
     playerWeapon,
     selectedCardObject,
     selectedCardType,
-    selectedCardSpellType
+    selectedCardSpellType,
+    warcryObject,
+    spellObject
   } = G;
 
   const { playCard } = moves;
@@ -144,6 +148,10 @@ export default function Board({
         playerClass={playerClass[yourID]}
         playerIsAttacking={playerIsAttacking[yourID]}
       />
+      {warcryObject[yourID] ? (
+        <WarcryObject data={warcryObject[yourID]} />
+      ) : null}
+      {spellObject[yourID] ? <SpellObject data={spellObject[yourID]} /> : null}
       {/* <Deck
         board={PLAYER_BOARDS[1]}
         cardBackSrc={cardBack[yourID]}

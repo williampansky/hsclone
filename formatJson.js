@@ -1,8 +1,7 @@
+/* eslint-disable array-callback-return */
 import GAME_CONFIG from './src/config/game.config';
 require('dotenv').config({ path: './.env.local' });
 const fs = require('fs');
-const incomingCore = require('./csv-core.json');
-const incomingEntourage = require('./csv-entourage.json');
 const Airtable = require('airtable-node');
 
 const APIKEY = process.env.AIRTABLE_API_KEY;
@@ -13,21 +12,9 @@ function parseCardClass(string) {
   return string.replace(/([0-9] )/g, '');
 }
 
-function parseImageSrc(string) {
-  if (!string) return;
-  const match = string.match(/\(([^)]+)\)/g).toString();
-  const newString = match.replace(/(\()/g, '').replace(/(\))/g, '');
-  return newString;
-}
-
 function parseImageSrcObject(obj) {
   if (!obj) return;
   return obj[0].thumbnails.large.url;
-}
-
-function parseMechanics(array) {
-  if (!array || array === null) return;
-  return array.split(',');
 }
 
 // CORE
@@ -73,17 +60,53 @@ base
     });
 
     const coreCards = JSON.stringify(Object.assign({}, ...mappedCore));
-    fs.writeFileSync('./src/data/debug/cards.json', coreCards);
+    fs.writeFileSync('./src/data/debug/cards-CORE.json', coreCards);
+  });
 
-    // IDs
-    const idArray = incomingCore.map(item => {
-      const { id } = item;
+// PRIME
+base
+  .table('PRIME')
+  .list({
+    maxRecords: 300
+  })
+  .then(resp => {
+    const mappedPrime = resp.records.map(item => {
+      const { fields } = item;
+      const {
+        artist,
+        cardClass,
+        collectible,
+        cost,
+        elite,
+        id,
+        imageSrc,
+        mechanics,
+        text
+      } = fields;
+
       if (!id) return;
-      return id;
+
+      return {
+        [id]: {
+          ...fields,
+          artist: artist ? artist : null,
+          cardClass: parseCardClass(cardClass),
+          collectible: collectible === 'checked' ? true : false,
+          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
+          elite: elite === 'checked' ? true : false,
+          imageSrc: parseImageSrcObject(imageSrc),
+          mechanics: GAME_CONFIG.debugData.enableMechanics
+            ? mechanics
+              ? mechanics
+              : []
+            : '',
+          text: GAME_CONFIG.debugData.enableText ? text : ''
+        }
+      };
     });
-    const filterNull = idArray.filter(item => item);
-    const newArr = JSON.stringify(filterNull);
-    fs.writeFileSync('./src/data/debug/cardIdArray.json', newArr);
+
+    const primeCards = JSON.stringify(Object.assign({}, ...mappedPrime));
+    fs.writeFileSync('./src/data/debug/cards-PRIME.json', primeCards);
   });
 
 // ENTOURAGE
@@ -129,5 +152,5 @@ base
     });
 
     const entourage = JSON.stringify(Object.assign({}, ...mappedEntourage));
-    fs.writeFileSync('./src/data/debug/entourage.json', entourage);
+    fs.writeFileSync('./src/data/debug/cards-ENTOURAGE.json', entourage);
   });

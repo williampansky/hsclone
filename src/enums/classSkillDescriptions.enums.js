@@ -1,6 +1,6 @@
 const CLASS_SKILL_DESCRIPTIONS = {
   1: 'Gain 1 Attack and 1 Shield point',
-  2: 'Backstab opponent for 2 damage',
+  2: 'Snipe opponent for 2 damage',
   3: 'Attack something for 1 damage',
   4: 'Summon a 1/1 Loyal Knight',
   5: 'Heal for 2 HP',

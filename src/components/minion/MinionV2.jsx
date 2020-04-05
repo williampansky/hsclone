@@ -8,7 +8,8 @@ export default function Minion({
   data,
   totalHealth
 }) {
-  const { imageSrc } = data;
+  let { imageSrc } = data;
+  if (!imageSrc) imageSrc = 'assets/images/card-image-placeholder.jpg';
   // const [isHovering, hoverProps] = useHover({
   //   mouseEnterDelayMS: 900,
   //   mouseLeaveDelayMS: 0
@@ -65,7 +66,7 @@ Minion.defaultProps = {
     howToEarn: null,
     howToEarnGolden: null,
     id: null,
-    imageSrc: null,
+    imageSrc: 'assets/images/card-image-placeholder.jpg',
     mechanics: [],
     name: 'CARD NAME',
     playRequirements: [],

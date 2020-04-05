@@ -249,3 +249,15 @@
     transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 }
+
+[data-file='mechanics/HasEnergyShield'] ~ .minion__v2 {
+  .attack-wrapper {
+    transform: translateX(10px);
+    transition: transform 200ms ease-out;
+  }
+
+  .health-wrapper {
+    transform: translateX(-10px);
+    transition: transform 200ms ease-out;
+  }
+}
