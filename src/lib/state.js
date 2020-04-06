@@ -82,5 +82,6 @@ export default {
   turnOrder: ['0', '1'].sort(() => {
     if (!GAME_CONFIG.matchConfig.enableRandomTurnOrder) return ['0', '1'];
     return Math.random() - 0.5;
-  })
+  }),
+  matchHistory: []
 };

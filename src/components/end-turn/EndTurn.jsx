@@ -13,7 +13,7 @@ export default function EndTurnButton({
     event.preventDefault();
     moves.hoverCard(null);
     moves.selectCard(null, null);
-    // moves.selectAttackingMinion(null, null);
+    moves.logMessage('endTurn');
     return events.endTurn();
   }
 

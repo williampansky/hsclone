@@ -34,7 +34,9 @@ base
         elite,
         id,
         imageSrc,
+        inspiration,
         mechanics,
+        name,
         text
       } = fields;
 
@@ -54,6 +56,7 @@ base
               ? mechanics
               : []
             : '',
+          name: name ? name : inspiration,
           text: GAME_CONFIG.debugData.enableText ? text : ''
         }
       };
@@ -80,7 +83,9 @@ base
         elite,
         id,
         imageSrc,
+        inspiration,
         mechanics,
+        name,
         text
       } = fields;
 
@@ -100,6 +105,7 @@ base
               ? mechanics
               : []
             : '',
+          name: name ? name : inspiration,
           text: GAME_CONFIG.debugData.enableText ? text : ''
         }
       };
@@ -126,7 +132,9 @@ base
         elite,
         id,
         imageSrc,
+        inspiration,
         mechanics,
+        name,
         text
       } = fields;
 
@@ -146,6 +154,7 @@ base
               ? mechanics
               : []
             : '',
+          name: name ? name : inspiration,
           text: GAME_CONFIG.debugData.enableText ? text : ''
         }
       };

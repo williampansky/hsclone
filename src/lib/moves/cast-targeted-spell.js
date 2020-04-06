@@ -14,6 +14,7 @@ import RACE from 'enums/race.enums';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
+import logMessage from 'lib/match-history/log-message';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -38,6 +39,12 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   const { id, cost, uuid } = selectedCardObject[currentPlayer];
   const THEIR_SLOT = G.boards[otherPlayer][index];
   const YOUR_SLOT = G.boards[currentPlayer][index];
+
+  if (index) {
+    logMessage(G, ctx, 'castTargetedSpell-minion', null, index);
+  } else {
+    logMessage(G, ctx, 'castTargetedSpell-player');
+  }
 
   energy.subtract(G, currentPlayer, cost);
   deselectCard(G, ctx);

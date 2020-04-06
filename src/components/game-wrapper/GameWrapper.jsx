@@ -8,7 +8,8 @@ import GameMenu from 'components/game-menu/GameMenu';
 import GameOver from 'components/game-over/GameOver';
 import TheirHand from 'components/hands/TheirHandV2';
 import YourHand from 'components/hands/YourHandV2';
-import ResizeObserver from './ResizeObserver';
+import ResizeObserver from 'components/game-wrapper/ResizeObserver';
+import MatchHistory from 'components/match-history/MatchHistory';
 
 export default function GameWrapper(props) {
   // global state manipulations
@@ -154,6 +155,7 @@ export default function GameWrapper(props) {
         />
       )}
 
+      <MatchHistory G={G} ctx={ctx} gameWidth={1920} />
       <ResizeObserver moves={moves} />
     </React.Fragment>
   ) : null;

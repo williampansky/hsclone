@@ -19,6 +19,7 @@ import playerCanAttack from 'lib/state/player-can-attack';
 import playSpellByCardId from 'lib/spells/play-spell-card-by-id';
 import playWeaponByCardId from 'lib/weapons/play-weapon-card-by-id';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
+import logMessage from 'lib/match-history/log-message';
 
 /**
  * Plays the provided card.
@@ -42,12 +43,15 @@ const playCard = (G, ctx, index, uuid, cardId = null) => {
   const { cost, type } = CARD_OBJ;
   switch (type) {
     case TYPE[1]:
+      logMessage(G, ctx, CARD_OBJ, 'playMinionCard');
       return playMinionCard(G, ctx, index, uuid, cardId, CARD_OBJ, SLOT_OBJ);
 
     case TYPE[3]:
+      logMessage(G, ctx, CARD_OBJ, 'playGlobalSpellCard');
       return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
 
     case TYPE[4]:
+      logMessage(G, ctx, CARD_OBJ, 'playWeaponCard');
       return playWeaponCard(G, ctx, uuid, cardId, cost);
 
     default:

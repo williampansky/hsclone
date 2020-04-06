@@ -18,6 +18,7 @@ import playCard from 'lib/moves/play-card';
 import selectCard from 'lib/moves/select-card';
 import selectMinion from 'lib/moves/select-minion';
 import terminatePlayerWeaponAttack from 'lib/moves/terminate-player-weapon-attack';
+import logMessage from './match-history/log-message';
 
 export default {
   addCardToHand: {
@@ -120,6 +121,12 @@ export default {
     client: false,
     move: (G, ctx, player, boardSlot, index) => {
       return boards.killMinion(G, ctx, player, boardSlot, index);
+    }
+  },
+  logMessage: {
+    client: false,
+    move: (G, ctx, action) => {
+      return logMessage(G, ctx, action);
     }
   },
   resetMinionIsAttacking: {

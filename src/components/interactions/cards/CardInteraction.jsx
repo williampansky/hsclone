@@ -64,7 +64,6 @@ export default function CardInteraction({
     howToEarnGolden,
     id,
     imageSrc,
-    inspiration,
     mechanics,
     name,
     playRequirements,
@@ -165,7 +164,6 @@ export default function CardInteraction({
         howToEarnGolden={howToEarnGolden}
         id={id}
         imageSrc={imageSrc}
-        inspiration={inspiration}
         mechanics={mechanics}
         name={name}
         playRequirements={playRequirements}

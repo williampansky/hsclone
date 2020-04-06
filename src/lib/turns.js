@@ -1,10 +1,14 @@
 import { TurnOrder } from 'boardgame.io/core';
+import logMessage from './match-history/log-message';
 
 export default {
   order: TurnOrder.CUSTOM_FROM('turnOrder'),
   onBegin: (G, ctx) => {
     // Reset timer to 75 seconds
     // G.counts[ctx.currentPlayer].timer = 75000;
+
+    // log message
+    logMessage(G, ctx, 'startTurn');
 
     // Increments the `total` energy of the `currentPlayer`
     // by one; but not more than ten.

@@ -22,7 +22,6 @@ export default function Card({
   howToEarnGolden,
   id,
   imageSrc,
-  inspiration,
   isGolden,
   mechanics,
   name,
@@ -82,12 +81,6 @@ export default function Card({
     fontSize: `${fontSizeBasedOnCharacterLength(name)}em`
   };
 
-  function cardName(hasName = name, ins = inspiration) {
-    if (hasName && hasName !== 'CARD NAME') return hasName;
-    else if (ins) return ins;
-    else return 'Unknown';
-  }
-
   return (
     <div
       className={[
@@ -108,7 +101,7 @@ export default function Card({
 
       <div className={'card__name'}>
         <div className={'text__value'} style={fontSize}>
-          {cardName(name, inspiration)}
+          {name}
         </div>
       </div>
       <div className={'card__text'}>
@@ -220,7 +213,6 @@ Card.propTypes = {
   howToEarnGolden: PropTypes.string,
   id: PropTypes.string,
   imageSrc: PropTypes.string,
-  inspiration: PropTypes.string,
   isGolden: PropTypes.bool,
   mechanics: PropTypes.array,
   name: PropTypes.string,
@@ -257,7 +249,6 @@ Card.defaultProps = {
   howToEarnGolden: null,
   id: null,
   imageSrc: 'assets/card-assets/card-image-placeholder.jpg',
-  inspiration: null,
   mechanics: [],
   name: '',
   playRequirements: [],
