@@ -3,6 +3,7 @@ import logMinionAttackedMinionMessage from './minion-attacked-minion.log';
 import logCastTargetedSpellAtMinionMessage from './cast-targeted-spell-at-minion.log';
 import logKillMinionMessage from './kill-minion.log';
 import logCastTargetedSpellAtPlayerMessage from './cast-targeted-spell-at-player.log';
+import logPlayCardMessage from './play-card.log';
 
 const logMessage = (G, ctx, action, player = null, index = null) => {
   const { turnOrder } = G;
@@ -46,6 +47,12 @@ const logMessage = (G, ctx, action, player = null, index = null) => {
 
     case 'killMinion':
       message = logKillMinionMessage(G, player, index);
+      break;
+
+    case 'playGlobalSpellCard':
+    case 'playMinionCard':
+    case 'playWeaponCard':
+      message = logPlayCardMessage(G, currentPlayer, action);
       break;
 
     case 'startTurn':

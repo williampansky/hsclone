@@ -92,7 +92,7 @@ export default function Board({
         theirID={theirID}
         yourID={yourID}
       /> */}
-      {/* <EndTurnButton
+      <EndTurnButton
         G={G}
         ctx={ctx}
         moves={moves}
@@ -100,7 +100,7 @@ export default function Board({
         isActive={isActive}
         yourID={yourID}
         theirID={theirID}
-      /> */}
+      />
       {/* <YourBoard
         G={G}
         ctx={ctx}

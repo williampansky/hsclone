@@ -43,15 +43,15 @@ const playCard = (G, ctx, index, uuid, cardId = null) => {
   const { cost, type } = CARD_OBJ;
   switch (type) {
     case TYPE[1]:
-      logMessage(G, ctx, CARD_OBJ, 'playMinionCard');
+      logMessage(G, ctx, 'playMinionCard');
       return playMinionCard(G, ctx, index, uuid, cardId, CARD_OBJ, SLOT_OBJ);
 
     case TYPE[3]:
-      logMessage(G, ctx, CARD_OBJ, 'playGlobalSpellCard');
+      logMessage(G, ctx, 'playGlobalSpellCard');
       return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
 
     case TYPE[4]:
-      logMessage(G, ctx, CARD_OBJ, 'playWeaponCard');
+      logMessage(G, ctx, 'playWeaponCard');
       return playWeaponCard(G, ctx, uuid, cardId, cost);
 
     default:
