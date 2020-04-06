@@ -49,6 +49,10 @@ const logMessage = (G, ctx, action, player = null, index = null) => {
       message = logKillMinionMessage(G, player, index);
       break;
 
+    case 'matchStart':
+      message = `Match started.`;
+      break;
+
     case 'playGlobalSpellCard':
     case 'playMinionCard':
     case 'playWeaponCard':
@@ -64,7 +68,8 @@ const logMessage = (G, ctx, action, player = null, index = null) => {
   }
 
   G.matchHistory.push(
-    `<span class="timestamp">[${timestamp()}]</span> ${message}`
+    `<span class="timestamp">[${timestamp()}]</span>
+    <span class="message">${message}</span>`
   );
 };
 

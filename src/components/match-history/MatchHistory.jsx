@@ -13,9 +13,11 @@ export default function MatchHistory({ G, ctx, gameWidth }) {
       <Log>
         {matchHistory.map((log, i) => {
           return (
-            <div className="log-message" key={i}>
-              <p dangerouslySetInnerHTML={createMarkup(log)} />
-            </div>
+            <div
+              className="log-item"
+              key={i}
+              dangerouslySetInnerHTML={createMarkup(log)}
+            />
           );
         })}
       </Log>
@@ -33,14 +35,14 @@ const Component = styled.div`
   pointer-events: auto;
   position: absolute;
   top: 0;
-  width: ${p => `calc(${p.gameWidth}px / 6)`};
+  width: ${p => `calc(${p.gameWidth}px / 5.5)`};
   z-index: 100;
   box-sizing: border-box;
 
   color: white;
   font-size: 12px;
   overflow: hidden;
-  font-family: sans-serif;
+  font-family: 'Verdana', sans-serif;
 `;
 
 const Log = styled.div`
@@ -53,17 +55,38 @@ const Log = styled.div`
     margin: 0;
   }
 
-  .log-message + .log-message {
-    margin: 4px 0 0;
+  .log-item {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .log-item + .log-item {
+    margin: 12px 0 0;
   }
 
   .timestamp {
     opacity: 0.725;
+    display: inline-block;
+    min-width: 70px;
+    font-size: 10px;
+    line-height: 1.5;
+    position: relative;
+    top: 1px;
+    letter-spacing: 0.03em;
+  }
+
+  .message {
+    display: inline-block;
+    line-height: 1.5;
   }
 
   /* prettier-ignore */
   .card-name {
     cursor: pointer;
+    display: inline-block;
+    font-family: 'Carter One', sans-serif;
     &[data-rarity='${RARITY[0]}'] { color: #fdfdfd; }
     &[data-rarity='${RARITY[0]}'] { color: #fdfdfd; }
     &[data-rarity='${RARITY[2]}'] { color: #23cbf2; }

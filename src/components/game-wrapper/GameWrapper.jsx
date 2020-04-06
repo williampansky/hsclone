@@ -152,6 +152,7 @@ export default function GameWrapper(props) {
           yourID={yourID}
           showMenu={showMenu}
           toggleMenuFn={() => toggleMenu()}
+          gameWidth={1920}
         />
       )}
 

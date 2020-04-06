@@ -2,9 +2,12 @@ import counts from 'lib/state/counts';
 import drawCard from 'lib/moves/draw-card';
 import GAME_CONFIG from 'config/game.config';
 import getCardByID from 'lib/utils/get-card-by-id';
+import logMessage from 'lib/match-history/log-message';
 
 export default {
   onBegin: (G, ctx) => {
+    logMessage(G, ctx, 'matchStart');
+
     const FIRST_PLAYER = G.turnOrder[0];
     const SECOND_PLAYER = G.turnOrder[1];
 
