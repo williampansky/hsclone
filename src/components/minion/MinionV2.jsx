@@ -1,5 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import CARDCLASS from 'enums/cardClass.enums';
+import RACE from 'enums/race.enums';
+import RARITY from 'enums/rarity.enums';
+import SET from 'enums/set.enums';
+import TYPE from 'enums/type.enums';
+import placeholdersArray from 'placeholders-array';
 // import useHover from 'react-use-hover';
 
 export default function Minion({
@@ -8,12 +14,18 @@ export default function Minion({
   data,
   totalHealth
 }) {
-  let { imageSrc } = data;
-  if (!imageSrc) imageSrc = 'assets/images/card-image-placeholder.jpg';
-  // const [isHovering, hoverProps] = useHover({
-  //   mouseEnterDelayMS: 900,
-  //   mouseLeaveDelayMS: 0
-  // });
+  let { id, set } = data;
+  const isGolden = false;
+  const goldenImageSrc = '';
+
+  function minionImage() {
+    if (placeholdersArray.includes(id))
+      return `url(assets/images/sets/PLACEHOLDER.jpg)`;
+
+    return isGolden
+      ? `url(${goldenImageSrc})`
+      : `url(assets/images/sets/${set}/${id}.jpg)`;
+  }
 
   return (
     <div
@@ -25,10 +37,7 @@ export default function Minion({
     >
       {/* <div className={'info-trigger'} {...hoverProps} /> */}
       <div className={'image-wrapper'}>
-        <div
-          className="image"
-          style={{ backgroundImage: `url(${imageSrc})` }}
-        />
+        <div className="image" style={{ backgroundImage: minionImage() }} />
       </div>
       <div className={'attack-wrapper'} data-value={currentAttack}>
         <div className={'text__value'}>{currentAttack}</div>
@@ -46,41 +55,45 @@ export default function Minion({
 Minion.propTypes = {
   currentAttack: PropTypes.number,
   currentHealth: PropTypes.number,
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    artist: PropTypes.string,
+    attack: PropTypes.number,
+    cardClass: PropTypes.string,
+    collectible: PropTypes.bool,
+    cost: PropTypes.number,
+    elite: PropTypes.bool,
+    health: PropTypes.number,
+    howToEarn: PropTypes.string,
+    id: PropTypes.string,
+    mechanics: PropTypes.array,
+    name: PropTypes.string,
+    race: PropTypes.string,
+    rarity: PropTypes.string,
+    set: PropTypes.string,
+    type: PropTypes.string
+  }),
   totalHealth: PropTypes.number
 };
 
 Minion.defaultProps = {
-  data: {
+  currentAttack: 0,
+  currentHealth: 1,
+  data: PropTypes.shape({
     artist: 'Unknown',
     attack: 0,
-    cardClass: 'Neutral',
-    collectible: true,
+    cardClass: CARDCLASS[0],
+    collectible: false,
     cost: 0,
     elite: false,
-    entourage: [],
-    flavor: null,
-    goldenImageSrc: null,
     health: 1,
-    hideStats: false,
-    howToEarn: null,
-    howToEarnGolden: null,
-    id: null,
-    imageSrc: 'assets/images/card-image-placeholder.jpg',
+    howToEarn: 'Provided to all players.',
+    id: 'UNKNOWN',
     mechanics: [],
-    name: 'CARD NAME',
-    playRequirements: [],
-    race: 'None',
-    rarity: 'Free',
-    set: 'Free',
-    sounds: {
-      attackSound: null,
-      deathSound: null,
-      dropSound: null
-    },
-    spellDamage: 0,
-    targetingArrowText: null,
-    text: '',
-    type: null
-  }
+    name: 'UNKNOWN',
+    race: RACE[0],
+    rarity: RARITY[0],
+    set: SET[0],
+    type: TYPE[1]
+  }),
+  totalHealth: 1
 };

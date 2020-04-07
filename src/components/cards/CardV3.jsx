@@ -5,6 +5,7 @@ import createMarkup from 'utils/createMarkup';
 import TYPE from 'enums/type.enums';
 import RACE from 'enums/race.enums';
 import RARITY from 'enums/rarity.enums';
+import placeholdersArray from 'placeholders-array';
 
 export default function Card({
   artist,
@@ -21,7 +22,6 @@ export default function Card({
   howToEarn,
   howToEarnGolden,
   id,
-  imageSrc,
   isGolden,
   mechanics,
   name,
@@ -36,46 +36,18 @@ export default function Card({
   text,
   type
 }) {
-  const { attackSound, deathSound, dropSound } = sounds;
-  const metaAttributes = [
-    { name: 'artist', content: artist },
-    { name: 'attack', content: attack },
-    { name: 'cardClass', content: cardClass },
-    { name: 'collectible', content: collectible.toString() },
-    { name: 'cost', content: cost },
-    { name: 'elite', content: elite.toString() },
-    { name: 'entourage', content: entourage },
-    { name: 'flavor', content: flavor },
-    { name: 'health', content: health },
-    { name: 'hideStats', content: hideStats.toString() },
-    { name: 'howToEarn', content: howToEarn },
-    { name: 'howToEarnGolden', content: howToEarnGolden },
-    { name: 'id', content: id },
-    { name: 'images.normal', content: imageSrc },
-    { name: 'images.golden', content: goldenImageSrc },
-    { name: 'mechanics', content: JSON.stringify(mechanics) },
-    { name: 'name', content: name },
-    { name: 'playRequirements', content: JSON.stringify(playRequirements) },
-    { name: 'race', content: race },
-    { name: 'rarity', content: rarity },
-    { name: 'set', content: set },
-    { name: 'sounds.attackSound', content: attackSound },
-    { name: 'sounds.deathSound', content: deathSound },
-    { name: 'sounds.dropSound', content: dropSound },
-    { name: 'spellDamage', content: spellDamage },
-    { name: 'spellType', content: spellType },
-    { name: 'targetingText', content: targetingArrowText },
-    { name: 'text', content: text },
-    { name: 'type', content: type }
-  ];
-
   const IS_MINION = type === TYPE[1] ? true : false;
   const IS_SPELL = type === TYPE[3] ? true : false;
   const IS_WEAPON = type === TYPE[4] ? true : false;
 
-  const cardImage = {
-    backgroundImage: isGolden ? `url(${goldenImageSrc})` : `url(${imageSrc})`
-  };
+  function cardImage() {
+    if (placeholdersArray.includes(id))
+      return `url(assets/images/sets/PLACEHOLDER.jpg)`;
+
+    return isGolden
+      ? `url(${goldenImageSrc})`
+      : `url(assets/images/sets/${set}/${id}.jpg)`;
+  }
 
   const fontSize = {
     fontSize: `${fontSizeBasedOnCharacterLength(name)}em`
@@ -95,7 +67,10 @@ export default function Card({
       </div>
 
       <div className={'card__image__wrapper'}>
-        <div className={'card__image'} style={cardImage} />
+        <div
+          className={'card__image'}
+          style={{ backgroundImage: cardImage() }}
+        />
       </div>
 
       <div className={'card__name'}>
@@ -179,13 +154,6 @@ export default function Card({
           src={`assets/images/cards/front/${rarity}.png`}
         />
       )}
-
-      {metaAttributes.map((attr, index) => {
-        const { name, content } = attr;
-        return content ? (
-          <meta key={index} name={name} content={content.toString()} />
-        ) : null;
-      })}
     </div>
   );
 }

@@ -59,6 +59,7 @@ export default function ClassSkillButton({
       data-file="class-skill/ClassSkillButton"
       board={board}
       canUse={canUse}
+      isActive={isActive}
       onClick={() => handleClick()}
     >
       {isActive ? (
@@ -69,14 +70,14 @@ export default function ClassSkillButton({
       ) : null}
 
       {board === PLAYER_BOARDS[1] ? (
-        canUse ? (
+        canUse && isActive ? (
           <TextValue canUse={canUse}>
             <span>{classText(playerClass)}</span>
           </TextValue>
         ) : null
       ) : null}
 
-      {canUse ? (
+      {canUse && isActive ? (
         <Image backgroundImage={classSkillImage(playerClass)} board={board} />
       ) : (
         <Image backgroundImage={`assets/images/Game_logo.png`} board={board} />
@@ -184,7 +185,8 @@ const TextValue = styled.div`
   }
 `;
 
-function determineCursor(board, canUse) {
+function determineCursor(board, canUse, isActive) {
+  if (!isActive) return 'default';
   if (board === PLAYER_BOARDS[2]) return 'default';
   return canUse ? 'pointer' : 'not-allowed';
 }
@@ -192,7 +194,7 @@ function determineCursor(board, canUse) {
 const Component = styled.div`
   align-items: center;
   border-radius: 50%;
-  cursor: ${p => determineCursor(p.board, p.canUse)};
+  cursor: ${p => determineCursor(p.board, p.canUse, p.isActive)};
   display: flex;
   flex-flow: column nowrap;
   height: 120px;
