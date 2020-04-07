@@ -12,11 +12,6 @@ function parseCardClass(string) {
   return string.replace(/([0-9] )/g, '');
 }
 
-function parseImageSrcObject(obj) {
-  if (!obj) return;
-  return obj[0].thumbnails.large.url;
-}
-
 // CORE
 base
   .table('CORE')
@@ -50,7 +45,6 @@ base
           collectible: collectible === 'checked' ? true : false,
           cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
-          imageSrc: parseImageSrcObject(imageSrc),
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
               ? mechanics
@@ -99,7 +93,6 @@ base
           collectible: collectible === 'checked' ? true : false,
           cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
-          imageSrc: parseImageSrcObject(imageSrc),
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
               ? mechanics
@@ -148,7 +141,6 @@ base
           collectible: collectible === 'checked' ? true : false,
           cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
-          imageSrc: parseImageSrcObject(imageSrc),
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
               ? mechanics
