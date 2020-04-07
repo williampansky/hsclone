@@ -8,7 +8,6 @@ import getCardByID from 'lib/utils/get-card-by-id';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
 import playerIsDisabled from 'lib/state/player-is-disabled';
-import winner from 'lib/state/winner';
 
 const onBegin = (G, ctx) => {
   const { turnOrder } = G;

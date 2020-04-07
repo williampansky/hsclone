@@ -170,13 +170,13 @@ export default function Card({
         <img
           alt=""
           className={`card__base__image`}
-          src={`assets/images/TCG_vol09_front--GOLDEN.png`}
+          src={`assets/images/cards/front/GOLDEN.png`}
         />
       ) : (
         <img
           alt=""
           className={`card__base__image`}
-          src={`assets/images/TCG_vol09_front--${rarity}.png`}
+          src={`assets/images/cards/front/${rarity}.png`}
         />
       )}
 

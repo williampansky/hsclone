@@ -7,7 +7,7 @@ export default function CardBack({ imageSrc }) {
     <div
       className={['card', 'card-back'].join(' ')}
       style={{
-        backgroundImage: `url(assets/images/${imageSrc})`
+        backgroundImage: `url(assets/images/cards/backs/${imageSrc})`
       }}
     />
   );

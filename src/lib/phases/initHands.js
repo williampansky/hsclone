@@ -6,10 +6,10 @@ import logMessage from 'lib/match-history/log-message';
 
 export default {
   onBegin: (G, ctx) => {
-    logMessage(G, ctx, 'matchStart');
-
     const FIRST_PLAYER = G.turnOrder[0];
     const SECOND_PLAYER = G.turnOrder[1];
+
+    logMessage(G, ctx, 'matchStart');
 
     if (!GAME_CONFIG.matchConfig.enableInitHandsStage) {
       // initHandsStage(G);

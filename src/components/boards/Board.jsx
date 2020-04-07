@@ -38,7 +38,8 @@ export default function Board({
   isConnected,
   credentials,
   yourID,
-  theirID
+  theirID,
+  gameWidth
 }) {
   const {
     cardBack,
@@ -76,11 +77,19 @@ export default function Board({
   return (
     <div data-file="boards/Board" className={'board'}>
       {cardType === TYPE[3] && spellType === SPELLTYPE[1] ? (
-        <SpellSlot index={0} onClick={() => castGlobalSpell()} />
+        <SpellSlot
+          index={0}
+          gameWidth={1920}
+          onClick={() => castGlobalSpell()}
+        />
       ) : null}
 
       {cardType === TYPE[4] ? (
-        <WeaponSlot index={0} onClick={() => equipPlayerWeapon()} />
+        <WeaponSlot
+          index={0}
+          gameWidth={1920}
+          onClick={() => equipPlayerWeapon()}
+        />
       ) : null}
       {/* <TheirBoard
         G={G}
@@ -179,5 +188,6 @@ Board.propTypes = {
   isConnected: PropTypes.bool,
   credentials: PropTypes.string,
   yourID: PropTypes.string,
-  theirID: PropTypes.string
+  theirID: PropTypes.string,
+  gameWidth: PropTypes.number
 };

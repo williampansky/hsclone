@@ -35,7 +35,8 @@ const Component = styled.div`
   pointer-events: auto;
   position: absolute;
   top: 0;
-  width: ${p => `calc(${p.gameWidth}px / 5.5)`};
+  /* width: ${p => `calc(${p.gameWidth}px / 5.5)`}; */
+  width: 300px;
   z-index: 100;
   box-sizing: border-box;
 

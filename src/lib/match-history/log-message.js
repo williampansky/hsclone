@@ -1,5 +1,8 @@
 import timestamp from './timestamp';
 import logMinionAttackedMinionMessage from './minion-attacked-minion.log';
+import logPlayerAttackedMinionMessage from './player-attacked-minion.log';
+import logPlayerAttackedPlayerMessage from './player-attacked-player.log';
+import logMinionAttackedPlayerMessage from './minion-attacked-player.log';
 import logCastTargetedSpellAtMinionMessage from './cast-targeted-spell-at-minion.log';
 import logKillMinionMessage from './kill-minion.log';
 import logCastTargetedSpellAtPlayerMessage from './cast-targeted-spell-at-player.log';
@@ -9,9 +12,6 @@ const logMessage = (G, ctx, action, player = null, index = null) => {
   const { turnOrder } = G;
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
-
-  const YOUR_CARD = G.selectedCardObject[currentPlayer];
-
   let message;
 
   switch (action) {
@@ -22,6 +22,23 @@ const logMessage = (G, ctx, action, player = null, index = null) => {
         otherPlayer,
         index
       );
+      break;
+
+    case 'attackMinionWithPlayer':
+      message = logPlayerAttackedMinionMessage(
+        G,
+        currentPlayer,
+        otherPlayer,
+        index
+      );
+      break;
+
+    case 'attackPlayer':
+      message = logMinionAttackedPlayerMessage(G, currentPlayer, otherPlayer);
+      break;
+
+    case 'attackPlayerWithPlayer':
+      message = logPlayerAttackedPlayerMessage(G, currentPlayer, otherPlayer);
       break;
 
     case 'castTargetedSpell-minion':
@@ -67,10 +84,10 @@ const logMessage = (G, ctx, action, player = null, index = null) => {
       return;
   }
 
-  G.matchHistory.push(
-    `<span class="timestamp">[${timestamp()}]</span>
-    <span class="message">${message}</span>`
-  );
+  G.matchHistory.push(`\
+    <span class="timestamp">[${timestamp()}]</span>
+    <span class="message">${message}</span>\
+  `);
 };
 
 export default logMessage;

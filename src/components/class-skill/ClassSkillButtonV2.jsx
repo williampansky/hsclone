@@ -210,6 +210,10 @@ const Component = styled.div`
     transform: translateX(-150%) scale(0.5);
     z-index: -1;
   }
+  
+  .player-avatar--is_attacking_player & {
+    transition-delay: 400ms;
+  }
 
   ${Cost} > ${TextValue} {
     opacity: 1;

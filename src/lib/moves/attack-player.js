@@ -4,6 +4,7 @@ import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
 import playerShieldPoints from 'lib/state/player-shield-points';
 import deselectMinion from './deselect-minion';
+import logMessage from 'lib/match-history/log-message';
 
 /**
  * Attacks a player with the current player's selectedMinionObject.
@@ -29,6 +30,8 @@ const attackPlayer = (G, ctx) => {
   for (let i = 0; i < G.boards[otherPlayer].length; i++) {
     if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
   }
+
+  logMessage(G, ctx, 'attackPlayer');
 
   // set attacked minion index for animation
   G.boards[currentPlayer][ATTACKING_MINION_INDEX].isAttackingPlayer = true;

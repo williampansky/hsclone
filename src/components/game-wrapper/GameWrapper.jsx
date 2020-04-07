@@ -117,6 +117,7 @@ export default function GameWrapper(props) {
           credentials={credentials}
           yourID={yourID}
           theirID={theirID}
+          gameWidth={1920}
         />
         <YourHand
           G={G}
