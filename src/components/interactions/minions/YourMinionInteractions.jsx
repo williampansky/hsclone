@@ -21,6 +21,7 @@ export default function YourMinionInteractions({
   data,
   index,
   board,
+  yourID,
   canAttack,
   canBeBuffed,
   canBeHealed,
@@ -84,7 +85,7 @@ export default function YourMinionInteractions({
     return <CanReceiveOnslaught G={G} ctx={ctx} moves={moves} index={index} />;
   }
 
-  if (canAttack && !isAttacking) {
+  if (canAttack && !isAttacking && G.selectedCardObject[yourID] === null) {
     return <CanAttack data={data} moves={moves} index={index} />;
   }
 
@@ -100,6 +101,7 @@ YourMinionInteractions.propTypes = {
   ctx: PropTypes.object,
   moves: PropTypes.object,
   data: PropTypes.object,
+  yourID: PropTypes.string,
   index: PropTypes.number,
   board: PropTypes.string,
   canAttack: PropTypes.bool,

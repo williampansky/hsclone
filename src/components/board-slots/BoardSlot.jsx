@@ -117,6 +117,7 @@ export default function BoardSlot({
         data !== null ? 'has-minion' : '',
         data === null && !canDrop ? 'cannot-drop-minion' : '',
         isDead ? 'is-dead' : '',
+        G.selectedCardObject[yourID] !== null ? 'cannot-drop-minion' : '',
         wasAttacked ? '--was-attacked' : '',
         isAttacking ? '--is-attacking' : '',
         isAttackingPlayer === true ? `target__other_player` : '',
@@ -134,6 +135,8 @@ export default function BoardSlot({
           moves={moves}
           isActive={isActive}
           board={board}
+          yourID={yourID}
+          theirID={theirID}
           index={index}
           render={render}
           data={data}
