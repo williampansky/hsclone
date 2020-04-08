@@ -17,12 +17,12 @@ const Component = styled.div`
   box-sizing: border-box;
   box-shadow: 0px 0px 20px 0px rgba(183, 197, 53, 0.45) inset;
   height: 100%;
-  left: 300px;
+  left: 306px;
   margin: auto auto 0;
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  right: 0;
+  right: 306px;
   top: 0;
   user-select: none;
   width: auto;

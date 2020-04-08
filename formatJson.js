@@ -14,12 +14,12 @@ function parseCardClass(string) {
 
 // CORE
 base
-  .table('CORE')
+  .table('GAME')
   .list({
     maxRecords: 200
   })
   .then(resp => {
-    const mappedCore = resp.records.map(item => {
+    const map = resp.records.map(item => {
       const { fields } = item;
       const {
         artist,
@@ -28,7 +28,52 @@ base
         cost,
         elite,
         id,
-        imageSrc,
+        mechanics,
+        name,
+        text
+      } = fields;
+
+      if (!id) return;
+
+      return {
+        [id]: {
+          ...fields,
+          artist: artist ? artist : null,
+          cardClass: parseCardClass(cardClass),
+          collectible: collectible === 'checked' ? true : false,
+          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
+          elite: elite === 'checked' ? true : false,
+          mechanics: GAME_CONFIG.debugData.enableMechanics
+            ? mechanics
+              ? mechanics
+              : []
+            : '',
+          name: name,
+          text: GAME_CONFIG.debugData.enableText ? text : ''
+        }
+      };
+    });
+
+    const cards = JSON.stringify(Object.assign({}, ...map));
+    fs.writeFileSync('./src/data/debug/cards-GAME.json', cards);
+  });
+
+// CORE
+base
+  .table('CORE')
+  .list({
+    maxRecords: 200
+  })
+  .then(resp => {
+    const map = resp.records.map(item => {
+      const { fields } = item;
+      const {
+        artist,
+        cardClass,
+        collectible,
+        cost,
+        elite,
+        id,
         inspiration,
         mechanics,
         name,
@@ -56,8 +101,8 @@ base
       };
     });
 
-    const coreCards = JSON.stringify(Object.assign({}, ...mappedCore));
-    fs.writeFileSync('./src/data/debug/cards-CORE.json', coreCards);
+    const cards = JSON.stringify(Object.assign({}, ...map));
+    fs.writeFileSync('./src/data/debug/cards-CORE.json', cards);
   });
 
 // PRIME
@@ -67,7 +112,7 @@ base
     maxRecords: 300
   })
   .then(resp => {
-    const mappedPrime = resp.records.map(item => {
+    const map = resp.records.map(item => {
       const { fields } = item;
       const {
         artist,
@@ -76,7 +121,6 @@ base
         cost,
         elite,
         id,
-        imageSrc,
         inspiration,
         mechanics,
         name,
@@ -104,8 +148,8 @@ base
       };
     });
 
-    const primeCards = JSON.stringify(Object.assign({}, ...mappedPrime));
-    fs.writeFileSync('./src/data/debug/cards-PRIME.json', primeCards);
+    const cards = JSON.stringify(Object.assign({}, ...map));
+    fs.writeFileSync('./src/data/debug/cards-PRIME.json', cards);
   });
 
 // ENTOURAGE
@@ -115,7 +159,7 @@ base
     maxRecords: 200
   })
   .then(resp => {
-    const mappedEntourage = resp.records.map(item => {
+    const map = resp.records.map(item => {
       const { fields } = item;
       const {
         artist,
@@ -124,7 +168,6 @@ base
         cost,
         elite,
         id,
-        imageSrc,
         inspiration,
         mechanics,
         name,
@@ -152,6 +195,6 @@ base
       };
     });
 
-    const entourage = JSON.stringify(Object.assign({}, ...mappedEntourage));
-    fs.writeFileSync('./src/data/debug/cards-ENTOURAGE.json', entourage);
+    const cards = JSON.stringify(Object.assign({}, ...map));
+    fs.writeFileSync('./src/data/debug/cards-ENTOURAGE.json', cards);
   });

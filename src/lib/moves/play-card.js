@@ -54,6 +54,10 @@ const playCard = (G, ctx, index, uuid, cardId = null) => {
       logMessage(G, ctx, 'playWeaponCard');
       return playWeaponCard(G, ctx, uuid, cardId, cost);
 
+    case TYPE[5]:
+      logMessage(G, ctx, 'playGlobalSpellCard');
+      return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
+
     default:
       return;
   }

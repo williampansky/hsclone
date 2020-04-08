@@ -38,6 +38,7 @@ export default function PlayerSidebar({
 // };
 
 const Component = styled.div`
+  /* display: none; */
   height: 100%;
   pointer-events: auto;
   position: absolute;

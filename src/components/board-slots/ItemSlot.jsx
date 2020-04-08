@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function SpellSlot({ index, onClick, render, gameWidth }) {
+export default function ItemSlot({ index, onClick, render, gameWidth }) {
   return (
     <Component
-      data-file="board-slots/SpellSlot"
+      data-file="board-slots/ItemSlot"
       data-slot={index}
       gameWidth={gameWidth}
       onClick={onClick}

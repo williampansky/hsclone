@@ -39,6 +39,7 @@ export default function Card({
   const IS_MINION = type === TYPE[1] ? true : false;
   const IS_SPELL = type === TYPE[3] ? true : false;
   const IS_WEAPON = type === TYPE[4] ? true : false;
+  const IS_ITEM = type === TYPE[5] ? true : false;
 
   function cardImage() {
     if (placeholdersArray.includes(id))
@@ -59,6 +60,7 @@ export default function Card({
         'card__v3',
         IS_MINION ? '--is-minion' : '',
         IS_SPELL ? '--is-spell' : '',
+        IS_ITEM ? '--is-item' : '',
         IS_WEAPON ? '--is-weapon' : ''
       ].join(' ')}
     >
@@ -132,7 +134,7 @@ export default function Card({
         <img
           alt=""
           className={`card__type__image`}
-          src={`assets/card-assets/Card_Type--${type}.png`}
+          src={`assets/icons/Card_Type--${type}.png`}
         />
         <img
           alt=""

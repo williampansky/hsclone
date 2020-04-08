@@ -130,4 +130,18 @@ const Log = styled.div`
     &[data-rarity='${RARITY[4]}'] { color: #db24f3; }
     &[data-rarity='${RARITY[5]}'] { color: #f42226; }
   }
+
+  button {
+    background: red;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    bottom: 15px;
+    transform: rotate(135deg) scale(1);
+  }
+
+  button:hover {
+    background: red;
+    transform: rotate(135deg) scale(1.25);
+  }
 `;

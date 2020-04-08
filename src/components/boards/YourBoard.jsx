@@ -12,6 +12,7 @@ import SpellSlot from 'components/board-slots/SpellSlot';
 import WeaponSlot from 'components/board-slots/WeaponSlot';
 import YourBoardPlayArea from 'components/board-play-areas/YourBoardPlayArea';
 import YourPlayerArea from 'components/player-areas/YourPlayerArea';
+import ItemSlot from 'components/board-slots/ItemSlot';
 
 export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
   const {
@@ -48,6 +49,10 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
 
       {cardType === TYPE[4] ? (
         <WeaponSlot index={0} onClick={() => equipPlayerWeapon()} />
+      ) : null}
+
+      {cardType === TYPE[5] ? (
+        <ItemSlot index={0} onClick={() => castGlobalSpell()} />
       ) : null}
 
       <YourBoardPlayArea
