@@ -16,6 +16,9 @@ const createSpellObject = cardId => {
   return {
     id: CARD_OBJECT.id,
     amount: CARD_OBJECT.warcryNumber,
+    name: CARD_OBJECT.name,
+    rarity: CARD_OBJECT.rarity,
+    set: CARD_OBJECT.set,
     spellType: CARD_OBJECT.spellType,
     spellContext: CARD_OBJECT.spellContext,
     targetingArrowText: CARD_OBJECT.targetingArrowText

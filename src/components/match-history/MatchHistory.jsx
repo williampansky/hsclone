@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import createMarkup from 'utils/createMarkup';
 import RARITY from 'enums/rarity.enums';
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 export default function MatchHistory({ G, ctx, gameWidth }) {
   const { matchHistory } = G;
@@ -11,15 +12,21 @@ export default function MatchHistory({ G, ctx, gameWidth }) {
   return (
     <Component data-file="match-history/MatchHistory" gameWidth={gameWidth}>
       <Log>
-        {matchHistory.map((log, i) => {
-          return (
-            <div
-              className="log-item"
-              key={i}
-              dangerouslySetInnerHTML={createMarkup(log)}
-            />
-          );
-        })}
+        <ScrollToBottom
+          checkInterval={100}
+          scrollViewClassName="_scrollable little"
+          mode="bottom"
+        >
+          {matchHistory.map((log, i) => {
+            return (
+              <div
+                className="log-item"
+                key={i}
+                dangerouslySetInnerHTML={createMarkup(log)}
+              />
+            );
+          })}
+        </ScrollToBottom>
       </Log>
     </Component>
   );
@@ -30,8 +37,7 @@ export default function MatchHistory({ G, ctx, gameWidth }) {
 // };
 
 const Component = styled.div`
-  background: black;
-  height: 100%;
+  height: calc(100% - var(--board-theirHand-height));
   pointer-events: auto;
   position: absolute;
   top: 0;
@@ -44,13 +50,39 @@ const Component = styled.div`
   font-size: 12px;
   overflow: hidden;
   font-family: 'Verdana', sans-serif;
+  margin: var(--board-theirHand-height) 0 0;
+  z-index: 300;
+
+  &:before {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), transparent);
+    bottom: auto;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 4.25%;
+    pointer-events: none;
+    z-index: 1;
+  }
 `;
 
 const Log = styled.div`
-  overflow-y: scroll;
+  /* overflow-y: scroll;
   height: 100%;
-  width: 100%;
-  padding: 40px 20px 0;
+  width: 100%; */
+  /* padding: 40px 10px 0 10px; */
+  cursor: default;
+  height: 100%;
+
+  & > div {
+    height: 100%;
+  }
+
+  ._scrollable {
+    padding: 40px 10px 0 10px;
+  }
 
   p {
     margin: 0;
@@ -65,6 +97,10 @@ const Log = styled.div`
 
   .log-item + .log-item {
     margin: 12px 0 0;
+  }
+
+  .log-item:last-of-type {
+    padding-bottom: 20px;
   }
 
   .timestamp {

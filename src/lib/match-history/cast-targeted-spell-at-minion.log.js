@@ -1,5 +1,6 @@
 import { generateNameHTML } from './html.log';
 import TYPE from 'enums/type.enums';
+import exists from 'utils/element.exists';
 
 const logCastTargetedSpellAtMinionMessage = (
   G,
@@ -12,7 +13,17 @@ const logCastTargetedSpellAtMinionMessage = (
   const YC_NAME = generateNameHTML(YOUR_CARD, TYPE[3]);
   const TM_NAME = generateNameHTML(THEIR_MINION.minionData, TYPE[1]);
 
-  return `Player ${currentPlayer} cast ${YC_NAME} at Player ${otherPlayer}'s ${TM_NAME} for ${YOUR_CARD.warcryNumber} damage.`;
+  function damagePhrase() {
+    let phrase = '';
+    if (!YOUR_CARD.warcryNumber) phrase = '';
+    else if (exists(YOUR_CARD.warcryNumber))
+      phrase = ` for ${YOUR_CARD.warcryNumber} damage`;
+    else if (YOUR_CARD.warcryNumber !== 0)
+      phrase = ` for ${YOUR_CARD.warcryNumber} damage`;
+    return phrase;
+  }
+
+  return `Player ${currentPlayer} cast ${YC_NAME} on Player ${otherPlayer}'s ${TM_NAME}${damagePhrase()}.`;
 };
 
 export default logCastTargetedSpellAtMinionMessage;

@@ -129,7 +129,8 @@ export default function GameWrapper(props) {
           gameWidth={1920}
         />
         <GameBackground
-          backgroundImage="assets/images/Uldaman_Board.jpg"
+          backgroundImage="assets/images/boards/BOARD.jpg"
+          // backgroundImage="assets/images/Uldaman_Board.jpg"
           gameWidth={1920}
           gameHeight={1080}
         />

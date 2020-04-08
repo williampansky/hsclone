@@ -165,7 +165,7 @@ Card.propTypes = {
   collectible: PropTypes.bool,
   cost: PropTypes.number,
   elite: PropTypes.bool,
-  entourage: PropTypes.array,
+  entourage: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   goldenImageSrc: PropTypes.string,
   flavor: PropTypes.string,
   health: PropTypes.number,

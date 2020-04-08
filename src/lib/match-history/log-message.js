@@ -7,6 +7,7 @@ import logCastTargetedSpellAtMinionMessage from './cast-targeted-spell-at-minion
 import logKillMinionMessage from './kill-minion.log';
 import logCastTargetedSpellAtPlayerMessage from './cast-targeted-spell-at-player.log';
 import logPlayCardMessage from './play-card.log';
+import { logGame009Message, logGame010Message } from './game.log';
 
 const logMessage = (G, ctx, action, player = null, index = null) => {
   const { turnOrder } = G;
@@ -60,6 +61,14 @@ const logMessage = (G, ctx, action, player = null, index = null) => {
 
     case 'endTurn':
       message = `Player ${currentPlayer}'s turn ended.`;
+      break;
+
+    case 'GAME_009':
+      message = logGame009Message(G, currentPlayer, index);
+      break;
+
+    case 'GAME_010':
+      message = logGame010Message(G, currentPlayer, otherPlayer, index);
       break;
 
     case 'killMinion':

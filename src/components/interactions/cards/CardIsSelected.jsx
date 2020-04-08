@@ -15,19 +15,24 @@ CardIsSelected.propTypes = {
 };
 
 const DeselectLabel = styled.div`
+  align-items: center;
   background: rgba(39, 38, 37, 0.65);
   border-radius: var(--card-border-radius);
   color: white;
+  display: flex;
+  flex-flow: column nowrap;
   font-size: 8px;
+  height: 10px;
+  justify-content: center;
   line-height: 1;
   margin: 0 auto;
   opacity: 0;
-  padding: 0.35em 0.85em 0.45em;
   text-align: center;
   transform: translateY(-150%);
-  transition: 200ms ease-in-out;
   transition-property: opacity, transform;
-  width: max-content;
+  transition: 200ms ease-in-out 0ms;
+  white-space: nowrap;
+  width: 63px;
 `;
 
 const Component = styled.div`
@@ -43,5 +48,6 @@ const Component = styled.div`
   &:hover ${DeselectLabel} {
     opacity: 1;
     transform: translateY(-200%);
+    transition-delay: 2000ms;
   }
 `;
