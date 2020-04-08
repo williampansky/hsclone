@@ -3,7 +3,7 @@ const RACE = {
   1: 'CREATURE',
   2: 'PRIMORDIAL',
   3: 'UNDEAD',
-  4: 'ROBOT',
+  4: 'DROID',
   5: 'SPRITE',
   6: 'IDOL',
   7: 'Pirate(temp)',

@@ -101,15 +101,7 @@ export default function Board({
         theirID={theirID}
         yourID={yourID}
       /> */}
-      <EndTurnButton
-        G={G}
-        ctx={ctx}
-        moves={moves}
-        events={events}
-        isActive={isActive}
-        yourID={yourID}
-        theirID={theirID}
-      />
+
       {/* <YourBoard
         G={G}
         ctx={ctx}

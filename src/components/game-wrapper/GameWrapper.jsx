@@ -10,6 +10,7 @@ import TheirHand from 'components/hands/TheirHandV2';
 import YourHand from 'components/hands/YourHandV2';
 import ResizeObserver from 'components/game-wrapper/ResizeObserver';
 import MatchHistory from 'components/match-history/MatchHistory';
+import PlayerSidebar from 'components/player-sidebar/PlayerSidebar';
 
 export default function GameWrapper(props) {
   // global state manipulations
@@ -159,6 +160,16 @@ export default function GameWrapper(props) {
       )}
 
       <MatchHistory G={G} ctx={ctx} gameWidth={1920} />
+      <PlayerSidebar
+        G={G}
+        ctx={ctx}
+        gameWidth={1920}
+        moves={moves}
+        events={events}
+        isActive={isActive}
+        yourID={yourID}
+        theirID={theirID}
+      />
       <ResizeObserver moves={moves} />
     </React.Fragment>
   ) : null;

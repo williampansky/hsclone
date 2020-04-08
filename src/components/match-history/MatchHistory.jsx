@@ -20,7 +20,7 @@ export default function MatchHistory({ G, ctx, gameWidth }) {
           {matchHistory.map((log, i) => {
             return (
               <div
-                className="log-item"
+                className="log-item uk-animation-slide-top-small"
                 key={i}
                 dangerouslySetInnerHTML={createMarkup(log)}
               />
@@ -43,7 +43,6 @@ const Component = styled.div`
   top: 0;
   /* width: ${p => `calc(${p.gameWidth}px / 5.5)`}; */
   width: 300px;
-  z-index: 100;
   box-sizing: border-box;
 
   color: white;

@@ -50,7 +50,7 @@
   }
 }
 
-.board-slot.has-minion.cannot-drop-minion {
+.your-board-play-area .board-slot.has-minion.cannot-drop-minion {
   cursor: default;
   pointer-events: none;
 }
