@@ -25,7 +25,6 @@ base
         artist,
         cardClass,
         collectible,
-        cost,
         elite,
         id,
         mechanics,
@@ -41,7 +40,6 @@ base
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
           collectible: collectible === 'checked' ? true : false,
-          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
@@ -71,7 +69,6 @@ base
         artist,
         cardClass,
         collectible,
-        cost,
         elite,
         id,
         inspiration,
@@ -88,7 +85,6 @@ base
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
           collectible: collectible === 'checked' ? true : false,
-          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
@@ -118,7 +114,6 @@ base
         artist,
         cardClass,
         collectible,
-        cost,
         elite,
         id,
         inspiration,
@@ -135,7 +130,6 @@ base
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
           collectible: collectible === 'checked' ? true : false,
-          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
@@ -165,7 +159,6 @@ base
         artist,
         cardClass,
         collectible,
-        cost,
         elite,
         id,
         inspiration,
@@ -182,7 +175,6 @@ base
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
           collectible: collectible === 'checked' ? true : false,
-          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics

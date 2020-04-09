@@ -2,6 +2,7 @@ import { generateNameHTML } from 'lib/match-history/html.log';
 import TYPE from 'enums/type.enums';
 import createWeaponObject from 'lib/creators/create-weapon-object';
 import exists from 'utils/element.exists';
+import logSystemErrorMessage from './system-error.log';
 
 const logPlayGlobalSpellCardMessage = (G, player) => {
   const YOUR_CARD = G.selectedCardObject[player];
@@ -18,8 +19,9 @@ const logPlayMinionCardMessage = (G, player) => {
 };
 
 const logPlayWeaponCardMessage = (G, player, cardId) => {
-  const YOUR_WEAPON = createWeaponObject(cardId);
-  if (!exists(YOUR_WEAPON)) return;
+  // const YOUR_WEAPON = createWeaponObject(cardId);
+  const YOUR_WEAPON = G.playerWeapon[player];
+  if (!exists(YOUR_WEAPON)) return logSystemErrorMessage();
   const WEAPON_NAME = generateNameHTML(YOUR_WEAPON, TYPE[4]);
   return `Player ${player} equipped a ${WEAPON_NAME} weapon.`;
 };

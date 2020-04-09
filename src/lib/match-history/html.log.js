@@ -38,9 +38,7 @@ const minionHTML = obj => {
       data-set="${set}"
       data-text="${text}"
       data-type="${type}"
-    >
-      ${name}
-    </strong>
+    >${name}</strong>
   `;
 };
 
@@ -81,9 +79,7 @@ const spellHTML = obj => {
       data-set="${set}"
       data-text="${text}"
       data-type="${type}"
-    >
-      ${name}
-    </strong>
+    >${name}</strong>
   `;
 };
 
@@ -110,9 +106,7 @@ const weaponHTML = obj => {
       data-rarity="${rarity}"
       data-set="${set}"
       data-targetingArrowText="${targetingArrowText}"
-    >
-      ${name}
-    </strong>
+    >${name}</strong>
   `;
 };
 

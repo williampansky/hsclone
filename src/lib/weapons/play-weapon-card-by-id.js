@@ -2,26 +2,31 @@ import createWeaponObject from 'lib/creators/create-weapon-object';
 import playerWeapon from 'lib/state/player-weapon';
 
 const playWeaponByCardId = (G, ctx, player, cardId) => {
-  const weaponObj = createWeaponObject(cardId);
-  G.playerAttackValue[player] = weaponObj && weaponObj.attack;
-
   // prettier-ignore
   switch (cardId) {
-    case 'CORE_076':  return playerWeapon.equip(G, player, weaponObj);
-    case 'CORE_081':  return playerWeapon.equip(G, player, weaponObj);
-    case 'CORE_100':  return playerWeapon.equip(G, player, weaponObj);
-    case 'CORE_127':  return playerWeapon.equip(G, player, weaponObj);
     case 'CORE_128':  return equipCORE128(G, ctx, player);
-    case 'CORE_132':  return playerWeapon.equip(G, player, weaponObj);
+    case 'CORE_076':
+    case 'CORE_081':
+    case 'CORE_100':
+    case 'CORE_127':
+    case 'CORE_132':  return equipGenericWeapon(G, player, cardId);
     default:          return;
   }
 };
 
+const equipGenericWeapon = (G, player, cardId) => {
+  const weaponObj = createWeaponObject(`${cardId}a`);
+  G.playerAttackValue[player] = weaponObj && weaponObj.attack;
+  playerWeapon.equip(G, player, weaponObj);
+};
+
 const equipCORE128 = (G, ctx, player) => {
   const { random } = ctx;
-  const idols = ['CORE_128a', 'CORE_128b'];
-  const randomWeaponID = random.Shuffle(idols).shift();
-  playerWeapon.equip(G, player, createWeaponObject(randomWeaponID));
+  const weapons = ['CORE_128a', 'CORE_128b'];
+  const randomWeaponID = random.Shuffle(weapons).shift();
+  const randomWeaponObj = createWeaponObject(randomWeaponID);
+  G.playerAttackValue[player] = randomWeaponObj && randomWeaponObj.attack;
+  playerWeapon.equip(G, player, randomWeaponObj);
 };
 
 export default playWeaponByCardId;

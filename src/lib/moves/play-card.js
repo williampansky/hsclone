@@ -43,19 +43,15 @@ const playCard = (G, ctx, index, uuid, cardId = null) => {
   const { cost, type } = CARD_OBJ;
   switch (type) {
     case TYPE[1]:
-      logMessage(G, ctx, 'playMinionCard');
       return playMinionCard(G, ctx, index, uuid, cardId, CARD_OBJ, SLOT_OBJ);
 
     case TYPE[3]:
-      logMessage(G, ctx, 'playGlobalSpellCard');
       return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
 
     case TYPE[4]:
-      logMessage(G, ctx, 'playWeaponCard');
       return playWeaponCard(G, ctx, uuid, cardId, cost);
 
     case TYPE[5]:
-      logMessage(G, ctx, 'playGlobalSpellCard');
       return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
 
     default:
@@ -84,6 +80,9 @@ export const playMinionCard = (
   // move to your playerCards array
   copyCardToPlayedCards(G, currentPlayer, cardId);
 
+  // log message
+  logMessage(G, ctx, 'playMinionCard');
+
   // and then remove card from your hand
   removeCardFromHand(G, currentPlayer, uuid);
 
@@ -104,6 +103,7 @@ export const playGlobalSpellCard = (G, ctx, index, uuid, cardId, cardCost) => {
 
   energy.subtract(G, currentPlayer, cardCost);
   playSpellByCardId(G, ctx, cardId, index);
+  logMessage(G, ctx, 'playGlobalSpellCard');
   selectCard(G, ctx);
   copyCardToPlayedCards(G, currentPlayer, cardId);
   removeCardFromHand(G, currentPlayer, uuid);
@@ -113,9 +113,13 @@ export const playGlobalSpellCard = (G, ctx, index, uuid, cardId, cardCost) => {
 export const playWeaponCard = (G, ctx, uuid, cardId, cardCost) => {
   const { currentPlayer } = ctx;
 
+  // allow only 1 attack per turn
+  if (G.playerWeapon[currentPlayer] === null)
+    playerCanAttack.enable(G, currentPlayer);
+
   energy.subtract(G, currentPlayer, cardCost);
   playWeaponByCardId(G, ctx, currentPlayer, cardId);
-  playerCanAttack.enable(G, currentPlayer);
+  logMessage(G, ctx, 'playWeaponCard');
   selectCard(G, ctx);
   copyCardToPlayedCards(G, currentPlayer, cardId);
   removeCardFromHand(G, currentPlayer, uuid);

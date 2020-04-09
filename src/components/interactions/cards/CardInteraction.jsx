@@ -9,6 +9,7 @@ import CardIsPlayable from 'components/interactions/cards/CardIsPlayable';
 import CardIsPlayableEffect from 'components/interactions/cards/CardIsPlayableEffect';
 import CardIsSelected from 'components/interactions/cards/CardIsSelected';
 import CardIsSelectedEffect from 'components/interactions/cards/CardIsSelectedEffect';
+import GAME_CONFIG from 'config/game.config';
 
 export default function CardInteraction({
   G,
@@ -82,7 +83,9 @@ export default function CardInteraction({
   const numberOfCards = G.counts[yourID].hand;
   const WARCRY_OBJECT_ACTIVE = warcryObject[yourID] !== null;
   const SPELL_OBJECT_ACTIVE = spellObject[yourID] !== null;
-  const CAN_AFFORD = cost <= G.energy[yourID].current;
+  const CAN_AFFORD = !GAME_CONFIG.debugData.enableCost
+    ? true
+    : cost <= G.energy[yourID].current;
   const IS_PLAYABLE =
     isActive && CAN_AFFORD && !WARCRY_OBJECT_ACTIVE && !SPELL_OBJECT_ACTIVE;
   const IS_SELECTED = G.selectedCardIndex[yourID] === index;
