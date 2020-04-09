@@ -1,5 +1,6 @@
 import { generateNameHTML } from './html.log';
 import TYPE from 'enums/type.enums';
+import exists from 'utils/element.exists';
 
 const logPlayerAttackedMinionMessage = (
   G,
@@ -8,6 +9,7 @@ const logPlayerAttackedMinionMessage = (
   index
 ) => {
   const THEIR_MINION = G.boards[otherPlayer][index];
+  if (!exists(THEIR_MINION)) return;
   const TM_NAME = generateNameHTML(THEIR_MINION.minionData, TYPE[1]);
 
   return `Player ${currentPlayer} attacked Player ${otherPlayer}'s ${TM_NAME} for ${G.playerAttackValue[currentPlayer]} damage.`;

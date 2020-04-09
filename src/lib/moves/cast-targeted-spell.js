@@ -40,7 +40,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   const THEIR_SLOT = G.boards[otherPlayer][index];
   const YOUR_SLOT = G.boards[currentPlayer][index];
 
-  if (WARCRY_TARGET_CONTEXT[2]) {
+  if (targetCtx === WARCRY_TARGET_CONTEXT[1]) {
     logMessage(G, ctx, 'castTargetedSpell-minion', null, index);
   } else {
     logMessage(G, ctx, 'castTargetedSpell-player');

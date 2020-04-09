@@ -10,11 +10,10 @@ export default function PlayerWeapon({
   board,
   canUse,
   playerAttackValue,
-  weaponAttack,
-  weaponHealth,
-  weaponImageSrc
+  weapon
 }) {
-  const AP_VALUE = playerAttackValue !== 0 ? playerAttackValue : weaponAttack;
+  const { attack, health, id, set } = weapon;
+  const AP_VALUE = playerAttackValue !== 0 ? playerAttackValue : attack;
 
   return (
     <Component
@@ -22,14 +21,14 @@ export default function PlayerWeapon({
       board={board}
       canUse={canUse}
     >
-      <Image backgroundImage={weaponImageSrc} />
+      <Image wID={id} set={set} />
 
       <AttackWrapper data-value={AP_VALUE}>
         <TextValue className={'text__value'}>{AP_VALUE}</TextValue>
         <img alt="" src={'assets/card-assets/ic_attack.png'} />
       </AttackWrapper>
-      <HealthWrapper data-value={weaponHealth}>
-        <TextValue className={'text__value'}>{weaponHealth}</TextValue>
+      <HealthWrapper data-value={health}>
+        <TextValue className={'text__value'}>{health}</TextValue>
         <img alt="" src={'assets/card-assets/ic_health.png'} />
       </HealthWrapper>
 
@@ -102,7 +101,7 @@ const Image = styled.div`
   right: 9px;
   top: 10px;
   position: absolute;
-  background-image: ${p => `url(${p.backgroundImage})`};
+  background-image: ${p => `url('assets/images/sets/${p.set}/${p.wID}.jpg')`};
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -1,4 +1,5 @@
 import TYPE from 'enums/type.enums';
+import exists from 'utils/element.exists';
 
 const minionHTML = obj => {
   const {
@@ -116,6 +117,8 @@ const weaponHTML = obj => {
 };
 
 export const generateNameHTML = (object, context) => {
+  if (!exists(object)) return;
+
   switch (context) {
     case TYPE[1]:
       return minionHTML(object);

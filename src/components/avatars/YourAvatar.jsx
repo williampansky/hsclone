@@ -108,9 +108,7 @@ export default function YourAvatar({
           board={PLAYER_BOARDS[1]}
           canUse={playerCanAttack[yourID]}
           playerAttackValue={playerAttackValue[yourID]}
-          weaponAttack={playerWeapon[yourID] && playerWeapon[yourID].attack}
-          weaponHealth={playerWeapon[yourID] && playerWeapon[yourID].health}
-          weaponImageSrc={playerWeapon[yourID] && playerWeapon[yourID].imageSrc}
+          weapon={playerWeapon[yourID]}
         />
       ) : null}
 
@@ -118,6 +116,7 @@ export default function YourAvatar({
         health={YOUR_HEALTH}
         player="YourHealth"
         shieldPoints={YOUR_SHIELD}
+        wasAttacked={wasAttacked}
       />
 
       <div

@@ -1,5 +1,6 @@
 import { generateNameHTML } from './html.log';
 import TYPE from 'enums/type.enums';
+import exists from 'utils/element.exists';
 
 const logMinionAttackedMinionMessage = (
   G,
@@ -9,6 +10,7 @@ const logMinionAttackedMinionMessage = (
 ) => {
   const YOUR_MINION = G.selectedMinionObject[currentPlayer];
   const THEIR_MINION = G.boards[otherPlayer][index];
+  if (!exists(YOUR_MINION) || !exists(THEIR_MINION)) return;
   const YM_NAME = generateNameHTML(YOUR_MINION.minionData, TYPE[1]);
   const TM_NAME = generateNameHTML(THEIR_MINION.minionData, TYPE[1]);
 

@@ -92,11 +92,7 @@ export default function TheirAvatar({
           board={PLAYER_BOARDS[2]}
           canUse={playerCanAttack[theirID]}
           playerAttackValue={playerAttackValue[theirID]}
-          weaponAttack={playerWeapon[theirID] && playerWeapon[theirID].attack}
-          weaponHealth={playerWeapon[theirID] && playerWeapon[theirID].health}
-          weaponImageSrc={
-            playerWeapon[theirID] && playerWeapon[theirID].imageSrc
-          }
+          weapon={playerWeapon[theirID]}
         />
       ) : null}
 

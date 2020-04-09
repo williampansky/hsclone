@@ -8,6 +8,7 @@ import playerCanAttack from 'lib/state/player-can-attack';
 import playerShieldPoints from 'lib/state/player-shield-points';
 import playerUsedClassSkill from 'lib/state/player-used-class-skill';
 import playerWeapon from 'lib/state/player-weapon';
+import logMessage from 'lib/match-history/log-message';
 
 /**
  * Backstab your opponent for 2 damage.
@@ -41,7 +42,8 @@ export const equipShuriken = (G, ctx) => {
  */
 export const gainShieldPoints = (G, ctx, amount = 2) => {
   const { currentPlayer } = ctx;
-  return playerShieldPoints.add(G, currentPlayer, amount);
+  logMessage(G, ctx, 'GAME_002');
+  playerShieldPoints.add(G, currentPlayer, amount);
 };
 
 /**
@@ -106,26 +108,32 @@ export const summonKnight = (G, ctx) => {
  * @param {{}} ctx
  */
 export const summonRandomIdol = (G, ctx) => {
-  let idols = ['GAME_003', 'GAME_004', 'GAME_005', 'GAME_006'];
+  const idols = ['GAME_003', 'GAME_004', 'GAME_005', 'GAME_006'];
   const { currentPlayer, random } = ctx;
 
   if (G.boards[currentPlayer].length === 7) return; // max minions
 
-  const randomIdolID = random.Shuffle(idols);
-  const randomIdol = createBoardSlotObject(randomIdolID[0]);
+  const randomIdolID = random.Shuffle(idols).shift();
+  // const randomIdolID = idols[Math.floor(Math.random() * idols.length)];
+  // const randomIdol = createBoardSlotObject(randomIdolID[0]);
+  const randomIdol = createBoardSlotObject(randomIdolID);
+  console.log(randomIdolID);
 
   // GAME_005 needs the Guard mechanic
-  if (randomIdolID[0] === 'GAME_005') {
+  if (randomIdolID === 'GAME_005') {
     G.boards[currentPlayer].push({
       ...randomIdol,
       hasGuard: true
     });
-  } else if (randomIdolID[0] === 'GAME_006') {
-    G.buffs[currentPlayer].spellDamage = Math.abs(
-      G.buffs[currentPlayer].spellDamage + 1
-    );
   } else {
     G.boards[currentPlayer].push(randomIdol);
+
+    // GAME_006 adds player spell damage
+    if (randomIdolID === 'GAME_006') {
+      G.buffs[currentPlayer].spellDamage = Math.abs(
+        G.buffs[currentPlayer].spellDamage + 1
+      );
+    }
   }
 };
 

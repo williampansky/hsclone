@@ -159,11 +159,12 @@ export default function GameWrapper(props) {
         />
       )}
 
-      <MatchHistory G={G} ctx={ctx} gameWidth={1920} />
+      <MatchHistory G={G} ctx={ctx} gameWidth={1920} gameHeight={1080} />
       <PlayerSidebar
         G={G}
         ctx={ctx}
         gameWidth={1920}
+        gameHeight={1080}
         moves={moves}
         events={events}
         isActive={isActive}

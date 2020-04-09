@@ -10,6 +10,7 @@ const logCastTargetedSpellAtMinionMessage = (
 ) => {
   const YOUR_CARD = G.selectedCardObject[currentPlayer];
   const THEIR_MINION = G.boards[otherPlayer][index];
+  if (!exists(YOUR_CARD) || !exists(THEIR_MINION)) return;
   const YC_NAME = generateNameHTML(YOUR_CARD, TYPE[3]);
   const TM_NAME = generateNameHTML(THEIR_MINION.minionData, TYPE[1]);
 

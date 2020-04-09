@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import PlayerShield from 'components/player-health/PlayerShieldV2';
 
-export default function PlayerHealth({ health, player, shieldPoints }) {
+export default function PlayerHealth({
+  health,
+  player,
+  shieldPoints,
+  wasAttacked
+}) {
   const [animation, setAnimation] = useState(false);
 
   useEffect(() => {
@@ -11,7 +16,7 @@ export default function PlayerHealth({ health, player, shieldPoints }) {
     setTimeout(() => {
       setAnimation(false);
     }, 200);
-  }, [health]);
+  }, [wasAttacked]);
 
   return (
     <Component data-file="player-health/PlayerHealth" player={player}>
@@ -27,7 +32,8 @@ export default function PlayerHealth({ health, player, shieldPoints }) {
 PlayerHealth.propTypes = {
   health: PropTypes.number,
   player: PropTypes.string,
-  shieldPoints: PropTypes.number
+  shieldPoints: PropTypes.number,
+  wasAttacked: PropTypes.bool
 };
 
 const Badge = styled.img`

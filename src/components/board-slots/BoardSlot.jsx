@@ -12,6 +12,7 @@ import HasOnslaught from 'components/mechanics/HasOnslaught';
 import IsDeadPoof from 'components/animations/minions/IsDeadPoof';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
 import usePrevious from 'components/hooks/usePrevious';
+import SPELLTYPE from 'enums/spellType.enums';
 
 export default function BoardSlot({
   G,
@@ -117,7 +118,10 @@ export default function BoardSlot({
         data !== null ? 'has-minion' : '',
         data === null && !canDrop ? 'cannot-drop-minion' : '',
         isDead ? 'is-dead' : '',
-        G.selectedCardObject[yourID] !== null ? 'cannot-drop-minion' : '',
+        G.selectedCardObject[yourID] !== null &&
+        G.selectedCardObject[yourID].spellType !== SPELLTYPE[2]
+          ? 'cannot-drop-minion'
+          : '',
         wasAttacked ? '--was-attacked' : '',
         isAttacking ? '--is-attacking' : '',
         isAttackingPlayer === true ? `target__other_player` : '',

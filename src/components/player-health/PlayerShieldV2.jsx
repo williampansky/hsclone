@@ -47,15 +47,8 @@ const Component = styled.div`
   height: calc(var(--player-health-size) / 1.5);
   width: calc(var(--player-health-size) / 1.5);
   z-index: 1;
-
-  bottom: ${p =>
-    p.player === 'YourHealth'
-      ? 'calc(var(--player-health-size) * 0.875)'
-      : 'calc(var(--player-health-size) * 0.8275)'};
-  left: ${p =>
-    p.player === 'YourHealth'
-      ? 'calc(var(--player-health-size) * -0.175)'
-      : 'calc(var(--player-health-size) * 0.375)'};
+  bottom: calc(var(--player-health-size) * 0.875);
+  left: calc(var(--player-health-size) * -0.175);
 `;
 
 const HealthValue = styled.div`

@@ -6,11 +6,15 @@ import createMarkup from 'utils/createMarkup';
 import RARITY from 'enums/rarity.enums';
 import ScrollToBottom from 'react-scroll-to-bottom';
 
-export default function MatchHistory({ G, ctx, gameWidth }) {
+export default function MatchHistory({ G, ctx, gameWidth, gameHeight }) {
   const { matchHistory } = G;
 
   return (
-    <Component data-file="match-history/MatchHistory" gameWidth={gameWidth}>
+    <Component
+      data-file="match-history/MatchHistory"
+      gameWidth={gameWidth}
+      gameHeight={gameHeight}
+    >
       <Log>
         <ScrollToBottom
           checkInterval={100}
@@ -37,7 +41,6 @@ export default function MatchHistory({ G, ctx, gameWidth }) {
 // };
 
 const Component = styled.div`
-  height: calc(100% - var(--board-theirHand-height));
   pointer-events: auto;
   position: absolute;
   top: 0;
@@ -51,6 +54,9 @@ const Component = styled.div`
   font-family: 'Verdana', sans-serif;
   margin: var(--board-theirHand-height) 0 0;
   z-index: 300;
+  bottom: 0;
+  height: ${p =>
+    `calc(${p.gameHeight - 40}px - var(--board-theirHand-height))`};
 
   &:before {
     background: linear-gradient(rgba(0, 0, 0, 0.85), transparent);
@@ -64,6 +70,10 @@ const Component = styled.div`
     height: 4.25%;
     pointer-events: none;
     z-index: 1;
+  }
+
+  [data-file="game-over/GameOver"] ~ & {
+    z-index: 9500;
   }
 `;
 
@@ -132,16 +142,47 @@ const Log = styled.div`
   }
 
   button {
-    background: red;
-    border-bottom-right-radius: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    animation: scaleUp 400ms ease-in-out forwards;
+    background: none;
+    border-radius: 50%;
+    border: 0;
     bottom: 15px;
-    transform: rotate(135deg) scale(1);
+    height: 40px;
+    width: 40px;
+
+    &:before {
+      background-image: url('assets/icons/arrow-circle-down-filled.png');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      border-radius: 50%;
+      content: '';
+      height: 40px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      transition: transform 200ms ease-in-out;
+      width: 40px;
+    }
+
+    @keyframes scaleUp {
+      0% {
+        opacity: 0;
+        transform: scale(0.2);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
   }
 
   button:hover {
-    background: red;
-    transform: rotate(135deg) scale(1.25);
+    background: none;
+  }
+
+  button:hover:before {
+    transform: scale(1.25);
   }
 `;

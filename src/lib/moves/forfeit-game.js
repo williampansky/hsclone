@@ -11,7 +11,7 @@ const forfeitGame = (G, ctx, player) => {
   const { turnOrder } = G;
   const otherPlayer = turnOrder.find(p => p !== player);
   health.subtract(G, player, 1000);
-  winner.set(G, otherPlayer);
+  // winner.set(G, otherPlayer);
 };
 
 export default forfeitGame;
