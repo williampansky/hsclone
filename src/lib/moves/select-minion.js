@@ -16,6 +16,11 @@ const selectMinion = (G, ctx, minionObject = null, index = null) => {
   const { currentPlayer } = ctx;
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
 
+  G.boards[currentPlayer][index].isAttacking = true;
+  G.boards[currentPlayer].forEach((slot, i) => {
+    if (index !== i) slot.isAttacking = false;
+  });
+
   selectedMinionIndex.set(G, currentPlayer, index);
   selectedMinionObject.set(G, currentPlayer, minionObject);
   playerCanBeAttacked.enableByMinion(G, otherPlayer);

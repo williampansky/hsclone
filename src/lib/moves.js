@@ -18,6 +18,7 @@ import playCard from 'lib/moves/play-card';
 import selectCard from 'lib/moves/select-card';
 import selectMinion from 'lib/moves/select-minion';
 import terminatePlayerWeaponAttack from 'lib/moves/terminate-player-weapon-attack';
+import logMessage from './match-history/log-message';
 
 export default {
   addCardToHand: {
@@ -122,6 +123,30 @@ export default {
       return boards.killMinion(G, ctx, player, boardSlot, index);
     }
   },
+  logMessage: {
+    client: false,
+    move: (G, ctx, action) => {
+      return logMessage(G, ctx, action);
+    }
+  },
+  resetMinionIsAttacking: {
+    client: false,
+    move: (G, ctx, index) => {
+      G.boards[ctx.currentPlayer][index].isAttacking = false;
+    }
+  },
+  resetMinionIsAttackingIndex: {
+    client: false,
+    move: (G, ctx, index) => {
+      G.boards[ctx.currentPlayer][index].isAttackingMinionIndex = null;
+    }
+  },
+  resetMinionIsAttackingPlayer: {
+    client: false,
+    move: (G, ctx, index) => {
+      G.boards[ctx.currentPlayer][index].isAttackingPlayer = false;
+    }
+  },
   selectCard: {
     client: false,
     move: (G, ctx, cardObject, index) => {
@@ -133,6 +158,18 @@ export default {
     client: false,
     move: (G, ctx, cardObject, index) => {
       return selectMinion(G, ctx, cardObject, index);
+    }
+  },
+  setAttackedMinionIndex: {
+    client: false,
+    move: G => {
+      G.attackedMinionIndex = null;
+    }
+  },
+  setGameWinner: {
+    client: false,
+    move: (G, ctx, player) => {
+      G.winner = player;
     }
   },
   setLastPlayedCardId: {

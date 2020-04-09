@@ -9,10 +9,15 @@ export default function GameMenu({
   isActive,
   yourID,
   showMenu,
-  toggleMenuFn
+  toggleMenuFn,
+  gameWidth
 }) {
   return (
-    <div data-file="GameMenu" className="game-menu">
+    <div
+      data-file="GameMenu"
+      className="game-menu"
+      style={{ width: `${gameWidth}px` }}
+    >
       <GameMenuTrigger showMenu={showMenu} toggleMenuFn={toggleMenuFn} />
       <h1>Menu</h1>
       <ForfeitGameButton moves={moves} isActive={isActive} yourID={yourID} />
@@ -26,5 +31,6 @@ GameMenu.propTypes = {
   isActive: PropTypes.bool,
   yourID: PropTypes.string,
   showMenu: PropTypes.bool,
-  toggleMenuFn: PropTypes.func
+  toggleMenuFn: PropTypes.func,
+  gameWidth: PropTypes.number
 };

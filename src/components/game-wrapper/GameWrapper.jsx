@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 
 // child components
 import Board from 'components/boards/Board';
+import GameBackground from 'components/game-wrapper/GameBackground';
 import GameMenu from 'components/game-menu/GameMenu';
 import GameOver from 'components/game-over/GameOver';
-import TheirHand from 'components/hands/TheirHand';
-import YourHand from 'components/hands/YourHand';
+import TheirHand from 'components/hands/TheirHandV2';
+import YourHand from 'components/hands/YourHandV2';
+import ResizeObserver from 'components/game-wrapper/ResizeObserver';
+import MatchHistory from 'components/match-history/MatchHistory';
+import PlayerSidebar from 'components/player-sidebar/PlayerSidebar';
 
 export default function GameWrapper(props) {
   // global state manipulations
@@ -31,16 +35,13 @@ export default function GameWrapper(props) {
     isConnected,
     credentials
   } = props;
-  const { winner, cardBack } = G;
+  const { cardBack, health, winner } = G;
   const { gameover } = ctx;
+  const { setGameWinner } = moves;
 
   // id declarations
   const yourID = playerID === '0' ? '0' : '1';
   const theirID = playerID === '0' ? '1' : '0';
-
-  // card graphic declarations
-  const theirCardBackImageSrc = cardBack[theirID];
-  const yourCardBackImageSrc = cardBack[yourID];
 
   function toggleMenu() {
     return !showMenu
@@ -67,21 +68,36 @@ export default function GameWrapper(props) {
     };
   }, [escFunction]);
 
+  useEffect(() => {
+    document.body.style.width = `${1920}px`;
+    document.body.style.height = `${1080 - 40}px`;
+  }, []);
+
+  // health declarations
+  const YOUR_HEALTH = health[yourID];
+  const THEIR_HEALTH = health[theirID];
+
+  useEffect(() => {
+    if (YOUR_HEALTH === 0) setGameWinner(theirID);
+    if (THEIR_HEALTH === 0) setGameWinner(yourID);
+  }, [YOUR_HEALTH, THEIR_HEALTH, setGameWinner]);
+
   return props ? (
     <React.Fragment>
       <div
         data-file="GameWrapper"
         className={[
           'game-wrapper',
-          gameover ? 'game-over' : '',
-          gameover && winner === yourID ? 'victory' : 'defeat'
+          gameover && winner === theirID ? 'game-over defeat' : '',
+          gameover && winner === yourID ? 'game-over victory' : ''
         ].join(' ')}
       >
         <TheirHand
           G={G}
-          cardBackSrc={theirCardBackImageSrc}
+          cardBackSrc={cardBack[theirID]}
           theirID={theirID}
           toggleMenuFn={() => toggleMenu()}
+          gameWidth={1920}
         />
         <Board
           G={G}
@@ -102,19 +118,33 @@ export default function GameWrapper(props) {
           credentials={credentials}
           yourID={yourID}
           theirID={theirID}
+          gameWidth={1920}
         />
         <YourHand
           G={G}
           ctx={ctx}
           moves={moves}
           isActive={isActive}
-          cardBackSrc={yourCardBackImageSrc}
+          cardBackSrc={cardBack[yourID]}
           yourID={yourID}
+          gameWidth={1920}
+        />
+        <GameBackground
+          backgroundImage="assets/images/boards/BOARD.jpg"
+          // backgroundImage="assets/images/Uldaman_Board.jpg"
+          gameWidth={1920}
+          gameHeight={1080}
         />
       </div>
 
       {gameover && (
-        <GameOver theirID={theirID} yourID={yourID} winner={winner} />
+        <GameOver
+          gameWidth={1920}
+          gameHeight={1080}
+          theirID={theirID}
+          yourID={yourID}
+          winner={winner}
+        />
       )}
 
       {showMenu && (
@@ -125,8 +155,23 @@ export default function GameWrapper(props) {
           yourID={yourID}
           showMenu={showMenu}
           toggleMenuFn={() => toggleMenu()}
+          gameWidth={1920}
         />
       )}
+
+      <MatchHistory G={G} ctx={ctx} gameWidth={1920} gameHeight={1080} />
+      <PlayerSidebar
+        G={G}
+        ctx={ctx}
+        gameWidth={1920}
+        gameHeight={1080}
+        moves={moves}
+        events={events}
+        isActive={isActive}
+        yourID={yourID}
+        theirID={theirID}
+      />
+      <ResizeObserver moves={moves} />
     </React.Fragment>
   ) : null;
 }

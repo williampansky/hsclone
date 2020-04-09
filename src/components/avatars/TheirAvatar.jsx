@@ -4,6 +4,10 @@ import PlayerHealth from 'components/player-health/PlayerHealthV2';
 import AvatarAnimation from 'components/animations/avatars/AvatarAnimation';
 import AvatarInteraction from 'components/interactions/avatars/AvatarInteraction';
 import CARDCLASS from 'enums/cardClass.enums';
+import ClassSkillButton from 'components/class-skill/ClassSkillButtonV2';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
+import usePrevious from 'components/hooks/usePrevious';
+import PlayerWeapon from 'components/player-weapon/PlayerWeaponV2';
 
 export default function TheirAvatar({
   G,
@@ -16,14 +20,35 @@ export default function TheirAvatar({
   playerClass
 }) {
   const {
+    playerCanUseClassSkill,
+    energy,
     health,
     playerShieldPoints,
     playerCanBeHealed,
     playerIsAttacking,
-    playerUsedClassSkill
+    playerUsedClassSkill,
+    playerCanAttack,
+    playerAttackValue,
+    playerWeapon
   } = G;
   const THEIR_HEALTH = health[theirID];
   const THEIR_SHIELD = playerShieldPoints[theirID];
+  const [wasAttacked, setWasAttacked] = React.useState(false);
+  const previousCurrentHealth = usePrevious(THEIR_HEALTH);
+
+  const animateWasAttacked = React.useCallback(
+    currentHealth => {
+      currentHealth < previousCurrentHealth && setWasAttacked(true);
+      return setTimeout(() => {
+        setWasAttacked(false);
+      }, 510);
+    },
+    [previousCurrentHealth]
+  );
+
+  React.useEffect(() => {
+    animateWasAttacked(THEIR_HEALTH);
+  }, [THEIR_HEALTH, animateWasAttacked]);
 
   function classImage(string) {
     // prettier-ignore
@@ -44,14 +69,39 @@ export default function TheirAvatar({
   return (
     <div
       data-file="avatars/TheirAvatar"
-      className={['player-avatar', 'their-avatar', 'effect--bezel'].join(' ')}
+      className={['player-avatar', 'their-avatar'].join(' ')}
     >
       <PlayerHealth
         health={THEIR_HEALTH}
         player="TheirHealth"
         shieldPoints={THEIR_SHIELD}
       />
-      <div className={'avatar-image-wrapper'}>
+
+      <ClassSkillButton
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        isActive={isActive}
+        playerClass={playerClass}
+        board={PLAYER_BOARDS[2]}
+        canUse={playerCanUseClassSkill[theirID] && energy[theirID].current >= 2}
+      />
+
+      {playerWeapon[theirID] !== null ? (
+        <PlayerWeapon
+          board={PLAYER_BOARDS[2]}
+          canUse={playerCanAttack[theirID]}
+          playerAttackValue={playerAttackValue[theirID]}
+          weapon={playerWeapon[theirID]}
+        />
+      ) : null}
+
+      <div
+        className={[
+          'avatar-image-wrapper',
+          wasAttacked ? '--was-attacked' : ''
+        ].join(' ')}
+      >
         {playerClass && (
           <div
             className={'avatar-image'}

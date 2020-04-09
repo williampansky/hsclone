@@ -1,7 +1,7 @@
 const cardBack = {
   __DATA_MODEL: {
-    '0': 'card-back-temp2.png',
-    '1': 'card-back-temp3.png'
+    '0': 'TCG_vol09_back.png',
+    '1': 'TCG_vol09_back.png'
   }
 };
 

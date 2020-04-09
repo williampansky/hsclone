@@ -9,6 +9,8 @@ export default function MinionInteraction({
   moves,
   isActive,
   index,
+  yourID,
+  theirID,
   board,
   data,
   canAttack,
@@ -45,6 +47,8 @@ export default function MinionInteraction({
           G={G}
           ctx={ctx}
           moves={moves}
+          yourID={yourID}
+          theirID={theirID}
           data={data}
           index={index}
           board={board}
@@ -80,6 +84,8 @@ export default function MinionInteraction({
           G={G}
           ctx={ctx}
           moves={moves}
+          yourID={yourID}
+          theirID={theirID}
           data={data}
           index={index}
           board={board}
@@ -119,6 +125,8 @@ MinionInteraction.propTypes = {
   isActive: PropTypes.bool,
   index: PropTypes.number,
   render: PropTypes.bool,
+  yourID: PropTypes.string,
+  theirID: PropTypes.string,
   board: PropTypes.string,
   data: PropTypes.object,
   canAttack: PropTypes.bool,

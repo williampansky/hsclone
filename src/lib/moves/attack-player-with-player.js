@@ -1,6 +1,7 @@
 import boards from 'lib/state/boards';
 import health from 'lib/state/health';
 import playerShieldPoints from 'lib/state/player-shield-points';
+import logMessage from 'lib/match-history/log-message';
 
 /**
  * Attacks a player with the current player's selectedMinionObject.
@@ -22,6 +23,8 @@ const attackPlayerWithPlayer = (G, ctx) => {
   }
 
   G.animationStates.playerIsAttackingPlayer[currentPlayer] = true;
+
+  logMessage(G, ctx, 'attackPlayerWithPlayer');
 
   // weapon-specific mechanics
   if (playerWeapon[currentPlayer].id === 'CORE_081') {

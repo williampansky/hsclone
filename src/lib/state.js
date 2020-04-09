@@ -44,7 +44,7 @@ export default {
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
   playerClass: {
-    '0': CARDCLASS[7],
+    '0': CARDCLASS[9],
     '1': CARDCLASS[9]
   },
   players: players.__DATA_MODEL,
@@ -59,18 +59,29 @@ export default {
   selectedCardObject: selectedCardObject.__DATA_MODEL,
   selectedMinionIndex: selectedMinionIndex.__DATA_MODEL,
   selectedMinionObject: selectedMinionObject.__DATA_MODEL,
+  attackedMinionIndex: null,
   spellObject: spellObject.__DATA_MODEL,
   warcryObject: warcryObject.__DATA_MODEL,
   cardBack: cardBack.__DATA_MODEL,
   lastPlayedCardId: null,
   animationStates: {
+    minionIsAttacking: {
+      '0': null,
+      '1': null
+    },
+    playerIsAttackingMinion: {
+      '0': false,
+      '1': false
+    },
     playerIsAttackingPlayer: {
       '0': false,
       '1': false
     }
   },
+  winner: null,
   turnOrder: ['0', '1'].sort(() => {
     if (!GAME_CONFIG.matchConfig.enableRandomTurnOrder) return ['0', '1'];
     return Math.random() - 0.5;
-  })
+  }),
+  matchHistory: []
 };

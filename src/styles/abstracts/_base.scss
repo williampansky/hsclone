@@ -3,11 +3,16 @@ body {
   background: black;
 }
 
+html {
+  position: absolute;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,6 +23,9 @@ body {
   box-sizing: border-box;
 }
 
+#root,
 .bgio-client {
+  height: 100%;
   overflow: hidden;
+  width: 100%;
 }

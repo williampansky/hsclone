@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useHover from 'react-use-hover';
-// import limitNumberWithinRange from 'lib/utils/range-limit';
+import limitNumberWithinRange from 'lib/utils/range-limit';
 
 // child components
-import Card from 'components/cards/Card';
-import CardV2 from 'components/cards/CardV2';
+import Card from 'components/cards/CardV3';
 import CardIsPlayable from 'components/interactions/cards/CardIsPlayable';
 import CardIsPlayableEffect from 'components/interactions/cards/CardIsPlayableEffect';
 import CardIsSelected from 'components/interactions/cards/CardIsSelected';
@@ -65,7 +64,6 @@ export default function CardInteraction({
     howToEarnGolden,
     id,
     imageSrc,
-    inspiration,
     mechanics,
     name,
     playRequirements,
@@ -81,6 +79,7 @@ export default function CardInteraction({
     type
   } = card;
 
+  const numberOfCards = G.counts[yourID].hand;
   const WARCRY_OBJECT_ACTIVE = warcryObject[yourID] !== null;
   const SPELL_OBJECT_ACTIVE = spellObject[yourID] !== null;
   const CAN_AFFORD = cost <= G.energy[yourID].current;
@@ -88,36 +87,36 @@ export default function CardInteraction({
     isActive && CAN_AFFORD && !WARCRY_OBJECT_ACTIVE && !SPELL_OBJECT_ACTIVE;
   const IS_SELECTED = G.selectedCardIndex[yourID] === index;
 
-  // const yourHandStyle = {
-  //   transform: `transformY(0) scale(0.475)`
-  //   // transform: `
-  //   //   translateY(calc(${calcOffset(index, numberOfCards + 1)} * 1px))
-  //   //   rotate(calc(${calcRotate(index, numberOfCards + 1)} * 0.875deg))
-  //   //   scale(0.475)
-  //   // `
-  // };
+  const yourHandStyle = {
+    // transform: `transformY(0) scale(0.475)`
+    transform: `
+      translateY(calc(${calcOffset(index, numberOfCards + 1)} * 1px))
+      rotate(calc(${calcRotate(index, numberOfCards + 1)} * 0.875deg))
+      scale(0.575)
+    `
+  };
 
-  // function calcOffset(index, total = 10, offsetRange = 80) {
-  //   // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
-  //   const MIN = 0;
-  //   const MAX = 60;
+  function calcOffset(index, total = 10, offsetRange = 80) {
+    // abs(($i - ($total - 1) / 2) / ($total - 2) * $offsetRange);
+    const MIN = 10;
+    const MAX = 60;
 
-  //   const calculation = Math.abs(
-  //     ((index - (total - 1.5) / 2) / (total - 2)) * offsetRange
-  //   );
+    const calculation = Math.abs(
+      ((index - (total - 1.85) / 2) / (total - 2)) * offsetRange
+    );
 
-  //   return limitNumberWithinRange(calculation, MAX, MIN);
-  // }
+    return limitNumberWithinRange(calculation, MAX, MIN);
+  }
 
-  // // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
-  // function calcRotate(index, total = 10, rotationRange = 50) {
-  //   const MIN = -15;
-  //   const MAX = 25;
-  //   const calculation =
-  //     ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
+  // ($i - ($total - 1) / 2) / ($total - 2) * $rotationRange;
+  function calcRotate(index, total = 10, rotationRange = 50) {
+    const MIN = -25;
+    const MAX = 25;
+    const calculation =
+      ((index - (total - 1) / 2) / (total - 2)) * rotationRange;
 
-  //   return limitNumberWithinRange(calculation, MAX, MIN);
-  // }
+    return limitNumberWithinRange(calculation, MAX, MIN);
+  }
 
   function selectPlayableCard(index) {
     hoverCard(null);
@@ -141,6 +140,7 @@ export default function CardInteraction({
         'card-in-your-hand',
         isAnimating ? 'draw-card-animation' : ''
       ].join(' ')}
+      style={yourHandStyle}
       {...hoverProps}
     >
       {isActive ? (
@@ -150,7 +150,7 @@ export default function CardInteraction({
         </React.Fragment>
       ) : null}
 
-      <CardV2
+      <Card
         artist={artist}
         attack={attack}
         cardClass={cardClass}
@@ -166,7 +166,6 @@ export default function CardInteraction({
         howToEarnGolden={howToEarnGolden}
         id={id}
         imageSrc={imageSrc}
-        inspiration={inspiration}
         mechanics={mechanics}
         name={name}
         playRequirements={playRequirements}

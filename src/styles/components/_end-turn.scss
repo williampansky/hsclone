@@ -1,14 +1,16 @@
 .end__turn {
-  bottom: auto;
-  left: auto;
-  margin: 0 1% 0 0;
-  position: absolute;
-  right: 0;
-  top: calc(52.5% - var(--board-yourHand-height));
+  // bottom: 0;
+  // left: auto;
+  margin: 0;
+  // position: absolute;
+  // right: 0;
+  // top: 0;
   z-index: 100;
   user-select: none;
   font-size: 15px;
   letter-spacing: 0.03em;
+  // height: 100%;
+  @include display-flex(column nowrap, center, center);
 }
 
 // prettier-ignore

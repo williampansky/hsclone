@@ -1,8 +1,7 @@
+/* eslint-disable array-callback-return */
 import GAME_CONFIG from './src/config/game.config';
 require('dotenv').config({ path: './.env.local' });
 const fs = require('fs');
-const incomingCore = require('./csv-core.json');
-const incomingEntourage = require('./csv-entourage.json');
 const Airtable = require('airtable-node');
 
 const APIKEY = process.env.AIRTABLE_API_KEY;
@@ -13,31 +12,14 @@ function parseCardClass(string) {
   return string.replace(/([0-9] )/g, '');
 }
 
-function parseImageSrc(string) {
-  if (!string) return;
-  const match = string.match(/\(([^)]+)\)/g).toString();
-  const newString = match.replace(/(\()/g, '').replace(/(\))/g, '');
-  return newString;
-}
-
-function parseImageSrcObject(obj) {
-  if (!obj) return;
-  return obj[0].thumbnails.large.url;
-}
-
-function parseMechanics(array) {
-  if (!array || array === null) return;
-  return array.split(',');
-}
-
 // CORE
 base
-  .table('CORE')
+  .table('GAME')
   .list({
     maxRecords: 200
   })
   .then(resp => {
-    const mappedCore = resp.records.map(item => {
+    const map = resp.records.map(item => {
       const { fields } = item;
       const {
         artist,
@@ -46,8 +28,8 @@ base
         cost,
         elite,
         id,
-        imageSrc,
         mechanics,
+        name,
         text
       } = fields;
 
@@ -61,29 +43,113 @@ base
           collectible: collectible === 'checked' ? true : false,
           cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
-          imageSrc: parseImageSrcObject(imageSrc),
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
               ? mechanics
               : []
             : '',
+          name: name,
           text: GAME_CONFIG.debugData.enableText ? text : ''
         }
       };
     });
 
-    const coreCards = JSON.stringify(Object.assign({}, ...mappedCore));
-    fs.writeFileSync('./src/data/debug/cards.json', coreCards);
+    const cards = JSON.stringify(Object.assign({}, ...map));
+    fs.writeFileSync('./src/data/debug/cards-GAME.json', cards);
+  });
 
-    // IDs
-    const idArray = incomingCore.map(item => {
-      const { id } = item;
+// CORE
+base
+  .table('CORE')
+  .list({
+    maxRecords: 200
+  })
+  .then(resp => {
+    const map = resp.records.map(item => {
+      const { fields } = item;
+      const {
+        artist,
+        cardClass,
+        collectible,
+        cost,
+        elite,
+        id,
+        inspiration,
+        mechanics,
+        name,
+        text
+      } = fields;
+
       if (!id) return;
-      return id;
+
+      return {
+        [id]: {
+          ...fields,
+          artist: artist ? artist : null,
+          cardClass: parseCardClass(cardClass),
+          collectible: collectible === 'checked' ? true : false,
+          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
+          elite: elite === 'checked' ? true : false,
+          mechanics: GAME_CONFIG.debugData.enableMechanics
+            ? mechanics
+              ? mechanics
+              : []
+            : '',
+          name: name ? name : inspiration,
+          text: GAME_CONFIG.debugData.enableText ? text : ''
+        }
+      };
     });
-    const filterNull = idArray.filter(item => item);
-    const newArr = JSON.stringify(filterNull);
-    fs.writeFileSync('./src/data/debug/cardIdArray.json', newArr);
+
+    const cards = JSON.stringify(Object.assign({}, ...map));
+    fs.writeFileSync('./src/data/debug/cards-CORE.json', cards);
+  });
+
+// PRIME
+base
+  .table('PRIME')
+  .list({
+    maxRecords: 300
+  })
+  .then(resp => {
+    const map = resp.records.map(item => {
+      const { fields } = item;
+      const {
+        artist,
+        cardClass,
+        collectible,
+        cost,
+        elite,
+        id,
+        inspiration,
+        mechanics,
+        name,
+        text
+      } = fields;
+
+      if (!id) return;
+
+      return {
+        [id]: {
+          ...fields,
+          artist: artist ? artist : null,
+          cardClass: parseCardClass(cardClass),
+          collectible: collectible === 'checked' ? true : false,
+          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
+          elite: elite === 'checked' ? true : false,
+          mechanics: GAME_CONFIG.debugData.enableMechanics
+            ? mechanics
+              ? mechanics
+              : []
+            : '',
+          name: name ? name : inspiration,
+          text: GAME_CONFIG.debugData.enableText ? text : ''
+        }
+      };
+    });
+
+    const cards = JSON.stringify(Object.assign({}, ...map));
+    fs.writeFileSync('./src/data/debug/cards-PRIME.json', cards);
   });
 
 // ENTOURAGE
@@ -93,7 +159,7 @@ base
     maxRecords: 200
   })
   .then(resp => {
-    const mappedEntourage = resp.records.map(item => {
+    const map = resp.records.map(item => {
       const { fields } = item;
       const {
         artist,
@@ -102,8 +168,9 @@ base
         cost,
         elite,
         id,
-        imageSrc,
+        inspiration,
         mechanics,
+        name,
         text
       } = fields;
 
@@ -117,17 +184,17 @@ base
           collectible: collectible === 'checked' ? true : false,
           cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
-          imageSrc: parseImageSrcObject(imageSrc),
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
               ? mechanics
               : []
             : '',
+          name: name ? name : inspiration,
           text: GAME_CONFIG.debugData.enableText ? text : ''
         }
       };
     });
 
-    const entourage = JSON.stringify(Object.assign({}, ...mappedEntourage));
-    fs.writeFileSync('./src/data/debug/entourage.json', entourage);
+    const cards = JSON.stringify(Object.assign({}, ...map));
+    fs.writeFileSync('./src/data/debug/cards-ENTOURAGE.json', cards);
   });

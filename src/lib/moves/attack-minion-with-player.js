@@ -1,6 +1,7 @@
 import boards from 'lib/state/boards';
 import health from 'lib/state/health';
 import playerShieldPoints from 'lib/state/player-shield-points';
+import logMessage from 'lib/match-history/log-message';
 
 /**
  * Attacks a minion with the currentPlayer's weapon.
@@ -24,10 +25,12 @@ const attackMinionWithPlayer = (G, ctx, index) => {
   const MBA_AP = MINION_BEING_ATTACKED.currentAttack;
   // const MBA_HP = MINION_BEING_ATTACKED.health;
 
+  logMessage(G, ctx, 'attackMinionWithPlayer', null, index);
+
   // eject if a PLAYER_BEING_ATTACKED's minion has gaurd
-  for (let i = 0; i < G.boards[otherPlayer].length; i++) {
-    if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
-  }
+  // for (let i = 0; i < G.boards[otherPlayer].length; i++) {
+  //   if (G.boards[otherPlayer][i] && G.boards[otherPlayer][i].hasGuard) return;
+  // }
 
   // weapon-specific mechanics
   if (playerWeapon[currentPlayer].id === 'CORE_081') {

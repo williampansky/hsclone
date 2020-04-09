@@ -11,6 +11,8 @@ import IsDisabled from 'components/mechanics/IsDisabled';
 import HasOnslaught from 'components/mechanics/HasOnslaught';
 import IsDeadPoof from 'components/animations/minions/IsDeadPoof';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
+import usePrevious from 'components/hooks/usePrevious';
+import SPELLTYPE from 'enums/spellType.enums';
 
 export default function BoardSlot({
   G,
@@ -26,7 +28,8 @@ export default function BoardSlot({
   yourID,
   theirID
 }) {
-  const { selectedMinionIndex } = G;
+  const [wasAttacked, setWasAttacked] = React.useState(false);
+  const { selectedMinionIndex, attackedMinionIndex } = G;
   const { killMinion } = moves;
   const {
     canAttack,
@@ -50,6 +53,9 @@ export default function BoardSlot({
     hasEnergyShield,
     hasGuard,
     hasOnslaught,
+    isAttacking,
+    isAttackingMinionIndex,
+    isAttackingPlayer,
     isConcealed,
     isCursed,
     isDisabled,
@@ -61,6 +67,28 @@ export default function BoardSlot({
   } = data;
 
   const playerID = board === PLAYER_BOARDS[1] ? yourID : theirID;
+  const previousCurrentHealth = usePrevious(currentHealth);
+
+  const animateWasAttacked = React.useCallback(
+    currentHealth => {
+      if (isActive && board === PLAYER_BOARDS[2]) {
+        currentHealth < previousCurrentHealth && setWasAttacked(true);
+        return setTimeout(() => {
+          setWasAttacked(false);
+        }, 510);
+      } else if (!isActive && board === PLAYER_BOARDS[1]) {
+        currentHealth < previousCurrentHealth && setWasAttacked(true);
+        return setTimeout(() => {
+          setWasAttacked(false);
+        }, 510);
+      }
+    },
+    [board, isActive, previousCurrentHealth]
+  );
+
+  React.useEffect(() => {
+    animateWasAttacked(currentHealth);
+  }, [currentHealth, animateWasAttacked]);
 
   const KillMinion = React.useCallback(
     index => {
@@ -71,10 +99,13 @@ export default function BoardSlot({
     [playerID, data, killMinion]
   );
 
-  // prettier-ignore
   React.useEffect(() => {
-    isDead &&  KillMinion(index);
+    isDead && KillMinion(index);
   }, [index, isDead, KillMinion]);
+
+  function handleIsAttackingClass(bool) {
+    if (bool) return '--animate-attack';
+  }
 
   return (
     <div
@@ -86,7 +117,17 @@ export default function BoardSlot({
         data === null ? 'is-empty' : '',
         data !== null ? 'has-minion' : '',
         data === null && !canDrop ? 'cannot-drop-minion' : '',
-        isDead ? 'is-dead' : ''
+        isDead ? 'is-dead' : '',
+        G.selectedCardObject[yourID] !== null &&
+        G.selectedCardObject[yourID].spellType !== SPELLTYPE[2]
+          ? 'cannot-drop-minion'
+          : '',
+        wasAttacked ? '--was-attacked' : '',
+        isAttacking ? '--is-attacking' : '',
+        isAttackingPlayer === true ? `target__other_player` : '',
+        isAttackingMinionIndex !== null
+          ? `target__slot-${isAttackingMinionIndex}`
+          : ''
       ].join(' ')}
       onClick={onClick}
     >
@@ -98,6 +139,8 @@ export default function BoardSlot({
           moves={moves}
           isActive={isActive}
           board={board}
+          yourID={yourID}
+          theirID={theirID}
           index={index}
           render={render}
           data={data}
@@ -120,7 +163,7 @@ export default function BoardSlot({
           hasEnergyShield={hasEnergyShield}
           hasGuard={hasGuard}
           hasOnslaught={hasOnslaught}
-          isAttacking={selectedMinionIndex[yourID] === index}
+          isAttacking={isAttacking}
           isConcealed={isConcealed}
           isCursed={isCursed}
           isDisabled={isDisabled}

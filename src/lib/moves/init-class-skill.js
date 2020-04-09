@@ -1,7 +1,7 @@
 import CARDCLASS from 'enums/cardClass.enums';
 import playerCanUseClassSkill from 'lib/state/player-can-use-class-skill';
 import {
-  backstabOpponent,
+  snipeOpponent,
   equipShuriken,
   gainShieldPoints,
   initTargetedDamage,
@@ -35,7 +35,7 @@ const initClassSkill = (G, ctx) => {
   // prettier-ignore
   switch (playerClass[currentPlayer]) {
     case CARDCLASS[1]: return initTargetedDamage(G, ctx); // AUGUR
-    case CARDCLASS[2]: return backstabOpponent(G, ctx);   // ASSASSIN
+    case CARDCLASS[2]: return snipeOpponent(G, ctx);      // SNIPER
     case CARDCLASS[3]: return initTargetedSpell(G, ctx);  // SORCERER
     case CARDCLASS[4]: return summonKnight(G, ctx);       // KNIGHT COMMANDER
     case CARDCLASS[5]: return initTargetedHeal(G, ctx);   // WHITE MAGE

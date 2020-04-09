@@ -1,0 +1,72 @@
+// prettier-ignore
+.board-slot {
+  &.--target-data-slot-0 { transform: translate3d(-350%, -50%, 0); }
+  &.--target-data-slot-1 { transform: translate3d(-225%, -50%, 0); }
+  &.--target-data-slot-2 { transform: translate3d(-100%, -50%, 0); }
+  &.--target-data-slot-3 { transform: translate3d(0%, -50%, 0); }
+  &.--target-data-slot-4 { transform: translate3d(100%, -50%, 0); }
+  &.--target-data-slot-5 { transform: translate3d(225%, -50%, 0); }
+  &.--target-data-slot-6 { transform: translate3d(350%, -50%, 0); }
+}
+
+// prettier-ignore
+[data-their-board-length="0"] .board-slot {
+  &.--target-data-slot-0 { transform: translate3d(0%, -50%, 0); }
+}
+
+// prettier-ignore
+[data-their-board-length="1"] .board-slot {
+  &.--target-data-slot-0 { transform: translate3d(0%, -50%, 0); }
+}
+
+// prettier-ignore
+[data-their-board-length="2"] .board-slot {
+  &.--target-data-slot-0 { transform: translate3d(-25%, -50%, 0); }
+  &.--target-data-slot-1 { transform: translate3d(25%, -50%, 0); }
+}
+
+// prettier-ignore
+[data-their-board-length="3"] .board-slot {
+  &.--target-data-slot-0 { transform: translate3d(-100%, -50%, 0); }
+  &.--target-data-slot-1 { transform: translate3d(0%, -50%, 0); }
+  &.--target-data-slot-2 { transform: translate3d(100%, -50%, 0); }
+}
+
+// prettier-ignore
+[data-their-board-length="4"] .board-slot {
+  &.--target-data-slot-0 { transform: translate3d(-150%, -50%, 0); }
+  &.--target-data-slot-1 { transform: translate3d(-50%, -50%, 0); }
+  &.--target-data-slot-2 { transform: translate3d(50%, -50%, 0); }
+  &.--target-data-slot-3 { transform: translate3d(150%, -50%, 0); }
+}
+
+// prettier-ignore
+[data-their-board-length="5"] .board-slot {
+  &.--target-data-slot-0 { transform: translate3d(-200%, -50%, 0); }
+  &.--target-data-slot-1 { transform: translate3d(-100%, -50%, 0); }
+  &.--target-data-slot-2 { transform: translate3d(0%, -50%, 0); }
+  &.--target-data-slot-3 { transform: translate3d(100%, -50%, 0); }
+  &.--target-data-slot-4 { transform: translate3d(200%, -50%, 0); }
+}
+
+// prettier-ignore
+[data-their-board-length="6"] .board-slot {
+  &.--target-data-slot-0 { transform: translate3d(-275%, -50%, 0); }
+  &.--target-data-slot-1 { transform: translate3d(-150%, -50%, 0); }
+  &.--target-data-slot-2 { transform: translate3d(-35%, -50%, 0); }
+  &.--target-data-slot-3 { transform: translate3d(35%, -50%, 0); }
+  &.--target-data-slot-4 { transform: translate3d(150%, -50%, 0); }
+  &.--target-data-slot-5 { transform: translate3d(275%, -50%, 0); }
+}
+
+// prettier-ignore
+[data-your-board-length="1"] {
+  .board-slot[data-slot='0'].--target-other-player { transform: translate3d(0%, -175%, 0); }
+  .board-slot[data-slot='0'].--target-data-slot-0 { transform: translate3d(-275%, -50%, 0); }
+}
+
+// prettier-ignore
+[data-your-board-length="2"] .board-slot {
+  &[data-slot='0'].--target-other-player { transform: translate3d(65%, -175%, 0); }
+  &[data-slot='1'].--target-other-player { transform: translate3d(-55%, -175%, 0); }
+}

@@ -14,6 +14,7 @@ import RACE from 'enums/race.enums';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
+import logMessage from 'lib/match-history/log-message';
 
 /**
  * Casts a targeted Warcry spell object.
@@ -38,6 +39,12 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   const { id, cost, uuid } = selectedCardObject[currentPlayer];
   const THEIR_SLOT = G.boards[otherPlayer][index];
   const YOUR_SLOT = G.boards[currentPlayer][index];
+
+  if (targetCtx === WARCRY_TARGET_CONTEXT[1]) {
+    logMessage(G, ctx, 'castTargetedSpell-minion', null, index);
+  } else {
+    logMessage(G, ctx, 'castTargetedSpell-player');
+  }
 
   energy.subtract(G, currentPlayer, cost);
   deselectCard(G, ctx);
@@ -452,6 +459,35 @@ const castTargetedClassSkill = (G, ctx, playerCtx, targetCtx, index, id) => {
   const THEIR_SLOT = G.boards[otherPlayer][index];
 
   G.lastPlayedCardId = id;
+
+  switch (id) {
+    case 'GAME_009':
+      // Heal for 2 HP
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        logMessage(G, ctx, 'GAME_009', null);
+        health.add(G, currentPlayer, 2);
+      } else {
+        logMessage(G, ctx, 'GAME_009', null, index);
+        boards.addToMinionHealth(G, currentPlayer, index, 2);
+      }
+      break;
+
+    case 'GAME_010':
+      // Deal 1 damage to a selected target.
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        logMessage(G, ctx, 'GAME_010', null);
+        health.subtract(G, otherPlayer, 1);
+      } else {
+        logMessage(G, ctx, 'GAME_010', null, index);
+        boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+      }
+      break;
+
+    default:
+      break;
+  }
+
   G.spellObject[currentPlayer] = null;
   G.warcryObject[currentPlayer] = null;
 
@@ -474,30 +510,6 @@ const castTargetedClassSkill = (G, ctx, playerCtx, targetCtx, index, id) => {
   // disable all canBeHealed
   boards.disableAllCanBeHealed(G, '0');
   boards.disableAllCanBeHealed(G, '1');
-
-  switch (id) {
-    case 'GAME_009':
-      // Heal for 2 HP
-      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.add(G, currentPlayer, 2);
-      } else {
-        boards.addToMinionHealth(G, currentPlayer, index, 2);
-      }
-      break;
-
-    case 'GAME_010':
-      // Deal 1 damage to a selected target.
-      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 1);
-      } else {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
-        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
-      }
-      break;
-
-    default:
-      break;
-  }
 };
 
 export default castTargetedSpell;

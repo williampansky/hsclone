@@ -48,8 +48,10 @@ const onBegin = (G, ctx) => {
       slot.willExpireIn = Math.abs(slot.willExpireIn - 1);
 
       // kill minion if expiration integer hits zero
-      if (slot.willExpireIn === 1)
-        boards.killMinion(G, ctx, currentPlayer, slot, i);
+      if (slot.willExpireIn === 0) {
+        boards.subtractFromMinionHealth(G, otherPlayer, i, 9000);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
+      }
     } else {
       slot.willExpireIn = 2;
     }
@@ -176,6 +178,7 @@ const onEnd = (G, ctx) => {
   // reset minion states
   G.selectedMinionIndex = { '0': null, '1': null };
   G.selectedMinionObject = { '0': null, '1': null };
+  G.attackedMinionIndex = null;
 
   // reset warcry states
   G.warcryObject = { '0': null, '1': null };
@@ -185,17 +188,10 @@ const onEnd = (G, ctx) => {
   G.animationStates.playerIsAttackingPlayer['1'] = false;
 };
 
-const endIf = G => {
-  const PLAYER0_HEALTH = G.health[G.turnOrder['0']];
-  if (PLAYER0_HEALTH === 0) G.winner = G.turnOrder['0'];
-  else G.winner = G.turnOrder['1'];
-};
-
 export default {
   turn: {
     order: TurnOrder.CUSTOM_FROM('turnOrder'),
     onBegin: (G, ctx) => onBegin(G, ctx),
     onEnd: (G, ctx) => onEnd(G, ctx)
-    // endIf: G => endIf(G)
   }
 };

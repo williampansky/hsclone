@@ -11,11 +11,13 @@ export default function YourBoardPlayerArea({
   moves,
   isActive,
   board,
+  theirID,
   yourID
 }) {
   const { boards, selectedCardObject } = G;
   const { playCard } = moves;
 
+  const THEIR_BOARD_LENGTH = G.boards[theirID].length;
   const SELECTED_CARD_OBJECT = selectedCardObject[yourID];
 
   const CARD_ID = SELECTED_CARD_OBJECT && SELECTED_CARD_OBJECT.id;
@@ -40,6 +42,9 @@ export default function YourBoardPlayerArea({
     <React.Fragment>
       <div
         data-file="board-play-areas/YourBoardPlayArea"
+        data-is-your-turn={isActive}
+        data-their-board-length={THEIR_BOARD_LENGTH}
+        data-your-board-length={boards[yourID].length}
         className={[
           'board-play-area',
           'your-board-play-area',
@@ -89,6 +94,7 @@ YourBoardPlayerArea.propTypes = {
   ctx: PropTypes.object,
   moves: PropTypes.object,
   isActive: PropTypes.bool,
+  theirID: PropTypes.string,
   yourID: PropTypes.string,
   board: PropTypes.string
 };
