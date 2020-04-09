@@ -318,7 +318,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
 
     case 'CORE_127':
       playerCanAttack.enable(G, currentPlayer);
-      playWeaponByCardId(G, currentPlayer, cardId);
+      playWeaponByCardId(G, ctx, currentPlayer, cardId);
       break;
 
     case 'CORE_129':
