@@ -114,7 +114,7 @@ export const playWeaponCard = (G, ctx, uuid, cardId, cardCost) => {
   const { currentPlayer } = ctx;
 
   energy.subtract(G, currentPlayer, cardCost);
-  playWeaponByCardId(G, currentPlayer, cardId);
+  playWeaponByCardId(G, ctx, currentPlayer, cardId);
   playerCanAttack.enable(G, currentPlayer);
   selectCard(G, ctx);
   copyCardToPlayedCards(G, currentPlayer, cardId);
