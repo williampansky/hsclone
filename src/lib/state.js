@@ -44,8 +44,8 @@ export default {
   counts: counts.__DATA_MODEL,
   health: health.__DATA_MODEL,
   playerClass: {
-    '0': CARDCLASS[9],
-    '1': CARDCLASS[9]
+    '0': CARDCLASS[7],
+    '1': CARDCLASS[8]
   },
   players: players.__DATA_MODEL,
   boards: boards.__DATA_MODEL,
@@ -64,6 +64,10 @@ export default {
   warcryObject: warcryObject.__DATA_MODEL,
   cardBack: cardBack.__DATA_MODEL,
   lastPlayedCardId: null,
+  playerName: {
+    '0': 'Player 0',
+    '1': 'Player 1'
+  },
   animationStates: {
     minionIsAttacking: {
       '0': null,

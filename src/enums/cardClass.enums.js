@@ -6,8 +6,8 @@ const CARDCLASS = {
   4: 'KNIGHT COMMANDER',
   5: 'WHITE MAGE',
   6: 'NINJA',
-  7: 'MYSTIC',
-  8: 'NECROMANCER',
+  7: 'NECROMANCER',
+  8: 'MYSTIC',
   9: 'BERSERKER'
 };
 

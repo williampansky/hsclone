@@ -3,8 +3,8 @@ import TYPE from 'enums/type.enums';
 import exists from 'utils/element.exists';
 import createSpellObject from 'lib/creators/create-spell-object';
 
-export const logGame002Message = (G, currentPlayer) => {
-  const YOUR_SPELL = createSpellObject('GAME_002');
+export const logGame011Message = (G, currentPlayer) => {
+  const YOUR_SPELL = createSpellObject('GAME_011');
   if (!exists(YOUR_SPELL)) return;
   const SPELL_NAME = generateNameHTML(YOUR_SPELL, TYPE[3]);
   return `Player ${currentPlayer} gained 2 Energy Shield points from ${SPELL_NAME}.`;

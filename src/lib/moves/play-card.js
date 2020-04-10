@@ -72,7 +72,7 @@ export const playMinionCard = (
   const { cost } = cardObj;
 
   // subtract the card's cost from player's current energy count
-  energy.subtract(G, currentPlayer, cost);
+  if (GAME_CONFIG.debugData.enableCost) energy.subtract(G, currentPlayer, cost);
 
   // place card in selected index on your board
   boards.placeCardOnBoard(G, currentPlayer, boardObj, index);
@@ -101,7 +101,9 @@ export const playMinionCard = (
 export const playGlobalSpellCard = (G, ctx, index, uuid, cardId, cardCost) => {
   const { currentPlayer } = ctx;
 
-  energy.subtract(G, currentPlayer, cardCost);
+  if (GAME_CONFIG.debugData.enableCost)
+    energy.subtract(G, currentPlayer, cardCost);
+
   playSpellByCardId(G, ctx, cardId, index);
   logMessage(G, ctx, 'playGlobalSpellCard');
   selectCard(G, ctx);
@@ -117,7 +119,9 @@ export const playWeaponCard = (G, ctx, uuid, cardId, cardCost) => {
   if (G.playerWeapon[currentPlayer] === null)
     playerCanAttack.enable(G, currentPlayer);
 
-  energy.subtract(G, currentPlayer, cardCost);
+  if (GAME_CONFIG.debugData.enableCost)
+    energy.subtract(G, currentPlayer, cardCost);
+
   playWeaponByCardId(G, ctx, currentPlayer, cardId);
   logMessage(G, ctx, 'playWeaponCard');
   selectCard(G, ctx);

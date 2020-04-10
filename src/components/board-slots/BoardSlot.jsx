@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import MinionInteraction from 'components/interactions/minions/MinionInteraction';
 import Minion from 'components/minion/MinionV2';
 import HasBoon from 'components/mechanics/HasBoon';
-import HasGuard from 'components/mechanics/HasGuard';
+import HasGuardBackground from 'components/mechanics/HasGuardBackground';
+import HasGuardForeground from 'components/mechanics/HasGuardForeground';
 import WillExpire from 'components/mechanics/WillExpire';
 import HasEnergyShield from 'components/mechanics/HasEnergyShield';
 import IsConcealed from 'components/mechanics/IsConcealed';
@@ -176,7 +177,7 @@ export default function BoardSlot({
       {/* mechanics */}
       {minionData && hasBoon && <HasBoon />}
       {minionData && hasEnergyShield && <HasEnergyShield />}
-      {minionData && hasGuard && <HasGuard />}
+      {minionData && hasGuard && <HasGuardForeground />}
       {minionData && hasOnslaught && <HasOnslaught />}
       {minionData && isConcealed && <IsConcealed />}
       {minionData && isDisabled && <IsDisabled />}
@@ -193,6 +194,7 @@ export default function BoardSlot({
         />
       )}
 
+      {minionData && hasGuard && <HasGuardBackground />}
       {isDead && <IsDeadPoof />}
     </div>
   );

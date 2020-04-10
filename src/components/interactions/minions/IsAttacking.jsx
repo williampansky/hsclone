@@ -18,29 +18,25 @@ IsAttacking.propTypes = {
 };
 
 const Component = styled.div`
-  animation: isAttackingGlow 2500ms infinite;
+  animation: fadeIn 1200ms var(--animation-transition-cubic) forwards;
   border-radius: var(--minion-border-radius);
+  box-shadow: var(--box-shadow-is-selected);
   cursor: pointer;
   height: 100%;
-  opacity: 1;
+  opacity: 0;
   transition-property: box-shadow, opacity, transform;
   transition: 200ms ease-in-out;
   width: 100%;
   position: absolute;
   transform: scale(1.15);
+  z-index: -1;
 
-  @keyframes isAttackingGlow {
-    0% {
-      box-shadow: 0 0 5px #ecd24f;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
     }
-    40% {
-      box-shadow: 0 0 20px #faff10;
-    }
-    60% {
-      box-shadow: 0 0 20px #faff10;
-    }
-    100% {
-      box-shadow: 0 0 5px #ecd24f;
+    to {
+      opacity: 1;
     }
   }
 `;

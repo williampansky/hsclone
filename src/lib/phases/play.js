@@ -143,7 +143,10 @@ const onEnd = (G, ctx) => {
       canBeAttackedBySpell: false,
       canBeAttackedByWarcry: false,
       canBeBuffed: false,
-      canBeHealed: false
+      canBeHealed: false,
+      isAttacking: false,
+      isAttackingMinionIndex: null,
+      isAttackingMinionPlayer: false
     };
   });
 
@@ -157,7 +160,10 @@ const onEnd = (G, ctx) => {
       canBeAttackedBySpell: false,
       canBeAttackedByWarcry: false,
       canBeBuffed: false,
-      canBeHealed: false
+      canBeHealed: false,
+      isAttacking: false,
+      isAttackingMinionIndex: null,
+      isAttackingMinionPlayer: false
     };
   });
 

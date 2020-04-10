@@ -22,6 +22,10 @@
   );
 
   /* ================================ */
+  /* animation vars */
+  --animation-transition-cubic:         cubic-bezier(0.19, 1, 0.22, 1);
+
+  /* ================================ */
   /* card vars */
   --card-background-color:            #0d0a08;
   --card-border-radius:                 8px;
@@ -48,6 +52,19 @@
   --deck-offset:                        100px;
 
   /* ================================ */
+  /* class skill vars */
+  --class-skill-button-size:            175px;
+
+  /* ================================ */
   /* weapon vars */
   --weapon-border-radius:               50%;
+
+  /* ================================ */
+  /* box-shadow vars */
+  --box-shadow-can-be-attacked-color:   rgba(196, 56, 0, 0.865);
+  --box-shadow-can-be-attacked:         0px 0px 10px 10px var(--box-shadow-can-be-attacked-color);
+  --box-shadow-can-be-selected-color:   rgba(0, 196, 105, 0.865);
+  --box-shadow-can-be-selected:         0px 0px 10px 10px var(--box-shadow-can-be-selected-color);
+  --box-shadow-is-selected-color:       rgba(236, 210, 79, 0.865);
+  --box-shadow-is-selected:             0px 0px 10px 10px var(--box-shadow-is-selected-color);
 }

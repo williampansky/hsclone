@@ -7,7 +7,7 @@ import GameBackground from 'components/game-wrapper/GameBackground';
 import GameMenu from 'components/game-menu/GameMenu';
 import GameOver from 'components/game-over/GameOver';
 import TheirHand from 'components/hands/TheirHandV2';
-import YourHand from 'components/hands/YourHandV2';
+import YourHand from 'components/hands/YourHandV3';
 import ResizeObserver from 'components/game-wrapper/ResizeObserver';
 import MatchHistory from 'components/match-history/MatchHistory';
 import PlayerSidebar from 'components/player-sidebar/PlayerSidebar';

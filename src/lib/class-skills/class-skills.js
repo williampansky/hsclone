@@ -42,7 +42,7 @@ export const equipShuriken = (G, ctx) => {
  */
 export const gainShieldPoints = (G, ctx, amount = 2) => {
   const { currentPlayer } = ctx;
-  logMessage(G, ctx, 'GAME_002');
+  logMessage(G, ctx, 'GAME_011');
   playerShieldPoints.add(G, currentPlayer, amount);
 };
 
@@ -107,17 +107,15 @@ export const summonKnight = (G, ctx) => {
  * @param {{}} G
  * @param {{}} ctx
  */
-export const summonRandomIdol = (G, ctx) => {
+export const summonRandomUndeadMinion = (G, ctx) => {
   const idols = ['GAME_003', 'GAME_004', 'GAME_005', 'GAME_006'];
   const { currentPlayer, random } = ctx;
 
   if (G.boards[currentPlayer].length === 7) return; // max minions
 
   const randomIdolID = random.Shuffle(idols).shift();
-  // const randomIdolID = idols[Math.floor(Math.random() * idols.length)];
-  // const randomIdol = createBoardSlotObject(randomIdolID[0]);
   const randomIdol = createBoardSlotObject(randomIdolID);
-  console.log(randomIdolID);
+  logMessage(G, ctx, 'GAME_002');
 
   // GAME_005 needs the Guard mechanic
   if (randomIdolID === 'GAME_005') {

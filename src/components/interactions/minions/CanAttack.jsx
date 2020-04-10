@@ -20,8 +20,9 @@ CanAttack.propTypes = {
 };
 
 const Component = styled.div`
+  animation: fadeIn 1200ms var(--animation-transition-cubic) forwards;
   border-radius: var(--minion-border-radius);
-  box-shadow: 0px 0px 15px 5px rgba(0, 196, 105, 0.465);
+  box-shadow: var(--box-shadow-can-be-selected);
   cursor: pointer;
   height: 100%;
   opacity: 1;
@@ -30,15 +31,12 @@ const Component = styled.div`
   width: 100%;
   position: absolute;
 
-  @keyframes canAttackGlow {
-    0% {
-      box-shadow: 0 0 -20px #00c469;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
     }
-    50% {
-      box-shadow: 0 0 8px #0ee681;
-    }
-    100% {
-      box-shadow: 0 0 -20px #00c469;
+    to {
+      opacity: 1;
     }
   }
 `;

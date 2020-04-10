@@ -8,9 +8,9 @@ import logKillMinionMessage from './kill-minion.log';
 import logCastTargetedSpellAtPlayerMessage from './cast-targeted-spell-at-player.log';
 import logPlayCardMessage from './play-card.log';
 import {
-  logGame002Message,
   logGame009Message,
-  logGame010Message
+  logGame010Message,
+  logGame011Message
 } from './game.log';
 
 const logMessage = (G, ctx, action, player = null, index = null) => {
@@ -67,16 +67,16 @@ const logMessage = (G, ctx, action, player = null, index = null) => {
       message = `Player ${currentPlayer}'s turn ended.`;
       break;
 
-    case 'GAME_002':
-      message = logGame002Message(G, currentPlayer, index);
-      break;
-
     case 'GAME_009':
       message = logGame009Message(G, currentPlayer, index);
       break;
 
     case 'GAME_010':
       message = logGame010Message(G, currentPlayer, otherPlayer, index);
+      break;
+
+    case 'GAME_011':
+      message = logGame011Message(G, currentPlayer, index);
       break;
 
     case 'killMinion':

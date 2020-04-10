@@ -10,7 +10,7 @@ const CLASS_SKILLS = {
     value: 1
   },
   2: {
-    name: 'Backstab',
+    name: 'Sniper Shot',
     class: CARDCLASS[2],
     description: CLASS_SKILL_DESCRIPTIONS[2],
     targetingArrowText: null,
@@ -45,7 +45,7 @@ const CLASS_SKILLS = {
     value: 1
   },
   7: {
-    name: 'Idol Worship',
+    name: 'Raise Dead',
     class: CARDCLASS[7],
     description: CLASS_SKILL_DESCRIPTIONS[7],
     targetingArrowText: null,
