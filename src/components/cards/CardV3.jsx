@@ -37,9 +37,9 @@ export default function Card({
   type
 }) {
   const IS_MINION = type === TYPE[1] ? true : false;
+  const IS_ITEM = type === TYPE[2] ? true : false;
   const IS_SPELL = type === TYPE[3] ? true : false;
   const IS_WEAPON = type === TYPE[4] ? true : false;
-  const IS_ITEM = type === TYPE[5] ? true : false;
 
   function cardImage() {
     if (placeholdersArray.includes(id))

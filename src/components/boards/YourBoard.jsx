@@ -43,16 +43,16 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
 
   return (
     <div data-file="boards/YourBoard" className={'your-board'}>
+      {cardType === TYPE[2] ? (
+        <ItemSlot index={0} onClick={() => castGlobalSpell()} />
+      ) : null}
+
       {cardType === TYPE[3] && spellType === SPELLTYPE[1] ? (
         <SpellSlot index={0} onClick={() => castGlobalSpell()} />
       ) : null}
 
       {cardType === TYPE[4] ? (
         <WeaponSlot index={0} onClick={() => equipPlayerWeapon()} />
-      ) : null}
-
-      {cardType === TYPE[5] ? (
-        <ItemSlot index={0} onClick={() => castGlobalSpell()} />
       ) : null}
 
       <YourBoardPlayArea

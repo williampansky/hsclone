@@ -45,14 +45,14 @@ const playCard = (G, ctx, index, uuid, cardId = null) => {
     case TYPE[1]:
       return playMinionCard(G, ctx, index, uuid, cardId, CARD_OBJ, SLOT_OBJ);
 
+    case TYPE[2]:
+      return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
+
     case TYPE[3]:
       return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
 
     case TYPE[4]:
       return playWeaponCard(G, ctx, uuid, cardId, cost);
-
-    case TYPE[5]:
-      return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
 
     default:
       return;
