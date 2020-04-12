@@ -32,6 +32,7 @@ import logMessage from 'lib/match-history/log-message';
  * @param {string} cardId=null
  */
 const playCard = (G, ctx, index, uuid, cardId = null) => {
+  const { currentPlayer } = ctx;
   if (!cardId) return;
 
   const CARD_OBJ = createMinionObject(cardId);

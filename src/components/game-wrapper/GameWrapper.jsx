@@ -11,6 +11,7 @@ import YourHand from 'components/hands/YourHandV3';
 import ResizeObserver from 'components/game-wrapper/ResizeObserver';
 import MatchHistory from 'components/match-history/MatchHistory';
 import PlayerSidebar from 'components/player-sidebar/PlayerSidebar';
+import SidebarBackground from './SidebarBackground';
 
 export default function GameWrapper(props) {
   // global state manipulations
@@ -135,6 +136,11 @@ export default function GameWrapper(props) {
           gameWidth={1920}
           gameHeight={1080}
         />
+        {/* <SidebarBackground
+          backgroundImage="assets/SIDEBAR.png"
+          gameWidth={1920}
+          gameHeight={1080}
+        /> */}
       </div>
 
       {gameover && (

@@ -9,7 +9,8 @@ import WarcryObject from 'components/warcrys/WarcryObject';
 import styled from 'styled-components';
 import ClassSkillButton from 'components/class-skill/ClassSkillButtonV3';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
-import PlayerHealth from 'components/player-health/PlayerHealthV3';
+import PlayerHealth from 'components/player-health/PlayerHealthV5';
+import Deck from 'components/decks/Deck';
 
 export default function YourHand({
   G,
@@ -30,7 +31,8 @@ export default function YourHand({
     spellObject,
     warcryObject,
     health,
-    playerShieldPoints
+    playerShieldPoints,
+    cardBack
   } = G;
 
   const yourHand = players[yourID] && players[yourID].hand;
@@ -63,6 +65,12 @@ export default function YourHand({
         board={PLAYER_BOARDS[1]}
         canUse={playerCanUseClassSkill[yourID] && energy[yourID].current >= 2}
       />
+
+      {/* <Deck
+        board={PLAYER_BOARDS[1]}
+        cardBackSrc={cardBack[yourID]}
+        length={counts[yourID].deck}
+      /> */}
 
       {yourHand.map((card, index) => {
         return (

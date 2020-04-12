@@ -1,22 +1,27 @@
-.deck {
+.deck__v2 {
   position: absolute;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  height: 270px;
+  height: 250px;
   font-size: 12px;
-  width: 150px;
-  right: 15%;
+  width: 178.56px;
+  right: 18%;
   z-index: -1;
 }
 
 .deck__card {
+  border-radius: var(--card-border-radius);
   pointer-events: auto;
   position: absolute;
 
+  .card {
+    box-shadow: none;
+  }
+
   &:before {
-    content: '';
+    content: none;
     box-shadow: 0 2px 10px hsla(0, 0%, 0%, 0.925);
     border-radius: var(--card-border-radius);
     left: 0;
@@ -29,7 +34,7 @@
   }
 
   &:after {
-    content: '';
+    content: none;
     background: rgba(0, 0, 0, 0.415);
     border-radius: var(--card-border-radius);
     left: 0;
@@ -46,7 +51,7 @@
   }
 
   .deck:hover & {
-    // filter: blur(2px);
+    filter: blur(2px);
     &:after {
       opacity: 1;
     }
@@ -54,12 +59,16 @@
 }
 
 // prettier-ignore
-[data-file='player-sidebar/PlayerSidebar'] .deck {
-  bottom: 2.5%;
+[data-file='player-sidebar/PlayerSidebar'] .deck__v2 {
+  bottom: -2.5%;
   .deck__card {
     &[data-index='0'] { transform: translate(-50px, 10px) rotate(-4deg); }
-    &[data-index='1'] { transform: translate(-25px, -10px) rotate(1deg); }
     &[data-index='2'] { transform: translate(0, 2px) rotate(4deg); }
+    &[data-index='3'] { transform: translate(50px, 10px) rotate(4deg); }
+    &[data-index='4'] { transform: translate(25px, -10px) rotate(-1deg); }
+    &[data-index='5'] { transform: translate(0, -2px) rotate(-4deg); }
+    &[data-index='6'] { transform: translate(-25px, -10px) rotate(1deg); }
+    &[data-index='7'] { transform: translate(35px, 10px) rotate(8deg); }
   }
 }
 
@@ -91,10 +100,9 @@
   line-height: 1;
   text-align: center;
   font-size: 1em;
-  left: -22.5px;
   z-index: 2;
   // transform: translate(0, calc(-0.65 * var(--card-height)));
-  transform: translateY(0);
+  transform: translateX(0);
   transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);
   transition-property: opacity, transform;
   text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
@@ -114,6 +122,6 @@
   .deck__card:hover ~ & {
     opacity: 1;
     // transform: translate(-50%, calc(-0.65 * var(--card-height)));
-    transform: translateY(calc(var(--deck-offset) * -0.25));
+    transform: translateX(calc(var(--deck-offset) * -0.25));
   }
 }

@@ -47,7 +47,7 @@ export default function Card({
 
     return isGolden
       ? `url(${goldenImageSrc})`
-      : `url(assets/images/sets/${set}/${id}.jpg)`;
+      : `url(assets/images/sets/${set}/${id}-CARD.jpg)`;
   }
 
   const fontSize = {

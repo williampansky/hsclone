@@ -9,8 +9,9 @@
 @import 'vendor/scrollable.codepen';
 @import 'vendor/uikit.animations';
 
-@import 'components/game-wrapper';
+@import 'utils/text-value';
 
+@import 'components/game-wrapper';
 @import 'components/avatar';
 @import 'components/hands';
 @import 'components/board';
@@ -21,6 +22,7 @@
 @import 'components/decks';
 @import 'components/player-energy';
 @import 'components/player-health';
+@import 'components/player-health-v5';
 @import 'components/card';
 @import 'components/card-v2';
 @import 'components/card-v3';

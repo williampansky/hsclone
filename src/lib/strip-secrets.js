@@ -10,6 +10,7 @@
  */
 const stripSecrets = (G, playerID) => ({
   ...G,
+  deckInfo: { [playerID]: G.deckInfo[playerID] },
   players: { [playerID]: G.players[playerID] },
   selectedCardObject: { [playerID]: G.selectedCardObject[playerID] },
   selectedCardType: { [playerID]: G.selectedCardType[playerID] },

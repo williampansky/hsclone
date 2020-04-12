@@ -24,7 +24,7 @@ export default function Minion({
 
     return isGolden
       ? `url(${goldenImageSrc})`
-      : `url(assets/images/sets/${set}/${id}.jpg)`;
+      : `url(assets/images/sets/${set}/${id}-CARD.jpg)`;
   }
 
   return (

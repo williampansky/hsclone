@@ -2,7 +2,7 @@ import CARD_DATABASE from 'lib/utils/card-databse';
 import uuidv4 from 'uuid/v4';
 
 const getCardObjectFromDatabase = (id, database = CARD_DATABASE) => {
-  return database[id];
+  return database[id.replace(' ', '')];
 };
 
 const getCardByID = cardId => {
