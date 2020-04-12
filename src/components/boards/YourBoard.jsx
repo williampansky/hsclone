@@ -43,7 +43,7 @@ export default function YourBoard({ G, ctx, moves, isActive, yourID }) {
 
   return (
     <div data-file="boards/YourBoard" className={'your-board'}>
-      {cardType === TYPE[2] ? (
+      {cardType === TYPE[2] && spellType === SPELLTYPE[1] ? (
         <ItemSlot index={0} onClick={() => castGlobalSpell()} />
       ) : null}
 

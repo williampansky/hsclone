@@ -17,7 +17,7 @@ const CLASS_SKILLS = {
     value: 2
   },
   3: {
-    name: 'Meteorite',
+    name: 'Lightning Strike',
     class: CARDCLASS[3],
     description: CLASS_SKILL_DESCRIPTIONS[3],
     targetingArrowText: 'Attack for 1 damage',
@@ -31,7 +31,7 @@ const CLASS_SKILLS = {
     value: null
   },
   5: {
-    name: 'Regen',
+    name: 'Mend',
     class: CARDCLASS[5],
     description: CLASS_SKILL_DESCRIPTIONS[5],
     targetingArrowText: 'Heal for for 2 HP',

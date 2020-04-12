@@ -119,6 +119,7 @@ export default function BoardSlot({
         data !== null ? 'has-minion' : '',
         data === null && !canDrop ? 'cannot-drop-minion' : '',
         isDead ? 'is-dead' : '',
+        hasGuard ? 'has-guard' : '',
         G.selectedCardObject[yourID] !== null &&
         G.selectedCardObject[yourID].spellType !== SPELLTYPE[2]
           ? 'cannot-drop-minion'

@@ -7,24 +7,36 @@ export default function MatchStats({ G, theirID, yourID }) {
 
   return (
     <Component data-file="player-sidebar/MatchStats">
-      <div className={`row`}>
-        <div className={`item`}>
-          <span className={`item__label`}>Your deck</span>
-          <span className={`text__value`}>{G.counts[yourID].deck}</span>
+      <div className={`column`}>
+        <div className={`row`}>
+          <span className={`item__label`}>Your Stats</span>
         </div>
-        <div className={`item`}>
-          <span className={`item__label`}>Your deck</span>
-          <span className={`text__value`}>{G.counts[yourID].hand}</span>
+        <hr />
+        <div className={`row`}>
+          <div className={`item`}>
+            <span className={`item__label`}>Deck</span>
+            <span className={`text__value`}>{counts[yourID].deck}</span>
+          </div>
+          <div className={`item`}>
+            <span className={`item__label`}>Hand</span>
+            <span className={`text__value`}>{counts[yourID].hand}</span>
+          </div>
         </div>
       </div>
-      <div className={`row`}>
-        <div className={`item`}>
-          <span className={`item__label`}>Their deck</span>
-          <span className={`text__value`}>{G.counts[theirID].deck}</span>
+      <div className={`column`}>
+        <div className={`row`}>
+          <span className={`item__label`}>Their Stats</span>
         </div>
-        <div className={`item`}>
-          <span className={`item__label`}>Their deck</span>
-          <span className={`text__value`}>{G.counts[theirID].hand}</span>
+        <hr />
+        <div className={`row`}>
+          <div className={`item`}>
+            <span className={`item__label`}>Deck</span>
+            <span className={`text__value`}>{counts[theirID].deck}</span>
+          </div>
+          <div className={`item`}>
+            <span className={`item__label`}>Hand</span>
+            <span className={`text__value`}>{counts[theirID].hand}</span>
+          </div>
         </div>
       </div>
     </Component>
@@ -39,7 +51,7 @@ MatchStats.propTypes = {
 
 const Component = styled.div`
   font-size: 18px;
-  padding: 10px;
+  padding: 40px 10px;
 
   display: flex;
   flex-flow: row nowrap;
@@ -48,12 +60,33 @@ const Component = styled.div`
   user-select: none;
   cursor: default;
 
-  .row {
+  span {
+    display: block;
+  }
+
+  hr {
+    border: 1px solid #5b5b5b;
+    width: 75%;
+  }
+
+  .column {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
     width: 100%;
+  }
+
+  .row {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .row + .row {
+    /* margin-top: 20px; */
   }
 
   .item {
@@ -67,12 +100,13 @@ const Component = styled.div`
 
   .item__label {
     font-family: 'Verdana', monospace;
-    font-size: 0.5em;
+    font-size: 0.675em;
     text-transform: uppercase;
     letter-spacing: 0.03em;
   }
 
   .text__value {
-    font-size: 1em;
+    font-size: 1.5em;
+    margin: 4px 0 0;
   }
 `;

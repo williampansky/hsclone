@@ -19,6 +19,7 @@ import SPELLTYPE from 'enums/spellType.enums';
 import TYPE from 'enums/type.enums';
 import SpellObject from 'components/spells/SpellObject';
 import WarcryObject from 'components/warcrys/WarcryObject';
+import ItemSlot from 'components/board-slots/ItemSlot';
 
 export default function Board({
   G,
@@ -76,6 +77,14 @@ export default function Board({
 
   return (
     <div data-file="boards/Board" className={'board'}>
+      {cardType === TYPE[2] && spellType === SPELLTYPE[1] ? (
+        <ItemSlot
+          index={0}
+          gameWidth={1920}
+          onClick={() => castGlobalSpell()}
+        />
+      ) : null}
+
       {cardType === TYPE[3] && spellType === SPELLTYPE[1] ? (
         <SpellSlot
           index={0}

@@ -51,79 +51,8 @@ Deck.propTypes = {
   playedCards: PropTypes.array
 };
 
-const Item = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-start;
-  height: 35px;
-  position: relative;
-  user-select: none;
-  font-family: 'Carter One', sans-serif;
-  width: 100%;
-  font-size: 14px;
-  opacity: ${p => (p.hasBeenPlayed ? '0.65' : 1)};
-
-  .item__cost {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: flex-start;
-    position: relative;
-    margin: 0 10px 0;
-    z-index: 1;
-  }
-
-  .item__cost .text__value {
-    font-size: 0.875em;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-
-  .item__cost img {
-    height: 30px;
-  }
-
-  .item__info {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 10px 0;
-    width: 100%;
-  }
-
-  .item__name {
-    font-size: 1em;
-    position: relative;
-    z-index: 1;
-  }
-
-  .item__amount {
-    font-size: 1em;
-    position: relative;
-    z-index: 1;
-  }
-
-  .item__image {
-    background-image: ${p => `${p.backgroundImage}`};
-    background-position: top right;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    z-index: 0;
-  }
-`;
-
 const Component = styled.div`
-  padding: 10px 10px 0 10px;
+  padding: 40px 10px;
   height: 100%;
   overflow-y: auto;
 

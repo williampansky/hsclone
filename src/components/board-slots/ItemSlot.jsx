@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default function ItemSlot({ index, onClick, render, gameWidth }) {
+export default function ItemSlot({ index, onClick, gameWidth }) {
   return (
     <Component
       data-file="board-slots/ItemSlot"
@@ -11,6 +12,12 @@ export default function ItemSlot({ index, onClick, render, gameWidth }) {
     />
   );
 }
+
+ItemSlot.propTypes = {
+  index: PropTypes.number,
+  onClick: PropTypes.func,
+  gameWidth: PropTypes.number
+};
 
 const Component = styled.div`
   bottom: 0;

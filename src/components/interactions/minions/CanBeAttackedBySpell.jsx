@@ -78,4 +78,14 @@ const Component = styled.div`
         0 0 0 20px rgba(196, 56, 0, 0);
     }
   }
+
+  .has-guard & {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    &:after {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+  }
 `;

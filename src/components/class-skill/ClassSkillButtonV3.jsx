@@ -142,23 +142,22 @@ const Cost = styled.div`
 `;
 
 const TextValue = styled.div`
+  align-items: center;
   color: white;
-  font-family: 'Carter One', sans-serif;
-  text-align: center;
-  pointer-events: none;
-  font-size: 20px;
-  white-space: nowrap;
-  width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  align-items: center;
+  font-family: 'Carter One', sans-serif;
+  font-size: 20px;
   justify-content: center;
-  z-index: 2;
-  position: relative;
   opacity: 1;
-  transition: 200ms ease-in-out;
-  transition-property: opacity, transform;
+  pointer-events: none;
+  position: relative;
+  text-align: center;
   transform: scale(0.85);
+  transition-property: opacity, transform;
+  transition: 200ms ease-in-out;
+  width: 100%;
+  z-index: 2;
   text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
     0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
     0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black,
