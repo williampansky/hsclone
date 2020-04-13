@@ -116,8 +116,8 @@ const Image = styled.div`
 
 const CostGem = styled.img`
   position: absolute;
-  height: calc(var(--card-height) / 5);
-  width: calc(var(--card-height) / 5);
+  height: calc(var(--card-height) / 4.5);
+  width: calc(var(--card-height) / 4.5);
 `;
 
 const Cost = styled.div`
@@ -128,7 +128,7 @@ const Cost = styled.div`
   flex-flow: column nowrap;
   font-size: 1em;
   font-weight: 600;
-  height: calc(var(--card-height) / 5.5);
+  height: calc(var(--card-height) / 4.5);
   justify-content: center;
   left: 15px;
   line-height: 1;
@@ -137,7 +137,7 @@ const Cost = styled.div`
   transition: transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
   top: 0;
   user-select: none;
-  width: calc(var(--card-height) / 5.5);
+  width: calc(var(--card-height) / 4.5);
   z-index: 5;
 `;
 

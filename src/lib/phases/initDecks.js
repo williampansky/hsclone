@@ -1,12 +1,12 @@
 import deckInfo from 'lib/state/deck-info';
 
+const ASSASSIN = require('data/debug/CORE_DECK_ASSASSIN_01.json');
 const AUGUR = require('data/debug/CORE_DECK_AUGUR_01.json');
 const BERSERKER = require('data/debug/CORE_DECK_BERSERKER_01.json');
+const KNIGHTCOMMANDER = require('data/debug/CORE_DECK_KNIGHTCOMMANDER_01.json');
 const MYSTIC = require('data/debug/CORE_DECK_MYSTIC_01.json');
 const NECROMANCER = require('data/debug/CORE_DECK_NECROMANCER_01.json');
 const NEUTRAL = require('data/debug/CORE_DECK_NEUTRAL_01.json');
-const KNIGHTCOMMANDER = require('data/debug/CORE_DECK_KNIGHTCOMMANDER_01.json');
-const ASSASSIN = require('data/debug/CORE_DECK_ASSASSIN_01.json');
 const SNIPER = require('data/debug/CORE_DECK_SNIPER_01.json');
 const SORCERER = require('data/debug/CORE_DECK_SORCERER_01.json');
 const WHITEMAGE = require('data/debug/CORE_DECK_WHITEMAGE_01.json');
@@ -16,11 +16,11 @@ export default {
   // component (client-side) state into the G state.
   // @TODO fix later on for deck selection/lobby/etc
   onBegin: (G, ctx) => {
-    G.players['0'].deck = ctx.random.Shuffle(SORCERER);
-    G.players['1'].deck = ctx.random.Shuffle(SORCERER);
+    G.players['0'].deck = ctx.random.Shuffle(ASSASSIN);
+    G.players['1'].deck = ctx.random.Shuffle(ASSASSIN);
 
-    deckInfo.set(G, ctx, '0', SORCERER);
-    deckInfo.set(G, ctx, '1', SORCERER);
+    deckInfo.set(G, ctx, '0', ASSASSIN);
+    deckInfo.set(G, ctx, '1', ASSASSIN);
   },
 
   // End phase when both player's decks are full (30 cards)

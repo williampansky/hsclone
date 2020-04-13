@@ -24,11 +24,11 @@ export const snipeOpponent = (G, ctx, amount = 2) => {
 };
 
 /**
- * Equip a 1/2 Shuriken.
+ * Equip a 1/2 Katar.
  * @param {{}} G
  * @param {{}} ctx
  */
-export const equipShuriken = (G, ctx) => {
+export const equipKatar = (G, ctx) => {
   const { currentPlayer } = ctx;
   playerCanAttack.enable(G, currentPlayer);
   playerWeapon.equip(G, currentPlayer, createWeaponObject('GAME_008'));

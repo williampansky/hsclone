@@ -4,7 +4,7 @@ const CLASS_SKILL_DESCRIPTIONS = {
   3: 'Attack for 1 damage.',
   4: 'Summon a 1/1 Loyal Knight.',
   5: 'Heal for 2 HP.',
-  6: 'Equip a 1/2 Shuriken.',
+  6: 'Equip a 1/2 Katar.',
   7: 'Summon a random Undead minion.',
   8: 'Trade 2 HP to draw a card.',
   9: 'Gain 2 Energy Shield points.'

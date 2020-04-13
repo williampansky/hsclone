@@ -38,7 +38,7 @@ const CLASS_SKILLS = {
     value: 2
   },
   6: {
-    name: 'Shuriken',
+    name: 'Katar',
     class: CARDCLASS[6],
     description: CLASS_SKILL_DESCRIPTIONS[6],
     targetingArrowText: 'Attack for 1 damage',

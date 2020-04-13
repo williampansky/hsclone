@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // child components
-import PlayerEnergy from 'components/player-energy/PlayerEnergy';
+import PlayerEnergy from 'components/player-energy/PlayerEnergyV2';
 import CardInteraction from 'components/interactions/cards/CardInteraction';
 import SpellObject from 'components/spells/SpellObject';
 import WarcryObject from 'components/warcrys/WarcryObject';
@@ -71,6 +71,11 @@ export default function YourHand({
         cardBackSrc={cardBack[yourID]}
         length={counts[yourID].deck}
       /> */}
+
+      <PlayerEnergy
+        energy={energy[yourID]}
+        selectedCost={selectedCardObj && selectedCardObj.cost}
+      />
 
       {yourHand.map((card, index) => {
         return (
