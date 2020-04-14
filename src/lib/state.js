@@ -18,6 +18,7 @@ import playerIsAttacking from 'lib/state/player-is-attacking';
 import playerIsDisabled from './state/player-is-disabled';
 import players from 'lib/state/players';
 import playerShieldPoints from 'lib/state/player-shield-points';
+import playerSpellDamage from 'lib/state/player-spell-damage';
 import playerUsedClassSkill from 'lib/state/player-used-class-skill';
 import playerWeapon from 'lib/state/player-weapon';
 import selectedCardIndex from 'lib/state/selected-card-index';
@@ -44,10 +45,11 @@ export default {
   playerCanBeAttackedByWarcry: playerCanBeAttacked.playerCanBeAttackedByWarcry,
   playerCanBeHealed: playerCanBeHealed.__DATA_MODEL,
   playerCanUseClassSkill: playerCanUseClassSkill.__DATA_MODEL,
-  playerClass: { '0': CARDCLASS[6], '1': CARDCLASS[6] },
+  playerClass: { '0': CARDCLASS[3], '1': CARDCLASS[3] },
   playerIsAttacking: playerIsAttacking.__DATA_MODEL,
   playerIsDisabled: playerIsDisabled.__DATA_MODEL,
   playerShieldPoints: playerShieldPoints.__DATA_MODEL,
+  playerSpellDamage: playerSpellDamage.__DATA_MODEL,
   playerUsedClassSkill: playerUsedClassSkill.__DATA_MODEL,
   playerWeapon: playerWeapon.__DATA_MODEL,
   selectedCardIndex: selectedCardIndex.__DATA_MODEL,

@@ -25,12 +25,12 @@ export default function CardInteraction({
   const { currentPlayer, phase } = ctx;
   const { deselectCard, hoverCard, selectCard } = moves;
 
+  const nullCardIndex = selectedCardIndex[currentPlayer] === null;
+
   const [isHovering, hoverProps] = useHover({
     mouseEnterDelayMS: 0,
     mouseLeaveDelayMS: 0
   });
-
-  const nullCardIndex = selectedCardIndex[currentPlayer] === null;
 
   const dispatchHover = useCallback(
     (hovering, nullIdx) => {
@@ -77,8 +77,13 @@ export default function CardInteraction({
     uuid,
     targetingArrowText,
     text,
-    type
+    type,
+    warcryNumber
   } = card;
+
+  const playerSpellBuff = G.buffs[yourID] && G.buffs[yourID].spellDamage;
+  const playerSpellDamage = warcryNumber;
+  const dynamicSpellDamageText = Math.abs(playerSpellBuff + playerSpellDamage);
 
   const numberOfCards = G.counts[yourID].hand;
   const WARCRY_OBJECT_ACTIVE = warcryObject[yourID] !== null;
@@ -182,6 +187,7 @@ export default function CardInteraction({
         targetingArrowText={targetingArrowText}
         text={text}
         type={type}
+        dynamicSpellDamageText={dynamicSpellDamageText}
       />
 
       {isActive ? (

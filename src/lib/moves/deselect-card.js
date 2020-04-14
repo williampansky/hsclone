@@ -26,6 +26,7 @@ const deselectCard = (G, ctx) => {
   G.selectedCardSpellType[currentPlayer] = null;
   G.selectedCardSpellContext[currentPlayer] = null;
   G.playerCanBeAttackedBySpell = { '0': false, '1': false };
+  G.playerSpellDamage = { '0': 0, '1': 0 };
 
   G.boards[currentPlayer].forEach(slot => {
     slot.canBeAttackedByMinion = false;
