@@ -156,14 +156,12 @@ const CORE_016 = (G, ctx, cardId) => {
  * @param {string} cardId
  */
 const CORE_020 = (G, ctx, cardId) => {
-  if (G.boards[ctx.currentPlayer].length === 7) return; // max minions
-  G.boards[ctx.currentPlayer].push(
-    createBoardSlotObject(
-      `${cardId}${['a', 'b'].sort(() => {
-        return Math.random() - 0.5;
-      })}`
-    )
-  );
+  const { currentPlayer, random } = ctx;
+  if (G.boards[currentPlayer].length === 7) return; // max minions
+  const minions = [`${cardId}a`, `${cardId}a`];
+  const randomMinionID = random.Shuffle(minions).shift();
+  const randomMinion = createBoardSlotObject(randomMinionID);
+  G.boards[currentPlayer].push(randomMinion);
 };
 
 /**

@@ -20,7 +20,8 @@ export default function CardIsPlayableEffect() {
 
 const CardEffect = styled.div`
   border-radius: var(--card-border-radius);
-  box-shadow: 0px 0px 10px 5px var(--box-shadow-can-be-selected-color);
+  box-shadow: var(--box-shadow-can-be-selected);
+  /* box-shadow: 0px 0px 10px 5px var(--box-shadow-can-be-selected-color); */
   content: '';
   height: var(--card-height);
   left: 0;

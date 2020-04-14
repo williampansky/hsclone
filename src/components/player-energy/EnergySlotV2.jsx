@@ -5,10 +5,7 @@ export default function EnergySlot({ available, filled, number, willCost }) {
   return (
     <div
       data-file="player-energy/EnergySlot"
-      className={[
-        'energy-bar__energy-slot',
-        willCost ? 'energy-slot--will-cost' : ''
-      ].join(' ')}
+      className={['energy-slot', willCost ? '--will-cost' : ''].join(' ')}
     >
       <div className={'text__value--wrapper'}>
         {filled ? (

@@ -1,6 +1,10 @@
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerCanBeHealed from 'lib/state/player-can-be-healed';
-import { _dMCBA, _eMCBA } from 'lib/state/board-methods/can-be-attacked';
+import {
+  _dMCBA,
+  _eMCBA,
+  _eMCBAbW
+} from 'lib/state/board-methods/can-be-attacked';
 import { _eMCBB } from 'lib/state/board-methods/can-be-buffed';
 import { _eMCBH } from 'lib/state/board-methods/can-be-healed';
 
@@ -77,5 +81,5 @@ export const _dST = (G, player) => {
  */
 export const _dWT = (G, player) => {
   playerCanBeAttacked.enableByWarcry(G, player);
-  G.boards[player].forEach((_, i) => _eMCBA(G, player, i));
+  G.boards[player].forEach((_, i) => _eMCBAbW(G, player, i));
 };
