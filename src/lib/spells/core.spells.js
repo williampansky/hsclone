@@ -54,7 +54,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Give your characters +2 Attack this turn.
     case 'CORE_048':
       G.boards[currentPlayer].forEach(slot => {
-        slot.currentAttack = slot.currentAttack + 1;
+        slot.currentAttack = Math.abs(slot.currentAttack + 2);
       });
       break;
 

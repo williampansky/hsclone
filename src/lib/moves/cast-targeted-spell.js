@@ -86,12 +86,12 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     case 'CORE_046':
       G.boards[currentPlayer][index] = {
         ...YOUR_SLOT,
-        currentAttack: YOUR_SLOT.currentAttack + 2,
-        currentHealth: YOUR_SLOT.currentHealth + 2,
+        currentAttack: Math.abs(YOUR_SLOT.currentAttack + 2),
+        currentHealth: Math.abs(YOUR_SLOT.currentHealth + 2),
         hasGuard: true,
         isConcealed: false,
-        totalAttack: YOUR_SLOT.totalAttack + 2,
-        totalHealth: YOUR_SLOT.totalHealth + 2
+        totalAttack: Math.abs(YOUR_SLOT.totalAttack + 2),
+        totalHealth: Math.abs(YOUR_SLOT.totalHealth + 2)
       };
       break;
 
@@ -126,13 +126,25 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       }
       break;
 
+    // Deal 5 damage and then draw a card.
+    case 'CORE_051':
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        health.subtract(G, otherPlayer, 5);
+      } else {
+        boards.subtractFromMinionHealth(G, otherPlayer, index, 5);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+      }
+      break;
+
     // Attack something for 2 damage.
     case 'CORE_053':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
         health.subtract(G, otherPlayer, 2);
+        drawCard(G, ctx, currentPlayer, 1);
       } else {
         boards.subtractFromMinionHealth(G, otherPlayer, index, 2);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+        drawCard(G, ctx, currentPlayer, 1);
       }
       break;
 

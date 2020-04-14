@@ -1,9 +1,4 @@
 const placeholdersArray = [
-  'CORE_010',
-  'CORE_017',
-  'CORE_021',
-  'CORE_026',
-  'CORE_028',
   'CORE_043',
   'CORE_044',
   'CORE_045',
