@@ -20,7 +20,6 @@ const placeholdersArray = [
   'CORE_060',
   'CORE_061',
   'CORE_062',
-  'CORE_069',
   'CORE_073',
   'CORE_074',
   'CORE_075',
