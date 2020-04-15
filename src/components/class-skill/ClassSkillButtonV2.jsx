@@ -190,7 +190,7 @@ const Component = styled.div`
   justify-content: center;
   position: absolute;
   right: -155px;
-  top: 45px;
+  top: 0;
   user-select: none;
   width: 120px;
   transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);

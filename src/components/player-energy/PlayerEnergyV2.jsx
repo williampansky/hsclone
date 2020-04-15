@@ -38,14 +38,14 @@ const Component = styled.div`
   align-items: center;
   display: flex;
   flex-flow: column nowrap;
-  font-size: 15px;
+  font-size: 22px;
   font-weight: bold;
   justify-content: center;
   left: 0;
   margin: 0;
   position: absolute;
   right: auto;
-  top: -928%;
+  top: -1100%;
   user-select: none;
 
   .energy-slot {
@@ -82,8 +82,8 @@ const Component = styled.div`
   }
 
   .energy-slot img {
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     z-index: 1;
   }
 
