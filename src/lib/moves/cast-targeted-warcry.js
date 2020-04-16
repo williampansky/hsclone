@@ -46,10 +46,6 @@ const castTargetedWarcry = (G, ctx, playerCtx, targetCtx, targetIdx) => {
       };
       break;
 
-    case 'CORE_062':
-      G.boards[currentPlayer][targetIdx].hasOnslaught = true;
-      break;
-
     case 'CORE_099':  G.boards[currentPlayer][targetIdx].hasOnslaught = true; break;
     case 'CORE_110':  G.boards[currentPlayer][targetIdx].hasOnslaught = true; break;
     case 'CORE_112':  attack(G, ctx, targetCtx, targetIdx, amount); break;

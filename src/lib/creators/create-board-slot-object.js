@@ -24,6 +24,7 @@ const createBoardSlotObject = cardId => {
     canReceiveOnslaught: false,
     currentAttack: attack,
     currentHealth: health,
+    hasAttacked: false,
     hasBoon: false,
     hasEnergyShield: false,
     hasGuard: false,

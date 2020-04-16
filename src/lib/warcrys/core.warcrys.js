@@ -9,6 +9,7 @@ import health from 'lib/state/health';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerWeapon from 'lib/state/player-weapon';
+import RACE from 'enums/race.enums';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
@@ -79,13 +80,13 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
       break;
 
     /**
-     * <strong>Warcry:</strong> Give a friendly minion <strong>Onslaught</strong>.
+     * <strong>Warcry:</strong> Give all your Creatures <em>Stampede</em>.
      */
     case 'CORE_062':
       if (G.boards[currentPlayer].length === 1) return;
-      G.warcryObject[currentPlayer] = createWarcryObject(cardId);
       G.boards[currentPlayer].forEach((slot, i) => {
-        if (index !== i) slot.canReceiveOnslaught = true;
+        if (slot.minionData.race === RACE[1] && !slot.hasAttacked)
+          slot.canAttack = true;
       });
       break;
 
