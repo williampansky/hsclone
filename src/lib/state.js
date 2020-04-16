@@ -46,6 +46,7 @@ export default {
   playerCanBeHealed: playerCanBeHealed.__DATA_MODEL,
   playerCanUseClassSkill: playerCanUseClassSkill.__DATA_MODEL,
   playerClass: { '0': CARDCLASS[2], '1': CARDCLASS[3] },
+  playerHasAttacked: { '0': false, '1': false },
   playerIsAttacking: playerIsAttacking.__DATA_MODEL,
   playerIsDisabled: playerIsDisabled.__DATA_MODEL,
   playerShieldPoints: playerShieldPoints.__DATA_MODEL,

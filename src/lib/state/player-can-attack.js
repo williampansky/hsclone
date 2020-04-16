@@ -10,6 +10,7 @@ const playerCanAttack = {
    * @param {string} player
    */
   enable: (G, player) => {
+    if (G.playerHasAttacked[player] === true) return;
     const result = (G.playerCanAttack[player] = true);
     return result;
   },
