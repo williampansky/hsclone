@@ -83,7 +83,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
      * <strong>Warcry:</strong> Give all your Creatures <em>Stampede</em>.
      */
     case 'CORE_062':
-      if (G.boards[currentPlayer].length === 1) return;
+      // if (G.boards[currentPlayer].length === 1) return;
       G.boards[currentPlayer].forEach((slot, i) => {
         if (slot.minionData.race === RACE[1] && !slot.hasAttacked)
           slot.canAttack = true;
