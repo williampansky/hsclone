@@ -9,6 +9,7 @@ import deckInfo from 'lib/state/deck-info';
 const copyCardToPlayedCards = (G, player, cardId) => {
   const cardToPushId = G.players[player].hand.find(c => c.id === cardId).id;
   G.playedCards[player].push(cardToPushId);
+  G.allPlayedCards.push(cardToPushId);
 
   if (G.players[player].deck.includes(cardId))
     deckInfo.changeAmount(G, player, cardId, 1);

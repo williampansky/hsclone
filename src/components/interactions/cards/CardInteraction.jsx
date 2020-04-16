@@ -81,7 +81,7 @@ export default function CardInteraction({
     warcryNumber
   } = card;
 
-  const playerSpellBuff = G.buffs[yourID] && G.buffs[yourID].spellDamage;
+  const playerSpellBuff = G.buffs[currentPlayer].spellDamage;
   const playerSpellDamage = warcryNumber;
   const dynamicSpellDamageText = Math.abs(playerSpellBuff + playerSpellDamage);
 

@@ -89,5 +89,6 @@ export default {
   deckInfo: deckInfo.__DATA_MODEL,
   playedCards: playedCards.__DATA_MODEL,
   players: players.__DATA_MODEL,
+  allPlayedCards: [],
   matchHistory: []
 };
