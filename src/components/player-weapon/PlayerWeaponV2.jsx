@@ -101,7 +101,8 @@ const Image = styled.div`
   right: 9px;
   top: 10px;
   position: absolute;
-  background-image: ${p => `url('assets/images/sets/${p.set}/${p.wID}.jpg')`};
+  background-image: ${p =>
+    `url('assets/images/sets/${p.set}/${p.wID}-CARD.jpg')`};
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
