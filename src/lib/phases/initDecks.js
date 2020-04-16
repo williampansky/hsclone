@@ -16,10 +16,10 @@ export default {
   // component (client-side) state into the G state.
   // @TODO fix later on for deck selection/lobby/etc
   onBegin: (G, ctx) => {
-    G.players['0'].deck = ctx.random.Shuffle(ASSASSIN);
+    G.players['0'].deck = ctx.random.Shuffle(SNIPER);
     G.players['1'].deck = ctx.random.Shuffle(SORCERER);
 
-    deckInfo.set(G, ctx, '0', ASSASSIN);
+    deckInfo.set(G, ctx, '0', SNIPER);
     deckInfo.set(G, ctx, '1', SORCERER);
   },
 

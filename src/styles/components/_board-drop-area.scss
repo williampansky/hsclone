@@ -1,5 +1,6 @@
 .drop-area {
   align-items: center;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px dashed rgba(255, 255, 255, 0.25);
   box-sizing: border-box;
   color: white;
@@ -30,7 +31,8 @@
   }
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.625);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.925);
     width: 7.5%;
   }
 

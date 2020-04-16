@@ -3,7 +3,7 @@ const GAME_CONFIG = {
     debugCard: 'CORE_066',
     enableDebugCard: false,
     enableAttack: true,
-    enableCost: true,
+    enableCost: false,
     enableHealth: true,
     enableMechanics: true,
     enableSet: true,
