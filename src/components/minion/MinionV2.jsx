@@ -41,13 +41,12 @@ export default function Minion({
       </div>
       <div className={'attack-wrapper'} data-value={currentAttack}>
         <div className={'text__value'}>{currentAttack}</div>
-        <img alt="" src={'assets/card-assets/ic_attack.png'} />
+        <img alt="" src={'assets/card-assets/ic_sword.png'} />
       </div>
       <div className={'health-wrapper'} data-value={currentHealth}>
         <div className={'text__value'}>{currentHealth}</div>
-        <img alt="" src={'assets/card-assets/ic_health.png'} />
+        <img alt="" src={'assets/card-assets/ic_shield2.png'} />
       </div>
-      <div className={'minion__bezel'} />
     </div>
   );
 }

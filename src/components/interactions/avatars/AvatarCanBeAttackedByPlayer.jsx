@@ -34,7 +34,7 @@ const Component = styled.div`
   }
 
   &:after {
-    animation: at-ripple-pink 600ms linear infinite;
+    animation: targeting-ripple 600ms linear infinite;
     content: '';
     position: absolute;
     border-top-left-radius: var(--avatar-border-radius);
@@ -71,7 +71,7 @@ const Component = styled.div`
     }
   }
 
-  @keyframes at-ripple-pink {
+  @keyframes targeting-ripple {
     0% {
       box-shadow: 0 4px 10px rgba(196, 56, 0, 0.5),
         0 0 0 0 rgba(196, 56, 0, 0.5), 0 0 0 5px rgba(196, 56, 0, 0.5),

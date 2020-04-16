@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import WARCRY_TARGET_CONTEXT from 'enums/warcry.target-context.enum';
 import TARGET_CONTEXT from 'enums/target-context.enum';
 
 export default function CanBeReturned({ moves, index, targetContext }) {
   const { castTargetedSpell } = moves;
   return (
-    <Component
+    <div
+      className="can-be-debuffed"
       data-file="interactions/minions/CanBeReturned"
       onClick={() =>
         castTargetedSpell(
@@ -25,19 +25,3 @@ CanBeReturned.propTypes = {
   index: PropTypes.number,
   targetContext: PropTypes.number
 };
-
-const Component = styled.div`
-  border-radius: var(--minion-border-radius);
-  box-shadow: 0 0 10px #3af32d;
-  cursor: pointer;
-  height: 100%;
-  opacity: 1;
-  transition-property: box-shadow, opacity;
-  transition: 200ms ease-in-out;
-  width: 100%;
-  position: absolute;
-
-  &:hover {
-    box-shadow: 0 0 20px #3af32d;
-  }
-`;

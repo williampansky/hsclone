@@ -61,14 +61,25 @@
 
   /* ================================ */
   /* box-shadow vars */
-  --box-shadow-can-be-attacked-color:   rgba(196, 56, 0, 0.865);
-  --box-shadow-can-be-attacked:         0px 0px 10px 10px var(--box-shadow-can-be-attacked-color);
-  --box-shadow-can-be-buffed-color:     rgba(45, 243, 216, 0.865);
-  --box-shadow-can-be-buffed:           0px 0px 10px 10px var(--box-shadow-can-be-buffed-color);
-  --box-shadow-can-be-debuffed-color:   rgba(172, 236, 53, 0.865);
-  --box-shadow-can-be-debuffed:         0px 0px 10px 10px var(--box-shadow-can-be-debuffed-color);
-  --box-shadow-can-be-selected-color:   rgba(0, 196, 105, 0.865);
-  --box-shadow-can-be-selected:         0px 0px 10px 10px var(--box-shadow-can-be-selected-color);
-  --box-shadow-is-selected-color:       rgba(236, 210, 79, 0.865);
-  --box-shadow-is-selected:             0px 0px 10px 10px var(--box-shadow-is-selected-color);
+  --box-shadow-can-be-attacked-color-ripple:  rgba(249, 40, 40, 0.5);
+  --box-shadow-can-be-attacked-color:         rgba(249, 40, 40, 0.865);
+  
+  --box-shadow-can-be-buffed-color-ripple:    rgba(45, 243, 216, 0.5);
+  --box-shadow-can-be-buffed-color:           rgba(45, 243, 216, 0.865);
+  
+  --box-shadow-can-be-debuffed-color-ripple:  rgba(255, 173, 22, 0.5);
+  --box-shadow-can-be-debuffed-color:         rgba(255, 173, 22, 0.865);
+  
+  --box-shadow-can-be-selected-color-ripple:  rgba(0, 196, 105, 0.5);
+  --box-shadow-can-be-selected-color:         rgba(0, 196, 105, 0.865);
+
+  --box-shadow-is-selected-color-ripple:      rgba(236, 210, 79, 0.5);
+  --box-shadow-is-selected-color:             rgba(236, 210, 79, 0.865);
+  
+  --box-shadow-dimensions:      0px 0px 10px 10px;
+  --box-shadow-can-be-attacked: var(--box-shadow-dimensions) var(--box-shadow-can-be-attacked-color);
+  --box-shadow-can-be-buffed:   var(--box-shadow-dimensions) var(--box-shadow-can-be-buffed-color);
+  --box-shadow-can-be-debuffed: var(--box-shadow-dimensions) var(--box-shadow-can-be-debuffed-color);
+  --box-shadow-can-be-selected: var(--box-shadow-dimensions) var(--box-shadow-can-be-selected-color);
+  --box-shadow-is-selected:     var(--box-shadow-dimensions) var(--box-shadow-is-selected-color);
 }
