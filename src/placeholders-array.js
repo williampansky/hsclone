@@ -32,7 +32,6 @@ const placeholdersArray = [
   'CORE_125',
   'CORE_126',
   'CORE_127',
-  'CORE_129',
   'GAME_007',
   'GAME_008',
   'GAME_009',

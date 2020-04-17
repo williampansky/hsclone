@@ -24,7 +24,7 @@ const CLASS_SKILLS = {
     value: 1
   },
   4: {
-    name: 'Loyal Knight',
+    name: 'Disciple',
     class: CARDCLASS[4],
     description: CLASS_SKILL_DESCRIPTIONS[4],
     targetingArrowText: null,

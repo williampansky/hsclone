@@ -22,7 +22,7 @@ const equipGenericWeapon = (G, player, cardId) => {
 
 const equipCORE128 = (G, ctx, player) => {
   const { random } = ctx;
-  const weapons = ['CORE_128a', 'CORE_128b'];
+  const weapons = ['CORE_128a', 'CORE_128a'];
   const randomWeaponID = random.Shuffle(weapons).shift();
   const randomWeaponObj = createWeaponObject(randomWeaponID);
   G.playerAttackValue[player] = randomWeaponObj && randomWeaponObj.attack;
