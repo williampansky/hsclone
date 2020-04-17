@@ -303,6 +303,7 @@ const CORE_118 = (G, ctx) => {
  * Deal 1 damage to everyone except itself.
  */
 const CORE_122 = (G, ctx, currentPlayer, otherPlayer, amount, index) => {
+  health.subtract(G, currentPlayer, amount);
   G.boards[currentPlayer].forEach((slot, i) => {
     if (i !== index) {
       boards.subtractFromMinionHealth(G, currentPlayer, i, amount);
@@ -310,6 +311,7 @@ const CORE_122 = (G, ctx, currentPlayer, otherPlayer, amount, index) => {
     }
   });
 
+  health.subtract(G, otherPlayer, amount);
   G.boards[otherPlayer].forEach((slot, i) => {
     boards.subtractFromMinionHealth(G, otherPlayer, i, amount);
     boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
