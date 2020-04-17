@@ -1,7 +1,7 @@
 const GAME_CONFIG = {
   debugData: {
     debugCard: 'CORE_005',
-    enableDebugCard: true,
+    enableDebugCard: false,
     enableAttack: true,
     enableCost: false,
     enableHealth: true,
