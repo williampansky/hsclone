@@ -116,3 +116,140 @@
     box-shadow: none !important;
   }
 }
+
+.card-in-your-hand.animate-in {
+  animation: drawYourCard 3000ms var(--animation-transition-cubic) reverse;
+  // cursor: default;
+  // pointer-events: none;
+
+  // [data-file*='interactions/cards'] {
+  //   cursor: default;
+  //   pointer-events: none;
+  // }
+
+  // &:before {
+  //   pointer-events: none;
+  // }
+
+  @keyframes drawYourCard {
+    0% {
+    }
+    10%,
+    20%,
+    30%,
+    40%,
+    50%,
+    60%,
+    70%,
+    80% {
+      transform: translate(100%, -100%) rotate(0deg) scale(1.35);
+    }
+    100% {
+      transform: translate(300%, -100%) rotate(0deg) scale(0.1);
+    }
+  }
+}
+
+// prettier-ignore
+// [data-file*='hands'] {
+//   &[data-number-of-cards='2'] .animate-in {
+//     & + .animate-in { animation-delay: 400ms; }
+//   }
+
+//   &[data-number-of-cards='3'] .animate-in {
+//     & + .animate-in { animation-delay: 400ms; }
+//     & + .animate-in + .animate-in { animation-delay: 600ms; }
+//   }
+
+//   &[data-number-of-cards='4'] .animate-in {
+//     & + .animate-in { animation-delay: 400ms; }
+//     & + .animate-in + .animate-in { animation-delay: 600ms; }
+//     & + .animate-in + .animate-in + .animate-in { animation-delay: 800ms; }
+//   }
+
+//   &[data-number-of-cards='5'] .animate-in {
+//     & + .animate-in { animation-delay: 400ms; }
+//     & + .animate-in + .animate-in { animation-delay: 600ms; }
+//     & + .animate-in + .animate-in + .animate-in { animation-delay: 800ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1000ms; }
+//   }
+
+//   &[data-number-of-cards='6'] .animate-in {
+//     & + .animate-in { animation-delay: 400ms; }
+//     & + .animate-in + .animate-in { animation-delay: 600ms; }
+//     & + .animate-in + .animate-in + .animate-in { animation-delay: 800ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1000ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1200ms; }
+//   }
+
+//   &[data-number-of-cards='7'] .animate-in {
+//     & + .animate-in { animation-delay: 400ms; }
+//     & + .animate-in + .animate-in { animation-delay: 600ms; }
+//     & + .animate-in + .animate-in + .animate-in { animation-delay: 800ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1000ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1200ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in { animation-delay: 1400ms; }
+//   }
+
+//   &[data-number-of-cards='8'] .animate-in {
+//     & + .animate-in { animation-delay: 400ms; }
+//     & + .animate-in + .animate-in { animation-delay: 600ms; }
+//     & + .animate-in + .animate-in + .animate-in { animation-delay: 800ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1000ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1200ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in { animation-delay: 1400ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in + .animate-in { animation-delay: 1600ms; }
+//   }
+
+//   &[data-number-of-cards='8'] .animate-in {
+//     & + .animate-in { animation-delay: 400ms; }
+//     & + .animate-in + .animate-in { animation-delay: 600ms; }
+//     & + .animate-in + .animate-in + .animate-in { animation-delay: 800ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1000ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1200ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in { animation-delay: 1400ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in + .animate-in { animation-delay: 1600ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in + .animate-in + .animate-in { animation-delay: 1800ms; }
+//   }
+
+//   &[data-number-of-cards='9'] .animate-in {
+//     & + .animate-in { animation-delay: 400ms; }
+//     & + .animate-in + .animate-in { animation-delay: 600ms; }
+//     & + .animate-in + .animate-in + .animate-in { animation-delay: 800ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1000ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1200ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in { animation-delay: 1400ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in + .animate-in { animation-delay: 1600ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in + .animate-in + .animate-in { animation-delay: 1800ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1800ms; }
+//   }
+
+//   &[data-number-of-cards='10'] .animate-in {
+//     & + .animate-in { animation-delay: 400ms; }
+//     & + .animate-in + .animate-in { animation-delay: 600ms; }
+//     & + .animate-in + .animate-in + .animate-in { animation-delay: 800ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1000ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1200ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in { animation-delay: 1400ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in + .animate-in { animation-delay: 1600ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in + .animate-in + .animate-in { animation-delay: 1800ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in + .animate-in + .animate-in + .animate-in { animation-delay: 1800ms; }
+//     & + .animate-in + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in + .animate-in + .animate-in + .animate-in
+//       + .animate-in { animation-delay: 2000ms; }
+//   }
+// }

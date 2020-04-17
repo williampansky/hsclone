@@ -67,13 +67,15 @@ const Component = styled.div`
 
   @keyframes targeting-ripple {
     0% {
-      box-shadow: 0 4px 10px rgba(196, 56, 0, 0.5),
-        0 0 0 0 rgba(196, 56, 0, 0.5), 0 0 0 5px rgba(196, 56, 0, 0.5),
-        0 0 0 10px rgba(196, 56, 0, 0.5);
+      box-shadow: 0 4px 10px var(--box-shadow-can-be-attacked-color-ripple),
+        0 0 0 0 var(--box-shadow-can-be-attacked-color-ripple),
+        0 0 0 5px var(--box-shadow-can-be-attacked-color-ripple),
+        0 0 0 10px var(--box-shadow-can-be-attacked-color-ripple);
     }
     100% {
-      box-shadow: 0 4px 10px rgba(196, 56, 0, 0.5),
-        0 0 0 5px rgba(196, 56, 0, 0.5), 0 0 0 10px rgba(196, 56, 0, 0.5),
+      box-shadow: 0 4px 10px var(--box-shadow-can-be-attacked-color-ripple),
+        0 0 0 5px var(--box-shadow-can-be-attacked-color-ripple),
+        0 0 0 10px var(--box-shadow-can-be-attacked-color-ripple),
         0 0 0 20px rgba(196, 56, 0, 0);
     }
   }

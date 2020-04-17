@@ -108,6 +108,7 @@ export default function TheirHand({
           <div
             key={index}
             data-index={index}
+            // data-is-animating={true}
             className={classes(index)}
             style={{ transform: transforms(index) }}
           >

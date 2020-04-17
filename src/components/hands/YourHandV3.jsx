@@ -43,6 +43,23 @@ export default function YourHand({
   const activeSpellObject = spellObject[yourID];
   const activeWarcryObject = warcryObject[yourID];
 
+  const [hand, setHand] = React.useState([]);
+  // React.useEffect(() => {
+  //   setTimeout(() => {
+  //     setHand(yourHand);
+  //   }, 100);
+  // }, [yourHand, setHand]);
+
+  const handleHandCallback = React.useCallback(array => {
+    setTimeout(() => {
+      setHand(array);
+    }, 100);
+  }, []);
+
+  React.useEffect(() => {
+    handleHandCallback(yourHand);
+  }, [yourHand, handleHandCallback]);
+
   return (
     <Component
       data-file="hands/YourHand"
@@ -77,7 +94,7 @@ export default function YourHand({
         selectedCost={selectedCardObj && selectedCardObj.cost}
       />
 
-      {yourHand.map((card, index) => {
+      {hand.map((card, index) => {
         return (
           <React.Fragment key={index}>
             <CardInteraction
@@ -90,13 +107,6 @@ export default function YourHand({
               index={index}
               numberOfCards={handLength}
             />
-
-            {/* {cardIsSelected && selectedCardIndex[yourID] === index ? (
-              <div
-                data-index={index}
-                className={['card-in-your-hand', 'card-placeholder'].join(' ')}
-              />
-            ) : null} */}
           </React.Fragment>
         );
       })}

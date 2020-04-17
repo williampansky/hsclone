@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useHover from 'react-use-hover';
 import limitNumberWithinRange from 'lib/utils/range-limit';
@@ -10,6 +10,7 @@ import CardIsPlayableEffect from 'components/interactions/cards/CardIsPlayableEf
 import CardIsSelected from 'components/interactions/cards/CardIsSelected';
 import CardIsSelectedEffect from 'components/interactions/cards/CardIsSelectedEffect';
 import GAME_CONFIG from 'config/game.config';
+import usePrevious from 'components/hooks/usePrevious';
 
 export default function CardInteraction({
   G,
@@ -20,7 +21,6 @@ export default function CardInteraction({
   card,
   index
 }) {
-  const [isAnimating, setIsAnimating] = React.useState(false);
   const { selectedCardIndex, spellObject, warcryObject } = G;
   const { currentPlayer, phase } = ctx;
   const { deselectCard, hoverCard, selectCard } = moves;
@@ -42,12 +42,6 @@ export default function CardInteraction({
   useEffect(() => {
     phase === 'play' && isActive && dispatchHover(isHovering, nullCardIndex);
   }, [isActive, phase, isHovering, nullCardIndex, dispatchHover]);
-
-  // prettier-ignore
-  useEffect(() => {
-    setIsAnimating(false);
-    // setTimeout(() => { setIsAnimating(false) }, 2000);
-  }, []);
 
   const {
     artist,
@@ -138,16 +132,41 @@ export default function CardInteraction({
     }, 0);
   }
 
+  const [isAnimating, setIsAnimating] = useState(true);
+  const [cardUuid, setCardUuid] = useState(null);
+  const previousCardUuid = usePrevious(cardUuid);
+  const previousIndex = usePrevious(index);
+
+  const handleAnimatingCallback = useCallback(
+    (idx, uniqueId) => {
+      if (uniqueId !== previousCardUuid && idx !== previousIndex) {
+        setIsAnimating(true);
+
+        setTimeout(() => {
+          setIsAnimating(false);
+        }, 3000);
+      }
+    },
+    [previousIndex, previousCardUuid]
+  );
+
+  useEffect(() => {
+    setCardUuid(uuid);
+  }, [uuid]);
+
+  useEffect(() => {
+    handleAnimatingCallback(index, uuid);
+  }, [index, uuid, handleAnimatingCallback]);
+
   return (
     <div
       data-file="interactions/cards/CardInteractionLayer"
       data-index={index}
       data-is-playable={!isAnimating && IS_PLAYABLE}
       data-is-selected={IS_SELECTED}
-      className={[
-        'card-in-your-hand',
-        isAnimating ? 'draw-card-animation' : ''
-      ].join(' ')}
+      className={['card-in-your-hand', isAnimating ? 'animate-in' : ''].join(
+        ' '
+      )}
       style={yourHandStyle}
       {...hoverProps}
     >

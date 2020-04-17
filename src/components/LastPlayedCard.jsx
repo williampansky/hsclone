@@ -10,7 +10,7 @@ export default function LastPlayedCard({ G, ctx, array }) {
   const { currentPlayer } = ctx;
 
   const [cardObj, setCardObj] = useState(null);
-  const previousCardObj = usePrevious(array.length);
+  const previousArrayLength = usePrevious(array.length);
 
   const playerSpellBuff = G.buffs[currentPlayer].spellDamage;
   const playerSpellDamage = G.warcryNumber;
@@ -18,7 +18,7 @@ export default function LastPlayedCard({ G, ctx, array }) {
 
   const handleDisplayCallback = useCallback(
     (arr, length) => {
-      if (length !== previousCardObj) {
+      if (length !== previousArrayLength) {
         setDisplay(true);
 
         setTimeout(() => {
@@ -26,7 +26,7 @@ export default function LastPlayedCard({ G, ctx, array }) {
         }, 2500);
       }
     },
-    [previousCardObj]
+    [previousArrayLength]
   );
 
   useEffect(() => {
@@ -46,6 +46,7 @@ export default function LastPlayedCard({ G, ctx, array }) {
         !display ? 'animate-out' : ''
       ].join(' ')}
       data-file="LastPlayedCard"
+      onClick={() => setDisplay(false)}
     >
       {cardObj !== null ? (
         <Card
@@ -92,10 +93,11 @@ LastPlayedCard.propTypes = {
 
 const Component = styled.div`
   box-sizing: border-box;
+  cursor: pointer;
   left: 360px;
   opacity: 0;
-  top: 20%;
   position: absolute;
+  top: 20%;
   transform: scale(0.1);
   transition: 1200ms var(--animation-transition-cubic);
   transition-property: opacity, transform;

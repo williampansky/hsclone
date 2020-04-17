@@ -20,6 +20,8 @@ import playSpellByCardId from 'lib/spells/play-spell-card-by-id';
 import playWeaponByCardId from 'lib/weapons/play-weapon-card-by-id';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
 import logMessage from 'lib/match-history/log-message';
+import RACE from 'enums/race.enums';
+import drawCard from './draw-card';
 
 /**
  * Plays the provided card.
@@ -70,7 +72,7 @@ export const playMinionCard = (
   boardObj
 ) => {
   const { currentPlayer } = ctx;
-  const { cost } = cardObj;
+  const { cost, race } = cardObj;
 
   // subtract the card's cost from player's current energy count
   if (GAME_CONFIG.debugData.enableCost) energy.subtract(G, currentPlayer, cost);
@@ -97,6 +99,12 @@ export const playMinionCard = (
   // reset selectedCardObject
   G.selectedCardIndex[currentPlayer] = null;
   G.selectedCardObject[currentPlayer] = null;
+
+  G.boards[currentPlayer].forEach(slot => {
+    if (slot.minionData.id === 'CORE_061') {
+      if (race === RACE[1]) drawCard(G, ctx, currentPlayer, 1);
+    }
+  });
 };
 
 export const playGlobalSpellCard = (G, ctx, index, uuid, cardId, cardCost) => {

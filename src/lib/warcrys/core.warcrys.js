@@ -75,9 +75,9 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
     /**
      * <strong>Warcry:</strong> Draw 2 cards.
      */
-    case 'CORE_061':
-      drawCard(G, ctx, currentPlayer, 2);
-      break;
+    // case 'CORE_061':
+    //   drawCard(G, ctx, currentPlayer, 2);
+    //   break;
 
     /**
      * <strong>Warcry:</strong> Give all your Creatures <em>Stampede</em>.
