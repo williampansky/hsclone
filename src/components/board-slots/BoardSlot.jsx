@@ -64,7 +64,8 @@ export default function BoardSlot({
     minionData,
     totalAttack,
     totalHealth,
-    willExpire
+    willExpire,
+    willExpireIn
   } = data;
 
   const playerID = board === PLAYER_BOARDS[1] ? yourID : theirID;
@@ -182,7 +183,7 @@ export default function BoardSlot({
       {minionData && hasOnslaught && <HasOnslaught />}
       {minionData && isConcealed && <IsConcealed />}
       {minionData && isDisabled && <IsDisabled />}
-      {minionData && willExpire && <WillExpire />}
+      {minionData && willExpire && <WillExpire count={willExpireIn} />}
 
       {/* visible minion component */}
       {minionData && (

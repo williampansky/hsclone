@@ -21,7 +21,7 @@ const boards = {
       // { ...createBoardSlotObject('CORE_061') }
     ],
     '1': [
-      // createBoardSlotObject('CORE_057b')
+      { ...createBoardSlotObject('CORE_061') }
     ]
   },
 

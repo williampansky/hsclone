@@ -79,8 +79,10 @@ const onBegin = (G, ctx) => {
       slot.willExpireIn = Math.abs(slot.willExpireIn - 1);
 
       // kill minion if expiration integer hits zero
-      if (slot.willExpireIn === 0)
-        boards.killMinion(G, ctx, otherPlayer, slot, i);
+      if (slot.willExpireIn === 0) {
+        boards.subtractFromMinionHealth(G, otherPlayer, i, 9000);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
+      }
     } else {
       slot.willExpireIn = 2;
     }
