@@ -98,7 +98,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
           boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
         });
       } else {
-        health.subtract(G, otherPlayer, 1);
+        health.subtract(G, otherPlayer, Math.abs(YOUR_SPELL_DMG - 3));
         G.boards[otherPlayer].forEach((slot, i) => {
           if (i === index) {
             boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
