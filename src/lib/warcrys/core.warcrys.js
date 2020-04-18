@@ -39,8 +39,17 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
       return CORE_025(G, ctx, cardId);
     case 'CORE_026':
       return CORE_026(G, ctx, cardId);
+
     case 'CORE_032':
-      return CORE_032(G, ctx, cardId);
+      // heal player
+      health.add(G, ctx.currentPlayer, 2);
+
+      // heal minions w/loop method
+      G.boards[currentPlayer].forEach((_, idx) => {
+        boards.addToMinionHealth(G, currentPlayer, idx, 2);
+      });
+      break;
+
     case 'CORE_033':
       return CORE_033(G, ctx, index);
     case 'CORE_035':
@@ -71,13 +80,6 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
         if (index !== i) slot.canReceiveGuard = true;
       });
       break;
-
-    /**
-     * <strong>Warcry:</strong> Draw 2 cards.
-     */
-    // case 'CORE_061':
-    //   drawCard(G, ctx, currentPlayer, 2);
-    //   break;
 
     /**
      * <strong>Warcry:</strong> Give all your Creatures <em>Stampede</em>.
@@ -181,21 +183,6 @@ const CORE_025 = (G, ctx, cardId) => {
 
 const CORE_026 = (G, ctx) => {
   return drawCardAtStartOfTurn(G, ctx);
-};
-
-/**
- * Restore 2 Health to you and all your minions.
- */
-const CORE_032 = (G, ctx, cardId) => {
-  const HEAL_AMOUNT = 2;
-
-  // heal player
-  health.add(G, ctx.currentPlayer, HEAL_AMOUNT);
-
-  // heal minions w/loop method
-  for (let i = 0; i < G.boards[ctx.currentPlayer].length; i++)
-    if (G.boards[ctx.currentPlayer][i].minionData.id !== cardId)
-      boards.addToMinionHealth(G, ctx.currentPlayer, i, HEAL_AMOUNT);
 };
 
 /**

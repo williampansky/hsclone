@@ -7,6 +7,7 @@ import RACE from 'enums/race.enums';
 import RARITY from 'enums/rarity.enums';
 import placeholdersArray from 'placeholders-array';
 import replaceDynamicText from 'utils/replace-dynamic-text';
+import replaceConstant from 'utils/replace-constants';
 
 export default function Card({
   artist,
@@ -52,6 +53,12 @@ export default function Card({
       : `url(assets/images/sets/${set}/${id}-CARD.jpg)`;
   }
 
+  function cardText(string, spellDmg) {
+    const replacedDynamicDmg = replaceDynamicText(string, spellDmg);
+    const replacedSymbols = replaceConstant(replacedDynamicDmg);
+    return replacedSymbols;
+  }
+
   const fontSize = {
     fontSize: `${fontSizeBasedOnCharacterLength(name)}em`
   };
@@ -86,7 +93,7 @@ export default function Card({
         <p
           className={'text__value'}
           dangerouslySetInnerHTML={createMarkup(
-            replaceDynamicText(text, dynamicSpellDamageText)
+            cardText(text, dynamicSpellDamageText)
           )}
         />
       </div>

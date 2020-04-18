@@ -51,7 +51,7 @@ export default function TheirAvatar({
   }, [THEIR_HEALTH, animateWasAttacked]);
 
   function classImage(string) {
-    const playerClass = string.replace(' ', '_').toUpperCase();
+    const playerClass = string.replace(/(%)/g, '').toUpperCase();
     return `assets/images/classes/${playerClass}/DEFAULT.jpg`;
   }
 

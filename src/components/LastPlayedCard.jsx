@@ -13,7 +13,7 @@ export default function LastPlayedCard({ G, ctx, array }) {
   const previousArrayLength = usePrevious(array.length);
 
   const playerSpellBuff = G.buffs[currentPlayer].spellDamage;
-  const playerSpellDamage = G.warcryNumber;
+  const playerSpellDamage = cardObj && cardObj.warcryNumber;
   const dynamicSpellDamageText = Math.abs(playerSpellBuff + playerSpellDamage);
 
   const handleDisplayCallback = useCallback(

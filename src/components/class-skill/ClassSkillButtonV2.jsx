@@ -23,7 +23,7 @@ export default function ClassSkillButton({
   }
 
   function classSkillImage(string) {
-    const playerClass = string.replace(' ', '_').toUpperCase();
+    const playerClass = string.replace(/(%)/g, '').toUpperCase();
     return `assets/images/class-skills/${playerClass}/DEFAULT.jpg`;
   }
 
