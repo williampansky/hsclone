@@ -12,6 +12,31 @@ function parseCardClass(string) {
   return string.replace(/([0-9] )/g, '');
 }
 
+// CONSTANTS
+base
+  .table('CONSTANTS')
+  .list({
+    maxRecords: 200
+  })
+  .then(resp => {
+    const map = resp.records.map(item => {
+      const { fields } = item;
+      const { name, symbol, type, description } = fields;
+
+      return {
+        [symbol]: {
+          name,
+          symbol,
+          type,
+          description
+        }
+      };
+    });
+
+    const constants = JSON.stringify(Object.assign({}, ...map));
+    fs.writeFileSync('./src/enums/CONSTANTS.json', constants);
+  });
+
 // CORE
 base
   .table('GAME')
