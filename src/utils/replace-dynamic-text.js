@@ -4,6 +4,7 @@
  * @param {String} value Value to replace
  */
 export default function replaceDynamicText(string, value) {
+  if (!string || !value) return;
   const newString = string.replace('%NUM%', value);
   return newString;
 }
