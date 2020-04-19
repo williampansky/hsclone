@@ -25,6 +25,18 @@ export const _eMCBA = (G, player, index) => {
 };
 
 /**
+ * Enables `canBeAttacked*` of the player's board index object.
+ * @param {{}} G
+ * @param {string} player
+ * @param {number} index
+ */
+export const _eMCBAbW = (G, player, index) => {
+  if (!G.boards[player][index]) return;
+  if (G.boards[player][index].isConcealed === true) return;
+  G.boards[player][index].canBeAttackedByWarcry = true;
+};
+
+/**
  * Disables `canBeAttacked*` on all of the player's minions.
  * @param {{}} G
  * @param {string} player

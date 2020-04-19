@@ -20,6 +20,8 @@ import playSpellByCardId from 'lib/spells/play-spell-card-by-id';
 import playWeaponByCardId from 'lib/weapons/play-weapon-card-by-id';
 import removeCardFromHand from 'lib/utils/remove-card-from-hand';
 import logMessage from 'lib/match-history/log-message';
+import RACE from 'enums/race.enums';
+import drawCard from './draw-card';
 
 /**
  * Plays the provided card.
@@ -32,6 +34,7 @@ import logMessage from 'lib/match-history/log-message';
  * @param {string} cardId=null
  */
 const playCard = (G, ctx, index, uuid, cardId = null) => {
+  const { currentPlayer } = ctx;
   if (!cardId) return;
 
   const CARD_OBJ = createMinionObject(cardId);
@@ -43,20 +46,16 @@ const playCard = (G, ctx, index, uuid, cardId = null) => {
   const { cost, type } = CARD_OBJ;
   switch (type) {
     case TYPE[1]:
-      logMessage(G, ctx, 'playMinionCard');
       return playMinionCard(G, ctx, index, uuid, cardId, CARD_OBJ, SLOT_OBJ);
 
+    case TYPE[2]:
+      return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
+
     case TYPE[3]:
-      logMessage(G, ctx, 'playGlobalSpellCard');
       return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
 
     case TYPE[4]:
-      logMessage(G, ctx, 'playWeaponCard');
       return playWeaponCard(G, ctx, uuid, cardId, cost);
-
-    case TYPE[5]:
-      logMessage(G, ctx, 'playGlobalSpellCard');
-      return playGlobalSpellCard(G, ctx, index, uuid, cardId, cost);
 
     default:
       return;
@@ -73,16 +72,19 @@ export const playMinionCard = (
   boardObj
 ) => {
   const { currentPlayer } = ctx;
-  const { cost } = cardObj;
+  const { cost, race } = cardObj;
 
   // subtract the card's cost from player's current energy count
-  energy.subtract(G, currentPlayer, cost);
+  if (GAME_CONFIG.debugData.enableCost) energy.subtract(G, currentPlayer, cost);
 
   // place card in selected index on your board
   boards.placeCardOnBoard(G, currentPlayer, boardObj, index);
 
   // move to your playerCards array
   copyCardToPlayedCards(G, currentPlayer, cardId);
+
+  // log message
+  logMessage(G, ctx, 'playMinionCard');
 
   // and then remove card from your hand
   removeCardFromHand(G, currentPlayer, uuid);
@@ -97,13 +99,22 @@ export const playMinionCard = (
   // reset selectedCardObject
   G.selectedCardIndex[currentPlayer] = null;
   G.selectedCardObject[currentPlayer] = null;
+
+  G.boards[currentPlayer].forEach(slot => {
+    if (slot.minionData.id === 'CORE_061') {
+      if (race === RACE[1]) drawCard(G, ctx, currentPlayer, 1);
+    }
+  });
 };
 
 export const playGlobalSpellCard = (G, ctx, index, uuid, cardId, cardCost) => {
   const { currentPlayer } = ctx;
 
-  energy.subtract(G, currentPlayer, cardCost);
+  if (GAME_CONFIG.debugData.enableCost)
+    energy.subtract(G, currentPlayer, cardCost);
+
   playSpellByCardId(G, ctx, cardId, index);
+  logMessage(G, ctx, 'playGlobalSpellCard');
   selectCard(G, ctx);
   copyCardToPlayedCards(G, currentPlayer, cardId);
   removeCardFromHand(G, currentPlayer, uuid);
@@ -113,9 +124,15 @@ export const playGlobalSpellCard = (G, ctx, index, uuid, cardId, cardCost) => {
 export const playWeaponCard = (G, ctx, uuid, cardId, cardCost) => {
   const { currentPlayer } = ctx;
 
-  energy.subtract(G, currentPlayer, cardCost);
+  // allow only 1 attack per turn
+  if (G.playerWeapon[currentPlayer] === null)
+    playerCanAttack.enable(G, currentPlayer);
+
+  if (GAME_CONFIG.debugData.enableCost)
+    energy.subtract(G, currentPlayer, cardCost);
+
   playWeaponByCardId(G, ctx, currentPlayer, cardId);
-  playerCanAttack.enable(G, currentPlayer);
+  logMessage(G, ctx, 'playWeaponCard');
   selectCard(G, ctx);
   copyCardToPlayedCards(G, currentPlayer, cardId);
   removeCardFromHand(G, currentPlayer, uuid);

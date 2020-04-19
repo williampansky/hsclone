@@ -39,6 +39,9 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   const { id, cost, uuid } = selectedCardObject[currentPlayer];
   const THEIR_SLOT = G.boards[otherPlayer][index];
   const YOUR_SLOT = G.boards[currentPlayer][index];
+  const YOUR_BASE_SPELL_DAMAGE = G.playerSpellDamage[currentPlayer];
+  const YOUR_SPELL_BUFF = G.buffs[currentPlayer].spellDamage;
+  const YOUR_SPELL_DMG = Math.abs(YOUR_BASE_SPELL_DAMAGE + YOUR_SPELL_BUFF);
 
   if (targetCtx === WARCRY_TARGET_CONTEXT[1]) {
     logMessage(G, ctx, 'castTargetedSpell-minion', null, index);
@@ -52,33 +55,10 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
   removeCardFromHand(G, currentPlayer, uuid);
   counts.deincrementHand(G, currentPlayer);
 
-  G.spellObject[currentPlayer] = null;
-  G.warcryObject[currentPlayer] = null;
-
-  // disable all player can be attacked
-  playerCanBeAttacked.disable(G, '0');
-  playerCanBeAttacked.disable(G, '1');
-
-  // disable all playerCanBeHealed
-  playerCanBeHealed.disable(G, '0');
-  playerCanBeHealed.disable(G, '1');
-
-  // disable all can be attacked
-  boards.disableAllCanBeAttacked(G, '0');
-  boards.disableAllCanBeAttacked(G, '1');
-
-  // disable all can be attacked
-  boards.disableAllCanBeBuffed(G, '0');
-  boards.disableAllCanBeBuffed(G, '1');
-
-  // disable all canBeHealed
-  boards.disableAllCanBeHealed(G, '0');
-  boards.disableAllCanBeHealed(G, '1');
-
   switch (id) {
     // Deal 1 damage to a selected target.
     case 'CORE_044':
-      boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
+      boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
       boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       break;
 
@@ -86,53 +66,75 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     case 'CORE_046':
       G.boards[currentPlayer][index] = {
         ...YOUR_SLOT,
-        currentAttack: YOUR_SLOT.currentAttack + 2,
-        currentHealth: YOUR_SLOT.currentHealth + 2,
+        currentAttack: Math.abs(YOUR_SLOT.currentAttack + 2),
+        currentHealth: Math.abs(YOUR_SLOT.currentHealth + 2),
         hasGuard: true,
         isConcealed: false,
-        totalAttack: YOUR_SLOT.totalAttack + 2,
-        totalHealth: YOUR_SLOT.totalHealth + 2
+        totalAttack: Math.abs(YOUR_SLOT.totalAttack + 2),
+        totalHealth: Math.abs(YOUR_SLOT.totalHealth + 2)
       };
       break;
 
     // Restore 8 points of Health.
     case 'CORE_047':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.add(G, currentPlayer, 5);
+        health.add(G, currentPlayer, YOUR_SPELL_DMG);
       } else {
-        boards.addToMinionHealth(G, currentPlayer, index, 5);
+        boards.addToMinionHealth(G, currentPlayer, index, YOUR_SPELL_DMG);
       }
       break;
 
     // Choose an enemy minion; deal 4 damage to it and 1 damage to all other enemies.
     case 'CORE_050':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 4);
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
         G.boards[otherPlayer].forEach((slot, i) => {
-          boards.subtractFromMinionHealth(G, otherPlayer, i, 1);
+          boards.subtractFromMinionHealth(
+            G,
+            otherPlayer,
+            i,
+            Math.abs(YOUR_SPELL_DMG - 3)
+          );
           boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
         });
       } else {
-        health.subtract(G, otherPlayer, 1);
+        health.subtract(G, otherPlayer, Math.abs(YOUR_SPELL_DMG - 3));
         G.boards[otherPlayer].forEach((slot, i) => {
           if (i === index) {
-            boards.subtractFromMinionHealth(G, otherPlayer, i, 4);
+            boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
             boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
           } else {
-            boards.subtractFromMinionHealth(G, otherPlayer, i, 1);
+            boards.subtractFromMinionHealth(
+              G,
+              otherPlayer,
+              i,
+              Math.abs(YOUR_SPELL_DMG - 3)
+            );
             boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
           }
         });
       }
       break;
 
+    // Deal 5 damage and then draw a card.
+    case 'CORE_051':
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
+      } else {
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+      }
+      break;
+
     // Attack something for 2 damage.
     case 'CORE_053':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 2);
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
+        drawCard(G, ctx, currentPlayer, 1);
       } else {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 2);
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
+        drawCard(G, ctx, currentPlayer, 1);
       }
       break;
 
@@ -145,43 +147,23 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
       };
       break;
 
-    // Deal 5 damage if you target an enemy Creature; else deal 3 damage.
+    // Deal 4 targeted damage.
     case 'CORE_058':
-      if (
-        playerCtx === TARGET_CONTEXT[2] &&
-        targetCtx === WARCRY_TARGET_CONTEXT[2]
-      ) {
-        health.subtract(G, otherPlayer, 3);
+      if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
       } else {
-        if (THEIR_SLOT.minionData.race === RACE[1]) {
-          boards.subtractFromMinionHealth(G, otherPlayer, index, 5);
-          boards.killMinionIfHealthIsZero(
-            G,
-            ctx,
-            otherPlayer,
-            THEIR_SLOT,
-            index
-          );
-        } else {
-          boards.subtractFromMinionHealth(G, otherPlayer, index, 3);
-          boards.killMinionIfHealthIsZero(
-            G,
-            ctx,
-            otherPlayer,
-            THEIR_SLOT,
-            index
-          );
-        }
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       }
       break;
 
     // Deal 3 damage to a character and Disable it.
     case 'CORE_066':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 3);
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
         playerIsDisabled.enable(G, otherPlayer);
       } else {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 3);
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
         G.boards[otherPlayer][index].isDisabled = true;
       }
@@ -190,9 +172,9 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     // Deal 6 targeted damage.
     case 'CORE_069':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 6);
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
       } else {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 6);
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       }
       break;
@@ -230,9 +212,9 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     // Restore 6 Health to yourself or a friendly minion.
     case 'CORE_077':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.add(G, currentPlayer, 6);
+        health.add(G, currentPlayer, YOUR_SPELL_DMG);
       } else {
-        boards.addToMinionHealth(G, currentPlayer, index, 6);
+        boards.addToMinionHealth(G, currentPlayer, index, YOUR_SPELL_DMG);
       }
       break;
 
@@ -250,10 +232,10 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     // Attack something for 3 damage and then draw a card.
     case 'CORE_080':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 3);
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
         drawCard(G, ctx, currentPlayer, 1);
       } else {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 3);
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
         drawCard(G, ctx, currentPlayer, 1);
       }
@@ -262,9 +244,9 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     // Deal 2 targeted damage.
     case 'CORE_083':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 2);
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
       } else {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 2);
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       }
       break;
@@ -311,7 +293,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
 
     // Deal 2 damage to one of your enemy's undamaged minions.
     case 'CORE_093':
-      boards.subtractFromMinionHealth(G, otherPlayer, index, 2);
+      boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
       boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       break;
 
@@ -323,10 +305,10 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     // Deal 1 targeted damage and then draw a card.
     case 'CORE_097':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 1);
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
         drawCard(G, ctx, currentPlayer, 1);
       } else {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
         drawCard(G, ctx, currentPlayer, 1);
       }
@@ -351,11 +333,11 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     // Deal 1 damage to an enemy character and Disable it.
     case 'CORE_105':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 1);
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
         playerIsDisabled.enable(G, otherPlayer);
       } else {
         G.boards[otherPlayer][index].isDisabled = true;
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       }
       break;
@@ -396,7 +378,7 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
 
     // Deal 1 damage to a minion. If that kills it, draw a card.
     case 'CORE_115':
-      boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
+      boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
       boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       if (THEIR_SLOT.currentHealth === 0) drawCard(G, ctx, currentPlayer, 1);
       break;
@@ -404,9 +386,9 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     // Deal 4 damage. Discard a random card.
     case 'CORE_116':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 4);
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
       } else {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 4);
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       }
 
@@ -420,18 +402,18 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     // Deal 2 damage and heal yourself for that amount.
     case 'CORE_119':
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
-        health.subtract(G, otherPlayer, 2);
+        health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
       } else {
-        boards.subtractFromMinionHealth(G, otherPlayer, index, 2);
+        boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       }
 
-      health.add(G, currentPlayer, 2);
+      health.add(G, currentPlayer, YOUR_SPELL_DMG);
       break;
 
     // Blast a minion for 4 damage.
     case 'CORE_120':
-      boards.subtractFromMinionHealth(G, otherPlayer, index, 4);
+      boards.subtractFromMinionHealth(G, otherPlayer, index, YOUR_SPELL_DMG);
       boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       break;
 
@@ -448,6 +430,30 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     default:
       break;
   }
+
+  G.playerSpellDamage[currentPlayer] = 0;
+  G.spellObject[currentPlayer] = null;
+  G.warcryObject[currentPlayer] = null;
+
+  // disable all player can be attacked
+  playerCanBeAttacked.disable(G, '0');
+  playerCanBeAttacked.disable(G, '1');
+
+  // disable all playerCanBeHealed
+  playerCanBeHealed.disable(G, '0');
+  playerCanBeHealed.disable(G, '1');
+
+  // disable all can be attacked
+  boards.disableAllCanBeAttacked(G, '0');
+  boards.disableAllCanBeAttacked(G, '1');
+
+  // disable all can be attacked
+  boards.disableAllCanBeBuffed(G, '0');
+  boards.disableAllCanBeBuffed(G, '1');
+
+  // disable all canBeHealed
+  boards.disableAllCanBeHealed(G, '0');
+  boards.disableAllCanBeHealed(G, '1');
 };
 
 const castTargetedClassSkill = (G, ctx, playerCtx, targetCtx, index, id) => {
@@ -488,6 +494,7 @@ const castTargetedClassSkill = (G, ctx, playerCtx, targetCtx, index, id) => {
       break;
   }
 
+  G.playerSpellDamage[currentPlayer] = 0;
   G.spellObject[currentPlayer] = null;
   G.warcryObject[currentPlayer] = null;
 

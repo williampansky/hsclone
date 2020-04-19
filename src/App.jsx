@@ -23,6 +23,7 @@ const HScloneClient = Client({
 class App extends React.Component {
   state = {
     playerID: null,
+    playerName: null,
     deck: []
   };
 
@@ -34,6 +35,9 @@ class App extends React.Component {
     href.includes('3002')
       ? this.setState({ playerID: '1' })
       : this.setState({ playerID: '0' });
+
+    if (localStorage.getItem('playerName'))
+      this.setState({ playerName: localStorage.getItem('playerName') });
   }
 
   render() {
@@ -53,7 +57,10 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <HScloneClient playerID={this.state.playerID} />
+        <HScloneClient
+          playerID={this.state.playerID}
+          playerName={this.state.playerName}
+        />
       </React.Fragment>
     );
   }

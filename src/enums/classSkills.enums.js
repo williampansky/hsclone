@@ -10,42 +10,42 @@ const CLASS_SKILLS = {
     value: 1
   },
   2: {
-    name: 'Backstab',
+    name: 'Sniper Shot',
     class: CARDCLASS[2],
     description: CLASS_SKILL_DESCRIPTIONS[2],
     targetingArrowText: null,
     value: 2
   },
   3: {
-    name: 'Meteorite',
+    name: 'Lightning Strike',
     class: CARDCLASS[3],
     description: CLASS_SKILL_DESCRIPTIONS[3],
     targetingArrowText: 'Attack for 1 damage',
     value: 1
   },
   4: {
-    name: 'Loyal Knight',
+    name: 'Disciple',
     class: CARDCLASS[4],
     description: CLASS_SKILL_DESCRIPTIONS[4],
     targetingArrowText: null,
     value: null
   },
   5: {
-    name: 'Regen',
+    name: 'Mend',
     class: CARDCLASS[5],
     description: CLASS_SKILL_DESCRIPTIONS[5],
     targetingArrowText: 'Heal for for 2 HP',
     value: 2
   },
   6: {
-    name: 'Shuriken',
+    name: 'Katar',
     class: CARDCLASS[6],
     description: CLASS_SKILL_DESCRIPTIONS[6],
     targetingArrowText: 'Attack for 1 damage',
     value: 1
   },
   7: {
-    name: 'Idol Worship',
+    name: 'Raise Dead',
     class: CARDCLASS[7],
     description: CLASS_SKILL_DESCRIPTIONS[7],
     targetingArrowText: null,

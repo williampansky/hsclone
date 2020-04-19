@@ -12,6 +12,31 @@ function parseCardClass(string) {
   return string.replace(/([0-9] )/g, '');
 }
 
+// CONSTANTS
+base
+  .table('CONSTANTS')
+  .list({
+    maxRecords: 200
+  })
+  .then(resp => {
+    const map = resp.records.map(item => {
+      const { fields } = item;
+      const { name, symbol, type, description } = fields;
+
+      return {
+        [symbol]: {
+          name,
+          symbol,
+          type,
+          description
+        }
+      };
+    });
+
+    const constants = JSON.stringify(Object.assign({}, ...map));
+    fs.writeFileSync('./src/enums/CONSTANTS.json', constants);
+  });
+
 // CORE
 base
   .table('GAME')
@@ -25,7 +50,6 @@ base
         artist,
         cardClass,
         collectible,
-        cost,
         elite,
         id,
         mechanics,
@@ -41,7 +65,6 @@ base
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
           collectible: collectible === 'checked' ? true : false,
-          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
@@ -71,7 +94,6 @@ base
         artist,
         cardClass,
         collectible,
-        cost,
         elite,
         id,
         inspiration,
@@ -88,7 +110,6 @@ base
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
           collectible: collectible === 'checked' ? true : false,
-          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
@@ -118,7 +139,6 @@ base
         artist,
         cardClass,
         collectible,
-        cost,
         elite,
         id,
         inspiration,
@@ -135,7 +155,6 @@ base
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
           collectible: collectible === 'checked' ? true : false,
-          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
@@ -165,7 +184,6 @@ base
         artist,
         cardClass,
         collectible,
-        cost,
         elite,
         id,
         inspiration,
@@ -182,7 +200,6 @@ base
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
           collectible: collectible === 'checked' ? true : false,
-          cost: GAME_CONFIG.debugData.enableCost ? cost : 0,
           elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics

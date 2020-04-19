@@ -25,10 +25,11 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
 
   if (cardObject === null) return;
 
-  const { id, spellContext, spellType, type } = cardObject;
+  const { id, spellContext, spellType, type, warcryNumber } = cardObject;
   G.selectedCardType[currentPlayer] = type;
   G.selectedCardSpellType[currentPlayer] = spellType;
   G.selectedCardSpellContext[currentPlayer] = spellContext;
+  G.playerSpellDamage[currentPlayer] = warcryNumber;
 
   if (type === TYPE[3] && spellType === SPELLTYPE[2]) {
     switch (id) {

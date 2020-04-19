@@ -2,7 +2,7 @@ import limitNumberWithinRange from 'lib/utils/range-limit';
 
 const health = {
   __DATA_MODEL: {
-    '0': 30,
+    '0': 25,
     '1': 30
   },
   add: (G, player, amount) => addToPlayerHealth(G, player, amount),

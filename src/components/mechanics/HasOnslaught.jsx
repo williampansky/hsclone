@@ -21,6 +21,7 @@ const Component = styled.div`
   width: 100%;
   pointer-events: none;
   position: absolute;
+  z-index: 2;
 `;
 
 const OnslaughtIcon = styled.div`

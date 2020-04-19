@@ -24,6 +24,10 @@ const initCoreSpell = (G, ctx, cardId, index) => {
   // const THEIR_HAND = G.players[otherPlayer].hand;
   const THEIR_PLAYED_CARDS = G.playedCards[otherPlayer];
 
+  const YOUR_BASE_SPELL_DAMAGE = G.playerSpellDamage[currentPlayer];
+  const YOUR_SPELL_BUFF = G.buffs[currentPlayer].spellDamage;
+  const YOUR_SPELL_DMG = Math.abs(YOUR_BASE_SPELL_DAMAGE + YOUR_SPELL_BUFF);
+
   function getRandomIndex(length) {
     return Math.floor(Math.random() * (length - 0) + 0);
   }
@@ -54,7 +58,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Give your characters +2 Attack this turn.
     case 'CORE_048':
       G.boards[currentPlayer].forEach(slot => {
-        slot.currentAttack = slot.currentAttack + 1;
+        slot.currentAttack = Math.abs(slot.currentAttack + 2);
       });
       break;
 
@@ -113,7 +117,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     case 'CORE_060':
       G.boards[otherPlayer].forEach((slot, i) => {
         if (i === theirRandomIdx1 || i === theirRandomIdx2) {
-          boards.subtractFromMinionHealth(G, otherPlayer, i, damageNumber);
+          boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
           boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
         }
       });
@@ -127,7 +131,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
           i === theirRandomIdx2 ||
           i === theirRandomIdx3
         ) {
-          boards.subtractFromMinionHealth(G, otherPlayer, i, damageNumber);
+          boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
           boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
         }
       });
@@ -151,7 +155,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Draw the next 2 cards from your deck.
     case 'CORE_065':
       G.boards[otherPlayer].forEach((slot, i) => {
-        boards.subtractFromMinionHealth(G, otherPlayer, i, 1);
+        boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
       });
       break;
@@ -171,16 +175,16 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Deal 4 damage to every enemy minion.
     case 'CORE_072':
       G.boards[otherPlayer].forEach((slot, i) => {
-        boards.subtractFromMinionHealth(G, otherPlayer, i, 4);
+        boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
       });
       break;
 
     // Attack all enemies for 2 damage.
     case 'CORE_079':
-      health.subtract(G, otherPlayer, 2);
+      health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
       G.boards[otherPlayer].forEach((slot, i) => {
-        boards.subtractFromMinionHealth(G, otherPlayer, i, 2);
+        boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
       });
       break;
@@ -197,34 +201,29 @@ const initCoreSpell = (G, ctx, cardId, index) => {
 
     // Restore 5 Health to yourself.
     case 'CORE_087':
-      health.add(G, currentPlayer, 5);
+      health.add(G, currentPlayer, YOUR_SPELL_DMG);
       break;
 
     // Deal 2 damage to all of your enemies and then restore
     // that amount of Health to yourself and all your minions.
     case 'CORE_091':
       G.lastPlayedCardId = cardId;
-      health.subtract(G, otherPlayer, 2);
+      health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
       G.boards[otherPlayer].forEach((slot, i) => {
-        boards.subtractFromMinionHealth(G, otherPlayer, i, 2);
+        boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
       });
 
-      health.add(G, currentPlayer, 2);
+      health.add(G, currentPlayer, YOUR_SPELL_DMG);
       G.boards[currentPlayer].forEach((_, i) => {
-        boards.addToMinionHealth(G, currentPlayer, i, 2);
+        boards.addToMinionHealth(G, currentPlayer, i, YOUR_SPELL_DMG);
       });
       break;
 
     // Return one of your opponent's minions to their hand.
     case 'CORE_096':
       G.boards[otherPlayer].forEach(slot => {
-        slot.canBeReturned = true;
-      });
-
-      health.add(G, currentPlayer, 2);
-      G.boards[currentPlayer].forEach((_, i) => {
-        boards.addToMinionHealth(G, currentPlayer, i, 2);
+        slot.canBeDisabled = true;
       });
       break;
 
@@ -236,14 +235,14 @@ const initCoreSpell = (G, ctx, cardId, index) => {
 
     // Deal 3 damage to the enemy player.
     case 'CORE_095':
-      health.subtract(G, otherPlayer, 3);
+      health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
       break;
 
     // Draw a card and also deal 1 damage to all enemy minions.
     case 'CORE_098':
-      drawCard(G, ctx, currentPlayer, 1);
+      drawCard(G, ctx, currentPlayer, YOUR_SPELL_DMG);
       G.boards[otherPlayer].forEach((slot, i) => {
-        boards.subtractFromMinionHealth(G, otherPlayer, i, 1);
+        boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
       });
       break;
@@ -272,15 +271,15 @@ const initCoreSpell = (G, ctx, cardId, index) => {
 
     // Deal 3 damage to everyone.
     case 'CORE_121':
-      health.subtract(G, currentPlayer, damageNumber);
+      health.subtract(G, currentPlayer, YOUR_SPELL_DMG);
       G.boards[currentPlayer].forEach((slot, i) => {
-        boards.subtractFromMinionHealth(G, currentPlayer, i, damageNumber);
+        boards.subtractFromMinionHealth(G, currentPlayer, i, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, currentPlayer, slot, i);
       });
 
-      health.subtract(G, otherPlayer, damageNumber);
+      health.subtract(G, otherPlayer, YOUR_SPELL_DMG);
       G.boards[otherPlayer].forEach((slot, i) => {
-        boards.subtractFromMinionHealth(G, otherPlayer, i, damageNumber);
+        boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
       });
       break;
@@ -288,12 +287,12 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Attack every minion for 1 damage.
     case 'CORE_124':
       G.boards[currentPlayer].forEach((slot, i) => {
-        boards.subtractFromMinionHealth(G, currentPlayer, i, damageNumber);
+        boards.subtractFromMinionHealth(G, currentPlayer, i, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, currentPlayer, slot, i);
       });
 
       G.boards[otherPlayer].forEach((slot, i) => {
-        boards.subtractFromMinionHealth(G, otherPlayer, i, damageNumber);
+        boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
       });
       break;
@@ -302,12 +301,13 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     case 'CORE_125':
       G.boards[otherPlayer].forEach((slot, i) => {
         if (i === theirRandomIdx1 || i === theirRandomIdx2) {
-          boards.subtractFromMinionHealth(G, otherPlayer, i, damageNumber);
+          boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
           boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
         }
       });
       break;
 
+    // Kill an already damaged minion.
     case 'CORE_126':
       G.spellObject[currentPlayer] = createSpellObject(cardId);
       G.boards[otherPlayer].forEach((slot, i) => {
@@ -316,13 +316,15 @@ const initCoreSpell = (G, ctx, cardId, index) => {
       });
       break;
 
+    // Give your player +4 Attack for this turn only.
     case 'CORE_127':
       playerCanAttack.enable(G, currentPlayer);
       playWeaponByCardId(G, ctx, currentPlayer, cardId);
       break;
 
+    // Gain 5 points of Energy Shield and draw a card.
     case 'CORE_129':
-      playerShieldPoints.add(G, currentPlayer, damageNumber);
+      playerShieldPoints.add(G, currentPlayer, YOUR_SPELL_DMG);
       drawCard(G, ctx, currentPlayer, 1);
       break;
 

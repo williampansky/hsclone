@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import createMarkup from 'utils/createMarkup';
 import RARITY from 'enums/rarity.enums';
 import EndTurnButton from 'components/end-turn/EndTurn';
+import Deck from 'components/decks/DeckV3';
+import PLAYER_BOARDS from 'enums/playerBoards.enums';
+import MatchStats from './MatchStats';
 
 export default function PlayerSidebar({
   G,
@@ -14,12 +17,19 @@ export default function PlayerSidebar({
   isActive,
   yourID,
   theirID,
-  gameWidth
+  gameWidth,
+  gameHeight
 }) {
-  const { matchHistory } = G;
+  const { cardBack, counts, deckInfo, playedCards } = G;
 
   return (
-    <Component data-file="player-sidebar/PlayerSidebar" gameWidth={gameWidth}>
+    <Component
+      data-file="player-sidebar/PlayerSidebar"
+      gameWidth={gameWidth}
+      gameHeight={gameHeight}
+    >
+      <MatchStats G={G} theirID={theirID} yourID={yourID} />
+
       <EndTurnButton
         G={G}
         ctx={ctx}
@@ -28,6 +38,14 @@ export default function PlayerSidebar({
         isActive={isActive}
         yourID={yourID}
         theirID={theirID}
+      />
+
+      <Deck
+        board={PLAYER_BOARDS[1]}
+        cardBackSrc={cardBack[yourID]}
+        data={deckInfo[yourID]}
+        length={counts[yourID].deck}
+        playedCards={playedCards[yourID]}
       />
     </Component>
   );
@@ -39,7 +57,8 @@ export default function PlayerSidebar({
 
 const Component = styled.div`
   /* display: none; */
-  height: 100%;
+  height: ${p =>
+    `calc(${p.gameHeight - 40}px - var(--board-theirHand-height))`};
   pointer-events: auto;
   position: absolute;
   top: 0;
@@ -51,6 +70,21 @@ const Component = styled.div`
   font-size: 12px;
   overflow: hidden;
   font-family: 'Verdana', sans-serif;
-  margin: 0 0 0 auto;
+  /* margin: 0 0 0 auto; */
+  margin: var(--board-theirHand-height) 0 0;
   z-index: 300;
+
+  &:before {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), transparent);
+    bottom: auto;
+    /* content: ''; */
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 4.25%;
+    pointer-events: none;
+    z-index: 2;
+  }
 `;

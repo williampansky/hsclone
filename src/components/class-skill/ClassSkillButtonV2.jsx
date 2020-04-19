@@ -3,7 +3,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CARDCLASS from 'enums/cardClass.enums';
-import CLASS_SKILL_DESCRIPTIONS from 'enums/classSkillDescriptions.enums';
+import CLASS_SKILLS from 'enums/classSkills.enums';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
 
 export default function ClassSkillButton({
@@ -23,33 +23,22 @@ export default function ClassSkillButton({
   }
 
   function classSkillImage(string) {
-    // prettier-ignore
-    switch (string) {
-      case CARDCLASS[1]:  return require('assets/images/class-skills/1.jpg');
-      case CARDCLASS[2]:  return require('assets/images/class-skills/2.jpg');
-      case CARDCLASS[3]:  return require('assets/images/class-skills/3.jpg');
-      case CARDCLASS[4]:  return require('assets/images/class-skills/4.jpg');
-      case CARDCLASS[5]:  return require('assets/images/class-skills/5.jpg');
-      case CARDCLASS[6]:  return require('assets/images/class-skills/6.jpg');
-      case CARDCLASS[7]:  return require('assets/images/class-skills/7.jpg');
-      case CARDCLASS[8]:  return require('assets/images/class-skills/8.jpg');
-      case CARDCLASS[9]:  return require('assets/images/class-skills/9.jpg');
-      default:            return;
-    }
+    const playerClass = string.replace(/(%)/g, '').toUpperCase();
+    return `assets/images/class-skills/${playerClass}/DEFAULT.jpg`;
   }
 
   function classText(string) {
     // prettier-ignore
     switch (string) {
-      case CARDCLASS[1]:  return CLASS_SKILL_DESCRIPTIONS[1];
-      case CARDCLASS[2]:  return CLASS_SKILL_DESCRIPTIONS[2];
-      case CARDCLASS[3]:  return CLASS_SKILL_DESCRIPTIONS[3];
-      case CARDCLASS[4]:  return CLASS_SKILL_DESCRIPTIONS[4];
-      case CARDCLASS[5]:  return CLASS_SKILL_DESCRIPTIONS[5];
-      case CARDCLASS[6]:  return CLASS_SKILL_DESCRIPTIONS[6];
-      case CARDCLASS[7]:  return CLASS_SKILL_DESCRIPTIONS[7];
-      case CARDCLASS[8]:  return CLASS_SKILL_DESCRIPTIONS[8];
-      case CARDCLASS[9]:  return CLASS_SKILL_DESCRIPTIONS[9];
+      case CARDCLASS[1]:  return CLASS_SKILLS[1].name;
+      case CARDCLASS[2]:  return CLASS_SKILLS[2].name;
+      case CARDCLASS[3]:  return CLASS_SKILLS[3].name;
+      case CARDCLASS[4]:  return CLASS_SKILLS[4].name;
+      case CARDCLASS[5]:  return CLASS_SKILLS[5].name;
+      case CARDCLASS[6]:  return CLASS_SKILLS[6].name;
+      case CARDCLASS[7]:  return CLASS_SKILLS[7].name;
+      case CARDCLASS[8]:  return CLASS_SKILLS[8].name;
+      case CARDCLASS[9]:  return CLASS_SKILLS[9].name;
       default:            return;
     }
   }
@@ -201,7 +190,7 @@ const Component = styled.div`
   justify-content: center;
   position: absolute;
   right: -155px;
-  top: 45px;
+  top: 0;
   user-select: none;
   width: 120px;
   transition: 600ms cubic-bezier(0.19, 1, 0.22, 1);

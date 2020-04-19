@@ -9,6 +9,7 @@ import health from 'lib/state/health';
 import playerCanAttack from 'lib/state/player-can-attack';
 import playerCanBeAttacked from 'lib/state/player-can-be-attacked';
 import playerWeapon from 'lib/state/player-weapon';
+import RACE from 'enums/race.enums';
 
 const initCoreWarcry = (G, ctx, cardId, index) => {
   const { turnOrder } = G;
@@ -38,8 +39,17 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
       return CORE_025(G, ctx, cardId);
     case 'CORE_026':
       return CORE_026(G, ctx, cardId);
+
     case 'CORE_032':
-      return CORE_032(G, ctx, cardId);
+      // heal player
+      health.add(G, ctx.currentPlayer, 2);
+
+      // heal minions w/loop method
+      G.boards[currentPlayer].forEach((_, idx) => {
+        boards.addToMinionHealth(G, currentPlayer, idx, 2);
+      });
+      break;
+
     case 'CORE_033':
       return CORE_033(G, ctx, index);
     case 'CORE_035':
@@ -72,20 +82,13 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
       break;
 
     /**
-     * <strong>Warcry:</strong> Draw 2 cards.
-     */
-    case 'CORE_061':
-      drawCard(G, ctx, currentPlayer, 2);
-      break;
-
-    /**
-     * <strong>Warcry:</strong> Give a friendly minion <strong>Onslaught</strong>.
+     * <strong>Warcry:</strong> Give all your Creatures <em>Stampede</em>.
      */
     case 'CORE_062':
-      if (G.boards[currentPlayer].length === 1) return;
-      G.warcryObject[currentPlayer] = createWarcryObject(cardId);
+      // if (G.boards[currentPlayer].length === 1) return;
       G.boards[currentPlayer].forEach((slot, i) => {
-        if (index !== i) slot.canReceiveOnslaught = true;
+        if (slot.minionData.race === RACE[1] && !slot.hasAttacked)
+          slot.canAttack = true;
       });
       break;
 
@@ -156,14 +159,12 @@ const CORE_016 = (G, ctx, cardId) => {
  * @param {string} cardId
  */
 const CORE_020 = (G, ctx, cardId) => {
-  if (G.boards[ctx.currentPlayer].length === 7) return; // max minions
-  G.boards[ctx.currentPlayer].push(
-    createBoardSlotObject(
-      `${cardId}${['a', 'b'].sort(() => {
-        return Math.random() - 0.5;
-      })}`
-    )
-  );
+  const { currentPlayer, random } = ctx;
+  if (G.boards[currentPlayer].length === 7) return; // max minions
+  const minions = [`${cardId}a`, `${cardId}a`];
+  const randomMinionID = random.Shuffle(minions).shift();
+  const randomMinion = createBoardSlotObject(randomMinionID);
+  G.boards[currentPlayer].push(randomMinion);
 };
 
 /**
@@ -182,21 +183,6 @@ const CORE_025 = (G, ctx, cardId) => {
 
 const CORE_026 = (G, ctx) => {
   return drawCardAtStartOfTurn(G, ctx);
-};
-
-/**
- * Restore 2 Health to you and all your minions.
- */
-const CORE_032 = (G, ctx, cardId) => {
-  const HEAL_AMOUNT = 2;
-
-  // heal player
-  health.add(G, ctx.currentPlayer, HEAL_AMOUNT);
-
-  // heal minions w/loop method
-  for (let i = 0; i < G.boards[ctx.currentPlayer].length; i++)
-    if (G.boards[ctx.currentPlayer][i].minionData.id !== cardId)
-      boards.addToMinionHealth(G, ctx.currentPlayer, i, HEAL_AMOUNT);
 };
 
 /**
@@ -304,6 +290,7 @@ const CORE_118 = (G, ctx) => {
  * Deal 1 damage to everyone except itself.
  */
 const CORE_122 = (G, ctx, currentPlayer, otherPlayer, amount, index) => {
+  health.subtract(G, currentPlayer, amount);
   G.boards[currentPlayer].forEach((slot, i) => {
     if (i !== index) {
       boards.subtractFromMinionHealth(G, currentPlayer, i, amount);
@@ -311,6 +298,7 @@ const CORE_122 = (G, ctx, currentPlayer, otherPlayer, amount, index) => {
     }
   });
 
+  health.subtract(G, otherPlayer, amount);
   G.boards[otherPlayer].forEach((slot, i) => {
     boards.subtractFromMinionHealth(G, otherPlayer, i, amount);
     boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);

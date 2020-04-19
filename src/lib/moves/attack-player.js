@@ -60,11 +60,14 @@ const attackPlayer = (G, ctx) => {
       G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasOnslaughtAttack - 1
     );
 
-    if (ATTACKING_MINION_ONSLAUGHT_COUNT === 0)
+    if (ATTACKING_MINION_ONSLAUGHT_COUNT === 0) {
       boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+      G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasAttacked = true;
+    }
   } else {
     // disable ATTACKING_MINION's ability to attack
     boards.disableCanAttack(G, currentPlayer, ATTACKING_MINION_INDEX);
+    G.boards[currentPlayer][ATTACKING_MINION_INDEX].hasAttacked = true;
   }
 
   // remove concealed once you attack

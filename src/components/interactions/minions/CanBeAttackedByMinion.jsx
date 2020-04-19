@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 export default function CanBeAttackedByMinion({ G, ctx, moves, index }) {
   const { selectedMinionIndex } = G;
+  const { currentPlayer } = ctx;
   const {
     attackMinion,
     setAttackedMinionIndex,
@@ -16,13 +16,14 @@ export default function CanBeAttackedByMinion({ G, ctx, moves, index }) {
 
     setTimeout(() => {
       setAttackedMinionIndex(null);
-      resetMinionIsAttacking(selectedMinionIndex[ctx.currentPlayer]);
-      resetMinionIsAttackingIndex(selectedMinionIndex[ctx.currentPlayer]);
+      resetMinionIsAttacking(selectedMinionIndex[currentPlayer]);
+      resetMinionIsAttackingIndex(selectedMinionIndex[currentPlayer]);
     }, 250);
   }
 
   return (
-    <Component
+    <div
+      className="can-be-attacked"
       data-file="interactions/minions/CanBeAttackedByMinion"
       onClick={() => handleClick()}
     />
@@ -35,19 +36,3 @@ CanBeAttackedByMinion.propTypes = {
   moves: PropTypes.object,
   index: PropTypes.number
 };
-
-const Component = styled.div`
-  border-radius: var(--minion-border-radius);
-  box-shadow: 0 0 5px #c43800;
-  cursor: pointer;
-  height: 100%;
-  opacity: 1;
-  transition-property: box-shadow, opacity;
-  transition: 200ms ease-in-out;
-  width: 100%;
-  position: absolute;
-
-  &:hover {
-    box-shadow: 0 0 20px #c43800;
-  }
-`;

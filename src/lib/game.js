@@ -41,6 +41,7 @@ export const HSclone = {
    * @see https://boardgame.io/documentation/#/phases
    */
   phases: {
+    // initPlayers: initDecksPhase,
     initDecks: initDecksPhase,
     initHands: initHandsPhase,
     play: playPhase

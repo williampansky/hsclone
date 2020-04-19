@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useHover from 'react-use-hover';
 import limitNumberWithinRange from 'lib/utils/range-limit';
@@ -9,6 +9,8 @@ import CardIsPlayable from 'components/interactions/cards/CardIsPlayable';
 import CardIsPlayableEffect from 'components/interactions/cards/CardIsPlayableEffect';
 import CardIsSelected from 'components/interactions/cards/CardIsSelected';
 import CardIsSelectedEffect from 'components/interactions/cards/CardIsSelectedEffect';
+import GAME_CONFIG from 'config/game.config';
+import usePrevious from 'components/hooks/usePrevious';
 
 export default function CardInteraction({
   G,
@@ -19,17 +21,16 @@ export default function CardInteraction({
   card,
   index
 }) {
-  const [isAnimating, setIsAnimating] = React.useState(false);
   const { selectedCardIndex, spellObject, warcryObject } = G;
   const { currentPlayer, phase } = ctx;
   const { deselectCard, hoverCard, selectCard } = moves;
+
+  const nullCardIndex = selectedCardIndex[currentPlayer] === null;
 
   const [isHovering, hoverProps] = useHover({
     mouseEnterDelayMS: 0,
     mouseLeaveDelayMS: 0
   });
-
-  const nullCardIndex = selectedCardIndex[currentPlayer] === null;
 
   const dispatchHover = useCallback(
     (hovering, nullIdx) => {
@@ -41,12 +42,6 @@ export default function CardInteraction({
   useEffect(() => {
     phase === 'play' && isActive && dispatchHover(isHovering, nullCardIndex);
   }, [isActive, phase, isHovering, nullCardIndex, dispatchHover]);
-
-  // prettier-ignore
-  useEffect(() => {
-    setIsAnimating(false);
-    // setTimeout(() => { setIsAnimating(false) }, 2000);
-  }, []);
 
   const {
     artist,
@@ -76,13 +71,20 @@ export default function CardInteraction({
     uuid,
     targetingArrowText,
     text,
-    type
+    type,
+    warcryNumber
   } = card;
+
+  const playerSpellBuff = G.buffs[currentPlayer].spellDamage;
+  const playerSpellDamage = warcryNumber;
+  const dynamicSpellDamageText = Math.abs(playerSpellBuff + playerSpellDamage);
 
   const numberOfCards = G.counts[yourID].hand;
   const WARCRY_OBJECT_ACTIVE = warcryObject[yourID] !== null;
   const SPELL_OBJECT_ACTIVE = spellObject[yourID] !== null;
-  const CAN_AFFORD = cost <= G.energy[yourID].current;
+  const CAN_AFFORD = !GAME_CONFIG.debugData.enableCost
+    ? true
+    : cost <= G.energy[yourID].current;
   const IS_PLAYABLE =
     isActive && CAN_AFFORD && !WARCRY_OBJECT_ACTIVE && !SPELL_OBJECT_ACTIVE;
   const IS_SELECTED = G.selectedCardIndex[yourID] === index;
@@ -130,16 +132,41 @@ export default function CardInteraction({
     }, 0);
   }
 
+  const [isAnimating, setIsAnimating] = useState(true);
+  const [cardUuid, setCardUuid] = useState(null);
+  const previousCardUuid = usePrevious(cardUuid);
+  const previousIndex = usePrevious(index);
+
+  const handleAnimatingCallback = useCallback(
+    (idx, uniqueId) => {
+      if (uniqueId !== previousCardUuid && idx !== previousIndex) {
+        setIsAnimating(true);
+
+        setTimeout(() => {
+          setIsAnimating(false);
+        }, 3000);
+      }
+    },
+    [previousIndex, previousCardUuid]
+  );
+
+  useEffect(() => {
+    setCardUuid(uuid);
+  }, [uuid]);
+
+  useEffect(() => {
+    handleAnimatingCallback(index, uuid);
+  }, [index, uuid, handleAnimatingCallback]);
+
   return (
     <div
       data-file="interactions/cards/CardInteractionLayer"
       data-index={index}
       data-is-playable={!isAnimating && IS_PLAYABLE}
       data-is-selected={IS_SELECTED}
-      className={[
-        'card-in-your-hand',
-        isAnimating ? 'draw-card-animation' : ''
-      ].join(' ')}
+      className={['card-in-your-hand', isAnimating ? 'animate-in' : ''].join(
+        ' '
+      )}
       style={yourHandStyle}
       {...hoverProps}
     >
@@ -179,6 +206,7 @@ export default function CardInteraction({
         targetingArrowText={targetingArrowText}
         text={text}
         type={type}
+        dynamicSpellDamageText={dynamicSpellDamageText}
       />
 
       {isActive ? (

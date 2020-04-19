@@ -6,6 +6,8 @@ import TYPE from 'enums/type.enums';
 import RACE from 'enums/race.enums';
 import RARITY from 'enums/rarity.enums';
 import placeholdersArray from 'placeholders-array';
+import replaceDynamicText from 'utils/replace-dynamic-text';
+import replaceConstant from 'utils/replace-constants';
 
 export default function Card({
   artist,
@@ -34,12 +36,13 @@ export default function Card({
   spellType,
   targetingArrowText,
   text,
-  type
+  type,
+  dynamicSpellDamageText
 }) {
   const IS_MINION = type === TYPE[1] ? true : false;
+  const IS_ITEM = type === TYPE[2] ? true : false;
   const IS_SPELL = type === TYPE[3] ? true : false;
   const IS_WEAPON = type === TYPE[4] ? true : false;
-  const IS_ITEM = type === TYPE[5] ? true : false;
 
   function cardImage() {
     if (placeholdersArray.includes(id))
@@ -47,7 +50,13 @@ export default function Card({
 
     return isGolden
       ? `url(${goldenImageSrc})`
-      : `url(assets/images/sets/${set}/${id}.jpg)`;
+      : `url(assets/images/sets/${set}/${id}-CARD.jpg)`;
+  }
+
+  function cardText(string, spellDmg) {
+    const replacedDynamicDmg = replaceDynamicText(string, spellDmg);
+    const replacedSymbols = replaceConstant(replacedDynamicDmg);
+    return replacedSymbols;
   }
 
   const fontSize = {
@@ -83,7 +92,9 @@ export default function Card({
       <div className={'card__text'}>
         <p
           className={'text__value'}
-          dangerouslySetInnerHTML={createMarkup(text)}
+          dangerouslySetInnerHTML={createMarkup(
+            cardText(text, dynamicSpellDamageText)
+          )}
         />
       </div>
 
@@ -192,7 +203,8 @@ Card.propTypes = {
   spellType: PropTypes.string,
   targetingArrowText: PropTypes.string,
   text: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  dynamicSpellDamageText: PropTypes.number
 };
 
 Card.defaultProps = {

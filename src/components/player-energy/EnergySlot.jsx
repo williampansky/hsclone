@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ReactSVG } from 'react-svg';
 
-export default function PlayerEnergy({
+export default function EnergySlot({
   available,
   empty,
   filled,
@@ -29,7 +29,7 @@ export default function PlayerEnergy({
   );
 }
 
-PlayerEnergy.propTypes = {
+EnergySlot.propTypes = {
   available: PropTypes.bool,
   empty: PropTypes.bool,
   filled: PropTypes.bool,

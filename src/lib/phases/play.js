@@ -79,8 +79,10 @@ const onBegin = (G, ctx) => {
       slot.willExpireIn = Math.abs(slot.willExpireIn - 1);
 
       // kill minion if expiration integer hits zero
-      if (slot.willExpireIn === 0)
-        boards.killMinion(G, ctx, otherPlayer, slot, i);
+      if (slot.willExpireIn === 0) {
+        boards.subtractFromMinionHealth(G, otherPlayer, i, 9000);
+        boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
+      }
     } else {
       slot.willExpireIn = 2;
     }
@@ -143,7 +145,10 @@ const onEnd = (G, ctx) => {
       canBeAttackedBySpell: false,
       canBeAttackedByWarcry: false,
       canBeBuffed: false,
-      canBeHealed: false
+      canBeHealed: false,
+      isAttacking: false,
+      isAttackingMinionIndex: null,
+      isAttackingMinionPlayer: false
     };
   });
 
@@ -157,7 +162,10 @@ const onEnd = (G, ctx) => {
       canBeAttackedBySpell: false,
       canBeAttackedByWarcry: false,
       canBeBuffed: false,
-      canBeHealed: false
+      canBeHealed: false,
+      isAttacking: false,
+      isAttackingMinionIndex: null,
+      isAttackingMinionPlayer: false
     };
   });
 
@@ -168,6 +176,7 @@ const onEnd = (G, ctx) => {
   G.playerCanBeAttackedBySpell = { '0': false, '1': false };
   G.playerCanBeAttackedByWarcry = { '0': false, '1': false };
   G.playerCanBeHealed = { '0': false, '1': false };
+  G.playerHasAttacked = { '0': false, '1': false };
   G.playerIsAttacking = { '0': false, '1': false };
 
   // reset card states

@@ -52,19 +52,8 @@ export default function YourAvatar({
   }, [YOUR_HEALTH, animateWasAttacked]);
 
   function classImage(string) {
-    // prettier-ignore
-    switch (string) {
-      case CARDCLASS[1]:  return require('assets/images/class-avatars/1.jpg');
-      case CARDCLASS[2]:  return require('assets/images/class-avatars/2.jpg');
-      case CARDCLASS[3]:  return require('assets/images/class-avatars/3.jpg');
-      case CARDCLASS[4]:  return require('assets/images/class-avatars/4.jpg');
-      case CARDCLASS[5]:  return require('assets/images/class-avatars/5.jpg');
-      case CARDCLASS[6]:  return require('assets/images/class-avatars/6.jpg');
-      case CARDCLASS[7]:  return require('assets/images/class-avatars/7.jpg');
-      case CARDCLASS[8]:  return require('assets/images/class-avatars/8.jpg');
-      case CARDCLASS[9]:  return require('assets/images/class-avatars/9.jpg');
-      default:            return;
-    }
+    const playerClass = string.replace(/(%)/g, '').toUpperCase();
+    return `assets/images/classes/${playerClass}/DEFAULT.jpg`;
   }
 
   const PlayerIsAttackingPlayer = playerIsAttackingPlayer[yourID];
@@ -93,7 +82,7 @@ export default function YourAvatar({
         attackingPlayerClass
       ].join(' ')}
     >
-      <ClassSkillButton
+      {/* <ClassSkillButton
         G={G}
         ctx={ctx}
         moves={moves}
@@ -101,7 +90,7 @@ export default function YourAvatar({
         playerClass={playerClass}
         board={PLAYER_BOARDS[1]}
         canUse={playerCanUseClassSkill[yourID] && energy[yourID].current >= 2}
-      />
+      /> */}
 
       {playerWeapon[yourID] !== null ? (
         <PlayerWeapon
@@ -112,12 +101,12 @@ export default function YourAvatar({
         />
       ) : null}
 
-      <PlayerHealth
+      {/* <PlayerHealth
         health={YOUR_HEALTH}
         player="YourHealth"
         shieldPoints={YOUR_SHIELD}
         wasAttacked={wasAttacked}
-      />
+      /> */}
 
       <div
         className={[

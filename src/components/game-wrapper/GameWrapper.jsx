@@ -6,11 +6,13 @@ import Board from 'components/boards/Board';
 import GameBackground from 'components/game-wrapper/GameBackground';
 import GameMenu from 'components/game-menu/GameMenu';
 import GameOver from 'components/game-over/GameOver';
-import TheirHand from 'components/hands/TheirHandV2';
-import YourHand from 'components/hands/YourHandV2';
+import TheirHand from 'components/hands/TheirHandV3';
+import YourHand from 'components/hands/YourHandV3';
 import ResizeObserver from 'components/game-wrapper/ResizeObserver';
 import MatchHistory from 'components/match-history/MatchHistory';
 import PlayerSidebar from 'components/player-sidebar/PlayerSidebar';
+import SidebarBackground from './SidebarBackground';
+import LastPlayedCard from 'components/LastPlayedCard';
 
 export default function GameWrapper(props) {
   // global state manipulations
@@ -35,7 +37,7 @@ export default function GameWrapper(props) {
     isConnected,
     credentials
   } = props;
-  const { cardBack, health, winner } = G;
+  const { cardBack, health, allPlayedCards, winner } = G;
   const { gameover } = ctx;
   const { setGameWinner } = moves;
 
@@ -43,6 +45,7 @@ export default function GameWrapper(props) {
   const yourID = playerID === '0' ? '0' : '1';
   const theirID = playerID === '0' ? '1' : '0';
 
+  // toggle game menu
   function toggleMenu() {
     return !showMenu
       ? setShowMenu({ showMenu: true })
@@ -135,6 +138,11 @@ export default function GameWrapper(props) {
           gameWidth={1920}
           gameHeight={1080}
         />
+        {/* <SidebarBackground
+          backgroundImage="assets/SIDEBAR.png"
+          gameWidth={1920}
+          gameHeight={1080}
+        /> */}
       </div>
 
       {gameover && (
@@ -158,6 +166,8 @@ export default function GameWrapper(props) {
           gameWidth={1920}
         />
       )}
+
+      <LastPlayedCard G={G} ctx={ctx} array={allPlayedCards} />
 
       <MatchHistory G={G} ctx={ctx} gameWidth={1920} gameHeight={1080} />
       <PlayerSidebar

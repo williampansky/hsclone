@@ -6,8 +6,8 @@ import logMessage from 'lib/match-history/log-message';
 
 export default {
   onBegin: (G, ctx) => {
-    const FIRST_PLAYER = G.turnOrder[0];
-    const SECOND_PLAYER = G.turnOrder[1];
+    const FIRST_PLAYER = G.turnOrder['0'];
+    const SECOND_PLAYER = G.turnOrder['1'];
 
     logMessage(G, ctx, 'matchStart');
 
@@ -31,8 +31,8 @@ export default {
   // End phase when both player's have their starting hands
   // prettier-ignore
   endIf: G => (
-    G.players[G.turnOrder[0]].hand.length === 3 &&
-    G.players[G.turnOrder[1]].hand.length === 5
+    G.players[G.turnOrder['0']].hand.length === 3 &&
+    G.players[G.turnOrder['1']].hand.length === 5
   ),
 
   next: 'play'
