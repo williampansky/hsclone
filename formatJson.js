@@ -46,16 +46,7 @@ base
   .then(resp => {
     const map = resp.records.map(item => {
       const { fields } = item;
-      const {
-        artist,
-        cardClass,
-        collectible,
-        elite,
-        id,
-        mechanics,
-        name,
-        text
-      } = fields;
+      const { artist, cardClass, id, mechanics, name, text } = fields;
 
       if (!id) return;
 
@@ -64,8 +55,6 @@ base
           ...fields,
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
-          collectible: collectible === 'checked' ? true : false,
-          elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
               ? mechanics
@@ -93,8 +82,6 @@ base
       const {
         artist,
         cardClass,
-        collectible,
-        elite,
         id,
         inspiration,
         mechanics,
@@ -109,8 +96,6 @@ base
           ...fields,
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
-          collectible: collectible === 'checked' ? true : false,
-          elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
               ? mechanics
@@ -138,8 +123,6 @@ base
       const {
         artist,
         cardClass,
-        collectible,
-        elite,
         id,
         inspiration,
         mechanics,
@@ -154,8 +137,6 @@ base
           ...fields,
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
-          collectible: collectible === 'checked' ? true : false,
-          elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
               ? mechanics
@@ -183,8 +164,6 @@ base
       const {
         artist,
         cardClass,
-        collectible,
-        elite,
         id,
         inspiration,
         mechanics,
@@ -199,8 +178,6 @@ base
           ...fields,
           artist: artist ? artist : null,
           cardClass: parseCardClass(cardClass),
-          collectible: collectible === 'checked' ? true : false,
-          elite: elite === 'checked' ? true : false,
           mechanics: GAME_CONFIG.debugData.enableMechanics
             ? mechanics
               ? mechanics

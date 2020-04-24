@@ -161,7 +161,6 @@ const placeholdersArray = [
   'PRIME_136',
   'PRIME_137',
   'PRIME_138',
-  'PRIME_139',
   'PRIME_140',
   'PRIME_141',
   'PRIME_142',

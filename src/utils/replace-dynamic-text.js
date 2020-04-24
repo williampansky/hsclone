@@ -6,8 +6,8 @@ import exists from './element.exists';
  * @param {String} value Value to replace
  */
 export default function replaceDynamicText(string, value) {
-  if (!exists(string) || !exists(value)) return;
+  if (!exists(string) || !exists(value)) return string;
   if (!string.includes('%NUM%')) return string;
-  const newString = string.replace('%NUM%', value);
+  const newString = string.replace(/%(NUM)%/g, value);
   return newString;
 }
