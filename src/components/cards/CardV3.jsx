@@ -4,7 +4,6 @@ import { fontSizeBasedOnCharacterLength } from 'utils/text';
 import createMarkup from 'utils/createMarkup';
 import TYPE from 'enums/type.enums';
 import RACE from 'enums/race.enums';
-import RARITY from 'enums/rarity.enums';
 import placeholdersArray from 'placeholders-array';
 import replaceDynamicText from 'utils/replace-dynamic-text';
 import replaceConstant from 'utils/replace-constants';
@@ -37,6 +36,7 @@ export default function Card({
   targetingArrowText,
   text,
   type,
+  warcryNumber,
   dynamicSpellDamageText
 }) {
   const IS_MINION = type === TYPE[1] ? true : false;
@@ -44,16 +44,16 @@ export default function Card({
   const IS_SPELL = type === TYPE[3] ? true : false;
   const IS_WEAPON = type === TYPE[4] ? true : false;
 
-  function cardImage() {
-    if (placeholdersArray.includes(id))
+  function cardImage(cardId, cardSet, isGold, goldSrc) {
+    if (placeholdersArray.includes(cardId))
       return `url(assets/images/sets/PLACEHOLDER.jpg)`;
 
-    return isGolden
-      ? `url(${goldenImageSrc})`
-      : `url(assets/images/sets/${set}/${id}-CARD.jpg)`;
+    return isGold
+      ? `url(${goldSrc})`
+      : `url(assets/images/sets/${cardSet}/${cardId}-CARD.jpg)`;
   }
 
-  function cardText(string, spellDmg) {
+  function cardText(string, spellDmg = warcryNumber) {
     const replacedDynamicDmg = replaceDynamicText(string, spellDmg);
     const replacedSymbols = replaceConstant(replacedDynamicDmg);
     return replacedSymbols;
@@ -80,7 +80,9 @@ export default function Card({
       <div className={'card__image__wrapper'}>
         <div
           className={'card__image'}
-          style={{ backgroundImage: cardImage() }}
+          style={{
+            backgroundImage: cardImage(id, set, isGolden, goldenImageSrc)
+          }}
         />
       </div>
 
@@ -101,16 +103,16 @@ export default function Card({
       {IS_MINION ? (
         race !== RACE[0] ? (
           <div className={'card__type'}>
-            <div>{race}</div>
+            <div>{replaceConstant(race)}</div>
           </div>
         ) : (
           <div className={'card__type'}>
-            <div>{type}</div>
+            <div>{replaceConstant(type)}</div>
           </div>
         )
       ) : (
         <div className={'card__type'}>
-          <div>{type}</div>
+          <div>{replaceConstant(type)}</div>
         </div>
       )}
 
@@ -204,6 +206,7 @@ Card.propTypes = {
   targetingArrowText: PropTypes.string,
   text: PropTypes.string,
   type: PropTypes.string,
+  warcryNumber: PropTypes.number,
   dynamicSpellDamageText: PropTypes.number
 };
 
