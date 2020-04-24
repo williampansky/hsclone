@@ -45,7 +45,7 @@ export default {
   playerCanBeAttackedByWarcry: playerCanBeAttacked.playerCanBeAttackedByWarcry,
   playerCanBeHealed: playerCanBeHealed.__DATA_MODEL,
   playerCanUseClassSkill: playerCanUseClassSkill.__DATA_MODEL,
-  playerClass: { '0': CARDCLASS[8], '1': CARDCLASS[3] },
+  playerClass: { '0': null, '1': null },
   playerHasAttacked: { '0': false, '1': false },
   playerIsAttacking: playerIsAttacking.__DATA_MODEL,
   playerIsDisabled: playerIsDisabled.__DATA_MODEL,

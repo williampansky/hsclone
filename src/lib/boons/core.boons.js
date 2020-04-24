@@ -24,6 +24,9 @@ const initCoreBoon = (G, player, cardId, index) => {
       });
       break;
 
+    case 'CORE_062':
+      break;
+
     // Provide adjacent minions with +2 Attack.
     case 'CORE_108':
       G.boards[player].forEach((slot, i) => {

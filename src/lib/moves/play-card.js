@@ -100,9 +100,13 @@ export const playMinionCard = (
   G.selectedCardIndex[currentPlayer] = null;
   G.selectedCardObject[currentPlayer] = null;
 
-  G.boards[currentPlayer].forEach(slot => {
+  G.boards[currentPlayer].forEach((slot, i) => {
     if (slot.minionData.id === 'CORE_061') {
-      if (race === RACE[1]) drawCard(G, ctx, currentPlayer, 1);
+      if (race === RACE[1] && i !== index) drawCard(G, ctx, currentPlayer, 1);
+    }
+
+    if (slot.minionData.id === 'CORE_062') {
+      if (race === RACE[1]) G.boards[currentPlayer][index].canAttack = true;
     }
   });
 };

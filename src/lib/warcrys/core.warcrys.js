@@ -77,20 +77,22 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
       if (G.boards[currentPlayer].length === 1) return;
       G.warcryObject[currentPlayer] = createWarcryObject(cardId);
       G.boards[currentPlayer].forEach((slot, i) => {
-        if (index !== i) slot.canReceiveGuard = true;
+        if (index !== i) {
+          if (slot.minionData.race === RACE[1]) slot.canReceiveGuard = true;
+        }
       });
       break;
 
     /**
      * <strong>Warcry:</strong> Give all your Creatures <em>Stampede</em>.
      */
-    case 'CORE_062':
-      // if (G.boards[currentPlayer].length === 1) return;
-      G.boards[currentPlayer].forEach((slot, i) => {
-        if (slot.minionData.race === RACE[1] && !slot.hasAttacked)
-          slot.canAttack = true;
-      });
-      break;
+    // case 'CORE_062':
+    //   // if (G.boards[currentPlayer].length === 1) return;
+    //   G.boards[currentPlayer].forEach((slot, i) => {
+    //     if (slot.minionData.race === RACE[1] && !slot.hasAttacked)
+    //       slot.canAttack = true;
+    //   });
+    //   break;
 
     /**
      * <strong>Warcry:</strong> Restore 6 Health to yourself.

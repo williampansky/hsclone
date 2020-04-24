@@ -13,6 +13,13 @@ const Component = styled.div`
   width: 100%;
   pointer-events: none;
   position: absolute;
+  z-index: 1;
+  transition: 600ms ease-in-out;
+  transition-property: box-shadow, opacity, transform;
+
+  .is-selected ~ & {
+    transform: scale(1.15);
+  }
 
   @keyframes hasBoonGlow {
     0%,
@@ -20,16 +27,16 @@ const Component = styled.div`
       box-shadow: 0 0 0 rgba(236, 210, 79, 0);
     }
     70% {
-      box-shadow: 0 0 5px rgba(236, 210, 79, 1);
+      box-shadow: 0 0 5px 5px rgba(236, 210, 79, 1);
     }
     80% {
-      box-shadow: 0 0 10px rgba(236, 210, 79, 1);
+      box-shadow: 0 0 10px 10px rgba(236, 210, 79, 1);
     }
     90% {
-      box-shadow: 0 0 30px rgba(236, 210, 79, 0.45);
+      box-shadow: 0 0 30px 15px rgba(236, 210, 79, 0.45);
     }
     100% {
-      box-shadow: 0 0 25px rgba(236, 210, 79, 0);
+      box-shadow: 0 0 25px 12.5px rgba(236, 210, 79, 0);
     }
   }
 `;

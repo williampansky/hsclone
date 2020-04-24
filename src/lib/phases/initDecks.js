@@ -1,4 +1,5 @@
 import deckInfo from 'lib/state/deck-info';
+import CARDCLASS from 'enums/cardClass.enums';
 
 const ASSASSIN = require('data/debug/CORE_DECK_ASSASSIN_01.json');
 const AUGUR = require('data/debug/CORE_DECK_AUGUR_01.json');
@@ -16,11 +17,14 @@ export default {
   // component (client-side) state into the G state.
   // @TODO fix later on for deck selection/lobby/etc
   onBegin: (G, ctx) => {
-    G.players['0'].deck = ctx.random.Shuffle(MYSTIC);
+    G.players['0'].deck = ctx.random.Shuffle(SNIPER);
     G.players['1'].deck = ctx.random.Shuffle(SORCERER);
 
-    deckInfo.set(G, ctx, '0', MYSTIC);
+    deckInfo.set(G, ctx, '0', SNIPER);
     deckInfo.set(G, ctx, '1', SORCERER);
+
+    G.playerClass['0'] = CARDCLASS[2];
+    G.playerClass['1'] = CARDCLASS[3];
   },
 
   // End phase when both player's decks are full (30 cards)
