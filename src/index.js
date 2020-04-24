@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './styles/game.scss';
-import App from './App';
+// import App from './App';
+import App from './AppSinglePlayer';
+// import App from './AppLobby';
 import * as serviceWorker from './serviceWorker';
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {

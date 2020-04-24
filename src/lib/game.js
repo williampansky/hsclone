@@ -48,5 +48,17 @@ export const HSclone = {
   },
 
   // End game if either player's health reaches zero
-  endIf: G => G.winner !== null
+  endIf: G => G.winner !== null,
+
+  ai: {
+    enumerate: (G, ctx) => {
+      let moves = [];
+      for (let i = 0; i < 9; i++) {
+        if (G.cells[i] === null) {
+          moves.push({ move: 'clickCell', args: [i] });
+        }
+      }
+      return moves;
+    }
+  }
 };

@@ -38,9 +38,6 @@ class App extends React.Component {
 
     if (localStorage.getItem('playerName'))
       this.setState({ playerName: localStorage.getItem('playerName') });
-
-    if (localStorage.getItem('deck'))
-      this.setState({ deck: JSON.parse(localStorage.getItem('deck')) });
   }
 
   render() {
