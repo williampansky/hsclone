@@ -32,8 +32,8 @@ const initCoreBoon = (G, player, cardId, index) => {
       G.boards[player].forEach((slot, i) => {
         if (i === index) return;
         if (i === index - 1 || i === index + 1) {
-          slot.currentAttack = slot.currentAttack + 2;
-          slot.totalAttack = slot.totalAttack + 2;
+          slot.currentAttack = Math.abs(slot.currentAttack + 2);
+          slot.totalAttack = Math.abs(slot.totalAttack + 2);
         }
       });
       break;

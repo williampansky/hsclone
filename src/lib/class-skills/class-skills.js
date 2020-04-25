@@ -71,7 +71,7 @@ export const initTargetedHeal = (G, ctx) => {
  */
 export const initTargetedDamage = (G, ctx, amount = 1) => {
   const { currentPlayer } = ctx;
-  playerWeapon.equip(G, currentPlayer, createWeaponObject('GAME_011'));
+  playerWeapon.equip(G, currentPlayer, createWeaponObject('GAME_012'));
   playerShieldPoints.add(G, currentPlayer, amount);
 };
 

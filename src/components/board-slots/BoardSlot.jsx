@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MinionInteraction from 'components/interactions/minions/MinionInteraction';
-import Minion from 'components/minion/MinionV2';
 import HasBoon from 'components/mechanics/HasBoon';
+import HasEnergyShield from 'components/mechanics/HasEnergyShield';
 import HasGuardBackground from 'components/mechanics/HasGuardBackground';
 import HasGuardForeground from 'components/mechanics/HasGuardForeground';
-import WillExpire from 'components/mechanics/WillExpire';
-import HasEnergyShield from 'components/mechanics/HasEnergyShield';
-import IsConcealed from 'components/mechanics/IsConcealed';
-import IsDisabled from 'components/mechanics/IsDisabled';
 import HasOnslaught from 'components/mechanics/HasOnslaught';
+import IsConcealed from 'components/mechanics/IsConcealed';
 import IsDeadPoof from 'components/animations/minions/IsDeadPoof';
+import IsDisabled from 'components/mechanics/IsDisabled';
+import Minion from 'components/minion/MinionV2';
+import MinionInteraction from 'components/interactions/minions/MinionInteraction';
 import PLAYER_BOARDS from 'enums/playerBoards.enums';
-import usePrevious from 'components/hooks/usePrevious';
 import SPELLTYPE from 'enums/spellType.enums';
+import usePrevious from 'components/hooks/usePrevious';
+import WillExpire from 'components/mechanics/WillExpire';
 
 export default function BoardSlot({
   G,

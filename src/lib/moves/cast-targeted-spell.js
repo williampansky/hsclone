@@ -346,7 +346,8 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
     case 'CORE_106':
       G.boards[currentPlayer][index] = {
         ...G.boards[currentPlayer][index],
-        currentAttack: G.boards[currentPlayer][index].currentAttack + 3
+        currentAttack: G.boards[currentPlayer][index].currentAttack + 3,
+        totalAttack: G.boards[currentPlayer][index].totalAttack + 3
       };
       break;
 
@@ -484,8 +485,10 @@ const castTargetedClassSkill = (G, ctx, playerCtx, targetCtx, index, id) => {
       if (targetCtx === WARCRY_TARGET_CONTEXT[2]) {
         logMessage(G, ctx, 'GAME_010', null);
         health.subtract(G, otherPlayer, 1);
+        G.lastTargeted = { context: TARGET_CONTEXT[2], index: null };
       } else {
         logMessage(G, ctx, 'GAME_010', null, index);
+        G.lastTargeted = { context: TARGET_CONTEXT[2], index: index };
         boards.subtractFromMinionHealth(G, otherPlayer, index, 1);
         boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       }

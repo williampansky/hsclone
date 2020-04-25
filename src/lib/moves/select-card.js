@@ -261,7 +261,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
 
       case 'CORE_113':
         G.boards[currentPlayer].forEach(slot => {
-          if (slot.minionData.race === RACE[3]) slot.canBeSacrificed = true;
+          slot.canBeSacrificed = true;
         });
         break;
 

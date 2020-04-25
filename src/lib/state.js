@@ -36,6 +36,7 @@ export default {
   health: health.__DATA_MODEL,
   hoveringCardIndex: hoveringCardIndex.__DATA_MODEL,
   lastPlayedCardId: null,
+  lastTargeted: { context: null, index: null },
   playerAttackValue: playerAttackValue.__DATA_MODEL,
   playerCanAttack: playerCanAttack.__DATA_MODEL,
   playerCanBeAttackedByMinion: playerCanBeAttacked.playerCanBeAttackedByMinion,

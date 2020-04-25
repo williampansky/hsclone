@@ -66,6 +66,7 @@ export default function Board({
   const cardUUID = selectedCard && selectedCard.uuid;
   const cardType = selectedCard && selectedCardType[yourID];
   const spellType = selectedCard && selectedCardSpellType[yourID];
+  const spellObjectId = spellObject[yourID] && spellObject[yourID].id;
 
   function castGlobalSpell(index = 0, uuid = cardUUID, id = cardId) {
     return playCard(index, uuid, id);
@@ -76,7 +77,12 @@ export default function Board({
   }
 
   return (
-    <div data-file="boards/Board" className={'board'}>
+    <div
+      data-file="boards/Board"
+      className={['board', spellObjectId === 'GAME_010' ? 'GAME_010' : ''].join(
+        ' '
+      )}
+    >
       {cardType === TYPE[2] && spellType === SPELLTYPE[1] ? (
         <ItemSlot
           index={0}

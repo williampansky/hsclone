@@ -1,0 +1,32 @@
+.board {
+  &:before {
+    background: rgba(0, 0, 0, 0.625);
+    content: '';
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 800ms var(--animation-transition-cubic);
+  }
+
+  &.GAME_010:before {
+    opacity: 1;
+  }
+}
+
+.board-slot.has-minion {
+  .GAME_010 {
+    pointer-events: none;
+    position: absolute;
+    width: 400px;
+    z-index: 100;
+    transform: translate(-28%, -50%) rotate(180deg);
+  }
+}

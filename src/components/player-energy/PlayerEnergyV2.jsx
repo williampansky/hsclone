@@ -41,7 +41,7 @@ const Component = styled.div`
   font-size: 22px;
   font-weight: bold;
   justify-content: center;
-  left: -10px;
+  left: 2px;
   margin: 0;
   position: absolute;
   right: auto;

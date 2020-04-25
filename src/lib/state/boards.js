@@ -18,9 +18,15 @@ import createBoardSlotObject from 'lib/creators/create-board-slot-object';
 const boards = {
   __DATA_MODEL: {
     '0': [
-      // { ...createBoardSlotObject('CORE_062'), hasBoon: true }
+      // { ...createBoardSlotObject('CORE_062') }
     ],
     '1': [
+      { ...createBoardSlotObject('CORE_004') },
+      { ...createBoardSlotObject('CORE_005') },
+      { ...createBoardSlotObject('CORE_006') },
+      { ...createBoardSlotObject('CORE_007') },
+      { ...createBoardSlotObject('CORE_008') },
+      { ...createBoardSlotObject('CORE_009') }
     ]
   },
 

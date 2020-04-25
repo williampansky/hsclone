@@ -116,7 +116,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Choose two enemies at random and deal 2 damage to each of them.
     case 'CORE_060':
       G.boards[otherPlayer].forEach((slot, i) => {
-        if (i === theirRandomIdx1 || i === theirRandomIdx2) {
+        if (i === (theirRandomIdx1 || theirRandomIdx2)) {
           boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
           boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
         }
@@ -126,11 +126,13 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Choose three enemies at random and deal 1 damage to each of them.
     case 'CORE_063':
       G.boards[otherPlayer].forEach((slot, i) => {
-        if (
-          i === theirRandomIdx1 ||
-          i === theirRandomIdx2 ||
-          i === theirRandomIdx3
-        ) {
+        if (i === theirRandomIdx1) {
+          boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
+          boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
+        } else if (i === theirRandomIdx2) {
+          boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
+          boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
+        } else if (i === theirRandomIdx3) {
           boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
           boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
         }
@@ -300,7 +302,7 @@ const initCoreSpell = (G, ctx, cardId, index) => {
     // Attack two random enemy minions for 2 damage each.
     case 'CORE_125':
       G.boards[otherPlayer].forEach((slot, i) => {
-        if (i === theirRandomIdx1 || i === theirRandomIdx2) {
+        if (i === (theirRandomIdx1 || theirRandomIdx2)) {
           boards.subtractFromMinionHealth(G, otherPlayer, i, YOUR_SPELL_DMG);
           boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, slot, i);
         }
