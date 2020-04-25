@@ -33,7 +33,7 @@ const attackMinionWithPlayer = (G, ctx, index) => {
   // }
 
   // weapon-specific mechanics
-  if (playerWeapon[currentPlayer].id === 'CORE_081') {
+  if (playerWeapon[currentPlayer].id === 'CORE_081a') {
     health.add(G, currentPlayer, 2);
   }
 

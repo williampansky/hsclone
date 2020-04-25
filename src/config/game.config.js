@@ -11,6 +11,7 @@ const GAME_CONFIG = {
     enableText: true // during formatJson.js
   },
   matchConfig: {
+    enableCardAnimation: false,
     enableInitHandsStage: false,
     enableRandomTurnOrder: false
   }

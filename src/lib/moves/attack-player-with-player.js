@@ -27,7 +27,7 @@ const attackPlayerWithPlayer = (G, ctx) => {
   logMessage(G, ctx, 'attackPlayerWithPlayer');
 
   // weapon-specific mechanics
-  if (playerWeapon[currentPlayer].id === 'CORE_081') {
+  if (playerWeapon[currentPlayer].id === 'CORE_081a') {
     health.add(G, currentPlayer, 2);
   }
 

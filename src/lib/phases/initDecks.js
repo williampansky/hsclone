@@ -17,14 +17,17 @@ export default {
   // component (client-side) state into the G state.
   // @TODO fix later on for deck selection/lobby/etc
   onBegin: (G, ctx) => {
-    G.players['0'].deck = ctx.random.Shuffle(SNIPER);
-    G.players['1'].deck = ctx.random.Shuffle(SORCERER);
+    const p1deck = BERSERKER;
+    const p2deck = KNIGHTCOMMANDER;
 
-    deckInfo.set(G, ctx, '0', SNIPER);
-    deckInfo.set(G, ctx, '1', SORCERER);
+    G.players['0'].deck = ctx.random.Shuffle(p1deck);
+    G.players['1'].deck = ctx.random.Shuffle(p2deck);
 
-    G.playerClass['0'] = CARDCLASS[2];
-    G.playerClass['1'] = CARDCLASS[3];
+    deckInfo.set(G, ctx, '0', p1deck);
+    deckInfo.set(G, ctx, '1', p2deck);
+
+    G.playerClass['0'] = CARDCLASS[9];
+    G.playerClass['1'] = CARDCLASS[4];
   },
 
   // End phase when both player's decks are full (30 cards)

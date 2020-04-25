@@ -164,9 +164,12 @@ export default function CardInteraction({
       data-index={index}
       data-is-playable={!isAnimating && IS_PLAYABLE}
       data-is-selected={IS_SELECTED}
-      className={['card-in-your-hand', isAnimating ? 'animate-in' : ''].join(
-        ' '
-      )}
+      className={[
+        'card-in-your-hand',
+        GAME_CONFIG.matchConfig.enableCardAnimation && isAnimating
+          ? 'animate-in'
+          : ''
+      ].join(' ')}
       style={yourHandStyle}
       {...hoverProps}
     >

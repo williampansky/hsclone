@@ -31,7 +31,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
   G.selectedCardSpellContext[currentPlayer] = spellContext;
   G.playerSpellDamage[currentPlayer] = warcryNumber;
 
-  if (type === TYPE[3] && spellType === SPELLTYPE[2]) {
+  if ((type === TYPE[2] || TYPE[3]) && spellType === SPELLTYPE[2]) {
     switch (id) {
       // Deal 1 damage to a selected target.
       case 'CORE_044':
@@ -117,7 +117,7 @@ const selectCard = (G, ctx, cardObject = null, index = null) => {
 
       case 'CORE_073':
         G.boards[currentPlayer].forEach(slot => {
-          slot.canBeDebuffed = true;
+          slot.canBeBuffed = true;
         });
         break;
 

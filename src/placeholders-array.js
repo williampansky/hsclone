@@ -1,6 +1,4 @@
 const placeholdersArray = [
-  'GAME_007',
-  'GAME_008',
   'GAME_009',
   'GAME_010',
   'PRIME_001',

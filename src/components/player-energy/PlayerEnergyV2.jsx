@@ -41,11 +41,11 @@ const Component = styled.div`
   font-size: 22px;
   font-weight: bold;
   justify-content: center;
-  left: 0;
+  left: -10px;
   margin: 0;
   position: absolute;
   right: auto;
-  top: -1100%;
+  top: -1150%;
   user-select: none;
 
   .energy-slot {
@@ -74,11 +74,11 @@ const Component = styled.div`
     position: absolute;
     transition: all 400ms cubic-bezier(0.19, 1, 0.22, 1);
     width: 100%;
-    z-index: 2;
+    z-index: 3;
+  }
 
-    & + .energy-slot {
-      margin-top: 4px;
-    }
+  .energy-slot + .energy-slot {
+    margin-top: 4px;
   }
 
   .energy-slot img {
@@ -159,6 +159,7 @@ const Component = styled.div`
   .energy-slot.--will-cost {
     transition-delay: 0ms !important;
     &:before { animation: blinkBefore 1200ms ease-in-out infinite; }
+    &:before { transition-delay: 0ms !important; }
 
     @keyframes blinkBefore {
       0%    { opacity: 1; }

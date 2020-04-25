@@ -424,7 +424,8 @@ const castTargetedSpell = (G, ctx, playerCtx, targetCtx, index) => {
 
     // Obliterate an already damaged minion.
     case 'CORE_126':
-      boards.killMinion(G, ctx, otherPlayer, THEIR_SLOT, index);
+      boards.subtractFromMinionHealth(G, otherPlayer, index, 9000);
+      boards.killMinionIfHealthIsZero(G, ctx, otherPlayer, THEIR_SLOT, index);
       break;
 
     default:
