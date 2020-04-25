@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 export default function WarcryObject({ data }) {
   const { id, attack, spellType, targetingArrowText } = data;
@@ -14,6 +15,7 @@ export default function WarcryObject({ data }) {
       <meta name="attack" content={attack} />
       <meta name="spellType" content={spellType} />
       <meta name="targetingArrowText" content={targetingArrowText} />
+      <Badge src={`assets/card-assets/Class_Skill_Sphere.png`} />
     </div>
   );
 }
@@ -21,3 +23,11 @@ export default function WarcryObject({ data }) {
 WarcryObject.propTypes = {
   data: PropTypes.object
 };
+
+const Badge = styled.img`
+  height: calc(var(--class-skill-button-size) + 30px);
+  right: -15px;
+  top: -12px;
+  position: absolute;
+  pointer-events: none;
+`;

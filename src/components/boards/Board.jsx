@@ -18,7 +18,7 @@ import WeaponSlot from 'components/board-slots/WeaponSlot';
 import SPELLTYPE from 'enums/spellType.enums';
 import TYPE from 'enums/type.enums';
 import SpellObject from 'components/spells/SpellObject';
-import WarcryObject from 'components/warcrys/WarcryObject';
+import WarcryObject from 'components/warcrys/WarcryObjectV2';
 import ItemSlot from 'components/board-slots/ItemSlot';
 
 export default function Board({
@@ -158,10 +158,10 @@ export default function Board({
         playerClass={playerClass[yourID]}
         playerIsAttacking={playerIsAttacking[yourID]}
       />
-      {warcryObject[yourID] ? (
+      {/* {warcryObject[yourID] ? (
         <WarcryObject data={warcryObject[yourID]} />
-      ) : null}
-      {spellObject[yourID] ? <SpellObject data={spellObject[yourID]} /> : null}
+      ) : null} */}
+      {/* {spellObject[yourID] ? <SpellObject data={spellObject[yourID]} /> : null} */}
       {/* <Deck
         board={PLAYER_BOARDS[1]}
         cardBackSrc={cardBack[yourID]}

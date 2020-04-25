@@ -36,14 +36,6 @@ PlayerHealth.propTypes = {
   wasAttacked: PropTypes.bool
 };
 
-const Badge = styled.img`
-  height: 80px;
-  right: -15px;
-  top: -15px;
-  position: absolute;
-  z-index: 0;
-`;
-
 const Component = styled.div`
   align-items: center;
   border-radius: 50%;
@@ -70,6 +62,14 @@ const Component = styled.div`
     width: 100%;
     position: absolute;
   }
+`;
+
+const Badge = styled.img`
+  height: 80px;
+  right: -15px;
+  top: -15px;
+  position: absolute;
+  z-index: 0;
 `;
 
 const HealthValue = styled.div`

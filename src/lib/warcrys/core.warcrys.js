@@ -17,6 +17,7 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
   const otherPlayer = turnOrder.find(p => p !== currentPlayer);
   const cardObj = getCardByID(cardId);
   const warcryNumber = cardObj && cardObj.warcryNumber;
+  let createObj = false;
 
   switch (cardId) {
     case 'CORE_001':
@@ -64,10 +65,16 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
      */
     case 'CORE_054':
       if (G.boards[currentPlayer].length === 1) return;
-      G.warcryObject[currentPlayer] = createWarcryObject(cardId);
+
       G.boards[currentPlayer].forEach((slot, i) => {
-        if (index !== i) slot.canBeBuffed = true;
+        if (index !== i) {
+          slot.canBeBuffed = true;
+          createObj = true;
+        }
       });
+
+      if (createObj === true)
+        G.warcryObject[currentPlayer] = createWarcryObject(cardId);
       break;
 
     /**
@@ -75,24 +82,19 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
      */
     case 'CORE_059':
       if (G.boards[currentPlayer].length === 1) return;
-      G.warcryObject[currentPlayer] = createWarcryObject(cardId);
+
       G.boards[currentPlayer].forEach((slot, i) => {
         if (index !== i) {
-          if (slot.minionData.race === RACE[1]) slot.canReceiveGuard = true;
+          if (slot.minionData.race === RACE[1]) {
+            slot.canReceiveGuard = true;
+            createObj = true;
+          }
         }
       });
-      break;
 
-    /**
-     * <strong>Warcry:</strong> Give all your Creatures <em>Stampede</em>.
-     */
-    // case 'CORE_062':
-    //   // if (G.boards[currentPlayer].length === 1) return;
-    //   G.boards[currentPlayer].forEach((slot, i) => {
-    //     if (slot.minionData.race === RACE[1] && !slot.hasAttacked)
-    //       slot.canAttack = true;
-    //   });
-    //   break;
+      if (createObj === true)
+        G.warcryObject[currentPlayer] = createWarcryObject(cardId);
+      break;
 
     /**
      * <strong>Warcry:</strong> Restore 6 Health to yourself.
@@ -106,10 +108,16 @@ const initCoreWarcry = (G, ctx, cardId, index) => {
      */
     case 'CORE_099':
       if (G.boards[currentPlayer].length === 1) return;
-      G.warcryObject[currentPlayer] = createWarcryObject(cardId);
+
       G.boards[currentPlayer].forEach((slot, i) => {
-        if (index !== i) slot.canReceiveOnslaught = true;
+        if (index !== i) {
+          slot.canReceiveOnslaught = true;
+          createObj = true;
+        }
       });
+
+      if (createObj === true)
+        G.warcryObject[currentPlayer] = createWarcryObject(cardId);
       break;
 
     case 'CORE_110':
@@ -277,10 +285,20 @@ const CORE_110 = (G, ctx, cardId) => {
  */
 const CORE_112 = (G, ctx, cardId, otherPlayer) => {
   playerCanBeAttacked.enableByWarcry(G, otherPlayer);
+
+  if (G.boards[ctx.currentPlayer].length === 1) return;
+  let createObj = false;
+
   G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
   G.boards[otherPlayer].forEach(slot => {
-    slot.canBeAttackedByWarcry = true;
+    if (!slot.isConcealed) {
+      slot.canBeAttackedByWarcry = true;
+      createObj = true;
+    }
   });
+
+  if (createObj === true)
+    G.warcryObject[ctx.currentPlayer] = createWarcryObject(cardId);
 };
 
 const CORE_118 = (G, ctx) => {

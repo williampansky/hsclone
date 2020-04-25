@@ -33,7 +33,7 @@
   }
 }
 
-.warcry__object__ring {
+.warcry-object .warcry__object__ring {
   animation: rotate 1s linear infinite;
   background: linear-gradient(#3cf, transparent, #3cf);
   border-radius: 110px;
@@ -55,7 +55,7 @@
   }
 }
 
-.warcry__object__content {
+.warcry-object .warcry__object__content {
   background-color: #222;
   background-image: linear-gradient(#222, #111);
   border-radius: 50%;
@@ -86,14 +86,14 @@
     0 0 1px black;
 }
 
-.warcry-object-label {
+.warcry-object .warcry-object-label {
   font-size: 0.6275em;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   margin: 0 auto 0.5em;
 }
 
-.warcry-object-text {
+.warcry-object .warcry-object-text {
   font-size: 1em;
   line-height: 1.15;
 }

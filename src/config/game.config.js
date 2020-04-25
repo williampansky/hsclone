@@ -1,17 +1,17 @@
 const GAME_CONFIG = {
   debugData: {
-    debugCard: 'CORE_014',
+    debugCard: 'CORE_007',
     enableDebugCard: false,
-    enableAttack: true,
+    enableAttack: true, // WIP
     enableCost: false,
-    enableHealth: true,
-    enableMechanics: true,
-    enableSet: true,
-    enableSpellType: true,
-    enableText: true
+    enableHealth: true, // WIP
+    enableMechanics: true, // during formatJson.js
+    enableSet: true, // WIP
+    enableSpellType: true, // WIP
+    enableText: true // during formatJson.js
   },
   matchConfig: {
-    enableInitHandsStage: true,
+    enableInitHandsStage: false,
     enableRandomTurnOrder: false
   }
 };
