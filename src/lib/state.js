@@ -1,7 +1,6 @@
 import boards from 'lib/state/boards';
 import buffs from 'lib/state/buffs';
 import cardBack from 'lib/state/card-back';
-import CARDCLASS from 'enums/cardClass.enums';
 import counts from 'lib/state/counts';
 import deckInfo from 'lib/state/deck-info';
 import energy from 'lib/state/energy';
@@ -89,6 +88,18 @@ export default {
   deckInfo: deckInfo.__DATA_MODEL,
   playedCards: playedCards.__DATA_MODEL,
   players: players.__DATA_MODEL,
+  initHandsSelection: {
+    '0': {
+      ready: false,
+      discard: [],
+      cards: []
+    },
+    '1': {
+      ready: false,
+      discard: [],
+      cards: []
+    }
+  },
   allPlayedCards: [],
   matchHistory: []
 };

@@ -13,6 +13,7 @@ import MatchHistory from 'components/match-history/MatchHistory';
 import PlayerSidebar from 'components/player-sidebar/PlayerSidebar';
 import SidebarBackground from './SidebarBackground';
 import LastPlayedCard from 'components/LastPlayedCard';
+import YourCardSelection from 'components/card-selection/YourCardSelection';
 
 export default function GameWrapper(props) {
   // global state manipulations
@@ -37,8 +38,8 @@ export default function GameWrapper(props) {
     isConnected,
     credentials
   } = props;
-  const { cardBack, health, allPlayedCards, winner } = G;
-  const { gameover } = ctx;
+  const { cardBack, health, allPlayedCards, initHandsSelection, winner } = G;
+  const { phase, gameover } = ctx;
   const { setGameWinner } = moves;
 
   // id declarations
@@ -166,6 +167,17 @@ export default function GameWrapper(props) {
           gameWidth={1920}
         />
       )}
+
+      {phase === 'initHands' ? (
+        <YourCardSelection
+          G={G}
+          ctx={ctx}
+          moves={moves}
+          isActive={isActive}
+          yourID={yourID}
+          data={initHandsSelection[yourID]}
+        />
+      ) : null}
 
       <LastPlayedCard G={G} ctx={ctx} array={allPlayedCards} />
 

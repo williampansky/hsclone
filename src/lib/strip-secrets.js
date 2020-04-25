@@ -12,10 +12,13 @@ const stripSecrets = (G, playerID) => ({
   ...G,
   deckInfo: { [playerID]: G.deckInfo[playerID] },
   players: { [playerID]: G.players[playerID] },
+  initHandsSelection: { [playerID]: G.initHandsSelection[playerID] },
   selectedCardObject: { [playerID]: G.selectedCardObject[playerID] },
   selectedCardType: { [playerID]: G.selectedCardType[playerID] },
   selectedCardSpellType: { [playerID]: G.selectedCardSpellType[playerID] },
-  selectedCardSpellContext: { [playerID]: G.selectedCardSpellContext[playerID] }
+  selectedCardSpellContext: {
+    [playerID]: G.selectedCardSpellContext[playerID]
+  }
 });
 
 export default stripSecrets;

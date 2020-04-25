@@ -31,6 +31,21 @@ export const drawSingleCard = (G, player) => {
   );
 }
 
+// prettier-ignore
+export const drawSpecificCard = (G, player, cardId) => {
+  if (G.players[player].deck.length === 0) return;  // eject if deck is empty
+  if (G.players[player].hand.length === 10) return; // eject if hand is full
+
+  counts.deincrementDeck(G, player); // .............. set counts[player].deck
+  counts.incrementHand(G, player); // ................ set counts[player].hand
+  
+  G.players[player].hand.push( // .................... pushes to hand
+    getCardByID( // .................................. generates card object
+      cardId // ...................................... card by id
+    )
+  );
+}
+
 export const drawMultipleCards = (G, player, amountToDraw) => {
   for (let i = 0; i < amountToDraw; i++) drawSingleCard(G, player);
 };
